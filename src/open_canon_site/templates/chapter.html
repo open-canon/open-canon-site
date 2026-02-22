@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% set static_root = "../../static/" %}
+{% set root_url = "../../" %}
+
+{% block title %}{{ current_doc.title }} – Open Canon{% endblock %}
+
+{% block body %}
+<div class="page-shell">
+
+  {# ── Left navigation sidebar ── #}
+  <nav class="sidebar-nav" aria-label="Document navigation">
+
+    {# All documents #}
+    <div class="nav-section">
+      <p class="nav-section-title">Library</p>
+      <ul class="nav-list">
+        {% for doc in documents %}
+        <li>
+          <a href="{{ '../../' }}{{ doc.slug }}/index.html"
+             {% if doc.slug == current_doc.slug %}class="active"{% endif %}>
+            {{ doc.title }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {# Divisions of current document (books, etc.) #}
+    {% if current_doc.divisions %}
+    <div class="nav-section">
+      <p class="nav-section-title">{{ current_doc.title }}</p>
+      <ul class="nav-list">
+        {% for div in current_doc.divisions %}
+        <li>
+          <a href="{{ '../../' }}{{ current_doc.slug }}/{{ div.slug }}/{% if div.chapters %}{{ div.chapters[0].slug }}.html{% else %}index.html{% endif %}"
+             {% if div.slug == current_div.slug %}class="active"{% endif %}>
+            {{ div.title }}
+          </a>
+          {# Chapter list for the current division #}
+          {% if div.slug == current_div.slug and div.chapters %}
+          <ul class="nav-chapter-list">
+            {% for chap in div.chapters %}
+            <li>
+              <a href="{{ '../../' }}{{ current_doc.slug }}/{{ div.slug }}/{{ chap.slug }}.html"
+                 {% if chap.chapter_id == current_chapter.chapter_id %}class="active"{% endif %}>
+                {{ chap.title }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+  </nav>
+
+  {# ── Center reading pane ── #}
+  <main class="content-main">
+
+    <h2 class="chapter-heading">
+      {{ current_div.title }} — {{ current_chapter.title }}
+    </h2>
+
+    {% if rendered_verses %}
+      {% for verse in rendered_verses %}
+      <div class="verse{% if verse.has_notes %} has-notes{% endif %}"
+           id="v-{{ verse.id }}"
+           data-verse="{{ verse.id }}">
+        <span class="verse-number">{{ verse.number }}</span>
+        <span class="verse-text">{{ verse.html | safe }}</span>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p style="color:var(--color-muted);font-style:italic;">No content in this chapter.</p>
+    {% endif %}
+
+    {# Prev / next chapter navigation #}
+    <nav class="chapter-nav" aria-label="Chapter navigation">
+      {% if prev_chapter_url %}
+        <a href="{{ '../../' }}{{ prev_chapter_url }}">&larr; Previous chapter</a>
+      {% else %}
+        <span></span>
+      {% endif %}
+      {% if next_chapter_url %}
+        <a href="{{ '../../' }}{{ next_chapter_url }}">Next chapter &rarr;</a>
+      {% endif %}
+    </nav>
+
+  </main>
+
+  {# ── Right notes tray ── #}
+  <aside class="notes-tray" aria-label="Notes">
+    <div class="notes-tray-header">Notes</div>
+    <div class="notes-tray-inner" id="notes-tray-inner">
+      {% if notes %}
+        {% for note in notes %}
+        <div class="note-item"
+             id="note-{{ note.id }}"
+             data-verse="{{ note.verse_id }}">
+          <div class="note-verse-ref">{{ note.verse_id }}</div>
+          <div class="note-text">{{ note.html | safe }}</div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p class="no-notes">No notes in this chapter.</p>
+      {% endif %}
+    </div>
+  </aside>
+
+</div>{# /page-shell #}
+
+<script src="{{ '../../' }}static/notes-sync.js"></script>
+{% endblock %}

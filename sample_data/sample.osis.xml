@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sample OSIS document for the Open Canon Site Generator demo.
+  Contains a minimal three-chapter excerpt from Genesis in a style
+  compatible with the OSIS 2.1.1 schema.
+-->
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.bibletechnologies.net/2003/OSIS/namespace
+                          http://www.bibletechnologies.net/OSIS/osisCore.2.1.1.xsd">
+
+  <osisText osisIDWork="KJV" xml:lang="en">
+
+    <header>
+      <work osisWork="KJV">
+        <title>King James Version (Sample)</title>
+        <identifier type="OSIS">Bible.KJV</identifier>
+        <rights type="x-copyright">Public Domain</rights>
+      </work>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  OLD TESTAMENT                                          -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div type="bookGroup">
+      <title>Old Testament</title>
+
+      <!-- ─── Genesis ─────────────────────────────────────── -->
+      <div type="book" osisID="Gen">
+        <title>Genesis</title>
+
+        <!-- Chapter 1 -->
+        <div type="chapter" osisID="Gen.1">
+          <title type="chapter">Chapter 1</title>
+
+          <verse osisID="Gen.1.1">In the beginning God created the heaven and the earth.<note type="study">The Hebrew word translated "beginning" (<foreign>bərēʾšīt</foreign>) indicates an absolute beginning of time and matter.</note></verse>
+
+          <verse osisID="Gen.1.2">And the earth was without form, and void; and darkness was upon the face of the deep. And the Spirit of God moved upon the face of the waters.<note type="crossReference">See John 1:1–3; Heb 11:3.</note></verse>
+
+          <verse osisID="Gen.1.3">And God said, Let there be light: and there was light.</verse>
+
+          <verse osisID="Gen.1.4">And God saw the light, that it was good: and God divided the light from the darkness.</verse>
+
+          <verse osisID="Gen.1.5">And God called the light Day, and the darkness he called Night. And the evening and the morning were the first day.<note type="study">The Hebrew word <foreign>yōm</foreign> ("day") here follows the pattern evening-then-morning, reflecting the Jewish reckoning of a day from sunset to sunset.</note></verse>
+
+          <verse osisID="Gen.1.26">And God said, Let us make man in our image, after our likeness: and let them have dominion over the fish of the sea, and over the fowl of the air, and over the cattle, and over all the earth, and over every creeping thing that creepeth upon the earth.<note type="study">The plural "us" has been variously interpreted as a reference to the divine council, the Trinity, or a majestic plural (pluralis majestatis).</note></verse>
+
+          <verse osisID="Gen.1.27">So God created man in his <hi type="italic">own</hi> image, in the image of God created he him; male and female created he them.</verse>
+
+          <verse osisID="Gen.1.31">And God saw every thing that he had made, and, behold, it was very good. And the evening and the morning were the sixth day.</verse>
+        </div>
+
+        <!-- Chapter 2 -->
+        <div type="chapter" osisID="Gen.2">
+          <title type="chapter">Chapter 2</title>
+
+          <verse osisID="Gen.2.1">Thus the heavens and the earth were finished, and all the host of them.</verse>
+
+          <verse osisID="Gen.2.2">And on the seventh day God ended his work which he had made; and he rested on the seventh day from all his work which he had made.<note type="crossReference">Cf. Heb 4:4; Ex 20:11.</note></verse>
+
+          <verse osisID="Gen.2.3">And God blessed the seventh day, and sanctified it: because that in it he had rested from all his work which God created and made.</verse>
+
+          <verse osisID="Gen.2.7">And the <divineName>Lord</divineName> God formed man of the dust of the ground, and breathed into his nostrils the breath of life; and man became a living soul.<note type="study">The word translated "soul" (<foreign>nep̄eš</foreign>) refers to the whole living being, not merely a separable inner essence.</note></verse>
+
+          <verse osisID="Gen.2.15">And the <divineName>Lord</divineName> God took the man, and put him into the garden of Eden to dress it and to keep it.</verse>
+
+          <verse osisID="Gen.2.24">Therefore shall a man leave his father and his mother, and shall cleave unto his wife: and they shall be one flesh.<note type="crossReference">Quoted in Matt 19:5; Mark 10:7–8; Eph 5:31.</note></verse>
+        </div>
+
+        <!-- Chapter 3 -->
+        <div type="chapter" osisID="Gen.3">
+          <title type="chapter">Chapter 3</title>
+
+          <verse osisID="Gen.3.1">Now the serpent was more subtil than any beast of the field which the <divineName>Lord</divineName> God had made. And he said unto the woman, Yea, hath God said, Ye shall not eat of every tree of the garden?<note type="study">The serpent (Hebrew <foreign>nāḥāš</foreign>) is identified in Rev 12:9 and 20:2 with Satan.</note></verse>
+
+          <verse osisID="Gen.3.6">And when the woman saw that the tree was good for food, and that it was pleasant to the eyes, and a tree to be desired to make one wise, she took of the fruit thereof, and did eat, and gave also unto her husband with her; and he did eat.</verse>
+
+          <verse osisID="Gen.3.15">And I will put enmity between thee and the woman, and between thy seed and her seed; it shall bruise thy head, and thou shalt bruise his heel.<note type="study">This verse is traditionally called the <hi type="italic">protoevangelium</hi> ("first gospel"), seen as a prophecy of Christ's victory over Satan.</note></verse>
+
+          <verse osisID="Gen.3.24">So he drove out the man; and he placed at the east of the garden of Eden Cherubims, and a flaming sword which turned every way, to keep the way of the tree of life.</verse>
+        </div>
+
+      </div><!-- /book Gen -->
+
+    </div><!-- /bookGroup OT -->
+
+  </osisText>
+</osis>

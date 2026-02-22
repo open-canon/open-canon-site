@@ -1,0 +1,421 @@
+"""Parse OSIS documents into structured data for site generation."""
+
+from __future__ import annotations
+
+import re
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Any
+
+import pyosis
+from pyosis.generated.osis_core_2_1_1 import (
+    ChapterCt,
+    DivCt,
+    NoteCt,
+    OsisDivs,
+    OsisTextCt,
+    PCt,
+    TitleCt,
+    VerseCt,
+)
+
+
+# ---------------------------------------------------------------------------
+# Data classes
+# ---------------------------------------------------------------------------
+
+
+@dataclass
+class NoteData:
+    """A single extracted note."""
+
+    note_id: str
+    verse_id: str  # OSIS ID of the parent verse/context (e.g. "Gen.1.1")
+    content: list[Any]  # raw pyosis content items
+
+
+@dataclass
+class VerseData:
+    """A single verse or paragraph with its associated notes."""
+
+    verse_id: str  # OSIS ID (e.g. "Gen.1.1")
+    number: str  # display number (e.g. "1")
+    content: list[Any]  # raw pyosis content items (strings + inline elements)
+    notes: list[NoteData] = field(default_factory=list)
+
+
+@dataclass
+class ChapterData:
+    """A chapter (or chapter-level division)."""
+
+    chapter_id: str  # OSIS ID (e.g. "Gen.1")
+    number: str  # display number (e.g. "1")
+    slug: str  # URL-safe identifier
+    title: str  # display title
+    verses: list[VerseData] = field(default_factory=list)
+
+
+@dataclass
+class DivisionData:
+    """A top-level division (e.g. a book) within a document."""
+
+    div_id: str  # OSIS ID (e.g. "Gen")
+    slug: str  # URL-safe identifier
+    title: str  # display title
+    chapters: list[ChapterData] = field(default_factory=list)
+
+
+@dataclass
+class DocumentData:
+    """A full OSIS document (work)."""
+
+    work_id: str  # osisIDWork value
+    slug: str  # URL-safe identifier
+    title: str  # display title
+    divisions: list[DivisionData] = field(default_factory=list)
+    source_path: Path | None = None
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+
+def _slugify(text: str) -> str:
+    """Convert an OSIS ID or title to a URL-safe slug."""
+    text = text.lower()
+    text = re.sub(r"[^a-z0-9]+", "-", text)
+    return text.strip("-")
+
+
+def _text_of(content: list[Any]) -> str:
+    """Extract plain text from a pyosis content list."""
+    parts: list[str] = []
+    for item in content:
+        if isinstance(item, str):
+            parts.append(item)
+        elif hasattr(item, "content"):
+            parts.append(_text_of(item.content))
+    return "".join(parts).strip()
+
+
+def _extract_title(items: list[Any]) -> str:
+    """Return the first TitleCt text found in *items*."""
+    for item in items:
+        if isinstance(item, TitleCt):
+            return _text_of(item.content)
+    return ""
+
+
+# ---------------------------------------------------------------------------
+# Content collection helpers (milestone vs. contained)
+# ---------------------------------------------------------------------------
+
+
+def _collect_milestone_groups(content: list[Any]) -> list[dict]:
+    """Group flat mixed content around verse/chapter milestones.
+
+    Returns a list of dicts with keys:
+        - "type": "verse" | "chapter_title" | "other"
+        - "verse_id": str (for type=="verse")
+        - "chapter_id": str (for type=="chapter_title")
+        - "items": list of content items
+    """
+    groups: list[dict] = []
+    current_verse_id: str | None = None
+    current_items: list[Any] = []
+
+    def flush(vid: str | None) -> None:
+        nonlocal current_items
+        if vid is not None and any(
+            (isinstance(i, str) and i.strip()) or isinstance(i, NoteCt)
+            for i in current_items
+        ):
+            groups.append({"type": "verse", "verse_id": vid, "items": list(current_items)})
+        elif current_items:
+            # Non-verse content (titles, etc.)
+            for item in current_items:
+                if isinstance(item, TitleCt):
+                    groups.append({"type": "title", "items": [item]})
+        current_items = []
+
+    for item in content:
+        if isinstance(item, VerseCt):
+            if item.s_id:
+                # Start of a new verse milestone
+                flush(current_verse_id)
+                current_verse_id = item.s_id
+            elif item.e_id:
+                # End of a verse milestone
+                flush(current_verse_id)
+                current_verse_id = None
+        elif isinstance(item, ChapterCt):
+            flush(current_verse_id)
+            current_verse_id = None
+        elif isinstance(item, TitleCt):
+            flush(current_verse_id)
+            groups.append({"type": "title", "items": [item]})
+            current_items = []
+        else:
+            current_items.append(item)
+
+    flush(current_verse_id)
+    return groups
+
+
+def _is_chapter_level(div: DivCt) -> bool:
+    """Return True when the div represents a chapter."""
+    return div.type_value in (OsisDivs.CHAPTER, "chapter") or (
+        isinstance(div.type_value, str) and div.type_value.lower() == "chapter"
+    )
+
+
+def _is_book_level(div: DivCt) -> bool:
+    """Return True when the div is a book or higher section."""
+    book_types = {
+        OsisDivs.BOOK,
+        OsisDivs.BOOK_GROUP,
+        OsisDivs.SECTION,
+        OsisDivs.INTRODUCTION,
+        OsisDivs.PREFACE,
+        OsisDivs.GLOSSARY,
+        OsisDivs.INDEX,
+        OsisDivs.MAP,
+        OsisDivs.APPENDIX,
+    }
+    return div.type_value in book_types or (
+        isinstance(div.type_value, str)
+        and div.type_value.lower() in {"book", "bookgroup", "major", "testament"}
+    )
+
+
+# ---------------------------------------------------------------------------
+# Verse extraction
+# ---------------------------------------------------------------------------
+
+_NOTE_COUNTER: int = 0
+
+
+def _next_note_id(doc_slug: str, verse_id: str) -> str:
+    global _NOTE_COUNTER
+    _NOTE_COUNTER += 1
+    return f"{doc_slug}-n{_NOTE_COUNTER}"
+
+
+def _extract_notes_from_content(
+    content: list[Any], verse_id: str, doc_slug: str
+) -> tuple[list[Any], list[NoteData]]:
+    """Walk *content*, pull out NoteCt instances into NoteData, return (cleaned_content, notes)."""
+    cleaned: list[Any] = []
+    notes: list[NoteData] = []
+    for item in content:
+        if isinstance(item, NoteCt):
+            nid = _next_note_id(doc_slug, verse_id)
+            notes.append(NoteData(note_id=nid, verse_id=verse_id, content=item.content))
+            # Replace note with a lightweight marker carrying the note id
+            cleaned.append(("note_marker", nid))
+        else:
+            cleaned.append(item)
+    return cleaned, notes
+
+
+def _parse_verses_from_content(content: list[Any], chapter_id: str, doc_slug: str) -> list[VerseData]:
+    """Extract VerseData from a chapter div's content list.
+
+    Handles both contained and milestone encoding styles.
+    """
+    global _NOTE_COUNTER
+    verses: list[VerseData] = []
+
+    # Detect contained style: if any VerseCt has its own osis_id AND content
+    contained = any(
+        isinstance(item, VerseCt) and item.osis_id and item.content and item.content != [None]
+        for item in content
+    )
+
+    if contained:
+        for item in content:
+            if isinstance(item, VerseCt) and item.osis_id:
+                vid = item.osis_id[0]
+                num = vid.rsplit(".", 1)[-1]
+                cleaned, notes = _extract_notes_from_content(item.content, vid, doc_slug)
+                verses.append(VerseData(verse_id=vid, number=num, content=cleaned, notes=notes))
+    else:
+        # Milestone style – group content between sID/eID markers
+        groups = _collect_milestone_groups(content)
+        for group in groups:
+            if group["type"] != "verse":
+                continue
+            vid = group["verse_id"]
+            num = vid.rsplit(".", 1)[-1]
+            cleaned, notes = _extract_notes_from_content(group["items"], vid, doc_slug)
+            verses.append(VerseData(verse_id=vid, number=num, content=cleaned, notes=notes))
+
+    return verses
+
+
+# ---------------------------------------------------------------------------
+# Chapter extraction
+# ---------------------------------------------------------------------------
+
+
+def _parse_chapter_div(div: DivCt, doc_slug: str, parent_id: str) -> ChapterData:
+    """Parse a chapter-level DivCt into ChapterData."""
+    cid = div.osis_id[0] if div.osis_id else parent_id
+    num = cid.rsplit(".", 1)[-1]
+    title_text = _extract_title(div.content) or f"Chapter {num}"
+    return ChapterData(
+        chapter_id=cid,
+        number=num,
+        slug=_slugify(cid),
+        title=title_text,
+        verses=_parse_verses_from_content(div.content, cid, doc_slug),
+    )
+
+
+def _find_chapters_milestone(content: list[Any], book_id: str, doc_slug: str) -> list[ChapterData]:
+    """Extract chapters from milestone-encoded content (chapter milestones)."""
+    chapters: list[ChapterData] = []
+    current_chapter_id: str | None = None
+    current_content: list[Any] = []
+
+    def flush(cid: str | None) -> None:
+        if cid is None:
+            return
+        num = cid.rsplit(".", 1)[-1]
+        title = _extract_title(current_content) or f"Chapter {num}"
+        verses = _parse_verses_from_content(current_content, cid, doc_slug)
+        chapters.append(
+            ChapterData(chapter_id=cid, number=num, slug=_slugify(cid), title=title, verses=verses)
+        )
+
+    for item in content:
+        if isinstance(item, ChapterCt):
+            if item.s_id:
+                flush(current_chapter_id)
+                current_chapter_id = item.s_id
+                current_content = []
+            elif item.e_id:
+                flush(current_chapter_id)
+                current_chapter_id = None
+                current_content = []
+        elif isinstance(item, DivCt) and _is_chapter_level(item):
+            chapters.append(_parse_chapter_div(item, doc_slug, book_id))
+        else:
+            if current_chapter_id is not None:
+                current_content.append(item)
+
+    flush(current_chapter_id)
+    return chapters
+
+
+# ---------------------------------------------------------------------------
+# Division (book) extraction
+# ---------------------------------------------------------------------------
+
+
+def _parse_book_div(div: DivCt, doc_slug: str) -> DivisionData:
+    """Parse a book-level DivCt into DivisionData."""
+    did = div.osis_id[0] if div.osis_id else "unknown"
+    title = _extract_title(div.content) or did
+
+    # Collect chapters
+    chapters: list[ChapterData] = []
+    has_chapter_divs = any(isinstance(c, DivCt) and _is_chapter_level(c) for c in div.content)
+    has_chapter_milestones = any(isinstance(c, ChapterCt) and c.s_id for c in div.content)
+
+    if has_chapter_divs or has_chapter_milestones:
+        chapters = _find_chapters_milestone(div.content, did, doc_slug)
+    else:
+        # Treat the whole book as a single pseudo-chapter
+        verses = _parse_verses_from_content(div.content, did, doc_slug)
+        if verses:
+            chapters = [
+                ChapterData(
+                    chapter_id=did,
+                    number="1",
+                    slug=_slugify(did),
+                    title=title,
+                    verses=verses,
+                )
+            ]
+
+    return DivisionData(div_id=did, slug=_slugify(did), title=title, chapters=chapters)
+
+
+def _collect_book_divs(divs: list[DivCt], doc_slug: str) -> list[DivisionData]:
+    """Recursively collect book-level divisions from a list of DivCts."""
+    divisions: list[DivisionData] = []
+    for div in divs:
+        if _is_book_level(div):
+            if div.type_value in (OsisDivs.BOOK_GROUP,) or (
+                isinstance(div.type_value, str) and div.type_value.lower() in {"bookgroup", "testament"}
+            ):
+                # Recurse into bookGroups
+                sub_divs = [c for c in div.content if isinstance(c, DivCt)]
+                divisions.extend(_collect_book_divs(sub_divs, doc_slug))
+            else:
+                divisions.append(_parse_book_div(div, doc_slug))
+        elif div.type_value is None or (isinstance(div.type_value, str) and div.type_value == ""):
+            # Generic div – recurse
+            sub_divs = [c for c in div.content if isinstance(c, DivCt)]
+            if sub_divs:
+                divisions.extend(_collect_book_divs(sub_divs, doc_slug))
+            else:
+                divisions.append(_parse_book_div(div, doc_slug))
+    return divisions
+
+
+# ---------------------------------------------------------------------------
+# Document parsing
+# ---------------------------------------------------------------------------
+
+
+def _reset_note_counter() -> None:
+    global _NOTE_COUNTER
+    _NOTE_COUNTER = 0
+
+
+def parse_osis_text(osis_text: OsisTextCt, source_path: Path | None = None) -> DocumentData:
+    """Parse an OsisTextCt into a DocumentData."""
+    _reset_note_counter()
+
+    work_id = osis_text.osis_idwork or "unknown"
+    slug = _slugify(work_id)
+
+    # Get title from header
+    title = work_id
+    if osis_text.header and osis_text.header.work:
+        for work in osis_text.header.work:
+            if work.title:
+                title = _text_of(work.title[0].content)
+                break
+
+    divisions = _collect_book_divs(osis_text.div, slug)
+
+    return DocumentData(
+        work_id=work_id,
+        slug=slug,
+        title=title,
+        divisions=divisions,
+        source_path=source_path,
+    )
+
+
+def parse_osis_file(path: Path) -> DocumentData:
+    """Parse an OSIS XML file and return a DocumentData."""
+    _reset_note_counter()
+    xml_text = path.read_text(encoding="utf-8")
+    osis_xml = pyosis.OsisXML.from_xml(xml_text)
+
+    # Handle corpus (multiple osisText elements)
+    if osis_xml.osis.osis_corpus:
+        corpus = osis_xml.osis.osis_corpus
+        # Return first text for now (corpus support can be extended)
+        if corpus.osis_text:
+            return parse_osis_text(corpus.osis_text[0], source_path=path)
+
+    if osis_xml.osis.osis_text:
+        return parse_osis_text(osis_xml.osis.osis_text, source_path=path)
+
+    raise ValueError(f"No osisText found in {path}")

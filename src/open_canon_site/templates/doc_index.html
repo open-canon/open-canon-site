@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% set static_root = "../static/" %}
+{% set root_url = "../" %}
+
+{% block title %}{{ current_doc.title }} – Open Canon{% endblock %}
+
+{% block body %}
+<div class="index-page">
+  <h1>{{ current_doc.title }}</h1>
+  {% if first_chapter_url %}
+    <meta http-equiv="refresh" content="0; url={{ first_chapter_url }}" />
+    <p class="subtitle">
+      <a href="{{ first_chapter_url }}">Click here to start reading</a>
+      if you are not redirected automatically.
+    </p>
+  {% else %}
+    <p class="subtitle">No chapters found in this document.</p>
+  {% endif %}
+</div>
+{% endblock %}

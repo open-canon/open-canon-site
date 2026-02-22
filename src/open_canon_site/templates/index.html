@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% set static_root = "static/" %}
+{% set root_url = "" %}
+
+{% block title %}Open Canon – Library{% endblock %}
+
+{% block body %}
+<main class="index-page">
+  <h1>Open Canon Library</h1>
+  <p class="subtitle">Select a document below to begin reading.</p>
+
+  {% if documents %}
+    {% for doc in documents %}
+    <a class="doc-card" href="{{ doc.slug }}/index.html">
+      <h2>{{ doc.title }}</h2>
+      <p class="meta">
+        {{ doc.divisions | length }} division{{ 's' if doc.divisions | length != 1 else '' }}
+        &nbsp;·&nbsp;
+        Work ID: {{ doc.work_id }}
+      </p>
+    </a>
+    {% endfor %}
+  {% else %}
+    <p>No documents found. Add OSIS XML files and regenerate the site.</p>
+  {% endif %}
+</main>
+{% endblock %}
