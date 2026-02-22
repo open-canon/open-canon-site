@@ -13,7 +13,7 @@
 
     <header>
       <work osisWork="KJV">
-        <title>King James Version (Sample)</title>
+        <title>King James Version</title>
         <identifier type="OSIS">Bible.KJV</identifier>
         <rights type="x-copyright">Public Domain</rights>
       </work>
