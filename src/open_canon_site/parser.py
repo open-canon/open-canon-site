@@ -125,6 +125,14 @@ def _extract_title(items: list[Any]) -> str:
     return ""
 
 
+def _normalize_chapter_title(title: str, chapter_number: str) -> str:
+    """Convert standalone Roman-numeral chapter titles to Arabic numerals."""
+    normalized = re.match(r"^chapter\s+[ivxlcdm]+[\s.]*$", title.strip(), re.IGNORECASE)
+    if normalized:
+        return f"Chapter {chapter_number}"
+    return title
+
+
 def _is_heading_item(item: Any) -> bool:
     qname = getattr(item, "qname", "")
     return isinstance(item, (TitleCt, HeadCt)) or str(qname).endswith("}head")
@@ -376,7 +384,7 @@ def _parse_chapter_div(div: DivCt, doc_slug: str, parent_id: str) -> ChapterData
     """Parse a chapter-level DivCt into ChapterData."""
     cid = div.osis_id[0] if div.osis_id else parent_id
     num = cid.rsplit(".", 1)[-1]
-    title_text = _extract_title(div.content) or f"Chapter {num}"
+    title_text = _normalize_chapter_title(_extract_title(div.content), num) or f"Chapter {num}"
     body, notes = _parse_body_content(div.content, cid, doc_slug)
     sections = _extract_sections_from_body(body)
     return ChapterData(
@@ -420,7 +428,7 @@ def _find_chapters_milestone(content: list[Any], book_id: str, doc_slug: str) ->
         if cid is None:
             return
         num = cid.rsplit(".", 1)[-1]
-        title = _extract_title(current_content) or f"Chapter {num}"
+        title = _normalize_chapter_title(_extract_title(current_content), num) or f"Chapter {num}"
         verses = _parse_verses_from_content(current_content, cid, doc_slug)
         body, notes = _parse_body_content(current_content, cid, doc_slug)
         sections = _extract_sections_from_body(body)

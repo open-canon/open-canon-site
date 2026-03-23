@@ -203,3 +203,35 @@ def test_generate_site_sidebar_links_to_body_sections(output_dir, tmp_path):
     assert ".chapter-section" in css
     assert "scroll-margin-top" in css
     assert "overview.html" not in html
+
+
+def test_generate_site_uses_arabic_numerals_for_roman_chapter_titles(output_dir, tmp_path):
+    osis_path = tmp_path / "roman.osis.xml"
+    osis_path.write_text(
+        """<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<osis xmlns=\"http://www.bibletechnologies.net/2003/OSIS/namespace\">
+    <osisText osisIDWork=\"TEST\" xml:lang=\"en\">
+        <header>
+            <work osisWork=\"TEST\">
+                <title>Roman Test</title>
+            </work>
+        </header>
+        <div type=\"book\" osisID=\"Book\">
+            <title>Book Title</title>
+            <div type=\"chapter\" osisID=\"Book.18\">
+                <title type=\"chapter\">CHAPTER XVIII.</title>
+                <verse osisID=\"Book.18.1\">Verse one.</verse>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+
+    generate_site([osis_path], output_dir)
+
+    html = (output_dir / "test" / "book" / "book-18.html").read_text()
+    assert "Chapter 18" in html
+    assert "Book Title — Chapter 18" in html
+    assert "CHAPTER XVIII" not in html

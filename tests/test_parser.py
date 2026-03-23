@@ -166,6 +166,30 @@ def test_parse_chapter_number_extracted():
     assert doc.divisions[0].chapters[0].number == "3"
 
 
+def test_parse_chapter_title_uses_arabic_numerals_for_roman_heading():
+    doc = _parse("""
+        <div type="book" osisID="Gen">
+          <div type="chapter" osisID="Gen.18">
+            <title type="chapter">CHAPTER XVIII.</title>
+            <verse osisID="Gen.18.1">Text.</verse>
+          </div>
+        </div>
+    """)
+    assert doc.divisions[0].chapters[0].title == "Chapter 18"
+
+
+def test_parse_milestone_chapter_title_uses_arabic_numerals_for_roman_heading():
+    doc = _parse("""
+        <div type="book" osisID="Gen">
+          <chapter sID="Gen.9"/>
+          <title type="chapter">CHAPTER IX.</title>
+          <verse osisID="Gen.9.1">Text.</verse>
+          <chapter eID="Gen.9"/>
+        </div>
+    """)
+    assert doc.divisions[0].chapters[0].title == "Chapter 9"
+
+
 def test_parse_front_material_as_renderable_page():
     doc = _parse("""
         <div type="book" osisID="Gen">
