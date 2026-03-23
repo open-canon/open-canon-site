@@ -80,6 +80,24 @@ def _chapter_url(doc: DocumentData, div: DivisionData, chapter: ChapterData) -> 
     return f"{doc.slug}/{div.slug}/{chapter.slug}.html"
 
 
+def _render_body_blocks(chapter: ChapterData) -> list[dict[str, str | None]]:
+    """Render body items individually so top-level sections can receive anchors."""
+    note_counter = [0]
+    sections_by_index = {section.item_index: section for section in chapter.sections}
+    blocks: list[dict[str, str | None]] = []
+
+    for item_index, item in enumerate(chapter.body):
+        section = sections_by_index.get(item_index)
+        blocks.append(
+            {
+                "anchor": section.anchor if section else None,
+                "html": render_content([item], note_counter),
+            }
+        )
+
+    return blocks
+
+
 def _generate_chapter(
     env: Environment,
     doc: DocumentData,
@@ -91,7 +109,7 @@ def _generate_chapter(
     """Render a single chapter page."""
     template = env.get_template("chapter.html")
 
-    chapter_body_html = render_content(chapter.body, [0]) if chapter.body else ""
+    rendered_body_blocks = _render_body_blocks(chapter)
 
     # Build per-verse rendered data
     rendered_verses = []
@@ -129,7 +147,7 @@ def _generate_chapter(
         current_doc=doc,
         current_div=div,
         current_chapter=chapter,
-        chapter_body_html=chapter_body_html,
+        rendered_body_blocks=rendered_body_blocks,
         rendered_verses=rendered_verses,
         notes=notes,
         prev_chapter_url=prev_chapter_url,

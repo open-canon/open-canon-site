@@ -214,6 +214,47 @@ def test_parse_front_material_extracts_nested_notes():
     )
 
 
+def test_parse_body_sections_for_sidebar_links():
+    doc = _parse("""
+        <div type="book" osisID="Gen">
+          <div type="front">
+            <head>Introduction</head>
+            <div type="section">
+              <head>Overview</head>
+              <p>Overview text.</p>
+            </div>
+            <div type="section">
+              <head>Authorship</head>
+              <p>Authorship text.</p>
+            </div>
+          </div>
+        </div>
+    """)
+    page = doc.divisions[0].chapters[0]
+    assert [section.title for section in page.sections] == ["Overview", "Authorship"]
+    assert [section.anchor for section in page.sections] == ["overview", "authorship"]
+
+
+def test_parse_body_sections_deduplicate_anchor_slugs():
+    doc = _parse("""
+        <div type="book" osisID="Gen">
+          <div type="front">
+            <head>Introduction</head>
+            <div type="section">
+              <head>Overview</head>
+              <p>First.</p>
+            </div>
+            <div type="section">
+              <head>Overview</head>
+              <p>Second.</p>
+            </div>
+          </div>
+        </div>
+    """)
+    page = doc.divisions[0].chapters[0]
+    assert [section.anchor for section in page.sections] == ["overview", "overview-2"]
+
+
 # ---------------------------------------------------------------------------
 # Verse extraction
 # ---------------------------------------------------------------------------

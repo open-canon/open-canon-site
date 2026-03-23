@@ -137,6 +137,10 @@ a:hover { text-decoration: underline; }
   font-weight: 600;
 }
 
+.nav-section-list a {
+  padding-left: 3rem;
+}
+
 /* ---------- Main content ---------- */
 .content-main {
   padding: 2rem 3rem;
@@ -151,6 +155,10 @@ a:hover { text-decoration: underline; }
   margin-bottom: 1.5rem;
   padding-bottom: .5rem;
   border-bottom: 2px solid var(--color-border);
+}
+
+.chapter-section {
+  scroll-margin-top: calc(var(--header-h) + 1rem);
 }
 
 /* Verse */

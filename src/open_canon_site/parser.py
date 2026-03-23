@@ -52,8 +52,18 @@ class ChapterData:
     slug: str  # URL-safe identifier
     title: str  # display title
     body: list[Any] = field(default_factory=list)
+    sections: list[SectionData] = field(default_factory=list)
     notes: list[NoteData] = field(default_factory=list)
     verses: list[VerseData] = field(default_factory=list)
+
+
+@dataclass
+class SectionData:
+    """A same-page section within a chapter or front-matter page."""
+
+    title: str
+    anchor: str
+    item_index: int
 
 
 @dataclass
@@ -124,6 +134,40 @@ def _copy_item_with_updates(item: Any, updates: dict[str, Any]) -> Any:
     if hasattr(item, "model_copy"):
         return item.model_copy(update=updates)
     return item
+
+
+def _section_title_of(item: Any) -> str:
+    if _is_heading_item(item):
+        return _text_of([item])
+
+    content = getattr(item, "content", None)
+    if isinstance(content, list):
+        return _extract_title(content)
+
+    children = getattr(item, "children", None)
+    if isinstance(children, list):
+        return _extract_title(children)
+
+    return ""
+
+
+def _extract_sections_from_body(body: list[Any]) -> list[SectionData]:
+    sections: list[SectionData] = []
+    used_anchors: dict[str, int] = {}
+
+    for item_index, item in enumerate(body):
+        title = _section_title_of(item)
+        if not title:
+            continue
+
+        base_anchor = _slugify(title) or "section"
+        count = used_anchors.get(base_anchor, 0) + 1
+        used_anchors[base_anchor] = count
+        anchor = base_anchor if count == 1 else f"{base_anchor}-{count}"
+
+        sections.append(SectionData(title=title, anchor=anchor, item_index=item_index))
+
+    return sections
 
 
 # ---------------------------------------------------------------------------
@@ -334,12 +378,14 @@ def _parse_chapter_div(div: DivCt, doc_slug: str, parent_id: str) -> ChapterData
     num = cid.rsplit(".", 1)[-1]
     title_text = _extract_title(div.content) or f"Chapter {num}"
     body, notes = _parse_body_content(div.content, cid, doc_slug)
+    sections = _extract_sections_from_body(body)
     return ChapterData(
         chapter_id=cid,
         number=num,
         slug=_slugify(cid),
         title=title_text,
         body=body,
+        sections=sections,
         notes=notes,
         verses=_parse_verses_from_content(div.content, cid, doc_slug),
     )
@@ -352,12 +398,14 @@ def _parse_non_chapter_div(
     div_id = div.osis_id[0] if div.osis_id else f"{parent_id}.front.{page_number}"
     title_text = _extract_title(div.content) or f"Front Matter {page_number}"
     body, notes = _parse_body_content(div.content, div_id, doc_slug)
+    sections = _extract_sections_from_body(body)
     return ChapterData(
         chapter_id=div_id,
         number="",
         slug=_slugify(div_id if div.osis_id else f"front-{page_number}-{title_text}"),
         title=title_text,
         body=body,
+        sections=sections,
         notes=notes,
     )
 
@@ -375,6 +423,7 @@ def _find_chapters_milestone(content: list[Any], book_id: str, doc_slug: str) ->
         title = _extract_title(current_content) or f"Chapter {num}"
         verses = _parse_verses_from_content(current_content, cid, doc_slug)
         body, notes = _parse_body_content(current_content, cid, doc_slug)
+        sections = _extract_sections_from_body(body)
         chapters.append(
             ChapterData(
                 chapter_id=cid,
@@ -382,6 +431,7 @@ def _find_chapters_milestone(content: list[Any], book_id: str, doc_slug: str) ->
                 slug=_slugify(cid),
                 title=title,
                 body=body,
+                sections=sections,
                 notes=notes,
                 verses=verses,
             )
@@ -454,6 +504,7 @@ def _parse_book_div(div: DivCt, doc_slug: str) -> DivisionData:
         verses = _parse_verses_from_content(div.content, did, doc_slug)
         body, notes = _parse_body_content(div.content, did, doc_slug)
         if verses or body:
+            sections = _extract_sections_from_body(body)
             chapters = [
                 ChapterData(
                     chapter_id=did,
@@ -461,6 +512,7 @@ def _parse_book_div(div: DivCt, doc_slug: str) -> DivisionData:
                     slug=_slugify(did),
                     title=title,
                     body=body,
+                    sections=sections,
                     notes=notes,
                     verses=verses,
                 )

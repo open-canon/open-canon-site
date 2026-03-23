@@ -7,6 +7,7 @@ A static site generator that reads [OSIS XML](http://www.bibletechnologies.net/)
 ## Features
 
 - **Left navigation sidebar** – lists all loaded documents; for the current document shows its top-level divisions (books, sections, etc.); for the current division shows all chapters
+- **In-page section links** – exposes section headings from introductions and other prose pages in the sidebar and links directly to the right anchor on the current page
 - **Center reading pane** – renders the full chapter text with verse numbers, inline formatting, and footnote/cross-reference markers
 - **Structured poetry support** – handles OSIS line groups such as `<lg>` and `<l>` used in texts like 1 Enoch
 - **Front matter support** – renders non-chapter material such as introductions, prefaces, and prose-only sections into navigable pages

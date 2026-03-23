@@ -45,6 +45,15 @@
                  {% if chap.chapter_id == current_chapter.chapter_id %}class="active"{% endif %}>
                 {{ chap.title }}
               </a>
+              {% if chap.chapter_id == current_chapter.chapter_id and chap.sections %}
+              <ul class="nav-chapter-list nav-section-list">
+                {% for section in chap.sections %}
+                <li>
+                  <a href="#{{ section.anchor }}">{{ section.title | title }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+              {% endif %}
             </li>
             {% endfor %}
           </ul>
@@ -64,8 +73,16 @@
       {{ current_div.title }} — {{ current_chapter.title }}
     </h2>
 
-    {% if chapter_body_html %}
-      <div class="chapter-body">{{ chapter_body_html | safe }}</div>
+    {% if rendered_body_blocks %}
+      <div class="chapter-body">
+        {% for block in rendered_body_blocks %}
+          {% if block.anchor %}
+            <section id="{{ block.anchor }}" class="chapter-section">{{ block.html | safe }}</section>
+          {% else %}
+            {{ block.html | safe }}
+          {% endif %}
+        {% endfor %}
+      </div>
     {% endif %}
 
     {% if rendered_verses %}
@@ -77,7 +94,7 @@
         <span class="verse-text">{{ verse.html | safe }}</span>
       </div>
       {% endfor %}
-    {% elif not chapter_body_html %}
+    {% elif not rendered_body_blocks %}
       <p style="color:var(--color-muted);font-style:italic;">No content in this chapter.</p>
     {% endif %}
 

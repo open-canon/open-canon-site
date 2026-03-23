@@ -158,3 +158,48 @@ def test_generate_site_renders_prose_only_chapter(output_dir, tmp_path):
     html = (output_dir / "test" / "book" / "book-1.html").read_text()
     assert "Opening prose." in html
     assert "No content in this chapter." not in html
+
+
+def test_generate_site_sidebar_links_to_body_sections(output_dir, tmp_path):
+    osis_path = tmp_path / "sections.osis.xml"
+    osis_path.write_text(
+        """<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<osis xmlns=\"http://www.bibletechnologies.net/2003/OSIS/namespace\">
+    <osisText osisIDWork=\"TEST\" xml:lang=\"en\">
+        <header>
+            <work osisWork=\"TEST\">
+                <title>Section Test</title>
+            </work>
+        </header>
+        <div type=\"book\" osisID=\"Book\">
+            <div type=\"front\">
+                <head>Introduction</head>
+                <div type=\"section\">
+                    <head>Overview</head>
+                    <p>Overview text.</p>
+                </div>
+                <div type=\"section\">
+                    <head>Historical Setting</head>
+                    <p>Historical setting text.</p>
+                </div>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+
+    generate_site([osis_path], output_dir)
+
+    html = (output_dir / "test" / "book" / "front-1-introduction.html").read_text()
+    css = (output_dir / "static" / "style.css").read_text()
+    assert 'href="#overview"' in html
+    assert 'href="#historical-setting"' in html
+    assert 'id="overview"' in html
+    assert 'id="historical-setting"' in html
+    assert ">Overview<" in html
+    assert ">Historical Setting<" in html
+    assert ".chapter-section" in css
+    assert "scroll-margin-top" in css
+    assert "overview.html" not in html
