@@ -8,6 +8,8 @@ A static site generator that reads [OSIS XML](http://www.bibletechnologies.net/)
 
 - **Left navigation sidebar** – lists all loaded documents; for the current document shows its top-level divisions (books, sections, etc.); for the current division shows all chapters
 - **Center reading pane** – renders the full chapter text with verse numbers, inline formatting, and footnote/cross-reference markers
+- **Structured poetry support** – handles OSIS line groups such as `<lg>` and `<l>` used in texts like 1 Enoch
+- **Front matter support** – renders non-chapter material such as introductions, prefaces, and prose-only sections into navigable pages
 - **Right notes tray** – displays all embedded notes for the chapter, automatically scrolling to stay aligned with whatever verse is currently visible in the center
 - **UV-managed dependencies** – project uses [UV](https://docs.astral.sh/uv/) for fast, reproducible package management
 
@@ -30,7 +32,7 @@ python -m http.server --directory output 8080
 
 ## Usage
 
-```
+```text
 open-canon-site [OPTIONS] OSIS_FILE [OSIS_FILE ...]
 
 Positional arguments:
@@ -52,7 +54,7 @@ uv run open-canon-site kjv.osis.xml bom.osis.xml -o output --clean
 
 ## Project layout
 
-```
+```text
 open-canon-site/
 ├── pyproject.toml                  # UV/PEP-517 project metadata & dependencies
 ├── sample_data/
@@ -80,12 +82,13 @@ open-canon-site/
 ## Running tests
 
 ```bash
-uv run pytest
+uv sync --extra dev
+uv run --extra dev pytest
 ```
 
 ## Dependencies
 
-| Package | Purpose |
-|---------|---------|
-| [pyosis](https://pypi.org/project/pyosis/) | Parses OSIS XML into typed Python models |
-| [Jinja2](https://jinja.palletsprojects.com/) | HTML template rendering |
+| Package                                        | Purpose                                    |
+| ---------------------------------------------- | ------------------------------------------ |
+| [pyosis](https://pypi.org/project/pyosis/)     | Parses OSIS XML into typed Python models   |
+| [Jinja2](https://jinja.palletsprojects.com/)   | HTML template rendering                    |

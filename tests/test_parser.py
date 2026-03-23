@@ -3,18 +3,15 @@
 from __future__ import annotations
 
 import textwrap
-from pathlib import Path
 
-import pytest
-
-from open_canon_site.parser import (
-    _slugify,
-    _text_of,
-    NoteData,
-    parse_osis_text,
-)
 import pyosis
 
+from open_canon_site.parser import (
+    NoteData,
+    _slugify,
+    _text_of,
+    parse_osis_text,
+)
 
 # ---------------------------------------------------------------------------
 # Minimal sample XML helpers
@@ -74,7 +71,9 @@ def test_slugify_trims_dashes():
 
 
 def test_parse_work_id():
-    doc = _parse("<div type='book' osisID='B'><div type='chapter' osisID='B.1'></div></div>", work_id="KJV")
+    doc = _parse(
+        "<div type='book' osisID='B'><div type='chapter' osisID='B.1'></div></div>", work_id="KJV"
+    )
     assert doc.work_id == "KJV"
 
 
@@ -84,7 +83,9 @@ def test_parse_title_from_header():
 
 
 def test_parse_slug_from_work_id():
-    doc = _parse("<div type='book' osisID='B'><div type='chapter' osisID='B.1'></div></div>", work_id="KJV")
+    doc = _parse(
+        "<div type='book' osisID='B'><div type='chapter' osisID='B.1'></div></div>", work_id="KJV"
+    )
     assert doc.slug == "kjv"
 
 
@@ -165,6 +166,54 @@ def test_parse_chapter_number_extracted():
     assert doc.divisions[0].chapters[0].number == "3"
 
 
+def test_parse_front_material_as_renderable_page():
+    doc = _parse("""
+        <div type="book" osisID="Gen">
+          <div type="front">
+            <head>Preface</head>
+            <p>Introductory material.</p>
+          </div>
+          <div type="chapter" osisID="Gen.1">
+            <verse osisID="Gen.1.1">Verse one.</verse>
+          </div>
+        </div>
+    """)
+    page = doc.divisions[0].chapters[0]
+    assert page.title == "Preface"
+    assert page.verses == []
+    assert any("Introductory material" in _text_of([item]) for item in page.body)
+
+
+def test_parse_chapter_body_without_verses_is_preserved():
+    doc = _parse("""
+        <div type="book" osisID="Gen">
+          <div type="chapter" osisID="Gen.1">
+            <title type="chapter">Chapter 1</title>
+            <p>Chapter preface paragraph.</p>
+          </div>
+        </div>
+    """)
+    chapter = doc.divisions[0].chapters[0]
+    assert chapter.verses == []
+    assert any("Chapter preface paragraph" in _text_of([item]) for item in chapter.body)
+
+
+def test_parse_front_material_extracts_nested_notes():
+    doc = _parse("""
+        <div type="book" osisID="Gen">
+          <div type="front">
+            <head>Preface</head>
+            <p>Text<note type="study">Front note.</note> More text.</p>
+          </div>
+        </div>
+    """)
+    page = doc.divisions[0].chapters[0]
+    assert len(page.notes) == 1
+    assert any(
+        isinstance(item, tuple) and item[0] == "note_marker" for item in page.body[0].content
+    )
+
+
 # ---------------------------------------------------------------------------
 # Verse extraction
 # ---------------------------------------------------------------------------
@@ -230,9 +279,12 @@ def test_parse_note_replaced_with_marker_in_content():
     verse = doc.divisions[0].chapters[0].verses[0]
     # Note should not appear in content as NoteCt
     from pyosis.generated.osis_core_2_1_1 import NoteCt
+
     assert not any(isinstance(item, NoteCt) for item in verse.content)
     # But a marker tuple should be present
-    markers = [item for item in verse.content if isinstance(item, tuple) and item[0] == "note_marker"]
+    markers = [
+        item for item in verse.content if isinstance(item, tuple) and item[0] == "note_marker"
+    ]
     assert len(markers) == 1
 
 

@@ -10,14 +10,13 @@ from jinja2 import Environment, PackageLoader, select_autoescape
 
 from open_canon_site.parser import (
     ChapterData,
-    DocumentData,
     DivisionData,
+    DocumentData,
     NoteData,
     VerseData,
     parse_osis_file,
 )
 from open_canon_site.renderer import render_content, render_note_content
-
 
 # ---------------------------------------------------------------------------
 # Jinja2 environment
@@ -59,7 +58,7 @@ def _all_notes_html(notes: list[NoteData]) -> list[dict]:
 
 def _chapter_notes(chapter: ChapterData) -> list[NoteData]:
     """Collect all notes across all verses in a chapter."""
-    notes: list[NoteData] = []
+    notes: list[NoteData] = list(chapter.notes)
     for verse in chapter.verses:
         notes.extend(verse.notes)
     return notes
@@ -91,6 +90,8 @@ def _generate_chapter(
 ) -> None:
     """Render a single chapter page."""
     template = env.get_template("chapter.html")
+
+    chapter_body_html = render_content(chapter.body, [0]) if chapter.body else ""
 
     # Build per-verse rendered data
     rendered_verses = []
@@ -128,6 +129,7 @@ def _generate_chapter(
         current_doc=doc,
         current_div=div,
         current_chapter=chapter,
+        chapter_body_html=chapter_body_html,
         rendered_verses=rendered_verses,
         notes=notes,
         prev_chapter_url=prev_chapter_url,
@@ -208,7 +210,7 @@ def generate_site(
         print(f"  Parsing {path.name} …")
         documents.append(parse_osis_file(path))
 
-    print(f"  Generating index …")
+    print("  Generating index …")
     _generate_index(env, documents, output_dir)
 
     for doc in documents:
@@ -254,7 +256,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    print(f"Open Canon Site Generator")
+    print("Open Canon Site Generator")
     print(f"  Input files : {[str(p) for p in args.input]}")
     print(f"  Output dir  : {args.output}")
 

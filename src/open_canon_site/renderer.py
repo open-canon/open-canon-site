@@ -9,6 +9,7 @@ from pyosis.generated.osis_core_2_1_1 import (
     ACt,
     DivineNameCt,
     ForeignCt,
+    HeadCt,
     HiCt,
     LCt,
     LgCt,
@@ -23,6 +24,29 @@ from pyosis.generated.osis_core_2_1_1 import (
     VerseCt,
     WCt,
 )
+
+
+def _container_children(item: Any) -> list[Any]:
+    """Return child nodes for pyosis containers with inconsistent field layouts."""
+    content = getattr(item, "content", None)
+    if isinstance(content, list):
+        return content
+
+    children = getattr(item, "children", None)
+    if isinstance(children, list):
+        items: list[Any] = []
+        text = getattr(item, "text", None)
+        if isinstance(text, str) and text:
+            items.append(text)
+        items.extend(children)
+        return items
+
+    children = []
+    for attr in ("l", "lg", "q"):
+        value = getattr(item, attr, None)
+        if isinstance(value, list):
+            children.extend(value)
+    return children
 
 
 def render_content(items: list[Any], note_counter: list[int] | None = None) -> str:
@@ -73,19 +97,21 @@ def _render_item(item: Any, nc: list[int]) -> str:
         return render_content(item.content, nc)
     if isinstance(item, HiCt):
         return _render_hi(item, nc)
+    if str(getattr(item, "qname", "")).endswith("}head"):
+        return f"<h3>{html.escape(getattr(item, 'text', '') or '')}</h3>"
     if isinstance(item, TitleCt):
+        return f"<h3>{render_content(item.content, nc)}</h3>"
+    if isinstance(item, HeadCt):
         return f"<h3>{render_content(item.content, nc)}</h3>"
     if isinstance(item, PCt):
         return f"<p>{render_content(item.content, nc)}</p>"
     if isinstance(item, LgCt):
-        return f'<div class="lg">{render_content(item.content, nc)}</div>'
+        return f'<div class="lg">{render_content(_container_children(item), nc)}</div>'
     if isinstance(item, LCt):
         return f'<div class="l">{render_content(item.content, nc)}</div>'
     if isinstance(item, QCt):
         level = getattr(item, "level", 1) or 1
-        return (
-            f'<div class="q q-{level}">{render_content(item.content, nc)}</div>'
-        )
+        return f'<div class="q q-{level}">{render_content(item.content, nc)}</div>'
     if isinstance(item, ACt):
         href = item.href or "#"
         return f'<a href="{html.escape(href)}">{render_content(item.content, nc)}</a>'
@@ -114,8 +140,9 @@ def _render_item(item: Any, nc: list[int]) -> str:
             return ""
         return render_content(item.content, nc)
     # Generic fallback for elements with a content list
-    if hasattr(item, "content") and isinstance(item.content, list):
-        return render_content(item.content, nc)
+    children = _container_children(item)
+    if children:
+        return render_content(children, nc)
     return ""
 
 

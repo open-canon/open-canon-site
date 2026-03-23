@@ -11,14 +11,13 @@ import pyosis
 from pyosis.generated.osis_core_2_1_1 import (
     ChapterCt,
     DivCt,
+    HeadCt,
     NoteCt,
     OsisDivs,
     OsisTextCt,
-    PCt,
     TitleCt,
     VerseCt,
 )
-
 
 # ---------------------------------------------------------------------------
 # Data classes
@@ -52,6 +51,8 @@ class ChapterData:
     number: str  # display number (e.g. "1")
     slug: str  # URL-safe identifier
     title: str  # display title
+    body: list[Any] = field(default_factory=list)
+    notes: list[NoteData] = field(default_factory=list)
     verses: list[VerseData] = field(default_factory=list)
 
 
@@ -96,15 +97,33 @@ def _text_of(content: list[Any]) -> str:
             parts.append(item)
         elif hasattr(item, "content"):
             parts.append(_text_of(item.content))
+        else:
+            text = getattr(item, "text", None)
+            if isinstance(text, str):
+                parts.append(text)
+            children = getattr(item, "children", None)
+            if isinstance(children, list):
+                parts.append(_text_of(children))
     return "".join(parts).strip()
 
 
 def _extract_title(items: list[Any]) -> str:
-    """Return the first TitleCt text found in *items*."""
+    """Return the first TitleCt or HeadCt text found in *items*."""
     for item in items:
-        if isinstance(item, TitleCt):
-            return _text_of(item.content)
+        if _is_heading_item(item):
+            return _text_of([item])
     return ""
+
+
+def _is_heading_item(item: Any) -> bool:
+    qname = getattr(item, "qname", "")
+    return isinstance(item, (TitleCt, HeadCt)) or str(qname).endswith("}head")
+
+
+def _copy_item_with_updates(item: Any, updates: dict[str, Any]) -> Any:
+    if hasattr(item, "model_copy"):
+        return item.model_copy(update=updates)
+    return item
 
 
 # ---------------------------------------------------------------------------
@@ -128,8 +147,7 @@ def _collect_milestone_groups(content: list[Any]) -> list[dict]:
     def flush(vid: str | None) -> None:
         nonlocal current_items
         if vid is not None and any(
-            (isinstance(i, str) and i.strip()) or isinstance(i, NoteCt)
-            for i in current_items
+            (isinstance(i, str) and i.strip()) or isinstance(i, NoteCt) for i in current_items
         ):
             groups.append({"type": "verse", "verse_id": vid, "items": list(current_items)})
         elif current_items:
@@ -209,17 +227,68 @@ def _extract_notes_from_content(
     cleaned: list[Any] = []
     notes: list[NoteData] = []
     for item in content:
-        if isinstance(item, NoteCt):
-            nid = _next_note_id(doc_slug, verse_id)
-            notes.append(NoteData(note_id=nid, verse_id=verse_id, content=item.content))
-            # Replace note with a lightweight marker carrying the note id
-            cleaned.append(("note_marker", nid))
-        else:
-            cleaned.append(item)
+        cleaned_item, item_notes = _extract_notes_from_item(item, verse_id, doc_slug)
+        notes.extend(item_notes)
+        if cleaned_item is not None:
+            cleaned.append(cleaned_item)
     return cleaned, notes
 
 
-def _parse_verses_from_content(content: list[Any], chapter_id: str, doc_slug: str) -> list[VerseData]:
+def _extract_notes_from_item(
+    item: Any, context_id: str, doc_slug: str
+) -> tuple[Any, list[NoteData]]:
+    if isinstance(item, NoteCt):
+        note_id = _next_note_id(doc_slug, context_id)
+        return ("note_marker", note_id), [
+            NoteData(note_id=note_id, verse_id=context_id, content=item.content)
+        ]
+
+    notes: list[NoteData] = []
+
+    content = getattr(item, "content", None)
+    if isinstance(content, list):
+        cleaned_children, child_notes = _extract_notes_from_content(content, context_id, doc_slug)
+        notes.extend(child_notes)
+        return _copy_item_with_updates(item, {"content": cleaned_children}), notes
+
+    updates: dict[str, Any] = {}
+    for attr in ("l", "lg", "q"):
+        value = getattr(item, attr, None)
+        if not isinstance(value, list):
+            continue
+        cleaned_children, child_notes = _extract_notes_from_content(value, context_id, doc_slug)
+        updates[attr] = cleaned_children
+        notes.extend(child_notes)
+
+    if updates:
+        return _copy_item_with_updates(item, updates), notes
+
+    return item, notes
+
+
+def _parse_body_content(
+    content: list[Any], context_id: str, doc_slug: str
+) -> tuple[list[Any], list[NoteData]]:
+    contained = any(
+        isinstance(item, VerseCt) and item.osis_id and item.content and item.content != [None]
+        for item in content
+    )
+    has_milestones = any(isinstance(item, VerseCt) and (item.s_id or item.e_id) for item in content)
+
+    if has_milestones and not contained:
+        return [], []
+
+    body_items = [
+        item
+        for item in content
+        if not _is_heading_item(item) and not isinstance(item, (VerseCt, ChapterCt))
+    ]
+    return _extract_notes_from_content(body_items, context_id, doc_slug)
+
+
+def _parse_verses_from_content(
+    content: list[Any], chapter_id: str, doc_slug: str
+) -> list[VerseData]:
     """Extract VerseData from a chapter div's content list.
 
     Handles both contained and milestone encoding styles.
@@ -264,12 +333,32 @@ def _parse_chapter_div(div: DivCt, doc_slug: str, parent_id: str) -> ChapterData
     cid = div.osis_id[0] if div.osis_id else parent_id
     num = cid.rsplit(".", 1)[-1]
     title_text = _extract_title(div.content) or f"Chapter {num}"
+    body, notes = _parse_body_content(div.content, cid, doc_slug)
     return ChapterData(
         chapter_id=cid,
         number=num,
         slug=_slugify(cid),
         title=title_text,
+        body=body,
+        notes=notes,
         verses=_parse_verses_from_content(div.content, cid, doc_slug),
+    )
+
+
+def _parse_non_chapter_div(
+    div: DivCt, doc_slug: str, parent_id: str, page_number: int
+) -> ChapterData:
+    """Parse front matter or other non-chapter divisions into a renderable page."""
+    div_id = div.osis_id[0] if div.osis_id else f"{parent_id}.front.{page_number}"
+    title_text = _extract_title(div.content) or f"Front Matter {page_number}"
+    body, notes = _parse_body_content(div.content, div_id, doc_slug)
+    return ChapterData(
+        chapter_id=div_id,
+        number="",
+        slug=_slugify(div_id if div.osis_id else f"front-{page_number}-{title_text}"),
+        title=title_text,
+        body=body,
+        notes=notes,
     )
 
 
@@ -285,8 +374,17 @@ def _find_chapters_milestone(content: list[Any], book_id: str, doc_slug: str) ->
         num = cid.rsplit(".", 1)[-1]
         title = _extract_title(current_content) or f"Chapter {num}"
         verses = _parse_verses_from_content(current_content, cid, doc_slug)
+        body, notes = _parse_body_content(current_content, cid, doc_slug)
         chapters.append(
-            ChapterData(chapter_id=cid, number=num, slug=_slugify(cid), title=title, verses=verses)
+            ChapterData(
+                chapter_id=cid,
+                number=num,
+                slug=_slugify(cid),
+                title=title,
+                body=body,
+                notes=notes,
+                verses=verses,
+            )
         )
 
     for item in content:
@@ -324,18 +422,46 @@ def _parse_book_div(div: DivCt, doc_slug: str) -> DivisionData:
     has_chapter_divs = any(isinstance(c, DivCt) and _is_chapter_level(c) for c in div.content)
     has_chapter_milestones = any(isinstance(c, ChapterCt) and c.s_id for c in div.content)
 
-    if has_chapter_divs or has_chapter_milestones:
+    page_number = 0
+    if has_chapter_divs:
+        for item in div.content:
+            if not isinstance(item, DivCt):
+                continue
+            if _is_chapter_level(item):
+                chapters.append(_parse_chapter_div(item, doc_slug, did))
+                continue
+
+            page_number += 1
+            page = _parse_non_chapter_div(item, doc_slug, did, page_number)
+            if page.body or page.notes:
+                chapters.append(page)
+
+    elif has_chapter_milestones:
         chapters = _find_chapters_milestone(div.content, did, doc_slug)
     else:
+        child_divs = [item for item in div.content if isinstance(item, DivCt)]
+        if child_divs:
+            for item in div.content:
+                if not isinstance(item, DivCt):
+                    continue
+                page_number += 1
+                page = _parse_non_chapter_div(item, doc_slug, did, page_number)
+                if page.body or page.notes:
+                    chapters.append(page)
+            return DivisionData(div_id=did, slug=_slugify(did), title=title, chapters=chapters)
+
         # Treat the whole book as a single pseudo-chapter
         verses = _parse_verses_from_content(div.content, did, doc_slug)
-        if verses:
+        body, notes = _parse_body_content(div.content, did, doc_slug)
+        if verses or body:
             chapters = [
                 ChapterData(
                     chapter_id=did,
                     number="1",
                     slug=_slugify(did),
                     title=title,
+                    body=body,
+                    notes=notes,
                     verses=verses,
                 )
             ]
@@ -349,7 +475,8 @@ def _collect_book_divs(divs: list[DivCt], doc_slug: str) -> list[DivisionData]:
     for div in divs:
         if _is_book_level(div):
             if div.type_value in (OsisDivs.BOOK_GROUP,) or (
-                isinstance(div.type_value, str) and div.type_value.lower() in {"bookgroup", "testament"}
+                isinstance(div.type_value, str)
+                and div.type_value.lower() in {"bookgroup", "testament"}
             ):
                 # Recurse into bookGroups
                 sub_divs = [c for c in div.content if isinstance(c, DivCt)]

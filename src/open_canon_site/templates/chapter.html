@@ -64,6 +64,10 @@
       {{ current_div.title }} — {{ current_chapter.title }}
     </h2>
 
+    {% if chapter_body_html %}
+      <div class="chapter-body">{{ chapter_body_html | safe }}</div>
+    {% endif %}
+
     {% if rendered_verses %}
       {% for verse in rendered_verses %}
       <div class="verse{% if verse.has_notes %} has-notes{% endif %}"
@@ -73,7 +77,7 @@
         <span class="verse-text">{{ verse.html | safe }}</span>
       </div>
       {% endfor %}
-    {% else %}
+    {% elif not chapter_body_html %}
       <p style="color:var(--color-muted);font-style:italic;">No content in this chapter.</p>
     {% endif %}
 

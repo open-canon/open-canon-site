@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from open_canon_site.renderer import render_content, render_note_content, _int_to_alpha
-
+from open_canon_site.renderer import _int_to_alpha, render_content, render_note_content
 
 # ---------------------------------------------------------------------------
 # Utilities
@@ -79,6 +78,7 @@ def test_render_note_marker_links_to_note():
 def _make_hi(type_value_str: str, inner: str):
     """Create a HiCt instance with the given type."""
     from pyosis.generated.osis_core_2_1_1 import HiCt, OsisHi
+
     return HiCt.model_construct(type_value=OsisHi(type_value_str), content=[inner])
 
 
@@ -99,6 +99,7 @@ def test_render_hi_small_caps():
 
 def _make_divine_name(text: str):
     from pyosis.generated.osis_core_2_1_1 import DivineNameCt
+
     return DivineNameCt.model_construct(content=[text])
 
 
@@ -108,8 +109,25 @@ def test_render_divine_name():
     assert '<span class="divine-name">LORD</span>' == result
 
 
+def test_render_line_group_from_structured_children():
+    from pyosis.generated.osis_core_2_1_1 import LCt, LgCt
+
+    lg = LgCt.model_construct(
+        l=[
+            LCt.model_construct(content=["Line one"]),
+            LCt.model_construct(content=["Line two"]),
+        ]
+    )
+
+    assert (
+        render_content([lg])
+        == '<div class="lg"><div class="l">Line one</div><div class="l">Line two</div></div>'
+    )
+
+
 def _make_note_ct(inner: str):
     from pyosis.generated.osis_core_2_1_1 import NoteCt
+
     return NoteCt.model_construct(content=[inner])
 
 

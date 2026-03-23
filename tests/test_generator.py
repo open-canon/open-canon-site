@@ -8,7 +8,6 @@ import pytest
 
 from open_canon_site.generator import generate_site
 
-
 SAMPLE_OSIS = Path(__file__).parent.parent / "sample_data" / "sample.osis.xml"
 
 
@@ -96,3 +95,66 @@ def test_index_page_lists_document(output_dir):
     html = (output_dir / "index.html").read_text()
     assert "King James Version" in html
     assert "kjv/index.html" in html
+
+
+def test_generate_site_renders_front_matter_page(output_dir, tmp_path):
+    osis_path = tmp_path / "front.osis.xml"
+    osis_path.write_text(
+        """<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<osis xmlns=\"http://www.bibletechnologies.net/2003/OSIS/namespace\">
+    <osisText osisIDWork=\"TEST\" xml:lang=\"en\">
+        <header>
+            <work osisWork=\"TEST\">
+                <title>Front Test</title>
+            </work>
+        </header>
+        <div type=\"book\" osisID=\"Book\">
+            <div type=\"front\">
+                <head>Preface</head>
+                <p>Introductory material.</p>
+            </div>
+            <div type=\"chapter\" osisID=\"Book.1\">
+                <verse osisID=\"Book.1.1\">Verse one.</verse>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+
+    generate_site([osis_path], output_dir)
+
+    html = (output_dir / "test" / "book" / "front-1-preface.html").read_text()
+    assert "Introductory material." in html
+    assert "Preface" in html
+
+
+def test_generate_site_renders_prose_only_chapter(output_dir, tmp_path):
+    osis_path = tmp_path / "prose.osis.xml"
+    osis_path.write_text(
+        """<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<osis xmlns=\"http://www.bibletechnologies.net/2003/OSIS/namespace\">
+    <osisText osisIDWork=\"TEST\" xml:lang=\"en\">
+        <header>
+            <work osisWork=\"TEST\">
+                <title>Prose Test</title>
+            </work>
+        </header>
+        <div type=\"book\" osisID=\"Book\">
+            <div type=\"chapter\" osisID=\"Book.1\">
+                <title type=\"chapter\">Chapter 1</title>
+                <p>Opening prose.</p>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+
+    generate_site([osis_path], output_dir)
+
+    html = (output_dir / "test" / "book" / "book-1.html").read_text()
+    assert "Opening prose." in html
+    assert "No content in this chapter." not in html
