@@ -190,6 +190,55 @@ def test_parse_milestone_chapter_title_uses_arabic_numerals_for_roman_heading():
     assert doc.divisions[0].chapters[0].title == "Chapter 9"
 
 
+def test_parse_chapter_element_contained():
+    """<chapter osisID=...> elements (not <div type=chapter>) should be parsed as chapters."""
+    doc = _parse("""
+        <div type="book" osisID="1Esd">
+          <chapter osisID="1Esd.1">
+            <verse osisID="1Esd.1.1">Verse one.</verse>
+            <verse osisID="1Esd.1.2">Verse two.</verse>
+          </chapter>
+          <chapter osisID="1Esd.2">
+            <verse osisID="1Esd.2.1">Chapter two verse one.</verse>
+          </chapter>
+        </div>
+    """)
+    div = doc.divisions[0]
+    assert len(div.chapters) == 2
+    assert div.chapters[0].chapter_id == "1Esd.1"
+    assert div.chapters[0].number == "1"
+    assert div.chapters[1].chapter_id == "1Esd.2"
+
+
+def test_parse_chapter_element_verses_extracted():
+    """Verses inside contained <chapter> elements should be extracted."""
+    doc = _parse("""
+        <div type="book" osisID="1Esd">
+          <chapter osisID="1Esd.1">
+            <verse osisID="1Esd.1.1">Hello world.</verse>
+            <verse osisID="1Esd.1.2">Second verse.</verse>
+          </chapter>
+        </div>
+    """)
+    verses = doc.divisions[0].chapters[0].verses
+    assert len(verses) == 2
+    assert verses[0].verse_id == "1Esd.1.1"
+    assert verses[1].verse_id == "1Esd.1.2"
+
+
+def test_parse_chapter_element_title_arabic_numerals():
+    """<chapter osisID> roman-numeral chapter titles should be normalised to Arabic numerals."""
+    doc = _parse("""
+        <div type="book" osisID="1Esd">
+          <chapter osisID="1Esd.18">
+            <title type="chapter">CHAPTER XVIII.</title>
+            <verse osisID="1Esd.18.1">Text.</verse>
+          </chapter>
+        </div>
+    """)
+    assert doc.divisions[0].chapters[0].title == "Chapter 18"
+
+
 def test_parse_front_material_as_renderable_page():
     doc = _parse("""
         <div type="book" osisID="Gen">
