@@ -49,8 +49,12 @@ jobs:
     permissions:
       contents: write
       id-token: write
+      pages: write
 
     steps:
+      - name: Configure GitHub Pages source
+        uses: actions/configure-pages@v5
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -128,9 +132,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Configure GitHub Pages source
-        uses: actions/configure-pages@v5
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
