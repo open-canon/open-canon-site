@@ -94,3 +94,15 @@ uv run --extra dev pytest
 | ---------------------------------------------- | ------------------------------------------ |
 | [pyosis](https://pypi.org/project/pyosis/)     | Parses OSIS XML into typed Python models   |
 | [Jinja2](https://jinja.palletsprojects.com/)   | HTML template rendering                    |
+
+## Contributing
+
+Commit messages must follow the **[Conventional Commits](https://www.conventionalcommits.org/)** format (Angular preset) — this drives automatic versioning via [python-semantic-release](https://python-semantic-release.readthedocs.io/).
+
+```
+feat(parser): support Hebrew right-to-left text direction
+fix(renderer): correct verse numbering for chapters > 99
+docs: clarify OSIS file requirements in README
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide.
