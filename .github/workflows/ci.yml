@@ -62,8 +62,8 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
-      - name: Generate site from sample data
-        run: uv run open-canon-site sample_data/sample.osis.xml --output _site --clean
+      - name: Generate site from documents
+        run: uv run open-canon-site open-canon-osis-documents/*.xml --output _site --clean
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
