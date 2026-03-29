@@ -49,8 +49,12 @@ jobs:
     permissions:
       contents: write
       id-token: write
+      pages: write
 
     steps:
+      - name: Configure GitHub Pages source
+        uses: actions/configure-pages@v5
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
