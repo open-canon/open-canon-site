@@ -16,6 +16,7 @@ open-canon-site = "open_canon_site.__main__:main"
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0.0",
+    "python-semantic-release>=10.0.0",
     "ruff>=0.8.0",
 ]
 
@@ -34,3 +35,9 @@ select = ["E", "F", "I", "UP"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+version_variables = ["src/open_canon_site/__init__.py:__version__"]
+branch = "main"
+commit_message = "chore(release): v{version} [skip ci]"

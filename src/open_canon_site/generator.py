@@ -8,6 +8,7 @@ from pathlib import Path
 
 from jinja2 import Environment, PackageLoader, select_autoescape
 
+from open_canon_site import __version__
 from open_canon_site.parser import (
     ChapterData,
     DivisionData,
@@ -72,7 +73,7 @@ def _chapter_notes(chapter: ChapterData) -> list[NoteData]:
 def _generate_index(env: Environment, documents: list[DocumentData], output_dir: Path) -> None:
     """Render the top-level index.html listing all documents."""
     template = env.get_template("index.html")
-    html = template.render(documents=documents)
+    html = template.render(documents=documents, version=__version__)
     (output_dir / "index.html").write_text(html, encoding="utf-8")
 
 
@@ -153,6 +154,7 @@ def _generate_chapter(
         prev_chapter_url=prev_chapter_url,
         next_chapter_url=next_chapter_url,
         chapter_url_fn=lambda d, di, c: _chapter_url(d, di, c),
+        version=__version__,
     )
 
     dest = output_dir / doc.slug / div.slug / f"{chapter.slug}.html"
@@ -178,6 +180,7 @@ def _generate_doc_index(
         documents=documents,
         current_doc=doc,
         first_chapter_url=first_url,
+        version=__version__,
     )
     dest = output_dir / doc.slug / "index.html"
     dest.parent.mkdir(parents=True, exist_ok=True)

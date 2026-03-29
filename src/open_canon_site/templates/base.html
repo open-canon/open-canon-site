@@ -15,5 +15,11 @@
 
 {% block body %}{% endblock %}
 
+{% if version %}
+<footer class="site-footer">
+  <span>Open Canon v{{ version }}</span>
+</footer>
+{% endif %}
+
 </body>
 </html>
