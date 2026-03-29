@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Open Canon{% endblock %}</title>
+  <link rel="stylesheet" href="{{ static_root }}style.css" />
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+<header class="site-header">
+  <h1><a href="{{ root_url }}index.html">Open Canon</a></h1>
+</header>
+
+{% block body %}{% endblock %}
+
+</body>
+</html>
