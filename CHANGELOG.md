@@ -2,6 +2,25 @@
 
 <!-- version list -->
 
+## v1.2.0 (2026-03-30)
+
+### Continuous Integration
+
+- Add fork guard and per-PR concurrency to preview jobs
+  ([`6823d45`](https://github.com/open-canon/open-canon-site/commit/6823d459e88ab81c7b21b2da88a6d8e09747eaa5))
+
+- Add PR preview deployment using rossjrw/pr-preview-action
+  ([`04ec180`](https://github.com/open-canon/open-canon-site/commit/04ec18071184eb129fbc7ab37a2abe9d1dad57b1))
+
+- Add weekly scheduled workflow to clean up stale PR previews
+  ([`3b1cc69`](https://github.com/open-canon/open-canon-site/commit/3b1cc695f56de08d6bd817c7ffe58aeec6182c40))
+
+### Features
+
+- Standard Works
+  ([`937967f`](https://github.com/open-canon/open-canon-site/commit/937967f2b7047d58e059abf8de189713c6201f47))
+
+
 ## v1.1.0 (2026-03-29)
 
 ### Bug Fixes
