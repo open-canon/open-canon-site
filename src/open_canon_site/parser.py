@@ -475,11 +475,12 @@ def _find_chapters_milestone(content: list[Any], book_id: str, doc_slug: str) ->
                 flush(current_chapter_id)
                 current_chapter_id = None
                 current_content = []
-            elif item.osis_id and not item.s_id:
+            elif item.osis_id and not item.s_id and not item.e_id:
                 # Contained chapter element (osisID, no milestone markers)
                 flush(current_chapter_id)
                 current_chapter_id = None
                 chapters.append(_parse_chapter_ct(item, doc_slug, book_id))
+                current_content = []
         elif isinstance(item, DivCt) and _is_chapter_level(item):
             chapters.append(_parse_chapter_div(item, doc_slug, book_id))
         else:
@@ -505,7 +506,7 @@ def _parse_book_div(div: DivCt, doc_slug: str) -> DivisionData:
     has_chapter_divs = any(isinstance(c, DivCt) and _is_chapter_level(c) for c in div.content)
     has_chapter_milestones = any(isinstance(c, ChapterCt) and c.s_id for c in div.content)
     has_contained_chapters = any(
-        isinstance(c, ChapterCt) and c.osis_id and not c.s_id for c in div.content
+        isinstance(c, ChapterCt) and c.osis_id and not c.s_id and not c.e_id for c in div.content
     )
 
     page_number = 0
@@ -527,7 +528,7 @@ def _parse_book_div(div: DivCt, doc_slug: str) -> DivisionData:
 
     elif has_contained_chapters:
         for item in div.content:
-            if isinstance(item, ChapterCt) and item.osis_id and not item.s_id:
+            if isinstance(item, ChapterCt) and item.osis_id and not item.s_id and not item.e_id:
                 chapters.append(_parse_chapter_ct(item, doc_slug, did))
 
     else:
