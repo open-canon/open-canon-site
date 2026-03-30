@@ -1,0 +1,61 @@
+name: Cleanup stale PR previews
+
+on:
+  schedule:
+    - cron: '0 2 * * 0'  # Weekly, Sunday at 02:00 UTC
+  workflow_dispatch:
+
+concurrency:
+  group: cleanup-pr-previews
+  cancel-in-progress: true
+
+jobs:
+  cleanup:
+    name: Remove previews for closed/merged PRs
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: read
+
+    steps:
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: Remove previews for closed/merged PRs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ ! -d pr-preview ]; then
+            echo "No pr-preview directory found, nothing to clean up."
+            exit 0
+          fi
+
+          changed=false
+          for dir in pr-preview/pr-*/; do
+            [ -d "$dir" ] || continue
+            pr_number=$(basename "$dir" | sed 's/pr-//')
+            echo "Checking PR #${pr_number}..."
+            state=$(gh pr view "$pr_number" \
+              --repo "${{ github.repository }}" \
+              --json state -q '.state' 2>/dev/null || echo "")
+            if [ "$state" = "CLOSED" ] || [ "$state" = "MERGED" ]; then
+              echo "PR #${pr_number} is ${state} — removing preview..."
+              rm -rf "$dir"
+              changed=true
+            else
+              echo "PR #${pr_number} is ${state:-unknown} — skipping."
+            fi
+          done
+
+          if [ "$changed" = "true" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "chore: remove stale PR preview deployments"
+            git push || { echo "Push failed"; exit 1; }
+          else
+            echo "No stale previews found, nothing to commit."
+          fi
