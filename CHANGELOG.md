@@ -2,6 +2,25 @@
 
 <!-- version list -->
 
+## v1.4.0 (2026-04-01)
+
+### Bug Fixes
+
+- Remove head.repo.fork check from preview/remove-preview job conditions
+  ([`d53e57e`](https://github.com/open-canon/open-canon-site/commit/d53e57e581e278336ebd9ed4ef0cfb703b321a43))
+
+- Use head.repo.fork check instead of full_name for robust re-run handling
+  ([`7b05fdc`](https://github.com/open-canon/open-canon-site/commit/7b05fdc9cd638116c9bd580d92cab3971ceb9e2a))
+
+- **ci**: Keep PR preview deployments rerun-safe
+  ([`a1c5680`](https://github.com/open-canon/open-canon-site/commit/a1c5680c5229bb98f9cfa7b2eae92c53fd3290f4))
+
+### Features
+
+- Post PR comment with GitHub Pages preview link on each PR
+  ([`641c4aa`](https://github.com/open-canon/open-canon-site/commit/641c4aa8783735f7726400b7c3e0e1f61b0d249e))
+
+
 ## v1.3.0 (2026-04-01)
 
 ### Features
