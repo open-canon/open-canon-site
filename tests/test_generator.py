@@ -66,6 +66,18 @@ def test_chapter_page_has_nav_links(output_dir):
     assert "gen-3.html" in html
 
 
+def test_library_section_is_collapsible(output_dir):
+    generate_site([SAMPLE_OSIS], output_dir)
+    html = (output_dir / "kjv" / "gen" / "gen-1.html").read_text()
+    # Library section must use a <details> element so it is collapsible
+    assert "<details" in html
+    assert "<summary" in html
+    # The summary should contain the "Library" label
+    assert "Library" in html
+    # The details element should be open by default (open attribute on <details>)
+    assert '<details class="nav-section" open>' in html
+
+
 def test_next_prev_navigation(output_dir):
     generate_site([SAMPLE_OSIS], output_dir)
     # Chapter 1 should have a "next chapter" link but no "prev"

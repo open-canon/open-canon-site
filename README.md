@@ -99,6 +99,12 @@ The preview jobs intentionally avoid conditions based on
 `pull_request` workflow is manually re-run, which would incorrectly skip
 same-repository preview deployments.
 
+The preview deployment job also uses an explicit `always()` guard with a
+`needs.build.result == 'success'` check. Without that override, GitHub applies
+the default `success()` condition to downstream jobs, and the PR preview job is
+silently skipped because the release job is expected to be skipped on
+`pull_request` events.
+
 ## Dependencies
 
 | Package                                        | Purpose                                    |
