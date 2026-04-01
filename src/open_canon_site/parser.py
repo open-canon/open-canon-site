@@ -357,7 +357,7 @@ def _parse_verses_from_content(
     if contained:
         for item in content:
             if isinstance(item, VerseCt) and item.osis_id:
-                vid = item.osis_id[0]
+                vid = " ".join(item.osis_id)
                 num = vid.rsplit(".", 1)[-1]
                 cleaned, notes = _extract_notes_from_content(item.content, vid, doc_slug)
                 verses.append(VerseData(verse_id=vid, number=num, content=cleaned, notes=notes))

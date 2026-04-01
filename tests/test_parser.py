@@ -379,6 +379,24 @@ def test_parse_verse_contained():
     assert verses[1].verse_id == "Gen.1.2"
 
 
+def test_parse_verse_multiword_book_id():
+    """Verses in books with spaces in their OSIS ID should have correct verse numbers."""
+    doc = _parse("""
+        <div type="book" osisID="Words of Mormon">
+          <chapter osisID="Words of Mormon.1">
+            <verse osisID="Words of Mormon.1.1">Verse one.</verse>
+            <verse osisID="Words of Mormon.1.2">Verse two.</verse>
+          </chapter>
+        </div>
+    """)
+    verses = doc.divisions[0].chapters[0].verses
+    assert len(verses) == 2
+    assert verses[0].verse_id == "Words of Mormon.1.1"
+    assert verses[0].number == "1"
+    assert verses[1].verse_id == "Words of Mormon.1.2"
+    assert verses[1].number == "2"
+
+
 def test_parse_verse_text_content():
     doc = _parse("""
         <div type="book" osisID="Gen">
