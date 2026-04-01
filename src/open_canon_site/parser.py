@@ -73,6 +73,7 @@ class DivisionData:
     div_id: str  # OSIS ID (e.g. "Gen")
     slug: str  # URL-safe identifier
     title: str  # display title
+    short_title: str = ""  # conventional/abbreviated name (e.g. "1 Nephi")
     chapters: list[ChapterData] = field(default_factory=list)
 
 
@@ -122,6 +123,16 @@ def _extract_title(items: list[Any]) -> str:
     for item in items:
         if _is_heading_item(item):
             return _text_of([item])
+    return ""
+
+
+def _extract_short_title(items: list[Any]) -> str:
+    """Return the ``short`` attribute of the first TitleCt in *items*, if set."""
+    for item in items:
+        if isinstance(item, TitleCt):
+            if item.short:
+                return item.short.strip()
+            break
     return ""
 
 
@@ -500,6 +511,7 @@ def _parse_book_div(div: DivCt, doc_slug: str) -> DivisionData:
     """Parse a book-level DivCt into DivisionData."""
     did = div.osis_id[0] if div.osis_id else "unknown"
     title = _extract_title(div.content) or did
+    short_title = _extract_short_title(div.content)
 
     # Collect chapters
     chapters: list[ChapterData] = []
@@ -541,7 +553,13 @@ def _parse_book_div(div: DivCt, doc_slug: str) -> DivisionData:
                 page = _parse_non_chapter_div(item, doc_slug, did, page_number)
                 if page.body or page.notes:
                     chapters.append(page)
-            return DivisionData(div_id=did, slug=_slugify(did), title=title, chapters=chapters)
+            return DivisionData(
+                div_id=did,
+                slug=_slugify(did),
+                title=title,
+                short_title=short_title,
+                chapters=chapters,
+            )
 
         # Treat the whole book as a single pseudo-chapter
         verses = _parse_verses_from_content(div.content, did, doc_slug)
@@ -561,7 +579,13 @@ def _parse_book_div(div: DivCt, doc_slug: str) -> DivisionData:
                 )
             ]
 
-    return DivisionData(div_id=did, slug=_slugify(did), title=title, chapters=chapters)
+    return DivisionData(
+        div_id=did,
+        slug=_slugify(did),
+        title=title,
+        short_title=short_title,
+        chapters=chapters,
+    )
 
 
 def _collect_book_divs(divs: list[DivCt], doc_slug: str) -> list[DivisionData]:

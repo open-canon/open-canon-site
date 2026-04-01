@@ -108,6 +108,33 @@ def test_parse_single_book():
     assert doc.divisions[0].title == "Genesis"
 
 
+def test_parse_book_short_title():
+    """The ``short`` attribute on a book title is exposed as ``short_title``."""
+    doc = _parse("""
+        <div type="book" osisID="1Ne">
+          <title short="1 Nephi">The First Book of Nephi</title>
+          <div type="chapter" osisID="1Ne.1">
+            <verse osisID="1Ne.1.1">Text.</verse>
+          </div>
+        </div>
+    """)
+    assert doc.divisions[0].title == "The First Book of Nephi"
+    assert doc.divisions[0].short_title == "1 Nephi"
+
+
+def test_parse_book_no_short_title():
+    """A book without a ``short`` attribute has an empty ``short_title``."""
+    doc = _parse("""
+        <div type="book" osisID="Gen">
+          <title>Genesis</title>
+          <div type="chapter" osisID="Gen.1">
+            <verse osisID="Gen.1.1">In the beginning.</verse>
+          </div>
+        </div>
+    """)
+    assert doc.divisions[0].short_title == ""
+
+
 def test_parse_bookgroup_flattens_into_divisions():
     """bookGroup should be unwrapped; its child books become divisions."""
     doc = _parse("""
