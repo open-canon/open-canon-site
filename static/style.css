@@ -85,6 +85,33 @@ a:hover { text-decoration: underline; }
 
 .nav-section { margin-bottom: .5rem; }
 
+/* Collapsible <details> used for the Library dropdown */
+details.nav-section { border: none; }
+
+details.nav-section > summary {
+  cursor: pointer;
+  user-select: none;
+  list-style: none;          /* Firefox */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Hide the native disclosure triangle in WebKit/Blink */
+details.nav-section > summary::-webkit-details-marker { display: none; }
+
+details.nav-section > summary::after {
+  content: '▸';
+  font-size: .6rem;
+  margin-right: 1.1rem;
+  color: var(--color-muted);
+  transition: transform .15s;
+}
+
+details.nav-section[open] > summary::after {
+  transform: rotate(90deg);
+}
+
 .nav-section-title {
   font-size: .65rem;
   font-weight: 700;
