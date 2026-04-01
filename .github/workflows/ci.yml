@@ -148,7 +148,7 @@ jobs:
     if: >-
       github.event_name == 'pull_request' &&
       github.event.action != 'closed' &&
-      github.event.pull_request.head.repo.full_name == github.repository
+      !github.event.pull_request.head.repo.fork
 
     concurrency:
       group: pr-preview-${{ github.event.pull_request.number }}
@@ -224,7 +224,7 @@ jobs:
     if: >-
       github.event_name == 'pull_request' &&
       github.event.action == 'closed' &&
-      github.event.pull_request.head.repo.full_name == github.repository
+      !github.event.pull_request.head.repo.fork
 
     concurrency:
       group: pr-preview-${{ github.event.pull_request.number }}
