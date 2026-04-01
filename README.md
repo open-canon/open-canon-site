@@ -88,6 +88,17 @@ uv sync --extra dev
 uv run --extra dev pytest
 ```
 
+## GitHub Pages deployment
+
+Production and PR preview deployments both publish to the `gh-pages` branch.
+Keep the repository Pages source set to `Deploy from a branch` with `gh-pages`
+selected; the preview workflow relies on branch-based deployments.
+
+The preview jobs intentionally avoid conditions based on
+`github.event.pull_request.head.repo`. GitHub can omit that object when a
+`pull_request` workflow is manually re-run, which would incorrectly skip
+same-repository preview deployments.
+
 ## Dependencies
 
 | Package                                        | Purpose                                    |
@@ -99,7 +110,7 @@ uv run --extra dev pytest
 
 Commit messages must follow the **[Conventional Commits](https://www.conventionalcommits.org/)** format (Angular preset) — this drives automatic versioning via [python-semantic-release](https://python-semantic-release.readthedocs.io/).
 
-```
+```text
 feat(parser): support Hebrew right-to-left text direction
 fix(renderer): correct verse numbering for chapters > 99
 docs: clarify OSIS file requirements in README
