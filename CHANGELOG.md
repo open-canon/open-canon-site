@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.3.0 (2026-04-01)
+
+### Features
+
+- **css**: Use Palatino as primary serif font with fallbacks
+  ([`03a5244`](https://github.com/open-canon/open-canon-site/commit/03a5244933aa86eb15cd4ba9833de40dd46578a4))
+
+
 ## v1.2.0 (2026-03-30)
 
 ### Continuous Integration
