@@ -320,6 +320,49 @@ details.nav-section[open] > summary::after {
 .index-page h1 { font-size: 2rem; margin-bottom: .5rem; color: var(--color-primary); }
 .index-page .subtitle { color: var(--color-muted); margin-bottom: 2rem; }
 
+/* ---------- Library collection groups (index page) ---------- */
+.collection {
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.collection-name {
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  padding: .75rem 1.25rem;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Hide native WebKit/Blink disclosure marker */
+.collection-name::-webkit-details-marker { display: none; }
+
+.collection-name::after {
+  content: '▸';
+  font-size: .7rem;
+  transition: transform .15s;
+}
+
+.collection[open] > .collection-name::after {
+  transform: rotate(90deg);
+}
+
+.collection .doc-card {
+  margin: .75rem 1rem 0;
+  box-shadow: none;
+}
+
+.collection .doc-card:last-child { margin-bottom: .75rem; }
+
 .doc-card {
   display: block;
   background: var(--color-surface);
