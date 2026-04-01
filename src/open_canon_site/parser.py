@@ -382,7 +382,7 @@ def _parse_verses_from_content(
 
 def _parse_chapter_div(div: DivCt, doc_slug: str, parent_id: str) -> ChapterData:
     """Parse a chapter-level DivCt into ChapterData."""
-    cid = div.osis_id[0] if div.osis_id else parent_id
+    cid = " ".join(div.osis_id) if div.osis_id else parent_id
     num = cid.rsplit(".", 1)[-1]
     title_text = _normalize_chapter_title(_extract_title(div.content), num) or f"Chapter {num}"
     body, notes = _parse_body_content(div.content, cid, doc_slug)
@@ -401,7 +401,7 @@ def _parse_chapter_div(div: DivCt, doc_slug: str, parent_id: str) -> ChapterData
 
 def _parse_chapter_ct(chapter: ChapterCt, doc_slug: str, parent_id: str) -> ChapterData:
     """Parse a contained ChapterCt element (osisID but no s_id/e_id) into ChapterData."""
-    cid = chapter.osis_id[0] if chapter.osis_id else parent_id
+    cid = " ".join(chapter.osis_id) if chapter.osis_id else parent_id
     num = cid.rsplit(".", 1)[-1]
     content = chapter.content or []
     title_text = _normalize_chapter_title(_extract_title(content), num) or f"Chapter {num}"
@@ -423,7 +423,7 @@ def _parse_non_chapter_div(
     div: DivCt, doc_slug: str, parent_id: str, page_number: int
 ) -> ChapterData:
     """Parse front matter or other non-chapter divisions into a renderable page."""
-    div_id = div.osis_id[0] if div.osis_id else f"{parent_id}.front.{page_number}"
+    div_id = " ".join(div.osis_id) if div.osis_id else f"{parent_id}.front.{page_number}"
     title_text = _extract_title(div.content) or f"Front Matter {page_number}"
     body, notes = _parse_body_content(div.content, div_id, doc_slug)
     sections = _extract_sections_from_body(body)
@@ -498,7 +498,7 @@ def _find_chapters_milestone(content: list[Any], book_id: str, doc_slug: str) ->
 
 def _parse_book_div(div: DivCt, doc_slug: str) -> DivisionData:
     """Parse a book-level DivCt into DivisionData."""
-    did = div.osis_id[0] if div.osis_id else "unknown"
+    did = " ".join(div.osis_id) if div.osis_id else "unknown"
     title = _extract_title(div.content) or did
 
     # Collect chapters

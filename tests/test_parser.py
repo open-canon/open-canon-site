@@ -155,6 +155,36 @@ def test_parse_chapter_contained():
     assert doc.divisions[0].chapters[1].chapter_id == "Gen.2"
 
 
+def test_parse_chapter_multiword_book_id():
+    """Books whose OSIS ID contains a space (e.g. '1 Nephi') should produce correct chapter IDs and numbers."""
+    doc = _parse("""
+        <div type="book" osisID="1 Nephi">
+          <title>The First Book of Nephi</title>
+          <div type="chapter" osisID="1 Nephi.1">
+            <verse osisID="1 Nephi.1.1">Verse one.</verse>
+          </div>
+          <div type="chapter" osisID="1 Nephi.2">
+            <verse osisID="1 Nephi.2.1">Chapter two verse one.</verse>
+          </div>
+          <div type="chapter" osisID="1 Nephi.3">
+            <verse osisID="1 Nephi.3.1">Chapter three verse one.</verse>
+          </div>
+        </div>
+    """)
+    div = doc.divisions[0]
+    assert div.div_id == "1 Nephi"
+    assert len(div.chapters) == 3
+    assert div.chapters[0].chapter_id == "1 Nephi.1"
+    assert div.chapters[0].number == "1"
+    assert div.chapters[0].title == "Chapter 1"
+    assert div.chapters[1].chapter_id == "1 Nephi.2"
+    assert div.chapters[1].number == "2"
+    assert div.chapters[1].title == "Chapter 2"
+    assert div.chapters[2].chapter_id == "1 Nephi.3"
+    assert div.chapters[2].number == "3"
+    assert div.chapters[2].title == "Chapter 3"
+
+
 def test_parse_chapter_number_extracted():
     doc = _parse("""
         <div type="book" osisID="Gen">
