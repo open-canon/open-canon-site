@@ -289,6 +289,48 @@ def test_generate_site_renders_front_matter_page(output_dir, tmp_path):
     assert "Preface" in html
 
 
+def test_generate_site_renders_nested_book_chapters(output_dir, tmp_path):
+    osis_path = tmp_path / "nested_books.osis.xml"
+    osis_path.write_text(
+        """<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<osis xmlns=\"http://www.bibletechnologies.net/2003/OSIS/namespace\">
+    <osisText osisIDWork=\"TEST\" xml:lang=\"en\">
+        <header>
+            <work osisWork=\"TEST\">
+                <title>Nested Book Test</title>
+            </work>
+        </header>
+        <div type=\"book\" osisID=\"Collection\">
+            <title>Collection</title>
+            <div type=\"introduction\">
+                <title>Introduction</title>
+                <p>Collection preface.</p>
+            </div>
+            <div type=\"book\" osisID=\"Collection.Child\">
+                <title>The Child Book</title>
+                <div type=\"chapter\" osisID=\"Collection.Child.1\">
+                    <verse osisID=\"Collection.Child.1.1\">Verse one.</verse>
+                </div>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+
+    generate_site([osis_path], output_dir)
+
+    intro_html = (output_dir / "test" / "collection" / "front-1-introduction.html").read_text()
+    chapter_html = (
+        output_dir / "test" / "collection-child" / "collection-child-1.html"
+    ).read_text()
+
+    assert "Collection preface." in intro_html
+    assert 'data-verse="Collection.Child.1.1"' in chapter_html
+    assert "Verse one." in chapter_html
+
+
 def test_generate_site_renders_prose_only_chapter(output_dir, tmp_path):
     osis_path = tmp_path / "prose.osis.xml"
     osis_path.write_text(

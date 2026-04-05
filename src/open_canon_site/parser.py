@@ -286,6 +286,14 @@ def _is_book_level(div: DivCt) -> bool:
     )
 
 
+def _is_division_container(div: DivCt) -> bool:
+    """Return True when the div should be recursed into as its own division."""
+    return div.type_value in (OsisDivs.BOOK, OsisDivs.BOOK_GROUP) or (
+        isinstance(div.type_value, str)
+        and div.type_value.lower() in {"book", "bookgroup", "testament"}
+    )
+
+
 # ---------------------------------------------------------------------------
 # Verse extraction
 # ---------------------------------------------------------------------------
@@ -617,6 +625,24 @@ def _collect_book_divs(divs: list[DivCt], doc_slug: str) -> list[DivisionData]:
     divisions: list[DivisionData] = []
     for div in divs:
         if _is_book_level(div):
+            child_divisions = [
+                item
+                for item in div.content
+                if isinstance(item, DivCt) and _is_division_container(item)
+            ]
+            if child_divisions:
+                own_content = [
+                    item
+                    for item in div.content
+                    if not (isinstance(item, DivCt) and _is_division_container(item))
+                ]
+                own_div = _copy_item_with_updates(div, {"content": own_content})
+                own_division = _parse_book_div(own_div, doc_slug)
+                if own_division.chapters:
+                    divisions.append(own_division)
+                divisions.extend(_collect_book_divs(child_divisions, doc_slug))
+                continue
+
             if div.type_value in (OsisDivs.BOOK_GROUP,) or (
                 isinstance(div.type_value, str)
                 and div.type_value.lower() in {"bookgroup", "testament"}
