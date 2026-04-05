@@ -66,9 +66,10 @@ def _group_into_collections(
 ) -> list[dict[str, object]]:
     """Organize *documents* into named collections for the library index.
 
-    Documents whose ``work_id`` (case-insensitive) matches a known collection
-    are grouped under that collection.  Any remaining documents are placed
-    under a final ``"Other"`` group.
+    A document may appear in **more than one** collection if the admin
+    configures overlapping ``work_ids`` lists.  Documents whose ``work_id``
+    (case-insensitive) does not match any collection are placed under a final
+    ``"Other"`` group.
 
     Args:
         documents:   All parsed documents to group.
@@ -78,7 +79,10 @@ def _group_into_collections(
         A list of dicts, each with ``"name"`` (str) and ``"documents"``
         (list[DocumentData]), suitable for use in the index template.
     """
-    assigned: set[str] = set()
+    # Track which docs appear in at least one named collection so we can
+    # compute the "Other" fallback.  Documents are NOT excluded from later
+    # collections even after being added to an earlier one.
+    seen_in_any: set[str] = set()
     result: list[dict[str, object]] = []
 
     for name, work_ids in collections:
@@ -86,9 +90,9 @@ def _group_into_collections(
         matches = [doc for doc in documents if doc.work_id.upper() in upper_ids]
         if matches:
             result.append({"name": name, "documents": matches})
-            assigned.update(doc.work_id.upper() for doc in matches)
+            seen_in_any.update(doc.work_id.upper() for doc in matches)
 
-    other = [doc for doc in documents if doc.work_id.upper() not in assigned]
+    other = [doc for doc in documents if doc.work_id.upper() not in seen_in_any]
     if other:
         result.append({"name": "Other", "documents": other})
 
@@ -175,6 +179,7 @@ def _generate_chapter(
     chapter: ChapterData,
     documents: list[DocumentData],
     output_dir: Path,
+    collections: list[dict[str, object]],
 ) -> None:
     """Render a single chapter page."""
     template = env.get_template("chapter.html")
@@ -214,6 +219,7 @@ def _generate_chapter(
 
     html = template.render(
         documents=documents,
+        collections=collections,
         current_doc=doc,
         current_div=div,
         current_chapter=chapter,
@@ -306,6 +312,9 @@ def generate_site(
         print(f"  Parsing {path.name} …")
         documents.append(parse_osis_file(path))
 
+    # Group documents into collections once; reused by index and every chapter page.
+    grouped = _group_into_collections(documents, collections)
+
     print("  Generating index …")
     _generate_index(env, documents, output_dir, collections)
 
@@ -314,7 +323,7 @@ def generate_site(
         _generate_doc_index(env, doc, documents, output_dir)
         for div in doc.divisions:
             for chapter in div.chapters:
-                _generate_chapter(env, doc, div, chapter, documents, output_dir)
+                _generate_chapter(env, doc, div, chapter, documents, output_dir, grouped)
 
     _copy_static(output_dir)
     print(f"  Site written to {output_dir}")

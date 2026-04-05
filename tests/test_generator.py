@@ -168,6 +168,60 @@ def test_index_page_uses_custom_collections_file(output_dir, tmp_path):
     assert "Other" not in html
 
 
+def test_sidebar_shows_collections_on_chapter_page(output_dir, tmp_path):
+    """Chapter page sidebar groups documents into nested collapsible collections."""
+    bom_path = tmp_path / "bom.osis.xml"
+    bom_path.write_text(
+        """<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace">
+    <osisText osisIDWork="BOM" xml:lang="en">
+        <header>
+            <work osisWork="BOM">
+                <title>Book of Mormon</title>
+            </work>
+        </header>
+        <div type="book" osisID="1Ne">
+            <div type="chapter" osisID="1Ne.1">
+                <verse osisID="1Ne.1.1">I, Nephi.</verse>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+
+    generate_site([bom_path], output_dir)
+    html = (output_dir / "bom" / "1ne" / "1ne-1.html").read_text()
+
+    # Outer Library section is collapsible
+    assert '<details class="nav-section" open>' in html
+    assert "Library" in html
+    # Named collection appears as a nested details inside Library
+    assert '<details class="nav-collection">' in html
+    assert "Standard Works" in html
+    assert "Book of Mormon" in html
+
+
+def test_work_can_appear_in_multiple_collections(output_dir, tmp_path):
+    """A document whose work_id is listed in two collections appears under both."""
+    custom_collections = tmp_path / "multi.json"
+    custom_collections.write_text(
+        '[{"name": "Group A", "work_ids": ["KJV"]},  {"name": "Group B", "work_ids": ["KJV"]}]',
+        encoding="utf-8",
+    )
+
+    generate_site([SAMPLE_OSIS], output_dir, collections_path=custom_collections)
+    html = (output_dir / "index.html").read_text()
+
+    assert "Group A" in html
+    assert "Group B" in html
+    # KJV appears in both groups, so the title should occur at least twice
+    assert html.count("King James Version") >= 2
+    # No "Other" since KJV is matched
+    assert "Other" not in html
+
+
 def test_generate_site_renders_front_matter_page(output_dir, tmp_path):
     osis_path = tmp_path / "front.osis.xml"
     osis_path.write_text(

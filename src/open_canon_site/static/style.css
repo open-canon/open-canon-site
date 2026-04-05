@@ -112,6 +112,38 @@ details.nav-section[open] > summary::after {
   transform: rotate(90deg);
 }
 
+/* Nested per-collection <details> inside the Library nav-section */
+.nav-collection { border: none; margin: 0; }
+
+.nav-collection > summary.nav-collection-title {
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--color-muted);
+  padding: .3rem 1.1rem .1rem 1.6rem;
+}
+
+.nav-collection > summary.nav-collection-title::-webkit-details-marker { display: none; }
+
+.nav-collection > summary.nav-collection-title::after {
+  content: '▸';
+  font-size: .5rem;
+  margin-right: 1.1rem;
+  color: var(--color-muted);
+  transition: transform .15s;
+}
+
+.nav-collection[open] > summary.nav-collection-title::after {
+  transform: rotate(90deg);
+}
+
 .nav-section-title {
   font-size: .65rem;
   font-weight: 700;
