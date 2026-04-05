@@ -435,6 +435,64 @@ details.nav-section[open] > summary::after {
   margin-top: 2rem;
 }
 
+/* ---------- Dark mode ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg:            #111118;
+    --color-surface:       #1c1c24;
+    --color-border:        #2e2e3e;
+    --color-primary:       #3a7bc8;
+    --color-primary-hover: #4e8fd6;
+    --color-accent:        #c8a04a;
+    --color-text:          #ddddd8;
+    --color-muted:         #8888a0;
+    --color-verse-num:     #5a5a72;
+    --color-note-bg:       #161620;
+    --color-note-border:   #2a2a3a;
+    --color-highlight:     #252515;
+    --color-active-link:   #3a7bc8;
+    --shadow:              0 1px 4px rgba(0,0,0,.40);
+  }
+
+  :root:not([data-theme="light"]) .note-item.active { background: #2d2500; }
+}
+
+/* Manual dark-mode override */
+[data-theme="dark"] {
+  --color-bg:            #111118;
+  --color-surface:       #1c1c24;
+  --color-border:        #2e2e3e;
+  --color-primary:       #3a7bc8;
+  --color-primary-hover: #4e8fd6;
+  --color-accent:        #c8a04a;
+  --color-text:          #ddddd8;
+  --color-muted:         #8888a0;
+  --color-verse-num:     #5a5a72;
+  --color-note-bg:       #161620;
+  --color-note-border:   #2a2a3a;
+  --color-highlight:     #252515;
+  --color-active-link:   #3a7bc8;
+  --shadow:              0 1px 4px rgba(0,0,0,.40);
+}
+
+[data-theme="dark"] .note-item.active { background: #2d2500; }
+
+/* ---------- Theme toggle button ---------- */
+.theme-toggle {
+  background: none;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: var(--radius);
+  color: #fff;
+  cursor: pointer;
+  font-size: .85rem;
+  line-height: 1;
+  padding: .3rem .55rem;
+  margin-left: auto;
+  transition: background .15s, border-color .15s;
+}
+
+.theme-toggle:hover { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.6); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1000px) {
   .notes-tray { display: none; }
