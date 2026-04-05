@@ -1,0 +1,844 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" TEIform="TEI.2">
+  <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="psalms-of-solomon" osisRefWork="Psalms of Solomon" xml:lang="en" xml:space="default" TEIform="text">
+    <header TEIform="teiHeader" canonical="false">
+      <revisionDesc TEIform="revisionDesc">
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T13:25:54</date>
+        <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
+      </revisionDesc>
+      <revisionDesc TEIform="revisionDesc">
+        <date event="edition" type="ISO" xml:lang="en" TEIform="date">1926</date>
+        <p TEIform="p">The Forgotten Books of Eden, edited by Rutherford H. Platt, Jr., 1926.</p>
+      </revisionDesc>
+      <work osisWork="psalms-of-solomon" xml:lang="en">
+        <title canonical="true" TEIform="title">The Psalms of Solomon</title>
+        <creator role="edt">Rutherford H. Platt, Jr.</creator>
+        <description>Text from "The Forgotten Books of Eden," edited by Rutherford H. Platt, Jr., 1926. Scraped from sacred-texts.com and converted to OSIS.</description>
+        <publisher>Alpha House, Inc.</publisher>
+        <type type="OSIS"/>
+      </work>
+    </header>
+    <div canonical="true" type="book" osisID="psalms-of-solomon" TEIform="div">
+      <title canonical="true" short="Psalms of Solomon" type="main" TEIform="title">The Psalms of Solomon</title>
+      <div canonical="false" type="introduction" TEIform="div">
+        <headCT TEIform="head">THE PSALMS OF SOLOMON</headCT>
+        <p TEIform="p">THIS collection of eighteen war songs are the gift of an ancient Semitic writer. The original manuscript has perished but fortunately Greek translations have been preserved, and recently a Syriac version of the same songs has turned up and was published in English for the first time in 1909 by Dr. Rendel Harris.</p>
+        <p TEIform="p">The date of the writing may be established at the middle of the First Century B. C. because the theme of these songs is that of Pompey's actions in Palestine and his death in Egypt in 48 B. C.</p>
+        <p TEIform="p">These psalms had an important position and were widely circulated in the early Church. They are frequently referred to in the various Codexes and histories of the first few centuries of the Christian Era.</p>
+        <p TEIform="p">Later, they became lost through inexplicable reasons; and have only been recovered for our use after the lapse of many centuries.</p>
+        <p TEIform="p">Besides the literary value of the trumpet-like rhythm of these verses, we have here a chapter of stirring ancient history written by an eyewitness. Pompey comes out of the West. He uses battering-rams on the fortifications. His soldiers defile the altar. He is slain in Egypt after a fearful career. In the "righteous" of these psalms we see the Pharisees; in the "sinners" we see the Sadducees. It is an epic of a great people in the throes of a great crisis.</p>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.1" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">"
+            <hi type="italic" TEIform="hi">They became insolent in their prosperity . . . .</hi>"
+          </p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.1.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">I cried unto the Lord when I was in distress,</l>
+            <l TEIform="l">Unto God when sinners assailed.</l>
+            <l TEIform="l">Suddenly the alarm of war was heard before me;</l>
+            <l TEIform="l">I said, He will hearken to me for I am full of righteousness.</l>
+            <l TEIform="l">I thought in my heart that I was full of righteousness,</l>
+            <l TEIform="l">Because I was well off and had become rich in children.</l>
+            <l TEIform="l">Their wealth spread to the whole earth,</l>
+            <l TEIform="l">And their glory unto the end of the earth.</l>
+            <l TEIform="l">They were exalted unto the stars;</l>
+            <l TEIform="l">They said they would never fan.</l>
+            <l TEIform="l">But they became insolent in their prosperity,</l>
+            <l TEIform="l">And they were without understanding,</l>
+            <l TEIform="l">Their sins were in secret,</l>
+            <l TEIform="l">And even I had no knowledge of them.</l>
+            <l TEIform="l">Their transgressions went beyond those of the heathen before them;</l>
+            <l TEIform="l">They utterly polluted the holy things of the Lord.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.2" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">The desecration of Jerusalem; captivity, murder, and raping. A psalm of utter despair</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.2.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">When the sinner waxed proud, with a battering-ram he cast down fortified walls, 
+              <milestone type="page" n="106" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">And thou didst not restrain him.</l>
+            <l TEIform="l">Alien nations ascended Thine altar,</l>
+            <l TEIform="l">They trampled it proudly with their sandals;</l>
+            <l TEIform="l">Because the sons of Jerusalem had defiled the holy things of the Lord,</l>
+            <l TEIform="l">Had profaned with iniquities the offerings of God.</l>
+            <l TEIform="l">Therefore He said: Cast them far from Me;</l>
+            <l TEIform="l">.       .       .       .       .       .</l>
+            <l TEIform="l">It was set at naught before God,</l>
+            <l TEIform="l">It was utterly dishonoured;</l>
+            <l TEIform="l">The sons and the daughters were m grievous captivity,</l>
+            <l TEIform="l">Sealed was their neck, branded was it among the nations.</l>
+            <l TEIform="l">According to their sins hath He done unto them,</l>
+            <l TEIform="l">For He hath left them in the hands of them that prevailed.</l>
+            <l TEIform="l">He hath turned away His face from pitying them,</l>
+            <l TEIform="l">Young and old and their children together;</l>
+            <l TEIform="l">For they had done evil one and all, in not hearkening.</l>
+            <l TEIform="l">And the heavens were angry,</l>
+            <l TEIform="l">And the earth abhorred them;</l>
+            <l TEIform="l">For no man upon it had done what they did,</l>
+            <l TEIform="l">And the earth recognized all</l>
+            <l TEIform="l">Thy righteous judgements, O God.</l>
+            <l TEIform="l">They set the sons of Jerusalem to be mocked at in return for the harlots in her;</l>
+            <l TEIform="l">Every wayfarer entered in in the full light of day.</l>
+            <l TEIform="l">They made mock with their transgressions, as they themselves were wont to do;</l>
+            <l TEIform="l">In the full light of day they revealed their iniquities.</l>
+            <l TEIform="l">And the daughters of Jerusalem were defiled in accordance with Thy judgement,</l>
+            <l TEIform="l">Because they had defiled themselves with unnatural intercourse.</l>
+            <l TEIform="l">I am pained in my bowels and my inward parts for these things.</l>
+            <l TEIform="l">And yet I will justify Thee, O God, in uprightness of heart,</l>
+            <l TEIform="l">For in Thy judgements is Thy righteousness displayed, O God.</l>
+            <l TEIform="l">For Thou hast rendered to the sinners according to their deeds,</l>
+            <l TEIform="l">Yea, according to their sins, which were very wicked.</l>
+            <l TEIform="l">Thou hast uncovered their sins, that Thy judgement might be manifest;</l>
+            <l TEIform="l">Thou hast wiped out their memorial from the earth.</l>
+            <l TEIform="l">God is a righteous judge,</l>
+            <l TEIform="l">And he is no respecter of persons.</l>
+            <l TEIform="l">For the nations reproached Jerusalem, trampling it down;</l>
+            <l TEIform="l">Her beauty was dragged down from the throne of glory.</l>
+            <l TEIform="l">She girded on sackcloth instead of comely raiment,</l>
+            <l TEIform="l">A rope was about her head instead of a crown.</l>
+            <l TEIform="l">She put off the glorious diadem which God had set upon her,</l>
+            <l TEIform="l">In dishonour was her beauty cast upon the ground.</l>
+            <l TEIform="l">And I saw and entreated the Lord and said,</l>
+            <l TEIform="l">Long enough, O Lord has Thine hand been heavy on Israel, in bringing the nations upon them.</l>
+            <l TEIform="l">For they have made sport unsparingly in wrath and fierce anger;</l>
+            <l TEIform="l">And they will make an utter end, unless Thou, O Lord, rebuke them in Thy wrath.</l>
+            <l TEIform="l">For they have done. it not in zeal, but in lust of soul,</l>
+            <l TEIform="l">Pouring out their wrath upon us with a view to rapine.</l>
+            <l TEIform="l">Delay not, O God, to recompense them on their heads,</l>
+            <l TEIform="l">To turn the pride of the dragon into dishonour. 
+              <milestone type="page" n="107" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">And I had not long to wait before God showed me the insolent one</l>
+            <l TEIform="l">Slain on the mountains of Egypt,</l>
+            <l TEIform="l">Esteemed of less account than the least, on land and sea;</l>
+            <l TEIform="l">His body, too, borne hither and thither on the billows with much insolence,</l>
+            <l TEIform="l">With none to bury him, because He had rejected him with dishonour.</l>
+            <l TEIform="l">He reflected not that he was man,</l>
+            <l TEIform="l">And reflected not on the latter end;</l>
+            <l TEIform="l">He said: I will be lord of land and sea;</l>
+            <l TEIform="l">And he recognized not that it is God who is great,</l>
+            <l TEIform="l">Mighty in His great strength.</l>
+            <l TEIform="l">He is king over the heavens,</l>
+            <l TEIform="l">And judgeth kings and kingdoms.</l>
+            <l TEIform="l">It is He who setteth me up in glory,</l>
+            <l TEIform="l">And bringeth down the proud to eternal destruction in dishonour,</l>
+            <l TEIform="l">Because they knew Him not.</l>
+            <l TEIform="l">And now behold, ye princes of the earth, the judgement of the Lord,</l>
+            <l TEIform="l">For a great king and righteous is He, judging all that is under heaven.</l>
+            <l TEIform="l">Bless God, ye that fear the Lord with wisdom,</l>
+            <l TEIform="l">For the mercy of the Lord will ~e upon them that fear Him, m the Judgement;</l>
+            <l TEIform="l">So that He will distinguish between the righteous and the sinner,</l>
+            <l TEIform="l">And recompense the sinners for ever according to their deeds;</l>
+            <l TEIform="l">And have mercy on the righteous, delivering him from the affliction of the sinner,</l>
+            <l TEIform="l">And recompensing the sinner for what he bath done to the righteous.</l>
+            <l TEIform="l">For the Lord is good to them that call upon Him in patience,</l>
+            <l TEIform="l">Doing according to His mercy to His pious ones,</l>
+            <l TEIform="l">Establishing them at all times before Him in strength.</l>
+            <l TEIform="l">Blessed be the Lord for ever before His servants.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.3" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">Righteousness versus Sin</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.3.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">Why sleepest thou, O my soul,</l>
+            <l TEIform="l">And blessest not the Lord?</l>
+            <l TEIform="l">Sing a new song,</l>
+            <l TEIform="l">Unto God who is worthy to be praised.</l>
+            <l TEIform="l">Sing and be wakeful against His awaking,</l>
+            <l TEIform="l">For good is a psalm sung to God from a glad heart.</l>
+            <l TEIform="l">The righteous remember the Lord at all times,</l>
+            <l TEIform="l">With thanksgiving and declaration of the righteousness of the Lord's judgements.</l>
+            <l TEIform="l">The righteous despiseth not the chastening of the Lord;</l>
+            <l TEIform="l">His will is always before the Lord.</l>
+            <l TEIform="l">The righteous stumbleth and holdeth the Lord righteous:</l>
+            <l TEIform="l">He falleth and looketh out for what God will do to him;</l>
+            <l TEIform="l">He seeketh out whence his deliverance will come.</l>
+            <l TEIform="l">The steadfastness of the righteous is from God, their deliverer;</l>
+            <l TEIform="l">There lodgeth not in the house of the righteous sin upon sin.</l>
+            <l TEIform="l">The righteous continually searcheth his house,</l>
+            <l TEIform="l">To remove utterly all iniquity done by him in error.</l>
+            <l TEIform="l">He maketh atonement for sins of ignorance by fasting and afflicting his soul,</l>
+            <l TEIform="l">And the Lord counteth guiltless every pious man and his house. 
+              <milestone type="page" n="108" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">The sinner stumbleth and curseth his life</l>
+            <l TEIform="l">The day when he was begotten, and his mother's travail.</l>
+            <l TEIform="l">He addeth sins to sins, while he liveth;</l>
+            <l TEIform="l">He falleth--verily grievous is his fall--and riseth no more.</l>
+            <l TEIform="l">The destruction of the sinner is for ever,</l>
+            <l TEIform="l">And he shall not be remembered, when the righteous is visited.</l>
+            <l TEIform="l">This is the portion of sinners for ever.</l>
+            <l TEIform="l">But they that fear the Lord shall rise to life eternal,</l>
+            <l TEIform="l">And their life shall be in the light of the Lord, and shall come to an end no more.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.4" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">A conversation of Solomon with the Men-pleasers</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.4.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">Wherefore sittest thou, O profane man, in the council of the pious,</l>
+            <l TEIform="l">Seeing that thy heart is far removed from the Lord,</l>
+            <l TEIform="l">Provoking with transgressions the God of Israel?</l>
+            <l TEIform="l">Extravagant in speech, extravagant in outward seeming beyond all men,</l>
+            <l TEIform="l">Is he that is severe of speech in condemning sinners in judgement.</l>
+            <l TEIform="l">And his hand is first upon him as though he acted in zeal,</l>
+            <l TEIform="l">And yet he is himself guilty in respect of manifold sins and of wantonness.</l>
+            <l TEIform="l">His eyes are upon every woman without distinction;</l>
+            <l TEIform="l">His tongue lieth when he maketh contract with an oath.</l>
+            <l TEIform="l">By night and in secret he sinneth as though unseen,</l>
+            <l TEIform="l">With his eyes he talketh to every woman of evil compacts.</l>
+            <l TEIform="l">He is swift to enter every house with cheerfulness as though guileless.</l>
+            <l TEIform="l">Let God remove those that live in hypocrisy in the company of the pious,</l>
+            <l TEIform="l">Even the life of such an one with corruption of his flesh and penury.</l>
+            <l TEIform="l">Let God reveal the deeds of the men-pleasers,</l>
+            <l TEIform="l">The deeds of such an one with laughter and derision;</l>
+            <l TEIform="l">That the pious may count righteous the judgement of their God,</l>
+            <l TEIform="l">When sinners are removed from before the righteous,</l>
+            <l TEIform="l">Even the man-pleaser who uttereth law guilefully.</l>
+            <l TEIform="l">And their eyes are fixed upon any man's house that is still secure,</l>
+            <l TEIform="l">That they may, like the Serpent, destroy the wisdom of . . . with words of transgressors,</l>
+            <l TEIform="l">His words are deceitful that he may accomplish his wicked desire.</l>
+            <l TEIform="l">He never ceaseth from scattering families as though they were orphans,</l>
+            <l TEIform="l">Yea, he layeth waste a house on account of his lawless desire.</l>
+            <l TEIform="l">He deceiveth with words, saying, There is none that seeth, or judgeth.</l>
+            <l TEIform="l">He fills one house with lawlessness,</l>
+            <l TEIform="l">And then his eyes are fixed upon the next house,</l>
+            <l TEIform="l">To destroy it with words that give wing to desire.</l>
+            <l TEIform="l">Yet with all these his soul like Sheol, is not sated.</l>
+            <l TEIform="l">Let his portion, O Lord, be dishonoured before thee;</l>
+            <l TEIform="l">Let him go forth groaning, and come home cursed.</l>
+            <l TEIform="l">Let his life be spent in anguish, and penury, and want, O Lord; 
+              <milestone type="page" n="109" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">Let his sleep be beset with pains and his awaking with perplexities.</l>
+            <l TEIform="l">Let sleep be withdrawn from his eyelids at night;</l>
+            <l TEIform="l">Let him fail dishonourably in every work of his hands.</l>
+            <l TEIform="l">Let him come home empty-handed to his house,</l>
+            <l TEIform="l">And his house be void of everything wherewith he could sate his appetite.</l>
+            <l TEIform="l">Let his old age be spent in childless loneliness until his removal by death.</l>
+            <l TEIform="l">Let the flesh of the men-pleasers be rent by wild beasts,</l>
+            <l TEIform="l">And let the bones of the lawless lie dishonoured in the sight of the sun.</l>
+            <l TEIform="l">Let ravens peck out the eyes of the hypocrites.</l>
+            <l TEIform="l">For they have laid waste many houses of men, in dishonour,</l>
+            <l TEIform="l">And scattered them in their lust;</l>
+            <l TEIform="l">And they have not remembered God,</l>
+            <l TEIform="l">Nor feared God in all these things;</l>
+            <l TEIform="l">But they have provoked God's anger and vexed Him.</l>
+            <l TEIform="l">May He remove them from off the earth,</l>
+            <l TEIform="l">Because with deceit they beguiled the souls of the flawless.</l>
+            <l TEIform="l">Blessed are they that fear the Lord in their flawlessness;</l>
+            <l TEIform="l">The Lord shall deliver them from guileful men and sinners,</l>
+            <l TEIform="l">And deliver us from every stumbling-block of the lawless (men).</l>
+            <l TEIform="l">Let God destroy them that insolently work all unrighteousness,</l>
+            <l TEIform="l">For a great and mighty judge is the Lord our God in righteousness.</l>
+            <l TEIform="l">Let Thy mercy, O Lord, be upon all them that love Thee.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.5" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">A statement of the philosophy of the indestructibility of matter. One of the tenets of modern physics</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.5.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">O Lord God, I will praise Thy name with joy,</l>
+            <l TEIform="l">In the midst of them that know Thy righteous judgements.</l>
+            <l TEIform="l">For Thou art good and merciful, the refuge of the poor;</l>
+            <l TEIform="l">When I cry to Thee, do not silently disregard me.</l>
+            <l TEIform="l">For no man taketh spoil from a mighty man;</l>
+            <l TEIform="l">Who, then, can take aught of a that Thou hast made, except Thou Thyself givest?</l>
+            <l TEIform="l">For man and his portion lie before Thee in the balance;</l>
+            <l TEIform="l">He cannot add to, so as to enlarge, what has been prescribed by Thee.</l>
+            <l TEIform="l">O God, when we are in distress we call upon Thee for help,</l>
+            <l TEIform="l">And Thou dost not turn back our petition, for Thou art our God.</l>
+            <l TEIform="l">Cause not Thy hand to be heavy upon us,</l>
+            <l TEIform="l">Lest through necessity we sin.</l>
+            <l TEIform="l">Even though Thou restore us not, we will not keep away;</l>
+            <l TEIform="l">But unto Thee will we come.</l>
+            <l TEIform="l">For if I hunger, unto Thee will I cry, O God;</l>
+            <l TEIform="l">And 
+              <hi type="italic" TEIform="hi">Thou</hi> wilt give to me.
+            </l>
+            <l TEIform="l">Birds and fish dost Thou nourish,</l>
+            <l TEIform="l">In that Thou givest rain to the steppes that green grass may spring up,</l>
+            <l TEIform="l">So to prepare fodder in the steppe for every living thing;</l>
+            <l TEIform="l">And if they hunger, unto Thee do they lift up their face.</l>
+            <l TEIform="l">Kings and rulers and peoples 
+              <hi type="italic" TEIform="hi">Thou</hi> dost nourish, O God;
+            </l>
+            <l TEIform="l">And who is the help of the poor and needy, if not Thou, O Lord? 
+              <milestone type="page" n="110" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">And Thou wilt hearken--for who is good and gentle but thou?--</l>
+            <l TEIform="l">Making glad the soul of the humble by opening Thine hand in mercy.</l>
+            <l TEIform="l">Man's goodness is bestowed grudgingly and ...;</l>
+            <l TEIform="l">And if he repeat it without murmuring, even that is marvellous.</l>
+            <l TEIform="l">But Thy gift is great in goodness and wealth,</l>
+            <l TEIform="l">And he whose hope is set on Thee shall have no lack of gifts.</l>
+            <l TEIform="l">Upon the whole earth is Thy mercy, O Lord, in goodness.</l>
+            <l TEIform="l">Happy is he whom God remembereth in granting to him a due sufficiency;</l>
+            <l TEIform="l">If a man abound overmuch, he sinneth.</l>
+            <l TEIform="l">Sufficient are moderate means with righteousness,</l>
+            <l TEIform="l">And hereby the blessing of the Lord becomes abundance with righteousness.</l>
+            <l TEIform="l">They that fear the Lord rejoice in good gifts,</l>
+            <l TEIform="l">And thy goodness is upon Israel in Thy kingdom.</l>
+            <l TEIform="l">Blessed is the glory of the Lord, for He is our king.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.6" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">A song of hope and fearlessness and peace</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.6.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">Happy is the man whose heart is fixed to call upon the name of the Lord;</l>
+            <l TEIform="l">When he remembereth the name of the Lord, he will be saved.</l>
+            <l TEIform="l">His ways are made even by the Lord,</l>
+            <l TEIform="l">And the works of his hands are preserved by the Lord his God.</l>
+            <l TEIform="l">At what he sees in his bad dreams, his soul shall not be troubled;</l>
+            <l TEIform="l">When he passes through rivers and the tossing of the seas, he shall not be dismayed.</l>
+            <l TEIform="l">He ariseth from his sleep, and blesseth the name of the Lord:</l>
+            <l TEIform="l">When his heart is at peace, he singeth to the name of his God,</l>
+            <l TEIform="l">And he entreateth the Lord for all his house.</l>
+            <l TEIform="l">And the Lord heareth the prayer of every one that feareth God,</l>
+            <l TEIform="l">And every request of the soul that hopes for Him doth the Lord accomplish.</l>
+            <l TEIform="l">Blessed is the Lord, who showeth mercy to those who love Him in sincerity.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.7" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">The fine old doctrine</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.7.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">Make not Thy dwelling afar from us, O God;</l>
+            <l TEIform="l">Lest they assail us that hate us without cause.</l>
+            <l TEIform="l">For Thou hast rejected them, O God;</l>
+            <l TEIform="l">Let not their foot trample upon Thy holy inheritance.</l>
+            <l TEIform="l">Chasten us Thyself in Thy good pleasure;</l>
+            <l TEIform="l">But give us not up to the nations;</l>
+            <l TEIform="l">For, if Thou sendest pestilence,</l>
+            <l TEIform="l">Thou Thyself givest it charge concerning us;</l>
+            <l TEIform="l">For Thou art merciful,</l>
+            <l TEIform="l">And wilt not be angry to the point of consuming us.</l>
+            <l TEIform="l">While Thy name dwelleth in our midst, we shall find mercy;</l>
+            <l TEIform="l">And the nations shall not prevail against us.</l>
+            <l TEIform="l">For Thou art our shield,</l>
+            <l TEIform="l">And when we call upon Thee, Thou hearkenest to us;</l>
+            <l TEIform="l">For Thou wilt pity the seed of Israel for ever</l>
+            <l TEIform="l">And Thou wilt not reject them: 
+              <milestone type="page" n="111" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">But we shall, be under Thy yoke for ever,</l>
+            <l TEIform="l">And under the rod of Thy chastening.</l>
+            <l TEIform="l">Thou wilt establish us in the time that Thou helpest us,</l>
+            <l TEIform="l">Showing mercy to the house of Jacob on the day wherein Thou didst promise to help them.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.8" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">Some remarkable similes of war creeping on Jerusalem. A survey of the sins that brought all this trouble</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.8.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">Distress and the sound of war hath my ear heard,</l>
+            <l TEIform="l">The sound of a trumpet announcing slaughter and calamity,</l>
+            <l TEIform="l">The sound of much people as of an exceeding high wind,</l>
+            <l TEIform="l">As a tempest with mighty fire sweeping through the Negeb.</l>
+            <l TEIform="l">And I said in my heart, Surely God judgeth us;</l>
+            <l TEIform="l">A sound I hear moving towards Jerusalem, the holy city</l>
+            <l TEIform="l">My loins were broken at what I heard, my knees tottered;</l>
+            <l TEIform="l">My heart was afraid, my bones were dismayed like flax.</l>
+            <l TEIform="l">I said: They establish their ways in righteousness.</l>
+            <l TEIform="l">I thought upon the judgments of God since the creation of heaven and earth;</l>
+            <l TEIform="l">I held God righteous in His judgements which have been from of old.</l>
+            <l TEIform="l">God bare their sins in the full light of day;</l>
+            <l TEIform="l">All the earth came to know the righteous judgements of God.</l>
+            <l TEIform="l">In secret places underground their iniquities were committed to provoke Him to anger;</l>
+            <l TEIform="l">They wrought confusion, son with mother and father with daughter;</l>
+            <l TEIform="l">They committed adultery, every man with his neighhour's wife.</l>
+            <l TEIform="l">They concluded covenants with one another with an oath touching these things;</l>
+            <l TEIform="l">They plundered the sanctuary of God, as though there was no avenger.</l>
+            <l TEIform="l">They trode the altar of the Lord, coming straight from all manner of uncleanness;</l>
+            <l TEIform="l">And with menstrual blood they defiled the sacrifices, as though these were common flesh.</l>
+            <l TEIform="l">They left no sin undone, wherein they surpassed not the heathen.</l>
+            <l TEIform="l">Therefore God mingled for them a spirit of wandering;</l>
+            <l TEIform="l">And gave them to drink a cup of undiluted wine, that they might become drunken.</l>
+            <l TEIform="l">He brought him that is from the end of the earth, that smiteth mightily;</l>
+            <l TEIform="l">He decreed war against Jerusalem, and against her land.</l>
+            <l TEIform="l">The princes of the land went to meet him with joy: they said unto him:</l>
+            <l TEIform="l">Blessed be thy way! Come ye, enter ye in with peace.</l>
+            <l TEIform="l">They made the rough ways even, before his entering in;</l>
+            <l TEIform="l">They opened the gates to Jerusalem, they crowned its walls.</l>
+            <l TEIform="l">As a father entereth the house of his sons, so he entered Jerusalem in peace;</l>
+            <l TEIform="l">He established his feet there in great safety.</l>
+            <l TEIform="l">He captured her fortresses and the wall of Jerusalem;</l>
+            <l TEIform="l">For God Himself led him in safety, while they wandered.</l>
+            <l TEIform="l">He destroyed their princes and every one wise in counsel;</l>
+            <l TEIform="l">He poured out the blood of the inhabitants of Jerusalem, like the water of uncleanness. 
+              <milestone type="page" n="112" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">He led away their sons and daughters, whom they had begotten in defilement.</l>
+            <l TEIform="l">They did according to their uncleanness, even as their fathers had done:</l>
+            <l TEIform="l">They defiled Jerusalem and the things that had been hallowed to the name of God.</l>
+            <l TEIform="l">But God hath shown Himself righteous in His judgements upon the nations of the earth;</l>
+            <l TEIform="l">And the pious servants of God are like innocent lambs in their midst.</l>
+            <l TEIform="l">Worthy to be praised is the Lord that judgeth the whole earth in His righteousness.</l>
+            <l TEIform="l">Behold, now, O God, Thou hast shown us Thy judgement in Thy righteousness;</l>
+            <l TEIform="l">Our eyes have seen Thy judgements, O God.</l>
+            <l TEIform="l">We have justified Thy name that is honoured for ever;</l>
+            <l TEIform="l">For Thou are the God of righteousness, judging Israel with chastening.</l>
+            <l TEIform="l">Turn, O God, Thy mercy upon us, and have pity upon us;</l>
+            <l TEIform="l">Gather together the dispersed of Israel, with mercy and goodness;</l>
+            <l TEIform="l">For Thy faithfulness is with us,</l>
+            <l TEIform="l">And though we have stiffened our neck, yet Thou art our chastener;</l>
+            <l TEIform="l">Overlook us not, O our God, lest the nations swallow us up, as though there were none to deliver.</l>
+            <l TEIform="l">But Thou art our God from the beginning,</l>
+            <l TEIform="l">And upon Thee is our hope set, O Lord;</l>
+            <l TEIform="l">And we will not depart from Thee,</l>
+            <l TEIform="l">For good are Thy judgements upon us.</l>
+            <l TEIform="l">Ours and our children's be Thy good pleasure for ever;</l>
+            <l TEIform="l">O Lord, our Saviour, we shall never more be moved.</l>
+            <l TEIform="l">The Lord is worthy to be praised for His judgements with the mouth of His pious ones;</l>
+            <l TEIform="l">And blessed be Israel of the Lord for ever.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.9" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">The exile of the tribes of Israel. A reference to the covenant which God made with Adam</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.9.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">When Israel was led away captive into a strange land,</l>
+            <l TEIform="l">When they fell away from the Lord who redeemed them,</l>
+            <l TEIform="l">They were cast away from the inheritance, which the Lord had given them.</l>
+            <l TEIform="l">Among every nation were the dispersed of Israel according to the word of God,</l>
+            <l TEIform="l">That Thou mightest be justified, O God, in Thy righteousness by reason of our transgressions:</l>
+            <l TEIform="l">For Thou art a just judge over all the peoples of the earth.</l>
+            <l TEIform="l">For from Thy knowledge none that doeth unjustly is hidden,</l>
+            <l TEIform="l">And the righteous deeds of Thy pious ones are before Thee, O Lord;</l>
+            <l TEIform="l">Where, then, can a man hide himself from Thy knowledge, O God?</l>
+            <l TEIform="l">Our works are subject to our own choice and power</l>
+            <l TEIform="l">To do right or wrong in the works of our hands;</l>
+            <l TEIform="l">And in Thy righteousness Thou visitest the sons of men.</l>
+            <l TEIform="l">He that doeth righteousness layeth up life for himself with the Lord;</l>
+            <l TEIform="l">And he that doeth wrongly forfeits his life to destruction; 
+              <milestone type="page" n="113" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">For the judgements of the Lord are given in righteousness to every man and his house.</l>
+            <l TEIform="l">Unto whom art Thou good, O God, except to them that call upon the Lord?</l>
+            <l TEIform="l">He cleanseth from sins a soul when it maketh confession, when it maketh acknowledgement;</l>
+            <l TEIform="l">For shame is upon us and u on our faces on account of all these things.</l>
+            <l TEIform="l">And to whom doth He forgive sins, except to them that have sinned?</l>
+            <l TEIform="l">Thou blessest the righteous, and dost not reprove them for the sins that they have committed;</l>
+            <l TEIform="l">And Thy goodness is upon them that sin, when they repent.</l>
+            <l TEIform="l">And, now, Thou art our God, and we the people whom Thou hast loved:</l>
+            <l TEIform="l">Behold and show pity, O God of Israel, for we are Thine;</l>
+            <l TEIform="l">And remove not Thy mercy from us, lest they assail us.</l>
+            <l TEIform="l">For Thou didst choose the seed of Abraham before all the nations,</l>
+            <l TEIform="l">And didst set Thy name upon us, O Lord,</l>
+            <l TEIform="l">And Thou wilt not reject us for ever.</l>
+            <l TEIform="l">Thou madest a covenant with our fathers concerning us;</l>
+            <l TEIform="l">And we hope in Thee, when our soul turneth unto Thee.</l>
+            <l TEIform="l">The mercy of the Lord be upon the house of Israel for ever and ever.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.10" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">A glorious hymn. Further reference to the eternal covenant between God and Man</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.10.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">Happy is the man whom the Lord remembereth with reproving,</l>
+            <l TEIform="l">And whom He restraineth from the way of evil with strokes</l>
+            <l TEIform="l">That he may be cleansed from sin, that it may not be multiplied.</l>
+            <l TEIform="l">He that maketh ready his back for strokes shall be cleansed,</l>
+            <l TEIform="l">For the Lord is good to them that endure chastening.</l>
+            <l TEIform="l">For He maketh straight the ways of the righteous,</l>
+            <l TEIform="l">And doth not pervert them by His chastening.</l>
+            <l TEIform="l">And the mercy of the Lord is upon them that love Him in truth,</l>
+            <l TEIform="l">And the Lord remembereth His servants in mercy.</l>
+            <l TEIform="l">For the testimony is in the law of the eternal covenant,</l>
+            <l TEIform="l">The testimony of the Lord is on the ways of men in His visitation.</l>
+            <l TEIform="l">Just and kind is our Lord in His judgements for ever,</l>
+            <l TEIform="l">And Israel shall praise the name of the Lord in gladness.</l>
+            <l TEIform="l">And the pious shall give thanks in the assembly of the people;</l>
+            <l TEIform="l">And on the poor shall God have mercy in the gladness of Israel;</l>
+            <l TEIform="l">For good and merciful is God for ever,</l>
+            <l TEIform="l">And the assemblies of Israel shall glorify the name of the Lord.</l>
+            <l TEIform="l">The salvation of the Lord be upon the house of Israel unto everlasting gladness!</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.11" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">Jerusalem hears a trumpet and stands on tiptoe to see her children returning from the North, East and West</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.11.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">Blow ye in Zion on the trumpet to summon the saints,</l>
+            <l TEIform="l">Cause ye to be heard in Jerusalem the voice of him that bringeth good tidings; 
+              <milestone type="page" n="114" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">For God hath had pity on Israel in visiting them.</l>
+            <l TEIform="l">Stand on the height, O Jerusalem, and behold thy children,</l>
+            <l TEIform="l">From the East and the West, gathered together by the Lord;</l>
+            <l TEIform="l">From the North they come in the gladness of their God,</l>
+            <l TEIform="l">From the isles afar off God hath gathered them.</l>
+            <l TEIform="l">High mountains hath He abased into a plain for them;</l>
+            <l TEIform="l">The hills fled at their entrance.</l>
+            <l TEIform="l">The woods gave them shelter as they passed by;</l>
+            <l TEIform="l">Every sweet-smelling tree God caused to spring up for them,</l>
+            <l TEIform="l">That Israel might pass by in the visitation of the glory of their God.</l>
+            <l TEIform="l">Put on, O Jerusalem, thy glorious garments;</l>
+            <l TEIform="l">Make ready thy holy robe;</l>
+            <l TEIform="l">For God hath spoken good concerning Israel, for ever and ever.</l>
+            <l TEIform="l">Let the Lord do what He hath spoken concerning Israel and Jerusalem;</l>
+            <l TEIform="l">Let the Lord raise up Israel by His glorious name.</l>
+            <l TEIform="l">The mercy of the Lord be upon Israel for ever and ever.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.12" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">An appeal for family tranquility and peace and quiet at home</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.12.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">O Lord, deliver my soul from the lawless and wicked man,</l>
+            <l TEIform="l">From the tongue that is lawless and slanderous, and speaketh lies and deceit.</l>
+            <l TEIform="l">Manifoldly twisted are the words of the tongue of the wicked man,</l>
+            <l TEIform="l">Even as among a people a fire that burneth up their beauty.</l>
+            <l TEIform="l">So he delights to fill houses with a lying tongue,</l>
+            <l TEIform="l">To cut down the trees of gladness which setteth on fire transgressors,</l>
+            <l TEIform="l">To involve households in warfare by means of slanderous lips.</l>
+            <l TEIform="l">May God remove far from the innocent the lips of transgressors by bringing them to want</l>
+            <l TEIform="l">And may the bones of slanderers be scattered far away from them that fear the Lord!</l>
+            <l TEIform="l">In flaming fire perish the slanderous tongue far away from the pious!</l>
+            <l TEIform="l">May the Lord preserve the quiet soul that hateth the unrighteous;</l>
+            <l TEIform="l">And may the Lord establish the man that followeth peace at home.</l>
+            <l TEIform="l">The salvation of the Lord be upon Israel His servant for ever;</l>
+            <l TEIform="l">And let the sinners perish together at the presence of the Lord;</l>
+            <l TEIform="l">But let the Lord's pious ones inherit the promises of the Lord.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.13" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">Of Solomon. A Psalm. Comfort for the righteous</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.13.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">The right hand of the Lord hath covered me;</l>
+            <l TEIform="l">The right hand of the Lord hath spared us.</l>
+            <l TEIform="l">The arm of the Lord hath saved us from the sword that passed through,</l>
+            <l TEIform="l">From famine and the death of sinners.</l>
+            <l TEIform="l">Noisome beasts ran upon them:</l>
+            <l TEIform="l">With their teeth they tore their flesh,</l>
+            <l TEIform="l">And with their molars crushed their bones.</l>
+            <l TEIform="l">But from all these things the Lord delivered us. 
+              <milestone type="page" n="115" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">The righteous was troubled on account of his errors,</l>
+            <l TEIform="l">Lest he should be taken away along with the sinners;</l>
+            <l TEIform="l">For terrible is the overthrow of the sinner;</l>
+            <l TEIform="l">But not one of all these things toucheth the righteous.</l>
+            <l TEIform="l">For not alike are the chastening of the righteous for sins done in ignorance,</l>
+            <l TEIform="l">And the overthrow of the sinners.</l>
+            <l TEIform="l">Secretly is the righteous chastened,</l>
+            <l TEIform="l">Lest the sinner rejoice over the righteous.</l>
+            <l TEIform="l">For He correcteth the righteous as a beloved son.</l>
+            <l TEIform="l">And his chastisement is as that of a first-born.</l>
+            <l TEIform="l">For the Lord spareth His pious ones,</l>
+            <l TEIform="l">And blotteth out their errors by His chastening.</l>
+            <l TEIform="l">For the life of the righteous shall be for ever;</l>
+            <l TEIform="l">But sinners shall be taken away into destruction,,</l>
+            <l TEIform="l">And their memorial shall be found no more.</l>
+            <l TEIform="l">But upon the pious is the mercy of the Lord,</l>
+            <l TEIform="l">And upon them that fear Him His mercy.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.14" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">Sinners "love the brief day spent in companionship with their sin." Profound wisdom, beautifully expressed</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.14.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">Faithful is the Lord to them that love Him in truth,</l>
+            <l TEIform="l">To them that endure His chastening,</l>
+            <l TEIform="l">To them that walk in the righteousness of His commandments,</l>
+            <l TEIform="l">In the law which He commanded us that we might live.</l>
+            <l TEIform="l">The pious of the Lord shall live by it for ever;</l>
+            <l TEIform="l">The Paradise of the Lord, the trees of life, are His pious ones.</l>
+            <l TEIform="l">Their planting is rooted for ever;</l>
+            <l TEIform="l">They shall not be plucked up all the days of heaven:</l>
+            <l TEIform="l">For the portion and the inheritance of God is Israel.</l>
+            <l TEIform="l">But not so are the sinners and transgressors,</l>
+            <l TEIform="l">Who love the brief day spent in companionship with their sin;</l>
+            <l TEIform="l">Their delight is in fleeting corruption,</l>
+            <l TEIform="l">And they remember not God.</l>
+            <l TEIform="l">For the ways of men are known before Him at all times,</l>
+            <l TEIform="l">And He knoweth the secrets of the heart before they come to pass.</l>
+            <l TEIform="l">Therefore their inheritance is Sheol and darkness and destruction</l>
+            <l TEIform="l">And they shall not be found in the day when the righteous obtain mercy;</l>
+            <l TEIform="l">But the pious of the Lord shall inherit life in gladness.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.15" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">The psalmist restates the great philosophy of Right and Wrong</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.15.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">When I was in distress I called upon the name of the Lord,</l>
+            <l TEIform="l">I hoped for the help of the God of Jacob and was saved;</l>
+            <l TEIform="l">For the hope and refuge of the poor art Thou, O God.</l>
+            <l TEIform="l">For who, O God, is strong except to give thanks unto Thee in truth?</l>
+            <l TEIform="l">And wherein is a man powerful except in giving thanks to Thy name?</l>
+            <l TEIform="l">A new psalm with song in gladness of heart,</l>
+            <l TEIform="l">The fruit of the lips with the well-tuned instrument of the tongue,</l>
+            <l TEIform="l">The first fruits of the lips from a pious and righteous heart-- 
+              <milestone type="page" n="116" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">He that offereth these things shall never be shaken by evil;</l>
+            <l TEIform="l">The flame of fire and the wrath against the unrighteous shall not touch him,</l>
+            <l TEIform="l">When it goeth forth from the face of the Lord against sinners,</l>
+            <l TEIform="l">To destroy all the substance of sinners,</l>
+            <l TEIform="l">For the mark of God is upon the righteous that they may be saved.</l>
+            <l TEIform="l">Famine and sword and pestilence shall be far from the righteous,</l>
+            <l TEIform="l">For they shall flee away from the pious as men pursued in war;</l>
+            <l TEIform="l">But they shall pursue sinners and overtake them,</l>
+            <l TEIform="l">And they that do lawlessness shall not escape the judgement of God;</l>
+            <l TEIform="l">As by enemies experienced in war shall they be overtaken,</l>
+            <l TEIform="l">For the mark of destruction is upon their forehead.</l>
+            <l TEIform="l">And the inheritance of sinners is destruction and darkness,</l>
+            <l TEIform="l">And their iniquities shall pursue them unto Sheol beneath.</l>
+            <l TEIform="l">Their inheritance shall not be found of their children,</l>
+            <l TEIform="l">For sins shall lay waste the houses of sinners.</l>
+            <l TEIform="l">And sinners shall perish for ever in the day of the Lord's judgement,</l>
+            <l TEIform="l">When God visiteth the earth with His judgement.</l>
+            <l TEIform="l">But they that fear the Lord shall find mercy therein,</l>
+            <l TEIform="l">And shall live by the compassion of their God;</l>
+            <l TEIform="l">But sinners shall perish for ever.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.16" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">The psalmist again expresses profound truth</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.16.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">When my soul slumbered being afar from the Lord, I had all but slipped down to the pit,</l>
+            <l TEIform="l">When I was far from God, my soul had been well-nigh poured out unto death,</l>
+            <l TEIform="l">I had been nigh unto the gates of Sheol with the sinner,</l>
+            <l TEIform="l">When my soul departed from the Lord God of Israel--</l>
+            <l TEIform="l">Had not the Lord helped me with His everlasting mercy.</l>
+            <l TEIform="l">He pricked me, as a horse is pricked, that I might serve Him,</l>
+            <l TEIform="l">My saviour and helper at all times saved me.</l>
+            <l TEIform="l">I will give thanks unto Thee, O God, for Thou hast helped me to my salvation;</l>
+            <l TEIform="l">And hast not counted me with sinners to my destruction.</l>
+            <l TEIform="l">Remove not Thy mercy from me, O God,</l>
+            <l TEIform="l">Nor Thy memorial from my heart until I die.</l>
+            <l TEIform="l">Rule me, O God, keeping me back from wicked sin,</l>
+            <l TEIform="l">And from every wicked woman that causeth the simple to stumble.</l>
+            <l TEIform="l">And let not the beauty of a lawless woman beguile me,</l>
+            <l TEIform="l">Nor any one that is subject to unprofitable sin.</l>
+            <l TEIform="l">Establish the works of my hands before Thee,</l>
+            <l TEIform="l">And preserve my goings in the remembrance of Thee.</l>
+            <l TEIform="l">Protect my tongue and my lips with words of truth;</l>
+            <l TEIform="l">Anger and unreasoning wrath put far from me.</l>
+            <l TEIform="l">Murmuring, and impatience in affliction, remove far from me</l>
+            <l TEIform="l">When, if I sin, Thou chastenest me that I may return unto Thee.</l>
+            <l TEIform="l">But with goodwill and cheerfulness support my soul;</l>
+            <l TEIform="l">When Thou strengthenest my soul, what is given to me will be sufficient for me.</l>
+            <l TEIform="l">For if 
+              <hi type="italic" TEIform="hi">Thou</hi> givest not strength,
+            </l>
+            <l TEIform="l">Who can endure chastisement with poverty? 
+              <milestone type="page" n="117" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">When a man is rebuked by means of his corruption,</l>
+            <l TEIform="l">Thy testing of him is in his flesh and in the affliction of poverty.</l>
+            <l TEIform="l">If the righteous endureth in all these trials, he shall receive mercy from the Lord.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.17" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">"They set a worldly monarchy . . . . they lay waste the Throne of David!' A poetic narrative about the utter disintegration of a great nation</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.17.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">O Lord, Thou art our King for ever and ever,</l>
+            <l TEIform="l">For in Thee, O God, doth our soul glory.</l>
+            <l TEIform="l">How long are the days of man's life upon the earth?</l>
+            <l TEIform="l">As are his days, so is the hope set upon him.</l>
+            <l TEIform="l">But 
+              <hi type="italic" TEIform="hi">we</hi> hope in God, our deliverer;
+            </l>
+            <l TEIform="l">For the might of our God is for ever with mercy,</l>
+            <l TEIform="l">And the kingdom of our God is for ever over the nations in judgement.</l>
+            <l TEIform="l">Thou, O Lord, didst choose David to be king over Israel,</l>
+            <l TEIform="l">And swaredst to him touching his seed that never should his kingdom fail before Thee.</l>
+            <l TEIform="l">But, for our sins, sinners rose up against us;</l>
+            <l TEIform="l">They assailed us and thrust us out;</l>
+            <l TEIform="l">What Thou hadst not promised to them, they took away from us with violence.</l>
+            <l TEIform="l">They in no wise glorified Thy honourable name;</l>
+            <l TEIform="l">They set a worldly monarchy in place of that which was their excellency;</l>
+            <l TEIform="l">They laid waste the throne of David in tumultuous arrogance.</l>
+            <l TEIform="l">But Thou, O God, didst cast them down, and remove their seed from the earth,</l>
+            <l TEIform="l">In that there rose up against them a man that was alien to our race.</l>
+            <l TEIform="l">According to their sins didst Thou recompense them, O God;</l>
+            <l TEIform="l">So that it befell them according to their deeds.</l>
+            <l TEIform="l">God showed them no pity;</l>
+            <l TEIform="l">He sought out their seed and let not one of them go free.</l>
+            <l TEIform="l">Faithful is the Lord in all His judgements</l>
+            <l TEIform="l">Which He doeth upon the earth.</l>
+            <l TEIform="l">The lawless one laid waste our land so that none inhabited it,</l>
+            <l TEIform="l">They destroyed young and old and their children together.</l>
+            <l TEIform="l">In the heat of His anger He sent them away even unto the west,</l>
+            <l TEIform="l">And He exposed the rulers of the land unsparingly to derision.</l>
+            <l TEIform="l">Being an alien the enemy acted proudly,</l>
+            <l TEIform="l">And his heart was alien from Our God.</l>
+            <l TEIform="l">And all things whatsoever he did in Jerusalem,</l>
+            <l TEIform="l">As also the nations in the cities to their gods.</l>
+            <l TEIform="l">And the children of the covenant in the midst of the mingled peoples surpassed them in evil.</l>
+            <l TEIform="l">There was not among them one that wrought in the midst of Jerusalem mercy and truth.</l>
+            <l TEIform="l">They that loved the synagogues of the pious fled from them,</l>
+            <l TEIform="l">As sparrows that fly from their nest.</l>
+            <l TEIform="l">They wandered in deserts that their lives might be saved from harm, 
+              <milestone type="page" n="118" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">And precious in the eyes of them that lived abroad was any that escaped alive from them.</l>
+            <l TEIform="l">Over the whole earth were they scattered by lawless men.</l>
+            <l TEIform="l">For the heavens withheld the rain from dropping upon the earth,</l>
+            <l TEIform="l">Springs were stopped that sprang perennially out of the deeps, that ran down from lofty mountains.</l>
+            <l TEIform="l">For there was none among them that wrought righteousness and justice;</l>
+            <l TEIform="l">From the chief of them to the least of them all were sinful;</l>
+            <l TEIform="l">The king was a transgressor, and the judge disobedient, and the people sinful.</l>
+            <l TEIform="l">Behold, O Lord, and raise up unto them their king, the son of David,</l>
+            <l TEIform="l">At the time in the which Thou seest, O God, that he may reign over Israel Thy servant.</l>
+            <l TEIform="l">And gird him with strength, that he may shatter unrighteous rulers,</l>
+            <l TEIform="l">And that he may purge Jerusalem from nations that trample her down to destruction.</l>
+            <l TEIform="l">Wisely, righteously he shall thrust out sinners from the inheritance,</l>
+            <l TEIform="l">He shall destroy the pride of the sinner as a potter's vessel.</l>
+            <l TEIform="l">With a rod of iron he shall break in pieces all their substance,</l>
+            <l TEIform="l">He shall destroy the godless nations with the word of his mouth;</l>
+            <l TEIform="l">At his rebuke nations shall flee before him,</l>
+            <l TEIform="l">And he shall reprove sinners for the thoughts of their heart.</l>
+            <l TEIform="l">And he shall gather together a holy people, whom he shall lead in righteousness,</l>
+            <l TEIform="l">And he shall judge the tribes of the people that has been sanctified by the Lord his God.</l>
+            <l TEIform="l">And he shall not suffer unrighteousness to lodge any more in their midst,</l>
+            <l TEIform="l">Nor shall there dwell with them any man that knoweth wickedness,</l>
+            <l TEIform="l">For he shall know them, that they are all sons of their God.</l>
+            <l TEIform="l">And he shall divide them according to their tribes upon the land,</l>
+            <l TEIform="l">And neither sojourner nor alien shall sojourn with them any more.</l>
+            <l TEIform="l">He shall judge peoples and nations in the wisdom of his righteousness. 
+              <hi type="italic" TEIform="hi">Selah</hi>.
+            </l>
+            <l TEIform="l">And he shall have the heathen nations to serve him under his yoke;</l>
+            <l TEIform="l">And he shall glorify the Lord in a place to be seen of all the earth;</l>
+            <l TEIform="l">And he shall purge Jerusalem, making it holy as of old:</l>
+            <l TEIform="l">So that nations shall come from the ends of the earth to see his glory,</l>
+            <l TEIform="l">Bringing as gifts her sons who had fainted.</l>
+            <l TEIform="l">And to see the glory of the Lord, wherewith God hath glorified her.</l>
+            <l TEIform="l">And he shall be a righteous king, taught of God, over them,</l>
+            <l TEIform="l">And there shall be no unrighteousness in his days in their midst,</l>
+            <l TEIform="l">For all shall be holy and their king the anointed of the Lord.</l>
+            <l TEIform="l">For he shall not put his trust in horse and rider and bow,</l>
+            <l TEIform="l">Nor shall he multiply for himself gold and silver for war,</l>
+            <l TEIform="l">Nor shall he gather confidence from a multitude for the day of battle. 
+              <milestone type="page" n="119" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">The Lord Himself is his king, the hope of him that is mighty through his hope in God.</l>
+            <l TEIform="l">All nations shall be in fear before him,</l>
+            <l TEIform="l">For he will smite the earth with the word of his mouth for ever.</l>
+            <l TEIform="l">He will bless the people of the Lord with wisdom and gladness,</l>
+            <l TEIform="l">And he himself will be pure from sin, so that he may rule a great people.</l>
+            <l TEIform="l">He will rebuke rulers, and remove sinners by the might of his word;</l>
+            <l TEIform="l">And relying upon his God, throughout his days he will not stumble;</l>
+            <l TEIform="l">For God will make him mighty by means of His holy spirit,</l>
+            <l TEIform="l">And wise by means of the spirit of understanding, with strength and righteousness.</l>
+            <l TEIform="l">And the blessing of the Lord will be with him: he will be strong and stumble not;</l>
+            <l TEIform="l">His hope will be in the Lord: who then can prevail against him?</l>
+            <l TEIform="l">He will, be mighty in his works, and strong in the fear of God,</l>
+            <l TEIform="l">He will be shepherding the flock of the Lord faithfully and righteously,</l>
+            <l TEIform="l">And will suffer none among them to stumble in their pasture.</l>
+            <l TEIform="l">He will lead them all aright,</l>
+            <l TEIform="l">And there will be no pride among them that any among them should be oppressed.</l>
+            <l TEIform="l">This will be the majesty of the king of Israel whom God knoweth;</l>
+            <l TEIform="l">He will raise him up over the house of Israel to correct him.</l>
+            <l TEIform="l">His words shall be more refined than costly gold, the choicest;</l>
+            <l TEIform="l">In the assemblies he will judge the peoples, the tribes of the sanctified.</l>
+            <l TEIform="l">His words shall be like the words of the holy ones in the midst of sanctified peoples.</l>
+            <l TEIform="l">Blessed be they that shall be in those days,</l>
+            <l TEIform="l">In that they shall see the good fortune of Israel which God shall bring to pass in the gathering together of the tribes.</l>
+            <l TEIform="l">May the Lord hasten His mercy upon Israel!</l>
+            <l TEIform="l">May He deliver us from the uncleanness of unholy enemies!</l>
+            <l TEIform="l">The Lord Himself is our king for ever and ever.</l>
+          </lgCT>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="psalms-of-solomon.18" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">With this psalm end the warlike Songs of Solomon</p>
+        </div>
+        <verse canonical="true" osisID="psalms-of-solomon.18.1">
+          <lgCT TEIform="lg">
+            <l TEIform="l">Lord, Thy mercy is over the works of Thy hands for ever;</l>
+            <l TEIform="l">Thy goodness is over Israel with a rich gift.</l>
+            <l TEIform="l">Thine eyes look upon them, so that none of them suffers want;</l>
+            <l TEIform="l">Thine ears listen to the hopeful prayer of the poor.</l>
+            <l TEIform="l">Thy judgements are executed upon the whole earth in mercy;</l>
+            <l TEIform="l">And Thy love is toward the seed of Abraham, the children of Israel.</l>
+            <l TEIform="l">Thy chastisement is upon us as upon a first-born, only-begotten son,</l>
+            <l TEIform="l">To turn back the obedient soul from folly that is wrought in ignorance.</l>
+            <l TEIform="l">May God cleanse Israel against the day of mercy and blessing,</l>
+            <l TEIform="l">Against the day of choice when</l>
+            <l TEIform="l">Blessed shall they be that shall be in those days,</l>
+            <l TEIform="l">He bringeth back His anointed. 
+              <milestone type="page" n="120" marker="DEFAULT" TEIform="milestone"/>
+            </l>
+            <l TEIform="l">In that they shall see the goodness of the Lord which He shall perform for the generation that is to come,</l>
+            <l TEIform="l">Under the rod of chastening of the Lord's anointed in the fear of his God,</l>
+            <l TEIform="l">In the spirit of wisdom and righteousness and strength;</l>
+            <l TEIform="l">That he may direct every man in the works of righteousness by the fear of God,</l>
+            <l TEIform="l">That he may establish them all before the Lord,</l>
+            <l TEIform="l">A good generation living in the fear of God in the days of mercy. Selah.</l>
+            <l TEIform="l">Great is our God and glorious, dwelling in the highest.</l>
+            <l TEIform="l">It is He who hath established in their courses the lights of heaven for determining seasons from year to year,</l>
+            <l TEIform="l">And they have not turned aside from the way which He appointed them.</l>
+            <l TEIform="l">In the fear of God they pursue their path every day,</l>
+            <l TEIform="l">From the day God created them and for evermore.</l>
+            <l TEIform="l">And they have erred not since the day He created them.</l>
+            <l TEIform="l">Since the generations of old they have not withdrawn from their path,</l>
+            <l TEIform="l">Unless God commanded them so to do by the command of His servants.</l>
+          </lgCT>
+        </verse>
+      </div>
+    </div>
+  </osisText>
+</osis>
