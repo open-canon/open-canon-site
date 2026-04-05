@@ -360,3 +360,35 @@ def test_generate_site_uses_arabic_numerals_for_roman_chapter_titles(output_dir,
     assert "Chapter 18" in html
     assert "Book Title — Chapter 18" in html
     assert "CHAPTER XVIII" not in html
+
+
+def test_generate_site_renders_chapter_summary(output_dir, tmp_path):
+    osis_path = tmp_path / "summary.osis.xml"
+    osis_path.write_text(
+        """<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<osis xmlns=\"http://www.bibletechnologies.net/2003/OSIS/namespace\">
+    <osisText osisIDWork=\"TEST\" xml:lang=\"en\">
+        <header>
+            <work osisWork=\"TEST\">
+                <title>Summary Test</title>
+            </work>
+        </header>
+        <div type=\"book\" osisID=\"Book\">
+            <chapter osisID=\"Book.1\">
+                <div type=\"summary\">
+                    <p>The summary of this chapter.</p>
+                </div>
+                <verse sID=\"Book.1.1\" osisID=\"Book.1.1\"/>Verse one.<verse eID=\"Book.1.1\"/>
+            </chapter>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+
+    generate_site([osis_path], output_dir)
+
+    html = (output_dir / "test" / "book" / "book-1.html").read_text()
+    assert "The summary of this chapter." in html
+    assert 'class="chapter-summary"' in html

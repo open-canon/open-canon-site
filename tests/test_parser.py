@@ -477,6 +477,92 @@ def test_parse_note_ids_are_unique():
     assert n1 != n2
 
 
+# ---------------------------------------------------------------------------
+# Chapter summary extraction
+# ---------------------------------------------------------------------------
+
+
+def test_parse_chapter_summary_div_style():
+    """<div type="summary"> inside a <div type="chapter"> is extracted into ChapterData.summary."""
+    doc = _parse("""
+        <div type="book" osisID="Gen">
+          <div type="chapter" osisID="Gen.1">
+            <div type="summary">
+              <p>The creation of the world.</p>
+            </div>
+            <verse osisID="Gen.1.1">In the beginning.</verse>
+          </div>
+        </div>
+    """)
+    chapter = doc.divisions[0].chapters[0]
+    assert chapter.summary
+    assert any("The creation of the world" in _text_of([item]) for item in chapter.summary)
+
+
+def test_parse_chapter_summary_not_in_body():
+    """Summary divs should not appear in chapter.body."""
+    doc = _parse("""
+        <div type="book" osisID="Gen">
+          <div type="chapter" osisID="Gen.1">
+            <div type="summary">
+              <p>Summary text.</p>
+            </div>
+            <verse osisID="Gen.1.1">Verse one.</verse>
+          </div>
+        </div>
+    """)
+    chapter = doc.divisions[0].chapters[0]
+    body_text = " ".join(_text_of([item]) for item in chapter.body)
+    assert "Summary text" not in body_text
+
+
+def test_parse_chapter_summary_chapter_element_style():
+    """<div type="summary"> inside a <chapter osisID=...> element is extracted into summary."""
+    doc = _parse("""
+        <div type="book" osisID="1Ne">
+          <chapter osisID="1Ne.1">
+            <div type="summary">
+              <p>Nephi begins the record.</p>
+            </div>
+            <verse osisID="1Ne.1.1">I, Nephi.</verse>
+          </chapter>
+        </div>
+    """)
+    chapter = doc.divisions[0].chapters[0]
+    assert chapter.summary
+    assert any("Nephi begins the record" in _text_of([item]) for item in chapter.summary)
+
+
+def test_parse_chapter_summary_milestone_style():
+    """<div type="summary"> in milestone chapters is extracted into ChapterData.summary."""
+    doc = _parse("""
+        <div type="book" osisID="Gen">
+          <chapter sID="Gen.1"/>
+          <div type="summary">
+            <p>The first chapter summary.</p>
+          </div>
+          <verse sID="Gen.1.1" osisID="Gen.1.1"/>In the beginning.<verse eID="Gen.1.1"/>
+          <chapter eID="Gen.1"/>
+        </div>
+    """)
+    chapter = doc.divisions[0].chapters[0]
+    assert chapter.summary
+    assert any("The first chapter summary" in _text_of([item]) for item in chapter.summary)
+
+
+def test_parse_chapter_without_summary_has_empty_summary():
+    """Chapters without a summary div have an empty summary list."""
+    doc = _parse("""
+        <div type="book" osisID="Gen">
+          <div type="chapter" osisID="Gen.1">
+            <verse osisID="Gen.1.1">In the beginning.</verse>
+          </div>
+        </div>
+    """)
+    chapter = doc.divisions[0].chapters[0]
+    assert chapter.summary == []
+
+
 def test_parse_chapter_title_excludes_embedded_note():
     """A <note> inside a chapter title element must not appear in the chapter title string."""
     doc = _parse("""
