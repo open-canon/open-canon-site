@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="T12Patr" osisRefWork="Testaments of the Twelve Patriarchs" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T13:25:55</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T16:46:07</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -21,7 +21,8 @@
     <div canonical="true" type="book" osisID="T12Patr" TEIform="div">
       <title canonical="true" short="Testaments of the Twelve Patriarchs" type="main" TEIform="title">The Testaments of the Twelve Patriarchs</title>
       <div canonical="false" type="introduction" TEIform="div">
-        <headCT TEIform="head">The Testaments of the Twelve Patriarchs</headCT>
+        <title canonical="false" type="main" TEIform="title">Introduction</title>
+        <title canonical="false" type="sub" TEIform="title">The Testaments of the Twelve Patriarchs</title>
         <p TEIform="p">THE following twelve books are biographies written between 107 and 137 B.C. They are a forceful exposition, showing how a Pharisee with a rare gift of writing secured publicity by using the names of the greatest men of ancient times. "There were intellectual giants in those days" and the Twelve Patriarchs were the Intellectual Giants!</p>
         <p TEIform="p">Each is here made to tell his life story. When he is on his deathbed he calls all his children and grandchildren and great-grandchildren about him, and proceeds without reservation to lay bare his experiences for the moral guidance of his hearers. If he fell into sin he tells all about it and then counsels them not to err as he did. If he was virtuous, he shows what rewards were his.</p>
         <p TEIform="p">When you look beyond the unvarnished--almost brutally frank--passages of the text, you will discern a remarkable attestation of the expectations of the Messiah which existed a hundred years before Christ. And there is another element of rare value in this strange series. As Dr. R. H. Charles says in his scholarly work on the Pseudepigrapha: its ethical teaching "has achieved a real immortality by influencing the thought and diction of the writers of the New Testament, and even those of our Lord. This ethical teaching, which is very much higher and purer than that of the Old Testament, is yet its true spiritual child and helps to bridge the chasm that divides the ethics of the Old and New Testaments."</p>

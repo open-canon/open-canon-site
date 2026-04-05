@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="letter-of-aristeas" osisRefWork="Letter of Aristeas" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T13:25:55</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T16:46:06</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -21,7 +21,8 @@
     <div canonical="true" type="book" osisID="letter-of-aristeas" TEIform="div">
       <title canonical="true" short="Letter of Aristeas" type="main" TEIform="title">The Letter of Aristeas</title>
       <div canonical="false" type="introduction" TEIform="div">
-        <headCT TEIform="head">THE LETTER OF ARISTEAS</headCT>
+        <title canonical="false" type="main" TEIform="title">Introduction</title>
+        <title canonical="false" type="sub" TEIform="title">THE LETTER OF ARISTEAS</title>
         <p TEIform="p">IN THE Letter of Aristeas, one of the most noteworthy and ancient recoveries in this collection, we have come a long way from Adam and Eve, a long way from the Flood. This writing presents a spectacle of the resiliency of the human race, which has repeopled the Earth, with powerful nations living in pomp and splendor.</p>
         <p TEIform="p">You will read here of the first great bibliophile--Ptolemy Philadelphus. He desires to collect into his library at Alexandria "all the books in the world." Finally in his passion to secure one great work--the Jewish Laws--he trades 100,000 captives for that book. This is probably the highest price ever paid for a single work. It presents an unusual reason for the end of the Great Captivity.</p>
         <p TEIform="p">The events of this narrative took place during the lifetime of the famous Queen Arsinoe, who died 270 B. C. The exact date of the writing is uncertain.</p>

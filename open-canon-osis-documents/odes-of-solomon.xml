@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="odes-of-solomon" osisRefWork="Odes of Solomon" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T13:25:54</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T16:46:06</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -21,7 +21,8 @@
     <div canonical="true" type="book" osisID="odes-of-solomon" TEIform="div">
       <title canonical="true" short="Odes of Solomon" type="main" TEIform="title">The Odes of Solomon</title>
       <div canonical="false" type="introduction" TEIform="div">
-        <headCT TEIform="head">THE ODES OF SOLOMON.</headCT>
+        <title canonical="false" type="main" TEIform="title">Introduction</title>
+        <title canonical="false" type="sub" TEIform="title">THE ODES OF SOLOMON.</title>
         <p TEIform="p">HERE are some of the most beautiful songs of peace and joy that the world possesses. Yet their origin, the date of their writing, and the exact meaning of many of the verses remain one of the great literary mysteries.</p>
         <p TEIform="p">They have come down to us in a single and very ancient document in Syriac language. Evidently that document is a translation from the original Greek. Critical debate has raged around these Odes; one of the most plausible explanations is that they are songs of newly baptized Christians of the First Century.</p>
         <p TEIform="p">They are strangely lacking in historical allusions. Their radiance is no reflection of other days. They do not borrow from either the Old Testament or the Gospels. The inspiration of these verses is first-hand. They remind you of Aristides' remark, "

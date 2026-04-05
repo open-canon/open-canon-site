@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="4Macc" osisRefWork="4 Maccabees" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T13:25:55</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T16:48:50</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -21,7 +21,8 @@
     <div canonical="true" type="book" osisID="4Macc" TEIform="div">
       <title canonical="true" short="4 Maccabees" type="main" TEIform="title">Fourth Book of Maccabees</title>
       <div canonical="false" type="introduction" TEIform="div">
-        <headCT TEIform="head">FOURTH BOOK OF MACCABEES</headCT>
+        <title canonical="false" type="main" TEIform="title">Introduction</title>
+        <title canonical="false" type="sub" TEIform="title">FOURTH BOOK OF MACCABEES</title>
         <p TEIform="p">THIS book is like a fearful peal of thunder echoing out of the dim horrors of ancient tyranny. It is a chapter based on persecution by Antiochus, the tyrant of Syria, whom some called Epiphanes, The Madman. Roman history of the first centuries records two such tyrants--the other, Caligula, the Second Brilliant Madman.</p>
         <p TEIform="p">The form of this writing is that of an oration. So carefully timed are the risings and fallings of the speech; so devastating are its arguments; so unfaltering is its logic; so deep its thrusts; so cool its reasoning--that it takes its place as a sample of the sheerest eloquence.</p>
         <p TEIform="p">The keynote is--Courage. The writer begins with an impassioned statement of the Philosophy of Inspired Reason. We like to think of this twentieth Century as the Age of Reason and contrast it with the Age of Myths--yet a writing such as this is a challenge to such an assumption. We find a writer who probably belonged to the first century before the Christian Era stating a clear-cut philosophy of Reason that is just as potent today as it was two thousand years ago.</p>
