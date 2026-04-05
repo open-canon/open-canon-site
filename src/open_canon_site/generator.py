@@ -39,9 +39,10 @@ def _make_env() -> Environment:
 
 #: Path to the default collections configuration shipped with the package.
 _DEFAULT_COLLECTIONS_PATH = Path(__file__).parent / "collections.json"
+CollectionConfig = tuple[str, tuple[str, ...]]
 
 
-def _load_collections(path: Path | None = None) -> list[tuple[str, frozenset[str]]]:
+def _load_collections(path: Path | None = None) -> list[CollectionConfig]:
     """Load collection definitions from a JSON file.
 
     Each entry in the JSON array must have a ``"name"`` string and a
@@ -53,16 +54,16 @@ def _load_collections(path: Path | None = None) -> list[tuple[str, frozenset[str
               ``collections.json`` bundled with the package is used.
 
     Returns:
-        An ordered list of ``(collection_name, frozenset_of_work_ids)`` tuples.
+        An ordered list of ``(collection_name, ordered_work_ids)`` tuples.
     """
     resolved = path if path is not None else _DEFAULT_COLLECTIONS_PATH
     raw: list[dict] = json.loads(resolved.read_text(encoding="utf-8"))
-    return [(entry["name"], frozenset(entry["work_ids"])) for entry in raw]
+    return [(entry["name"], tuple(entry["work_ids"])) for entry in raw]
 
 
 def _group_into_collections(
     documents: list[DocumentData],
-    collections: list[tuple[str, frozenset[str]]],
+    collections: list[CollectionConfig],
 ) -> list[dict[str, object]]:
     """Organize *documents* into named collections for the library index.
 
@@ -79,6 +80,10 @@ def _group_into_collections(
         A list of dicts, each with ``"name"`` (str) and ``"documents"``
         (list[DocumentData]), suitable for use in the index template.
     """
+    docs_by_work_id: dict[str, list[DocumentData]] = {}
+    for doc in documents:
+        docs_by_work_id.setdefault(doc.work_id.upper(), []).append(doc)
+
     # Track which docs appear in at least one named collection so we can
     # compute the "Other" fallback.  Documents are NOT excluded from later
     # collections even after being added to an earlier one.
@@ -86,8 +91,16 @@ def _group_into_collections(
     result: list[dict[str, object]] = []
 
     for name, work_ids in collections:
-        upper_ids = {wid.upper() for wid in work_ids}
-        matches = [doc for doc in documents if doc.work_id.upper() in upper_ids]
+        matches: list[DocumentData] = []
+        seen_in_collection: set[str] = set()
+        for work_id in work_ids:
+            normalized_work_id = work_id.upper()
+            if normalized_work_id in seen_in_collection:
+                continue
+
+            seen_in_collection.add(normalized_work_id)
+            matches.extend(docs_by_work_id.get(normalized_work_id, []))
+
         if matches:
             result.append({"name": name, "documents": matches})
             seen_in_any.update(doc.work_id.upper() for doc in matches)
@@ -141,7 +154,7 @@ def _generate_index(
     env: Environment,
     documents: list[DocumentData],
     output_dir: Path,
-    collections: list[tuple[str, frozenset[str]]],
+    collections: list[CollectionConfig],
 ) -> None:
     """Render the top-level index.html listing all documents."""
     template = env.get_template("index.html")

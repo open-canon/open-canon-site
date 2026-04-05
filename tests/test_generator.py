@@ -222,6 +222,40 @@ def test_work_can_appear_in_multiple_collections(output_dir, tmp_path):
     assert "Other" not in html
 
 
+def test_collection_uses_work_id_order_from_json(output_dir, tmp_path):
+    """Documents inside a collection follow the JSON work_ids order, not input file order."""
+    bom_path = tmp_path / "bom.osis.xml"
+    bom_path.write_text(
+        """<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace">
+    <osisText osisIDWork="BOM" xml:lang="en">
+        <header>
+            <work osisWork="BOM">
+                <title>Book of Mormon</title>
+            </work>
+        </header>
+        <div type="book" osisID="1Ne">
+            <div type="chapter" osisID="1Ne.1">
+                <verse osisID="1Ne.1.1">I, Nephi.</verse>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+    custom_collections = tmp_path / "ordered.json"
+    custom_collections.write_text(
+        '[{"name": "Scriptures", "work_ids": ["BOM", "KJV"]}]',
+        encoding="utf-8",
+    )
+
+    generate_site([SAMPLE_OSIS, bom_path], output_dir, collections_path=custom_collections)
+    html = (output_dir / "index.html").read_text()
+
+    assert html.index("Book of Mormon") < html.index("King James Version")
+
+
 def test_generate_site_renders_front_matter_page(output_dir, tmp_path):
     osis_path = tmp_path / "front.osis.xml"
     osis_path.write_text(
