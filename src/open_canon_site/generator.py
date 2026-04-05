@@ -111,6 +111,7 @@ def _generate_chapter(
     template = env.get_template("chapter.html")
 
     rendered_body_blocks = _render_body_blocks(chapter)
+    rendered_summary = render_content(chapter.summary) if chapter.summary else ""
 
     # Build per-verse rendered data
     rendered_verses = []
@@ -149,6 +150,7 @@ def _generate_chapter(
         current_div=div,
         current_chapter=chapter,
         rendered_body_blocks=rendered_body_blocks,
+        rendered_summary=rendered_summary,
         rendered_verses=rendered_verses,
         notes=notes,
         prev_chapter_url=prev_chapter_url,

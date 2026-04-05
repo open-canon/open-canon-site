@@ -55,6 +55,7 @@ class ChapterData:
     sections: list[SectionData] = field(default_factory=list)
     notes: list[NoteData] = field(default_factory=list)
     verses: list[VerseData] = field(default_factory=list)
+    summary: list[Any] = field(default_factory=list)
 
 
 @dataclass
@@ -149,6 +150,19 @@ def _normalize_chapter_title(title: str, chapter_number: str) -> str:
 def _is_heading_item(item: Any) -> bool:
     qname = getattr(item, "qname", "")
     return isinstance(item, (TitleCt, HeadCt)) or str(qname).endswith("}head")
+
+
+def _extract_summary_from_content(content: list[Any]) -> list[Any]:
+    """Return the content items from the first non-canonical summary div, if present."""
+    for item in content:
+        if isinstance(item, DivCt) and item.type_value == OsisDivs.SUMMARY:
+            return item.content or []
+    return []
+
+
+def _is_summary_div(item: Any) -> bool:
+    """Return True if *item* is a non-canonical summary div."""
+    return isinstance(item, DivCt) and item.type_value == OsisDivs.SUMMARY
 
 
 def _copy_item_with_updates(item: Any, updates: dict[str, Any]) -> Any:
@@ -346,7 +360,9 @@ def _parse_body_content(
     body_items = [
         item
         for item in content
-        if not _is_heading_item(item) and not isinstance(item, (VerseCt, ChapterCt))
+        if not _is_heading_item(item)
+        and not isinstance(item, (VerseCt, ChapterCt))
+        and not _is_summary_div(item)
     ]
     return _extract_notes_from_content(body_items, context_id, doc_slug)
 
@@ -398,6 +414,7 @@ def _parse_chapter_div(div: DivCt, doc_slug: str, parent_id: str) -> ChapterData
     cid = " ".join(div.osis_id) if div.osis_id else parent_id
     num = cid.rsplit(".", 1)[-1]
     title_text = _normalize_chapter_title(_extract_title(div.content), num) or f"Chapter {num}"
+    summary = _extract_summary_from_content(div.content)
     body, notes = _parse_body_content(div.content, cid, doc_slug)
     sections = _extract_sections_from_body(body)
     return ChapterData(
@@ -409,6 +426,7 @@ def _parse_chapter_div(div: DivCt, doc_slug: str, parent_id: str) -> ChapterData
         sections=sections,
         notes=notes,
         verses=_parse_verses_from_content(div.content, cid, doc_slug),
+        summary=summary,
     )
 
 
@@ -418,6 +436,7 @@ def _parse_chapter_ct(chapter: ChapterCt, doc_slug: str, parent_id: str) -> Chap
     num = cid.rsplit(".", 1)[-1]
     content = chapter.content or []
     title_text = _normalize_chapter_title(_extract_title(content), num) or f"Chapter {num}"
+    summary = _extract_summary_from_content(content)
     body, notes = _parse_body_content(content, cid, doc_slug)
     sections = _extract_sections_from_body(body)
     return ChapterData(
@@ -429,6 +448,7 @@ def _parse_chapter_ct(chapter: ChapterCt, doc_slug: str, parent_id: str) -> Chap
         sections=sections,
         notes=notes,
         verses=_parse_verses_from_content(content, cid, doc_slug),
+        summary=summary,
     )
 
 
@@ -462,6 +482,7 @@ def _find_chapters_milestone(content: list[Any], book_id: str, doc_slug: str) ->
             return
         num = cid.rsplit(".", 1)[-1]
         title = _normalize_chapter_title(_extract_title(current_content), num) or f"Chapter {num}"
+        summary = _extract_summary_from_content(current_content)
         verses = _parse_verses_from_content(current_content, cid, doc_slug)
         body, notes = _parse_body_content(current_content, cid, doc_slug)
         sections = _extract_sections_from_body(body)
@@ -475,6 +496,7 @@ def _find_chapters_milestone(content: list[Any], book_id: str, doc_slug: str) ->
                 sections=sections,
                 notes=notes,
                 verses=verses,
+                summary=summary,
             )
         )
 
