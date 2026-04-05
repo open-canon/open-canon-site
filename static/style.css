@@ -112,6 +112,38 @@ details.nav-section[open] > summary::after {
   transform: rotate(90deg);
 }
 
+/* Nested per-collection <details> inside the Library nav-section */
+.nav-collection { border: none; margin: 0; }
+
+.nav-collection > summary.nav-collection-title {
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--color-muted);
+  padding: .3rem 1.1rem .1rem 1.6rem;
+}
+
+.nav-collection > summary.nav-collection-title::-webkit-details-marker { display: none; }
+
+.nav-collection > summary.nav-collection-title::after {
+  content: '▸';
+  font-size: .5rem;
+  margin-right: 1.1rem;
+  color: var(--color-muted);
+  transition: transform .15s;
+}
+
+.nav-collection[open] > summary.nav-collection-title::after {
+  transform: rotate(90deg);
+}
+
 .nav-section-title {
   font-size: .65rem;
   font-weight: 700;
@@ -328,6 +360,49 @@ details.nav-section[open] > summary::after {
 .index-page { max-width: 700px; margin: 3rem auto; padding: 0 1.5rem; }
 .index-page h1 { font-size: 2rem; margin-bottom: .5rem; color: var(--color-primary); }
 .index-page .subtitle { color: var(--color-muted); margin-bottom: 2rem; }
+
+/* ---------- Library collection groups (index page) ---------- */
+.collection {
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.collection-name {
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  padding: .75rem 1.25rem;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Hide native WebKit/Blink disclosure marker */
+.collection-name::-webkit-details-marker { display: none; }
+
+.collection-name::after {
+  content: '▸';
+  font-size: .7rem;
+  transition: transform .15s;
+}
+
+.collection[open] > .collection-name::after {
+  transform: rotate(90deg);
+}
+
+.collection .doc-card {
+  margin: .75rem 1rem 0;
+  box-shadow: none;
+}
+
+.collection .doc-card:last-child { margin-bottom: .75rem; }
 
 .doc-card {
   display: block;
