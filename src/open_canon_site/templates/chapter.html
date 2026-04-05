@@ -73,6 +73,10 @@
       {{ current_div.title }} — {{ current_chapter.title }}
     </h2>
 
+    {% if rendered_summary %}
+      <div class="chapter-summary">{{ rendered_summary | safe }}</div>
+    {% endif %}
+
     {% if rendered_body_blocks %}
       <div class="chapter-body">
         {% for block in rendered_body_blocks %}
