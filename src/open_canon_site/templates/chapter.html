@@ -39,7 +39,7 @@
         <li>
           <a href="{{ '../../' }}{{ current_doc.slug }}/{{ div.slug }}/{% if div.chapters %}{{ div.chapters[0].slug }}.html{% else %}index.html{% endif %}"
              {% if div.slug == current_div.slug %}class="active"{% endif %}>
-            {{ div.title }}
+            {{ div.short_title if div.short_title else div.title }}
           </a>
           {# Chapter list for the current division #}
           {% if div.slug == current_div.slug and div.chapters %}

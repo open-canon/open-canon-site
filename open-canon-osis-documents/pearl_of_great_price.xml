@@ -3,7 +3,7 @@
   <osisText canonical="true" osisIDWork="pgp" osisRefWork="The Pearl of Great Price" xml:lang="eng" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="eng" TEIform="date">2026.03.29T23:54:44</date>
+        <date event="eversion" type="ISO" xml:lang="eng" TEIform="date">2026.04.04T22:52:28</date>
         <p TEIform="p">Scraped from churchofjesuschrist.org, and converted to OSIS by the churchstudy-to-osis Python package.</p>
       </revisionDesc>
       <work osisWork="PGP">
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div canonical="true" type="book" osisID="Moses" TEIform="div">
-      <headCT canonical="true" TEIform="head">Book of Moses</headCT>
+      <title canonical="true" short="Moses" type="main" TEIform="title">Book of Moses</title>
       <title canonical="true" type="sub" TEIform="title">Selections from the</title>
       <title canonical="true" type="sub" TEIform="title">
         <pCT TEIform="p">(June 1830)</pCT>
@@ -450,7 +450,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Abraham" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Book of Abraham</headCT>
+      <title canonical="true" short="Abraham" type="main" TEIform="title">The Book of Abraham</title>
       <title canonical="true" type="sub" TEIform="title">
         <pCT TEIform="p">Translated from the Papyrus, by Joseph Smith</pCT>
       </title>
@@ -688,7 +688,7 @@
       </div>
     </div>
     <div canonical="true" type="book" osisID="Joseph Smith--Matthew" TEIform="div">
-      <headCT canonical="true" TEIform="head">Joseph Smith—Matthew</headCT>
+      <title canonical="true" short="Joseph Smith--Matthew" type="main" TEIform="title">Joseph Smith—Matthew</title>
       <div canonical="false" type="introduction" TEIform="div">
         <p TEIform="p">An extract from the translation of the Bible as revealed to Joseph Smith the Prophet in 1831: <reference canonical="false">Matthew 23:39 and chapter 24</reference>.</p>
       </div>
@@ -755,7 +755,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Joseph Smith--History" TEIform="div">
-      <headCT canonical="true" TEIform="head">Joseph Smith—History</headCT>
+      <title canonical="true" short="Joseph Smith--History" type="main" TEIform="title">Joseph Smith—History</title>
       <title canonical="true" type="sub" TEIform="title">
         <pCT TEIform="p">Extracts from the History of Joseph Smith, the Prophet</pCT>
       </title>
@@ -896,7 +896,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Articles of Faith" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Articles of Faith</headCT>
+      <title canonical="true" short="Articles of Faith" type="main" TEIform="title">The Articles of Faith</title>
       <title canonical="true" type="sub" TEIform="title">of The Church of Jesus Christ of Latter-day Saints</title>
       <chapter canonical="false" osisID="Articles of Faith.1" TEIform="div">
         <verse sID="Articles of Faith.1.1" eID="Articles of Faith.1.1" canonical="true" osisID="Articles of Faith.1.1">We <note canonical="false" TEIform="note">TG Believe.</note>believe in <note canonical="false" TEIform="note">TG Godhead; God the Father, Elohim.</note>God, the Eternal Father, and in His <note canonical="false" TEIform="note">TG Jesus Christ, Divine Sonship.</note>Son, Jesus Christ, and in the <note canonical="false" TEIform="note">TG Holy Ghost.</note>Holy Ghost.</verse>

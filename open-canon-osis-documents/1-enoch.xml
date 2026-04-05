@@ -19,6 +19,7 @@
       </work>
     </header>
     <div canonical="true" type="book" osisID="1En" TEIform="div">
+      <title canonical="true" short="1 Enoch" type="main" TEIform="title">The Book of Enoch</title>
       <headCT TEIform="head">The Book of Enoch</headCT>
       <div canonical="false" type="front" TEIform="div">
         <headCT TEIform="head">Title Page</headCT>

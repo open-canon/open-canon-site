@@ -3,7 +3,7 @@
   <osisText canonical="true" osisIDWork="bom" osisRefWork="The Book of Mormon" xml:lang="eng" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="eng" TEIform="date">2026.03.29T23:25:36</date>
+        <date event="eversion" type="ISO" xml:lang="eng" TEIform="date">2026.04.04T22:52:41</date>
         <p TEIform="p">Scraped from churchofjesuschrist.org, and converted to OSIS by the churchstudy-to-osis Python package.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -262,7 +262,7 @@ Salt Lake City, Utah, USA</publisher>
       </div>
     </div>
     <div canonical="true" type="book" osisID="1 Nephi" TEIform="div">
-      <headCT canonical="true" TEIform="head">The First Book of Nephi</headCT>
+      <title canonical="true" short="1 Nephi" type="main" TEIform="title">The First Book of Nephi</title>
       <title canonical="true" type="sub" TEIform="title">
         <pCT TEIform="p">His Reign and Ministry</pCT>
       </title>
@@ -1025,7 +1025,7 @@ Salt Lake City, Utah, USA</publisher>
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="2 Nephi" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Second Book of Nephi</headCT>
+      <title canonical="true" short="2 Nephi" type="main" TEIform="title">The Second Book of Nephi</title>
       <div canonical="true" type="introduction" TEIform="div">
         <p TEIform="p">An account of the death of Lehi. Nephi’s brethren rebel against him. The Lord warns Nephi to depart into the wilderness. His journeyings in the wilderness, and so forth.</p>
       </div>
@@ -2047,7 +2047,7 @@ Salt Lake City, Utah, USA</publisher>
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Jacob" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Book of Jacob</headCT>
+      <title canonical="true" short="Jacob" type="main" TEIform="title">The Book of Jacob</title>
       <title canonical="true" type="sub" TEIform="title">the Brother of Nephi</title>
       <div canonical="true" type="introduction" TEIform="div">
         <p TEIform="p">The words of his preaching unto his brethren. He confoundeth a man who seeketh to overthrow the doctrine of Christ. A few words concerning the history of the people of Nephi.</p>
@@ -2300,7 +2300,7 @@ Salt Lake City, Utah, USA</publisher>
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Enos" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Book of Enos</headCT>
+      <title canonical="true" short="Enos" type="main" TEIform="title">The Book of Enos</title>
       <chapter canonical="false" osisID="Enos.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">Enos prays mightily and gains a remission of his sins—The voice of the Lord comes into his mind, promising salvation for the Lamanites in a future day—The Nephites sought to reclaim the Lamanites—Enos rejoices in his Redeemer. About 420 <hi type="small-caps" TEIform="hi">B.C.</hi>
@@ -2336,7 +2336,7 @@ Salt Lake City, Utah, USA</publisher>
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Jarom" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Book of Jarom</headCT>
+      <title canonical="true" short="Jarom" type="main" TEIform="title">The Book of Jarom</title>
       <chapter canonical="false" osisID="Jarom.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">The Nephites keep the law of Moses, look forward to the coming of Christ, and prosper in the land—Many prophets labor to keep the people in the way of truth. About 399–361 <hi type="small-caps" TEIform="hi">B.C.</hi>
@@ -2360,7 +2360,7 @@ Salt Lake City, Utah, USA</publisher>
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Omni" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Book of Omni</headCT>
+      <title canonical="true" short="Omni" type="main" TEIform="title">The Book of Omni</title>
       <chapter canonical="false" osisID="Omni.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">Omni, Amaron, Chemish, Abinadom, and Amaleki, each in turn, keep the records—Mosiah discovers the people of Zarahemla, who came from Jerusalem in the days of Zedekiah—Mosiah is made king over them—The descendants of Mulek at Zarahemla had discovered Coriantumr, the last of the Jaredites—King Benjamin succeeds Mosiah—Men should offer their souls as an offering to Christ. About 323–130 <hi type="small-caps" TEIform="hi">B.C.</hi>
@@ -2399,7 +2399,7 @@ Salt Lake City, Utah, USA</publisher>
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Words of Mormon" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Words of Mormon</headCT>
+      <title canonical="true" short="Words of Mormon" type="main" TEIform="title">The Words of Mormon</title>
       <chapter canonical="false" osisID="Words of Mormon.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">Mormon abridges the large plates of Nephi—He puts the small plates with the other plates—King Benjamin establishes peace in the land. About <hi type="small-caps" TEIform="hi">A.D.</hi> 385.</p>
@@ -2425,7 +2425,7 @@ Salt Lake City, Utah, USA</publisher>
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Mosiah" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Book of Mosiah</headCT>
+      <title canonical="true" short="Mosiah" type="main" TEIform="title">The Book of Mosiah</title>
       <chapter canonical="false" osisID="Mosiah.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">King Benjamin teaches his sons the language and prophecies of their fathers—Their religion and civilization have been preserved because of the records kept on the various plates—Mosiah is chosen as king and is given custody of the records and other things. About 130–124 <hi type="small-caps" TEIform="hi">B.C.</hi>
@@ -3408,7 +3408,7 @@ Salt Lake City, Utah, USA</publisher>
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Alma" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Book of Alma</headCT>
+      <title canonical="true" short="Alma" type="main" TEIform="title">The Book of Alma</title>
       <title canonical="true" type="sub" TEIform="title">the Son of Alma</title>
       <div canonical="true" type="introduction" TEIform="div">
         <p TEIform="p">The account of Alma, who was the son of Alma, the first and chief judge over the people of Nephi, and also the high priest over the Church. An account of the reign of the judges, and the wars and contentions among the people. And also an account of a war between the Nephites and the Lamanites, according to the record of Alma, the first and chief judge.</p>
@@ -5829,7 +5829,7 @@ Salt Lake City, Utah, USA</publisher>
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Helaman" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Book of Helaman</headCT>
+      <title canonical="true" short="Helaman" type="main" TEIform="title">The Book of Helaman</title>
       <div canonical="true" type="introduction" TEIform="div">
         <p TEIform="p">An account of the Nephites. Their wars and contentions, and their dissensions. And also the prophecies of many holy prophets, before the coming of Christ, according to the records of Helaman, who was the son of Helaman, and also according to the records of his sons, even down to the coming of Christ. And also many of the Lamanites are converted. An account of their conversion. An account of the righteousness of the Lamanites, and the wickedness and abominations of the Nephites, according to the record of Helaman and his sons, even down to the coming of Christ, which is called the book of Helaman, and so forth.</p>
       </div>
@@ -6444,7 +6444,7 @@ Salt Lake City, Utah, USA</publisher>
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="3 Nephi" TEIform="div">
-      <headCT canonical="true" TEIform="head">Third Nephi</headCT>
+      <title canonical="true" short="3 Nephi" type="main" TEIform="title">Third Nephi</title>
       <div canonical="true" type="introduction" TEIform="div">
         <p TEIform="p">And Helaman was the son of Helaman, who was the son of Alma, who was the son of Alma, being a descendant of Nephi who was the son of Lehi, who came out of Jerusalem in the first year of the reign of Zedekiah, the king of Judah.</p>
       </div>
@@ -7406,7 +7406,7 @@ Salt Lake City, Utah, USA</publisher>
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="4 Nephi" TEIform="div">
-      <headCT canonical="true" TEIform="head">Fourth Nephi</headCT>
+      <title canonical="true" short="4 Nephi" type="main" TEIform="title">Fourth Nephi</title>
       <div canonical="true" type="introduction" TEIform="div">
         <p TEIform="p">An account of the people of Nephi, according to his record.</p>
       </div>
@@ -7466,7 +7466,7 @@ Salt Lake City, Utah, USA</publisher>
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Mormon" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Book of Mormon</headCT>
+      <title canonical="true" short="Mormon" type="main" TEIform="title">The Book of Mormon</title>
       <chapter canonical="false" osisID="Mormon.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">Ammaron instructs Mormon concerning the sacred records—War commences between the Nephites and the Lamanites—The Three Nephites are taken away—Wickedness, unbelief, sorceries, and witchcraft prevail. About <hi type="small-caps" TEIform="hi">A.D.</hi> 321–26.</p>
@@ -7743,7 +7743,7 @@ Salt Lake City, Utah, USA</publisher>
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Ether" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Book of Ether</headCT>
+      <title canonical="true" short="Ether" type="main" TEIform="title">The Book of Ether</title>
       <div canonical="false" type="introduction" TEIform="div">
         <p TEIform="p">The record of the Jaredites, taken from the twenty-four plates found by the people of Limhi in the days of King Mosiah.</p>
       </div>
@@ -8258,7 +8258,7 @@ Salt Lake City, Utah, USA</publisher>
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Moroni" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Book of Moroni</headCT>
+      <title canonical="true" short="Moroni" type="main" TEIform="title">The Book of Moroni</title>
       <chapter canonical="false" osisID="Moroni.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">Moroni writes for the benefit of the Lamanites—The Nephites who will not deny Christ are put to death. About <hi type="small-caps" TEIform="hi">A.D.</hi> 401–21.</p>
