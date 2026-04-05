@@ -288,9 +288,12 @@ def test_generate_site_sidebar_shows_conventional_name(output_dir, tmp_path):
     generate_site([osis_path], output_dir)
 
     html = (output_dir / "test" / "1ne" / "1ne-1.html").read_text()
-    # Books with a short attribute show "Full Title (Conventional Name)"
-    assert "The First Book of Nephi (1 Nephi)" in html
-    assert "The Book of Enoch (1 Enoch)" in html
+    # Books with a short attribute show only the conventional name
+    assert "1 Nephi" in html
+    assert "1 Enoch" in html
+    # The formal long titles must NOT appear as standalone sidebar entries
+    assert "The First Book of Nephi (1 Nephi)" not in html
+    assert "The Book of Enoch (1 Enoch)" not in html
     # Books without a short attribute show only their title, unchanged
     assert "Genesis (" not in html
     assert "Genesis" in html
