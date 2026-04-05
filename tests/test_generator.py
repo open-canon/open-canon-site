@@ -247,3 +247,50 @@ def test_generate_site_uses_arabic_numerals_for_roman_chapter_titles(output_dir,
     assert "Chapter 18" in html
     assert "Book Title — Chapter 18" in html
     assert "CHAPTER XVIII" not in html
+
+
+def test_generate_site_sidebar_shows_conventional_name(output_dir, tmp_path):
+    """Books with a ``short`` title attribute show the conventional name in the sidebar."""
+    osis_path = tmp_path / "short_title.osis.xml"
+    osis_path.write_text(
+        """<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<osis xmlns=\"http://www.bibletechnologies.net/2003/OSIS/namespace\">
+    <osisText osisIDWork=\"TEST\" xml:lang=\"en\">
+        <header>
+            <work osisWork=\"TEST\">
+                <title>Short Title Test</title>
+            </work>
+        </header>
+        <div type=\"book\" osisID=\"1Ne\">
+            <title short=\"1 Nephi\">The First Book of Nephi</title>
+            <div type=\"chapter\" osisID=\"1Ne.1\">
+                <verse osisID=\"1Ne.1.1\">I, Nephi.</verse>
+            </div>
+        </div>
+        <div type=\"book\" osisID=\"Enoch\">
+            <title short=\"1 Enoch\">The Book of Enoch</title>
+            <div type=\"chapter\" osisID=\"Enoch.1\">
+                <verse osisID=\"Enoch.1.1\">Words of Enoch.</verse>
+            </div>
+        </div>
+        <div type=\"book\" osisID=\"Gen\">
+            <title>Genesis</title>
+            <div type=\"chapter\" osisID=\"Gen.1\">
+                <verse osisID=\"Gen.1.1\">In the beginning.</verse>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+
+    generate_site([osis_path], output_dir)
+
+    html = (output_dir / "test" / "1ne" / "1ne-1.html").read_text()
+    # Books with a short attribute show "Full Title (Conventional Name)"
+    assert "The First Book of Nephi (1 Nephi)" in html
+    assert "The Book of Enoch (1 Enoch)" in html
+    # Books without a short attribute show only their title, unchanged
+    assert "Genesis (" not in html
+    assert "Genesis" in html
