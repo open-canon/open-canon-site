@@ -109,6 +109,153 @@ def test_index_page_lists_document(output_dir):
     assert "kjv/index.html" in html
 
 
+def test_index_page_groups_documents_into_named_collection(output_dir, tmp_path):
+    """Documents whose work_id matches a configured collection appear under that heading."""
+    bom_path = tmp_path / "bom.osis.xml"
+    bom_path.write_text(
+        """<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace">
+    <osisText osisIDWork="BOM" xml:lang="en">
+        <header>
+            <work osisWork="BOM">
+                <title>Book of Mormon</title>
+            </work>
+        </header>
+        <div type="book" osisID="1Ne">
+            <div type="chapter" osisID="1Ne.1">
+                <verse osisID="1Ne.1.1">I, Nephi.</verse>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+
+    generate_site([bom_path], output_dir)
+    html = (output_dir / "index.html").read_text()
+
+    assert "Standard Works" in html
+    assert "Book of Mormon" in html
+    assert "<details" in html
+    assert "<summary" in html
+    assert "bom/index.html" in html
+
+
+def test_index_page_places_unmatched_documents_in_other(output_dir):
+    """Documents whose work_id is not in any collection appear under 'Other'."""
+    generate_site([SAMPLE_OSIS], output_dir)
+    html = (output_dir / "index.html").read_text()
+    assert "Other" in html
+    assert "King James Version" in html
+    assert "kjv/index.html" in html
+
+
+def test_index_page_uses_custom_collections_file(output_dir, tmp_path):
+    """Passing a custom collections JSON file overrides the default grouping."""
+    custom_collections = tmp_path / "my_collections.json"
+    custom_collections.write_text(
+        '[{"name": "My Texts", "work_ids": ["KJV"]}]',
+        encoding="utf-8",
+    )
+
+    generate_site([SAMPLE_OSIS], output_dir, collections_path=custom_collections)
+    html = (output_dir / "index.html").read_text()
+
+    assert "My Texts" in html
+    assert "King James Version" in html
+    # No "Other" group because KJV was explicitly matched
+    assert "Other" not in html
+
+
+def test_sidebar_shows_collections_on_chapter_page(output_dir, tmp_path):
+    """Chapter page sidebar groups documents into nested collapsible collections."""
+    bom_path = tmp_path / "bom.osis.xml"
+    bom_path.write_text(
+        """<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace">
+    <osisText osisIDWork="BOM" xml:lang="en">
+        <header>
+            <work osisWork="BOM">
+                <title>Book of Mormon</title>
+            </work>
+        </header>
+        <div type="book" osisID="1Ne">
+            <div type="chapter" osisID="1Ne.1">
+                <verse osisID="1Ne.1.1">I, Nephi.</verse>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+
+    generate_site([bom_path], output_dir)
+    html = (output_dir / "bom" / "1ne" / "1ne-1.html").read_text()
+
+    # Outer Library section is collapsible
+    assert '<details class="nav-section" open>' in html
+    assert "Library" in html
+    # Named collection appears as a nested details inside Library
+    assert '<details class="nav-collection">' in html
+    assert "Standard Works" in html
+    assert "Book of Mormon" in html
+
+
+def test_work_can_appear_in_multiple_collections(output_dir, tmp_path):
+    """A document whose work_id is listed in two collections appears under both."""
+    custom_collections = tmp_path / "multi.json"
+    custom_collections.write_text(
+        '[{"name": "Group A", "work_ids": ["KJV"]},  {"name": "Group B", "work_ids": ["KJV"]}]',
+        encoding="utf-8",
+    )
+
+    generate_site([SAMPLE_OSIS], output_dir, collections_path=custom_collections)
+    html = (output_dir / "index.html").read_text()
+
+    assert "Group A" in html
+    assert "Group B" in html
+    # KJV appears in both groups, so the title should occur at least twice
+    assert html.count("King James Version") >= 2
+    # No "Other" since KJV is matched
+    assert "Other" not in html
+
+
+def test_collection_uses_work_id_order_from_json(output_dir, tmp_path):
+    """Documents inside a collection follow the JSON work_ids order, not input file order."""
+    bom_path = tmp_path / "bom.osis.xml"
+    bom_path.write_text(
+        """<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace">
+    <osisText osisIDWork="BOM" xml:lang="en">
+        <header>
+            <work osisWork="BOM">
+                <title>Book of Mormon</title>
+            </work>
+        </header>
+        <div type="book" osisID="1Ne">
+            <div type="chapter" osisID="1Ne.1">
+                <verse osisID="1Ne.1.1">I, Nephi.</verse>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+    custom_collections = tmp_path / "ordered.json"
+    custom_collections.write_text(
+        '[{"name": "Scriptures", "work_ids": ["BOM", "KJV"]}]',
+        encoding="utf-8",
+    )
+
+    generate_site([SAMPLE_OSIS, bom_path], output_dir, collections_path=custom_collections)
+    html = (output_dir / "index.html").read_text()
+
+    assert html.index("Book of Mormon") < html.index("King James Version")
+
+
 def test_generate_site_renders_front_matter_page(output_dir, tmp_path):
     osis_path = tmp_path / "front.osis.xml"
     osis_path.write_text(

@@ -10,19 +10,24 @@
   {# ── Left navigation sidebar ── #}
   <nav class="sidebar-nav" aria-label="Document navigation">
 
-    {# All documents – collapsible library dropdown #}
+    {# All documents – collapsible library dropdown with per-collection sub-groups #}
     <details class="nav-section" open>
       <summary class="nav-section-title">Library</summary>
-      <ul class="nav-list">
-        {% for doc in documents %}
-        <li>
-          <a href="{{ '../../' }}{{ doc.slug }}/index.html"
-             {% if doc.slug == current_doc.slug %}class="active"{% endif %}>
-            {{ doc.title }}
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
+      {% for collection in collections %}
+      <details class="nav-collection">
+        <summary class="nav-collection-title">{{ collection.name }}</summary>
+        <ul class="nav-list">
+          {% for doc in collection.documents %}
+          <li>
+            <a href="{{ '../../' }}{{ doc.slug }}/index.html"
+               {% if doc.slug == current_doc.slug %}class="active"{% endif %}>
+              {{ doc.title }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </details>
+      {% endfor %}
     </details>
 
     {# Divisions of current document (books, etc.) #}

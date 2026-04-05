@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Standard Works",
+    "work_ids": ["OT", "NT", "BOM", "DC", "PGP"]
+  },
+  {
+    "name": "Apocrypha/Deuterocanon",
+    "work_ids": ["kjv-apocrypha"]
+  },
+  {
+    "name": "Enochian Literature",
+    "work_ids": ["1En", "Enoch"]
+  }
+]
