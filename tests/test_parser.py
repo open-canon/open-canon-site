@@ -475,3 +475,16 @@ def test_parse_note_ids_are_unique():
     n1 = chap.verses[0].notes[0].note_id
     n2 = chap.verses[1].notes[0].note_id
     assert n1 != n2
+
+
+def test_parse_chapter_title_excludes_embedded_note():
+    """A <note> inside a chapter title element must not appear in the chapter title string."""
+    doc = _parse("""
+        <div type="book" osisID="Song">
+          <div type="chapter" osisID="Song.1">
+            <title type="chapter"><note canonical="false">Note: not inspired.</note>Song of Solomon</title>
+            <verse osisID="Song.1.1">Text.</verse>
+          </div>
+        </div>
+    """)
+    assert doc.divisions[0].chapters[0].title == "Song of Solomon"

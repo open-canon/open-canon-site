@@ -100,11 +100,13 @@ def _slugify(text: str) -> str:
 
 
 def _text_of(content: list[Any]) -> str:
-    """Extract plain text from a pyosis content list."""
+    """Extract plain text from a pyosis content list, skipping notes."""
     parts: list[str] = []
     for item in content:
         if isinstance(item, str):
             parts.append(item)
+        elif isinstance(item, NoteCt):
+            continue
         elif hasattr(item, "content"):
             parts.append(_text_of(item.content))
         else:
