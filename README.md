@@ -42,6 +42,8 @@ Positional arguments:
 
 Options:
   -o / --output DIR   Output directory (default: ./output)
+  --collections JSON_FILE
+                      JSON file defining library collections and their work IDs
   --clean             Remove the output directory before generating
   -h / --help         Show this message and exit
 ```
@@ -53,6 +55,10 @@ Pass several files to build a combined library:
 ```bash
 uv run open-canon-site kjv.osis.xml bom.osis.xml -o output --clean
 ```
+
+If you provide a custom collections file with `--collections`, the collections
+themselves follow the JSON array order, and the books within each collection
+follow the `work_ids` list order.
 
 ## Project layout
 

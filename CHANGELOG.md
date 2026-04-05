@@ -2,6 +2,28 @@
 
 <!-- version list -->
 
+## v1.5.0 (2026-04-05)
+
+### Chores
+
+- Add KJV apocryphra to collection
+  ([`dd8eb17`](https://github.com/open-canon/open-canon-site/commit/dd8eb172a8d8de942ed19bc56958d40f754aea0d))
+
+- Always build PR preview
+  ([`e03970a`](https://github.com/open-canon/open-canon-site/commit/e03970a932d4553cbbeb612653503376947cd557))
+
+### Features
+
+- Works inside a collection remain ordered
+  ([`65dad8d`](https://github.com/open-canon/open-canon-site/commit/65dad8de21c18d97f992c16097887b6964ff1ac7))
+
+- **library**: Add sidebar collections, fix Apocrypha name, allow multi-collection docs
+  ([`544bf2d`](https://github.com/open-canon/open-canon-site/commit/544bf2dc6ab71fbd789d66767ca9a9239fa837d7))
+
+- **library**: Group documents into collapsible collections with JSON config
+  ([`39a2fa5`](https://github.com/open-canon/open-canon-site/commit/39a2fa518c89c0a562dd3970943f4c8340fa3107))
+
+
 ## v1.4.0 (2026-04-01)
 
 ### Bug Fixes

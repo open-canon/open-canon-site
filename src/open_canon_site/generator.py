@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import shutil
 from pathlib import Path
 
@@ -30,6 +31,85 @@ def _make_env() -> Environment:
         autoescape=select_autoescape(["html"]),
     )
     return env
+
+
+# ---------------------------------------------------------------------------
+# Collection configuration
+# ---------------------------------------------------------------------------
+
+#: Path to the default collections configuration shipped with the package.
+_DEFAULT_COLLECTIONS_PATH = Path(__file__).parent / "collections.json"
+CollectionConfig = tuple[str, tuple[str, ...]]
+
+
+def _load_collections(path: Path | None = None) -> list[CollectionConfig]:
+    """Load collection definitions from a JSON file.
+
+    Each entry in the JSON array must have a ``"name"`` string and a
+    ``"work_ids"`` array of strings.  Work IDs are matched
+    case-insensitively against each document's ``work_id``.
+
+    Args:
+        path: Path to a JSON collections file.  If *None*, the default
+              ``collections.json`` bundled with the package is used.
+
+    Returns:
+        An ordered list of ``(collection_name, ordered_work_ids)`` tuples.
+    """
+    resolved = path if path is not None else _DEFAULT_COLLECTIONS_PATH
+    raw: list[dict] = json.loads(resolved.read_text(encoding="utf-8"))
+    return [(entry["name"], tuple(entry["work_ids"])) for entry in raw]
+
+
+def _group_into_collections(
+    documents: list[DocumentData],
+    collections: list[CollectionConfig],
+) -> list[dict[str, object]]:
+    """Organize *documents* into named collections for the library index.
+
+    A document may appear in **more than one** collection if the admin
+    configures overlapping ``work_ids`` lists.  Documents whose ``work_id``
+    (case-insensitive) does not match any collection are placed under a final
+    ``"Other"`` group.
+
+    Args:
+        documents:   All parsed documents to group.
+        collections: Ordered collection definitions from :func:`_load_collections`.
+
+    Returns:
+        A list of dicts, each with ``"name"`` (str) and ``"documents"``
+        (list[DocumentData]), suitable for use in the index template.
+    """
+    docs_by_work_id: dict[str, list[DocumentData]] = {}
+    for doc in documents:
+        docs_by_work_id.setdefault(doc.work_id.upper(), []).append(doc)
+
+    # Track which docs appear in at least one named collection so we can
+    # compute the "Other" fallback.  Documents are NOT excluded from later
+    # collections even after being added to an earlier one.
+    seen_in_any: set[str] = set()
+    result: list[dict[str, object]] = []
+
+    for name, work_ids in collections:
+        matches: list[DocumentData] = []
+        seen_in_collection: set[str] = set()
+        for work_id in work_ids:
+            normalized_work_id = work_id.upper()
+            if normalized_work_id in seen_in_collection:
+                continue
+
+            seen_in_collection.add(normalized_work_id)
+            matches.extend(docs_by_work_id.get(normalized_work_id, []))
+
+        if matches:
+            result.append({"name": name, "documents": matches})
+            seen_in_any.update(doc.work_id.upper() for doc in matches)
+
+    other = [doc for doc in documents if doc.work_id.upper() not in seen_in_any]
+    if other:
+        result.append({"name": "Other", "documents": other})
+
+    return result
 
 
 # ---------------------------------------------------------------------------
@@ -70,10 +150,16 @@ def _chapter_notes(chapter: ChapterData) -> list[NoteData]:
 # ---------------------------------------------------------------------------
 
 
-def _generate_index(env: Environment, documents: list[DocumentData], output_dir: Path) -> None:
+def _generate_index(
+    env: Environment,
+    documents: list[DocumentData],
+    output_dir: Path,
+    collections: list[CollectionConfig],
+) -> None:
     """Render the top-level index.html listing all documents."""
     template = env.get_template("index.html")
-    html = template.render(documents=documents, version=__version__)
+    grouped = _group_into_collections(documents, collections)
+    html = template.render(documents=documents, collections=grouped, version=__version__)
     (output_dir / "index.html").write_text(html, encoding="utf-8")
 
 
@@ -106,6 +192,7 @@ def _generate_chapter(
     chapter: ChapterData,
     documents: list[DocumentData],
     output_dir: Path,
+    collections: list[dict[str, object]],
 ) -> None:
     """Render a single chapter page."""
     template = env.get_template("chapter.html")
@@ -146,6 +233,7 @@ def _generate_chapter(
 
     html = template.render(
         documents=documents,
+        collections=collections,
         current_doc=doc,
         current_div=div,
         current_chapter=chapter,
@@ -213,19 +301,25 @@ def generate_site(
     input_paths: list[Path],
     output_dir: Path,
     clean: bool = False,
+    collections_path: Path | None = None,
 ) -> None:
     """Generate a static site from a list of OSIS XML files.
 
     Args:
-        input_paths:    List of OSIS XML file paths to process.
-        output_dir:     Directory where the HTML files will be written.
-        clean:          If True, remove and recreate *output_dir* first.
+        input_paths:       List of OSIS XML file paths to process.
+        output_dir:        Directory where the HTML files will be written.
+        clean:             If True, remove and recreate *output_dir* first.
+        collections_path:  Optional path to a JSON file that defines which
+                           documents belong to which library collection.  When
+                           *None* the default ``collections.json`` bundled with
+                           the package is used.
     """
     if clean and output_dir.exists():
         shutil.rmtree(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
     env = _make_env()
+    collections = _load_collections(collections_path)
 
     # Parse all documents
     documents: list[DocumentData] = []
@@ -233,15 +327,18 @@ def generate_site(
         print(f"  Parsing {path.name} …")
         documents.append(parse_osis_file(path))
 
+    # Group documents into collections once; reused by index and every chapter page.
+    grouped = _group_into_collections(documents, collections)
+
     print("  Generating index …")
-    _generate_index(env, documents, output_dir)
+    _generate_index(env, documents, output_dir, collections)
 
     for doc in documents:
         print(f"  Generating '{doc.title}' ({len(doc.divisions)} division(s)) …")
         _generate_doc_index(env, doc, documents, output_dir)
         for div in doc.divisions:
             for chapter in div.chapters:
-                _generate_chapter(env, doc, div, chapter, documents, output_dir)
+                _generate_chapter(env, doc, div, chapter, documents, output_dir, grouped)
 
     _copy_static(output_dir)
     print(f"  Site written to {output_dir}")
@@ -273,6 +370,16 @@ def main() -> None:
         help="Output directory (default: ./output).",
     )
     parser.add_argument(
+        "--collections",
+        type=Path,
+        default=None,
+        metavar="JSON_FILE",
+        help=(
+            "JSON file defining library collections and their work IDs "
+            "(default: built-in collections.json)."
+        ),
+    )
+    parser.add_argument(
         "--clean",
         action="store_true",
         help="Remove the output directory before generating.",
@@ -283,4 +390,4 @@ def main() -> None:
     print(f"  Input files : {[str(p) for p in args.input]}")
     print(f"  Output dir  : {args.output}")
 
-    generate_site(args.input, args.output, clean=args.clean)
+    generate_site(args.input, args.output, clean=args.clean, collections_path=args.collections)
