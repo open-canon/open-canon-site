@@ -3,7 +3,7 @@
   <osisText canonical="true" osisIDWork="nt" osisRefWork="The New Testament" xml:lang="eng" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="eng" TEIform="date">2026.03.29T23:31:56</date>
+        <date event="eversion" type="ISO" xml:lang="eng" TEIform="date">2026.04.04T22:52:28</date>
         <p TEIform="p">Scraped from churchofjesuschrist.org, and converted to OSIS by the churchstudy-to-osis Python package.</p>
       </revisionDesc>
       <work osisWork="NT">
@@ -23,8 +23,8 @@
       </div>
     </div>
     <div canonical="true" type="book" osisID="Matthew" TEIform="div">
-      <headCT canonical="true" TEIform="head">
-        <note canonical="false" TEIform="note">Title: JST entitles this book “The Testimony of St. Matthew.”</note>St Matthew</headCT>
+      <title canonical="true" short="Matthew" type="main" TEIform="title">
+        <note canonical="false" TEIform="note">Title: JST entitles this book “The Testimony of St. Matthew.”</note>St Matthew</title>
       <title canonical="true" type="sub" TEIform="title">The Gospel According to</title>
       <chapter canonical="false" osisID="Matthew.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -1351,8 +1351,8 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Mark" TEIform="div">
-      <headCT canonical="true" TEIform="head">
-        <note canonical="false" TEIform="note">Title: JST entitles this book “The Testimony of St. Mark.”</note>St Mark</headCT>
+      <title canonical="true" short="Mark" type="main" TEIform="title">
+        <note canonical="false" TEIform="note">Title: JST entitles this book “The Testimony of St. Mark.”</note>St Mark</title>
       <title canonical="true" type="sub" TEIform="title">The Gospel According to</title>
       <chapter canonical="false" osisID="Mark.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -2165,8 +2165,8 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Luke" TEIform="div">
-      <headCT canonical="true" TEIform="head">
-        <note canonical="false" TEIform="note">Title: JST entitles this book “The Testimony of St. Luke.”</note>St Luke</headCT>
+      <title canonical="true" short="Luke" type="main" TEIform="title">
+        <note canonical="false" TEIform="note">Title: JST entitles this book “The Testimony of St. Luke.”</note>St Luke</title>
       <title canonical="true" type="sub" TEIform="title">The Gospel According to</title>
       <chapter canonical="false" osisID="Luke.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -3531,8 +3531,8 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="John" TEIform="div">
-      <headCT canonical="true" TEIform="head">
-        <note canonical="false" TEIform="note">Title: JST entitles this book “The Testimony of St. John.”</note>St John</headCT>
+      <title canonical="true" short="John" type="main" TEIform="title">
+        <note canonical="false" TEIform="note">Title: JST entitles this book “The Testimony of St. John.”</note>St John</title>
       <title canonical="true" type="sub" TEIform="title">The Gospel According to</title>
       <chapter canonical="false" osisID="John.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -4579,7 +4579,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Acts" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Acts <lb TEIform="milestone"/>of the Apostles</headCT>
+      <title canonical="true" short="Acts" type="main" TEIform="title">The Acts <lb TEIform="milestone"/>of the Apostles</title>
       <chapter canonical="false" osisID="Acts.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">Jesus ministers for forty days after His resurrection—The kingdom is to be restored to Israel at a later time—The Twelve are to bear witness in Jerusalem, Judæa, Samaria, and the uttermost parts of the earth—Jesus ascends into heaven—Matthias is chosen to fill the vacancy in the Twelve.</p>
@@ -5787,7 +5787,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Romans" TEIform="div">
-      <headCT canonical="true" TEIform="head">Romans</headCT>
+      <title canonical="true" short="Romans" type="main" TEIform="title">Romans</title>
       <title canonical="true" type="sub" TEIform="title">The Epistle of Paul the Apostle</title>
       <title canonical="true" type="sub" TEIform="title">to the</title>
       <chapter canonical="false" osisID="Romans.1" TEIform="div">
@@ -6366,7 +6366,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="1 Corinthians" TEIform="div">
-      <headCT canonical="true" TEIform="head">Corinthians</headCT>
+      <title canonical="true" short="1 Corinthians" type="main" TEIform="title">Corinthians</title>
       <title canonical="true" type="sub" TEIform="title">The First Epistle of</title>
       <title canonical="true" type="sub" TEIform="title">Paul the Apostle to the</title>
       <chapter canonical="false" osisID="1 Corinthians.1" TEIform="div">
@@ -6956,7 +6956,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="2 Corinthians" TEIform="div">
-      <headCT canonical="true" TEIform="head">Corinthians</headCT>
+      <title canonical="true" short="2 Corinthians" type="main" TEIform="title">Corinthians</title>
       <title canonical="true" type="sub" TEIform="title">The Second Epistle of</title>
       <title canonical="true" type="sub" TEIform="title">Paul the Apostle to the</title>
       <chapter canonical="false" osisID="2 Corinthians.1" TEIform="div">
@@ -7320,7 +7320,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Galatians" TEIform="div">
-      <headCT canonical="true" TEIform="head">Galatians</headCT>
+      <title canonical="true" short="Galatians" type="main" TEIform="title">Galatians</title>
       <title canonical="true" type="sub" TEIform="title">The Epistle of Paul the Apostle</title>
       <title canonical="true" type="sub" TEIform="title">to the</title>
       <chapter canonical="false" osisID="Galatians.1" TEIform="div">
@@ -7512,7 +7512,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Ephesians" TEIform="div">
-      <headCT canonical="true" TEIform="head">Ephesians</headCT>
+      <title canonical="true" short="Ephesians" type="main" TEIform="title">Ephesians</title>
       <title canonical="true" type="sub" TEIform="title">The Epistle of Paul the Apostle</title>
       <title canonical="true" type="sub" TEIform="title">to the</title>
       <chapter canonical="false" osisID="Ephesians.1" TEIform="div">
@@ -7719,7 +7719,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Philippians" TEIform="div">
-      <headCT canonical="true" TEIform="head">Philippians</headCT>
+      <title canonical="true" short="Philippians" type="main" TEIform="title">Philippians</title>
       <title canonical="true" type="sub" TEIform="title">The Epistle of Paul the Apostle</title>
       <title canonical="true" type="sub" TEIform="title">to the</title>
       <chapter canonical="false" osisID="Philippians.1" TEIform="div">
@@ -7858,7 +7858,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Colossians" TEIform="div">
-      <headCT canonical="true" TEIform="head">Colossians</headCT>
+      <title canonical="true" short="Colossians" type="main" TEIform="title">Colossians</title>
       <title canonical="true" type="sub" TEIform="title">The Epistle of Paul the Apostle</title>
       <title canonical="true" type="sub" TEIform="title">to the</title>
       <chapter canonical="false" osisID="Colossians.1" TEIform="div">
@@ -8007,7 +8007,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="1 Thessalonians" TEIform="div">
-      <headCT canonical="true" TEIform="head">Thessalonians</headCT>
+      <title canonical="true" short="1 Thessalonians" type="main" TEIform="title">Thessalonians</title>
       <title canonical="true" type="sub" TEIform="title">The First Epistle of</title>
       <title canonical="true" type="sub" TEIform="title">Paul the Apostle to the</title>
       <chapter canonical="false" osisID="1 Thessalonians.1" TEIform="div">
@@ -8141,7 +8141,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="2 Thessalonians" TEIform="div">
-      <headCT canonical="true" TEIform="head">Thessalonians</headCT>
+      <title canonical="true" short="2 Thessalonians" type="main" TEIform="title">Thessalonians</title>
       <title canonical="true" type="sub" TEIform="title">The Second Epistle of</title>
       <title canonical="true" type="sub" TEIform="title">Paul the Apostle to the</title>
       <chapter canonical="false" osisID="2 Thessalonians.1" TEIform="div">
@@ -8211,7 +8211,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="1 Timothy" TEIform="div">
-      <headCT canonical="true" TEIform="head">Timothy</headCT>
+      <title canonical="true" short="1 Timothy" type="main" TEIform="title">Timothy</title>
       <title canonical="true" type="sub" TEIform="title">The First Epistle of</title>
       <title canonical="true" type="sub" TEIform="title">Paul the Apostle to</title>
       <chapter canonical="false" osisID="1 Timothy.1" TEIform="div">
@@ -8382,7 +8382,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="2 Timothy" TEIform="div">
-      <headCT canonical="true" TEIform="head">Timothy</headCT>
+      <title canonical="true" short="2 Timothy" type="main" TEIform="title">Timothy</title>
       <title canonical="true" type="sub" TEIform="title">The Second Epistle of</title>
       <title canonical="true" type="sub" TEIform="title">Paul the Apostle to</title>
       <chapter canonical="false" osisID="2 Timothy.1" TEIform="div">
@@ -8500,7 +8500,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Titus" TEIform="div">
-      <headCT canonical="true" TEIform="head">Titus</headCT>
+      <title canonical="true" short="Titus" type="main" TEIform="title">Titus</title>
       <title canonical="true" type="sub" TEIform="title">The Epistle of Paul to</title>
       <chapter canonical="false" osisID="Titus.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -8573,7 +8573,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Philemon" TEIform="div">
-      <headCT canonical="true" TEIform="head">Philemon</headCT>
+      <title canonical="true" short="Philemon" type="main" TEIform="title">Philemon</title>
       <title canonical="true" type="sub" TEIform="title">The Epistle of Paul to</title>
       <chapter canonical="false" osisID="Philemon.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -8608,7 +8608,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Hebrews" TEIform="div">
-      <headCT canonical="true" TEIform="head">Hebrews</headCT>
+      <title canonical="true" short="Hebrews" type="main" TEIform="title">Hebrews</title>
       <title canonical="true" type="sub" TEIform="title">The Epistle of Paul the Apostle</title>
       <title canonical="true" type="sub" TEIform="title">to the</title>
       <chapter canonical="false" osisID="Hebrews.1" TEIform="div">
@@ -9029,7 +9029,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="James" TEIform="div">
-      <headCT canonical="true" TEIform="head">James</headCT>
+      <title canonical="true" short="James" type="main" TEIform="title">James</title>
       <title canonical="true" type="sub" TEIform="title">The General Epistle of</title>
       <chapter canonical="false" osisID="James.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -9181,7 +9181,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="1 Peter" TEIform="div">
-      <headCT canonical="true" TEIform="head">Peter</headCT>
+      <title canonical="true" short="1 Peter" type="main" TEIform="title">Peter</title>
       <title canonical="true" type="sub" TEIform="title">The First Epistle General of</title>
       <chapter canonical="false" osisID="1 Peter.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -9340,7 +9340,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="2 Peter" TEIform="div">
-      <headCT canonical="true" TEIform="head">Peter</headCT>
+      <title canonical="true" short="2 Peter" type="main" TEIform="title">Peter</title>
       <title canonical="true" type="sub" TEIform="title">The Second Epistle General of</title>
       <chapter canonical="false" osisID="2 Peter.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -9426,7 +9426,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="1 John" TEIform="div">
-      <headCT canonical="true" TEIform="head">John</headCT>
+      <title canonical="true" short="1 John" type="main" TEIform="title">John</title>
       <title canonical="true" type="sub" TEIform="title">The First Epistle General of</title>
       <chapter canonical="false" osisID="1 John.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -9574,7 +9574,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="2 John" TEIform="div">
-      <headCT canonical="true" TEIform="head">John</headCT>
+      <title canonical="true" short="2 John" type="main" TEIform="title">John</title>
       <title canonical="true" type="sub" TEIform="title">The Second Epistle of</title>
       <chapter canonical="false" osisID="2 John.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -9598,7 +9598,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="3 John" TEIform="div">
-      <headCT canonical="true" TEIform="head">John</headCT>
+      <title canonical="true" short="3 John" type="main" TEIform="title">John</title>
       <title canonical="true" type="sub" TEIform="title">The Third Epistle of</title>
       <chapter canonical="false" osisID="3 John.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -9621,7 +9621,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Jude" TEIform="div">
-      <headCT canonical="true" TEIform="head">Jude</headCT>
+      <title canonical="true" short="Jude" type="main" TEIform="title">Jude</title>
       <title canonical="true" type="sub" TEIform="title">The General Epistle of</title>
       <chapter canonical="false" osisID="Jude.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -9659,7 +9659,7 @@
       </chapter>
     </div>
     <div canonical="true" type="book" osisID="Revelation" TEIform="div">
-      <headCT canonical="true" TEIform="head">The Revelation</headCT>
+      <title canonical="true" short="Revelation" type="main" TEIform="title">The Revelation</title>
       <title canonical="true" type="sub" TEIform="title">of St John the Divine</title>
       <chapter canonical="false" osisID="Revelation.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">

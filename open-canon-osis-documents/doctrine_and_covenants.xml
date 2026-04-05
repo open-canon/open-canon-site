@@ -3,7 +3,7 @@
   <osisText canonical="true" osisIDWork="dc" osisRefWork="The Doctrine and Covenants" xml:lang="eng" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="eng" TEIform="date">2026.03.29T23:25:27</date>
+        <date event="eversion" type="ISO" xml:lang="eng" TEIform="date">2026.04.04T22:52:29</date>
         <p TEIform="p">Scraped from churchofjesuschrist.org, and converted to OSIS by the churchstudy-to-osis Python package.</p>
       </revisionDesc>
       <work osisWork="DC">
@@ -1428,7 +1428,7 @@
       </div>
     </div>
     <div canonical="true" type="book" osisID="DC" TEIform="div">
-      <headCT canonical="true" TEIform="head">Doctrine and Covenants</headCT>
+      <title canonical="true" type="main" TEIform="title">Doctrine and Covenants</title>
       <title canonical="true" type="sub" TEIform="title">The</title>
       <div canonical="false" type="introduction" TEIform="div">
         <p TEIform="p">Revelation given through Joseph Smith the Prophet, on November 1, 1831, during a special conference of elders of the Church, held at Hiram, Ohio. Many revelations had been received from the Lord prior to this time, and the compilation of these for publication in book form was one of the principal subjects passed upon at the conference. This section constitutes the Lord’s preface to the doctrines, covenants, and commandments given in this dispensation.</p>
