@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% set static_root = "static/" %}
+{% set root_url = "" %}
+
+{% block title %}Open Canon – Changelog{% endblock %}
+
+{% block body %}
+<main class="changelog-page">
+  {{ changelog_html | safe }}
+</main>
+{% endblock %}
