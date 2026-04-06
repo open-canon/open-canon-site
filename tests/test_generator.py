@@ -772,3 +772,48 @@ def test_generate_site_sidebar_shows_conventional_name(output_dir, tmp_path):
     # Books without a short attribute show only their title, unchanged
     assert "Genesis (" not in html
     assert "Genesis" in html
+
+
+def test_generate_changelog_creates_html_file(output_dir, tmp_path):
+    """When changelog_path is provided, changelog.html is created in the output directory."""
+    changelog = tmp_path / "CHANGELOG.md"
+    changelog.write_text("# CHANGELOG\n\n## v1.0.0\n\n- Initial release\n", encoding="utf-8")
+
+    generate_site([SAMPLE_OSIS], output_dir, changelog_path=changelog)
+    assert (output_dir / "changelog.html").exists()
+
+
+def test_generate_changelog_converts_markdown_to_html(output_dir, tmp_path):
+    """The generated changelog.html contains the markdown content converted to HTML."""
+    changelog = tmp_path / "CHANGELOG.md"
+    changelog.write_text("# CHANGELOG\n\n## v1.0.0\n\n- Initial release\n", encoding="utf-8")
+
+    generate_site([SAMPLE_OSIS], output_dir, changelog_path=changelog)
+    html = (output_dir / "changelog.html").read_text()
+    assert "<h1>CHANGELOG</h1>" in html
+    assert "<h2>v1.0.0</h2>" in html
+    assert "Initial release" in html
+
+
+def test_footer_has_changelog_link_when_provided(output_dir, tmp_path):
+    """When changelog_path is provided, all pages include a footer link to changelog.html."""
+    changelog = tmp_path / "CHANGELOG.md"
+    changelog.write_text("# CHANGELOG\n\n- change\n", encoding="utf-8")
+
+    generate_site([SAMPLE_OSIS], output_dir, changelog_path=changelog)
+    index_html = (output_dir / "index.html").read_text()
+    assert 'href="changelog.html"' in index_html
+    assert "Changelog" in index_html
+
+
+def test_footer_has_no_changelog_link_when_not_provided(output_dir):
+    """When no changelog_path is given, no changelog link appears in the footer."""
+    generate_site([SAMPLE_OSIS], output_dir)
+    html = (output_dir / "index.html").read_text()
+    assert "changelog.html" not in html
+
+
+def test_generate_site_without_changelog_creates_no_changelog_file(output_dir):
+    """Without a changelog path, no changelog.html is written."""
+    generate_site([SAMPLE_OSIS], output_dir)
+    assert not (output_dir / "changelog.html").exists()

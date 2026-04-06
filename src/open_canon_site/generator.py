@@ -8,6 +8,7 @@ import shutil
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import markdown as md
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from open_canon_site import __version__
@@ -263,11 +264,14 @@ def _generate_index(
     documents: list[DocumentData],
     output_dir: Path,
     collections: list[CollectionConfig],
+    changelog_url: str | None = None,
 ) -> None:
     """Render the top-level index.html listing all documents."""
     template = env.get_template("index.html")
     grouped = _group_into_collections(documents, collections)
-    html = template.render(documents=documents, collections=grouped, version=__version__)
+    html = template.render(
+        documents=documents, collections=grouped, version=__version__, changelog_url=changelog_url
+    )
     (output_dir / "index.html").write_text(html, encoding="utf-8")
 
 
@@ -301,6 +305,7 @@ def _generate_chapter(
     documents: list[DocumentData],
     output_dir: Path,
     collections: list[dict[str, object]],
+    changelog_url: str | None = None,
 ) -> None:
     """Render a single chapter page."""
     template = env.get_template("chapter.html")
@@ -353,6 +358,7 @@ def _generate_chapter(
         next_chapter_url=next_chapter_url,
         chapter_url_fn=lambda d, di, c: _chapter_url(d, di, c),
         version=__version__,
+        changelog_url=changelog_url,
     )
 
     dest = output_dir / doc.slug / div.slug / f"{chapter.slug}.html"
@@ -365,6 +371,7 @@ def _generate_doc_index(
     doc: DocumentData,
     documents: list[DocumentData],
     output_dir: Path,
+    changelog_url: str | None = None,
 ) -> None:
     """Render a per-document index that redirects to the first chapter."""
     template = env.get_template("doc_index.html")
@@ -379,6 +386,7 @@ def _generate_doc_index(
         current_doc=doc,
         first_chapter_url=first_url,
         version=__version__,
+        changelog_url=changelog_url,
     )
     dest = output_dir / doc.slug / "index.html"
     dest.parent.mkdir(parents=True, exist_ok=True)
@@ -401,6 +409,29 @@ def _copy_static(output_dir: Path) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Changelog generation
+# ---------------------------------------------------------------------------
+
+#: Output filename for the rendered changelog page.
+_CHANGELOG_OUTPUT = "changelog.html"
+
+
+def _generate_changelog(env: Environment, changelog_path: Path, output_dir: Path) -> None:
+    """Convert *changelog_path* from Markdown to HTML and write ``changelog.html``.
+
+    Args:
+        env:            Jinja2 environment used to render the page template.
+        changelog_path: Path to the Markdown changelog file.
+        output_dir:     Directory where ``changelog.html`` will be written.
+    """
+    raw_md = changelog_path.read_text(encoding="utf-8")
+    changelog_html = md.markdown(raw_md, extensions=["fenced_code", "tables"])
+    template = env.get_template("changelog.html")
+    html = template.render(changelog_html=changelog_html, version=__version__)
+    (output_dir / _CHANGELOG_OUTPUT).write_text(html, encoding="utf-8")
+
+
+# ---------------------------------------------------------------------------
 # Main generation entry point
 # ---------------------------------------------------------------------------
 
@@ -410,6 +441,7 @@ def generate_site(
     output_dir: Path,
     clean: bool = False,
     collections_path: Path | None = None,
+    changelog_path: Path | None = None,
 ) -> None:
     """Generate a static site from a list of OSIS XML files.
 
@@ -421,6 +453,10 @@ def generate_site(
                            documents belong to which library collection.  When
                            *None* the default ``collections.json`` bundled with
                            the package is used.
+        changelog_path:    Optional path to a Markdown changelog file.  When
+                           provided, the file is converted to HTML and written
+                           as ``changelog.html`` in the output directory, and
+                           all pages include a footer link to it.
     """
     if clean and output_dir.exists():
         shutil.rmtree(output_dir)
@@ -428,6 +464,9 @@ def generate_site(
 
     env = _make_env()
     collections = _load_collections(collections_path)
+
+    # Determine the footer changelog URL so every page can link to it.
+    changelog_url = _CHANGELOG_OUTPUT if changelog_path is not None else None
 
     # Parse all documents
     documents: list[DocumentData] = []
@@ -439,14 +478,20 @@ def generate_site(
     grouped = _group_into_collections(documents, collections)
 
     print("  Generating index …")
-    _generate_index(env, documents, output_dir, collections)
+    _generate_index(env, documents, output_dir, collections, changelog_url)
 
     for doc in documents:
         print(f"  Generating '{doc.title}' ({len(doc.divisions)} division(s)) …")
-        _generate_doc_index(env, doc, documents, output_dir)
+        _generate_doc_index(env, doc, documents, output_dir, changelog_url)
         for div in doc.divisions:
             for chapter in div.chapters:
-                _generate_chapter(env, doc, div, chapter, documents, output_dir, grouped)
+                _generate_chapter(
+                    env, doc, div, chapter, documents, output_dir, grouped, changelog_url
+                )
+
+    if changelog_path is not None:
+        print("  Generating changelog …")
+        _generate_changelog(env, changelog_path, output_dir)
 
     _copy_static(output_dir)
     print(f"  Site written to {output_dir}")
@@ -488,6 +533,13 @@ def main() -> None:
         ),
     )
     parser.add_argument(
+        "--changelog",
+        type=Path,
+        default=None,
+        metavar="MD_FILE",
+        help="Markdown changelog file to publish alongside the site (e.g. CHANGELOG.md).",
+    )
+    parser.add_argument(
         "--clean",
         action="store_true",
         help="Remove the output directory before generating.",
@@ -498,4 +550,10 @@ def main() -> None:
     print(f"  Input files : {[str(p) for p in args.input]}")
     print(f"  Output dir  : {args.output}")
 
-    generate_site(args.input, args.output, clean=args.clean, collections_path=args.collections)
+    generate_site(
+        args.input,
+        args.output,
+        clean=args.clean,
+        collections_path=args.collections,
+        changelog_path=args.changelog,
+    )

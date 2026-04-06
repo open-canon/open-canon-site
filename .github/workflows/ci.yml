@@ -106,7 +106,7 @@ jobs:
         run: uv sync
 
       - name: Generate site from documents
-        run: uv run open-canon-site open-canon-osis-documents/*.xml --output _site --clean
+        run: uv run open-canon-site open-canon-osis-documents/*.xml --output _site --clean --changelog CHANGELOG.md
 
       - name: Upload site artifact
         uses: actions/upload-artifact@v4
