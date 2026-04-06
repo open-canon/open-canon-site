@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.7.0 (2026-04-06)
+
+### Features
+
+- Add Vita Adae et Evae
+  ([`b00d8d7`](https://github.com/open-canon/open-canon-site/commit/b00d8d7db28c2c92b7592d50fa09c194fea942b4))
+
+
 ## v1.6.0 (2026-04-06)
 
 ### Bug Fixes
