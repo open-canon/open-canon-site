@@ -32,6 +32,23 @@ def test_generate_site_copies_static_assets(output_dir):
     generate_site([SAMPLE_OSIS], output_dir)
     assert (output_dir / "static" / "style.css").exists()
     assert (output_dir / "static" / "notes-sync.js").exists()
+    assert (output_dir / "static" / "nav.js").exists()
+
+
+def test_chapter_page_has_mobile_nav_toggle(output_dir):
+    """Chapter pages include a hamburger toggle button for mobile navigation."""
+    generate_site([SAMPLE_OSIS], output_dir)
+    html = (output_dir / "kjv" / "gen" / "gen-1.html").read_text()
+    assert 'id="nav-toggle"' in html
+    assert 'class="nav-toggle"' in html
+    assert 'id="nav-overlay"' in html
+
+
+def test_index_page_has_no_mobile_nav_toggle(output_dir):
+    """The index page has no sidebar and therefore no hamburger toggle button."""
+    generate_site([SAMPLE_OSIS], output_dir)
+    html = (output_dir / "index.html").read_text()
+    assert 'id="nav-toggle"' not in html
 
 
 def test_chapter_page_has_three_columns(output_dir):

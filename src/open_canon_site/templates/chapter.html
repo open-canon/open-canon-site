@@ -4,6 +4,10 @@
 
 {% block title %}{{ current_doc.title }} – Open Canon{% endblock %}
 
+{% block header_buttons %}
+<button id="nav-toggle" class="nav-toggle" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+{% endblock %}
+
 {% block body %}
 <div class="page-shell">
 
@@ -142,5 +146,8 @@
 
 </div>{# /page-shell #}
 
+<div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+
 <script src="{{ '../../' }}static/notes-sync.js"></script>
+<script src="{{ '../../' }}static/nav.js"></script>
 {% endblock %}
