@@ -13,13 +13,13 @@
     {% for collection in collections %}
     <details class="collection" open>
       <summary class="collection-name">{{ collection.name }}</summary>
-      {% for doc in collection.documents %}
-      <a class="doc-card" href="{{ doc.slug }}/index.html">
-        <h2>{{ doc.title }}</h2>
+      {% for entry in collection.documents %}
+      <a class="doc-card" href="{{ entry.url }}">
+        <h2>{{ entry.title }}</h2>
         <p class="meta">
-          {{ doc.divisions | length }} division{{ 's' if doc.divisions | length != 1 else '' }}
+          {{ entry.subtitle }}
           &nbsp;·&nbsp;
-          Work ID: {{ doc.work_id }}
+          Work ID: {{ entry.work_id }}
         </p>
       </a>
       {% endfor %}
