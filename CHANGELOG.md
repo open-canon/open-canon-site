@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.8.0 (2026-04-06)
+
+### Features
+
+- Publish CHANGELOG as changelog.html and add footer link
+  ([`4795ff3`](https://github.com/open-canon/open-canon-site/commit/4795ff3ca8be41dd9c3a5205af06213806e67896))
+
+
 ## v1.7.0 (2026-04-06)
 
 ### Features
