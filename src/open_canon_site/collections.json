@@ -5,7 +5,7 @@
   },
   {
     "name": "Apocrypha/Deuterocanon",
-    "work_ids": ["kjv-apocrypha"]
+    "osis_ids": ["1Esd", "2Esd", "Tob", "Jdt", "AddEsth", "Wis", "Sir", "Bar", "PrAzar", "Sus", "Bel", "PrMan", "1Macc", "2Macc"]
   },
   {
     "name": "Enochian Literature",
