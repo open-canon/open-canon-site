@@ -222,6 +222,14 @@ def test_work_can_appear_in_multiple_collections(output_dir, tmp_path):
     assert "Other" not in html
 
 
+def test_footer_has_github_link(output_dir):
+    generate_site([SAMPLE_OSIS], output_dir)
+    html = (output_dir / "index.html").read_text()
+    assert 'href="https://github.com/open-canon/open-canon-site"' in html
+    assert 'aria-label="GitHub repository"' in html
+    assert 'footer-github-icon' in html
+
+
 def test_collection_uses_work_id_order_from_json(output_dir, tmp_path):
     """Documents inside a collection follow the JSON work_ids order, not input file order."""
     bom_path = tmp_path / "bom.osis.xml"
