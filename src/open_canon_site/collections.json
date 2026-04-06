@@ -9,6 +9,10 @@
   },
   {
     "name": "Enochian Literature",
-    "work_ids": ["1En", "Enoch"]
+    "work_ids": ["1En", "Enoch", "2En"]
+  },
+  {
+    "name": "Adam and Eve Literature",
+    "work_ids": ["1-adam-and-eve", "2-adam-and-eve"]
   }
 ]

@@ -159,6 +159,30 @@ def test_parse_bookgroup_flattens_into_divisions():
     assert doc.divisions[1].div_id == "Exod"
 
 
+def test_parse_nested_book_divs_preserve_parent_intro_and_child_book_chapters():
+    """Nested child books inside a parent book should become separate divisions."""
+    doc = _parse("""
+        <div type="book" osisID="T12Patr">
+          <title>Testaments of the Twelve Patriarchs</title>
+          <div type="introduction">
+            <title>Introduction</title>
+            <p>Collection preface.</p>
+          </div>
+          <div type="book" osisID="T12Patr.TReu">
+            <title>The Testament of Reuben</title>
+            <div type="chapter" osisID="T12Patr.TReu.1">
+              <verse osisID="T12Patr.TReu.1.1">Verse one.</verse>
+            </div>
+          </div>
+        </div>
+    """)
+    assert [div.div_id for div in doc.divisions] == ["T12Patr", "T12Patr.TReu"]
+    assert doc.divisions[0].chapters[0].title == "Introduction"
+    assert doc.divisions[1].title == "The Testament of Reuben"
+    assert doc.divisions[1].chapters[0].chapter_id == "T12Patr.TReu.1"
+    assert doc.divisions[1].chapters[0].verses[0].verse_id == "T12Patr.TReu.1.1"
+
+
 # ---------------------------------------------------------------------------
 # Chapter extraction
 # ---------------------------------------------------------------------------
