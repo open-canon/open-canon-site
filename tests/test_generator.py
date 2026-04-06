@@ -226,7 +226,8 @@ def test_footer_has_github_link(output_dir):
     generate_site([SAMPLE_OSIS], output_dir)
     html = (output_dir / "index.html").read_text()
     assert 'href="https://github.com/open-canon/open-canon-site"' in html
-    assert "GitHub" in html
+    assert 'aria-label="GitHub repository"' in html
+    assert 'footer-github-icon' in html
 
 
 def test_collection_uses_work_id_order_from_json(output_dir, tmp_path):

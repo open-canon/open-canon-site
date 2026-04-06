@@ -435,6 +435,22 @@ details.nav-section[open] > summary::after {
   margin-top: 2rem;
 }
 
+.footer-github-link {
+  display: inline-flex;
+  align-items: center;
+  margin-left: .5rem;
+  color: var(--color-muted);
+  vertical-align: middle;
+}
+
+.footer-github-link:hover {
+  color: var(--color-text);
+}
+
+.footer-github-icon {
+  fill: currentColor;
+}
+
 /* ---------- Dark mode ---------- */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
