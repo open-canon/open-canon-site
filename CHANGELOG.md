@@ -2,6 +2,30 @@
 
 <!-- version list -->
 
+## v1.6.0 (2026-04-06)
+
+### Bug Fixes
+
+- Correcty parse chapters and verses when a book's OsisID has multiple components.
+  ([`eb4b399`](https://github.com/open-canon/open-canon-site/commit/eb4b399665698ac931ab25273fc5a8dca3de6de6))
+
+### Chores
+
+- 1 Enoch fix
+  ([`1660a7b`](https://github.com/open-canon/open-canon-site/commit/1660a7b2e1df80572e0767c7d1922af64bb15e30))
+
+- Update texts
+  ([`dcbac79`](https://github.com/open-canon/open-canon-site/commit/dcbac790ea6516b90114b273455bb1df6e375273))
+
+- Use consolidated Adam and Eve
+  ([`6ae670d`](https://github.com/open-canon/open-canon-site/commit/6ae670de56597d1037d98b7d3443fbeac7608cba))
+
+### Features
+
+- Add Forgotten Books of Eden
+  ([`5b4642c`](https://github.com/open-canon/open-canon-site/commit/5b4642cc869c5daa6c1474ef2e2b6f522d1f7d5b))
+
+
 ## v1.5.1 (2026-04-05)
 
 
