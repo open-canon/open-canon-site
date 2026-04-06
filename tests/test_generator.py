@@ -264,6 +264,252 @@ def test_collection_uses_work_id_order_from_json(output_dir, tmp_path):
     assert html.index("Book of Mormon") < html.index("King James Version")
 
 
+def test_collection_osis_ids_matches_specific_division(output_dir, tmp_path):
+    """An osis_id entry in a collection matches a specific division (book) by OSIS ID."""
+    osis_path = tmp_path / "multi.osis.xml"
+    osis_path.write_text(
+        """<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace">
+    <osisText osisIDWork="APOC" xml:lang="en">
+        <header>
+            <work osisWork="APOC">
+                <title>Apocrypha</title>
+            </work>
+        </header>
+        <div type="book" osisID="Tob">
+            <title>Tobit</title>
+            <div type="chapter" osisID="Tob.1">
+                <verse osisID="Tob.1.1">The book of Tobit.</verse>
+            </div>
+        </div>
+        <div type="book" osisID="Jdt">
+            <title>Judith</title>
+            <div type="chapter" osisID="Jdt.1">
+                <verse osisID="Jdt.1.1">In the days of Arphaxad.</verse>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+    custom_collections = tmp_path / "osis_id.json"
+    custom_collections.write_text(
+        '[{"name": "Apocrypha", "osis_ids": ["Tob"]}]',
+        encoding="utf-8",
+    )
+
+    generate_site([osis_path], output_dir, collections_path=custom_collections)
+    html = (output_dir / "index.html").read_text()
+
+    assert "Apocrypha" in html
+    # The matched division's title should appear
+    assert "Tobit" in html
+    # Its URL should point to the division's first chapter, not the doc index
+    assert "apoc/tob/tob-1.html" in html
+    # The parent document (APOC) is considered matched via its division, so no "Other"
+    assert "Other" not in html
+
+
+def test_collection_osis_ids_uses_short_title_when_available(output_dir, tmp_path):
+    """When a matched division has a short_title, that is used as the entry title."""
+    osis_path = tmp_path / "short.osis.xml"
+    osis_path.write_text(
+        """<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace">
+    <osisText osisIDWork="TEST" xml:lang="en">
+        <header>
+            <work osisWork="TEST">
+                <title>Test Work</title>
+            </work>
+        </header>
+        <div type="book" osisID="1Ne">
+            <title short="1 Nephi">The First Book of Nephi</title>
+            <div type="chapter" osisID="1Ne.1">
+                <verse osisID="1Ne.1.1">I, Nephi.</verse>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+    custom_collections = tmp_path / "short.json"
+    custom_collections.write_text(
+        '[{"name": "Nephi Books", "osis_ids": ["1Ne"]}]',
+        encoding="utf-8",
+    )
+
+    generate_site([osis_path], output_dir, collections_path=custom_collections)
+    html = (output_dir / "index.html").read_text()
+
+    assert "Nephi Books" in html
+    assert "1 Nephi" in html
+
+
+def test_collection_osis_ids_order_preserved(output_dir, tmp_path):
+    """Divisions appear in the collection in the order specified by osis_ids."""
+    osis_path = tmp_path / "books.osis.xml"
+    osis_path.write_text(
+        """<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace">
+    <osisText osisIDWork="TEST" xml:lang="en">
+        <header>
+            <work osisWork="TEST">
+                <title>Test Work</title>
+            </work>
+        </header>
+        <div type="book" osisID="BookA">
+            <title>Book A</title>
+            <div type="chapter" osisID="BookA.1">
+                <verse osisID="BookA.1.1">Verse A.</verse>
+            </div>
+        </div>
+        <div type="book" osisID="BookB">
+            <title>Book B</title>
+            <div type="chapter" osisID="BookB.1">
+                <verse osisID="BookB.1.1">Verse B.</verse>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+    custom_collections = tmp_path / "ordered.json"
+    custom_collections.write_text(
+        '[{"name": "My Books", "osis_ids": ["BookB", "BookA"]}]',
+        encoding="utf-8",
+    )
+
+    generate_site([osis_path], output_dir, collections_path=custom_collections)
+    html = (output_dir / "index.html").read_text()
+
+    assert html.index("Book B") < html.index("Book A")
+
+
+def test_collection_osis_ids_prevents_doc_from_appearing_in_other(output_dir, tmp_path):
+    """Documents whose divisions are matched via osis_ids do not also appear in Other."""
+    osis_path = tmp_path / "single.osis.xml"
+    osis_path.write_text(
+        """<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace">
+    <osisText osisIDWork="MYWORK" xml:lang="en">
+        <header>
+            <work osisWork="MYWORK">
+                <title>My Work</title>
+            </work>
+        </header>
+        <div type="book" osisID="MyBook">
+            <title>My Book</title>
+            <div type="chapter" osisID="MyBook.1">
+                <verse osisID="MyBook.1.1">A verse.</verse>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+    custom_collections = tmp_path / "col.json"
+    custom_collections.write_text(
+        '[{"name": "My Collection", "osis_ids": ["MyBook"]}]',
+        encoding="utf-8",
+    )
+
+    generate_site([osis_path], output_dir, collections_path=custom_collections)
+    html = (output_dir / "index.html").read_text()
+
+    assert "My Collection" in html
+    assert "My Book" in html
+    # The document is represented via its division, so no "Other" group
+    assert "Other" not in html
+
+
+def test_collection_osis_ids_and_work_ids_can_coexist(output_dir, tmp_path):
+    """A single collection can mix work_ids and osis_ids entries."""
+    apoc_path = tmp_path / "apoc.osis.xml"
+    apoc_path.write_text(
+        """<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace">
+    <osisText osisIDWork="APOC" xml:lang="en">
+        <header>
+            <work osisWork="APOC">
+                <title>Apocrypha</title>
+            </work>
+        </header>
+        <div type="book" osisID="Tob">
+            <title>Tobit</title>
+            <div type="chapter" osisID="Tob.1">
+                <verse osisID="Tob.1.1">Tobit verse.</verse>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+    custom_collections = tmp_path / "mixed.json"
+    custom_collections.write_text(
+        '[{"name": "Mixed", "work_ids": ["KJV"], "osis_ids": ["Tob"]}]',
+        encoding="utf-8",
+    )
+
+    generate_site([SAMPLE_OSIS, apoc_path], output_dir, collections_path=custom_collections)
+    html = (output_dir / "index.html").read_text()
+
+    assert "Mixed" in html
+    # Work ID match: full KJV document
+    assert "King James Version" in html
+    assert "kjv/index.html" in html
+    # OSIS ID match: specific Tobit division
+    assert "Tobit" in html
+    assert "apoc/tob/tob-1.html" in html
+    # Both matched, nothing in Other
+    assert "Other" not in html
+
+
+def test_collection_osis_ids_chapter_subtitle(output_dir, tmp_path):
+    """Division entries show a chapter count subtitle rather than a division count."""
+    osis_path = tmp_path / "chapters.osis.xml"
+    osis_path.write_text(
+        """<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace">
+    <osisText osisIDWork="TEST" xml:lang="en">
+        <header>
+            <work osisWork="TEST">
+                <title>Test Work</title>
+            </work>
+        </header>
+        <div type="book" osisID="Book">
+            <title>My Book</title>
+            <div type="chapter" osisID="Book.1">
+                <verse osisID="Book.1.1">Verse 1.</verse>
+            </div>
+            <div type="chapter" osisID="Book.2">
+                <verse osisID="Book.2.1">Verse 2.</verse>
+            </div>
+            <div type="chapter" osisID="Book.3">
+                <verse osisID="Book.3.1">Verse 3.</verse>
+            </div>
+        </div>
+    </osisText>
+</osis>
+""",
+        encoding="utf-8",
+    )
+    custom_collections = tmp_path / "col.json"
+    custom_collections.write_text(
+        '[{"name": "My Col", "osis_ids": ["Book"]}]',
+        encoding="utf-8",
+    )
+
+    generate_site([osis_path], output_dir, collections_path=custom_collections)
+    html = (output_dir / "index.html").read_text()
+
+    assert "3 chapters" in html
+
+
 def test_generate_site_renders_front_matter_page(output_dir, tmp_path):
     osis_path = tmp_path / "front.osis.xml"
     osis_path.write_text(

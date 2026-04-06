@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import shutil
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from jinja2 import Environment, PackageLoader, select_autoescape
@@ -39,26 +40,75 @@ def _make_env() -> Environment:
 
 #: Path to the default collections configuration shipped with the package.
 _DEFAULT_COLLECTIONS_PATH = Path(__file__).parent / "collections.json"
-CollectionConfig = tuple[str, tuple[str, ...]]
+
+
+@dataclass
+class CollectionConfig:
+    """A single collection definition loaded from JSON.
+
+    Attributes:
+        name:     Display name for the collection.
+        work_ids: Work IDs matched case-insensitively against each
+                  document's ``work_id`` (entire documents).
+        osis_ids: OSIS division IDs matched case-insensitively against
+                  each division's ``div_id`` (individual books/divisions).
+    """
+
+    name: str
+    work_ids: tuple[str, ...] = field(default_factory=tuple)
+    osis_ids: tuple[str, ...] = field(default_factory=tuple)
+
+
+@dataclass
+class CollectionEntry:
+    """A single rendered entry within a collection group, used by templates.
+
+    Attributes:
+        title:    Display title for this entry.
+        url:      Relative URL to link to (e.g. ``"kjv/index.html"`` for a
+                  whole document, or ``"kjv/gen/gen-1.html"`` for a specific
+                  division).
+        doc_slug: Slug of the parent document; used by the chapter sidebar to
+                  detect the currently-active document.
+        work_id:  Source work identifier, shown as metadata.
+        subtitle: Short descriptive line shown beneath the title (e.g.
+                  ``"3 divisions"`` or ``"12 chapters"``).
+    """
+
+    title: str
+    url: str
+    doc_slug: str
+    work_id: str
+    subtitle: str
 
 
 def _load_collections(path: Path | None = None) -> list[CollectionConfig]:
     """Load collection definitions from a JSON file.
 
-    Each entry in the JSON array must have a ``"name"`` string and a
-    ``"work_ids"`` array of strings.  Work IDs are matched
-    case-insensitively against each document's ``work_id``.
+    Each entry in the JSON array must have a ``"name"`` string and may
+    include a ``"work_ids"`` array of strings and/or an ``"osis_ids"`` array
+    of strings.  Work IDs are matched case-insensitively against each
+    document's ``work_id`` (selecting the whole document).  OSIS IDs are
+    matched case-insensitively against each division's ``div_id`` (selecting
+    individual books or other top-level divisions).
 
     Args:
         path: Path to a JSON collections file.  If *None*, the default
               ``collections.json`` bundled with the package is used.
 
     Returns:
-        An ordered list of ``(collection_name, ordered_work_ids)`` tuples.
+        An ordered list of :class:`CollectionConfig` objects.
     """
     resolved = path if path is not None else _DEFAULT_COLLECTIONS_PATH
     raw: list[dict] = json.loads(resolved.read_text(encoding="utf-8"))
-    return [(entry["name"], tuple(entry["work_ids"])) for entry in raw]
+    return [
+        CollectionConfig(
+            name=entry["name"],
+            work_ids=tuple(entry.get("work_ids", [])),
+            osis_ids=tuple(entry.get("osis_ids", [])),
+        )
+        for entry in raw
+    ]
 
 
 def _group_into_collections(
@@ -67,10 +117,11 @@ def _group_into_collections(
 ) -> list[dict[str, object]]:
     """Organize *documents* into named collections for the library index.
 
-    A document may appear in **more than one** collection if the admin
-    configures overlapping ``work_ids`` lists.  Documents whose ``work_id``
-    (case-insensitive) does not match any collection are placed under a final
-    ``"Other"`` group.
+    An entry may appear in **more than one** collection if the admin
+    configures overlapping ``work_ids`` or ``osis_ids`` lists.  Documents
+    whose ``work_id`` does not match any collection, and whose divisions are
+    not referenced by ``osis_ids`` in any collection, are placed under a
+    final ``"Other"`` group.
 
     Args:
         documents:   All parsed documents to group.
@@ -78,36 +129,93 @@ def _group_into_collections(
 
     Returns:
         A list of dicts, each with ``"name"`` (str) and ``"documents"``
-        (list[DocumentData]), suitable for use in the index template.
+        (list[:class:`CollectionEntry`]), suitable for use in the index and
+        chapter templates.
     """
     docs_by_work_id: dict[str, list[DocumentData]] = {}
     for doc in documents:
         docs_by_work_id.setdefault(doc.work_id.upper(), []).append(doc)
 
-    # Track which docs appear in at least one named collection so we can
-    # compute the "Other" fallback.  Documents are NOT excluded from later
+    # Build a flat index from OSIS division ID → [(DocumentData, DivisionData)]
+    # so that ``osis_ids`` in a collection can resolve to specific books.
+    divs_by_osis_id: dict[str, list[tuple[DocumentData, DivisionData]]] = {}
+    for doc in documents:
+        for div in doc.divisions:
+            if div.div_id and div.div_id != "unknown":
+                divs_by_osis_id.setdefault(div.div_id.upper(), []).append((doc, div))
+
+    # Track which document slugs appear in at least one named collection so we
+    # can compute the "Other" fallback.  Documents are NOT excluded from later
     # collections even after being added to an earlier one.
-    seen_in_any: set[str] = set()
+    seen_doc_slugs: set[str] = set()
     result: list[dict[str, object]] = []
 
-    for name, work_ids in collections:
-        matches: list[DocumentData] = []
-        seen_in_collection: set[str] = set()
-        for work_id in work_ids:
-            normalized_work_id = work_id.upper()
-            if normalized_work_id in seen_in_collection:
-                continue
+    for config in collections:
+        matches: list[CollectionEntry] = []
+        seen_work_ids: set[str] = set()
+        seen_osis_ids: set[str] = set()
 
-            seen_in_collection.add(normalized_work_id)
-            matches.extend(docs_by_work_id.get(normalized_work_id, []))
+        # --- work_ids: match entire documents ---
+        for work_id in config.work_ids:
+            normalized = work_id.upper()
+            if normalized in seen_work_ids:
+                continue
+            seen_work_ids.add(normalized)
+            for doc in docs_by_work_id.get(normalized, []):
+                n_divs = len(doc.divisions)
+                matches.append(
+                    CollectionEntry(
+                        title=doc.title,
+                        url=f"{doc.slug}/index.html",
+                        doc_slug=doc.slug,
+                        work_id=doc.work_id,
+                        subtitle=f"{n_divs} division{'s' if n_divs != 1 else ''}",
+                    )
+                )
+
+        # --- osis_ids: match individual divisions (books) ---
+        for osis_id in config.osis_ids:
+            normalized = osis_id.upper()
+            if normalized in seen_osis_ids:
+                continue
+            seen_osis_ids.add(normalized)
+            for doc, div in divs_by_osis_id.get(normalized, []):
+                if div.chapters:
+                    url = f"{doc.slug}/{div.slug}/{div.chapters[0].slug}.html"
+                else:
+                    url = f"{doc.slug}/index.html"
+                n_chapters = len(div.chapters)
+                title = div.short_title if div.short_title else div.title
+                matches.append(
+                    CollectionEntry(
+                        title=title,
+                        url=url,
+                        doc_slug=doc.slug,
+                        work_id=doc.work_id,
+                        subtitle=f"{n_chapters} chapter{'s' if n_chapters != 1 else ''}",
+                    )
+                )
 
         if matches:
-            result.append({"name": name, "documents": matches})
-            seen_in_any.update(doc.work_id.upper() for doc in matches)
+            result.append({"name": config.name, "documents": matches})
+            seen_doc_slugs.update(entry.doc_slug for entry in matches)
 
-    other = [doc for doc in documents if doc.work_id.upper() not in seen_in_any]
-    if other:
-        result.append({"name": "Other", "documents": other})
+    # Build the "Other" group from documents not yet represented anywhere.
+    other_entries: list[CollectionEntry] = []
+    for doc in documents:
+        if doc.slug not in seen_doc_slugs:
+            n_divs = len(doc.divisions)
+            other_entries.append(
+                CollectionEntry(
+                    title=doc.title,
+                    url=f"{doc.slug}/index.html",
+                    doc_slug=doc.slug,
+                    work_id=doc.work_id,
+                    subtitle=f"{n_divs} division{'s' if n_divs != 1 else ''}",
+                )
+            )
+    if other_entries:
+        result.append({"name": "Other", "documents": other_entries})
 
     return result
 

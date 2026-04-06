@@ -17,11 +17,11 @@
       <details class="nav-collection">
         <summary class="nav-collection-title">{{ collection.name }}</summary>
         <ul class="nav-list">
-          {% for doc in collection.documents %}
+          {% for entry in collection.documents %}
           <li>
-            <a href="{{ '../../' }}{{ doc.slug }}/index.html"
-               {% if doc.slug == current_doc.slug %}class="active"{% endif %}>
-              {{ doc.title }}
+            <a href="{{ '../../' }}{{ entry.url }}"
+               {% if entry.doc_slug == current_doc.slug %}class="active"{% endif %}>
+              {{ entry.title }}
             </a>
           </li>
           {% endfor %}
