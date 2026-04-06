@@ -50,7 +50,7 @@
   }
 
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") closeNav();
+    if (e.key === "Escape" && sidebar.classList.contains("is-open")) closeNav();
   });
 
   // Close the drawer when the user follows a nav link (navigating away).
