@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The New Testament – Open Canon</title>
+  <link rel="stylesheet" href="../../static/style.css" />
+  <script src="../../static/theme.js"></script>
+  
+</head>
+<body>
+
+<header class="site-header">
+  <h1><a href="../../index.html">Open Canon</a></h1>
+  <span class="header-spacer"></span>
+  
+<button id="nav-toggle" class="nav-toggle" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+</header>
+
+
+<div class="page-shell">
+
+  
+  <nav class="sidebar-nav" aria-label="Document navigation">
+
+    
+    <details class="nav-section" open>
+      <summary class="nav-section-title">Library</summary>
+      
+      <details class="nav-collection">
+        <summary class="nav-collection-title">Standard Works</summary>
+        <ul class="nav-list">
+          
+          <li>
+            <a href="../../ot/index.html"
+               >
+              The Old Testament
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../nt/index.html"
+               class="active">
+              The New Testament
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../bom/index.html"
+               >
+              The Book of Mormon
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../dc/index.html"
+               >
+              The Doctrine and Covenants
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../pgp/index.html"
+               >
+              The Pearl of Great Price
+            </a>
+          </li>
+          
+        </ul>
+      </details>
+      
+      <details class="nav-collection">
+        <summary class="nav-collection-title">Apocrypha/Deuterocanon</summary>
+        <ul class="nav-list">
+          
+          <li>
+            <a href="../../kjv-apocrypha/1esd/1esd-1.html"
+               >
+              1 Esdras
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../kjv-apocrypha/2esd/2esd-1.html"
+               >
+              2 Esdras
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../kjv-apocrypha/tob/tob-1.html"
+               >
+              Tobit
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../kjv-apocrypha/jdt/jdt-1.html"
+               >
+              Judith
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../kjv-apocrypha/addesth/addesth-10.html"
+               >
+              Additions to Esther
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../kjv-apocrypha/wis/wis-1.html"
+               >
+              Wisdom of Solomon
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../kjv-apocrypha/sir/sir-1.html"
+               >
+              Ecclesiasticus (Wisdom of Sirach)
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../kjv-apocrypha/bar/bar-1.html"
+               >
+              Baruch
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../kjv-apocrypha/prazar/prazar-1.html"
+               >
+              Prayer of Azariah
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../kjv-apocrypha/sus/sus-1.html"
+               >
+              Susanna
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../kjv-apocrypha/bel/bel-1.html"
+               >
+              Bel and the Dragon
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../kjv-apocrypha/prman/prman-1.html"
+               >
+              Prayer of Manasseh
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../kjv-apocrypha/1macc/1macc-1.html"
+               >
+              1 Maccabees
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../kjv-apocrypha/2macc/2macc-1.html"
+               >
+              2 Maccabees
+            </a>
+          </li>
+          
+        </ul>
+      </details>
+      
+      <details class="nav-collection">
+        <summary class="nav-collection-title">Enochian Literature</summary>
+        <ul class="nav-list">
+          
+          <li>
+            <a href="../../1en/index.html"
+               >
+              The Book of Enoch
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../2en/index.html"
+               >
+              The Book of the Secrets of Enoch
+            </a>
+          </li>
+          
+        </ul>
+      </details>
+      
+      <details class="nav-collection">
+        <summary class="nav-collection-title">Adam and Eve Literature</summary>
+        <ul class="nav-list">
+          
+          <li>
+            <a href="../../vita-adae-et-evae/index.html"
+               >
+              Vita Adae et Evae
+            </a>
+          </li>
+          
+        </ul>
+      </details>
+      
+      <details class="nav-collection">
+        <summary class="nav-collection-title">Other</summary>
+        <ul class="nav-list">
+          
+          <li>
+            <a href="../../4macc/index.html"
+               >
+              Fourth Book of Maccabees
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../adam-and-eve/index.html"
+               >
+              The First and Second Books of Adam and Eve
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../jub/index.html"
+               >
+              The Book of Jubilees
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../letter-of-aristeas/index.html"
+               >
+              The Letter of Aristeas
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../odes-of-solomon/index.html"
+               >
+              The Odes of Solomon
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../psalms-of-solomon/index.html"
+               >
+              The Psalms of Solomon
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../story-of-ahikar/index.html"
+               >
+              The Story of Ahikar
+            </a>
+          </li>
+          
+          <li>
+            <a href="../../t12patr/index.html"
+               >
+              The Testaments of the Twelve Patriarchs
+            </a>
+          </li>
+          
+        </ul>
+      </details>
+      
+    </details>
+
+    
+    
+    <div class="nav-section">
+      <p class="nav-section-title">The New Testament</p>
+      <ul class="nav-list">
+        
+        <li>
+          <a href="../../nt/matthew/matthew-1.html"
+             >
+            Matthew
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/mark/mark-1.html"
+             >
+            Mark
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/luke/luke-1.html"
+             >
+            Luke
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/john/john-1.html"
+             >
+            John
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/acts/acts-1.html"
+             >
+            Acts
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/romans/romans-1.html"
+             >
+            Romans
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/1-corinthians/1-corinthians-1.html"
+             >
+            1 Corinthians
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/2-corinthians/2-corinthians-1.html"
+             >
+            2 Corinthians
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/galatians/galatians-1.html"
+             >
+            Galatians
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/ephesians/ephesians-1.html"
+             >
+            Ephesians
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/philippians/philippians-1.html"
+             >
+            Philippians
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/colossians/colossians-1.html"
+             >
+            Colossians
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/1-thessalonians/1-thessalonians-1.html"
+             >
+            1 Thessalonians
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/2-thessalonians/2-thessalonians-1.html"
+             >
+            2 Thessalonians
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/1-timothy/1-timothy-1.html"
+             >
+            1 Timothy
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/2-timothy/2-timothy-1.html"
+             class="active">
+            2 Timothy
+          </a>
+          
+          
+          <ul class="nav-chapter-list">
+            
+            <li>
+              <a href="../../nt/2-timothy/2-timothy-1.html"
+                 class="active">
+                Chapter 1
+              </a>
+              
+            </li>
+            
+            <li>
+              <a href="../../nt/2-timothy/2-timothy-2.html"
+                 >
+                Chapter 2
+              </a>
+              
+            </li>
+            
+            <li>
+              <a href="../../nt/2-timothy/2-timothy-3.html"
+                 >
+                Chapter 3
+              </a>
+              
+            </li>
+            
+            <li>
+              <a href="../../nt/2-timothy/2-timothy-4.html"
+                 >
+                Chapter 4
+              </a>
+              
+            </li>
+            
+          </ul>
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/titus/titus-1.html"
+             >
+            Titus
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/philemon/philemon-1.html"
+             >
+            Philemon
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/hebrews/hebrews-1.html"
+             >
+            Hebrews
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/james/james-1.html"
+             >
+            James
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/1-peter/1-peter-1.html"
+             >
+            1 Peter
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/2-peter/2-peter-1.html"
+             >
+            2 Peter
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/1-john/1-john-1.html"
+             >
+            1 John
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/2-john/2-john-1.html"
+             >
+            2 John
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/3-john/3-john-1.html"
+             >
+            3 John
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/jude/jude-1.html"
+             >
+            Jude
+          </a>
+          
+          
+        </li>
+        
+        <li>
+          <a href="../../nt/revelation/revelation-1.html"
+             >
+            Revelation
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </nav>
+
+  
+  <main class="content-main">
+
+    <h2 class="chapter-heading">
+      Timothy — Chapter 1
+    </h2>
+
+    
+      <div class="chapter-summary"><p>Christ brings immortality and eternal life through the gospel—Be strong in the faith.</p></div>
+    
+
+    
+
+    
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.1"
+           data-verse="2 Timothy.1.1">
+        <span class="verse-number">1</span>
+        <span class="verse-text">Paul, an apostle of Jesus Christ by the will of God, according to the <sup class="note-marker" data-note="nt-n7772"><a href="#note-nt-n7772">a</a></sup>promise of life which is in Christ Jesus,</span>
+      </div>
+      
+      <div class="verse"
+           id="v-2 Timothy.1.2"
+           data-verse="2 Timothy.1.2">
+        <span class="verse-number">2</span>
+        <span class="verse-text">To Timothy, <em class="transchange">my</em> dearly beloved son: Grace, mercy, <em class="transchange">and</em> peace, from God the Father and Christ Jesus our Lord.</span>
+      </div>
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.3"
+           data-verse="2 Timothy.1.3">
+        <span class="verse-number">3</span>
+        <span class="verse-text">I thank God, whom I serve from <em class="transchange">my</em> forefathers with pure <sup class="note-marker" data-note="nt-n7773"><a href="#note-nt-n7773">a</a></sup>conscience, that without ceasing I have remembrance of thee in my prayers night and day;</span>
+      </div>
+      
+      <div class="verse"
+           id="v-2 Timothy.1.4"
+           data-verse="2 Timothy.1.4">
+        <span class="verse-number">4</span>
+        <span class="verse-text">Greatly desiring to see thee, being mindful of thy tears, that I may be filled with joy;</span>
+      </div>
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.5"
+           data-verse="2 Timothy.1.5">
+        <span class="verse-number">5</span>
+        <span class="verse-text">When I call to remembrance the unfeigned faith that is in thee, which dwelt first in thy grandmother Lois, and thy mother <sup class="note-marker" data-note="nt-n7774"><a href="#note-nt-n7774">a</a></sup>Eunice; and I am persuaded that in thee also.</span>
+      </div>
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.6"
+           data-verse="2 Timothy.1.6">
+        <span class="verse-number">6</span>
+        <span class="verse-text">Wherefore I put thee in remembrance that thou <sup class="note-marker" data-note="nt-n7775"><a href="#note-nt-n7775">a</a></sup>stir up the <sup class="note-marker" data-note="nt-n7776"><a href="#note-nt-n7776">b</a></sup>gift of God, which is in thee by the putting on of my <sup class="note-marker" data-note="nt-n7777"><a href="#note-nt-n7777">c</a></sup>hands.</span>
+      </div>
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.7"
+           data-verse="2 Timothy.1.7">
+        <span class="verse-number">7</span>
+        <span class="verse-text">For God hath not given us the spirit of <sup class="note-marker" data-note="nt-n7778"><a href="#note-nt-n7778">a</a></sup>fear; but of <sup class="note-marker" data-note="nt-n7779"><a href="#note-nt-n7779">b</a></sup>power, and of <sup class="note-marker" data-note="nt-n7780"><a href="#note-nt-n7780">c</a></sup>love, and of a sound mind.</span>
+      </div>
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.8"
+           data-verse="2 Timothy.1.8">
+        <span class="verse-number">8</span>
+        <span class="verse-text">Be not thou therefore <sup class="note-marker" data-note="nt-n7781"><a href="#note-nt-n7781">a</a></sup>ashamed of the <sup class="note-marker" data-note="nt-n7782"><a href="#note-nt-n7782">b</a></sup>testimony of our Lord, nor of me his prisoner: but be thou partaker of the afflictions of the gospel according to the power of God;</span>
+      </div>
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.9"
+           data-verse="2 Timothy.1.9">
+        <span class="verse-number">9</span>
+        <span class="verse-text">Who hath saved us, and called <em class="transchange">us</em> with an holy <sup class="note-marker" data-note="nt-n7783"><a href="#note-nt-n7783">a</a></sup>calling, not according to our works, but according to his own purpose and <sup class="note-marker" data-note="nt-n7784"><a href="#note-nt-n7784">b</a></sup>grace, which was given us in Christ Jesus before the world began,</span>
+      </div>
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.10"
+           data-verse="2 Timothy.1.10">
+        <span class="verse-number">10</span>
+        <span class="verse-text">But is now made <sup class="note-marker" data-note="nt-n7785"><a href="#note-nt-n7785">a</a></sup>manifest by the appearing of our Saviour Jesus Christ, who hath abolished <sup class="note-marker" data-note="nt-n7786"><a href="#note-nt-n7786">b</a></sup>death, and hath brought <sup class="note-marker" data-note="nt-n7787"><a href="#note-nt-n7787">c</a></sup>life and <sup class="note-marker" data-note="nt-n7788"><a href="#note-nt-n7788">d</a></sup>immortality to light through the gospel:</span>
+      </div>
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.11"
+           data-verse="2 Timothy.1.11">
+        <span class="verse-number">11</span>
+        <span class="verse-text">Whereunto I am <sup class="note-marker" data-note="nt-n7789"><a href="#note-nt-n7789">a</a></sup>appointed a preacher, and an <sup class="note-marker" data-note="nt-n7790"><a href="#note-nt-n7790">b</a></sup>apostle, and a teacher of the Gentiles.</span>
+      </div>
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.12"
+           data-verse="2 Timothy.1.12">
+        <span class="verse-number">12</span>
+        <span class="verse-text">For the which cause I also suffer these things: nevertheless I am not <sup class="note-marker" data-note="nt-n7791"><a href="#note-nt-n7791">a</a></sup>ashamed: for I know whom I have believed, and am persuaded that he is able to keep that which I have committed unto him against that day.</span>
+      </div>
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.13"
+           data-verse="2 Timothy.1.13">
+        <span class="verse-number">13</span>
+        <span class="verse-text">Hold fast the <sup class="note-marker" data-note="nt-n7792"><a href="#note-nt-n7792">a</a></sup>form of <sup class="note-marker" data-note="nt-n7793"><a href="#note-nt-n7793">b</a></sup>sound words, which thou hast heard of me, in faith and love which is in Christ Jesus.</span>
+      </div>
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.14"
+           data-verse="2 Timothy.1.14">
+        <span class="verse-number">14</span>
+        <span class="verse-text">That good thing which was committed unto thee keep by the Holy Ghost which <sup class="note-marker" data-note="nt-n7794"><a href="#note-nt-n7794">a</a></sup>dwelleth in us.</span>
+      </div>
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.15"
+           data-verse="2 Timothy.1.15">
+        <span class="verse-number">15</span>
+        <span class="verse-text">This thou knowest, that all they which are in Asia be <sup class="note-marker" data-note="nt-n7795"><a href="#note-nt-n7795">a</a></sup>turned away from me; of whom are Phygellus and Hermogenes.</span>
+      </div>
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.16"
+           data-verse="2 Timothy.1.16">
+        <span class="verse-number">16</span>
+        <span class="verse-text">The Lord give mercy unto the house of Onesiphorus; for he oft <sup class="note-marker" data-note="nt-n7796"><a href="#note-nt-n7796">a</a></sup>refreshed me, and was not ashamed of my chain:</span>
+      </div>
+      
+      <div class="verse"
+           id="v-2 Timothy.1.17"
+           data-verse="2 Timothy.1.17">
+        <span class="verse-number">17</span>
+        <span class="verse-text">But, when he was in Rome, he sought me out very diligently, and found <em class="transchange">me.</em></span>
+      </div>
+      
+      <div class="verse has-notes"
+           id="v-2 Timothy.1.18"
+           data-verse="2 Timothy.1.18">
+        <span class="verse-number">18</span>
+        <span class="verse-text">The Lord grant unto him that he may find <sup class="note-marker" data-note="nt-n7797"><a href="#note-nt-n7797">a</a></sup>mercy of the Lord in that day: and in how many things he ministered unto me at Ephesus, thou knowest very well.</span>
+      </div>
+      
+    
+
+    
+    <nav class="chapter-nav" aria-label="Chapter navigation">
+      
+        <a href="../../nt/1-timothy/1-timothy-6.html">&larr; Previous chapter</a>
+      
+      
+        <a href="../../nt/2-timothy/2-timothy-2.html">Next chapter &rarr;</a>
+      
+    </nav>
+
+  </main>
+
+  
+  <aside class="notes-tray" aria-label="Notes">
+    <div class="notes-tray-header">Notes</div>
+    <div class="notes-tray-inner" id="notes-tray-inner">
+      
+        
+        <div class="note-item"
+             id="note-nt-n7772"
+             data-verse="2 Timothy.1.1">
+          <div class="note-verse-ref">2 Timothy.1.1</div>
+          <div class="note-text">Titus 1:2.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7773"
+             data-verse="2 Timothy.1.3">
+          <div class="note-verse-ref">2 Timothy.1.3</div>
+          <div class="note-text">TG Conscience.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7774"
+             data-verse="2 Timothy.1.5">
+          <div class="note-verse-ref">2 Timothy.1.5</div>
+          <div class="note-text">Acts 16:1.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7775"
+             data-verse="2 Timothy.1.6">
+          <div class="note-verse-ref">2 Timothy.1.6</div>
+          <div class="note-text">GR rekindle, revive. TG Priesthood, Magnifying Callings within.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7776"
+             data-verse="2 Timothy.1.6">
+          <div class="note-verse-ref">2 Timothy.1.6</div>
+          <div class="note-text">1 Tim. 1:18; D&amp;C 8:4. TG Holy Ghost, Gifts of.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7777"
+             data-verse="2 Timothy.1.6">
+          <div class="note-verse-ref">2 Timothy.1.6</div>
+          <div class="note-text">TG Hands, Laying on of.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7778"
+             data-verse="2 Timothy.1.7">
+          <div class="note-verse-ref">2 Timothy.1.7</div>
+          <div class="note-text">TG Courage; Fearful.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7779"
+             data-verse="2 Timothy.1.7">
+          <div class="note-verse-ref">2 Timothy.1.7</div>
+          <div class="note-text">Acts 1:8.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7780"
+             data-verse="2 Timothy.1.7">
+          <div class="note-verse-ref">2 Timothy.1.7</div>
+          <div class="note-text">TG Love.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7781"
+             data-verse="2 Timothy.1.8">
+          <div class="note-verse-ref">2 Timothy.1.8</div>
+          <div class="note-text">TG Shame.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7782"
+             data-verse="2 Timothy.1.8">
+          <div class="note-verse-ref">2 Timothy.1.8</div>
+          <div class="note-text">TG Testimony.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7783"
+             data-verse="2 Timothy.1.9">
+          <div class="note-verse-ref">2 Timothy.1.9</div>
+          <div class="note-text">TG Foreordination.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7784"
+             data-verse="2 Timothy.1.9">
+          <div class="note-verse-ref">2 Timothy.1.9</div>
+          <div class="note-text">TG Grace.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7785"
+             data-verse="2 Timothy.1.10">
+          <div class="note-verse-ref">2 Timothy.1.10</div>
+          <div class="note-text">Col. 1:26.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7786"
+             data-verse="2 Timothy.1.10">
+          <div class="note-verse-ref">2 Timothy.1.10</div>
+          <div class="note-text">1 Cor. 15:26; Heb. 2:14; Rev. 20:13 (11–15). TG Jesus Christ, Atonement through; Jesus Christ, Death of.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7787"
+             data-verse="2 Timothy.1.10">
+          <div class="note-verse-ref">2 Timothy.1.10</div>
+          <div class="note-text">1 Jn. 5:11 (10–21).</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7788"
+             data-verse="2 Timothy.1.10">
+          <div class="note-verse-ref">2 Timothy.1.10</div>
+          <div class="note-text">TG Immortality.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7789"
+             data-verse="2 Timothy.1.11">
+          <div class="note-verse-ref">2 Timothy.1.11</div>
+          <div class="note-text">1 Thes. 2:4.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7790"
+             data-verse="2 Timothy.1.11">
+          <div class="note-verse-ref">2 Timothy.1.11</div>
+          <div class="note-text">TG Apostles.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7791"
+             data-verse="2 Timothy.1.12">
+          <div class="note-verse-ref">2 Timothy.1.12</div>
+          <div class="note-text">Rom. 1:16.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7792"
+             data-verse="2 Timothy.1.13">
+          <div class="note-verse-ref">2 Timothy.1.13</div>
+          <div class="note-text">GR sketch, model, example.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7793"
+             data-verse="2 Timothy.1.13">
+          <div class="note-verse-ref">2 Timothy.1.13</div>
+          <div class="note-text">GR uncorrupted.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7794"
+             data-verse="2 Timothy.1.14">
+          <div class="note-verse-ref">2 Timothy.1.14</div>
+          <div class="note-text">D&amp;C 130:22.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7795"
+             data-verse="2 Timothy.1.15">
+          <div class="note-verse-ref">2 Timothy.1.15</div>
+          <div class="note-text">TG Apostasy of the Early Christian Church.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7796"
+             data-verse="2 Timothy.1.16">
+          <div class="note-verse-ref">2 Timothy.1.16</div>
+          <div class="note-text">TG Hospitality.</div>
+        </div>
+        
+        <div class="note-item"
+             id="note-nt-n7797"
+             data-verse="2 Timothy.1.18">
+          <div class="note-verse-ref">2 Timothy.1.18</div>
+          <div class="note-text">TG God, Mercy of.</div>
+        </div>
+        
+      
+    </div>
+  </aside>
+
+</div>
+
+<div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+
+<script src="../../static/notes-sync.js"></script>
+<script src="../../static/nav.js"></script>
+
+
+
+<footer class="site-footer">
+  <span>Open Canon v1.8.0</span>
+  <a href="changelog.html" class="footer-changelog-link">Changelog</a>
+  <a href="https://github.com/open-canon/open-canon-site" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" class="footer-github-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" class="footer-github-icon"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg></a>
+</footer>
+
+
+</body>
+</html>
