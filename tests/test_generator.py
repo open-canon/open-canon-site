@@ -42,6 +42,7 @@ def test_chapter_page_has_mobile_nav_toggle(output_dir):
     assert 'id="nav-toggle"' in html
     assert 'class="nav-toggle"' in html
     assert 'id="nav-overlay"' in html
+    assert 'id="note-popup"' in html
 
 
 def test_index_page_has_no_mobile_nav_toggle(output_dir):
