@@ -11,6 +11,9 @@
 <body>
 
 <header class="site-header">
+  
+<button id="nav-toggle" class="nav-toggle" aria-label="Open navigation" aria-expanded="false">&#9776;</button>
+
   <h1><a href="../../index.html">Open Canon</a></h1>
   <span class="header-spacer"></span>
   <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
@@ -1273,7 +1276,18 @@
 
 </div>
 
+<div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+
+<div class="note-popup" id="note-popup" aria-hidden="true" role="dialog" aria-label="Note">
+  <div class="note-popup-header">
+    <span class="note-popup-ref" id="note-popup-ref"></span>
+    <button class="note-popup-close" id="note-popup-close" aria-label="Close note">&#x2715;</button>
+  </div>
+  <div class="note-popup-text" id="note-popup-text"></div>
+</div>
+
 <script src="../../static/notes-sync.js"></script>
+<script src="../../static/nav.js"></script>
 
 
 
