@@ -1,8 +1,8 @@
-import io
-import zipfile
-import xml.etree.ElementTree as ET
-import pathlib
 import datetime
+import io
+import pathlib
+import xml.etree.ElementTree as ET
+import zipfile
 
 import httpx
 import pyosis
@@ -68,10 +68,12 @@ def parse_books(xml_bytes: bytes) -> dict[str, pyosis.DivCt]:
                 )
                 for verse_num, text in sorted(raw[book_code][chapter_num])
             ]
-            chapters.append(pyosis.ChapterCt(
-                osis_id=[f"{osis_id}.{chapter_num}"],
-                content=verses,
-            ))
+            chapters.append(
+                pyosis.ChapterCt(
+                    osis_id=[f"{osis_id}.{chapter_num}"],
+                    content=verses,
+                )
+            )
 
         books[book_code] = pyosis.DivCt(
             osis_id=[osis_id],
@@ -93,15 +95,9 @@ def books_to_osis_xml(books: list[pyosis.DivCt]) -> pyosis.OsisXML:
                     work=[
                         pyosis.WorkCt(
                             osis_work="King James Version Apocrypha",
-                            title=[
-                                pyosis.TitleCt(
-                                    content=["King James Version--Apocrypha"]
-                                )
-                            ],
+                            title=[pyosis.TitleCt(content=["King James Version--Apocrypha"])],
                             type_value=[
-                                pyosis.TypeCt(
-                                    type_value=pyosis.OsisType.OSIS, value="Bible"
-                                )
+                                pyosis.TypeCt(type_value=pyosis.OsisType.OSIS, value="Bible")
                             ],
                         )
                     ],
@@ -109,11 +105,7 @@ def books_to_osis_xml(books: list[pyosis.DivCt]) -> pyosis.OsisXML:
                         pyosis.RevisionDescCt(
                             date=pyosis.DateCt(
                                 event=pyosis.OsisEvents.EVERSION,
-                                content=[
-                                    datetime.datetime.now().strftime(
-                                        "%Y.%m.%dT%H:%M:%S"
-                                    )
-                                ],
+                                content=[datetime.datetime.now().strftime("%Y.%m.%dT%H:%M:%S")],
                                 lang="en",
                             ),
                             p=[
