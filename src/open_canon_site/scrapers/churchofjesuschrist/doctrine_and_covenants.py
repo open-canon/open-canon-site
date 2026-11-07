@@ -8,7 +8,6 @@ import bs4.element
 import httpx
 import pyosis.generated
 import pyosis.serialization
-
 from churchstudy_to_osis import church_website_models
 from churchstudy_to_osis.build_osis import build_chapter, clean_up_html, extract_markup
 
@@ -52,7 +51,9 @@ async def _build_dc_front_matter_div(
     if title_tag:
         osis_contents.append(
             pyosis.generated.HeadCt(
-                content=extract_markup(title_tag, scripture_content.content.footnotes, no_container=True)
+                content=extract_markup(
+                    title_tag, scripture_content.content.footnotes, no_container=True
+                )
             )
         )
         title_tag.extract()
@@ -97,7 +98,10 @@ async def _build_dc_front_matter_div(
         if closing_signatures_tags:
             osis_contents.append(
                 pyosis.generated.SignedCt(
-                    content=[pyosis.generated.NameCt(content=[p.get_text()]) for p in closing_signatures_tags]
+                    content=[
+                        pyosis.generated.NameCt(content=[p.get_text()])
+                        for p in closing_signatures_tags
+                    ]
                 )
             )
 
@@ -112,7 +116,9 @@ async def _build_dc_front_matter_div(
     )
 
 
-async def build_doctrine_and_covenants_front_matter(lang: str, client: httpx.AsyncClient) -> pyosis.generated.DivCt:
+async def build_doctrine_and_covenants_front_matter(
+    lang: str, client: httpx.AsyncClient
+) -> pyosis.generated.DivCt:
     """Asynchronously builds the front matter section for the Doctrine and Covenants in OSIS format.
 
     Gathers the introductory front matter content and assembles it into a single OSIS DivCt front
@@ -148,7 +154,9 @@ async def build_doctrine_and_covenants_front_matter(lang: str, client: httpx.Asy
     )
 
 
-async def _build_official_declaration(lang: str, od_number: int, client: httpx.AsyncClient) -> pyosis.generated.DivCt:
+async def _build_official_declaration(
+    lang: str, od_number: int, client: httpx.AsyncClient
+) -> pyosis.generated.DivCt:
     """Asynchronously builds an OSIS division for a single Official Declaration.
 
     Fetches the content of the specified Official Declaration from the church website, builds the
@@ -165,7 +173,9 @@ async def _build_official_declaration(lang: str, od_number: int, client: httpx.A
     scripture_content = await church_website_models.get_scripture_content(
         lang, "DoctrineAndCovenants", book=None, chapter=od_number, client=client, book_uri="od"
     )
-    osis_chapter, front_matter = build_chapter(scripture_content, book_osis_id="OD", chapter_number=od_number)
+    osis_chapter, front_matter = build_chapter(
+        scripture_content, book_osis_id="OD", chapter_number=od_number
+    )
     chapter_content: list[object] = list(front_matter) if front_matter else []
     chapter_content.append(osis_chapter)
     return pyosis.generated.DivCt(
@@ -176,7 +186,9 @@ async def _build_official_declaration(lang: str, od_number: int, client: httpx.A
     )
 
 
-async def build_doctrine_and_covenants_sections(lang: str, client: httpx.AsyncClient) -> pyosis.generated.DivCt:
+async def build_doctrine_and_covenants_sections(
+    lang: str, client: httpx.AsyncClient
+) -> pyosis.generated.DivCt:
     """Asynchronously builds the main body of the Doctrine and Covenants (sections 1-138).
 
     Fetches all sections concurrently, builds OSIS chapter elements for each, and assembles them
@@ -190,16 +202,20 @@ async def build_doctrine_and_covenants_sections(lang: str, client: httpx.AsyncCl
         An OSIS DivCt object representing the complete Doctrine and Covenants text.
     """
     section_nums = list(range(1, DC_SECTION_COUNT + 1))
-    section_contents = await asyncio.gather(*[
-        church_website_models.get_scripture_content(
-            lang, "DoctrineAndCovenants", "Doctrine and Covenants", section_num, client
-        )
-        for section_num in section_nums
-    ])
+    section_contents = await asyncio.gather(
+        *[
+            church_website_models.get_scripture_content(
+                lang, "DoctrineAndCovenants", "Doctrine and Covenants", section_num, client
+            )
+            for section_num in section_nums
+        ]
+    )
 
     osis_chapters: list[object] = []
     for section_num, section_content in zip(section_nums, section_contents):
-        osis_chapter, front_matter = build_chapter(section_content, book_osis_id="DC", chapter_number=section_num)
+        osis_chapter, front_matter = build_chapter(
+            section_content, book_osis_id="DC", chapter_number=section_num
+        )
         if front_matter:
             osis_chapters.extend(front_matter)
         osis_chapters.append(osis_chapter)
@@ -212,7 +228,9 @@ async def build_doctrine_and_covenants_sections(lang: str, client: httpx.AsyncCl
     )
 
 
-async def build_doctrine_and_covenants_header(lang: str, client: httpx.AsyncClient) -> pyosis.generated.HeaderCt:
+async def build_doctrine_and_covenants_header(
+    lang: str, client: httpx.AsyncClient
+) -> pyosis.generated.HeaderCt:
     """Asynchronously builds the OSIS header for the Doctrine and Covenants.
 
     Fetches the introduction page to extract edition and copyright metadata, then constructs a
@@ -226,7 +244,12 @@ async def build_doctrine_and_covenants_header(lang: str, client: httpx.AsyncClie
         An OSIS HeaderCt object populated with metadata for the Doctrine and Covenants.
     """
     scripture_content = await church_website_models.get_scripture_content(
-        lang, "DoctrineAndCovenants", book=None, chapter=None, client=client, book_uri="introduction"
+        lang,
+        "DoctrineAndCovenants",
+        book=None,
+        chapter=None,
+        client=client,
+        book_uri="introduction",
     )
     soup = clean_up_html(bs4.BeautifulSoup(scripture_content.content.body, "html.parser"))
 
@@ -259,7 +282,9 @@ async def build_doctrine_and_covenants_header(lang: str, client: httpx.AsyncClie
         revision_desc.append(
             pyosis.generated.RevisionDescCt(
                 date=pyosis.generated.DateCt(
-                    event=pyosis.generated.OsisEvents.EDITION, content=[date_str_to_osis_format], lang=lang
+                    event=pyosis.generated.OsisEvents.EDITION,
+                    content=[date_str_to_osis_format],
+                    lang=lang,
                 ),
                 p=[pyosis.generated.PCt(content=[copyright_info])],
             )
@@ -278,14 +303,18 @@ async def build_doctrine_and_covenants_header(lang: str, client: httpx.AsyncClie
                     ),
                 ],
                 contributor=[
-                    pyosis.generated.ContributorCt(role=pyosis.generated.OsisRoles.COM, value="Joseph Smith, Jr."),
+                    pyosis.generated.ContributorCt(
+                        role=pyosis.generated.OsisRoles.COM, value="Joseph Smith, Jr."
+                    ),
                 ],
             )
         ],
     )
 
 
-async def build_doctrine_and_covenants(lang: str, client: httpx.AsyncClient) -> pyosis.serialization.OsisXML:
+async def build_doctrine_and_covenants(
+    lang: str, client: httpx.AsyncClient
+) -> pyosis.serialization.OsisXML:
     """Asynchronously builds the OSIS XML representation of the Doctrine and Covenants.
 
     Gathers the front matter, all 138 sections, both Official Declarations, and the header
@@ -303,9 +332,9 @@ async def build_doctrine_and_covenants(lang: str, client: httpx.AsyncClient) -> 
         build_doctrine_and_covenants_sections(lang, client),
         build_doctrine_and_covenants_header(lang, client),
     )
-    od_divs = await asyncio.gather(*[
-        _build_official_declaration(lang, od_num, client) for od_num in range(1, OD_COUNT + 1)
-    ])
+    od_divs = await asyncio.gather(
+        *[_build_official_declaration(lang, od_num, client) for od_num in range(1, OD_COUNT + 1)]
+    )
 
     return pyosis.serialization.OsisXML(
         osis=pyosis.generated.Osis(

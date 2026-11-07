@@ -9,7 +9,6 @@ import httpx
 import pyosis.generated
 import pyosis.serialization
 import tqdm.auto
-
 from churchstudy_to_osis import church_website_models
 from churchstudy_to_osis.build_osis import build_book, clean_up_html, extract_markup
 
@@ -44,7 +43,9 @@ async def _build_pgp_front_matter_div(
     if title_tag:
         osis_contents.append(
             pyosis.generated.HeadCt(
-                content=extract_markup(title_tag, scripture_content.content.footnotes, no_container=True)
+                content=extract_markup(
+                    title_tag, scripture_content.content.footnotes, no_container=True
+                )
             )
         )
         title_tag.extract()
@@ -83,7 +84,9 @@ async def _build_pgp_front_matter_div(
     )
 
 
-async def build_pearl_of_great_price_front_matter(lang: str, client: httpx.AsyncClient) -> pyosis.generated.DivCt:
+async def build_pearl_of_great_price_front_matter(
+    lang: str, client: httpx.AsyncClient
+) -> pyosis.generated.DivCt:
     """Build the front matter section for the Pearl of Great Price in OSIS format.
 
     Args:
@@ -107,7 +110,9 @@ async def build_pearl_of_great_price_front_matter(lang: str, client: httpx.Async
     )
 
 
-def build_pearl_of_great_price_header(lang: str, client: httpx.AsyncClient) -> pyosis.generated.HeaderCt:
+def build_pearl_of_great_price_header(
+    lang: str, client: httpx.AsyncClient
+) -> pyosis.generated.HeaderCt:
     """Build the OSIS header for the Pearl of Great Price.
 
     Constructs a header object in OSIS format containing revision descriptions and work metadata
@@ -171,7 +176,12 @@ async def _build_abraham_facsimile_div(
         A canonical OSIS DivCt appendix representing the facsimile.
     """
     scripture_content = await church_website_models.get_scripture_content(
-        lang, "PearlOfGreatPrice", book=None, chapter=None, client=client, book_uri=f"abr/fac-{fac_num}"
+        lang,
+        "PearlOfGreatPrice",
+        book=None,
+        chapter=None,
+        client=client,
+        book_uri=f"abr/fac-{fac_num}",
     )
     soup = clean_up_html(bs4.BeautifulSoup(scripture_content.content.body, "html.parser"))
 
@@ -181,7 +191,9 @@ async def _build_abraham_facsimile_div(
     if title_tag:
         osis_contents.append(
             pyosis.generated.HeadCt(
-                content=extract_markup(title_tag, scripture_content.content.footnotes, no_container=True)
+                content=extract_markup(
+                    title_tag, scripture_content.content.footnotes, no_container=True
+                )
             )
         )
         title_tag.extract()
@@ -207,7 +219,9 @@ async def _build_abraham_facsimile_div(
     )
 
 
-async def _build_abraham_with_facsimiles(lang: str, client: httpx.AsyncClient) -> pyosis.generated.DivCt:
+async def _build_abraham_with_facsimiles(
+    lang: str, client: httpx.AsyncClient
+) -> pyosis.generated.DivCt:
     """Build the Book of Abraham including its three facsimiles as canonical appendices.
 
     Args:
@@ -226,7 +240,9 @@ async def _build_abraham_with_facsimiles(lang: str, client: httpx.AsyncClient) -
     return abraham_book
 
 
-async def build_pearl_of_great_price(lang: str, client: httpx.AsyncClient) -> pyosis.serialization.OsisXML:
+async def build_pearl_of_great_price(
+    lang: str, client: httpx.AsyncClient
+) -> pyosis.serialization.OsisXML:
     """Asynchronously builds the OSIS XML representation of the Pearl of Great Price.
 
     Fetches all books of the Pearl of Great Price concurrently and assembles them into a complete

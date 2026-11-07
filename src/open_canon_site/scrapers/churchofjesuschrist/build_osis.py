@@ -10,7 +10,6 @@ import bs4._typing
 import bs4.element
 import httpx
 import pyosis.generated
-
 from churchstudy_to_osis import church_website_models
 
 OneElement: TypeAlias = bs4._typing._OneElement  # pyright: ignore[reportPrivateUsage]
@@ -32,7 +31,13 @@ def clean_up_html(html: bs4.BeautifulSoup) -> bs4.BeautifulSoup:
 
 def extract_footnote(
     tag: bs4.element.Tag, footnotes_dict: dict[str, church_website_models.Footnote]
-) -> list[pyosis.generated.NoteCt | pyosis.generated.ReferenceCt | pyosis.generated.ForeignCt | str | object]:
+) -> list[
+    pyosis.generated.NoteCt
+    | pyosis.generated.ReferenceCt
+    | pyosis.generated.ForeignCt
+    | str
+    | object
+]:
     """Extract a footnote from a BeautifulSoup Tag.
 
     Args:
@@ -59,7 +64,9 @@ def extract_footnote(
 
 
 def extract_markup(
-    tag: OneElement, footnotes_dict: dict[str, church_website_models.Footnote], no_container: bool = False
+    tag: OneElement,
+    footnotes_dict: dict[str, church_website_models.Footnote],
+    no_container: bool = False,
 ) -> list[object]:
     """Extract markup from an BeautifulSoup Tag (i.e. html) and convert it to the equivalent OSIS structures.
 
@@ -160,31 +167,58 @@ def extract_markup(
         return [pyosis.generated.ReferenceCt(canonical=False, content=[tag_text])]
 
     if (
-        tag.name == "span" and ("small-caps" in tag.attrs["class"] or "uppercase" in tag.attrs["class"])
+        tag.name == "span"
+        and ("small-caps" in tag.attrs["class"] or "uppercase" in tag.attrs["class"])
     ) or tag.name == "small":
         # TODO: Figure out a way to determine when small should be small caps or just smaller text.
         # TODO: Figure out a better way to represent <span class="uppercase">Translated by Joseph Smith</span>
-        return [pyosis.generated.HiCt(type_value=pyosis.generated.OsisHi.SMALL_CAPS, content=extract_children(tag))]
+        return [
+            pyosis.generated.HiCt(
+                type_value=pyosis.generated.OsisHi.SMALL_CAPS, content=extract_children(tag)
+            )
+        ]
     if tag.name == "sup":
         if tag.get_text().strip() == "":
             # This is a footnote marker, so we should return an empty string
             return []
-        return [pyosis.generated.HiCt(type_value=pyosis.generated.OsisHi.SUPER, content=extract_children(tag))]
+        return [
+            pyosis.generated.HiCt(
+                type_value=pyosis.generated.OsisHi.SUPER, content=extract_children(tag)
+            )
+        ]
     if tag.name == "sub":
-        return [pyosis.generated.HiCt(type_value=pyosis.generated.OsisHi.SUB, content=extract_children(tag))]
+        return [
+            pyosis.generated.HiCt(
+                type_value=pyosis.generated.OsisHi.SUB, content=extract_children(tag)
+            )
+        ]
     if tag.name == "b":
-        return [pyosis.generated.HiCt(type_value=pyosis.generated.OsisHi.BOLD, content=extract_children(tag))]
+        return [
+            pyosis.generated.HiCt(
+                type_value=pyosis.generated.OsisHi.BOLD, content=extract_children(tag)
+            )
+        ]
     if tag.name == "em":
-        return [pyosis.generated.HiCt(type_value=pyosis.generated.OsisHi.EMPHASIS, content=extract_children(tag))]
+        return [
+            pyosis.generated.HiCt(
+                type_value=pyosis.generated.OsisHi.EMPHASIS, content=extract_children(tag)
+            )
+        ]
     if tag.name == "i":
-        return [pyosis.generated.HiCt(type_value=pyosis.generated.OsisHi.ITALIC, content=extract_children(tag))]
+        return [
+            pyosis.generated.HiCt(
+                type_value=pyosis.generated.OsisHi.ITALIC, content=extract_children(tag)
+            )
+        ]
 
     if tag.name == "span" and "deity-name" in tag.attrs["class"]:
         return [pyosis.generated.DivineNameCt(content=extract_children(tag))]
 
     if tag.name == "span" and "language" in tag.attrs["class"]:
         # TODO: Parse language code
-        return [pyosis.generated.ForeignCt(lang=str(tag.attrs["lang"]), content=extract_children(tag))]
+        return [
+            pyosis.generated.ForeignCt(lang=str(tag.attrs["lang"]), content=extract_children(tag))
+        ]
 
     if tag.name == "span" and "question" in tag.attrs.get("class", []):
         return [pyosis.generated.DivCt(type_value="x-question", content=extract_children(tag))]
@@ -196,7 +230,11 @@ def extract_markup(
         return [pyosis.generated.LCt(content=extract_children(tag))]
 
     if tag.name == "span" and "translit" in tag.attrs.get("class", []):
-        return [pyosis.generated.ForeignCt(lang=str(tag.attrs.get("lang", "")), content=extract_children(tag))]
+        return [
+            pyosis.generated.ForeignCt(
+                lang=str(tag.attrs.get("lang", "")), content=extract_children(tag)
+            )
+        ]
     if tag.name == "span" and "clarity-word" in tag.attrs.get("class", []):
         return [pyosis.generated.TransChangeCt(type_value="added", content=extract_children(tag))]
 
@@ -209,7 +247,9 @@ def extract_markup(
         )
         return extract_children(tag)
 
-    if tag.name == "a" and ("study-note-ref" in tag.attrs["class"] or "note-ref" in tag.attrs["class"]):
+    if tag.name == "a" and (
+        "study-note-ref" in tag.attrs["class"] or "note-ref" in tag.attrs["class"]
+    ):
         return extract_footnote(tag, footnotes_dict)
 
     if tag.name in ("ol", "ul"):
@@ -242,7 +282,9 @@ def extract_markup(
             header_tag = tag.find("header")
             if header_tag:
                 head_osis = pyosis.generated.HeadCt(
-                    content=extract_markup(header_tag, footnotes_dict=footnotes_dict, no_container=True),
+                    content=extract_markup(
+                        header_tag, footnotes_dict=footnotes_dict, no_container=True
+                    ),
                 )
             else:
                 head_osis = None
@@ -253,7 +295,9 @@ def extract_markup(
 
             rows = [
                 row
-                for row in extract_markup(table_tag, footnotes_dict=footnotes_dict, no_container=True)
+                for row in extract_markup(
+                    table_tag, footnotes_dict=footnotes_dict, no_container=True
+                )
                 if isinstance(row, pyosis.generated.RowCt)
             ]
             return [
@@ -292,7 +336,11 @@ def extract_markup(
 
     if tag.name == "tr":
         # TODO: Figure out role
-        cells = [cell for cell in extract_children(tag, no_strings=True) if isinstance(cell, pyosis.generated.CellCt)]
+        cells = [
+            cell
+            for cell in extract_children(tag, no_strings=True)
+            if isinstance(cell, pyosis.generated.CellCt)
+        ]
         return [pyosis.generated.RowCt(cell=cells)]
 
     if tag.name == "td":
@@ -398,7 +446,9 @@ def build_chapter(
     """
     chapter_osis_id = f"{book_osis_id}.{chapter_number}"
 
-    chapter_html: bs4.BeautifulSoup = bs4.BeautifulSoup(scripture_content.content.body, "html.parser")
+    chapter_html: bs4.BeautifulSoup = bs4.BeautifulSoup(
+        scripture_content.content.body, "html.parser"
+    )
     chapter_html = clean_up_html(chapter_html)
 
     front_matter: list[object] = []
@@ -415,13 +465,17 @@ def build_chapter(
                 )
             )
             title.extract()  # We have to remove the title tag from the soup so it doesn't get duplicated in the header
-        other_titles = extract_markup(titles_tag, scripture_content.content.footnotes, no_container=True)
+        other_titles = extract_markup(
+            titles_tag, scripture_content.content.footnotes, no_container=True
+        )
         for other_title in other_titles:
             if isinstance(other_title, str):
                 if stripped := other_title.strip():
                     front_matter.append(
                         pyosis.generated.TitleCt(
-                            canonical=True, type_value=pyosis.generated.OsisTitles.SUB, content=[stripped]
+                            canonical=True,
+                            type_value=pyosis.generated.OsisTitles.SUB,
+                            content=[stripped],
                         )
                     )
             elif isinstance(other_title, pyosis.generated.LbCt):
@@ -471,12 +525,16 @@ def build_chapter(
         verse_osis_id = f"{chapter_osis_id}.{verse_number}"
         verse_number_span.extract()
 
-        verse_contents: list[object] = extract_markup(verse_p, scripture_content.content.footnotes, no_container=True)
+        verse_contents: list[object] = extract_markup(
+            verse_p, scripture_content.content.footnotes, no_container=True
+        )
         verse_classes = verse_p.get_attribute_list("class")
 
         if "contains-line" in verse_classes:
             verse_contents = [
-                pyosis.generated.LgCt(l=[c for c in verse_contents if isinstance(c, pyosis.generated.LCt)])
+                pyosis.generated.LgCt(
+                    l=[c for c in verse_contents if isinstance(c, pyosis.generated.LCt)]
+                )
             ]
 
         osis_verse = pyosis.generated.VerseCt(
@@ -498,12 +556,16 @@ def build_chapter(
     chapter_contents.extend(osis_verses)
 
     return (
-        pyosis.generated.ChapterCt(canonical=False, osis_id=[chapter_osis_id], content=chapter_contents),
+        pyosis.generated.ChapterCt(
+            canonical=False, osis_id=[chapter_osis_id], content=chapter_contents
+        ),
         front_matter or None,
     )
 
 
-async def build_book(lang: str, parent_book: str, book: str, client: httpx.AsyncClient) -> pyosis.generated.DivCt:
+async def build_book(
+    lang: str, parent_book: str, book: str, client: httpx.AsyncClient
+) -> pyosis.generated.DivCt:
     """Asynchronously builds an OSIS book division from scripture content.
 
     Fetches the list of chapter numbers for the specified book and language, retrieves the content for each chapter
@@ -525,10 +587,14 @@ async def build_book(lang: str, parent_book: str, book: str, client: httpx.Async
     chapter_nums = await church_website_models.get_chapters_list(
         lang=lang, parent_book=parent_book, book=book, client=client
     )
-    chapter_contents = await asyncio.gather(*[
-        church_website_models.get_scripture_content(lang, parent_book, book, chapter_num, client)
-        for chapter_num in chapter_nums
-    ])
+    chapter_contents = await asyncio.gather(
+        *[
+            church_website_models.get_scripture_content(
+                lang, parent_book, book, chapter_num, client
+            )
+            for chapter_num in chapter_nums
+        ]
+    )
 
     osis_chapters: list[object] = []
     for chapter_num, chapter_content in zip(chapter_nums, chapter_contents):
