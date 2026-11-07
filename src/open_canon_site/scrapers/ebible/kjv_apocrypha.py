@@ -1,5 +1,9 @@
+from __future__ import annotations
+
+import argparse
 import datetime
 import io
+import logging
 import pathlib
 import xml.etree.ElementTree as ET
 import zipfile
@@ -7,10 +11,12 @@ import zipfile
 import httpx
 import pyosis
 
+from open_canon_site.scrapers.base import ScraperSpec
+
+logger = logging.getLogger(__name__)
+
 DOWNLOAD_URL = "https://ebible.org/Scriptures/eng-kjv_vpl.zip"
 XML_FILENAME = "eng-kjv_vpl.xml"
-
-OUTPUT_DIR = pathlib.Path("osis-documents")
 
 # Mapping: VPL book code -> (display name, OSIS ID), in canonical KJV order
 APOCRYPHA_BOOKS: dict[str, tuple[str, str]] = {
@@ -32,7 +38,7 @@ APOCRYPHA_BOOKS: dict[str, tuple[str, str]] = {
 
 
 def download_xml() -> bytes:
-    print(f"Downloading {DOWNLOAD_URL} ...")
+    logger.info("Downloading %s ...", DOWNLOAD_URL)
     response = httpx.get(DOWNLOAD_URL, follow_redirects=True)
     response.raise_for_status()
     with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
@@ -56,7 +62,7 @@ def parse_books(xml_bytes: bytes) -> dict[str, pyosis.DivCt]:
     books: dict[str, pyosis.DivCt] = {}
     for book_code, (book_name, osis_id) in APOCRYPHA_BOOKS.items():
         if book_code not in raw:
-            print(f"Warning: no verses found for {book_name} ({book_code})")
+            logger.warning("No verses found for %s (%s)", book_name, book_code)
             continue
 
         chapters = []
@@ -113,7 +119,7 @@ def books_to_osis_xml(books: list[pyosis.DivCt]) -> pyosis.OsisXML:
                                     content=[
                                         "Downloaded from ebible.org (eng-kjv_vpl.zip),"
                                         " and converted to OSIS by the"
-                                        " osis-kjv-apocrypha Python package."
+                                        " open-canon-site scrapers."
                                     ]
                                 )
                             ],
@@ -128,12 +134,27 @@ def books_to_osis_xml(books: list[pyosis.DivCt]) -> pyosis.OsisXML:
     )
 
 
-def main() -> None:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+def book_file_name(book_name: str) -> str:
+    """Legacy per-book output filename, e.g. ``1_Esdras.xml``."""
+    return "_".join(book_name.split()) + ".xml"
 
-    xml_bytes = download_xml()
-    books = parse_books(xml_bytes)
 
+def add_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "--per-book",
+        action="store_true",
+        help="also write one OSIS file per book (off by default: the site build "
+        "globs every *.xml in the output directory)",
+    )
+
+
+def run(args: argparse.Namespace) -> list[pathlib.Path]:
+    output_dir = pathlib.Path(args.output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    books = parse_books(download_xml())
+
+    written: list[pathlib.Path] = []
     all_book_divs = []
     for book_code, (book_name, _) in APOCRYPHA_BOOKS.items():
         if book_code not in books:
@@ -141,13 +162,24 @@ def main() -> None:
         book_div = books[book_code]
         all_book_divs.append(book_div)
 
-        file_name = "_".join(book_name.split()) + ".xml"
-        (OUTPUT_DIR / file_name).write_text(books_to_osis_xml([book_div]).to_xml())
-        print(f"Saved {file_name}")
+        if getattr(args, "per_book", False):
+            path = output_dir / book_file_name(book_name)
+            path.write_text(books_to_osis_xml([book_div]).to_xml())
+            logger.info("Saved %s", path.name)
+            written.append(path)
 
-    (OUTPUT_DIR / "kjv_apocrypha.xml").write_text(books_to_osis_xml(all_book_divs).to_xml())
-    print("Saved kjv_apocrypha.xml")
+    combined = output_dir / "kjv_apocrypha.xml"
+    combined.write_text(books_to_osis_xml(all_book_divs).to_xml())
+    logger.info("Saved %s", combined.name)
+    written.append(combined)
+    return written
 
 
-if __name__ == "__main__":
-    main()
+SPEC = ScraperSpec(
+    name="kjv-apocrypha",
+    help="Scrape the KJV Apocrypha from ebible.org into OSIS XML.",
+    source="https://ebible.org/Scriptures/eng-kjv_vpl.zip",
+    outputs=("kjv_apocrypha.xml",),
+    run=run,
+    add_arguments=add_arguments,
+)

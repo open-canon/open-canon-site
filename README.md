@@ -86,6 +86,7 @@ Common options (accepted by every scraper and by `all`):
 
 | subcommand | source | outputs |
 |---|---|---|
+| `kjv-apocrypha` | [ebible.org](https://ebible.org/Scriptures/eng-kjv_vpl.zip) KJV Apocrypha | `kjv_apocrypha.xml` (`--per-book` also writes one file per book) |
 
 Tests that hit the network are skipped unless `OPEN_CANON_NETWORK_TESTS=1` is set.
 
