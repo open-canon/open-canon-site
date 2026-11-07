@@ -4,6 +4,7 @@ These tests exercise split_multi_verse_content(), split_multi_verse_poetry_lines
 and the parse_page() handling of unnumbered poetry paragraphs directly and do NOT
 require a network connection or HTML cache.
 """
+
 from __future__ import annotations
 
 import importlib
@@ -78,18 +79,14 @@ class TestSplitMultiVerseContent:
         # Verse 2 should be plain text
         assert result[1][1] == ["Next verse."]
 
-    def test_no_false_positive_on_decimal_preceding_digit(
-        self, parser: SacredTextsParser
-    ) -> None:
+    def test_no_false_positive_on_decimal_preceding_digit(self, parser: SacredTextsParser) -> None:
         """'32. ' should NOT trigger a split when looking for verse 2."""
         parts = ["See figure 32. This is not a new verse."]
         result = parser.split_multi_verse_content(parts, 1)
         # '32' is preceded by a digit so (?<!\d) prevents a match; no split.
         assert len(result) == 1
 
-    def test_split_at_tail_after_inline_element(
-        self, parser: SacredTextsParser
-    ) -> None:
+    def test_split_at_tail_after_inline_element(self, parser: SacredTextsParser) -> None:
         """Verse boundary that falls in a child element's tail is handled."""
         import pyosis
 
@@ -107,9 +104,7 @@ class TestSplitMultiVerseContent:
         v1_text = " ".join(p for p in v1_parts if isinstance(p, str))
         assert "Verse 2" not in v1_text
 
-    def test_multiple_boundaries_in_single_child_tail(
-        self, parser: SacredTextsParser
-    ) -> None:
+    def test_multiple_boundaries_in_single_child_tail(self, parser: SacredTextsParser) -> None:
         """Multiple verse numbers in a single child's tail are all split."""
         import pyosis
 
@@ -152,9 +147,7 @@ class TestSplitMultiVersePoetryLines:
         assert not result[1][1][0][0].startswith("4.")
         assert "From that time" in result[1][1][0][0]
 
-    def test_leading_whitespace_in_verse_prefix(
-        self, parser: SacredTextsParser
-    ) -> None:
+    def test_leading_whitespace_in_verse_prefix(self, parser: SacredTextsParser) -> None:
         lines = [["Line A"], ["   5. Line B"]]
         result = parser.split_multi_verse_poetry_lines(lines, 4)
         assert len(result) == 2
@@ -208,9 +201,7 @@ class TestParsePageUnnumberedPoetry:
         assert div is not None
 
         verse_ids = [
-            item.osis_id[0]
-            for item in div.content
-            if hasattr(item, "osis_id") and item.osis_id
+            item.osis_id[0] for item in div.content if hasattr(item, "osis_id") and item.osis_id
         ]
 
         # Both verse 3 and verse 4 must be present
@@ -230,8 +221,7 @@ class TestParsePageUnnumberedPoetry:
         assert has_lg_v3, "verse 3 should have a linegroup after being extended"
         lg_v3 = next(c for c in verse3.content if isinstance(c, pyosis.LgCt))
         v3_texts = [
-            lc.content[0] if lc.content and isinstance(lc.content[0], str) else ""
-            for lc in lg_v3.l
+            lc.content[0] if lc.content and isinstance(lc.content[0], str) else "" for lc in lg_v3.l
         ]
         assert any("Holy and Great One" in t for t in v3_texts), (
             f"verse 3 should include 'The Holy and Great One' line, got {v3_texts}"
@@ -282,9 +272,7 @@ class TestParsePageUnnumberedPoetry:
         assert div is not None
 
         verse_ids = [
-            item.osis_id[0]
-            for item in div.content
-            if hasattr(item, "osis_id") and item.osis_id
+            item.osis_id[0] for item in div.content if hasattr(item, "osis_id") and item.osis_id
         ]
 
         # Verse 4 must now be present between verse 3 and verse 5
@@ -318,9 +306,7 @@ class TestParsePageUnnumberedPoetry:
         assert div is not None
 
         verse_ids = [
-            item.osis_id[0]
-            for item in div.content
-            if hasattr(item, "osis_id") and item.osis_id
+            item.osis_id[0] for item in div.content if hasattr(item, "osis_id") and item.osis_id
         ]
         # Only verse 3 and verse 5 should be present; no spurious verse 4
         assert "1En.1.3" in verse_ids
@@ -343,9 +329,7 @@ class TestParsePageUnnumberedPoetry:
         assert div is not None
 
         verse_ids = [
-            item.osis_id[0]
-            for item in div.content
-            if hasattr(item, "osis_id") and item.osis_id
+            item.osis_id[0] for item in div.content if hasattr(item, "osis_id") and item.osis_id
         ]
         # Only verse 1 should be present; no verse 0 created from pre-verse poetry
         assert "1En.1.1" in verse_ids

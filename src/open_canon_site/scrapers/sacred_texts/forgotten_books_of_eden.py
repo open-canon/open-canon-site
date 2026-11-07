@@ -167,34 +167,22 @@ TESTAMENTS_INTRO_PAGES: Final[list[int]] = [266]
 
 TESTAMENTS: Final[list[TestamentDef]] = [
     TestamentDef("T12Patr.TReu", "The Testament of Reuben", "Test. Reuben", [267, 268]),
-    TestamentDef(
-        "T12Patr.TSim", "The Testament of Simeon", "Test. Simeon", [269, 270, 271]
-    ),
+    TestamentDef("T12Patr.TSim", "The Testament of Simeon", "Test. Simeon", [269, 270, 271]),
     TestamentDef(
         "T12Patr.TLevi",
         "The Testament of Levi",
         "Test. Levi",
         [272, 273, 274, 275, 276],
     ),
-    TestamentDef(
-        "T12Patr.TJud", "The Testament of Judah", "Test. Judah", [277, 278, 279, 280]
-    ),
-    TestamentDef(
-        "T12Patr.TIss", "The Testament of Issachar", "Test. Issachar", [281, 282]
-    ),
-    TestamentDef(
-        "T12Patr.TZeb", "The Testament of Zebulun", "Test. Zebulun", [283, 284]
-    ),
+    TestamentDef("T12Patr.TJud", "The Testament of Judah", "Test. Judah", [277, 278, 279, 280]),
+    TestamentDef("T12Patr.TIss", "The Testament of Issachar", "Test. Issachar", [281, 282]),
+    TestamentDef("T12Patr.TZeb", "The Testament of Zebulun", "Test. Zebulun", [283, 284]),
     TestamentDef("T12Patr.TDan", "The Testament of Dan", "Test. Dan", [285, 286]),
-    TestamentDef(
-        "T12Patr.TNaph", "The Testament of Naphtali", "Test. Naphtali", [287, 288]
-    ),
+    TestamentDef("T12Patr.TNaph", "The Testament of Naphtali", "Test. Naphtali", [287, 288]),
     TestamentDef("T12Patr.TGad", "The Testament of Gad", "Test. Gad", [289, 290]),
     TestamentDef("T12Patr.TAsh", "The Testament of Asher", "Test. Asher", [291]),
     TestamentDef("T12Patr.TJos", "The Testament of Joseph", "Test. Joseph", [292, 293]),
-    TestamentDef(
-        "T12Patr.TBenj", "The Testament of Benjamin", "Test. Benjamin", [294, 295]
-    ),
+    TestamentDef("T12Patr.TBenj", "The Testament of Benjamin", "Test. Benjamin", [294, 295]),
 ]
 
 ADAM_EVE_WORK_IDS: Final[tuple[str, str]] = ("1-adam-and-eve", "2-adam-and-eve")
@@ -262,9 +250,7 @@ class FBEParser:
     def _is_standalone_page_marker(p_tag: Tag) -> bool:
         """Return True if this <p> contains only a page-marker anchor."""
         children = [
-            c
-            for c in p_tag.children
-            if not isinstance(c, NavigableString) or str(c).strip()
+            c for c in p_tag.children if not isinstance(c, NavigableString) or str(c).strip()
         ]
         if len(children) == 1 and isinstance(children[0], Tag):
             a = children[0]
@@ -296,47 +282,33 @@ class FBEParser:
 
         for child in element.children:
             if isinstance(child, NavigableString):
-                result.extend(
-                    self.parse_inline_annotations(child, is_green_font=is_green_font)
-                )
+                result.extend(self.parse_inline_annotations(child, is_green_font=is_green_font))
             elif isinstance(child, Tag):
                 if child in skip_set:
                     continue
 
-                is_child_green = (
-                    child.name == "font" and child.get("color", "").lower() == "green"
-                )
-                child_content = self.parse_inline_annotations(
-                    child, is_green_font=is_child_green
-                )
+                is_child_green = child.name == "font" and child.get("color", "").lower() == "green"
+                child_content = self.parse_inline_annotations(child, is_green_font=is_child_green)
 
                 if child.name in ("i", "em"):
                     if child_content:
                         result.append(
-                            pyosis.HiCt(
-                                type_value=pyosis.OsisHi.ITALIC, content=child_content
-                            )
+                            pyosis.HiCt(type_value=pyosis.OsisHi.ITALIC, content=child_content)
                         )
                 elif child.name in ("b", "strong"):
                     if child_content:
                         result.append(
-                            pyosis.HiCt(
-                                type_value=pyosis.OsisHi.BOLD, content=child_content
-                            )
+                            pyosis.HiCt(type_value=pyosis.OsisHi.BOLD, content=child_content)
                         )
                 elif child.name == "sup":
                     if child_content:
                         result.append(
-                            pyosis.HiCt(
-                                type_value=pyosis.OsisHi.SUPER, content=child_content
-                            )
+                            pyosis.HiCt(type_value=pyosis.OsisHi.SUPER, content=child_content)
                         )
                 elif child.name == "sub":
                     if child_content:
                         result.append(
-                            pyosis.HiCt(
-                                type_value=pyosis.OsisHi.SUB, content=child_content
-                            )
+                            pyosis.HiCt(type_value=pyosis.OsisHi.SUB, content=child_content)
                         )
                 elif child.name == "br":
                     continue
@@ -464,15 +436,11 @@ class FBEParser:
     ) -> pyosis.VerseCt:
         """Wrap VerseContent in a VerseCt OSIS element."""
         if verse_content.has_poetry and verse_content.poetry_lines:
-            lg = pyosis.LgCt(
-                l=[pyosis.LCt(content=line) for line in verse_content.poetry_lines]
-            )
+            lg = pyosis.LgCt(l=[pyosis.LCt(content=line) for line in verse_content.poetry_lines])
             content: list = [lg]
         else:
             content = (
-                verse_content.content_parts
-                if verse_content.content_parts
-                else [verse_content.text]
+                verse_content.content_parts if verse_content.content_parts else [verse_content.text]
             )
 
         return pyosis.VerseCt(osis_id=[osis_id], canonical=canonical, content=content)
@@ -501,20 +469,14 @@ class FBEParser:
         headings: list[str] = []
         seen: set[str] = set()
 
-        for element in root.find_all(
-            ["h1", "h2", "h3", "h4", "h5", "h6", "p"], recursive=True
-        ):
+        for element in root.find_all(["h1", "h2", "h3", "h4", "h5", "h6", "p"], recursive=True):
             if element.name == "p":
                 if self._skip_paragraph(element):
                     continue
                 break
 
             heading_text = element.get_text().strip()
-            if (
-                not heading_text
-                or self._is_nav_text(heading_text)
-                or heading_text in seen
-            ):
+            if not heading_text or self._is_nav_text(heading_text) or heading_text in seen:
                 continue
 
             headings.append(heading_text)
@@ -541,9 +503,7 @@ class FBEParser:
     ) -> list[pyosis.TitleCt | pyosis.PCt | pyosis.HeadCt | pyosis.MilestoneCt]:
         """Parse an intro / front-matter page into OSIS paragraph elements."""
         soup = BeautifulSoup(html, "html.parser")
-        elements: list[
-            pyosis.TitleCt | pyosis.PCt | pyosis.HeadCt | pyosis.MilestoneCt
-        ] = []
+        elements: list[pyosis.TitleCt | pyosis.PCt | pyosis.HeadCt | pyosis.MilestoneCt] = []
         intro_headings = self._extract_intro_headings(html)
 
         if title_override:
@@ -626,14 +586,10 @@ class FBEParser:
                 inner_p = sib.find("p")
                 if inner_p:
                     chapter_summary_parts = self.parse_inline_annotations(inner_p)
-                    chapter_summary_text = self._extract_text(
-                        chapter_summary_parts
-                    ).strip()
+                    chapter_summary_text = self._extract_text(chapter_summary_parts).strip()
                 else:
                     chapter_summary_parts = self.parse_inline_annotations(sib)
-                    chapter_summary_text = self._extract_text(
-                        chapter_summary_parts
-                    ).strip()
+                    chapter_summary_text = self._extract_text(chapter_summary_parts).strip()
 
         if chapter_summary_text:
             summary_div = pyosis.DivCt(
@@ -819,9 +775,7 @@ class FBEParser:
                     verse_divs.append(self._build_verse(v_id, vc))
                 else:
                     lg = pyosis.LgCt(l=[pyosis.LCt(content=ln) for ln in current_lines])
-                    verse_divs.append(
-                        pyosis.VerseCt(osis_id=[v_id], canonical=True, content=[lg])
-                    )
+                    verse_divs.append(pyosis.VerseCt(osis_id=[v_id], canonical=True, content=[lg]))
                 current_verse_num = None
                 current_lines = []
 
@@ -1034,13 +988,9 @@ class FBEParser:
             chapter_num = self._detect_chapter_number(html, idx + 1)
 
             if is_psalms:
-                chapter_div = self._parse_psalms_chapter_page(
-                    html, work.osis_id, chapter_num
-                )
+                chapter_div = self._parse_psalms_chapter_page(html, work.osis_id, chapter_num)
             elif is_odes:
-                chapter_div = self._parse_odes_chapter_page(
-                    html, work.osis_id, chapter_num
-                )
+                chapter_div = self._parse_odes_chapter_page(html, work.osis_id, chapter_num)
             else:
                 chapter_div = self._parse_chapter_page(html, work.osis_id, chapter_num)
 
@@ -1351,13 +1301,9 @@ class FBEParser:
                 )
 
         # Generate XML for each standalone work
-        standalone_works = [
-            work for work in WORKS if work.osis_id not in ADAM_EVE_WORK_IDS
-        ]
+        standalone_works = [work for work in WORKS if work.osis_id not in ADAM_EVE_WORK_IDS]
         for work in tqdm(standalone_works, desc="Generating XML files"):
-            missing = [
-                p for p in work.intro_pages + work.chapter_pages if p not in page_html
-            ]
+            missing = [p for p in work.intro_pages + work.chapter_pages if p not in page_html]
             if missing:
                 LOGGER.warning("Skipping %s: missing pages %s", work.osis_id, missing)
                 continue
@@ -1372,9 +1318,7 @@ class FBEParser:
                 LOGGER.error("Error generating %s: %s", output_stem, exc, exc_info=True)
 
         # Testaments
-        t_pages = TESTAMENTS_INTRO_PAGES + [
-            p for t in TESTAMENTS for p in t.chapter_pages
-        ]
+        t_pages = TESTAMENTS_INTRO_PAGES + [p for t in TESTAMENTS for p in t.chapter_pages]
         missing_t = [p for p in t_pages if p not in page_html]
         if missing_t:
             LOGGER.warning("Skipping testaments: missing pages %s", missing_t)
@@ -1420,9 +1364,7 @@ def main(
     parser = FBEParser(cache_dir=cache_dir if cache_dir else None, delay=delay)
 
     try:
-        LOGGER.info(
-            "Processing pages %d–%d with %.1fs delay", start_page, end_page, delay
-        )
+        LOGGER.info("Processing pages %d–%d with %.1fs delay", start_page, end_page, delay)
         parser.process_all(
             output_dir=output_dir,
             start_page=start_page,

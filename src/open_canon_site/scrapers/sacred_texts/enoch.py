@@ -65,9 +65,7 @@ class VerseContent:
     """Represents parsed verse content with annotations and formatting preserved."""
 
     text: str  # Plain text version for reference
-    content_parts: list[
-        str | pyosis.HiCt | pyosis.MilestoneCt
-    ]  # Parsed content with formatting
+    content_parts: list[str | pyosis.HiCt | pyosis.MilestoneCt]  # Parsed content with formatting
     has_poetry: bool = False
     poetry_lines: list[list[str | pyosis.HiCt | pyosis.MilestoneCt]] | None = (
         None  # Parsed lines with formatting
@@ -114,9 +112,7 @@ class SacredTextsParser:
             self.cache_dir.mkdir(parents=True, exist_ok=True)
             LOGGER.info(f"Using cache directory: {self.cache_dir}")
 
-    def fetch_page(
-        self, page_num: int, retry_count: int = 3, delay: float = 1.0
-    ) -> str:
+    def fetch_page(self, page_num: int, retry_count: int = 3, delay: float = 1.0) -> str:
         """Fetch a single page from sacred-texts.com.
 
         Args:
@@ -179,9 +175,7 @@ class SacredTextsParser:
         for child in element.children:
             if isinstance(child, NavigableString):
                 # Recursively call to handle page marker conversion
-                child_result = self.parse_inline_annotations(
-                    child, is_green_font=is_green_font
-                )
+                child_result = self.parse_inline_annotations(child, is_green_font=is_green_font)
                 result.extend(child_result)
             elif isinstance(child, Tag):
                 # Skip if this element was marked for skipping
@@ -190,8 +184,7 @@ class SacredTextsParser:
 
                 # Skip navigation elements
                 if child.get("class") and any(
-                    cls in str(child.get("class"))
-                    for cls in ["navigation", "next", "prev"]
+                    cls in str(child.get("class")) for cls in ["navigation", "next", "prev"]
                 ):
                     continue
 
@@ -230,30 +223,22 @@ class SacredTextsParser:
                 if child.name in ["i", "em"]:
                     if child_content:
                         result.append(
-                            pyosis.HiCt(
-                                type_value=pyosis.OsisHi.ITALIC, content=child_content
-                            )
+                            pyosis.HiCt(type_value=pyosis.OsisHi.ITALIC, content=child_content)
                         )
                 elif child.name in ["b", "strong"]:
                     if child_content:
                         result.append(
-                            pyosis.HiCt(
-                                type_value=pyosis.OsisHi.BOLD, content=child_content
-                            )
+                            pyosis.HiCt(type_value=pyosis.OsisHi.BOLD, content=child_content)
                         )
                 elif child.name == "sup":
                     if child_content:
                         result.append(
-                            pyosis.HiCt(
-                                type_value=pyosis.OsisHi.SUPER, content=child_content
-                            )
+                            pyosis.HiCt(type_value=pyosis.OsisHi.SUPER, content=child_content)
                         )
                 elif child.name == "sub":
                     if child_content:
                         result.append(
-                            pyosis.HiCt(
-                                type_value=pyosis.OsisHi.SUB, content=child_content
-                            )
+                            pyosis.HiCt(type_value=pyosis.OsisHi.SUB, content=child_content)
                         )
                 elif child.name == "br":
                     # Skip br tags - handled at poetry level
@@ -311,8 +296,7 @@ class SacredTextsParser:
 
                 # Skip empty lines and navigation elements
                 if line_text and not any(
-                    nav in line_text
-                    for nav in ["Next:", "Previous:", "Sacred Texts", "Index"]
+                    nav in line_text for nav in ["Next:", "Previous:", "Sacred Texts", "Index"]
                 ):
                     lines.append(line_parts)
 
@@ -381,9 +365,7 @@ class SacredTextsParser:
 
         return self.is_navigation_text(text)
 
-    def extract_front_matter_lead_lines(
-        self, soup: BeautifulSoup, title: str
-    ) -> list[str]:
+    def extract_front_matter_lead_lines(self, soup: BeautifulSoup, title: str) -> list[str]:
         """Extract heading lines that belong to the front-matter page itself.
 
         This preserves the title-page block on boe000 and leading subheadings like
@@ -437,9 +419,7 @@ class SacredTextsParser:
             parsed_content = self.parse_inline_annotations(p_tag)
             if parsed_content:
                 # If paragraph contains only a milestone, add it directly (not wrapped in PCt)
-                if len(parsed_content) == 1 and isinstance(
-                    parsed_content[0], pyosis.MilestoneCt
-                ):
+                if len(parsed_content) == 1 and isinstance(parsed_content[0], pyosis.MilestoneCt):
                     front_content.append(parsed_content[0])
                 else:
                     # Regular paragraph with text/formatting
@@ -494,17 +474,13 @@ class SacredTextsParser:
 
             lg = pyosis.LgCt(l=lines)
 
-            verse = pyosis.VerseCt(
-                osis_id=[verse_osis_id], canonical=True, content=[lg]
-            )
+            verse = pyosis.VerseCt(osis_id=[verse_osis_id], canonical=True, content=[lg])
         else:
             # Regular verse - use parsed content with formatting
             verse = pyosis.VerseCt(
                 osis_id=[verse_osis_id],
                 canonical=True,
-                content=content.content_parts
-                if content.content_parts
-                else [content.text],
+                content=content.content_parts if content.content_parts else [content.text],
             )
 
         self.current_div.content.append(verse)
@@ -533,11 +509,7 @@ class SacredTextsParser:
         new_l_elements = [pyosis.LCt(content=lp) for lp in extra_lines]
 
         for item in reversed(self.current_div.content):
-            if (
-                hasattr(item, "osis_id")
-                and item.osis_id
-                and item.osis_id[0] == verse_osis_id
-            ):
+            if hasattr(item, "osis_id") and item.osis_id and item.osis_id[0] == verse_osis_id:
                 # Extend an existing LgCt if present
                 for c in item.content:
                     if isinstance(c, pyosis.LgCt):
@@ -568,7 +540,7 @@ class SacredTextsParser:
 
         verse_osis_prefix = f"{OSIS_BOOK_ID}.{self.current_chapter}."
         verse_nums = sorted(
-            int(item.osis_id[0][len(verse_osis_prefix):])
+            int(item.osis_id[0][len(verse_osis_prefix) :])
             for item in self.current_div.content
             if (
                 hasattr(item, "osis_id")
@@ -614,9 +586,7 @@ class SacredTextsParser:
                 # Match the next expected verse number preceded by whitespace and
                 # not preceded by another digit (avoids false matches such as
                 # "p. 32. " or "fig. 2.").
-                m = re.search(
-                    rf"(?<!\d)\s+{re.escape(str(next_verse))}\.\s+", remaining
-                )
+                m = re.search(rf"(?<!\d)\s+{re.escape(str(next_verse))}\.\s+", remaining)
                 if not m:
                     break
 
@@ -658,9 +628,7 @@ class SacredTextsParser:
             next_verse = current_verse + 1
             # Check whether this line starts with the next verse number
             if line_parts and isinstance(line_parts[0], str):
-                m = re.match(
-                    rf"^\s*{re.escape(str(next_verse))}\.\s+", line_parts[0]
-                )
+                m = re.match(rf"^\s*{re.escape(str(next_verse))}\.\s+", line_parts[0])
                 if m:
                     # Close out the current verse
                     result.append((current_verse, current_lines))
@@ -813,9 +781,7 @@ class SacredTextsParser:
                 verse_content.text = re.sub(r"^\d+\.\s+", "", verse_content.text)
 
                 # Remove verse number from content_parts
-                if verse_content.content_parts and isinstance(
-                    verse_content.content_parts[0], str
-                ):
+                if verse_content.content_parts and isinstance(verse_content.content_parts[0], str):
                     verse_content.content_parts[0] = re.sub(
                         r"^\d+\.\s+", "", verse_content.content_parts[0]
                     )
@@ -837,9 +803,7 @@ class SacredTextsParser:
                             poetry_lines=seg_lines,
                         )
                         self.add_verse(seg_verse_num, seg_content)
-                        LOGGER.debug(
-                            f"Added verse {self.current_chapter}.{seg_verse_num}"
-                        )
+                        LOGGER.debug(f"Added verse {self.current_chapter}.{seg_verse_num}")
                 else:
                     # Split non-poetry content into individual per-verse segments
                     for seg_verse_num, seg_parts in self.split_multi_verse_content(
@@ -850,15 +814,9 @@ class SacredTextsParser:
                             content_parts=seg_parts,
                         )
                         self.add_verse(seg_verse_num, seg_content)
-                        LOGGER.debug(
-                            f"Added verse {self.current_chapter}.{seg_verse_num}"
-                        )
+                        LOGGER.debug(f"Added verse {self.current_chapter}.{seg_verse_num}")
 
-            elif (
-                not verse_match
-                and self.current_chapter
-                and self.current_verse is not None
-            ):
+            elif not verse_match and self.current_chapter and self.current_verse is not None:
                 # Paragraph without a verse number following a known verse:
                 # sacred-texts.com sometimes places a poetry stanza that straddles
                 # two verses in an unnumbered <p>.  The paragraph may begin with
@@ -893,9 +851,7 @@ class SacredTextsParser:
                         # First segment extends the current verse; the rest are new
                         for i, (seg_verse_num, seg_lines) in enumerate(segments):
                             if i == 0:
-                                self._extend_verse_with_poetry(
-                                    self.current_verse, seg_lines
-                                )
+                                self._extend_verse_with_poetry(self.current_verse, seg_lines)
                                 LOGGER.debug(
                                     f"Extended verse"
                                     f" {self.current_chapter}.{self.current_verse}"
@@ -1005,9 +961,7 @@ class SacredTextsParser:
 
         return osis_xml
 
-    def process_all_pages(
-        self, start: int = 0, end: int = 112, delay: float = 1.0
-    ) -> None:
+    def process_all_pages(self, start: int = 0, end: int = 112, delay: float = 1.0) -> None:
         """Download and process all pages in range.
 
         Args:

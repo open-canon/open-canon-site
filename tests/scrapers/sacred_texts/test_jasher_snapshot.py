@@ -14,9 +14,7 @@ SRC_ROOT = REPO_ROOT / "src"
 DOCUMENTS_DIR = REPO_ROOT / "documents"
 PACKAGE_JASHER_MODULE = "1_enoch_osis.scrape_jasher"
 SOURCE_CACHE_DIR = REPO_ROOT / ".cache" / "html"
-INDEX_CACHE_FILE = (
-    SOURCE_CACHE_DIR / "sacred-texts.com" / "chr" / "apo" / "jasher" / "index.htm"
-)
+INDEX_CACHE_FILE = SOURCE_CACHE_DIR / "sacred-texts.com" / "chr" / "apo" / "jasher" / "index.htm"
 SNAPSHOT_FILE = "jasher.xml"
 EVERSION_DATE_PATTERN = re.compile(
     r'(<date event="eversion" type="ISO" xml:lang="en" TEIform="date">)'
@@ -48,9 +46,7 @@ def generated_jasher_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
     index_source = INDEX_CACHE_FILE.read_text(encoding="utf-8")
     if not module.JasherParser.is_valid_index(index_source):
-        pytest.skip(
-            f"Missing valid original-site Jasher index cache: {INDEX_CACHE_FILE}"
-        )
+        pytest.skip(f"Missing valid original-site Jasher index cache: {INDEX_CACHE_FILE}")
 
     missing_cache_files = []
     invalid_cache_files = []
@@ -73,8 +69,7 @@ def generated_jasher_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
     if missing_cache_files:
         pytest.skip(
-            "Missing complete local Jasher cache; first missing file: "
-            f"{missing_cache_files[0]}"
+            f"Missing complete local Jasher cache; first missing file: {missing_cache_files[0]}"
         )
 
     if invalid_cache_files:
@@ -102,9 +97,7 @@ def test_scrape_jasher_matches_snapshot(generated_jasher_output: Path) -> None:
     assert generated_jasher_output.exists(), "Missing generated Jasher snapshot"
     assert expected_path.exists(), f"Missing committed snapshot: {SNAPSHOT_FILE}"
 
-    actual_xml = normalize_osis_snapshot(
-        generated_jasher_output.read_text(encoding="utf-8")
-    )
+    actual_xml = normalize_osis_snapshot(generated_jasher_output.read_text(encoding="utf-8"))
     expected_xml = normalize_osis_snapshot(expected_path.read_text(encoding="utf-8"))
 
     assert actual_xml == expected_xml
