@@ -87,6 +87,11 @@ Common options (accepted by every scraper and by `all`):
 | subcommand | source | outputs |
 |---|---|---|
 | `kjv-apocrypha` | [ebible.org](https://ebible.org/Scriptures/eng-kjv_vpl.zip) KJV Apocrypha | `kjv_apocrypha.xml` (`--per-book` also writes one file per book) |
+| `1-enoch` (`--start-page`, `--end-page`) | sacred-texts.com, Book of Enoch | `1-enoch.xml` |
+| `forgotten-books-of-eden` (`--start-page`, `--end-page`) | sacred-texts.com, Forgotten Books of Eden | `adam-and-eve.xml`, `2-enoch.xml`, `psalms-of-solomon.xml`, `odes-of-solomon.xml`, `letter-of-aristeas.xml`, `4-maccabees.xml`, `story-of-ahikar.xml`, `testaments-twelve-patriarchs.xml` |
+| `jasher` | sacred-texts.com, Book of Jasher | `jasher.xml` |
+| `jubilees` | sacred-texts.com, Book of Jubilees | `jubilees.xml` |
+| `vita-adae-et-evae` | sacred-texts.com, Vita Adae et Evae | `vita-adae-et-evae.xml` |
 
 Tests that hit the network are skipped unless `OPEN_CANON_NETWORK_TESTS=1` is set.
 

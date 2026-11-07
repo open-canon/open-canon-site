@@ -1,49 +1,43 @@
-# /// script
-# requires-python = ">=3.13"
-# dependencies = [
-#     "beautifulsoup4",
-#     "fire",
-#     "httpx",
-#     "pyosis",
-#     "tqdm",
-# ]
-# ///
 """Download and parse Book of Enoch from sacred-texts.com to OSIS XML."""
 
 from __future__ import annotations
 
+import argparse
 import logging
 import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Final
 
-import fire
 import pyosis
 from bs4 import BeautifulSoup, NavigableString, Tag
 from tqdm import tqdm
 
-from .http_client import CachedHttpFetcher
-from .osis_parsing import (
+from open_canon_site.scrapers._http import CachedHttpFetcher
+from open_canon_site.scrapers._osis import (
     InlinePart,
     consolidate_inline_strings,
     extract_plain_text,
     is_navigation_text,
     parse_page_marker_text,
 )
-from .osis_parsing import (
+from open_canon_site.scrapers._osis import (
     normalize_whitespace as shared_normalize_whitespace,
 )
-from .osis_parsing import (
+from open_canon_site.scrapers._osis import (
     roman_to_int as shared_roman_to_int,
 )
+from open_canon_site.scrapers.base import ScraperSpec
 
 LOGGER = logging.getLogger(__name__)
+
+OUTPUT_FILENAME: Final[str] = "1-enoch.xml"
+DEFAULT_START_PAGE: Final[int] = 0  # 0 includes the title page and front matter
+DEFAULT_END_PAGE: Final[int] = 112
 
 BASE_URL: Final[str] = "https://sacred-texts.com/bib/boe/"
 # Files range from boe000.htm (title page) to boe112.htm (appendix)
 FILE_RANGE: Final[tuple[int, int]] = (0, 112)
-DEFAULT_OUTPUT: Final[str] = str(Path("documents") / "1-enoch.xml")
 OSIS_BOOK_ID: Final[str] = "1En"
 BOOK_TITLE: Final[str] = "The Book of Enoch"
 BOOK_SHORT_TITLE: Final[str] = "1 Enoch"
@@ -980,48 +974,50 @@ class SacredTextsParser:
                 continue
 
 
-def main(
-    output: str = DEFAULT_OUTPUT,
-    start_page: int = 0,  # Start at 0 to include title page and front matter
-    end_page: int = 112,
-    delay: float = 1.5,  # Delay between requests in seconds
-    cache_dir: str = ".cache/html",  # Directory to cache downloaded HTML files
-    log_level: str = "INFO",
-) -> None:
-    """Download and convert Book of Enoch to OSIS XML.
-
-    Args:
-        output: Output XML filename (default: documents/1-enoch.xml)
-        start_page: First page to process (default 0 for title page, use 4 for Chapter I)
-        end_page: Last page to process (default 112)
-        delay: Delay between requests in seconds (default 1.5 to avoid rate limiting)
-        cache_dir: Directory to cache downloaded HTML files (default ".cache/html", use empty string to disable)
-        log_level: Logging level (DEBUG, INFO, WARNING, ERROR)
-    """
-    logging.basicConfig(
-        level=getattr(logging, log_level.upper()),
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+def add_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "--start-page",
+        type=int,
+        default=DEFAULT_START_PAGE,
+        help="first page to process (0 is the title page, 4 is Chapter I; default: %(default)s)",
+    )
+    parser.add_argument(
+        "--end-page",
+        type=int,
+        default=DEFAULT_END_PAGE,
+        help="last page to process (default: %(default)s)",
     )
 
-    parser = SacredTextsParser(cache_dir=cache_dir if cache_dir else None, delay=delay)
+
+def run(args: argparse.Namespace) -> list[Path]:
+    parser = SacredTextsParser(cache_dir=args.cache_dir, delay=args.delay)
 
     try:
-        LOGGER.info(f"Processing pages {start_page} to {end_page} with {delay}s delay")
-        parser.process_all_pages(start_page, end_page, delay=delay)
+        LOGGER.info(
+            f"Processing pages {args.start_page} to {args.end_page} with {args.delay}s delay"
+        )
+        parser.process_all_pages(args.start_page, args.end_page, delay=args.delay)
 
         LOGGER.info("Generating OSIS XML")
         osis_doc = parser.generate_osis()
 
-        output_path = Path(output)
+        output_path = Path(args.output_dir) / OUTPUT_FILENAME
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        LOGGER.info(f"Writing to {output}")
+        LOGGER.info(f"Writing to {output_path}")
         output_path.write_text(osis_doc.to_xml(), encoding="utf-8")
 
         LOGGER.info("Done!")
     finally:
         parser.close()
+    return [output_path]
 
 
-if __name__ == "__main__":
-    fire.Fire(main)
+SPEC = ScraperSpec(
+    name="1-enoch",
+    help="Book of Enoch (R. H. Charles, 1917) to OSIS",
+    source="https://sacred-texts.com/bib/boe/",
+    outputs=(OUTPUT_FILENAME,),
+    run=run,
+    add_arguments=add_arguments,
+)

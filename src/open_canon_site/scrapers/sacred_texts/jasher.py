@@ -1,16 +1,8 @@
-# /// script
-# requires-python = ">=3.13"
-# dependencies = [
-#     "beautifulsoup4",
-#     "fire",
-#     "httpx",
-#     "pyosis",
-# ]
-# ///
 """Download and parse the Book of Jasher to OSIS XML."""
 
 from __future__ import annotations
 
+import argparse
 import html
 import logging
 import re
@@ -19,18 +11,19 @@ from datetime import datetime
 from pathlib import Path
 from typing import Final
 
-import fire
 import pyosis
 from bs4 import BeautifulSoup
 
-from .http_client import CachedHttpFetcher
-from .osis_parsing import normalize_whitespace
+from open_canon_site.scrapers._http import CachedHttpFetcher
+from open_canon_site.scrapers._osis import normalize_whitespace
+from open_canon_site.scrapers.base import ScraperSpec
 
 LOGGER = logging.getLogger(__name__)
 
+OUTPUT_FILENAME: Final[str] = "jasher.xml"
+
 INDEX_URL: Final[str] = "https://sacred-texts.com/chr/apo/jasher/index.htm"
 CHAPTER_URL_TEMPLATE: Final[str] = "https://sacred-texts.com/chr/apo/jasher/{page}.htm"
-DEFAULT_OUTPUT: Final[str] = str(Path("documents") / "jasher.xml")
 OSIS_WORK_ID: Final[str] = "Jasher"
 BOOK_TITLE: Final[str] = "The Book of Jasher"
 BOOK_SHORT_TITLE: Final[str] = "Jasher"
@@ -376,7 +369,7 @@ class JasherParser:
                     title=[pyosis.TitleCt(canonical=True, content=[BOOK_TITLE])],
                     description=[
                         pyosis.DescriptionCt(
-                            value="The Book of Jasher from the 1887 English edition published by J.H. Parry & Company. Transcribed at sacred-texts.com and converted to OSIS in this repository."
+                            value="The Book of Jasher from the 1887 English edition published by J.H. Parry & Company. Transcribed at sacred-texts.com and converted to OSIS by the open-canon-site scrapers."
                         )
                     ],
                     type_value=[pyosis.TypeCt(type_value="OSIS", content=["Bible"])],
@@ -412,27 +405,27 @@ class JasherParser:
         return self.generate_osis(front_matter, chapters)
 
 
-def main(
-    output: str = DEFAULT_OUTPUT,
-    delay: float = 1.5,
-    cache_dir: str = ".cache/html",
-    log_level: str = "INFO",
-) -> None:
-    """Download and convert the Book of Jasher to OSIS XML."""
-    logging.basicConfig(
-        level=getattr(logging, log_level.upper()),
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    )
+def add_arguments(parser: argparse.ArgumentParser) -> None:
+    """jasher has no scraper-specific options."""
 
-    parser = JasherParser(cache_dir=cache_dir if cache_dir else None, delay=delay)
+
+def run(args: argparse.Namespace) -> list[Path]:
+    parser = JasherParser(cache_dir=args.cache_dir, delay=args.delay)
     try:
         osis_doc = parser.process()
-        output_path = Path(output)
+        output_path = Path(args.output_dir) / OUTPUT_FILENAME
         output_path.parent.mkdir(parents=True, exist_ok=True)
         output_path.write_text(osis_doc.to_xml(), encoding="utf-8")
     finally:
         parser.close()
+    return [output_path]
 
 
-if __name__ == "__main__":
-    fire.Fire(main)
+SPEC = ScraperSpec(
+    name="jasher",
+    help="Book of Jasher (1887 Parry & Company edition) to OSIS",
+    source="https://sacred-texts.com/chr/apo/jasher/",
+    outputs=(OUTPUT_FILENAME,),
+    run=run,
+    add_arguments=add_arguments,
+)

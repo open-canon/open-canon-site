@@ -1,18 +1,17 @@
 from __future__ import annotations
 
+import argparse
 import importlib
 import re
-import sys
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
 import pytest
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-SRC_ROOT = REPO_ROOT / "src"
-DOCUMENTS_DIR = REPO_ROOT / "documents"
-PACKAGE_JASHER_MODULE = "1_enoch_osis.scrape_jasher"
+REPO_ROOT = Path(__file__).resolve().parents[3]
+DOCUMENTS_DIR = REPO_ROOT / "open-canon-osis-documents"
+PACKAGE_MODULE = "open_canon_site.scrapers.sacred_texts.jasher"
 SOURCE_CACHE_DIR = REPO_ROOT / ".cache" / "html"
 INDEX_CACHE_FILE = SOURCE_CACHE_DIR / "sacred-texts.com" / "chr" / "apo" / "jasher" / "index.htm"
 SNAPSHOT_FILE = "jasher.xml"
@@ -23,23 +22,27 @@ EVERSION_DATE_PATTERN = re.compile(
 )
 
 
+# The committed snapshots predate the move into open-canon-site and name the old
+# repository in their provenance notes; the scrapers now name open-canon-site.
+OLD_PROVENANCE = "converted to OSIS in this repository."
+NEW_PROVENANCE = "converted to OSIS by the open-canon-site scrapers."
+
+
 def normalize_osis_snapshot(xml: str) -> str:
-    normalized = xml.replace("\r\n", "\n")
+    normalized = xml.replace("\r\n", "\n").replace(OLD_PROVENANCE, NEW_PROVENANCE)
     return EVERSION_DATE_PATTERN.sub(r"\1SCRAPE_TIMESTAMP\2", normalized)
 
 
 @lru_cache(maxsize=1)
 def load_scrape_jasher_main() -> Any:
-    if str(SRC_ROOT) not in sys.path:
-        sys.path.insert(0, str(SRC_ROOT))
-
-    module = importlib.import_module(PACKAGE_JASHER_MODULE)
-    return module.main
+    return importlib.import_module(PACKAGE_MODULE).run
 
 
 @pytest.fixture(scope="session")
 def generated_jasher_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
-    module = importlib.import_module(PACKAGE_JASHER_MODULE)
+    if not (DOCUMENTS_DIR / SNAPSHOT_FILE).exists():
+        pytest.skip(f"Missing committed snapshot: {SNAPSHOT_FILE}")
+    module = importlib.import_module(PACKAGE_MODULE)
 
     if not INDEX_CACHE_FILE.exists():
         pytest.skip(f"Missing Jasher index cache: {INDEX_CACHE_FILE}")
@@ -83,10 +86,7 @@ def generated_jasher_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
     scrape_jasher_main = load_scrape_jasher_main()
 
     scrape_jasher_main(
-        output=str(output_path),
-        delay=0,
-        cache_dir=str(SOURCE_CACHE_DIR),
-        log_level="WARNING",
+        argparse.Namespace(output_dir=output_dir, cache_dir=SOURCE_CACHE_DIR, delay=0)
     )
     return output_path
 

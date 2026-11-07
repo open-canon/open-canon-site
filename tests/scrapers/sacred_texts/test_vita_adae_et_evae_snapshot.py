@@ -1,18 +1,17 @@
 from __future__ import annotations
 
+import argparse
 import importlib
 import re
-import sys
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
 import pytest
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-SRC_ROOT = REPO_ROOT / "src"
-DOCUMENTS_DIR = REPO_ROOT / "documents"
-PACKAGE_VITA_MODULE = "1_enoch_osis.scrape_vita_adae_et_evae"
+REPO_ROOT = Path(__file__).resolve().parents[3]
+DOCUMENTS_DIR = REPO_ROOT / "open-canon-osis-documents"
+PACKAGE_MODULE = "open_canon_site.scrapers.sacred_texts.vita_adae_et_evae"
 SOURCE_CACHE_DIR = REPO_ROOT / ".cache" / "html"
 SNAPSHOT_FILE = "vita-adae-et-evae.xml"
 EVERSION_DATE_PATTERN = re.compile(
@@ -22,23 +21,27 @@ EVERSION_DATE_PATTERN = re.compile(
 )
 
 
+# The committed snapshots predate the move into open-canon-site and name the old
+# repository in their provenance notes; the scrapers now name open-canon-site.
+OLD_PROVENANCE = "converted to OSIS in this repository."
+NEW_PROVENANCE = "converted to OSIS by the open-canon-site scrapers."
+
+
 def normalize_osis_snapshot(xml: str) -> str:
-    normalized = xml.replace("\r\n", "\n")
+    normalized = xml.replace("\r\n", "\n").replace(OLD_PROVENANCE, NEW_PROVENANCE)
     return EVERSION_DATE_PATTERN.sub(r"\1SCRAPE_TIMESTAMP\2", normalized)
 
 
 @lru_cache(maxsize=1)
 def load_scrape_vita_main() -> Any:
-    if str(SRC_ROOT) not in sys.path:
-        sys.path.insert(0, str(SRC_ROOT))
-
-    module = importlib.import_module(PACKAGE_VITA_MODULE)
-    return module.main
+    return importlib.import_module(PACKAGE_MODULE).run
 
 
 @pytest.fixture(scope="session")
 def generated_vita_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
-    source_cache_path = SOURCE_CACHE_DIR / "www.sacred-texts.com" / "chr" / "apo" / "adamnev.htm"
+    if not (DOCUMENTS_DIR / SNAPSHOT_FILE).exists():
+        pytest.skip(f"Missing committed snapshot: {SNAPSHOT_FILE}")
+    source_cache_path = SOURCE_CACHE_DIR / "sacred-texts.com" / "chr" / "apo" / "adamnev.htm"
     if not source_cache_path.exists():
         pytest.skip(f"Missing local Vita HTML cache at {source_cache_path}")
 
@@ -46,12 +49,7 @@ def generated_vita_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
     output_path = output_dir / SNAPSHOT_FILE
     scrape_vita_main = load_scrape_vita_main()
 
-    scrape_vita_main(
-        output=str(output_path),
-        delay=0,
-        cache_dir=str(SOURCE_CACHE_DIR),
-        log_level="WARNING",
-    )
+    scrape_vita_main(argparse.Namespace(output_dir=output_dir, cache_dir=SOURCE_CACHE_DIR, delay=0))
     return output_path
 
 
