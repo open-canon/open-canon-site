@@ -4,7 +4,8 @@ import warnings
 
 import bs4
 import pyosis.generated
-from churchstudy_to_osis.build_osis import extract_markup
+
+from open_canon_site.scrapers.churchofjesuschrist.build_osis import extract_markup
 
 
 def test_translit_span_with_lang() -> None:

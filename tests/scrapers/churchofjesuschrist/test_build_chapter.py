@@ -1,8 +1,9 @@
 """Unit tests for build_chapter title handling."""
 
 import pyosis.generated
-from churchstudy_to_osis.build_osis import build_chapter
-from churchstudy_to_osis.church_website_models import Content, Meta, ScriptureStudyContent
+
+from open_canon_site.scrapers.churchofjesuschrist.build_osis import build_chapter
+from open_canon_site.scrapers.churchofjesuschrist.models import Content, Meta, ScriptureStudyContent
 
 
 def _make_scripture_content(body: str) -> ScriptureStudyContent:

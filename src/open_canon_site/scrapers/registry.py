@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from open_canon_site.scrapers.base import ScraperSpec
+from open_canon_site.scrapers.churchofjesuschrist.standard_works import SPEC as LDS_STANDARD_WORKS
 from open_canon_site.scrapers.ebible.kjv_apocrypha import SPEC as KJV_APOCRYPHA
 from open_canon_site.scrapers.sacred_texts.enoch import SPEC as ENOCH
 from open_canon_site.scrapers.sacred_texts.forgotten_books_of_eden import (
@@ -23,6 +24,7 @@ SCRAPERS: tuple[ScraperSpec, ...] = (
     JASHER,
     JUBILEES,
     VITA_ADAE_ET_EVAE,
+    LDS_STANDARD_WORKS,
 )
 """All registered scrapers in the order ``open-canon-scrape all`` runs them."""
 
