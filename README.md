@@ -60,6 +60,35 @@ If you provide a custom collections file with `--collections`, the collections
 themselves follow the JSON array order, and the books within each collection
 follow the `work_ids` list order.
 
+## Scrapers
+
+The repository also ships scrapers that fetch public-domain texts and write the OSIS XML
+documents the site build reads. They are optional; the core site install does not need them.
+
+```bash
+uv sync --extra scrapers            # or: pip install open-canon-site[scrapers]
+
+uv run open-canon-scrape list                       # show available scrapers
+uv run open-canon-scrape <scraper> --help           # scraper-specific options
+uv run open-canon-scrape <scraper> -o open-canon-osis-documents
+uv run open-canon-scrape all --no-cache             # run every scraper with defaults
+```
+
+Common options (accepted by every scraper and by `all`):
+
+| option | default | meaning |
+|---|---|---|
+| `-o`, `--output-dir DIR` | `open-canon-osis-documents` | where OSIS XML files are written |
+| `--cache-dir DIR` | `.cache/html` | cache of downloaded pages |
+| `--no-cache` | off | disable the cache |
+| `--delay SECONDS` | `1.5` | politeness delay between requests |
+| `--log-level LEVEL` | `INFO` | `DEBUG`, `INFO`, `WARNING` or `ERROR` |
+
+| subcommand | source | outputs |
+|---|---|---|
+
+Tests that hit the network are skipped unless `OPEN_CANON_NETWORK_TESTS=1` is set.
+
 ## Project layout
 
 ```text
