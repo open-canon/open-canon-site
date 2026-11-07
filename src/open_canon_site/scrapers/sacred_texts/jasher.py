@@ -242,9 +242,7 @@ class JasherParser:
         heading, content_html = cls._extract_content_after_heading(raw_html)
         heading_match = CHAPTER_HEADING_RE.search(heading)
         if not heading_match:
-            raise RuntimeError(
-                f"Could not determine Jasher chapter from heading: {heading}"
-            )
+            raise RuntimeError(f"Could not determine Jasher chapter from heading: {heading}")
 
         actual_chapter_number = int(heading_match.group("chapter"))
         if actual_chapter_number != chapter_number:
@@ -313,10 +311,7 @@ class JasherParser:
                             canonical=False,
                             content=[section.title],
                         ),
-                        *[
-                            pyosis.PCt(content=[paragraph])
-                            for paragraph in section.paragraphs
-                        ],
+                        *[pyosis.PCt(content=[paragraph]) for paragraph in section.paragraphs],
                     ],
                 )
             )

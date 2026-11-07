@@ -62,9 +62,7 @@ def test_scrape_sacred_texts_matches_snapshot(generated_1_enoch_output: Path) ->
     assert generated_1_enoch_output.exists(), "Missing generated 1 Enoch snapshot"
     assert expected_path.exists(), f"Missing committed snapshot: {SNAPSHOT_FILE}"
 
-    actual_xml = normalize_osis_snapshot(
-        generated_1_enoch_output.read_text(encoding="utf-8")
-    )
+    actual_xml = normalize_osis_snapshot(generated_1_enoch_output.read_text(encoding="utf-8"))
     expected_xml = normalize_osis_snapshot(expected_path.read_text(encoding="utf-8"))
 
     assert actual_xml == expected_xml

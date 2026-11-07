@@ -14,9 +14,7 @@ SRC_ROOT = REPO_ROOT / "src"
 DOCUMENTS_DIR = REPO_ROOT / "documents"
 PACKAGE_JUBILEES_MODULE = "1_enoch_osis.scrape_jubilees"
 SOURCE_CACHE_DIR = REPO_ROOT / ".cache" / "html"
-JUBILEES_CACHE_FILE = (
-    SOURCE_CACHE_DIR / "sacred-texts.com" / "bib" / "jub" / "jub00.htm"
-)
+JUBILEES_CACHE_FILE = SOURCE_CACHE_DIR / "sacred-texts.com" / "bib" / "jub" / "jub00.htm"
 SNAPSHOT_FILE = "jubilees.xml"
 EVERSION_DATE_PATTERN = re.compile(
     r'(<date event="eversion" type="ISO" xml:lang="en" TEIform="date">)'
@@ -46,11 +44,7 @@ def generated_jubilees_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
     invalid_cache_files = []
     for page_number in range(module.PAGE_RANGE[0], module.PAGE_RANGE[1] + 1):
         cache_file = (
-            SOURCE_CACHE_DIR
-            / "sacred-texts.com"
-            / "bib"
-            / "jub"
-            / f"jub{page_number:02d}.htm"
+            SOURCE_CACHE_DIR / "sacred-texts.com" / "bib" / "jub" / f"jub{page_number:02d}.htm"
         )
         if not cache_file.exists():
             missing_cache_files.append(cache_file)
@@ -62,8 +56,7 @@ def generated_jubilees_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
     if missing_cache_files:
         pytest.skip(
-            "Missing complete local Jubilees cache; first missing file: "
-            f"{missing_cache_files[0]}"
+            f"Missing complete local Jubilees cache; first missing file: {missing_cache_files[0]}"
         )
 
     if invalid_cache_files:
@@ -91,9 +84,7 @@ def test_scrape_jubilees_matches_snapshot(generated_jubilees_output: Path) -> No
     assert generated_jubilees_output.exists(), "Missing generated Jubilees snapshot"
     assert expected_path.exists(), f"Missing committed snapshot: {SNAPSHOT_FILE}"
 
-    actual_xml = normalize_osis_snapshot(
-        generated_jubilees_output.read_text(encoding="utf-8")
-    )
+    actual_xml = normalize_osis_snapshot(generated_jubilees_output.read_text(encoding="utf-8"))
     expected_xml = normalize_osis_snapshot(expected_path.read_text(encoding="utf-8"))
 
     assert actual_xml == expected_xml

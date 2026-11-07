@@ -143,25 +143,17 @@ class VitaAdaeEtEvaeParser:
                 re.IGNORECASE | re.DOTALL,
             )
             if not main_match:
-                raise RuntimeError(
-                    "Could not locate Vita Adae et Evae body in source HTML"
-                )
+                raise RuntimeError("Could not locate Vita Adae et Evae body in source HTML")
 
             body = main_match.group("body")
-            source_match = re.search(
-                r"<b>(?P<source>.*?)</b>", body, re.IGNORECASE | re.DOTALL
-            )
+            source_match = re.search(r"<b>(?P<source>.*?)</b>", body, re.IGNORECASE | re.DOTALL)
             if not source_match:
                 raise RuntimeError("Could not locate Vita Adae et Evae source heading")
 
             source_text = normalize_whitespace(
-                cls._strip_html_fragment(
-                    source_match.group("source"), line_breaks=False
-                )
+                cls._strip_html_fragment(source_match.group("source"), line_breaks=False)
             )
-            content_text = cls._strip_html_fragment(
-                body[source_match.end() :], line_breaks=True
-            )
+            content_text = cls._strip_html_fragment(body[source_match.end() :], line_breaks=True)
             normalized_source, content_lines = cls._normalize_content_lines(
                 f"{source_text}\n\n{content_text}"
             )
@@ -172,9 +164,7 @@ class VitaAdaeEtEvaeParser:
 
         title_marker = "## VITA ADAE ET EVAE"
         if title_marker not in text:
-            raise RuntimeError(
-                "Could not locate Vita Adae et Evae title in source text"
-            )
+            raise RuntimeError("Could not locate Vita Adae et Evae title in source text")
 
         text = text.split(title_marker, 1)[1]
 
@@ -226,9 +216,7 @@ class VitaAdaeEtEvaeParser:
                 current_chapter,
                 Chapter(number=current_chapter, verses=[]),
             )
-            chapter.verses.append(
-                VerseBlock(verse_numbers=verse_numbers, text=verse_text)
-            )
+            chapter.verses.append(VerseBlock(verse_numbers=verse_numbers, text=verse_text))
             current_block = []
 
         for line in lines:
@@ -238,9 +226,7 @@ class VitaAdaeEtEvaeParser:
                 continue
 
             if not current_block:
-                raise RuntimeError(
-                    f"Unexpected continuation without verse marker: {line}"
-                )
+                raise RuntimeError(f"Unexpected continuation without verse marker: {line}")
 
             current_block.append(line)
 

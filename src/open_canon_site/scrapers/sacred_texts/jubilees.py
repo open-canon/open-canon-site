@@ -66,13 +66,9 @@ HEADING_CHAPTER_RE: Final[re.Pattern[str]] = re.compile(
 RANGE_LINE_RE: Final[re.Pattern[str]] = re.compile(
     r"^\((?P<chapter>[ivxlcdm]+)\..*\)\.?$", re.IGNORECASE
 )
-CHAPTER_LINE_RE: Final[re.Pattern[str]] = re.compile(
-    r"^(?P<chapter>[IVXLCDM]+)\.\s+(?P<text>.+)$"
-)
+CHAPTER_LINE_RE: Final[re.Pattern[str]] = re.compile(r"^(?P<chapter>[IVXLCDM]+)\.\s+(?P<text>.+)$")
 VERSE_LINE_RE: Final[re.Pattern[str]] = re.compile(r"^(?P<verse>\d+)\.\s+(?P<text>.+)$")
-INLINE_VERSE_RE: Final[re.Pattern[str]] = re.compile(
-    r"(?:(?<=^)|(?<=\s))(?P<verse>\d+)\.\s+"
-)
+INLINE_VERSE_RE: Final[re.Pattern[str]] = re.compile(r"(?:(?<=^)|(?<=\s))(?P<verse>\d+)\.\s+")
 JOIN_WITH_PREVIOUS_PREFIXES: Final[tuple[str, ...]] = (
     "and ",
     "or ",
@@ -160,9 +156,7 @@ class JubileesParser:
             if self.is_valid_page(cached):
                 return cached
 
-            LOGGER.warning(
-                "Discarding invalid cached Jubilees source at %s", cache_path
-            )
+            LOGGER.warning("Discarding invalid cached Jubilees source at %s", cache_path)
             cache_path.unlink()
 
         fetched = self.http.fetch_text(url=url, retry_count=retry_count)
@@ -365,9 +359,7 @@ class JubileesParser:
 
         return footnotes
 
-    def extract_page_components(
-        self, raw_text: str
-    ) -> tuple[list[str], list[PageParagraph]]:
+    def extract_page_components(self, raw_text: str) -> tuple[list[str], list[PageParagraph]]:
         if not self.is_valid_page(raw_text):
             raise RuntimeError(
                 "Jubilees scraper expects original sacred-texts HTML, not mirror-derived markdown or interstitial pages"
@@ -408,9 +400,7 @@ class JubileesParser:
                 headings.append(cleaned)
                 continue
 
-            paragraph = self.make_paragraph(
-                self.parse_inline_content(element, footnotes)
-            )
+            paragraph = self.make_paragraph(self.parse_inline_content(element, footnotes))
             if paragraph is None:
                 continue
 
@@ -438,9 +428,7 @@ class JubileesParser:
                 continue
 
             if self.should_join_with_previous(line.text, paragraphs[-1].text):
-                paragraphs[-1].text = normalize_whitespace(
-                    f"{paragraphs[-1].text} {line.text}"
-                )
+                paragraphs[-1].text = normalize_whitespace(f"{paragraphs[-1].text} {line.text}")
                 paragraphs[-1].content_parts = self.consolidate_parts(
                     paragraphs[-1].content_parts + [" "] + line.content_parts
                 )
@@ -450,9 +438,7 @@ class JubileesParser:
 
         return paragraphs
 
-    def parse_front_matter_page(
-        self, page_number: int, raw_text: str
-    ) -> FrontMatterSection:
+    def parse_front_matter_page(self, page_number: int, raw_text: str) -> FrontMatterSection:
         headings, content_lines = self.extract_page_components(raw_text)
         title = FRONT_MATTER_TITLES[page_number]
 
@@ -473,17 +459,11 @@ class JubileesParser:
                 duplicate_lines.add(normalized_part.upper())
 
         paragraphs = [
-            line
-            for line in self.build_paragraphs(body_lines)
-            if line.text not in duplicate_lines
+            line for line in self.build_paragraphs(body_lines) if line.text not in duplicate_lines
         ]
-        return FrontMatterSection(
-            page_number=page_number, title=title, paragraphs=paragraphs
-        )
+        return FrontMatterSection(page_number=page_number, title=title, paragraphs=paragraphs)
 
-    def extract_chapter_number(
-        self, title: str, content_lines: list[PageParagraph]
-    ) -> int:
+    def extract_chapter_number(self, title: str, content_lines: list[PageParagraph]) -> int:
         title_match = HEADING_CHAPTER_RE.search(title)
         if title_match:
             return roman_to_int(title_match.group("chapter"))
@@ -497,9 +477,7 @@ class JubileesParser:
             if chapter_match:
                 return roman_to_int(chapter_match.group("chapter"))
 
-        raise RuntimeError(
-            f"Could not determine Jubilees chapter from section title: {title}"
-        )
+        raise RuntimeError(f"Could not determine Jubilees chapter from section title: {title}")
 
     def parse_verses(
         self,
@@ -514,14 +492,11 @@ class JubileesParser:
         lines = [
             line
             for line in lines
-            if line.text
-            != "Herewith is completed the account of the division of the days."
+            if line.text != "Herewith is completed the account of the division of the days."
         ]
 
         if not lines:
-            raise RuntimeError(
-                f"No Jubilees content paragraphs remained on page {page_number}"
-            )
+            raise RuntimeError(f"No Jubilees content paragraphs remained on page {page_number}")
 
         chapter_match = CHAPTER_LINE_RE.match(lines[0].text)
         if chapter_match:
@@ -535,9 +510,7 @@ class JubileesParser:
             replaced = False
             for part in lines[0].content_parts:
                 if not replaced and isinstance(part, str):
-                    new_part, count = re.subn(
-                        r"^\s*[IVXLCDM]+\.\s+", "1. ", part, count=1
-                    )
+                    new_part, count = re.subn(r"^\s*[IVXLCDM]+\.\s+", "1. ", part, count=1)
                     if count:
                         rewritten_parts.append(new_part)
                         replaced = True
@@ -623,9 +596,7 @@ class JubileesParser:
     def parse_section_page(self, page_number: int, raw_text: str) -> Section:
         headings, content_lines = self.extract_page_components(raw_text)
         if not headings:
-            raise RuntimeError(
-                f"Missing section heading for Jubilees page {page_number}"
-            )
+            raise RuntimeError(f"Missing section heading for Jubilees page {page_number}")
 
         title = headings[0]
         chapter_number = self.extract_chapter_number(title, content_lines)
@@ -659,9 +630,7 @@ class JubileesParser:
 
         for section in front_matter:
             div_type = (
-                pyosis.OsisDivs.TITLE_PAGE
-                if section.page_number == 0
-                else pyosis.OsisDivs.FRONT
+                pyosis.OsisDivs.TITLE_PAGE if section.page_number == 0 else pyosis.OsisDivs.FRONT
             )
             book_div.content.append(
                 pyosis.DivCt(
@@ -772,9 +741,7 @@ class JubileesParser:
                         )
                     ],
                     publisher=[
-                        pyosis.PublisherCt(
-                            value="Society for Promoting Christian Knowledge"
-                        )
+                        pyosis.PublisherCt(value="Society for Promoting Christian Knowledge")
                     ],
                 )
             ],
