@@ -1,13 +1,3 @@
-# /// script
-# requires-python = ">=3.13"
-# dependencies = [
-#     "beautifulsoup4",
-#     "fire",
-#     "httpx",
-#     "pyosis",
-#     "tqdm",
-# ]
-# ///
 """Download and parse The Forgotten Books of Eden from sacred-texts.com to OSIS XML.
 
 Scrapes https://sacred-texts.com/bib/fbe/ and produces OSIS XML files for the
@@ -24,6 +14,7 @@ following works:
 
 from __future__ import annotations
 
+import argparse
 import logging
 import re
 from dataclasses import dataclass
@@ -31,29 +22,28 @@ from datetime import datetime
 from pathlib import Path
 from typing import Final
 
-import fire
 import pyosis
 from bs4 import BeautifulSoup, NavigableString, Tag
 from tqdm import tqdm
 
-from .http_client import CachedHttpFetcher
-from .osis_parsing import (
+from open_canon_site.scrapers._http import CachedHttpFetcher
+from open_canon_site.scrapers._osis import (
     InlinePart,
     consolidate_inline_strings,
     extract_plain_text,
     is_navigation_text,
     parse_page_marker_text,
 )
-from .osis_parsing import (
+from open_canon_site.scrapers._osis import (
     roman_to_int as shared_roman_to_int,
 )
+from open_canon_site.scrapers.base import ScraperSpec
 
 LOGGER = logging.getLogger(__name__)
 
 BASE_URL: Final[str] = "https://sacred-texts.com/bib/fbe/"
 FILE_PREFIX: Final[str] = "fbe"
 FILE_RANGE: Final[tuple[int, int]] = (0, 295)
-DEFAULT_OUTPUT_DIR: Final[str] = "documents"
 
 
 # ---------------------------------------------------------------------------
@@ -1338,42 +1328,57 @@ class FBEParser:
 # ---------------------------------------------------------------------------
 
 
-def main(
-    output_dir: str = DEFAULT_OUTPUT_DIR,
-    start_page: int = FILE_RANGE[0],
-    end_page: int = FILE_RANGE[1],
-    delay: float = 1.5,
-    cache_dir: str = ".cache/html",
-    log_level: str = "INFO",
-) -> None:
-    """Download and convert The Forgotten Books of Eden to OSIS XML.
+OUTPUT_FILENAMES: Final[tuple[str, ...]] = (
+    "adam-and-eve.xml",
+    "2-enoch.xml",
+    "psalms-of-solomon.xml",
+    "odes-of-solomon.xml",
+    "letter-of-aristeas.xml",
+    "4-maccabees.xml",
+    "story-of-ahikar.xml",
+    "testaments-twelve-patriarchs.xml",
+)
 
-    Args:
-        output_dir: Directory to write output XML files (default: documents)
-        start_page: First page number to fetch (default: 0)
-        end_page: Last page number to fetch (default: 295)
-        delay: Delay in seconds between HTTP requests (default: 1.5)
-        cache_dir: Directory for caching downloaded HTML (default: .cache/html, '' to disable)
-        log_level: Logging level: DEBUG, INFO, WARNING, ERROR
-    """
-    logging.basicConfig(
-        level=getattr(logging, log_level.upper()),
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+
+def add_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument(
+        "--start-page",
+        type=int,
+        default=FILE_RANGE[0],
+        help="first page number to fetch (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--end-page",
+        type=int,
+        default=FILE_RANGE[1],
+        help="last page number to fetch (default: %(default)s)",
     )
 
-    parser = FBEParser(cache_dir=cache_dir if cache_dir else None, delay=delay)
+
+def run(args: argparse.Namespace) -> list[Path]:
+    output_dir = Path(args.output_dir)
+    parser = FBEParser(cache_dir=args.cache_dir, delay=args.delay)
 
     try:
-        LOGGER.info("Processing pages %d–%d with %.1fs delay", start_page, end_page, delay)
+        LOGGER.info(
+            "Processing pages %d–%d with %.1fs delay", args.start_page, args.end_page, args.delay
+        )
         parser.process_all(
-            output_dir=output_dir,
-            start_page=start_page,
-            end_page=end_page,
+            output_dir=str(output_dir),
+            start_page=args.start_page,
+            end_page=args.end_page,
         )
         LOGGER.info("Done!")
     finally:
         parser.close()
+    return [output_dir / name for name in OUTPUT_FILENAMES if (output_dir / name).exists()]
 
 
-if __name__ == "__main__":
-    fire.Fire(main)
+SPEC = ScraperSpec(
+    name="forgotten-books-of-eden",
+    help="The Forgotten Books of Eden (eight works) to OSIS",
+    source="https://sacred-texts.com/bib/fbe/",
+    outputs=OUTPUT_FILENAMES,
+    run=run,
+    add_arguments=add_arguments,
+)

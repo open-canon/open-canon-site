@@ -1,4 +1,4 @@
-"""Unit tests for the verse-splitting helpers in scrape_sacred_texts.
+"""Unit tests for the verse-splitting helpers in sacred_texts.enoch.
 
 These tests exercise split_multi_verse_content(), split_multi_verse_poetry_lines(),
 and the parse_page() handling of unnumbered poetry paragraphs directly and do NOT
@@ -8,19 +8,11 @@ require a network connection or HTML cache.
 from __future__ import annotations
 
 import importlib
-import sys
-from pathlib import Path
 
 import pyosis
 import pytest
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-SRC_ROOT = REPO_ROOT / "src"
-
-if str(SRC_ROOT) not in sys.path:
-    sys.path.insert(0, str(SRC_ROOT))
-
-_mod = importlib.import_module("1_enoch_osis.scrape_sacred_texts")
+_mod = importlib.import_module("open_canon_site.scrapers.sacred_texts.enoch")
 SacredTextsParser = _mod.SacredTextsParser
 
 
@@ -99,7 +91,6 @@ class TestSplitMultiVerseContent:
         # hi should appear in verse 1
         assert any(isinstance(p, pyosis.HiCt) for p in v1_parts)
         # hi's tail in v1 should be cut before " 2. "
-        hi_in_v1 = next(p for p in v1_parts if isinstance(p, pyosis.HiCt))
         # The string after hi in verse 1 should not contain "Verse 2"
         v1_text = " ".join(p for p in v1_parts if isinstance(p, str))
         assert "Verse 2" not in v1_text

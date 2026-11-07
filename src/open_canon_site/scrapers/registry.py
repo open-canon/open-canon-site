@@ -4,12 +4,26 @@ from __future__ import annotations
 
 from open_canon_site.scrapers.base import ScraperSpec
 from open_canon_site.scrapers.ebible.kjv_apocrypha import SPEC as KJV_APOCRYPHA
+from open_canon_site.scrapers.sacred_texts.enoch import SPEC as ENOCH
+from open_canon_site.scrapers.sacred_texts.forgotten_books_of_eden import (
+    SPEC as FORGOTTEN_BOOKS_OF_EDEN,
+)
+from open_canon_site.scrapers.sacred_texts.jasher import SPEC as JASHER
+from open_canon_site.scrapers.sacred_texts.jubilees import SPEC as JUBILEES
+from open_canon_site.scrapers.sacred_texts.vita_adae_et_evae import SPEC as VITA_ADAE_ET_EVAE
 
 # Each port layer adds one import line per scraper and appends its SPEC below, e.g.:
 #   from open_canon_site.scrapers.ebible.kjv_apocrypha import SPEC as KJV_APOCRYPHA
 # Order matters: `open-canon-scrape all` runs scrapers in this order.
 
-SCRAPERS: tuple[ScraperSpec, ...] = (KJV_APOCRYPHA,)
+SCRAPERS: tuple[ScraperSpec, ...] = (
+    KJV_APOCRYPHA,
+    ENOCH,
+    FORGOTTEN_BOOKS_OF_EDEN,
+    JASHER,
+    JUBILEES,
+    VITA_ADAE_ET_EVAE,
+)
 """All registered scrapers in the order ``open-canon-scrape all`` runs them."""
 
 
