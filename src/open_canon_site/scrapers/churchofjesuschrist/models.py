@@ -2,14 +2,17 @@
 Latter-day Saints website.
 """
 
+from __future__ import annotations
+
 import re
-from typing import Any, TypeVar
+from typing import Any, Optional, TypeVar, Union
 
 import bs4
 import httpx
 import pydantic
 
 # ruff: noqa: N815
+# NOTE: pydantic evaluates annotations at runtime, so Optional/Union (not `X | Y`) are required on Python 3.9.
 
 
 class RedirectionError(ValueError):
@@ -30,7 +33,7 @@ class Meta(pydantic.BaseModel):
     title: str
     canonicalUrl: str
     contentType: str  # "text/html"
-    audio: list[Audio] | None = None
+    audio: Optional[list[Audio]] = None  # noqa: UP007, UP045
     pageAttributes: Any
     # "pageAttributes": {
     #     "data-asset-id": "34085354c9883ef35ff0623e36634ee00725eca2",  # pragma: allowlist secret
@@ -105,12 +108,12 @@ class ContentApiResponse(pydantic.BaseModel):
     content: list[ContentApiContent]
     headline: str
     publication: str
-    referenceURIDisplayText: str | Any
-    referenceURI: str | Any
+    referenceURIDisplayText: Union[str, Any]  # noqa: UP007, UP045
+    referenceURI: Union[str, Any]  # noqa: UP007, UP045
     type: str
     uri: str
     image: Any
-    idNotationUri: str | Any = ""
+    idNotationUri: Union[str, Any] = ""  # noqa: UP007, UP045
 
 
 BookOfMormonBooksUri = {

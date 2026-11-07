@@ -8,8 +8,13 @@ import httpx
 import pyosis.generated
 import pyosis.serialization
 import tqdm.auto
-from churchstudy_to_osis import church_website_models
-from churchstudy_to_osis.build_osis import build_book, clean_up_html, extract_markup
+
+from open_canon_site.scrapers.churchofjesuschrist import models as church_website_models
+from open_canon_site.scrapers.churchofjesuschrist.build_osis import (
+    build_book,
+    clean_up_html,
+    extract_markup,
+)
 
 
 async def _build_nt_front_matter_div(
@@ -133,7 +138,7 @@ def build_new_testament_header(lang: str, client: httpx.AsyncClient) -> pyosis.g
                 pyosis.generated.PCt(
                     content=[
                         "Scraped from churchofjesuschrist.org, and converted to OSIS by the"
-                        " churchstudy-to-osis Python package."
+                        " open-canon-site scrapers."
                     ]
                 )
             ],

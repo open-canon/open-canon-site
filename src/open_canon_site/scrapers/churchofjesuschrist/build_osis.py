@@ -1,18 +1,21 @@
 """Build OSIS XML files."""
 
+from __future__ import annotations
+
 import asyncio
 import copy
 import warnings
-from typing import TypeAlias, cast
+from typing import cast
 
 import bs4
 import bs4._typing
 import bs4.element
 import httpx
 import pyosis.generated
-from churchstudy_to_osis import church_website_models
 
-OneElement: TypeAlias = bs4._typing._OneElement  # pyright: ignore[reportPrivateUsage]
+from open_canon_site.scrapers.churchofjesuschrist import models as church_website_models
+
+OneElement = bs4._typing._OneElement  # pyright: ignore[reportPrivateUsage]
 
 
 def clean_up_html(html: bs4.BeautifulSoup) -> bs4.BeautifulSoup:
@@ -242,7 +245,7 @@ def extract_markup(
         # Unknown span class — pass through contents with a warning
         warnings.warn(
             f"Unknown span class(es) {tag.attrs.get('class')} parsed, contents passed through. "
-            "Please report this to the churchstudy-to-osis project.\n"
+            "Please report this to the open-canon-site project.\n"
             f"Element in question:\n{str(tag)[:120]}..."
         )
         return extract_children(tag)
@@ -387,7 +390,7 @@ def extract_markup(
             return []
         warnings.warn(
             f"Unknown Div tag {tag} parsed, but probably incorrectly. "
-            "Please report this to the churchstudy-to-osis project."
+            "Please report this to the open-canon-site project."
         )
         return [
             pyosis.generated.DivCt(
