@@ -1,7 +1,6 @@
 """Unit tests for build_chapter title handling."""
 
 import pyosis.generated
-
 from churchstudy_to_osis.build_osis import build_chapter
 from churchstudy_to_osis.church_website_models import Content, Meta, ScriptureStudyContent
 
@@ -39,7 +38,9 @@ _BODY_WITHOUT_TITLE = """
 def test_build_chapter_title_with_short_name() -> None:
     """build_chapter emits TitleCt(type=main, short=book_short_name) when book_short_name is given."""
     sc = _make_scripture_content(_BODY_WITH_TITLE)
-    _chapter, front_matter = build_chapter(sc, book_osis_id="1 Nephi", chapter_number=1, book_short_name="1 Nephi")
+    _chapter, front_matter = build_chapter(
+        sc, book_osis_id="1 Nephi", chapter_number=1, book_short_name="1 Nephi"
+    )
 
     assert front_matter is not None
     titles = [item for item in front_matter if isinstance(item, pyosis.generated.TitleCt)]
@@ -64,6 +65,8 @@ def test_build_chapter_title_without_short_name() -> None:
 def test_build_chapter_no_title_tag() -> None:
     """build_chapter produces no front matter when there is no title tag in the HTML."""
     sc = _make_scripture_content(_BODY_WITHOUT_TITLE)
-    _chapter, front_matter = build_chapter(sc, book_osis_id="Gen", chapter_number=2, book_short_name="Genesis")
+    _chapter, front_matter = build_chapter(
+        sc, book_osis_id="Gen", chapter_number=2, book_short_name="Genesis"
+    )
 
     assert front_matter is None

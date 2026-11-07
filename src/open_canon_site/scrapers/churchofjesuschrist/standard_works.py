@@ -19,16 +19,15 @@ import pathlib
 from collections.abc import Awaitable
 from typing import Callable, Literal, TypeVar
 
-import fire  # type: ignore
-import httpx
-import pyosis
-import tqdm.auto
-
 import churchstudy_to_osis.standard_works.book_of_mormon
 import churchstudy_to_osis.standard_works.doctrine_and_covenants
 import churchstudy_to_osis.standard_works.new_testament
 import churchstudy_to_osis.standard_works.old_testament
 import churchstudy_to_osis.standard_works.pearl_of_great_price
+import fire  # type: ignore
+import httpx
+import pyosis
+import tqdm.auto
 
 K = TypeVar("K")
 V = TypeVar("V")
@@ -47,7 +46,9 @@ async def gather_dict(tasks: dict[K, Awaitable[V]]) -> dict[K, V]:
     async def mark(key: K, coro: Awaitable[V]) -> tuple[K, V]:
         return key, await coro
 
-    return {key: result for key, result in await asyncio.gather(*itertools.starmap(mark, tasks.items()))}
+    return {
+        key: result for key, result in await asyncio.gather(*itertools.starmap(mark, tasks.items()))
+    }
 
 
 class AvailableStandardWorks(enum.IntFlag):
@@ -67,7 +68,13 @@ class AvailableStandardWorks(enum.IntFlag):
     NEW_TESTAMENT = enum.auto()
     OLD_TESTAMENT = enum.auto()
     PEARL_OF_GREAT_PRICE = enum.auto()
-    ALL = BOOK_OF_MORMON | DOCTRINE_AND_COVENANTS | NEW_TESTAMENT | OLD_TESTAMENT | PEARL_OF_GREAT_PRICE
+    ALL = (
+        BOOK_OF_MORMON
+        | DOCTRINE_AND_COVENANTS
+        | NEW_TESTAMENT
+        | OLD_TESTAMENT
+        | PEARL_OF_GREAT_PRICE
+    )
 
 
 async def build_standard_works(
@@ -88,7 +95,8 @@ async def build_standard_works(
     client = client or httpx.AsyncClient(timeout=httpx.Timeout(timeout=60.0, pool=None))
 
     standard_works_mapping: dict[
-        AvailableStandardWorks, tuple[pathlib.Path, Callable[[str, httpx.AsyncClient], Awaitable[pyosis.OsisXML]]]
+        AvailableStandardWorks,
+        tuple[pathlib.Path, Callable[[str, httpx.AsyncClient], Awaitable[pyosis.OsisXML]]],
     ] = {
         AvailableStandardWorks.BOOK_OF_MORMON: (
             root_dir / "book_of_mormon.xml",

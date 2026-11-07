@@ -9,7 +9,6 @@ import httpx
 import pyosis.generated
 import pyosis.serialization
 import tqdm.auto
-
 from churchstudy_to_osis import church_website_models
 from churchstudy_to_osis.build_osis import build_book, clean_up_html, extract_markup
 
@@ -44,7 +43,9 @@ async def _build_ot_front_matter_div(
     if title_tag:
         osis_contents.append(
             pyosis.generated.HeadCt(
-                content=extract_markup(title_tag, scripture_content.content.footnotes, no_container=True)
+                content=extract_markup(
+                    title_tag, scripture_content.content.footnotes, no_container=True
+                )
             )
         )
         title_tag.extract()
@@ -83,7 +84,9 @@ async def _build_ot_front_matter_div(
     )
 
 
-async def build_old_testament_front_matter(lang: str, client: httpx.AsyncClient) -> pyosis.generated.DivCt:
+async def build_old_testament_front_matter(
+    lang: str, client: httpx.AsyncClient
+) -> pyosis.generated.DivCt:
     """Build the front matter section for the Old Testament in OSIS format.
 
     Args:

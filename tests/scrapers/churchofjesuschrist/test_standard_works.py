@@ -1,8 +1,7 @@
 """Test that the standard works scraping works as expected."""
 
-import pytest
-
 import churchstudy_to_osis.standard_works.__main__
+import pytest
 
 
 @pytest.mark.asyncio

@@ -4,8 +4,6 @@ import warnings
 
 import bs4
 import pyosis.generated
-import pytest
-
 from churchstudy_to_osis.build_osis import extract_markup
 
 

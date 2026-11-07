@@ -3,7 +3,7 @@ Latter-day Saints website.
 """
 
 import re
-from typing import Any, TypeVar, overload
+from typing import Any, TypeVar
 
 import bs4
 import httpx
@@ -224,7 +224,9 @@ parent_book_uri_mapper: dict[str, tuple[str, dict[str, str]]] = {
 }
 
 
-BASE_STUDY_CONTENT_URL = "https://www.churchofjesuschrist.org/study/api/v3/language-pages/type/content"
+BASE_STUDY_CONTENT_URL = (
+    "https://www.churchofjesuschrist.org/study/api/v3/language-pages/type/content"
+)
 BASE_CONTENT_URL = "https://www.churchofjesuschrist.org/content/api/v3"
 STUDY_CONTENT_URL_FORMAT = f"{BASE_STUDY_CONTENT_URL}?lang={{lang}}&uri={{uri}}"
 BASE_CONTENT_URL_FORMAT = "/{lang}/scriptures/{parent_book_uri}/{book_uri}/{chapter}.{verse}"
@@ -234,7 +236,9 @@ NOTE_ID_REGEX = re.compile(r"note(\d+)(\w+)")
 T = TypeVar("T")
 
 
-def prepare_uri(parent_book: str, book: str | None, chapter: int | None, book_uri: str | None = None) -> str:
+def prepare_uri(
+    parent_book: str, book: str | None, chapter: int | None, book_uri: str | None = None
+) -> str:
     """Prepare the uri for a chapter or verse.
 
     Args:
@@ -286,7 +290,9 @@ async def get_scripture_content(
     return await get_scripture_content_from_uri(lang, uri, client)
 
 
-async def get_chapters_list(lang: str, parent_book: str, book: str, client: httpx.AsyncClient) -> list[int]:
+async def get_chapters_list(
+    lang: str, parent_book: str, book: str, client: httpx.AsyncClient
+) -> list[int]:
     """Fetches a list of chapter numbers for a given book from the church website.
 
     This asynchronous function retrieves the table of contents for a specified book and language,
@@ -336,7 +342,9 @@ async def get_chapters_list(lang: str, parent_book: str, book: str, client: http
     return chapters
 
 
-async def get_scripture_content_from_uri(lang: str, uri: str, client: httpx.AsyncClient) -> ScriptureStudyContent:
+async def get_scripture_content_from_uri(
+    lang: str, uri: str, client: httpx.AsyncClient
+) -> ScriptureStudyContent:
     """Fetches scripture study content from a given URI asynchronously.
 
     This function constructs a URL using the provided language and URI, sends an asynchronous GET request

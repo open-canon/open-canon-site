@@ -8,7 +8,6 @@ import bs4.element
 import httpx
 import pyosis.generated
 import pyosis.serialization
-
 from churchstudy_to_osis import church_website_models
 from churchstudy_to_osis.build_osis import build_book, clean_up_html, extract_markup
 
@@ -50,7 +49,9 @@ async def _build_bom_front_matter_div(
     if title_tag:
         osis_contents.append(
             pyosis.generated.HeadCt(
-                content=extract_markup(title_tag, scripture_content.content.footnotes, no_container=True)
+                content=extract_markup(
+                    title_tag, scripture_content.content.footnotes, no_container=True
+                )
             )
         )
         # We have to remove the title tag from the soup so it doesn't get duplicated in the header
@@ -67,7 +68,11 @@ async def _build_bom_front_matter_div(
         )
         # Only include contents if they are not empty. Strings that are empty or only contain whitespace are not
         # included in the list.
-        header_contents = [content for content in header_contents if not isinstance(content, str) or content.strip()]
+        header_contents = [
+            content
+            for content in header_contents
+            if not isinstance(content, str) or content.strip()
+        ]
         if header_contents:
             osis_contents.append(
                 pyosis.generated.DivCt(
@@ -99,7 +104,10 @@ async def _build_bom_front_matter_div(
         if len(closing_signatures_tags):
             osis_contents.append(
                 pyosis.generated.SignedCt(
-                    content=[pyosis.generated.NameCt(content=[p.get_text()]) for p in closing_signatures_tags]
+                    content=[
+                        pyosis.generated.NameCt(content=[p.get_text()])
+                        for p in closing_signatures_tags
+                    ]
                 )
             )
 
@@ -118,7 +126,9 @@ async def _build_bom_front_matter_div(
     return title_page
 
 
-async def build_book_of_mormon_front_matter(lang: str, client: httpx.AsyncClient) -> pyosis.generated.DivCt:
+async def build_book_of_mormon_front_matter(
+    lang: str, client: httpx.AsyncClient
+) -> pyosis.generated.DivCt:
     """Asynchronously builds the front matter section for the Book of Mormon in OSIS format.
 
     This function gathers various front matter components such as title pages, introduction,
@@ -149,7 +159,9 @@ async def build_book_of_mormon_front_matter(lang: str, client: httpx.AsyncClient
             front_matter_type_value=pyosis.generated.OsisDivs.TITLE_PAGE,
         ),
         # Introduction
-        _build_bom_front_matter_div(lang=lang, book_uri="introduction", client=client, canonical=False),
+        _build_bom_front_matter_div(
+            lang=lang, book_uri="introduction", client=client, canonical=False
+        ),
         # Testimony of Three Witnesses
         _build_bom_front_matter_div(lang=lang, book_uri="three", client=client, canonical=False),
         # Testimony of Eight Witnesses
@@ -157,9 +169,13 @@ async def build_book_of_mormon_front_matter(lang: str, client: httpx.AsyncClient
         # Testimony of the Prophet Joseph Smith
         _build_bom_front_matter_div(lang=lang, book_uri="js", client=client, canonical=False),
         # Brief Explanations about the Book of Mormon
-        _build_bom_front_matter_div(lang=lang, book_uri="explanation", client=client, canonical=False),
+        _build_bom_front_matter_div(
+            lang=lang, book_uri="explanation", client=client, canonical=False
+        ),
         # Illustrations
-        _build_bom_front_matter_div(lang=lang, book_uri="illustrations", client=client, canonical=False),
+        _build_bom_front_matter_div(
+            lang=lang, book_uri="illustrations", client=client, canonical=False
+        ),
     )
 
     # Assemble them all
@@ -170,7 +186,9 @@ async def build_book_of_mormon_front_matter(lang: str, client: httpx.AsyncClient
     )
 
 
-async def build_book_of_mormon_back_matter(lang: str, client: httpx.AsyncClient) -> pyosis.generated.DivCt:
+async def build_book_of_mormon_back_matter(
+    lang: str, client: httpx.AsyncClient
+) -> pyosis.generated.DivCt:
     """Asynchronously builds the back matter section for the Book of Mormon.
 
     This function gathers and constructs the back matter content, such as the Pronunciation Guide,
@@ -202,7 +220,9 @@ async def build_book_of_mormon_back_matter(lang: str, client: httpx.AsyncClient)
     )
 
 
-async def build_book_of_mormon_header(lang: str, client: httpx.AsyncClient) -> pyosis.generated.HeaderCt:
+async def build_book_of_mormon_header(
+    lang: str, client: httpx.AsyncClient
+) -> pyosis.generated.HeaderCt:
     """Asynchronously builds the OSIS header for the Book of Mormon.
 
     This function fetches the title page content for the Book of Mormon from the church website,
@@ -252,13 +272,21 @@ async def build_book_of_mormon_header(lang: str, client: httpx.AsyncClient) -> p
         ),
         pyosis.generated.RevisionDescCt(
             date=pyosis.generated.DateCt(
-                event=pyosis.generated.OsisEvents.EDITION, content=[date_str_to_osis_format], lang=lang
+                event=pyosis.generated.OsisEvents.EDITION,
+                content=[date_str_to_osis_format],
+                lang=lang,
             ),
             p=[pyosis.generated.PCt(content=[copyright_info])],
         ),
         pyosis.generated.RevisionDescCt(
-            date=pyosis.generated.DateCt(event=pyosis.generated.OsisEvents.EDITION, lang="en", content=["1830.03.26"]),
-            p=[pyosis.generated.PCt(content=["First English edition published in Palmyra, New York, USA, in 1830"])],
+            date=pyosis.generated.DateCt(
+                event=pyosis.generated.OsisEvents.EDITION, lang="en", content=["1830.03.26"]
+            ),
+            p=[
+                pyosis.generated.PCt(
+                    content=["First English edition published in Palmyra, New York, USA, in 1830"]
+                )
+            ],
         ),
     ]
 
@@ -269,7 +297,9 @@ async def build_book_of_mormon_header(lang: str, client: httpx.AsyncClient) -> p
                 osis_work="BOM",
                 title=[
                     pyosis.generated.TitleCt(
-                        canonical=True, type_value=pyosis.generated.OsisTitles.MAIN, content=["The Book of Mormon"]
+                        canonical=True,
+                        type_value=pyosis.generated.OsisTitles.MAIN,
+                        content=["The Book of Mormon"],
                     ),
                     pyosis.generated.TitleCt(
                         canonical=True,
@@ -278,9 +308,15 @@ async def build_book_of_mormon_header(lang: str, client: httpx.AsyncClient) -> p
                     ),
                 ],
                 contributor=[
-                    pyosis.generated.ContributorCt(role=pyosis.generated.OsisRoles.TRL, value="Joseph Smith, Jr."),
-                    pyosis.generated.ContributorCt(role=pyosis.generated.OsisRoles.COM, value="Mormon"),
-                    pyosis.generated.ContributorCt(role=pyosis.generated.OsisRoles.COM, value="Moroni"),
+                    pyosis.generated.ContributorCt(
+                        role=pyosis.generated.OsisRoles.TRL, value="Joseph Smith, Jr."
+                    ),
+                    pyosis.generated.ContributorCt(
+                        role=pyosis.generated.OsisRoles.COM, value="Mormon"
+                    ),
+                    pyosis.generated.ContributorCt(
+                        role=pyosis.generated.OsisRoles.COM, value="Moroni"
+                    ),
                 ],
                 publisher=[
                     pyosis.generated.PublisherCt(
@@ -292,7 +328,9 @@ async def build_book_of_mormon_header(lang: str, client: httpx.AsyncClient) -> p
     )
 
 
-async def build_book_of_mormon(lang: str, client: httpx.AsyncClient) -> pyosis.serialization.OsisXML:
+async def build_book_of_mormon(
+    lang: str, client: httpx.AsyncClient
+) -> pyosis.serialization.OsisXML:
     """Asynchronously builds the OSIS XML representation of the Book of Mormon.
 
     This function gathers the front matter, each book's content, and back matter for the Book of Mormon
@@ -308,9 +346,9 @@ async def build_book_of_mormon(lang: str, client: httpx.AsyncClient) -> pyosis.s
     """
     book_names = church_website_models.BookOfMormonBooksUri.keys()
     front_matter = await build_book_of_mormon_front_matter(lang, client)
-    osis_books = await asyncio.gather(*[
-        build_book(lang, "BookOfMormon", book_name, client) for book_name in book_names
-    ])
+    osis_books = await asyncio.gather(
+        *[build_book(lang, "BookOfMormon", book_name, client) for book_name in book_names]
+    )
     back_matter = await build_book_of_mormon_back_matter(lang, client)
 
     header = await build_book_of_mormon_header(lang, client)
