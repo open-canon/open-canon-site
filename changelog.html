@@ -22,6 +22,77 @@
   <h1>CHANGELOG</h1>
 <!-- version list -->
 
+<h2>v1.11.0 (2026-11-08)</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li>
+<p><strong>scrapers</strong>: Do not treat "p." inside a word as a page marker
+  (<a href="https://github.com/open-canon/open-canon-site/commit/3b2917a52f54d15414dd07d50b9c9b320f43a93b"><code>3b2917a</code></a>)</p>
+</li>
+<li>
+<p><strong>scrapers</strong>: Keep top-level italics/bold in Jubilees footnotes
+  (<a href="https://github.com/open-canon/open-canon-site/commit/91014541c6392e8e0d4a46e348ffc742e9334a18"><code>9101454</code></a>)</p>
+</li>
+<li>
+<p><strong>scrapers</strong>: Treat a missing class as empty in LDS extract_markup
+  (<a href="https://github.com/open-canon/open-canon-site/commit/780e09db14d8f066a1cf80a55030892b0c1d8984"><code>780e09d</code></a>)</p>
+</li>
+</ul>
+<h3>Code Style</h3>
+<ul>
+<li>
+<p><strong>scrapers</strong>: Ruff format churchofjesuschrist
+  (<a href="https://github.com/open-canon/open-canon-site/commit/06d6eb2d14e59a411eb7b2c1dffe3e0a3914a9f5"><code>06d6eb2</code></a>)</p>
+</li>
+<li>
+<p><strong>scrapers</strong>: Ruff format sacred-texts
+  (<a href="https://github.com/open-canon/open-canon-site/commit/88849a5956e902d12f02f90aace963afaf9ba9f7"><code>88849a5</code></a>)</p>
+</li>
+</ul>
+<h3>Documentation</h3>
+<ul>
+<li>
+<p><strong>scrapers</strong>: Document lds-standard-works functions and attributes
+  (<a href="https://github.com/open-canon/open-canon-site/commit/4e795d80e9ab3f380b773148c25a8c3a7bc3a4a1"><code>4e795d8</code></a>)</p>
+</li>
+<li>
+<p><strong>scrapers</strong>: Document sacred-texts functions and attributes
+  (<a href="https://github.com/open-canon/open-canon-site/commit/61689304c15f6f581188ae03f7339833e725c43d"><code>6168930</code></a>)</p>
+</li>
+</ul>
+<h3>Features</h3>
+<ul>
+<li>
+<p><strong>scrapers</strong>: Wire lds-standard-works into open-canon-scrape
+  (<a href="https://github.com/open-canon/open-canon-site/commit/f63db15fbda49e0cc171646bbe66241beda5840f"><code>f63db15</code></a>)</p>
+</li>
+<li>
+<p><strong>scrapers</strong>: Wire sacred-texts scrapers into open-canon-scrape
+  (<a href="https://github.com/open-canon/open-canon-site/commit/150016bdfe0d0ab5350d0c33e3f9f560266bd352"><code>150016b</code></a>)</p>
+</li>
+</ul>
+<h3>Refactoring</h3>
+<ul>
+<li>
+<p><strong>scrapers</strong>: Import churchofjesuschrist sources verbatim
+  (<a href="https://github.com/open-canon/open-canon-site/commit/88432466533fb0515a615a612979de0a2eb1e789"><code>8843246</code></a>)</p>
+</li>
+<li>
+<p><strong>scrapers</strong>: Import sacred-texts sources verbatim
+  (<a href="https://github.com/open-canon/open-canon-site/commit/44321ba8875e8d127fdbcf5bd4f8210da3b8429d"><code>44321ba</code></a>)</p>
+</li>
+</ul>
+<h3>Testing</h3>
+<ul>
+<li>
+<p><strong>scrapers</strong>: Unit-test lds-standard-works functions
+  (<a href="https://github.com/open-canon/open-canon-site/commit/d69b86f9175ec73fc5c3deae56373edc298add27"><code>d69b86f</code></a>)</p>
+</li>
+<li>
+<p><strong>scrapers</strong>: Unit-test sacred-texts functions
+  (<a href="https://github.com/open-canon/open-canon-site/commit/6aaf5e67a078bdf435d0447782cdb532d03d59e8"><code>6aaf5e6</code></a>)</p>
+</li>
+</ul>
 <h2>v1.10.0 (2026-11-08)</h2>
 <h3>Code Style</h3>
 <ul>
@@ -273,7 +344,7 @@
 
 
 <footer class="site-footer">
-  <span>Open Canon v1.10.0</span>
+  <span>Open Canon v1.11.0</span>
   
   <a href="https://github.com/open-canon/open-canon-site" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository" class="footer-github-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" class="footer-github-icon"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg></a>
 </footer>
