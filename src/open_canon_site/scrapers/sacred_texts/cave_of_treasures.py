@@ -10,10 +10,11 @@ Reference scheme
 The translation has no chapter or verse numbering of its own, so one is imposed. It is
 deliberately simple and follows the divisions Budge prints:
 
-* **Chapter** = one of the six numbered "ages" of the book, in source order: 1 The First
-  Thousand Years (``bct04.htm``), 2 The Second Thousand Years, 3 The Third, 4 The Fourth,
-  5 The Fifth, 6 The Five Hundred Years from the Second Year of Cyrus to the Birth of Christ
-  (``bct09.htm``). Each is one source page.
+* **Chapter** = one numbered text page, in source order: 1 The First Thousand Years
+  (``bct04.htm``), 2 The Second, 3 The Third, 4 The Fourth, 5 The Fifth, 6 The Five Hundred
+  Years from the Second Year of Cyrus to the Birth of Christ, 7 Testamentum Adami and 8 the
+  Supplementary Translations from the "Book of the Bee" (``bct11.htm``). Chapters 1 to 6 are
+  the book itself; 7 and 8 are translations Budge appended and use the same scheme.
 * **Verse** = one paragraph of the translation, numbered consecutively from 1 within its
   chapter (``CaveOfTreasures.<chapter>.<verse>``). A row of a numbered list of names (the
   genealogies in chapter 6) is its own verse.
@@ -25,8 +26,10 @@ deliberately simple and follows the divisions Budge prints:
   type="page">`` elements inside the verse (or heading) in which they fall. Folio references
   to the Syriac manuscript (``[Fol. 3b, col. 1.]``) stay in the text as printed.
 * **Budge's notes** (paragraphs opening ``[NOTES.``, his commentary rather than the
-  translation) are emitted as non-canonical ``<div type="x-notes">`` blocks, in place and
-  not numbered. His footnotes become inline ``<note>`` elements.
+  translation) become ``<note n="Budge">`` elements at the end of the verse they follow
+  (the site shows them as note popups next to that verse); the surrounding brackets and the
+  ``NOTES.--`` label are dropped as redundant. His footnotes become inline ``<note>``
+  elements too.
 
 Images
 ------
@@ -35,20 +38,22 @@ Images are kept as ``<figure src=...>`` elements that point at the image files o
 ``archive.sacred-texts.com`` (the files themselves are not downloaded):
 
 * Every image inside a translation page (the cuneiform and hieroglyph renderings in
-  chapters 5 and 6, for instance) becomes a figure, grouped in a non-canonical
-  ``<div type="x-figures">`` at the place the table or paragraph occupied. The image's
-  ``alt`` text is kept; text in those tables is not.
+  chapters 5 and 6, for instance) becomes a figure at the end of the verse it follows (in
+  front and back matter, in a non-canonical ``<div type="x-figures">``). The image's
+  ``alt`` text is kept.
 * The sixteen plate pages (the frontispiece and Plates I to XV, ``bct_pl00`` to ``bct_pl15``)
-  are collected in one non-canonical ``<div type="x-plates">`` after the last chapter. Each
+  are collected in one non-canonical ``<div type="x-plates">`` at the very end of the book. Each
   plate is a ``<div type="x-plate">`` with a sub-title (``Plate XV (facing page 272)``), one
   figure per image and Budge's caption as a paragraph.
 
-Nothing inside the six translation pages is dropped except site navigation. A table row
-becomes a verse (cells joined with `` | ``), followed by a figures block if it holds images.
+Front and back matter are kept, not numbered: the title page, contents, preface and
+introduction come first, then the chapters, then the essay "Abraham and the City of Ur"
+(``appendix``) and the bibliography, then the plates. Each is a non-canonical div (with the
+matching OSIS div type) holding paragraphs, with headings as section divs.
 
-Left out: the title page, preface, introduction, contents and bibliography, the "notes to
-the hypertext transcription", and the appendices (Testamentum Adami, translations from the
-Book of the Bee, Abraham and the City of Ur), which are separate works Budge appended.
+Nothing on these pages is dropped except site navigation; a table row becomes a verse
+(chapters) or paragraph (other sections) with cells joined by `` | ``. Only the transcriber's
+"notes to the hypertext transcription" page is not scraped.
 """
 
 from __future__ import annotations
@@ -95,17 +100,25 @@ BOOK_SHORT_TITLE: Final[str] = "Cave of Treasures"
 
 @dataclass(frozen=True)
 class ChapterSource:
-    """Where one chapter lives and how to recognise it."""
+    """Where one section of the book lives and how to recognise it."""
 
     page: str
     """Page stem on the archive host, e.g. ``bct04``."""
     title: str
-    """Chapter title emitted as the OSIS chapter title."""
+    """Section title: the OSIS chapter title, or the title of a front/back matter div."""
     marker: re.Pattern[str]
     """Pattern that must match the page text; guards against interstitials and wrong pages."""
+    role: str = "chapter"
+    """``chapter`` (numbered, canonical verses) or the OSIS div type of non-numbered matter:
+    ``titlePage``, ``tableOfContents``, ``preface``, ``introduction``, ``appendix`` or
+    ``bibliography``."""
 
 
-CHAPTERS: Final[tuple[ChapterSource, ...]] = (
+SECTIONS: Final[tuple[ChapterSource, ...]] = (
+    ChapterSource("bct00", "Title Page", re.compile(r"CAVE OF TREASURES"), "titlePage"),
+    ChapterSource("bct01", "Contents", re.compile(r"LIST OF PLATES"), "tableOfContents"),
+    ChapterSource("bct02", "Preface", re.compile(r"PREFACE"), "preface"),
+    ChapterSource("bct03", "Introduction", re.compile(r"INTRODUCTION"), "introduction"),
     ChapterSource("bct04", "The First Thousand Years", re.compile(r"FIRST THOUSAND YEARS")),
     ChapterSource("bct05", "The Second Thousand Years", re.compile(r"SECOND THOUSAND YEARS")),
     ChapterSource("bct06", "The Third Thousand Years", re.compile(r"THIRD THOUSAND YEARS")),
@@ -116,8 +129,29 @@ CHAPTERS: Final[tuple[ChapterSource, ...]] = (
         "The Five Hundred Years from the Second Year of Cyrus to the Birth of Christ",
         re.compile(r"FIVE HUNDRED YEARS FROM THE SECOND YEAR OF CYRUS"),
     ),
+    ChapterSource("bct10", "Testamentum Adami", re.compile(r"TESTAMENTUM ADAMI")),
+    ChapterSource(
+        "bct11",
+        'Supplementary Translations from the "Book of the Bee"',
+        re.compile(r"BOOK OF THE BEE"),
+    ),
+    ChapterSource("bct12", "Abraham and the City of Ur", re.compile(r"CITY OF UR"), "appendix"),
+    ChapterSource("bct13", "Bibliography", re.compile(r"BIBLIOGRAPHY"), "bibliography"),
 )
-"""The six chapters in order; chapter ``n`` is ``CHAPTERS[n - 1]``."""
+"""Every text page in book order. The ``chapter`` role pages are numbered 1 to 8 in order."""
+CHAPTERS: Final[tuple[ChapterSource, ...]] = tuple(
+    source for source in SECTIONS if source.role == "chapter"
+)
+"""The eight numbered chapters; chapter ``n`` is ``CHAPTERS[n - 1]``."""
+DIV_TYPES: Final[dict[str, pyosis.OsisDivs]] = {
+    "titlePage": pyosis.OsisDivs.TITLE_PAGE,
+    "tableOfContents": pyosis.OsisDivs.TABLEOF_CONTENTS,
+    "preface": pyosis.OsisDivs.PREFACE,
+    "introduction": pyosis.OsisDivs.INTRODUCTION,
+    "appendix": pyosis.OsisDivs.APPENDIX,
+    "bibliography": pyosis.OsisDivs.BIBLIOGRAPHY,
+}
+"""OSIS div type for each non-chapter role."""
 
 CHAPTER_HEADING_RE: Final[re.Pattern[str]] = re.compile(
     r"THOUSAND YEARS|FIVE HUNDRED YEARS FROM THE SECOND YEAR", re.IGNORECASE
@@ -133,6 +167,10 @@ NAVIGATION_RE: Final[re.Pattern[str]] = re.compile(
     re.IGNORECASE,
 )
 """Matches the site's own navigation paragraphs, which hold only nav link words."""
+TITLE_PAGE_NAVIGATION_RE: Final[re.Pattern[str]] = re.compile(
+    r"^(?:(?:Sacred-Texts|Christianity|Index|Frontespiece|Next)\s*)+$", re.IGNORECASE
+)
+"""Matches the title page's navigation line, which links to the frontispiece plate."""
 NOTES_RE: Final[re.Pattern[str]] = re.compile(r"^\[?\s*NOTES?\b")
 """Matches the start of one of Budge's commentary paragraphs."""
 PAGE_ANCHOR_RE: Final[re.Pattern[str]] = re.compile(r"^page_(?P<page>[0-9ivxlcdm]+)$", re.I)
@@ -145,11 +183,18 @@ FOLIO_HEADING_RE: Final[re.Pattern[str]] = re.compile(
     r"^\[(?P<folio>Fol\.[^\]]*)\]\s*\[(?P<title>.*?)\]\.?$"
 )
 """Matches a heading that starts with a folio reference: ``[Fol. 13b, col. 2] [The Rule of Enoch].``"""
+NOTE_LABEL_RE: Final[re.Pattern[str]] = re.compile(r"^\[?\s*NOTES?\s*[.:]?\s*(?:--|\u2014|-)?\s*")
+"""Matches the ``[NOTES.--`` opening of one of Budge's commentary paragraphs."""
+FOOTNOTE_ANCHOR_RE: Final[re.Pattern[str]] = re.compile(r"(?:_note_\d+|^fn_\d+)$")
+"""Matches a footnote anchor name: ``page_92_note_1`` on the archive host, ``fn_1`` after
+``legacy_html`` rebuilds a reader-layout page."""
 PLATE_FOOTER_RE: Final[re.Pattern[str]] = re.compile(
     r"^(?:Sacred Texts\s*\|\s*Christianity|(?:«\s*)?(?:Previous|Next):.*)$", re.IGNORECASE
 )
 """Matches the footer navigation of a page: ``Sacred Texts | Christianity`` and the
 ``« Previous: …`` / ``Next: … »`` links."""
+HEADING_TAGS: Final[list[str]] = ["h1", "h2", "h3", "h4", "h5", "h6"]
+"""Heading elements; each is kept as a heading (the ``Footnotes`` heading ends the content)."""
 LIST_NUMBER_RE: Final[re.Pattern[str]] = re.compile(r"^\d+\.$")
 """Matches the number cell of a numbered-list table row such as ``12.``."""
 
@@ -205,11 +250,13 @@ class Chapter:
     """A parsed chapter page."""
 
     number: int
-    """Chapter number (1 through 6)."""
+    """Chapter number (1 through 8), or 0 for front and back matter."""
     title: str
-    """Chapter title."""
+    """Section title."""
     blocks: list[Block] = field(default_factory=list)
     """Headings, verses and notes in source order."""
+    role: str = "chapter"
+    """The source's ``role``; anything but ``chapter`` is emitted without verse numbers."""
 
 
 def _clean(parts: list[InlinePart]) -> list[InlinePart]:
@@ -447,7 +494,7 @@ class CaveOfTreasuresParser:
         if not heading:
             return footnotes
         for para in heading.find_next_siblings("p"):
-            anchor = para.find("a", attrs={"name": re.compile(r"_note_\d+$")})
+            anchor = para.find("a", attrs={"name": FOOTNOTE_ANCHOR_RE})
             back = para.find("a", attrs={"href": re.compile(r"^#")})
             if not anchor or not back:
                 continue
@@ -527,25 +574,40 @@ class CaveOfTreasuresParser:
         return blocks
 
     def parse_chapter(self, html_text: str, number: int) -> Chapter:
-        """Parse one chapter page.
+        """Parse one numbered chapter page.
 
         Args:
             html_text: Raw page HTML (old layout, or reader layout via ``legacy_html``).
-            number: Chapter number, 1 through 6.
+            number: Chapter number, 1 through 8.
 
         Returns:
             The chapter with its headings, verses and notes in source order.
         """
+        return self.parse_section(html_text, CHAPTERS[number - 1], number)
+
+    def parse_section(self, html_text: str, source: ChapterSource, number: int = 0) -> Chapter:
+        """Parse one text page, numbered chapter or front/back matter.
+
+        Args:
+            html_text: Raw page HTML (old layout, or reader layout via ``legacy_html``).
+            source: The section the page holds.
+            number: Chapter number, or 0 for front and back matter.
+
+        Returns:
+            The section with its headings, paragraphs and notes in source order.
+        """
         soup = BeautifulSoup(legacy_html(html_text), "html.parser")
         footnotes = self.parse_footnotes(soup)
-        page = CHAPTERS[number - 1].page
-        chapter = Chapter(number=number, title=CHAPTERS[number - 1].title)
+        page = source.page
+        chapter = Chapter(number=number, title=source.title, role=source.role)
         pending: list[InlinePart] = []
         body = soup.body or soup
 
-        for element in body.find_all(["h1", "p", "blockquote", "table"], recursive=False):
+        for element in body.find_all(HEADING_TAGS + ["p", "blockquote", "table"], recursive=False):
             if element.find_parent("table") is not None:
                 continue
+            if element.name == "h3" and element.get_text(strip=True) == "Footnotes":
+                break
             if element.name == "table":
                 chapter.blocks.extend(self._table_blocks(element, footnotes, pending, page))
                 continue
@@ -561,16 +623,23 @@ class CaveOfTreasuresParser:
                     chapter.blocks.append(Block("figures", [], images))
                 continue
             text = _plain(parts)
-            if NAVIGATION_RE.match(text):
+            if NAVIGATION_RE.match(text) or (
+                element.find("a") and TITLE_PAGE_NAVIGATION_RE.match(text)
+            ):
                 continue
 
-            centred = element.get("align") == "center"
-            is_heading = element.name in {"h1", "blockquote"} or (
-                centred
-                and (
-                    text.startswith("[")
-                    or CHAPTER_HEADING_RE.search(text)
-                    or RUNNING_HEAD_RE.match(text)
+            centred = element.get("align") == "center" or self._looks_centred(element, text)
+            is_heading = (
+                element.name in HEADING_TAGS
+                or (element.name == "blockquote" and len(text) <= 200)
+                or (
+                    centred
+                    and (
+                        text.startswith("[")
+                        or CHAPTER_HEADING_RE.search(text)
+                        or RUNNING_HEAD_RE.match(text)
+                        or self._is_caps_heading(text)
+                    )
                 )
             )
             if is_heading:
@@ -643,6 +712,47 @@ class CaveOfTreasuresParser:
         )
 
     @staticmethod
+    def _looks_centred(element: Tag, text: str) -> bool:
+        """Guess whether a paragraph was a centred heading when ``align`` is unavailable.
+
+        ``legacy_html`` strips ``align`` from reader-layout pages, so a heading there is
+        recognised by its shape: a short bracketed line that is not one of Budge's notes,
+        a running head, or a short all-capitals line.
+
+        Args:
+            element: The paragraph element.
+            text: Its plain text.
+
+        Returns:
+            True for a short bracketed line other than a ``NOTES`` paragraph, a running
+            head, or a short line that is mostly capitals.
+        """
+        if element.name != "p" or len(text) > 200:
+            return False
+        if text.startswith("[") and text.endswith("]") and not NOTES_RE.match(text):
+            return True
+        if RUNNING_HEAD_RE.match(text):
+            return True
+        return CaveOfTreasuresParser._is_caps_heading(text)
+
+    @staticmethod
+    def _is_caps_heading(text: str) -> bool:
+        """Report whether a short line is in capitals, as Budge's section headings are.
+
+        Args:
+            text: Plain text of a paragraph.
+
+        Returns:
+            True for a line of at most 200 characters in which over 80% of letters are capitals.
+        """
+        letters = [c for c in text if c.isalpha()]
+        return (
+            len(text) <= 200
+            and bool(letters)
+            and sum(c.isupper() for c in letters) / len(letters) > 0.8
+        )
+
+    @staticmethod
     def _heading_content(parts: list[InlinePart]) -> list[InlinePart]:
         """Return heading parts without page milestones, which a title cannot hold.
 
@@ -653,6 +763,38 @@ class CaveOfTreasuresParser:
             The parts minus milestones.
         """
         return [p for p in parts if not isinstance(p, pyosis.MilestoneCt)]
+
+    @staticmethod
+    def _commentary_note(parts: list[InlinePart]) -> pyosis.NoteCt:
+        """Build the inline note for one of Budge's ``[NOTES.--...]`` paragraphs.
+
+        The enclosing square brackets and the ``NOTES.--`` label are Budge's way of marking
+        commentary; a ``<note>`` already says so, so both are removed. A footnote nested in
+        the paragraph cannot be a note inside a note and is kept as bracketed text.
+
+        Args:
+            parts: Inline parts of the whole paragraph.
+
+        Returns:
+            A note attached to the verse that precedes the paragraph.
+        """
+        flat: list[InlinePart] = []
+        for part in parts:
+            if isinstance(part, pyosis.NoteCt):
+                flat.append(" [" + "".join(c for c in part.content if isinstance(c, str)) + "]")
+            else:
+                flat.append(part)
+        flat = _clean(flat)
+        # The brackets are often bold highlights of their own: drop those elements.
+        if flat and isinstance(flat[0], pyosis.HiCt) and _plain([flat[0]]) == "[":
+            flat.pop(0)
+        if flat and isinstance(flat[-1], pyosis.HiCt) and _plain([flat[-1]]) == "]":
+            flat.pop()
+        if flat and isinstance(flat[0], str):
+            flat[0] = NOTE_LABEL_RE.sub("", flat[0], count=1)
+        if flat and isinstance(flat[-1], str):
+            flat[-1] = re.sub(r"\s*\]$", "", flat[-1])
+        return pyosis.NoteCt(type_value="explanation", n="Budge", content=_clean(flat))
 
     @staticmethod
     def _figure(image: Image) -> pyosis.FigureCt:
@@ -730,53 +872,72 @@ class CaveOfTreasuresParser:
         )
 
         for chapter in chapters:
+            numbered = chapter.role == "chapter"
             chapter_div = pyosis.DivCt(
-                type_value=pyosis.OsisDivs.CHAPTER,
-                osis_id=[f"{OSIS_WORK_ID}.{chapter.number}"],
-                canonical=True,
+                type_value=pyosis.OsisDivs.CHAPTER if numbered else DIV_TYPES[chapter.role],
+                osis_id=[f"{OSIS_WORK_ID}.{chapter.number}"] if numbered else [],
+                canonical=numbered,
                 content=[
                     pyosis.TitleCt(
-                        type_value=pyosis.OsisTitles.CHAPTER,
+                        type_value=pyosis.OsisTitles.CHAPTER
+                        if numbered
+                        else pyosis.OsisTitles.MAIN,
                         canonical=False,
                         content=[chapter.title],
                     )
                 ],
             )
             verse_number = 0
+            last_verse: pyosis.VerseCt | None = None
+            waiting: list[object] = []  # notes and figures that precede the first verse
             for block in chapter.blocks:
                 if block.kind == "heading":
-                    chapter_div.content.append(
-                        pyosis.TitleCt(
-                            type_value=pyosis.OsisTitles.SUB,
-                            canonical=False,
-                            content=self._heading_content(block.parts),
-                        )
+                    title = pyosis.TitleCt(
+                        type_value=pyosis.OsisTitles.SUB,
+                        canonical=False,
+                        content=self._heading_content(block.parts),
                     )
-                elif block.kind == "figures":
-                    chapter_div.content.append(
-                        pyosis.DivCt(
-                            type_value="x-figures",
-                            canonical=False,
-                            content=[self._figure(image) for image in block.images],
+                    if numbered:
+                        chapter_div.content.append(title)
+                    else:
+                        # The site only lists and renders a heading that sits in a section div.
+                        chapter_div.content.append(
+                            pyosis.DivCt(
+                                type_value=pyosis.OsisDivs.SECTION,
+                                canonical=False,
+                                content=[title],
+                            )
                         )
-                    )
-                elif block.kind == "notes":
-                    chapter_div.content.append(
-                        pyosis.DivCt(
-                            type_value="x-notes",
-                            canonical=False,
-                            content=[pyosis.PCt(content=block.parts)],
+                elif not numbered:
+                    if block.kind == "figures":
+                        chapter_div.content.append(
+                            pyosis.DivCt(
+                                type_value="x-figures",
+                                canonical=False,
+                                content=[self._figure(image) for image in block.images],
+                            )
                         )
+                    else:
+                        chapter_div.content.append(pyosis.PCt(content=block.parts))
+                elif block.kind in {"figures", "notes"}:
+                    extras = (
+                        [self._figure(image) for image in block.images]
+                        if block.kind == "figures"
+                        else [self._commentary_note(block.parts)]
                     )
+                    if last_verse is None:
+                        waiting.extend(extras)
+                    else:
+                        last_verse.content = [*last_verse.content, *extras]
                 else:
                     verse_number += 1
-                    chapter_div.content.append(
-                        pyosis.VerseCt(
-                            osis_id=[f"{OSIS_WORK_ID}.{chapter.number}.{verse_number}"],
-                            canonical=True,
-                            content=block.parts,
-                        )
+                    last_verse = pyosis.VerseCt(
+                        osis_id=[f"{OSIS_WORK_ID}.{chapter.number}.{verse_number}"],
+                        canonical=True,
+                        content=[*block.parts, *waiting],
                     )
+                    waiting = []
+                    chapter_div.content.append(last_verse)
             book_div.content.append(chapter_div)
 
         if plates:
@@ -850,14 +1011,15 @@ class CaveOfTreasuresParser:
         return pyosis.OsisXML(pyosis.Osis(osis_text=osis_text))
 
     def process(self) -> pyosis.OsisXML:
-        """Run the full pipeline: fetch every chapter and plate page, parse and convert.
+        """Run the full pipeline: fetch every text and plate page, parse and convert.
 
         Returns:
             The OSIS document.
         """
+        numbers = {source.page: n for n, source in enumerate(CHAPTERS, start=1)}
         chapters = [
-            self.parse_chapter(self.fetch_page_text(source), number)
-            for number, source in enumerate(CHAPTERS, start=1)
+            self.parse_section(self.fetch_page_text(source), source, numbers.get(source.page, 0))
+            for source in SECTIONS
         ]
         plates = [self.parse_plate(self.fetch_plate_text(page), page) for page in PLATE_PAGES]
         return self.generate_osis(chapters, plates)

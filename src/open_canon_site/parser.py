@@ -15,6 +15,7 @@ from pyosis.generated.osis_core_2_1_1 import (
     NoteCt,
     OsisDivs,
     OsisTextCt,
+    OsisTitles,
     TitleCt,
     VerseCt,
 )
@@ -41,6 +42,8 @@ class VerseData:
     number: str  # display number (e.g. "1")
     content: list[Any]  # raw pyosis content items (strings + inline elements)
     notes: list[NoteData] = field(default_factory=list)
+    heading: list[Any] = field(default_factory=list)
+    """Sub-heading titles (``<title type="sub">``) that sit before this verse in its chapter."""
 
 
 @dataclass
@@ -392,12 +395,20 @@ def _parse_verses_from_content(
     )
 
     if contained:
+        headings: list[Any] = []
         for item in content:
-            if isinstance(item, VerseCt) and item.osis_id:
+            if isinstance(item, TitleCt) and item.type_value == OsisTitles.SUB:
+                headings.append(item)
+            elif isinstance(item, VerseCt) and item.osis_id:
                 vid = " ".join(item.osis_id)
                 num = vid.rsplit(".", 1)[-1]
                 cleaned, notes = _extract_notes_from_content(item.content, vid, doc_slug)
-                verses.append(VerseData(verse_id=vid, number=num, content=cleaned, notes=notes))
+                verses.append(
+                    VerseData(
+                        verse_id=vid, number=num, content=cleaned, notes=notes, heading=headings
+                    )
+                )
+                headings = []
     else:
         # Milestone style – group content between sID/eID markers
         groups = _collect_milestone_groups(content)

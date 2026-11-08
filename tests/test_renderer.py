@@ -151,3 +151,32 @@ def test_render_mixed_string_and_elements():
     hi = _make_hi("italic", "own")
     result = render_content(["In his ", hi, " image"])
     assert result == "In his <em>own</em> image"
+
+
+# ---------------------------------------------------------------------------
+# Figures
+# ---------------------------------------------------------------------------
+
+
+def test_render_figure_with_alt_and_escaped_src():
+    import pyosis
+
+    figure = pyosis.FigureCt(src="https://example.org/a.jpg?x=1&y=2", alt='A "plate"')
+    out = render_content([figure])
+    assert out == (
+        '<figure class="osis-figure"><img src="https://example.org/a.jpg?x=1&amp;y=2" '
+        'alt="A &quot;plate&quot;" loading="lazy"></figure>'
+    )
+
+
+def test_render_figure_without_src_renders_nothing():
+    import pyosis
+
+    assert render_content([pyosis.FigureCt()]) == ""
+
+
+def test_render_figure_caption():
+    import pyosis
+
+    figure = pyosis.FigureCt(src="a.jpg", caption=[pyosis.CaptionCt(content=["Plate I"])])
+    assert "<figcaption>Plate I</figcaption>" in render_content([figure])

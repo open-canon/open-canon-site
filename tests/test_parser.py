@@ -625,3 +625,20 @@ def test_parse_chapter_title_excludes_embedded_note():
         </div>
     """)
     assert doc.divisions[0].chapters[0].title == "Song of Solomon"
+
+
+def test_sub_titles_attach_to_the_following_verse():
+    """A ``<title type="sub">`` in a chapter is kept as the heading of the next verse."""
+    doc = _parse("""
+        <div type="book" osisID="Gen">
+          <div type="chapter" osisID="Gen.1">
+            <title type="chapter">One</title>
+            <title type="sub">The First Day</title>
+            <verse osisID="Gen.1.1">In the beginning.</verse>
+            <verse osisID="Gen.1.2">And the earth.</verse>
+          </div>
+        </div>
+    """)
+    verses = doc.divisions[0].chapters[0].verses
+    assert [_text_of([h]) for h in verses[0].heading] == ["The First Day"]
+    assert verses[1].heading == []

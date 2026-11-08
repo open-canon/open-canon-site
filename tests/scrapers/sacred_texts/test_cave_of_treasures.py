@@ -39,9 +39,11 @@ def kinds(chapter) -> list[str]:
     return [block.kind for block in chapter.blocks]
 
 
-def test_chapter_table_is_six_ordered_pages():
-    """Six chapters, bct04 through bct09, in order."""
-    assert [c.page for c in cot.CHAPTERS] == [f"bct0{n}" for n in range(4, 10)]
+def test_sections_cover_every_text_page_and_chapters_are_numbered_in_order():
+    """All fourteen text pages are listed; eight of them are numbered chapters."""
+    assert [s.page for s in cot.SECTIONS] == [f"bct{n:02d}" for n in range(14)]
+    assert [c.page for c in cot.CHAPTERS] == [f"bct{n:02d}" for n in range(4, 12)]
+    assert {s.role for s in cot.SECTIONS} - {"chapter"} == set(cot.DIV_TYPES)
 
 
 def find(chapter, text: str):
@@ -188,13 +190,13 @@ def test_generate_osis_numbers_verses_per_chapter(parser, chapter1, chapter6):
     assert 'osisID="CaveOfTreasures.1.3"' in xml
     assert 'osisID="CaveOfTreasures.1.4"' not in xml
     assert 'osisID="CaveOfTreasures.6.1"' in xml
-    assert 'type="x-notes"' in xml
-    assert 'type="page" n="44"' in xml or 'n="44"' in xml
+    assert 'type="x-notes"' not in xml
+    assert 'n="44"' in xml
     assert "The First Thousand Years" in xml
 
 
-def test_process_fetches_all_six_pages(parser, monkeypatch):
-    """The pipeline fetches bct04..bct09 and emits six chapters."""
+def test_process_fetches_every_page(parser, monkeypatch):
+    """The pipeline fetches all fourteen text pages and 16 plates and emits eight chapters."""
     page = (FIXTURES / "bct04.htm").read_text(encoding="utf-8")
     seen: list[str] = []
     plate = (FIXTURES / "bct_pl15.htm").read_text(encoding="utf-8")
@@ -202,10 +204,12 @@ def test_process_fetches_all_six_pages(parser, monkeypatch):
     monkeypatch.setattr(parser, "fetch_page_text", lambda source: seen.append(source.page) or page)
     monkeypatch.setattr(parser, "fetch_plate_text", lambda stem: seen_plates.append(stem) or plate)
     xml = parser.process().to_xml()
-    assert seen == [f"bct0{n}" for n in range(4, 10)]
+    assert seen == [f"bct{n:02d}" for n in range(14)]
     assert seen_plates == [f"bct_pl{n:02d}" for n in range(16)]
     assert xml.count('type="x-plate"') == 16
-    assert all(f'osisID="CaveOfTreasures.{n}"' in xml for n in range(1, 7))
+    assert all(f'osisID="CaveOfTreasures.{n}"' in xml for n in range(1, 9))
+    for div_type in ("titlePage", "preface", "introduction", "appendix", "bibliography"):
+        assert f'type="{div_type}"' in xml
 
 
 def test_run_writes_output_file(tmp_path, monkeypatch):
@@ -269,7 +273,6 @@ def test_generate_osis_emits_figures_and_plates(parser, chapter6):
     """Inline figures and the plates div appear in the output with their URLs."""
     plate = parser.parse_plate((FIXTURES / "bct_pl15.htm").read_text(encoding="utf-8"), "bct_pl15")
     xml = parser.generate_osis([chapter6], [plate]).to_xml()
-    assert 'type="x-figures"' in xml
     assert 'src="https://archive.sacred-texts.com/chr/bct/cnf-star.jpg"' in xml
     assert 'alt="cuneiform"' in xml
     assert 'type="x-plates"' in xml
@@ -332,3 +335,106 @@ def test_internal_link_text_in_footnote_is_kept(parser):
     assert (
         "".join(c for c in note.content if isinstance(c, str)) == "See below, (page 233) for more."
     )
+
+
+def test_headings_are_recognised_without_align_attributes(parser):
+    """Reader-layout pages lose ``align``; bracketed and capitalised headings still work."""
+    html = (FIXTURES / "bct04.htm").read_text(encoding="utf-8")
+    stripped = html.replace(' align="center"', "")
+    assert kinds(parser.parse_chapter(stripped, 1)) == kinds(parser.parse_chapter(html, 1))
+
+
+def test_chapter_title_and_notes_without_align(parser):
+    """An unaligned all-caps chapter title is a heading and a ``[NOTES`` paragraph stays notes."""
+    html = (
+        "<html><body><p>THE FIVE HUNDRED YEARS FROM THE SECOND YEAR OF CYRUS TO THE BIRTH OF "
+        "CHRIST</p><p>[NOTE.--Commentary here.]</p><p>[Fol. 3b] A verse in brackets.</p></body></html>"
+    )
+    chapter = parser.parse_chapter(html, 6)
+    assert kinds(chapter) == ["heading", "notes", "verse"]
+
+
+def test_reader_layout_footnote_anchors_are_resolved(parser):
+    """``fn_N`` footnote anchors (as rebuilt by ``legacy_html``) become inline notes."""
+    html = (
+        "<html><body><p>Text.<a name='fr_1'></a><a href='#fn_1'>1</a></p>"
+        "<hr/><h3>Footnotes</h3><p><a name='fn_1'></a><a href='#fr_1'>1</a> The note.</p>"
+        "</body></html>"
+    )
+    chapter = parser.parse_chapter(html, 1)
+    notes = [p for b in chapter.blocks for p in b.parts if isinstance(p, pyosis.NoteCt)]
+    assert len(notes) == 1
+    assert notes[0].content == ["The note."]
+
+
+def _verses(xml_doc):
+    """Return the ``VerseCt`` elements of a generated document, in order."""
+    out = []
+
+    def walk(items):
+        for item in items:
+            if isinstance(item, pyosis.VerseCt):
+                out.append(item)
+            if hasattr(item, "content") and isinstance(item.content, list):
+                walk(item.content)
+
+    walk(xml_doc.osis.osis_text.div)
+    return out
+
+
+def test_budge_notes_become_inline_notes_on_the_preceding_verse(parser, chapter1):
+    """A ``[NOTES.--...]`` paragraph is a ``<note>`` at the end of the verse it follows."""
+    verses = _verses(parser.generate_osis([chapter1]))
+    notes = [p for v in verses for p in v.content if isinstance(p, pyosis.NoteCt)]
+    assert len(notes) == 1
+    assert notes[0].n == "Budge"
+    text = "".join(c for c in notes[0].content if isinstance(c, str))
+    assert text.startswith("According to Solomon, a Nestorian bishop")
+    assert not text.startswith(("[", "NOTES"))
+    assert not text.endswith("]")
+    assert any(isinstance(p, pyosis.NoteCt) for p in verses[1].content)
+
+
+def test_figures_attach_to_the_preceding_verse(parser, chapter6):
+    """Images after a verse are figures inside that verse, not loose blocks."""
+    verses = _verses(parser.generate_osis([chapter6]))
+    with_figures = [v for v in verses if any(isinstance(p, pyosis.FigureCt) for p in v.content)]
+    assert with_figures
+    assert cot._plain([p for p in with_figures[0].content if isinstance(p, str)]) == "1"
+
+
+def test_non_chapter_sections_use_section_divs_for_headings_and_paragraphs(parser):
+    """Front matter is a non-canonical typed div with section-div headings and ``<p>`` text."""
+    html = "<html><body><h1>PREFACE</h1><p>First paragraph.</p></body></html>"
+    source = next(s for s in cot.SECTIONS if s.role == "preface")
+    section = parser.parse_section(html, source)
+    xml = parser.generate_osis([section]).to_xml()
+    assert 'type="preface"' in xml
+    assert 'canonical="true" type="preface"' not in xml
+    assert 'type="section"' in xml
+    assert "<p " in xml and "First paragraph." in xml
+    assert "<verse" not in xml
+
+
+def test_footnotes_heading_ends_the_content(parser):
+    """The ``Footnotes`` heading and what follows are never emitted as blocks."""
+    html = "<html><body><p>Text.</p><hr/><h3>Footnotes</h3><p>1 A note.</p></body></html>"
+    chapter = parser.parse_chapter(html, 1)
+    assert [cot._plain(b.parts) for b in chapter.blocks] == ["Text."]
+
+
+def test_frontispiece_label_is_not_mistaken_for_navigation(parser):
+    """The plate page's ``Frontespiece`` label is kept, while the title page's nav link is not."""
+    plate = parser.parse_plate(
+        "<html><body><p align='center'><a href='index.htm'>Index</a></p>"
+        "<p align='center'><small><i>Frontespiece</i></small></p>"
+        "<p align='center'><img src='pl00.jpg'/></p><p><small>A relief.</small></p></body></html>",
+        "bct_pl00",
+    )
+    assert plate.label == "Frontespiece"
+    source = next(s for s in cot.SECTIONS if s.page == "bct00")
+    html = (
+        "<html><body><p align='center'><a href='a'>Sacred-Texts</a> <a href='b'>Index</a> "
+        "<a href='c'>Frontespiece</a> <a href='d'>Next</a></p><h1>TITLE</h1></body></html>"
+    )
+    assert [cot._plain(b.parts) for b in parser.parse_section(html, source).blocks] == ["TITLE"]

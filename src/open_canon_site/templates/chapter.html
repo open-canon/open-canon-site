@@ -100,6 +100,7 @@
 
     {% if rendered_verses %}
       {% for verse in rendered_verses %}
+      {% if verse.heading_html %}<div class="verse-heading">{{ verse.heading_html | safe }}</div>{% endif %}
       <div class="verse{% if verse.has_notes %} has-notes{% endif %}"
            id="v-{{ verse.id }}"
            data-verse="{{ verse.id }}">

@@ -7,7 +7,9 @@ from typing import Any
 
 from pyosis.generated.osis_core_2_1_1 import (
     ACt,
+    CaptionCt,
     DivineNameCt,
+    FigureCt,
     ForeignCt,
     HeadCt,
     HiCt,
@@ -105,6 +107,8 @@ def _render_item(item: Any, nc: list[int]) -> str:
         return f"<h3>{render_content(item.content, nc)}</h3>"
     if isinstance(item, PCt):
         return f"<p>{render_content(item.content, nc)}</p>"
+    if isinstance(item, FigureCt):
+        return _render_figure(item, nc)
     if isinstance(item, LgCt):
         return f'<div class="lg">{render_content(_container_children(item), nc)}</div>'
     if isinstance(item, LCt):
@@ -144,6 +148,22 @@ def _render_item(item: Any, nc: list[int]) -> str:
     if children:
         return render_content(children, nc)
     return ""
+
+
+# ---------------------------------------------------------------------------
+# figure element
+# ---------------------------------------------------------------------------
+
+
+def _render_figure(item: FigureCt, nc: list[int]) -> str:
+    """Render a ``<figure>`` as an HTML ``<figure>`` with an ``<img>`` and optional caption."""
+    if not item.src:
+        return ""
+    alt = html.escape(item.alt or "")
+    img = f'<img src="{html.escape(item.src)}" alt="{alt}" loading="lazy">'
+    captions = [render_content(c.content, nc) for c in item.caption if isinstance(c, CaptionCt)]
+    figcaption = f"<figcaption>{' '.join(captions)}</figcaption>" if captions else ""
+    return f'<figure class="osis-figure">{img}{figcaption}</figure>'
 
 
 # ---------------------------------------------------------------------------
