@@ -75,7 +75,11 @@ def generated_jubilees_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
     invalid_cache_files = []
     for page_number in range(module.PAGE_RANGE[0], module.PAGE_RANGE[1] + 1):
         cache_file = (
-            SOURCE_CACHE_DIR / "archive.sacred-texts.com" / "bib" / "jub" / f"jub{page_number:02d}.htm"
+            SOURCE_CACHE_DIR
+            / "archive.sacred-texts.com"
+            / "bib"
+            / "jub"
+            / f"jub{page_number:02d}.htm"
         )
         if not cache_file.exists():
             missing_cache_files.append(cache_file)

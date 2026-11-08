@@ -103,10 +103,10 @@ def test_page_title_normalizes_whitespace_and_handles_missing_title():
 
 @given(st.text(alphabet=string.printable))
 def test_legacy_html_returns_non_reader_text_unchanged(text):
-    """Anything that is not a reader-layout page is returned as is."""
+    """Anything that is not a reader-layout page is returned as is (bar closed references)."""
     if is_reader_layout(text):
         return
-    assert legacy_html(text) is text
+    assert legacy_html(text) == _layout.close_character_references(text)
 
 
 def test_legacy_html_is_idempotent_on_reader_pages():
@@ -441,3 +441,46 @@ def test_legacy_html_keeps_the_rest_of_a_page_after_an_unterminated_reference():
     html = "<html><body><p>and &#7730araite Jews.</p><h3>Footnotes</h3></body></html>"
     soup = BeautifulSoup(legacy_html(html), "html.parser")
     assert soup.find("h3") is not None
+
+
+# --- italic summaries ----------------------------------------------------------------------
+
+
+def summary_page(inner: str) -> str:
+    """Wrap ``inner`` in the reader layout's content containers."""
+    return (
+        '<html><body><article data-slot="reader-content"><div data-slot="reader-prose">'
+        f'<div data-slot="ad-content">{inner}</div></div></article></body></html>'
+    )
+
+
+def test_legacy_html_leaves_a_bare_italic_summary_unwrapped():
+    """``<h3>I</h3><em>summary</em>`` keeps its italic element as a sibling of the heading."""
+    soup = BeautifulSoup(
+        legacy_html(summary_page("<h3>I</h3> <em>Short summary</em> <p>1 v</p>")), "html.parser"
+    )
+    summary = soup.find("em")
+    assert summary is not None and summary.parent.name == "body"
+
+
+def test_legacy_html_still_wraps_loose_text_that_mixes_in_italics():
+    """A run with plain text next to an italic is still wrapped in a paragraph."""
+    soup = BeautifulSoup(
+        legacy_html(summary_page("<p>a</p> loose <em>bit</em> text <p>b</p>")), "html.parser"
+    )
+    assert soup.find("em").parent.name == "p"
+
+
+@pytest.mark.parametrize(
+    ("markup", "expected"),
+    [
+        ("<em>a</em> <i>b</i>", True),
+        ("<em>a</em> text", False),
+        ("<em>a</em><b>b</b>", False),
+        ("   ", False),
+    ],
+)
+def test_is_italic_only(markup, expected):
+    """Only runs made purely of italic elements (and whitespace) qualify."""
+    root = BeautifulSoup(f"<div>{markup}</div>", "html.parser").div
+    assert _layout._is_italic_only(list(root.children)) is expected

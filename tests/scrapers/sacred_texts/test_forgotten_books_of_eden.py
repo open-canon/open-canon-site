@@ -1122,3 +1122,15 @@ def test_parse_chapter_page_reader_layout_matches_old_layout(parser):
     new_div = parser._parse_chapter_page(new, "Bk", 5)
     assert new_div.content[0] == old_div.content[0]
     assert _verses(new_div)[0] == _verses(old_div)[0]
+
+
+def test_parse_chapter_page_reader_layout_italic_summary_is_a_summary(parser):
+    """On a reader page a bare ``<em>`` after the heading is still the summary (no duplicate verse 1)."""
+    html = (
+        '<html><body><article data-slot="reader-content"><div data-slot="reader-prose">'
+        '<div data-slot="ad-content"><h3>I</h3> <em>Short summary</em> <p>1 v</p></div>'
+        "</div></article></body></html>"
+    )
+    div = parser._parse_chapter_page(html, "Bk", 1)
+    assert div.content[0].type_value == pyosis.OsisDivs.SUMMARY
+    assert [v.osis_id[0] for v in _verses(div)] == ["Bk.1.1"]

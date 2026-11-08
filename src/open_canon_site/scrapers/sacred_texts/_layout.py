@@ -394,6 +394,27 @@ def _follows_wrapped_block(node: object) -> bool:
     )
 
 
+def _is_italic_only(run: list[object]) -> bool:
+    """Tell whether a run of loose nodes is nothing but italic elements and whitespace.
+
+    Args:
+        run: Consecutive loose nodes under the content container.
+
+    Returns:
+        ``True`` if the run holds at least one ``<i>``/``<em>`` and no other element or text.
+    """
+    italics = 0
+    for node in run:
+        if isinstance(node, NavigableString):
+            if str(node).strip():
+                return False
+        elif node.name in {"i", "em"}:
+            italics += 1
+        else:
+            return False
+    return italics > 0
+
+
 def _wrap_loose_text(root: Tag, soup: BeautifulSoup) -> None:
     """Wrap runs of loose top-level text in ``<p>`` elements.
 
@@ -402,7 +423,9 @@ def _wrap_loose_text(root: Tag, soup: BeautifulSoup) -> None:
     paragraph-based parsers would skip. A run of consecutive text nodes and inline
     elements directly under ``root`` is wrapped in a new ``<p>`` when it contains at
     least one letter or digit (leading whitespace is trimmed), so stray punctuation left between blocks (for example
-    the ``.`` after ``<i><p>...</p></i>``) stays loose as it was in the old markup.
+    the ``.`` after ``<i><p>...</p></i>``) stays loose as it was in the old markup. A run
+    that is only italic elements (a chapter summary such as ``<h3>I</h3><em>...</em>``) is
+    left as it is: the parsers recognise a summary by its italic element, not by a paragraph.
 
     Args:
         root: The content container, modified in place.
@@ -421,7 +444,7 @@ def _wrap_loose_text(root: Tag, soup: BeautifulSoup) -> None:
         runs.append(current)
 
     for run in runs:
-        if _follows_wrapped_block(run[0]):
+        if _follows_wrapped_block(run[0]) or _is_italic_only(run):
             continue
         text = "".join(
             str(node) if isinstance(node, NavigableString) else node.get_text() for node in run
