@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import html
 import logging
 import re
@@ -485,7 +486,9 @@ class JubileesParser:
         """Collect footnotes from the section after the ``Footnotes`` heading.
 
         Each footnote paragraph holds an anchor ``<a name="fn_N">``, then an anchor whose text
-        is the label, then the note body.
+        is the label, then the note body. The body is parsed as one container with the two
+        anchors removed, so direct ``<i>``/``<b>`` children keep their highlights exactly as
+        nested ones do.
 
         Args:
             body: The page body.
@@ -517,11 +520,13 @@ class JubileesParser:
             if label_anchor is not None:
                 label = normalize_whitespace(label_anchor.get_text(" ", strip=True))
 
-            content_parts: list[InlinePart] = []
-            for child in element.children:
-                if child == footnote_anchor or child == label_anchor:
-                    continue
-                content_parts.extend(self.parse_inline_content(child, {}))
+            body_copy = copy.copy(element)
+            copy_anchor = body_copy.find("a", attrs={"name": re.compile(r"^fn_")})
+            copy_label = copy_anchor.find_next_sibling("a") if copy_anchor is not None else None
+            for anchor in (copy_anchor, copy_label):
+                if anchor is not None:
+                    anchor.decompose()
+            content_parts = self.parse_inline_content(body_copy, {})
 
             footnotes[footnote_anchor["name"]] = FootnoteInfo(
                 ref_id=footnote_anchor["name"],
