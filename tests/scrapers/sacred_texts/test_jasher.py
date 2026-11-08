@@ -487,7 +487,7 @@ def test_add_arguments_registers_nothing():
 def test_run_writes_output_file_using_prepopulated_cache(tmp_path):
     """``run`` reads pages from a pre-populated cache and writes ``jasher.xml``."""
     cache = tmp_path / "cache"
-    base = cache / "sacred-texts.com" / "chr" / "apo" / "jasher"
+    base = cache / "archive.sacred-texts.com" / "chr" / "apo" / "jasher"
     base.mkdir(parents=True)
     (base / "index.htm").write_text(INDEX_HTML, encoding="utf-8")
     for n in jasher.EXPECTED_CHAPTERS:

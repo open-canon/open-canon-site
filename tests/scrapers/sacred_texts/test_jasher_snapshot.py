@@ -18,7 +18,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 DOCUMENTS_DIR = REPO_ROOT / "open-canon-osis-documents"
 PACKAGE_MODULE = "open_canon_site.scrapers.sacred_texts.jasher"
 SOURCE_CACHE_DIR = REPO_ROOT / ".cache" / "html"
-INDEX_CACHE_FILE = SOURCE_CACHE_DIR / "sacred-texts.com" / "chr" / "apo" / "jasher" / "index.htm"
+INDEX_CACHE_FILE = SOURCE_CACHE_DIR / "archive.sacred-texts.com" / "chr" / "apo" / "jasher" / "index.htm"
 SNAPSHOT_FILE = "jasher.xml"
 EVERSION_DATE_PATTERN = re.compile(
     r'(<date event="eversion" type="ISO" xml:lang="en" TEIform="date">)'
@@ -84,7 +84,7 @@ def generated_jasher_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
     for chapter_number in module.EXPECTED_CHAPTERS:
         cache_file = (
             SOURCE_CACHE_DIR
-            / "sacred-texts.com"
+            / "archive.sacred-texts.com"
             / "chr"
             / "apo"
             / "jasher"
