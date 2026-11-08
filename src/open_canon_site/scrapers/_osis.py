@@ -107,7 +107,9 @@ def parse_page_marker_text(text: str) -> list[InlinePart]:
     """Split text on ``p. 12`` / ``p. xiv`` page markers into text and page milestones.
 
     Markers are matched case-insensitively with arabic or roman numerals, together
-    with the whitespace around them. Each becomes a ``MilestoneCt`` of type ``page``
+    with the whitespace around them. The ``p.`` must not be preceded by a word
+    character, so the end of a word such as ``Gossip. 5`` is not a marker; a marker
+    may follow the start of the string, whitespace or punctuation such as ``(``. Each becomes a ``MilestoneCt`` of type ``page``
     whose ``n`` is the numeral as written. Whitespace-only text segments are dropped.
 
     Args:
@@ -118,7 +120,7 @@ def parse_page_marker_text(text: str) -> list[InlinePart]:
     """
     parts: list[InlinePart] = []
     last_end = 0
-    for match in re.finditer(r"\s*p\.\s+(\d+|[ivxlcdm]+)\s*", text, re.IGNORECASE):
+    for match in re.finditer(r"\s*(?<!\w)p\.\s+(\d+|[ivxlcdm]+)\s*", text, re.IGNORECASE):
         if match.start() > last_end:
             parts.append(text[last_end : match.start()])
         parts.append(pyosis.MilestoneCt(type_value="page", n=match.group(1)))

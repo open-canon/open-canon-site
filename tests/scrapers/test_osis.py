@@ -167,14 +167,60 @@ def test_parse_page_marker_text_empty_and_blank_return_empty():
     assert _osis.parse_page_marker_text("   ") == []
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason="Bug: the marker regex has no word boundary, so 'p. 5' inside 'Gossip. 5' is split "
-    "off as a page milestone and the text loses its final 'p'.",
-)
 def test_parse_page_marker_text_ignores_p_dot_inside_words():
     """A ``p.`` ending an ordinary word is not a page marker."""
     assert _osis.parse_page_marker_text("Gossip. 5 times") == ["Gossip. 5 times"]
+    assert _osis.parse_page_marker_text("map. xiv") == ["map. xiv"]
+
+
+def test_parse_page_marker_text_marker_after_punctuation_and_at_start():
+    """A marker at the start of the text or after ``(``/``[``/``.`` is still recognised."""
+    assert [getattr(p, "n", p) for p in _osis.parse_page_marker_text("p. 3 text")] == ["3", "text"]
+    assert [getattr(p, "n", p) for p in _osis.parse_page_marker_text("a (p. 7) b")] == [
+        "a (",
+        "7",
+        ") b",
+    ]
+    assert [getattr(p, "n", p) for p in _osis.parse_page_marker_text("a [p. xi] b")] == [
+        "a [",
+        "xi",
+        "] b",
+    ]
+    assert [getattr(p, "n", p) for p in _osis.parse_page_marker_text("end.p. 4 x")] == [
+        "end.",
+        "4",
+        "x",
+    ]
+
+
+def test_parse_page_marker_text_marker_preceded_by_newline():
+    """Newlines count as the whitespace before a marker."""
+    assert [getattr(p, "n", p) for p in _osis.parse_page_marker_text("a\np. 9\nb")] == [
+        "a",
+        "9",
+        "b",
+    ]
+
+
+@given(
+    word=st.from_regex(r"[A-Za-z0-9_]+", fullmatch=True),
+    number=st.integers(min_value=1, max_value=999),
+)
+def test_parse_page_marker_text_word_ending_in_p_dot_never_splits(word, number):
+    """Any word-character run followed by ``p. N`` stays plain text."""
+    text = f"{word}p. {number} tail"
+    assert _osis.parse_page_marker_text(text) == [text]
+
+
+@given(
+    before=st.from_regex(r"[A-Za-z]+", fullmatch=True),
+    after=st.from_regex(r"[A-Za-z]+", fullmatch=True),
+    number=st.integers(min_value=1, max_value=999),
+)
+def test_parse_page_marker_text_whitespace_separated_marker_always_splits(before, after, number):
+    """A ``p. N`` marker separated from words by spaces always becomes one milestone."""
+    parts = _osis.parse_page_marker_text(f"{before} p. {number} {after}")
+    assert [getattr(p, "n", p) for p in parts] == [before, str(number), after]
 
 
 # --- roman_to_int ----------------------------------------------------------------------
