@@ -18,45 +18,94 @@ from open_canon_site.scrapers._osis import normalize_whitespace, roman_to_int
 from open_canon_site.scrapers.base import ScraperSpec
 
 LOGGER = logging.getLogger(__name__)
+"""Module logger; warns when an invalid cached page is discarded."""
 
 OUTPUT_FILENAME: Final[str] = "vita-adae-et-evae.xml"
+"""Name of the OSIS file written into the output directory."""
 
 SOURCE_URL: Final[str] = "https://sacred-texts.com/chr/apo/adamnev.htm"
+"""URL of the single page holding the whole book."""
 OSIS_WORK_ID: Final[str] = "vita-adae-et-evae"
+"""OSIS work identifier, also the book id prefix (``vita-adae-et-evae.<chapter>.<verse>``)."""
 BOOK_TITLE: Final[str] = "Vita Adae et Evae"
+"""Full title of the book."""
 BOOK_SHORT_TITLE: Final[str] = "Vita Adae et Evae"
+"""Short title used for the OSIS main title and ``osisRefWork``."""
 
 CHAPTER_START_RE: Final[re.Pattern[str]] = re.compile(
     r"^(?P<chapter>[ivxlcdm]+)\s+(?P<verses>[0-9I](?:,[0-9I])*)\s+(?P<text>.+)$",
     re.IGNORECASE,
 )
+"""Matches a line that opens a chapter: lower-case Roman numeral, verse token, then text,
+e.g. ``i 1 When they were driven out`` or ``xxx 1,2 Then ...`` (``chapter``, ``verses``
+and ``text`` groups). The verse token is digits or ``I`` (an OCR'd ``1``), comma-joined.
+"""
 VERSE_START_RE: Final[re.Pattern[str]] = re.compile(
     r"^(?P<verses>[0-9I](?:,[0-9I])*)\s+(?P<text>.+)$",
     re.IGNORECASE,
 )
+"""Matches a line that opens a verse within the current chapter: a verse token (digits or
+``I``, comma-joined for verse groups) followed by text (``verses`` and ``text`` groups).
+"""
 
 
 @dataclass
 class VerseBlock:
+    """One verse, or a group of verses printed together, from the source."""
+
     verse_numbers: list[int]
+    """Verse numbers covered, e.g. ``[1, 2]`` for a ``1,2`` marker."""
     text: str
+    """Verse text with whitespace normalised."""
 
 
 @dataclass
 class Chapter:
+    """A parsed chapter."""
+
     number: int
+    """Chapter number (1 through 51)."""
     verses: list[VerseBlock]
+    """Verse blocks in source order."""
 
 
 class VitaAdaeEtEvaeParser:
+    """Fetch and parse sacred-texts.com's Vita Adae et Evae into OSIS.
+
+    The whole book is one HTML page: an ``<h1>`` title, a bold source/edition line, then
+    text lines carrying inline markers ``<roman chapter> <verse> text`` for the first verse
+    of a chapter and ``<verse> text`` for the others, with ``I`` standing in for ``1``.
+    Two chapters (32 and 37) lack a printed marker and are recognised by their opening words.
+    """
+
     def __init__(self, cache_dir: str | None = None, delay: float = 1.0) -> None:
+        """Create a parser with a caching HTTP fetcher.
+
+        Args:
+            cache_dir: Directory for cached pages, or ``None`` to disable caching.
+            delay: Seconds to wait around each live request.
+        """
         self.http = CachedHttpFetcher(cache_dir=cache_dir, delay=delay, logger=LOGGER)
+        """Fetcher used for the source page."""
         self.cache_dir = Path(cache_dir) if cache_dir else None
+        """Cache directory as a ``Path``, or ``None`` when caching is disabled."""
 
     def close(self) -> None:
+        """Close the underlying HTTP client."""
         self.http.close()
 
     def fetch_source_text(self) -> str:
+        """Return the validated source page, from cache or the network.
+
+        An invalid cached copy is logged and deleted; an invalid fetched page also removes
+        its cache entry (for example a Cloudflare interstitial).
+
+        Returns:
+            Raw page text.
+
+        Raises:
+            RuntimeError: If the fetched page is not the Vita Adae et Evae page.
+        """
         cache_path = self.http.cache_path_for(SOURCE_URL)
         if cache_path and cache_path.exists():
             cached = cache_path.read_text(encoding="utf-8")
@@ -79,6 +128,15 @@ class VitaAdaeEtEvaeParser:
 
     @staticmethod
     def is_valid_source(text: str) -> bool:
+        """Report whether text is the genuine Vita Adae et Evae page.
+
+        Args:
+            text: Raw page text.
+
+        Returns:
+            True if it has the upper-case title and the opening verse ``i 1 When they were
+            driven out from paradise`` and is not a Cloudflare interstitial ("Just a moment").
+        """
         return (
             "VITA ADAE ET EVAE" in text
             and "i 1 When they were driven out from paradise" in text
@@ -87,6 +145,19 @@ class VitaAdaeEtEvaeParser:
 
     @staticmethod
     def _normalize_content_lines(text: str) -> tuple[str, list[str]]:
+        """Split text into the source/edition line and the numbered content lines.
+
+        First inserts the missing markers for chapters 32 (``And Adam answered and said: 'Hear
+        me, my sons.``) and 37 (``Then Seth and his mother``). Lines are whitespace-normalised and
+        blank lines dropped; everything before the first ``CHAPTER_START_RE`` match is the
+        source text.
+
+        Args:
+            text: Text containing the source line followed by the content.
+
+        Returns:
+            ``(source_text, content_lines)`` where the source lines are joined by spaces.
+        """
         text = re.sub(
             r"(?m)^\s*And Adam answered and said:\s+'Hear me, my sons\.",
             "xxxii 1 And Adam answered and said: 'Hear me, my sons.",
@@ -119,6 +190,16 @@ class VitaAdaeEtEvaeParser:
 
     @staticmethod
     def _strip_html_fragment(fragment: str, *, line_breaks: bool) -> str:
+        """Convert an HTML fragment to text.
+
+        Args:
+            fragment: HTML fragment.
+            line_breaks: If true ``<br>`` becomes a newline, otherwise a space.
+                Paragraph and ``<hr>`` tags always become newlines.
+
+        Returns:
+            Text with tags removed and entities unescaped.
+        """
         cleaned = re.sub(r"(?i)<br\s*/?>", "\n" if line_breaks else " ", fragment)
         cleaned = re.sub(r"(?i)</?p\b[^>]*>", "\n", cleaned)
         cleaned = re.sub(r"(?i)<hr\s*/?>", "\n", cleaned)
@@ -127,6 +208,22 @@ class VitaAdaeEtEvaeParser:
 
     @classmethod
     def extract_main_text(cls, raw_text: str) -> tuple[str, list[str]]:
+        """Extract the source line and content lines from the page.
+
+        For original HTML the body lies between ``<h1>VITA ADAE ET EVAE</h1>`` and the
+        ``Scanned and Edited by`` footer (or ``</body>``); the first ``<b>`` element is the
+        source line. Mirror-derived Markdown text is also accepted: the part after the
+        ``## VITA ADAE ET EVAE`` heading up to the footer markers, with emphasis markers removed.
+
+        Args:
+            raw_text: Raw page text (HTML or Markdown mirror).
+
+        Returns:
+            ``(source_text, content_lines)`` as from ``_normalize_content_lines``.
+
+        Raises:
+            RuntimeError: If the title, body or source heading cannot be located.
+        """
         text = raw_text.replace("\r\n", "\n")
 
         if "<html" in text.lower():
@@ -175,6 +272,14 @@ class VitaAdaeEtEvaeParser:
 
     @staticmethod
     def parse_verse_numbers(token: str) -> list[int]:
+        """Parse a verse token into verse numbers.
+
+        Args:
+            token: Comma-separated verse numbers; ``I`` (any case) means ``1``.
+
+        Returns:
+            The verse numbers, e.g. ``"1,2"`` gives ``[1, 2]``.
+        """
         verse_numbers = []
         for part in token.split(","):
             cleaned = part.strip().upper()
@@ -182,11 +287,32 @@ class VitaAdaeEtEvaeParser:
         return verse_numbers
 
     def parse_chapters(self, lines: list[str]) -> list[Chapter]:
+        """Group content lines into chapters of verse blocks.
+
+        A line matching a chapter or verse marker starts a new block; other lines continue the
+        current block. A chapter marker also sets the current chapter.
+
+        Args:
+            lines: Content lines from ``extract_main_text``.
+
+        Returns:
+            Chapters 1 through 51 in order.
+
+        Raises:
+            RuntimeError: If a continuation precedes any marker, a block cannot be parsed, or
+                the chapters found are not exactly 1 through 51.
+        """
         chapters: dict[int, Chapter] = {}
         current_chapter: int | None = None
         current_block: list[str] = []
 
         def flush_block() -> None:
+            """Parse the pending block into a verse and add it to its chapter.
+
+            Raises:
+                RuntimeError: If the block has neither a chapter marker nor a verse marker
+                    within a chapter.
+            """
             nonlocal current_block, current_chapter
             if not current_block:
                 return
@@ -236,6 +362,16 @@ class VitaAdaeEtEvaeParser:
 
     @staticmethod
     def generate_osis(source_text: str, chapters: list[Chapter]) -> pyosis.OsisXML:
+        """Build the OSIS document for the book.
+
+        Args:
+            source_text: Source/edition line, emitted as a front-matter ``Source`` div when non-empty.
+            chapters: Chapters in order.
+
+        Returns:
+            An OSIS document with one canonical chapter div per chapter; verse ids
+            ``vita-adae-et-evae.<chapter>.<verse>`` (several ids for grouped verses).
+        """
         current_date = datetime.now().strftime("%Y.%m.%dT%H:%M:%S")
 
         book_div = pyosis.DivCt(
@@ -358,6 +494,11 @@ class VitaAdaeEtEvaeParser:
         return pyosis.OsisXML(pyosis.Osis(osis_text=osis_text))
 
     def process(self) -> pyosis.OsisXML:
+        """Run the full pipeline: fetch, extract, parse and convert.
+
+        Returns:
+            The OSIS document.
+        """
         raw_text = self.fetch_source_text()
         source_text, content_lines = self.extract_main_text(raw_text)
         chapters = self.parse_chapters(content_lines)
@@ -365,10 +506,22 @@ class VitaAdaeEtEvaeParser:
 
 
 def add_arguments(parser: argparse.ArgumentParser) -> None:
-    """vita-adae-et-evae has no scraper-specific options."""
+    """Register scraper-specific options; Vita Adae et Evae has none.
+
+    Args:
+        parser: Sub-parser to extend (left unchanged).
+    """
 
 
 def run(args: argparse.Namespace) -> list[Path]:
+    """Scrape Vita Adae et Evae and write ``vita-adae-et-evae.xml``.
+
+    Args:
+        args: Parsed CLI arguments providing ``cache_dir``, ``delay`` and ``output_dir``.
+
+    Returns:
+        A one-element list with the written file's path.
+    """
     parser = VitaAdaeEtEvaeParser(cache_dir=args.cache_dir, delay=args.delay)
     try:
         osis_doc = parser.process()
@@ -388,3 +541,4 @@ SPEC = ScraperSpec(
     run=run,
     add_arguments=add_arguments,
 )
+"""Registry entry that exposes this scraper to the CLI."""

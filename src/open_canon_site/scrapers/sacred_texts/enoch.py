@@ -1,4 +1,26 @@
-"""Download and parse Book of Enoch from sacred-texts.com to OSIS XML."""
+"""Download and parse the Book of Enoch from sacred-texts.com into OSIS XML.
+
+The source is R. H. Charles's 1917 translation, published at
+``https://sacred-texts.com/bib/boe/`` as one static HTML page per file
+(``boe000.htm`` to ``boe112.htm``). Pages 0-3 are front matter (title page,
+preface, introduction, abbreviations); the rest hold chapters. The page shapes
+handled are:
+
+* Chapter headings are ``<h3>CHAPTER IV.</h3>`` with a Roman numeral.
+* Verses are ``<p>`` elements that start with an Arabic ``N. `` marker. Several
+  verses may share one ``<p>`` (later markers inline, e.g. ``"... 2. And he..."``).
+* Poetry lines inside a verse are separated by ``<br>``; a stanza straddling two
+  verses can sit in an unnumbered ``<p>`` after the verse it continues.
+* Inline formatting uses ``<i>``/``<b>``/``<sup>``/``<sub>``; page numbers appear as
+  ``<font color="green">p. 12</font>``; Charles's brackets (``⌈ ⌉``) are literal text.
+* Footnotes sit under an ``<h3>Footnotes</h3>`` heading as
+  ``<p><a name="fn_0"></a><a href="...#fr_0">label</a> text</p>`` and are referenced
+  in the text by ``<a name="fr_0"></a><a href="#fn_0">1</a>``.
+* Site chrome (``Next:``, ``Previous:``, ``Sacred Texts``, ``Index``, ``«``/``»``) is
+  skipped.
+
+:func:`run` is the entry point registered through :data:`SPEC`.
+"""
 
 from __future__ import annotations
 
@@ -13,106 +35,143 @@ import pyosis
 from bs4 import BeautifulSoup, NavigableString, Tag
 from tqdm import tqdm
 
+from open_canon_site.scrapers import _osis
 from open_canon_site.scrapers._http import CachedHttpFetcher
 from open_canon_site.scrapers._osis import (
     InlinePart,
     consolidate_inline_strings,
     extract_plain_text,
     is_navigation_text,
+    normalize_whitespace,
     parse_page_marker_text,
-)
-from open_canon_site.scrapers._osis import (
-    normalize_whitespace as shared_normalize_whitespace,
-)
-from open_canon_site.scrapers._osis import (
-    roman_to_int as shared_roman_to_int,
 )
 from open_canon_site.scrapers.base import ScraperSpec
 
 LOGGER = logging.getLogger(__name__)
+"""Module logger."""
 
 OUTPUT_FILENAME: Final[str] = "1-enoch.xml"
+"""Name of the OSIS file written by :func:`run`."""
 DEFAULT_START_PAGE: Final[int] = 0  # 0 includes the title page and front matter
+"""Default first page to process; 0 includes the title page and front matter."""
 DEFAULT_END_PAGE: Final[int] = 112
+"""Default last page to process (the appendix)."""
 
 BASE_URL: Final[str] = "https://sacred-texts.com/bib/boe/"
-# Files range from boe000.htm (title page) to boe112.htm (appendix)
+"""Directory URL of the Charles translation; page files are appended to it."""
 FILE_RANGE: Final[tuple[int, int]] = (0, 112)
+"""Inclusive range of page numbers, ``boe000.htm`` (title page) to ``boe112.htm`` (appendix)."""
 OSIS_BOOK_ID: Final[str] = "1En"
+"""OSIS book abbreviation used in every osisID."""
 BOOK_TITLE: Final[str] = "The Book of Enoch"
+"""Full title of the book."""
 BOOK_SHORT_TITLE: Final[str] = "1 Enoch"
+"""Short title of the book."""
 FRONT_MATTER_TITLES: Final[dict[int, str]] = {
     0: "Title Page",
     1: "Editors' Preface",
     2: "Introduction",
     3: "Abbreviations, Brackets and Symbols",
 }
+"""Section titles for the front-matter pages, keyed by page number."""
 FRONT_MATTER_BOILERPLATE: Final[set[str]] = {
     "The Book of Enoch, by R.H. Charles, [1917], at sacred-texts.com",
     "Scanned at sacred-texts.com, June 2004. Proofed and formatted by John Bruno Hare. This text is in the public domain in the United States because it was published prior to 1923.",
 }
+"""Exact header and credit lines sacred-texts adds to front-matter pages; never emitted."""
 
 
-@dataclass
 @dataclass
 class VerseContent:
-    """Represents parsed verse content with annotations and formatting preserved."""
+    """Parsed verse content with annotations and formatting preserved."""
 
-    text: str  # Plain text version for reference
-    content_parts: list[str | pyosis.HiCt | pyosis.MilestoneCt]  # Parsed content with formatting
+    text: str
+    """Plain-text rendering of the verse (formatting flattened), for reference."""
+    content_parts: list[str | pyosis.HiCt | pyosis.MilestoneCt]
+    """Inline parts (strings, ``hi`` formatting, page milestones, notes) in document order."""
     has_poetry: bool = False
-    poetry_lines: list[list[str | pyosis.HiCt | pyosis.MilestoneCt]] | None = (
-        None  # Parsed lines with formatting
-    )
+    """True when the source ``<p>`` contained ``<br>`` line breaks."""
+    poetry_lines: list[list[str | pyosis.HiCt | pyosis.MilestoneCt]] | None = None
+    """Inline parts per non-empty poetry line, or ``None`` when there is no poetry."""
 
 
 @dataclass
 class FootnoteInfo:
-    """Information about a footnote."""
+    """A footnote scraped from a page's ``Footnotes`` section."""
 
-    ref_id: str  # e.g., "fn_0"
-    label: str  # e.g., "viii:1"
-    content: str  # The footnote text
+    ref_id: str
+    """Anchor id of the footnote body, e.g. ``"fn_0"``."""
+    label: str
+    """Verse reference printed on the footnote link, e.g. ``"viii:1"``."""
+    content: str
+    """Footnote text with the anchors removed."""
 
 
 @dataclass
 class ChapterInfo:
-    """Information about a chapter."""
+    """A chapter heading and, optionally, its verses (not used by the parser itself)."""
 
     number: int
+    """1-based chapter number."""
     title: str
+    """Chapter heading text, e.g. ``"CHAPTER I."``."""
     section_title: str | None = None
+    """Title of the section containing the chapter, if any."""
     verses: dict[int, VerseContent] | None = None
+    """Verses keyed by verse number, if collected."""
 
 
 class SacredTextsParser:
-    """Parse Book of Enoch from sacred-texts.com."""
+    """Parse the sacred-texts.com Book of Enoch pages into a single OSIS book division.
+
+    Feed pages through :meth:`parse_page` in order (or use :meth:`process_all_pages`),
+    then call :meth:`generate_osis`.
+    """
 
     def __init__(
         self,
         cache_dir: str | None = None,
         delay: float = 1.0,
     ) -> None:
+        """Create a parser with its own cached HTTP fetcher.
+
+        Args:
+            cache_dir: Directory for the on-disk HTML cache (created if missing), or
+                ``None`` to disable caching.
+            delay: Seconds the fetcher sleeps around live requests.
+        """
         self.current_chapter: int | None = None
+        """Number of the chapter being filled, or ``None`` before the first heading."""
         self.current_verse: int | None = None
+        """Number of the most recently added verse, or ``None`` before any verse."""
         self.current_div: pyosis.DivCt | None = None
+        """OSIS chapter division currently receiving verses."""
         self.root_div: pyosis.DivCt | None = None
+        """OSIS book division holding front matter and chapters (set by :meth:`start_book`)."""
         self.chapters: list[pyosis.DivCt] = []
+        """Reserved list of chapter divisions; not populated by the parser."""
         self.footnotes: dict[str, FootnoteInfo] = {}
+        """Footnotes seen so far, keyed by anchor id (``"fn_0"``), across all pages."""
         self.http = CachedHttpFetcher(cache_dir=cache_dir, delay=delay, logger=LOGGER)
+        """HTTP client that fetches and caches the page HTML."""
 
         self.cache_dir = Path(cache_dir) if cache_dir else None
+        """Resolved cache directory, or ``None`` when caching is disabled."""
         if self.cache_dir:
             self.cache_dir.mkdir(parents=True, exist_ok=True)
             LOGGER.info(f"Using cache directory: {self.cache_dir}")
 
     def fetch_page(self, page_num: int, retry_count: int = 3, delay: float = 1.0) -> str:
-        """Fetch a single page from sacred-texts.com.
+        """Fetch one ``boeNNN.htm`` page, using the cache when possible.
 
         Args:
-            page_num: Page number to fetch
-            retry_count: Number of retries for failed requests
-            delay: Base delay between requests in seconds
+            page_num: Page number; zero-padded to three digits in the URL.
+            retry_count: Maximum number of live attempts passed to the fetcher.
+            delay: Delay between requests in seconds; applied to the fetcher if it
+                differs from the current value.
+
+        Returns:
+            The page HTML.
         """
         if delay != self.http.delay:
             self.http.delay = delay
@@ -121,6 +180,7 @@ class SacredTextsParser:
         return self.http.fetch_text(url=url, retry_count=retry_count)
 
     def close(self) -> None:
+        """Close the HTTP client."""
         self.http.close()
 
     def consolidate_strings(self, content: list[InlinePart]) -> list[InlinePart]:
@@ -129,6 +189,12 @@ class SacredTextsParser:
         pyosis has a bug where PCt/LCt/VerseCt don't handle multiple consecutive
         strings correctly - they only keep the first and last, dropping middle ones.
         This function merges consecutive strings to avoid that bug.
+
+        Args:
+            content: Inline parts, possibly with adjacent strings.
+
+        Returns:
+            Parts with adjacent strings merged.
         """
         return consolidate_inline_strings(content)
 
@@ -147,9 +213,18 @@ class SacredTextsParser:
         Inline page references (e.g., "pp. 35, 36") are preserved as text.
         Brackets (⌈⌉) are preserved as literal characters.
 
+        Footnote references (``<a name="fr_N">`` followed by ``<a href="#fn_N">``) become
+        ``<note>`` elements when the footnote was already extracted; navigation-classed
+        elements and ``<br>`` are dropped.
+
         Args:
-            element: The HTML element or text node to parse
-            is_green_font: True if we're inside a green font tag (for page markers)
+            element: The HTML element or text node to parse.
+            is_green_font: True if inside a ``<font color="green">`` tag, where text is
+                scanned for page markers.
+
+        Returns:
+            Inline parts in document order. A bare whitespace-only text node yields
+            ``[]`` outside green font.
         """
         if isinstance(element, NavigableString):
             text = str(element)
@@ -251,7 +326,19 @@ class SacredTextsParser:
         return self.consolidate_strings(result)
 
     def parse_verse_text(self, verse_element: Tag) -> VerseContent:
-        """Parse verse text, handling poetry and inline annotations."""
+        """Parse a verse ``<p>`` into inline parts and, if it has ``<br>``, poetry lines.
+
+        The paragraph is split on ``<br>`` and each piece is parsed separately so
+        formatting stays inside its line. Empty lines and lines containing navigation
+        words (``Next:``, ``Previous:``, ``Sacred Texts``, ``Index``) are dropped.
+
+        Args:
+            verse_element: The ``<p>`` (or other) tag holding the verse.
+
+        Returns:
+            The verse text, inline parts and poetry information. The leading verse
+            number is *not* stripped here.
+        """
         text_parts = self.parse_inline_annotations(verse_element)
 
         # Extract plain text for comparison (flatten HiCt content)
@@ -304,21 +391,23 @@ class SacredTextsParser:
         )
 
     def extract_chapter_number(self, text: str) -> int | None:
-        """Extract chapter number from chapter heading."""
-        # Handle "CHAPTER I", "CHAPTER II", etc.
+        """Extract the chapter number from a ``CHAPTER IV.`` style heading.
+
+        Args:
+            text: Heading text; matching is case-insensitive and only ``IVXLC`` numerals
+                are recognised.
+
+        Returns:
+            The chapter number, or ``None`` if the text has no such heading.
+        """
         match = re.search(r"CHAPTER\s+([IVXLC]+)", text, re.IGNORECASE)
         if match:
             roman = match.group(1)
-            return self.roman_to_int(roman)
+            return _osis.roman_to_int(roman)
         return None
 
-    @staticmethod
-    def roman_to_int(s: str) -> int:
-        """Convert Roman numeral to integer."""
-        return shared_roman_to_int(s)
-
     def start_book(self) -> None:
-        """Initialize the OSIS book structure."""
+        """Create the root ``1En`` book division with its main title, replacing any existing one."""
         self.root_div = pyosis.DivCt(
             type_value=pyosis.OsisDivs.BOOK,
             osis_id=[OSIS_BOOK_ID],
@@ -332,38 +421,50 @@ class SacredTextsParser:
             ],
         )
 
-    @staticmethod
-    def normalize_whitespace(text: str) -> str:
-        """Collapse internal whitespace so scraped headings compare consistently."""
-        return shared_normalize_whitespace(text)
-
-    @staticmethod
-    def is_navigation_text(text: str) -> bool:
-        """Return True if text is site navigation or other sacred-texts chrome."""
-        return is_navigation_text(text)
-
     def should_skip_front_matter_paragraph(self, p_tag: Tag) -> bool:
-        """Return True if a front-matter paragraph is site chrome or metadata."""
+        """Return True if a front-matter paragraph is site chrome or metadata.
+
+        Skips paragraphs inside ``nav``/``header``/``footer``, footnote bodies (those
+        with an ``<a name="fn_...">``), empty paragraphs, the known sacred-texts
+        boilerplate lines and navigation text.
+
+        Args:
+            p_tag: The paragraph to classify.
+
+        Returns:
+            True if the paragraph should not be emitted.
+        """
         if p_tag.find_parent(["nav", "header", "footer"]):
             return True
 
         if p_tag.find("a", attrs={"name": lambda x: x and x.startswith("fn_")}):
             return True
 
-        text = self.normalize_whitespace(p_tag.get_text(" ", strip=True))
+        text = normalize_whitespace(p_tag.get_text(" ", strip=True))
         if not text:
             return True
 
         if text in FRONT_MATTER_BOILERPLATE:
             return True
 
-        return self.is_navigation_text(text)
+        return is_navigation_text(text)
 
     def extract_front_matter_lead_lines(self, soup: BeautifulSoup, title: str) -> list[str]:
         """Extract heading lines that belong to the front-matter page itself.
 
         This preserves the title-page block on boe000 and leading subheadings like
         the introduction's opening section, while avoiding duplicated section titles.
+
+        Walks headings and paragraphs in order, collecting heading text until the first
+        real content paragraph; skipped (chrome) paragraphs do not stop the scan.
+
+        Args:
+            soup: The parsed front-matter page.
+            title: The section title already used for the division; headings equal to it
+                (case-insensitively) are not repeated.
+
+        Returns:
+            Distinct heading lines, whitespace-normalised, in page order.
         """
         root = soup.body if soup.body else soup
         lead_lines = []
@@ -375,10 +476,10 @@ class SacredTextsParser:
                     continue
                 break
 
-            line = self.normalize_whitespace(element.get_text(" ", strip=True))
+            line = normalize_whitespace(element.get_text(" ", strip=True))
             if not line or line in FRONT_MATTER_BOILERPLATE:
                 continue
-            if self.is_navigation_text(line):
+            if is_navigation_text(line):
                 continue
             if line.casefold() in seen:
                 continue
@@ -394,7 +495,16 @@ class SacredTextsParser:
         content_paragraphs: list[Tag],
         lead_lines: list[str] | None = None,
     ) -> None:
-        """Add front matter sections like preface, introduction, etc."""
+        """Append a ``front`` division (preface, introduction...) to the book.
+
+        A paragraph whose only content is a page milestone is added bare; others are
+        wrapped in ``<p>``. Starts the book first if needed.
+
+        Args:
+            title: Section title for the division's main title.
+            content_paragraphs: Paragraph tags with the section body.
+            lead_lines: Extra heading lines emitted as paragraphs before the body.
+        """
         if not self.root_div:
             self.start_book()
 
@@ -427,7 +537,12 @@ class SacredTextsParser:
         self.root_div.content.append(front_matter_div)
 
     def start_chapter(self, chapter_num: int, title: str = "") -> None:
-        """Start a new chapter."""
+        """Close the previous chapter (logging verse gaps) and open ``1En.<chapter_num>``.
+
+        Args:
+            chapter_num: Chapter number, used in the OSIS id.
+            title: Heading text for the chapter title element; omitted when empty.
+        """
         if self.current_div and self.current_chapter:
             # Check for verse gaps before closing the previous chapter
             self._check_verse_gaps()
@@ -452,7 +567,14 @@ class SacredTextsParser:
             self.root_div.content.append(self.current_div)
 
     def add_verse(self, verse_num: int, content: VerseContent) -> None:
-        """Add a verse to the current chapter."""
+        """Append a verse to the current chapter, as a line group when it has poetry.
+
+        Logs a warning and does nothing if no chapter is open.
+
+        Args:
+            verse_num: Verse number within the current chapter.
+            content: Parsed verse content; poetry lines win over ``content_parts``.
+        """
         if not self.current_chapter or not self.current_div:
             LOGGER.warning(f"No chapter started for verse {verse_num}")
             return
@@ -527,7 +649,8 @@ class SacredTextsParser:
         """Log a warning for any gaps in verse numbering within the current chapter.
 
         Called just before closing a chapter (i.e. when a new chapter starts) so
-        that missing verses are surfaced to the user early.
+        that missing verses are surfaced to the user early. Does nothing without an
+        open chapter.
         """
         if not self.current_div or not self.current_chapter:
             return
@@ -562,7 +685,18 @@ class SacredTextsParser:
         numbers like " 2. " inline in the text.  This method splits them into separate
         lists, one per verse.
 
-        Returns a list of (verse_num, content_parts) tuples in order.
+        A split happens only at the *next expected* number (current verse + 1)
+        surrounded by whitespace and not preceded by a digit, so page references such
+        as ``"p. 32. "`` do not split. Non-string parts stay with the verse in progress.
+
+        Args:
+            content_parts: Inline parts of one paragraph.
+            starting_verse_num: Number of the first verse in the paragraph (its marker
+                already removed).
+
+        Returns:
+            ``(verse_num, parts)`` tuples in order; a single tuple holding the original
+            parts if no marker was found.
         """
         result: list[tuple[int, list[InlinePart]]] = []
         current_verse = starting_verse_num
@@ -612,7 +746,14 @@ class SacredTextsParser:
         A poetry line that begins with " N. " (where N is the expected next verse
         number) marks the start of a new verse inside the same paragraph.
 
-        Returns a list of (verse_num, lines) tuples in order.
+        Args:
+            poetry_lines: Inline parts per line.
+            starting_verse_num: Number of the first verse; for each line the next
+                expected number is current + 1, which is stripped from the line start.
+
+        Returns:
+            ``(verse_num, lines)`` tuples in order; a single tuple with the original
+            lines if no marker was found.
         """
         result: list[tuple[int, list[list[InlinePart]]]] = []
         current_verse = starting_verse_num
@@ -653,6 +794,12 @@ class SacredTextsParser:
         Footnotes are typically in a section with <H3>Footnotes</H3> heading.
         Each footnote has the format:
         <A NAME="fn_X"></A><A HREF="...#fr_X">label</A> content
+
+        Paragraphs are read until the next ``h1``-``h4`` heading. Footnotes with empty
+        content are ignored; results are stored in :attr:`footnotes`.
+
+        Args:
+            soup: The parsed page.
         """
         # Look for "Footnotes" heading
         for h3 in soup.find_all("h3"):
@@ -705,9 +852,15 @@ class SacredTextsParser:
     def parse_page(self, html: str, page_num: int = -1) -> None:
         """Parse a single page and extract chapter/verse content or front matter.
 
+        Footnotes are extracted first. Pages 0-3 become front-matter divisions. Other
+        pages start chapters from ``CHAPTER`` ``<h3>`` headings and turn numbered ``<p>``
+        elements into verses, splitting inline multi-verse paragraphs. Unnumbered
+        poetry paragraphs after a verse continue it or become the next verse.
+
         Args:
-            html: HTML content to parse
-            page_num: Page number (used to identify front matter pages 0-3)
+            html: HTML content to parse.
+            page_num: Page number (used to identify front matter pages 0-3); the
+                default ``-1`` means a body page.
         """
         soup = BeautifulSoup(html, "html.parser")
 
@@ -866,7 +1019,14 @@ class SacredTextsParser:
                                 )
 
     def generate_osis(self) -> pyosis.OsisXML:
-        """Generate complete OSIS document."""
+        """Build the complete OSIS document from everything parsed so far.
+
+        Checks the final chapter for verse gaps, then wraps the book division in an
+        OSIS text with a header (scrape timestamp, 1913 edition, work metadata).
+
+        Returns:
+            The OSIS XML document.
+        """
         # Check for verse gaps in the final chapter before generating output
         self._check_verse_gaps()
 
@@ -956,7 +1116,9 @@ class SacredTextsParser:
         return osis_xml
 
     def process_all_pages(self, start: int = 0, end: int = 112, delay: float = 1.0) -> None:
-        """Download and process all pages in range.
+        """Start the book, then download and parse every page in the range.
+
+        A page that fails to download or parse is logged and skipped.
 
         Args:
             start: First page number to process
@@ -975,6 +1137,11 @@ class SacredTextsParser:
 
 
 def add_arguments(parser: argparse.ArgumentParser) -> None:
+    """Register the ``--start-page`` and ``--end-page`` options.
+
+    Args:
+        parser: The sub-command parser to add options to.
+    """
     parser.add_argument(
         "--start-page",
         type=int,
@@ -990,6 +1157,15 @@ def add_arguments(parser: argparse.ArgumentParser) -> None:
 
 
 def run(args: argparse.Namespace) -> list[Path]:
+    """Scrape the requested pages and write ``1-enoch.xml``.
+
+    Args:
+        args: Parsed options with ``cache_dir``, ``delay``, ``start_page``,
+            ``end_page`` and ``output_dir``.
+
+    Returns:
+        A one-element list with the path of the written OSIS file.
+    """
     parser = SacredTextsParser(cache_dir=args.cache_dir, delay=args.delay)
 
     try:
