@@ -106,7 +106,10 @@ def extract_markup(
         ``div.credit``/``div.publish-info``/``div.copyright-info`` -> acknowledgement/x-publish-info/x-copyright-info
         div; ``div.card-label`` -> nothing; other ``div`` -> div x-unknown plus a warning; ``h1``-``h6`` -> head; ``br`` -> lb;
         ``section``/``blockquote`` -> div x-section/x-blockquote. With ``no_container`` only the converted children of
-        the tag are returned (the tag's own wrapper is not emitted).
+        the tag are returned (the tag's own wrapper is not emitted). A tag with no ``class`` attribute is treated as having
+        an empty class list, so it takes the same path as a tag with an unrecognised class: a ``span`` and a ``div``
+        get a warning and pass through (as ``children only`` / ``x-unknown``), while an ``a`` or ``figure`` with no
+        recognised class raises ``ValueError``.
 
     Raises:
         NotImplementedError: If the function encounters a tag or structure that is not yet supported (e.g., <table>
@@ -157,7 +160,7 @@ def extract_markup(
     # <span class="small-caps">Jehovah</span></span></a>
     # We want to extract the embedded `a`, wrap its contents in the `.deity-name` and `.small-caps` tags exactly as
     # present, and then put those into the `a`, and then process the `a`.
-    if tag.name == "span" and "deity-name" in tag.attrs["class"]:
+    if tag.name == "span" and "deity-name" in tag.attrs.get("class", []):
         deity_name_span = tag
         small_caps_span = deity_name_span.find("span", class_="small-caps")
         if isinstance(small_caps_span, bs4.element.Tag):
@@ -174,13 +177,13 @@ def extract_markup(
         return extract_children(tag)
 
     # These we should ignore and just return the contents
-    if tag.name == "span" and "dominant" in tag.attrs["class"]:
+    if tag.name == "span" and "dominant" in tag.attrs.get("class", []):
         return extract_children(tag)
 
     if tag.name == "p":
         return [pyosis.generated.PCt(content=extract_children(tag))]
 
-    if tag.name == "a" and "scripture-ref" in tag.attrs["class"]:
+    if tag.name == "a" and "scripture-ref" in tag.attrs.get("class", []):
         # TODO: use Osis refs
         # There's an issue where the website refers to specific pages in the
         # captions for the illustrations (presumably pointing at the currently
@@ -197,7 +200,9 @@ def extract_markup(
 
     if (
         tag.name == "span"
-        and ("small-caps" in tag.attrs["class"] or "uppercase" in tag.attrs["class"])
+        and (
+            "small-caps" in tag.attrs.get("class", []) or "uppercase" in tag.attrs.get("class", [])
+        )
     ) or tag.name == "small":
         # TODO: Figure out a way to determine when small should be small caps or just smaller text.
         # TODO: Figure out a better way to represent <span class="uppercase">Translated by Joseph Smith</span>
@@ -240,10 +245,10 @@ def extract_markup(
             )
         ]
 
-    if tag.name == "span" and "deity-name" in tag.attrs["class"]:
+    if tag.name == "span" and "deity-name" in tag.attrs.get("class", []):
         return [pyosis.generated.DivineNameCt(content=extract_children(tag))]
 
-    if tag.name == "span" and "language" in tag.attrs["class"]:
+    if tag.name == "span" and "language" in tag.attrs.get("class", []):
         # TODO: Parse language code
         return [
             pyosis.generated.ForeignCt(lang=str(tag.attrs["lang"]), content=extract_children(tag))
@@ -277,7 +282,7 @@ def extract_markup(
         return extract_children(tag)
 
     if tag.name == "a" and (
-        "study-note-ref" in tag.attrs["class"] or "note-ref" in tag.attrs["class"]
+        "study-note-ref" in tag.attrs.get("class", []) or "note-ref" in tag.attrs.get("class", [])
     ):
         return extract_footnote(tag, footnotes_dict)
 
@@ -297,7 +302,7 @@ def extract_markup(
             )
         ]
     if tag.name == "figure":
-        if "image" in tag.attrs["class"]:
+        if "image" in tag.attrs.get("class", []):
             # HTML figures aren't exactly the same as OSIS figures, but as a temporary workaround, we can put the
             # HTML figure as an OSIS div and the contained images as OSIS figures
             return [
@@ -306,7 +311,7 @@ def extract_markup(
                     content=extract_children(tag),
                 )
             ]
-        if "table" in tag.attrs["class"]:
+        if "table" in tag.attrs.get("class", []):
             # TODO: parse caption tags?
             header_tag = tag.find("header")
             if header_tag:
@@ -390,28 +395,28 @@ def extract_markup(
         ]
 
     if tag.name == "div":
-        if "credit" in tag.attrs["class"]:
+        if "credit" in tag.attrs.get("class", []):
             return [
                 pyosis.generated.DivCt(
                     type_value=pyosis.generated.OsisDivs.ACKNOWLEDGEMENT,
                     content=extract_children(tag),
                 )
             ]
-        if "publish-info" in tag.attrs["class"]:
+        if "publish-info" in tag.attrs.get("class", []):
             return [
                 pyosis.generated.DivCt(
                     type_value="x-publish-info",
                     content=extract_children(tag),
                 )
             ]
-        if "copyright-info" in tag.attrs["class"]:
+        if "copyright-info" in tag.attrs.get("class", []):
             return [
                 pyosis.generated.DivCt(
                     type_value="x-copyright-info",
                     content=extract_children(tag),
                 )
             ]
-        if "card-label" in tag.attrs["class"]:
+        if "card-label" in tag.attrs.get("class", []):
             # Mobile duplicate of the column header — skip
             return []
         warnings.warn(
