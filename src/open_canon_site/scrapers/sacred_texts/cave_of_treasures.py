@@ -27,11 +27,25 @@ deliberately simple and follows the divisions Budge prints:
   translation) are emitted as non-canonical ``<div type="x-notes">`` blocks, in place and
   not numbered. His footnotes become inline ``<note>`` elements.
 
-Left out: the title page, preface, introduction, contents and bibliography, the plates,
-the "notes to the hypertext transcription", and the appendices (Testamentum Adami,
-translations from the Book of the Bee, Abraham and the City of Ur), which are separate
-works Budge appended. Tables that are not numbered lists (cuneiform and hieroglyph
-renderings, the zodiac tables) are dropped because they are mostly images.
+Images
+------
+
+Images are kept as ``<figure src=...>`` elements that point at the image files on
+``archive.sacred-texts.com`` (the files themselves are not downloaded):
+
+* Every image inside a translation page (the cuneiform and hieroglyph renderings in
+  chapters 5 and 6, for instance) becomes a figure, grouped in a non-canonical
+  ``<div type="x-figures">`` at the place the table or paragraph occupied. The image's
+  ``alt`` text is kept; text in those tables is not.
+* The sixteen plate pages (the frontispiece and Plates I to XV, ``bct_pl00`` to ``bct_pl15``)
+  are collected in one non-canonical ``<div type="x-plates">`` after the last chapter. Each
+  plate is a ``<div type="x-plate">`` with a sub-title (``Plate XV (facing page 272)``), one
+  figure per image and Budge's caption as a paragraph.
+
+Left out: the title page, preface, introduction, contents and bibliography, the "notes to
+the hypertext transcription", and the appendices (Testamentum Adami, translations from the
+Book of the Bee, Abraham and the City of Ur), which are separate works Budge appended. Text
+in tables that are not numbered lists is dropped.
 """
 
 from __future__ import annotations
@@ -39,10 +53,12 @@ from __future__ import annotations
 import argparse
 import logging
 import re
+from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import Final
+from urllib.parse import urljoin
 
 import pyosis
 from bs4 import BeautifulSoup, Comment, NavigableString, Tag
@@ -109,13 +125,19 @@ SKIPPED_HEADING_RE: Final[re.Pattern[str]] = re.compile(
 )
 """Matches the manuscript running heads on the first page, which are dropped."""
 NAVIGATION_RE: Final[re.Pattern[str]] = re.compile(
-    r"^(?:(?:Sacred-Texts|Christianity|Index|Previous|Next)\s*)+$", re.IGNORECASE
+    r"^(?:(?:Sacred-Texts|Christianity|Index|List of Plates|Title Page|Previous Plate|Next Plate"
+    r"|Previous|Next)\s*)+$",
+    re.IGNORECASE,
 )
 """Matches the site's own navigation paragraphs, which hold only nav link words."""
 NOTES_RE: Final[re.Pattern[str]] = re.compile(r"^\[?\s*NOTES?\b")
 """Matches the start of one of Budge's commentary paragraphs."""
 PAGE_ANCHOR_RE: Final[re.Pattern[str]] = re.compile(r"^page_(?P<page>[0-9ivxlcdm]+)$", re.I)
 """Matches the ``name`` of a printed-page anchor such as ``page_44``."""
+PLATE_PAGES: Final[tuple[str, ...]] = tuple(f"bct_pl{n:02d}" for n in range(16))
+"""Page stems of the plates: the frontispiece (``bct_pl00``) and Plates I to XV."""
+FACING_RE: Final[re.Pattern[str]] = re.compile(r"facing\s+page\s+(?P<page>[0-9ivxlcdm]+)", re.I)
+"""Matches the ``{facing page 272}`` line of a plate page."""
 LIST_NUMBER_RE: Final[re.Pattern[str]] = re.compile(r"^\d+\.$")
 """Matches the number cell of a numbered-list table row such as ``12.``."""
 
@@ -131,13 +153,39 @@ class Footnote:
 
 
 @dataclass
+class Image:
+    """One image on a page."""
+
+    src: str
+    """Absolute URL of the image file."""
+    alt: str
+    """Alternative text; empty when the page gives none."""
+
+
+@dataclass
 class Block:
     """One block of a chapter in source order."""
 
     kind: str
-    """``verse``, ``heading`` or ``notes``."""
+    """``verse``, ``heading``, ``notes`` or ``figures``."""
     parts: list[InlinePart]
-    """Inline content, including page milestones and footnote notes."""
+    """Inline content, including page milestones and footnote notes (empty for figures)."""
+    images: list[Image] = field(default_factory=list)
+    """Images of a ``figures`` block."""
+
+
+@dataclass
+class Plate:
+    """One plate page: the frontispiece or a numbered plate."""
+
+    label: str
+    """Plate label as printed, e.g. ``PLATE XV`` or ``Frontespiece``."""
+    facing: str
+    """Printed page the plate faces, or ``""`` when none is given."""
+    images: list[Image]
+    """The plate's images in page order."""
+    caption: list[str]
+    """Caption paragraphs as plain text."""
 
 
 @dataclass
@@ -248,38 +296,79 @@ class CaveOfTreasuresParser:
         """
         return "Just a moment" not in text and bool(source.marker.search(legacy_html(text)))
 
-    def fetch_page_text(self, source: ChapterSource) -> str:
-        """Return the validated HTML of one chapter page, from cache or the network.
+    def _fetch_validated(self, url: str, validator: Callable[[str], bool], what: str) -> str:
+        """Fetch a page, preferring a valid cached copy and never keeping an invalid one.
 
         An invalid cached copy is logged and deleted; an invalid fetched page also removes
         its cache entry.
+
+        Args:
+            url: Page URL.
+            validator: Returns whether page text is genuine.
+            what: Description used in log and error messages.
+
+        Returns:
+            Raw HTML of the page.
+
+        Raises:
+            RuntimeError: If the fetched page fails validation.
+        """
+        cache_path = self.http.cache_path_for(url)
+        if cache_path and cache_path.exists():
+            cached = cache_path.read_text(encoding="utf-8")
+            if validator(cached):
+                return cached
+            LOGGER.warning("Discarding invalid cached Cave of Treasures page at %s", cache_path)
+            cache_path.unlink()
+
+        fetched = self.http.fetch_text(url=url)
+        if validator(fetched):
+            return fetched
+        if cache_path and cache_path.exists():
+            cache_path.unlink()
+        raise RuntimeError(
+            f"Source page {url} did not contain {what}; direct access to "
+            "sacred-texts.com may be blocked in this environment"
+        )
+
+    def fetch_page_text(self, source: ChapterSource) -> str:
+        """Return the validated HTML of one chapter page, from cache or the network.
 
         Args:
             source: Chapter to fetch.
 
         Returns:
             Raw HTML of the page.
-
-        Raises:
-            RuntimeError: If the fetched page is not the expected chapter.
         """
-        url = PAGE_URL_TEMPLATE.format(page=source.page)
-        cache_path = self.http.cache_path_for(url)
-        if cache_path and cache_path.exists():
-            cached = cache_path.read_text(encoding="utf-8")
-            if self.is_valid_page(cached, source):
-                return cached
-            LOGGER.warning("Discarding invalid cached Cave of Treasures page at %s", cache_path)
-            cache_path.unlink()
+        return self._fetch_validated(
+            PAGE_URL_TEMPLATE.format(page=source.page),
+            lambda text: self.is_valid_page(text, source),
+            repr(source.title),
+        )
 
-        fetched = self.http.fetch_text(url=url)
-        if self.is_valid_page(fetched, source):
-            return fetched
-        if cache_path and cache_path.exists():
-            cache_path.unlink()
-        raise RuntimeError(
-            f"Source page {source.page} did not contain {source.title!r}; direct access to "
-            "sacred-texts.com may be blocked in this environment"
+    @staticmethod
+    def is_valid_plate_page(text: str) -> bool:
+        """Report whether text is a genuine plate page.
+
+        Args:
+            text: Raw page HTML.
+
+        Returns:
+            True if it shows at least one image and is not a Cloudflare interstitial.
+        """
+        return "Just a moment" not in text and "<img" in legacy_html(text).lower()
+
+    def fetch_plate_text(self, page: str) -> str:
+        """Return the validated HTML of one plate page, from cache or the network.
+
+        Args:
+            page: Plate page stem such as ``bct_pl07``.
+
+        Returns:
+            Raw HTML of the page.
+        """
+        return self._fetch_validated(
+            PAGE_URL_TEMPLATE.format(page=page), self.is_valid_plate_page, "a plate image"
         )
 
     def parse_inline(self, node: Tag, footnotes: dict[str, Footnote]) -> list[InlinePart]:
@@ -357,21 +446,41 @@ class CaveOfTreasuresParser:
             footnotes[key] = Footnote(label=label, parts=_clean(self.parse_inline(para, {})))
         return footnotes
 
-    def _table_blocks(
-        self, table: Tag, footnotes: dict[str, Footnote], pending: list[InlinePart]
-    ) -> list[Block]:
-        """Turn the rows of a numbered-list table into verses.
+    @staticmethod
+    def parse_images(node: Tag, page: str) -> list[Image]:
+        """Collect the images inside an element.
 
-        Rows whose first cell is not a number (and tables with none) are skipped. A row that
-        holds only a page marker is carried into ``pending``.
+        Args:
+            node: Element to search.
+            page: Stem of the page being parsed, used to resolve relative ``src`` values.
+
+        Returns:
+            The images in document order, with absolute URLs.
+        """
+        base = PAGE_URL_TEMPLATE.format(page=page)
+        return [
+            Image(src=urljoin(base, img["src"]), alt=normalize_whitespace(img.get("alt", "")))
+            for img in node.find_all("img")
+            if img.get("src")
+        ]
+
+    def _table_blocks(
+        self, table: Tag, footnotes: dict[str, Footnote], pending: list[InlinePart], page: str
+    ) -> list[Block]:
+        """Turn a table into verses (numbered lists) or a figures block (images).
+
+        Rows whose first cell is a number become verses; a row that holds only a page marker
+        is carried into ``pending``. Other text is dropped, but a table with no numbered rows
+        that holds images yields one ``figures`` block.
 
         Args:
             table: The ``<table>`` element.
             footnotes: Page footnotes.
             pending: Page milestones waiting for the next block; extended in place.
+            page: Stem of the page being parsed.
 
         Returns:
-            One verse block per numbered row.
+            One verse block per numbered row, else at most one figures block.
         """
         blocks: list[Block] = []
         for row in table.find_all("tr"):
@@ -389,6 +498,10 @@ class CaveOfTreasuresParser:
                 pending.clear()
             else:
                 LOGGER.debug("Skipping non-list table row: %s", number)
+        if not blocks:
+            images = self.parse_images(table, page)
+            if images:
+                blocks.append(Block("figures", [], images))
         return blocks
 
     def parse_chapter(self, html_text: str, number: int) -> Chapter:
@@ -403,6 +516,7 @@ class CaveOfTreasuresParser:
         """
         soup = BeautifulSoup(legacy_html(html_text), "html.parser")
         footnotes = self.parse_footnotes(soup)
+        page = CHAPTERS[number - 1].page
         chapter = Chapter(number=number, title=CHAPTERS[number - 1].title)
         pending: list[InlinePart] = []
         body = soup.body or soup
@@ -411,15 +525,18 @@ class CaveOfTreasuresParser:
             if element.find_parent("table") is not None:
                 continue
             if element.name == "table":
-                chapter.blocks.extend(self._table_blocks(element, footnotes, pending))
+                chapter.blocks.extend(self._table_blocks(element, footnotes, pending, page))
                 continue
             footnote_start = element.find_previous_sibling("h3", string=re.compile("Footnotes"))
             if footnote_start is not None:
                 break
 
             parts = _clean(self.parse_inline(element, footnotes))
+            images = self.parse_images(element, page)
             if not _has_text(parts):
                 pending.extend(p for p in parts if isinstance(p, pyosis.MilestoneCt))
+                if images:
+                    chapter.blocks.append(Block("figures", [], images))
                 continue
             text = _plain(parts)
             if NAVIGATION_RE.match(text) or SKIPPED_HEADING_RE.match(text):
@@ -440,8 +557,49 @@ class CaveOfTreasuresParser:
                 kind = "verse"
             chapter.blocks.append(Block(kind, [*pending, *parts]))
             pending.clear()
+            if images:
+                chapter.blocks.append(Block("figures", [], images))
 
         return chapter
+
+    def parse_plate(self, html_text: str, page: str) -> Plate:
+        """Parse one plate page.
+
+        The label is the first centred line, the facing page comes from ``{facing page N}``,
+        images are every ``<img>`` and the caption is the remaining text (navigation, the
+        label, the facing line and bare digit keys such as ``1`` dropped).
+
+        Args:
+            html_text: Raw page HTML (old layout, or reader layout via ``legacy_html``).
+            page: Page stem such as ``bct_pl07``, used to resolve image URLs.
+
+        Returns:
+            The parsed plate; its ``images`` is empty if the page has none.
+        """
+        soup = BeautifulSoup(legacy_html(html_text), "html.parser")
+        body = soup.body or soup
+        label = ""
+        facing = ""
+        caption: list[str] = []
+        for element in body.find_all(["p", "td"]):
+            if element.find(["p", "td", "table"]):
+                continue
+            text = normalize_whitespace(element.get_text(" "))
+            if not text or text.isdigit() or NAVIGATION_RE.match(text):
+                continue
+            match = FACING_RE.search(text)
+            if match:
+                facing = match.group("page")
+            elif not label:
+                label = text
+            elif text not in caption:
+                caption.append(text)
+        return Plate(
+            label=label,
+            facing=facing,
+            images=self.parse_images(body, page),
+            caption=caption,
+        )
 
     @staticmethod
     def _heading_content(parts: list[InlinePart]) -> list[InlinePart]:
@@ -455,11 +613,62 @@ class CaveOfTreasuresParser:
         """
         return [p for p in parts if not isinstance(p, pyosis.MilestoneCt)]
 
-    def generate_osis(self, chapters: list[Chapter]) -> pyosis.OsisXML:
+    @staticmethod
+    def _figure(image: Image) -> pyosis.FigureCt:
+        """Build a ``<figure>`` for an image.
+
+        Args:
+            image: The image.
+
+        Returns:
+            A figure whose ``src`` is the image URL and whose ``alt`` is the alternative text
+            (omitted when empty).
+        """
+        return pyosis.FigureCt(src=image.src, alt=image.alt or None)
+
+    def _plates_div(self, plates: list[Plate]) -> pyosis.DivCt:
+        """Build the non-canonical div that gathers the plates.
+
+        Args:
+            plates: Plates in page order.
+
+        Returns:
+            A ``x-plates`` div holding one ``x-plate`` div per plate.
+        """
+        div = pyosis.DivCt(
+            type_value="x-plates",
+            canonical=False,
+            content=[
+                pyosis.TitleCt(
+                    type_value=pyosis.OsisTitles.MAIN, canonical=False, content=["Plates"]
+                )
+            ],
+        )
+        for plate in plates:
+            title = plate.label + (f" (facing page {plate.facing})" if plate.facing else "")
+            div.content.append(
+                pyosis.DivCt(
+                    type_value="x-plate",
+                    canonical=False,
+                    content=[
+                        pyosis.TitleCt(
+                            type_value=pyosis.OsisTitles.SUB, canonical=False, content=[title]
+                        ),
+                        *[self._figure(image) for image in plate.images],
+                        *[pyosis.PCt(content=[line]) for line in plate.caption],
+                    ],
+                )
+            )
+        return div
+
+    def generate_osis(
+        self, chapters: list[Chapter], plates: list[Plate] | None = None
+    ) -> pyosis.OsisXML:
         """Build the OSIS document for the book.
 
         Args:
             chapters: Chapters in order.
+            plates: Plates to append after the chapters, if any.
 
         Returns:
             An OSIS document with one canonical chapter div per chapter and verse ids
@@ -502,6 +711,14 @@ class CaveOfTreasuresParser:
                             content=self._heading_content(block.parts),
                         )
                     )
+                elif block.kind == "figures":
+                    chapter_div.content.append(
+                        pyosis.DivCt(
+                            type_value="x-figures",
+                            canonical=False,
+                            content=[self._figure(image) for image in block.images],
+                        )
+                    )
                 elif block.kind == "notes":
                     chapter_div.content.append(
                         pyosis.DivCt(
@@ -520,6 +737,9 @@ class CaveOfTreasuresParser:
                         )
                     )
             book_div.content.append(chapter_div)
+
+        if plates:
+            book_div.content.append(self._plates_div(plates))
 
         header = pyosis.HeaderCt(
             canonical=False,
@@ -589,7 +809,7 @@ class CaveOfTreasuresParser:
         return pyosis.OsisXML(pyosis.Osis(osis_text=osis_text))
 
     def process(self) -> pyosis.OsisXML:
-        """Run the full pipeline: fetch every chapter page, parse and convert.
+        """Run the full pipeline: fetch every chapter and plate page, parse and convert.
 
         Returns:
             The OSIS document.
@@ -598,7 +818,8 @@ class CaveOfTreasuresParser:
             self.parse_chapter(self.fetch_page_text(source), number)
             for number, source in enumerate(CHAPTERS, start=1)
         ]
-        return self.generate_osis(chapters)
+        plates = [self.parse_plate(self.fetch_plate_text(page), page) for page in PLATE_PAGES]
+        return self.generate_osis(chapters, plates)
 
 
 def add_arguments(parser: argparse.ArgumentParser) -> None:

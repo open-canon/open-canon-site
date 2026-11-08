@@ -181,16 +181,23 @@ def test_process_fetches_all_six_pages(parser, monkeypatch):
     """The pipeline fetches bct04..bct09 and emits six chapters."""
     page = (FIXTURES / "bct04.htm").read_text(encoding="utf-8")
     seen: list[str] = []
+    plate = (FIXTURES / "bct_pl15.htm").read_text(encoding="utf-8")
+    seen_plates: list[str] = []
     monkeypatch.setattr(parser, "fetch_page_text", lambda source: seen.append(source.page) or page)
+    monkeypatch.setattr(parser, "fetch_plate_text", lambda stem: seen_plates.append(stem) or plate)
     xml = parser.process().to_xml()
     assert seen == [f"bct0{n}" for n in range(4, 10)]
+    assert seen_plates == [f"bct_pl{n:02d}" for n in range(16)]
+    assert xml.count('type="x-plate"') == 16
     assert all(f'osisID="CaveOfTreasures.{n}"' in xml for n in range(1, 7))
 
 
 def test_run_writes_output_file(tmp_path, monkeypatch):
     """``run`` writes ``cave-of-treasures.xml`` into the output directory."""
     page = (FIXTURES / "bct04.htm").read_text(encoding="utf-8")
+    plate = (FIXTURES / "bct_pl15.htm").read_text(encoding="utf-8")
     monkeypatch.setattr(CaveOfTreasuresParser, "fetch_page_text", lambda self, source: page)
+    monkeypatch.setattr(CaveOfTreasuresParser, "fetch_plate_text", lambda self, stem: plate)
     args = argparse.Namespace(cache_dir=None, delay=0, output_dir=str(tmp_path / "out"))
     (path,) = cot.run(args)
     assert path == tmp_path / "out" / "cave-of-treasures.xml"
@@ -202,3 +209,47 @@ def test_spec_is_registered():
     spec = registry.get_scraper("cave-of-treasures")
     assert spec.outputs == ("cave-of-treasures.xml",)
     assert spec is cot.SPEC
+
+
+def test_image_table_becomes_figures_block_with_absolute_urls(chapter6):
+    """A table of images is kept as a figures block whose ``src`` is an absolute URL."""
+    (block,) = [b for b in chapter6.blocks if b.kind == "figures"]
+    assert block.images == [
+        cot.Image(src="https://archive.sacred-texts.com/chr/bct/cnf-star.jpg", alt="cuneiform")
+    ]
+
+
+def test_parse_plate_reads_label_facing_images_and_caption(parser):
+    """A plate page yields its label, facing page, images in order and caption text."""
+    plate = parser.parse_plate((FIXTURES / "bct_pl15.htm").read_text(encoding="utf-8"), "bct_pl15")
+    assert plate.label == "PLATE XV"
+    assert plate.facing == "272"
+    assert [i.src.rsplit("/", 1)[1] for i in plate.images] == [
+        "pl15-1.jpg",
+        "pl15-2.jpg",
+        "pl15-3.jpg",
+    ]
+    assert plate.images[0].src.startswith("https://archive.sacred-texts.com/chr/bct/")
+    assert plate.caption[0] == 'Incised shell plaques from "Ur of the Chaldees."'
+    assert any("Shell plaque of the Ist dynasty" in c for c in plate.caption)
+    assert not any("List of Plates" in c or c == "1" for c in plate.caption)
+
+
+def test_generate_osis_emits_figures_and_plates(parser, chapter6):
+    """Inline figures and the plates div appear in the output with their URLs."""
+    plate = parser.parse_plate((FIXTURES / "bct_pl15.htm").read_text(encoding="utf-8"), "bct_pl15")
+    xml = parser.generate_osis([chapter6], [plate]).to_xml()
+    assert 'type="x-figures"' in xml
+    assert 'src="https://archive.sacred-texts.com/chr/bct/cnf-star.jpg"' in xml
+    assert 'alt="cuneiform"' in xml
+    assert 'type="x-plates"' in xml
+    assert "PLATE XV (facing page 272)" in xml
+    assert xml.count("<figure") == 4
+
+
+def test_is_valid_plate_page():
+    """A plate page needs an image and must not be an interstitial."""
+    good = (FIXTURES / "bct_pl15.htm").read_text(encoding="utf-8")
+    assert CaveOfTreasuresParser.is_valid_plate_page(good)
+    assert not CaveOfTreasuresParser.is_valid_plate_page("<html><p>no images</p></html>")
+    assert not CaveOfTreasuresParser.is_valid_plate_page("Just a moment <img src='a'>")
