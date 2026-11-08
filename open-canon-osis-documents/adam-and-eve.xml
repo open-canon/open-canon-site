@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="adam-and-eve" osisRefWork="Adam and Eve" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T00:50:25</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T07:15:46</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -1598,7 +1598,7 @@
           <p TEIform="p">Time, like an ever-rolling stream, bears away another generation of men</p>
         </div>
         <verse canonical="true" osisID="2-adam-and-eve.14.1">WHEN Enos was nine hundred years old, all the children of Seth, and of Cainan, and his first-born, with their wives and children, gathered around him, asking for a blessing from him.</verse>
-        <verse canonical="true" osisID="2-adam-and-eve.14.2">He then prayed over them and blessed them, and adjured them by the blood of Abel the just saying to them, "Let not one of your children go down from this Holy Mountain, and let them make no fellowship with the children of Cain the murderer." (See Page 13)</verse>
+        <verse canonical="true" osisID="2-adam-and-eve.14.2">He then prayed over them and blessed them, and adjured them by the blood of Abel the just saying to them, "Let not one of your children go down from this Holy Mountain, and let them make no fellowship with the children of Cain the murderer."</verse>
         <verse canonical="true" osisID="2-adam-and-eve.14.3">Then Enos called his son Cainan and said to him, "See, O my son, and set thy heart on thy people, and establish them in righteousness, and in innocence; and stand ministering before the body of our father Adam, all the days of thy life."</verse>
         <verse canonical="true" osisID="2-adam-and-eve.14.4">After this Enos entered into rest, aged nine hundred and eighty-five years; and Cainan wound him up, and laid him in the Cave of Treasures on the left of his father Adam; and made offerings for him, after the custom of his fathers.</verse>
       </div>

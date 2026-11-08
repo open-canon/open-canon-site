@@ -27,7 +27,7 @@ HTML shapes handled (sacred-texts.com, Platt 1926 edition):
   or a ``<p>`` holding only a quoted italic (``<p>"<i>...</i>."</p>``), directly after the
   ``<h3>``; an italic subtitle before the ``<h3>`` names a testament.
 - Illustrations are a thumbnail followed by ``Click to enlarge`` and the plate's caption;
-  caption paragraphs are skipped.
+  caption paragraphs, and the "(See page N)" line pointing a plate at its page, are skipped.
 - Inline ``<i>``/``<em>``, ``<b>``/``<strong>``, ``<sup>`` and ``<sub>`` map to OSIS
   ``hi`` elements; ``<font color="green">`` text carries ``p. 12`` page markers that become
   page milestones; navigation links (``Next:``, ``Sacred Texts`` ...) and standalone
@@ -118,6 +118,10 @@ class TestamentDef:
     """Page numbers of the testament's chapters, in order."""
 
 
+PLATE_REFERENCE_RE: Final[re.Pattern[str]] = re.compile(
+    r"^\(\s*See\s+page\s+\d+[^()]*\)\.?$", re.IGNORECASE
+)
+"""A paragraph that only points a plate at its page, e.g. ``(See page 233 et seq.)``."""
 IMAGE_CAPTION_PREFIX: Final[str] = "Click to enlarge"
 """Text the site prints under every thumbnail; a paragraph starting with it is a caption."""
 SUMMARY_PUNCTUATION_RE: Final[re.Pattern[str]] = re.compile(r"^[\s\"'“”‘’.,;:!?…-]*$")
@@ -605,8 +609,9 @@ class FBEParser:
             p_tag: Paragraph to test.
 
         Returns:
-            Whether it is empty, navigation text, a standalone page-marker anchor, or an
-            illustration caption (``Click to enlarge`` followed by the plate title).
+            Whether it is empty, navigation text, a standalone page-marker anchor, an
+            illustration caption (``Click to enlarge`` followed by the plate title) or a
+            plate's cross-reference (``(See page 214)``).
         """
         text = p_tag.get_text().strip()
         if not text:
@@ -616,6 +621,8 @@ class FBEParser:
         if self._is_standalone_page_marker(p_tag):
             return True
         if text.startswith(IMAGE_CAPTION_PREFIX):
+            return True
+        if PLATE_REFERENCE_RE.match(text):
             return True
         return False
 

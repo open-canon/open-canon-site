@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="letter-of-aristeas" osisRefWork="Letter of Aristeas" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T00:50:41</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T07:16:02</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -130,10 +130,7 @@
           <hi type="italic" TEIform="hi">of the captives</hi>.
         </verse>
         <verse canonical="true" osisID="letter-of-aristeas.1.48">For we consider that it will be advantageous to us and to our affairs that the matter should be brought to a conclusion.</verse>
-        <verse canonical="true" osisID="letter-of-aristeas.1.49">Any one who likes may give information about any who disobey the decree, on condition (
-          <hi type="italic" TEIform="hi">See page 214</hi>) (
-          <hi type="italic" TEIform="hi">See page 233 et seq</hi>.) that if the man is proved guilty he will become his slave; his property, however, will be handed over to the royal treasury.'
-        </verse>
+        <verse canonical="true" osisID="letter-of-aristeas.1.49">Any one who likes may give information about any who disobey the decree, on condition that if the man is proved guilty he will become his slave; his property, however, will be handed over to the royal treasury.'</verse>
         <verse canonical="true" osisID="letter-of-aristeas.1.50">When the decree was brought to be read over to the king for his approval, it contained all the other provisions except the phrase 'any captives who were in the land before that time or were brought hither afterwards,' and in his magnanimity and the largeness of his heart the king inserted this clause and gave orders that the grant of money required for the redemption should be deposited in full with the paymasters of the forces and the royal bankers, and so the matter was decided and the decree ratified within seven days.</verse>
         <verse canonical="true" osisID="letter-of-aristeas.1.51">The grant for the redemption amounted to more than six hundred and sixty talents; for many infants at the breast were emancipated together with their mothers.</verse>
         <verse canonical="true" osisID="letter-of-aristeas.1.52">When the question was raised whether the sum of twenty talents was to be paid for these, the king ordered that it should be done, and thus he carried out his decision in the most comprehensive way. 143:1  A important comparison of God and Zeus.</verse>

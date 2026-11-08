@@ -416,6 +416,10 @@ def test_build_verse_poetry_flag_without_lines_is_prose(parser):
         ('<p><a name="page_3"></a></p>', True),
         ("<p>Real text</p>", False),
         ("<p><br/>Click to enlarge<br/>THE FIRST SUNRISE<br/></p>", True),
+        ('<p>(<i>See page <a href="#page_214">214</a></i>)</p>', True),
+        ("<p>(<i>See page 233 et seq</i>.)</p>", True),
+        ("<p>(See Page 13)</p>", True),
+        ("<p>(See page 5) and the story goes on.</p>", False),
         (
             '<p><span><a href="img/1.jpg"><img src="tn/1.jpg"/><br/><font>Click to enlarge'
             "</font></a><br/>PLATE</span></p>",
@@ -584,12 +588,28 @@ def test_parse_chapter_page_image_caption_does_not_replace_verse(parser):
     html = _page(
         "<h3>CHAP. XIV.</h3><p>WHEN Enos was old.</p><p>2 He then prayed over them.</p>"
         "<p> </p> <a></a> <img/><p><br/>Click to enlarge<br/>FACSIMILE.<br/> Gutenberg.<br/></p>"
-        "<img/><p><br/>Click to enlarge<br/>THE FIRST SUNRISE<br/></p><p>3 Then Enos</p>"
+        "<img/><p><br/>Click to enlarge<br/>THE FIRST SUNRISE<br/></p>"
+        "<i><p>(See Page 13)</p></i><p>3 Then Enos</p>"
     )
     div = parser._parse_chapter_page(html, "Bk", 14)
     v1, v2, v3 = _verses(div)
     assert v2.content == ["He then prayed over them."]
     assert v3.content == ["Then Enos"]
+
+
+def test_parse_chapter_page_plate_reference_does_not_split_sentence(parser):
+    """A plate's ``(See page N)`` line between two halves of a verse is dropped."""
+    html = _page(
+        "<h3>CHAP. I.</h3><p>49 Any one may give information, on condition</p>"
+        "<img/><p><br/>Click to enlarge<br/>AHIKAR ANSWERS<br/></p>"
+        '<p>(<i>See page <a href="#page_214">214</a></i>)</p>'
+        "<p>that if the man is proved guilty he will become his slave.</p>"
+    )
+    (verse,) = _verses(parser._parse_chapter_page(html, "Bk", 1))
+    assert _text(verse.content) == (
+        "Any one may give information, on condition that if the man is proved guilty he "
+        "will become his slave."
+    )
 
 
 def test_parse_odes_chapter_page_quoted_italic_summary(parser):

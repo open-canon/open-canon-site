@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="story-of-ahikar" osisRefWork="Story of Ahikar" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T00:50:42</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T07:16:04</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -253,9 +253,7 @@
         <verse canonical="true" osisID="story-of-ahikar.5.8">And when the king heard this speech from Haiqâr he rejoiced with a great joy, and his heart was expanded and he showed him favour.</verse>
         <verse canonical="true" osisID="story-of-ahikar.5.9">And Haiqâr said to the king: 'Grant me a delay of forty days that I may consider this question and manage it.' And the king permitted this.</verse>
         <verse canonical="true" osisID="story-of-ahikar.5.10">And Haiqâr went to his dwelling, and he commanded the huntsmen to capture two young eaglets for him, and they captured them and brought them to him: and he commanded the weavers of ropes to weave two cables of cotton for him, each of them two thousand cubits long, and he had the carpenters brought and ordered them to make two great boxes, and they did this.</verse>
-        <verse canonical="true" osisID="story-of-ahikar.5.11">Then he took two little lads, and spent every day sacrificing lambs and feeding the eagles and the boys, and making the boys ride on the backs of the eagles, and he bound them with a firm knot, and tied the cable to the feet of the eagles, (
-          <hi type="italic" TEIform="hi">See page 259 et seq</hi>.) and let them soar upwards little by little every day, to a distance of ten cubits, till they grew accustomed and were educated to it; and they rose all the length of the rope till they reached the sky; the boys being on their backs. Then he drew them to himself.
-        </verse>
+        <verse canonical="true" osisID="story-of-ahikar.5.11">Then he took two little lads, and spent every day sacrificing lambs and feeding the eagles and the boys, and making the boys ride on the backs of the eagles, and he bound them with a firm knot, and tied the cable to the feet of the eagles, and let them soar upwards little by little every day, to a distance of ten cubits, till they grew accustomed and were educated to it; and they rose all the length of the rope till they reached the sky; the boys being on their backs. Then he drew them to himself.</verse>
         <verse canonical="true" osisID="story-of-ahikar.5.12">And when Haiqâr saw that his desire was fulfilled he charged the boys that when they were borne aloft to the sky they were to shout, saying:</verse>
         <verse canonical="true" osisID="story-of-ahikar.5.13">'Bring us clay and stone, that we may build a castle for king Pharaoh, for we are idle.'</verse>
         <verse canonical="true" osisID="story-of-ahikar.5.14">And Haiqâr was never done training them and exercising them till they had reached the utmost possible point (of skill).</verse>
