@@ -98,7 +98,7 @@ Common options (accepted by every scraper and by `all`):
 | `lds-standard-works` | [churchofjesuschrist.org](https://www.churchofjesuschrist.org/study/scriptures) | `book_of_mormon.xml`, `doctrine_and_covenants.xml`, `new_testament.xml`, `old_testament.xml`, `pearl_of_great_price.xml` (options: `--works book-of-mormon,new-testament,...` default all, `--lang eng`) |
 | `lds-proclamations` | [churchofjesuschrist.org](https://www.churchofjesuschrist.org/study/scriptures/the-family-a-proclamation-to-the-world) | `lds_proclamations.xml` (1980, 1995 and 2020 official proclamations; option: `--lang eng`) |
 | `lds-living-christ` | [churchofjesuschrist.org](https://www.churchofjesuschrist.org/study/manual/the-living-christ-the-testimony-of-the-apostles/the-living-christ-the-testimony-of-the-apostles) | `the_living_christ.xml` (option: `--lang eng`) |
-| `lectures-on-faith` | [lecturesonfaith.com](https://lecturesonfaith.com/), 1835 edition | `lectures_on_faith.xml` |
+| `lectures-on-faith` | [lecturesonfaith.com](https://lecturesonfaith.com/) | `lectures_on_faith.xml` (book group with the 1835 edition and the site's Revised Standard Edition) |
 
 Tests that hit the network are skipped unless `OPEN_CANON_NETWORK_TESTS=1` is set.
 

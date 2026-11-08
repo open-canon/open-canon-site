@@ -1,20 +1,26 @@
-"""Build an OSIS file of the "Lectures on Faith" (1835) from lecturesonfaith.com.
+"""Build an OSIS file of the "Lectures on Faith" from lecturesonfaith.com, in its 1835 and revised editions.
 
 The seven Lectures on Faith were delivered to the School of the Elders in Kirtland, Ohio, in the winter of 1834-35 and
 printed as the "Doctrine" part of the 1835 Doctrine and Covenants, preceded by the book's preface. They were removed from
 the Doctrine and Covenants in 1921.
 
 lecturesonfaith.com is a single-page React app: the text is not in any HTML page but compiled into its JavaScript bundle
-as a literal array of lectures, ``{number, title, subtitle, paragraphs: [P(n, text), ...], qa: [Q(question, answer),
+as literal arrays of lectures, ``{number, title, subtitle, paragraphs: [P(n, text), ...], qa: [Q(question, answer),
 ...], note?}``, where ``P`` and ``Q`` are tiny factory functions (``function P(e,t){return{number:e,text:t}}``). The site
 has two such arrays: the 1835 edition (which starts with the preface, lecture ``0``) and a modernised "Revised Standard
-Edition". Only the 1835 edition is scraped. Its names are minified and change between deployments, so the array is found
-by its shape, the factories by their bodies, and the literal is read with a small parser for the subset of JavaScript it
-uses (arrays, objects with bare keys, strings, numbers and factory calls) rather than by evaluating any code.
+Edition" (lectures 1-7, with its own, finer paragraph numbering). The names are minified and change between
+deployments, so the arrays are found by their shape, the factories by their bodies, and the literals are read with a
+small parser for the subset of JavaScript they use (arrays, objects with bare keys, strings, numbers and factory calls)
+rather than by evaluating any code.
 
-The result is one book ``LoF``: the preface as a front-matter page, then one chapter per lecture (``LoF.1`` to ``LoF.7``)
-whose numbered paragraphs are verses, followed by the lecture's "Questions and Answers on the Foregoing Principles"
-(lectures 1-5) or closing note (lecture 6).
+The result is a book group ``LoF`` holding one book per edition, ``LoF1835`` and ``LoFRSE``. The 1835 book starts with
+the preface as a front-matter page. Each lecture is a chapter (``LoF1835.1`` ... ``LoF1835.7``) whose numbered
+paragraphs are verses, followed by its closing note (lecture 6) and its "Questions and Answers on the Foregoing
+Principles" (lectures 1-5).
+
+Known source defect: the site's 1835 array omits most of Lecture Second's catechism (the Adam-to-Abraham chronology
+questions); it has 16 questions where the Revised Standard Edition has 148. The text is scraped as served rather than
+filled in from the revised edition.
 """
 
 from __future__ import annotations
@@ -41,20 +47,49 @@ SOURCE_URL: Final[str] = "https://lecturesonfaith.com/"
 OUTPUT_FILENAME: Final[str] = "lectures_on_faith.xml"
 """Name of the OSIS file written."""
 OSIS_WORK_ID: Final[str] = "LoF"
-"""OSIS work and book id."""
+"""OSIS work id, also the id of the book group holding both editions."""
 BOOK_TITLE: Final[str] = "Lectures on Faith"
 """Title of the work."""
 QA_HEADING: Final[str] = "Questions and Answers on the Foregoing Principles"
 """Heading the site prints above each lecture's catechism."""
 LECTURE_COUNT: Final[int] = 7
-"""Number of lectures in the 1835 edition."""
+"""Number of lectures in each edition."""
+
+
+@dataclasses.dataclass(frozen=True)
+class Edition:
+    """One edition of the lectures on the site, scraped as its own book."""
+
+    osis_id: str
+    """OSIS book id."""
+    title: str
+    """Book title."""
+    short_title: str
+    """Short title shown in the library and sidebar under "Lectures on Faith"."""
+    has_preface: bool
+    """Whether the edition starts with the 1835 preface (lecture 0)."""
+
+
+EDITION_1835: Final[Edition] = Edition(
+    "LoF1835", "Lectures on Faith (1835)", "1835 Edition", has_preface=True
+)
+"""The text as printed in the 1835 Doctrine and Covenants."""
+EDITION_RSE: Final[Edition] = Edition(
+    "LoFRSE",
+    "Lectures on Faith (Revised Standard Edition)",
+    "Revised Standard Edition",
+    has_preface=False,
+)
+"""The site's modernised edition, with its own paragraph numbering and no preface."""
+EDITIONS: Final[tuple[Edition, ...]] = (EDITION_1835, EDITION_RSE)
+"""Both editions, in the order their books appear."""
 
 _BUNDLE_RE: Final[re.Pattern[str]] = re.compile(
     r'<script[^>]*\bsrc="([^"]*/assets/index-[^"]+\.js)"'
 )
 """The module script tag of the site's main bundle."""
-_ARRAY_RE: Final[re.Pattern[str]] = re.compile(r'\b[\w$]+=\[\{number:0,title:"Preface"')
-"""Start of the 1835 edition's array (the Revised Standard Edition has no preface)."""
+_ARRAY_RE: Final[re.Pattern[str]] = re.compile(r"\b[\w$]+=\[\{number:\d+,title:")
+"""Start of an edition's array of lectures."""
 _FACTORY_RE: Final[re.Pattern[str]] = re.compile(
     r"function ([\w$]+)\(([\w$]+),([\w$]+)\)\{return\{([\w$]+):\2,([\w$]+):\3\}\}"
 )
@@ -320,45 +355,65 @@ def find_bundle_url(index_html: str, base_url: str = SOURCE_URL) -> str:
     return urljoin(base_url, match.group(1))
 
 
-def extract_lectures(bundle: str) -> list[Lecture]:
-    """Read the 1835 edition's lectures out of the JavaScript bundle.
+def extract_editions(bundle: str) -> list[tuple[Edition, list[Lecture]]]:
+    """Read both editions' lectures out of the JavaScript bundle.
 
-    The factory functions used by the array are the ones defined most recently before it, which keeps the 1835
-    edition's factories apart from the Revised Standard Edition's even if the minifier reuses a name.
+    Every array literal of the shape ``NAME=[{number:N,title:...`` is read; the one starting with the preface
+    (``number:0``) is the 1835 edition and the one starting with lecture 1 the Revised Standard Edition. The factory
+    functions used by an array are the ones defined most recently before it, which keeps each edition's factories
+    apart even if the minifier reuses a name.
 
     Args:
         bundle: The JavaScript bundle source.
 
     Returns:
-        The preface (number 0) followed by lectures 1 to 7.
+        ``(edition, lectures)`` pairs in `EDITIONS` order. The 1835 lectures start with the preface (number 0).
 
     Raises:
-        ValueError: If the array cannot be found or parsed, or its contents are not the expected preface and seven
-            lectures with consecutively numbered paragraphs.
+        ValueError: If an array cannot be parsed, an edition is missing or found twice, or an edition's contents are
+            not the expected lectures with consecutively numbered paragraphs.
     """
-    array = _ARRAY_RE.search(bundle)
-    if not array:
-        raise ValueError(
-            "No 1835 Lectures on Faith array (starting with the Preface) in the bundle"
-        )
-    factories: dict[str, tuple[str, ...]] = {
-        match.group(1): (match.group(4), match.group(5))
-        for match in _FACTORY_RE.finditer(bundle, 0, array.start())
-    }
-    start = bundle.index("[", array.start())
-    raw, _ = JsLiteralParser(bundle, factories).parse(start)
+    found: dict[str, list[Lecture]] = {}
+    for array in _ARRAY_RE.finditer(bundle):
+        factories: dict[str, tuple[str, ...]] = {
+            match.group(1): (match.group(4), match.group(5))
+            for match in _FACTORY_RE.finditer(bundle, 0, array.start())
+        }
+        start = bundle.index("[", array.start())
+        raw, _ = JsLiteralParser(bundle, factories).parse(start)
+        lectures = [_lecture_from_raw(item) for item in raw]
+        edition = EDITION_1835 if lectures and lectures[0].number == 0 else EDITION_RSE
+        if edition.osis_id in found:
+            raise ValueError(f"Found two lecture arrays for the {edition.title}")
+        _validate(edition, lectures)
+        found[edition.osis_id] = lectures
 
-    lectures = [_lecture_from_raw(item) for item in raw]
+    missing = [edition.title for edition in EDITIONS if edition.osis_id not in found]
+    if missing:
+        raise ValueError(f"No lecture array in the bundle for: {', '.join(missing)}")
+    return [(edition, found[edition.osis_id]) for edition in EDITIONS]
+
+
+def _validate(edition: Edition, lectures: list[Lecture]) -> None:
+    """Check an edition holds the expected lectures with consecutively numbered paragraphs.
+
+    Args:
+        edition: The edition the lectures were read for.
+        lectures: The lectures read.
+
+    Raises:
+        ValueError: If lectures are missing or out of order, or a lecture's paragraphs skip a number.
+    """
+    expected = list(range(0 if edition.has_preface else 1, LECTURE_COUNT + 1))
     numbers = [lecture.number for lecture in lectures]
-    if numbers != list(range(LECTURE_COUNT + 1)):
-        raise ValueError(f"Expected the preface and lectures 1-{LECTURE_COUNT}, got {numbers}")
+    if numbers != expected:
+        raise ValueError(f"{edition.title}: expected lectures {expected}, got {numbers}")
     for lecture in lectures:
         paragraph_numbers = [paragraph.number for paragraph in lecture.paragraphs]
         if paragraph_numbers != list(range(1, len(paragraph_numbers) + 1)) or not paragraph_numbers:
             raise ValueError(
-                f"Lecture {lecture.number} paragraphs are numbered {paragraph_numbers}"
+                f"{edition.title}: lecture {lecture.number} paragraphs are numbered {paragraph_numbers}"
             )
-    return lectures
 
 
 def _lecture_from_raw(item: Any) -> Lecture:
@@ -423,23 +478,24 @@ def _paragraphs_of(text: str) -> list[pyosis.PCt]:
     return [pyosis.PCt(content=[line.strip()]) for line in text.splitlines() if line.strip()]
 
 
-def _preface_div(preface: Lecture) -> pyosis.DivCt:
+def _preface_div(edition: Edition, preface: Lecture) -> pyosis.DivCt:
     """Build the preface's front-matter division.
 
     The site numbers the preface's paragraphs, but the 1835 printing does not, so they become plain paragraphs.
 
     Args:
+        edition: The edition the preface belongs to.
         preface: Lecture 0.
 
     Returns:
-        A ``preface`` division titled "Preface".
+        A ``preface`` division ``<book>.Preface`` titled "Preface".
     """
     content: list[Any] = [pyosis.TitleCt(type_value=pyosis.OsisTitles.MAIN, content=["Preface"])]
     for paragraph in preface.paragraphs:
         content.extend(_paragraphs_of(paragraph.text))
     return pyosis.DivCt(
         type_value=pyosis.OsisDivs.PREFACE,
-        osis_id=[f"{OSIS_WORK_ID}.Preface"],
+        osis_id=[f"{edition.osis_id}.Preface"],
         canonical=True,
         content=content,
     )
@@ -465,17 +521,18 @@ def _qa_div(lecture: Lecture) -> pyosis.DivCt:
     return pyosis.DivCt(type_value=pyosis.OsisDivs.SECTION, canonical=True, content=content)
 
 
-def _lecture_div(lecture: Lecture) -> pyosis.DivCt:
+def _lecture_div(edition: Edition, lecture: Lecture) -> pyosis.DivCt:
     """Build a lecture's chapter division.
 
     Args:
+        edition: The edition the lecture belongs to.
         lecture: A lecture numbered 1 or more.
 
     Returns:
-        A chapter ``LoF.<n>`` titled with the printed heading, its paragraphs as verses ``LoF.<n>.<p>``, followed by
-        the catechism or closing note, if any.
+        A chapter ``<book>.<n>`` titled with the printed heading, its paragraphs as verses ``<book>.<n>.<p>``,
+        followed by the closing note and catechism, if any.
     """
-    chapter_id = f"{OSIS_WORK_ID}.{lecture.number}"
+    chapter_id = f"{edition.osis_id}.{lecture.number}"
     content: list[Any] = [
         pyosis.TitleCt(type_value=pyosis.OsisTitles.MAIN, content=[lecture.subtitle])
     ]
@@ -491,27 +548,50 @@ def _lecture_div(lecture: Lecture) -> pyosis.DivCt:
     )
 
 
-def generate_osis(lectures: list[Lecture], bundle_url: str = SOURCE_URL) -> pyosis.OsisXML:
+def _book_div(edition: Edition, lectures: list[Lecture]) -> pyosis.DivCt:
+    """Build one edition's book division.
+
+    Args:
+        edition: The edition.
+        lectures: Its lectures, starting with the preface when the edition has one.
+
+    Returns:
+        A book ``<edition.osis_id>`` holding the preface page (if any) and one chapter per lecture.
+    """
+    content: list[Any] = [
+        pyosis.TitleCt(
+            type_value=pyosis.OsisTitles.MAIN, short=edition.short_title, content=[edition.title]
+        )
+    ]
+    for lecture in lectures:
+        if lecture.number == 0:
+            content.append(_preface_div(edition, lecture))
+        else:
+            content.append(_lecture_div(edition, lecture))
+    return pyosis.DivCt(
+        type_value=pyosis.OsisDivs.BOOK, osis_id=[edition.osis_id], canonical=True, content=content
+    )
+
+
+def generate_osis(
+    editions: list[tuple[Edition, list[Lecture]]], bundle_url: str = SOURCE_URL
+) -> pyosis.OsisXML:
     """Assemble the OSIS document.
 
     Args:
-        lectures: The preface followed by the lectures, as returned by `extract_lectures`.
+        editions: ``(edition, lectures)`` pairs, as returned by `extract_editions`.
         bundle_url: Where the text was read from, recorded in the header.
 
     Returns:
-        The OSIS document with one book ``LoF``.
+        The OSIS document: a ``bookGroup`` ``LoF`` holding one book per edition.
     """
-    preface, *rest = lectures
-    book = pyosis.DivCt(
-        type_value=pyosis.OsisDivs.BOOK,
+    book_group = pyosis.DivCt(
+        type_value=pyosis.OsisDivs.BOOK_GROUP,
         osis_id=[OSIS_WORK_ID],
         canonical=True,
         content=[
-            pyosis.TitleCt(
-                type_value=pyosis.OsisTitles.MAIN, short=BOOK_TITLE, content=[BOOK_TITLE]
-            ),
-            _preface_div(preface),
-            *(_lecture_div(lecture) for lecture in rest),
+            pyosis.TitleCt(type_value=pyosis.OsisTitles.MAIN, content=[BOOK_TITLE]),
+            *(_book_div(edition, lectures) for edition, lectures in editions),
         ],
     )
     header = pyosis.HeaderCt(
@@ -527,8 +607,8 @@ def generate_osis(lectures: list[Lecture], bundle_url: str = SOURCE_URL) -> pyos
                 p=[
                     pyosis.PCt(
                         content=[
-                            f"Scraped from {SOURCE_URL} (the 1835 edition, read from {bundle_url}) and converted"
-                            " to OSIS by the open-canon-site scrapers."
+                            f"Scraped from {SOURCE_URL} (the 1835 edition and the Revised Standard Edition, read"
+                            f" from {bundle_url}) and converted to OSIS by the open-canon-site scrapers."
                         ]
                     )
                 ],
@@ -557,7 +637,8 @@ def generate_osis(lectures: list[Lecture], bundle_url: str = SOURCE_URL) -> pyos
                     pyosis.DescriptionCt(
                         value="Seven lectures on faith delivered to the School of the Elders in Kirtland, Ohio, in"
                         " 1834-35, published with the preface of the 1835 Doctrine and Covenants and removed from it"
-                        " in 1921."
+                        " in 1921. Includes the 1835 text and the modernised Revised Standard Edition published at"
+                        " lecturesonfaith.com."
                     )
                 ],
                 type_value=[pyosis.TypeCt(type_value="OSIS", content=["Bible"])],
@@ -577,13 +658,13 @@ def generate_osis(lectures: list[Lecture], bundle_url: str = SOURCE_URL) -> pyos
         osis_ref_work=BOOK_TITLE,
         canonical=True,
         header=header,
-        div=[book],
+        div=[book_group],
     )
     return pyosis.OsisXML(pyosis.Osis(osis_text=osis_text))
 
 
 def scrape(fetcher: CachedHttpFetcher) -> pyosis.OsisXML:
-    """Fetch the site's home page and bundle and convert the 1835 edition to OSIS.
+    """Fetch the site's home page and bundle and convert both editions to OSIS.
 
     Args:
         fetcher: Fetcher used for both requests.
@@ -593,7 +674,7 @@ def scrape(fetcher: CachedHttpFetcher) -> pyosis.OsisXML:
     """
     bundle_url = find_bundle_url(fetcher.fetch_text(url=SOURCE_URL))
     LOGGER.info("Reading Lectures on Faith from %s", bundle_url)
-    return generate_osis(extract_lectures(fetcher.fetch_text(url=bundle_url)), bundle_url)
+    return generate_osis(extract_editions(fetcher.fetch_text(url=bundle_url)), bundle_url)
 
 
 def run(args: argparse.Namespace) -> list[Path]:
@@ -618,7 +699,7 @@ def run(args: argparse.Namespace) -> list[Path]:
 
 SPEC = ScraperSpec(
     name="lectures-on-faith",
-    help="Lectures on Faith (1835 edition) from lecturesonfaith.com to OSIS",
+    help="Lectures on Faith (1835 and Revised Standard editions) from lecturesonfaith.com to OSIS",
     source=SOURCE_URL,
     outputs=(OUTPUT_FILENAME,),
     run=run,
