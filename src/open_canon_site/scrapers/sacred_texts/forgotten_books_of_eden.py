@@ -23,8 +23,11 @@ HTML shapes handled (sacred-texts.com, Platt 1926 edition):
 - The Odes of Solomon put a whole ode in a single ``<p>`` whose ``<br>``-separated
   lines start with verse numbers. The Psalms of Solomon have no verse numbers at all and
   become a single verse holding a line group.
-- A chapter summary is an italic ``<i>``/``<em>`` element (optionally wrapping a ``<p>``)
-  directly after the ``<h3>``; an italic subtitle before the ``<h3>`` names a testament.
+- A chapter summary is an italic ``<i>``/``<em>`` element (optionally wrapping a ``<p>``),
+  or a ``<p>`` holding only a quoted italic (``<p>"<i>...</i>."</p>``), directly after the
+  ``<h3>``; an italic subtitle before the ``<h3>`` names a testament.
+- Illustrations are a thumbnail followed by ``Click to enlarge`` and the plate's caption;
+  caption paragraphs, and the "(See page N)" line pointing a plate at its page, are skipped.
 - Inline ``<i>``/``<em>``, ``<b>``/``<strong>``, ``<sup>`` and ``<sub>`` map to OSIS
   ``hi`` elements; ``<font color="green">`` text carries ``p. 12`` page markers that become
   page milestones; navigation links (``Next:``, ``Sacred Texts`` ...) and standalone
@@ -113,6 +116,16 @@ class TestamentDef:
     """Short title for the ``short`` attribute (e.g. ``"Test. Reuben"``)."""
     chapter_pages: list[int]
     """Page numbers of the testament's chapters, in order."""
+
+
+PLATE_REFERENCE_RE: Final[re.Pattern[str]] = re.compile(
+    r"^\(\s*See\s+page\s+\d+[^()]*\)\.?$", re.IGNORECASE
+)
+"""A paragraph that only points a plate at its page, e.g. ``(See page 233 et seq.)``."""
+IMAGE_CAPTION_PREFIX: Final[str] = "Click to enlarge"
+"""Text the site prints under every thumbnail; a paragraph starting with it is a caption."""
+SUMMARY_PUNCTUATION_RE: Final[re.Pattern[str]] = re.compile(r"^[\s\"'“”‘’.,;:!?…-]*$")
+"""Matches the quotes and punctuation allowed around a quoted italic summary."""
 
 
 FRONT_MATTER_PAGES: Final[list[int]] = list(range(0, 5))
@@ -596,7 +609,9 @@ class FBEParser:
             p_tag: Paragraph to test.
 
         Returns:
-            Whether it is empty, navigation text, or a standalone page-marker anchor.
+            Whether it is empty, navigation text, a standalone page-marker anchor, an
+            illustration caption (``Click to enlarge`` followed by the plate title) or a
+            plate's cross-reference (``(See page 214)``).
         """
         text = p_tag.get_text().strip()
         if not text:
@@ -605,7 +620,77 @@ class FBEParser:
             return True
         if self._is_standalone_page_marker(p_tag):
             return True
+        if text.startswith(IMAGE_CAPTION_PREFIX):
+            return True
+        if PLATE_REFERENCE_RE.match(text):
+            return True
         return False
+
+    def _find_chapter_summary(self, h3: Tag | None) -> tuple[list[InlinePart] | None, Tag | None]:
+        """Find the chapter summary printed directly after the ``<h3>`` heading.
+
+        Recognised shapes:
+
+        - ``<i>summary</i>`` or ``<i><p>summary</p></i>`` (``<em>`` alike);
+        - ``<p>"<i>summary</i>."</p>``: a paragraph holding one italic element and nothing
+          else but quotes and punctuation. The italic is unwrapped so the summary reads
+          like the other shapes, keeping the surrounding quotes and punctuation.
+
+        Args:
+            h3: The chapter heading, or ``None`` if the page has none.
+
+        Returns:
+            ``(parts, paragraph)``: the summary's inline parts (``None`` if there is no
+            summary or it is empty) and the ``<p>`` the verse parser must skip (``None`` if
+            the summary is not inside a paragraph).
+        """
+        if h3 is None:
+            return None, None
+        sib = h3.find_next_sibling()
+        if sib is None:
+            return None, None
+
+        if sib.name in ("i", "em"):
+            inner_p = sib.find("p")
+            parts = self.parse_inline_annotations(inner_p if inner_p else sib)
+        elif sib.name == "p":
+            italics = [c for c in sib.children if isinstance(c, Tag)]
+            if len(italics) != 1 or italics[0].name not in ("i", "em"):
+                return None, None
+            loose = "".join(str(c) for c in sib.children if isinstance(c, NavigableString))
+            if not SUMMARY_PUNCTUATION_RE.match(loose):
+                return None, None
+            inner_p = sib
+            parts = []
+            for child in sib.children:
+                if isinstance(child, NavigableString):
+                    if str(child).strip():
+                        parts.append(str(child).strip())
+                else:
+                    parts.extend(self.parse_inline_annotations(child))
+            parts = self.consolidate_strings(parts)
+        else:
+            return None, None
+
+        if not self._extract_text(parts).strip():
+            return None, inner_p
+        return parts, inner_p
+
+    @staticmethod
+    def _summary_div(parts: list[InlinePart]) -> pyosis.DivCt:
+        """Wrap chapter-summary parts in a non-canonical summary div.
+
+        Args:
+            parts: Inline parts of the summary.
+
+        Returns:
+            ``<div type="summary" canonical="false"><p>...</p></div>``.
+        """
+        return pyosis.DivCt(
+            type_value=pyosis.OsisDivs.SUMMARY,
+            canonical=False,
+            content=[pyosis.PCt(content=parts)],
+        )
 
     def _extract_intro_headings(self, html: str) -> list[str]:
         """Extract heading lines that appear before the first intro paragraph.
@@ -765,47 +850,17 @@ class FBEParser:
 
         chapter_content: list = []
 
-        # ---- Detect chapter summary (italic <p> or <i><p>) ----
-        # Find the <h3> chapter heading first
+        # ---- Detect chapter summary right after the <h3> ----
         h3 = soup.find("h3")
-        chapter_summary_text: str | None = None
-        chapter_summary_parts: list | None = None
-
-        if h3:
-            # Look for an immediately following <i> or <em> element
-            sib = h3.find_next_sibling()
-            while sib and isinstance(sib, NavigableString):
-                sib = sib.find_next_sibling()
-
-            if sib and sib.name in ("i", "em"):
-                # The <i> may directly contain a <p> or be inline text
-                inner_p = sib.find("p")
-                if inner_p:
-                    chapter_summary_parts = self.parse_inline_annotations(inner_p)
-                    chapter_summary_text = self._extract_text(chapter_summary_parts).strip()
-                else:
-                    chapter_summary_parts = self.parse_inline_annotations(sib)
-                    chapter_summary_text = self._extract_text(chapter_summary_parts).strip()
-
-        if chapter_summary_text:
-            summary_div = pyosis.DivCt(
-                type_value=pyosis.OsisDivs.SUMMARY,
-                canonical=False,
-                content=[pyosis.PCt(content=chapter_summary_parts)],
-            )
-            chapter_content.append(summary_div)
+        summary_parts, summary_p = self._find_chapter_summary(h3)
+        if summary_parts:
+            chapter_content.append(self._summary_div(summary_parts))
 
         # ---- Collect verse paragraphs ----
         # Identify which <p> elements are the chapter-summary paragraph to skip
         summary_p_set: set[Tag] = set()
-        if h3 and chapter_summary_text:
-            sib = h3.find_next_sibling()
-            while sib and isinstance(sib, NavigableString):
-                sib = sib.find_next_sibling()
-            if sib and sib.name in ("i", "em"):
-                inner_p = sib.find("p")
-                if inner_p:
-                    summary_p_set.add(inner_p)
+        if summary_parts and summary_p is not None:
+            summary_p_set.add(summary_p)
 
         # Also skip any italic <p> paragraphs that appear BEFORE the <h3>
         # (these are testament/book subtitles like "The First-Born Son of Jacob and Leah")
@@ -932,28 +987,13 @@ class FBEParser:
         chapter_osis_id = f"{book_osis_id}.{chapter_num}"
         chapter_content: list = []
 
-        # Check for chapter summary (italic paragraph after h3)
-        h3 = soup.find("h3")
+        # Check for chapter summary (italic element or quoted italic paragraph after h3)
         summary_p_set: set[Tag] = set()
-        if h3:
-            sib = h3.find_next_sibling()
-            while sib and isinstance(sib, NavigableString):
-                sib = sib.find_next_sibling()
-            if sib and sib.name in ("i", "em"):
-                inner_p = sib.find("p")
-                ref = inner_p if inner_p else sib
-                parts = self.parse_inline_annotations(ref)
-                summary_text = self._extract_text(parts).strip()
-                if summary_text:
-                    chapter_content.append(
-                        pyosis.DivCt(
-                            type_value=pyosis.OsisDivs.SUMMARY,
-                            canonical=False,
-                            content=[pyosis.PCt(content=parts)],
-                        )
-                    )
-                if inner_p:
-                    summary_p_set.add(inner_p)
+        summary_parts, summary_p = self._find_chapter_summary(soup.find("h3"))
+        if summary_parts:
+            chapter_content.append(self._summary_div(summary_parts))
+        if summary_p is not None:
+            summary_p_set.add(summary_p)
 
         verse_divs: list[pyosis.VerseCt] = []
 
@@ -1053,23 +1093,12 @@ class FBEParser:
         summary_p_set: set[Tag] = set()
         if h3:
             sib = h3.find_next_sibling()
-            while sib and isinstance(sib, NavigableString):
-                sib = sib.find_next_sibling()
-            if sib and sib.name in ("i", "em"):
-                inner_p = sib.find("p")
-                ref = inner_p if inner_p else sib
-                parts = self.parse_inline_annotations(ref)
-                summary_text = self._extract_text(parts).strip()
-                if summary_text:
-                    chapter_content.append(
-                        pyosis.DivCt(
-                            type_value=pyosis.OsisDivs.SUMMARY,
-                            canonical=False,
-                            content=[pyosis.PCt(content=parts)],
-                        )
-                    )
-                if inner_p:
-                    summary_p_set.add(inner_p)
+            summary_parts, summary_p = self._find_chapter_summary(h3)
+            if summary_parts or summary_p is not None:
+                if summary_parts:
+                    chapter_content.append(self._summary_div(summary_parts))
+                if summary_p is not None:
+                    summary_p_set.add(summary_p)
             # Also handle a plain centered <p> that acts as a motto quote
             elif sib and sib.name == "p":
                 inner_text = sib.get_text().strip()

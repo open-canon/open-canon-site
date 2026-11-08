@@ -9,6 +9,7 @@ SACRED_TEXTS = {
     "1-enoch": ("1-enoch.xml",),
     "jasher": ("jasher.xml",),
     "jubilees": ("jubilees.xml",),
+    "kebra-nagast": ("kebra-nagast.xml",),
     "pseudo-philo": ("pseudo-philo.xml",),
     "vita-adae-et-evae": ("vita-adae-et-evae.xml",),
 }
@@ -21,6 +22,7 @@ def test_sacred_texts_registered_in_order() -> None:
         "forgotten-books-of-eden",
         "jasher",
         "jubilees",
+        "kebra-nagast",
         "pseudo-philo",
         "vita-adae-et-evae",
     ]
