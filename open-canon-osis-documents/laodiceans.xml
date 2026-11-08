@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="laodiceans" osisRefWork="Laodiceans" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T09:13:36</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T10:53:36</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/lbob/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">

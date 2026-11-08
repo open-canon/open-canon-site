@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="apostles-creed" osisRefWork="Apostles' Creed" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T09:13:36</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T10:53:36</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/lbob/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -103,32 +103,32 @@
           <hi type="italic" TEIform="hi">, it was no more than this</hi>."—Mr. Justice Bailey. p. 9 
           <hi type="italic" TEIform="hi">n</hi>.
         </verse>
-        <verse canonical="true" osisID="apostles-creed.1.18">I Believe in God the Father Almighty:</verse>
-        <verse canonical="true" osisID="apostles-creed.1.19">And in Jesus Christ his only begotten Son, our Lord;</verse>
-        <verse canonical="true" osisID="apostles-creed.1.20">Who was born of the Holy Ghost and Virgin Mary,</verse>
-        <verse canonical="true" osisID="apostles-creed.1.21">And was crucified under Pontius Pilate, and was buried;</verse>
-        <verse canonical="true" osisID="apostles-creed.1.22">And the third day rose again from the dead.</verse>
-        <verse canonical="true" osisID="apostles-creed.1.23">Ascended into heaven, sitteth on the right hand of the Father;</verse>
-        <verse canonical="true" osisID="apostles-creed.1.24">Whence he shall come to judge the quick and the dead;</verse>
-        <verse canonical="true" osisID="apostles-creed.1.25">And in the Holy Ghost;</verse>
-        <verse canonical="true" osisID="apostles-creed.1.26">The Holy Church;</verse>
-        <verse canonical="true" osisID="apostles-creed.1.27">The remission of sins;</verse>
-        <verse canonical="true" osisID="apostles-creed.1.28">And the resurrection of the flesh, Amen.</verse>
+        <verse canonical="true" osisID="apostles-creed.1.18">1 I Believe in God the Father Almighty:</verse>
+        <verse canonical="true" osisID="apostles-creed.1.19">2 And in Jesus Christ his only begotten Son, our Lord;</verse>
+        <verse canonical="true" osisID="apostles-creed.1.20">3 Who was born of the Holy Ghost and Virgin Mary,</verse>
+        <verse canonical="true" osisID="apostles-creed.1.21">4 And was crucified under Pontius Pilate, and was buried;</verse>
+        <verse canonical="true" osisID="apostles-creed.1.22">5 And the third day rose again from the dead.</verse>
+        <verse canonical="true" osisID="apostles-creed.1.23">6 Ascended into heaven, sitteth on the right hand of the Father;</verse>
+        <verse canonical="true" osisID="apostles-creed.1.24">7 Whence he shall come to judge the quick and the dead;</verse>
+        <verse canonical="true" osisID="apostles-creed.1.25">8 And in the Holy Ghost;</verse>
+        <verse canonical="true" osisID="apostles-creed.1.26">9 The Holy Church;</verse>
+        <verse canonical="true" osisID="apostles-creed.1.27">10 The remission of sins;</verse>
+        <verse canonical="true" osisID="apostles-creed.1.28">11 And the resurrection of the flesh, Amen.</verse>
         <verse canonical="true" osisID="apostles-creed.1.29">
           <hi type="italic" TEIform="hi">As it stands in the book of Common Prayer of the United Church of England and Ireland as by law established</hi>.
         </verse>
-        <verse canonical="true" osisID="apostles-creed.1.30">I Believe in God the Father Almighty, maker of heaven and earth:</verse>
-        <verse canonical="true" osisID="apostles-creed.1.31">And in Jesus Christ his only Son, our Lord:</verse>
-        <verse canonical="true" osisID="apostles-creed.1.32">Who was conceived by the Holy Ghost, born of the Virgin Mary,</verse>
-        <verse canonical="true" osisID="apostles-creed.1.33">Suffered under Pontius Pilate, was crucified, dead and buried;</verse>
-        <verse canonical="true" osisID="apostles-creed.1.34">He descended into hell;</verse>
-        <verse canonical="true" osisID="apostles-creed.1.35">The third day he rose again from the dead;</verse>
-        <verse canonical="true" osisID="apostles-creed.1.36">He ascended into heaven, and sitteth on the right hand of God the Father Almighty;</verse>
-        <verse canonical="true" osisID="apostles-creed.1.37">From thence he shall come to judge the quick and the dead.</verse>
-        <verse canonical="true" osisID="apostles-creed.1.38">I believe in the Holy Ghost;</verse>
-        <verse canonical="true" osisID="apostles-creed.1.39">The holy Catholic Church; the communion of saints;</verse>
-        <verse canonical="true" osisID="apostles-creed.1.40">The forgiveness of sins;</verse>
-        <verse canonical="true" osisID="apostles-creed.1.41">The resurrection of the body and the life everlasting, Amen.</verse>
+        <verse canonical="true" osisID="apostles-creed.1.30">1 I Believe in God the Father Almighty, maker of heaven and earth:</verse>
+        <verse canonical="true" osisID="apostles-creed.1.31">2 And in Jesus Christ his only Son, our Lord:</verse>
+        <verse canonical="true" osisID="apostles-creed.1.32">3 Who was conceived by the Holy Ghost, born of the Virgin Mary,</verse>
+        <verse canonical="true" osisID="apostles-creed.1.33">4 Suffered under Pontius Pilate, was crucified, dead and buried;</verse>
+        <verse canonical="true" osisID="apostles-creed.1.34">5 He descended into hell;</verse>
+        <verse canonical="true" osisID="apostles-creed.1.35">6 The third day he rose again from the dead;</verse>
+        <verse canonical="true" osisID="apostles-creed.1.36">7 He ascended into heaven, and sitteth on the right hand of God the Father Almighty;</verse>
+        <verse canonical="true" osisID="apostles-creed.1.37">8 From thence he shall come to judge the quick and the dead.</verse>
+        <verse canonical="true" osisID="apostles-creed.1.38">9 ¶ I believe in the Holy Ghost;</verse>
+        <verse canonical="true" osisID="apostles-creed.1.39">10 The holy Catholic Church; the communion of saints;</verse>
+        <verse canonical="true" osisID="apostles-creed.1.40">11 The forgiveness of sins;</verse>
+        <verse canonical="true" osisID="apostles-creed.1.41">12 The resurrection of the body and the life everlasting, Amen.</verse>
       </div>
     </div>
   </osisText>

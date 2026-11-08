@@ -415,6 +415,16 @@ def test_build_verse_poetry_flag_without_lines_is_prose(parser):
         ("<p>Next: chapter</p>", True),
         ('<p><a name="page_3"></a></p>', True),
         ("<p>Real text</p>", False),
+        ("<p><br/>Click to enlarge<br/>THE FIRST SUNRISE<br/></p>", True),
+        ('<p>(<i>See page <a href="#page_214">214</a></i>)</p>', True),
+        ("<p>(<i>See page 233 et seq</i>.)</p>", True),
+        ("<p>(See Page 13)</p>", True),
+        ("<p>(See page 5) and the story goes on.</p>", False),
+        (
+            '<p><span><a href="img/1.jpg"><img src="tn/1.jpg"/><br/><font>Click to enlarge'
+            "</font></a><br/>PLATE</span></p>",
+            True,
+        ),
     ],
 )
 def test_skip_paragraph(parser, html, expected):
@@ -541,6 +551,73 @@ def test_parse_chapter_page_summary_skips_navigable_siblings(parser):
     html = "<h3>I</h3>\n<i><p>S</p></i>\n<p>1 v</p>"
     div = parser._parse_chapter_page(html, "Bk", 1)
     assert div.content[0].type_value == pyosis.OsisDivs.SUMMARY
+
+
+def test_parse_chapter_page_quoted_italic_paragraph_is_summary(parser):
+    """``<p>"<i>summary</i>."</p>`` after the ``<h3>`` is a summary, not part of verse 1."""
+    html = _page(
+        '<h3>CHAP. XIII.</h3> <p>"<i>Among the children of Cain</i>."</p> '
+        "<p>IN those days lived Lamech.</p> <p>2 But Lamech</p>"
+    )
+    div = parser._parse_chapter_page(html, "Bk", 13)
+    summary = div.content[0]
+    assert summary.type_value == pyosis.OsisDivs.SUMMARY
+    assert summary.content[0].content == ['"Among the children of Cain."']
+    v1, v2 = _verses(div)
+    assert v1.content == ["IN those days lived Lamech."]
+    assert v2.osis_id == ["Bk.13.2"]
+
+
+@pytest.mark.parametrize(
+    "first",
+    [
+        '"<i>Quoted</i> and more text."',
+        "<i>a</i> <b>b</b>",
+        "Plain opening line.",
+    ],
+)
+def test_parse_chapter_page_paragraph_with_more_than_quoted_italic_is_verse(parser, first):
+    """A first paragraph with text or tags beyond one quoted italic stays verse 1."""
+    div = parser._parse_chapter_page(_chapter("I", first, "2 Two"), "Bk", 1)
+    assert not any(isinstance(c, pyosis.DivCt) for c in div.content)
+    assert [v.osis_id[0] for v in _verses(div)] == ["Bk.1.1", "Bk.1.2"]
+
+
+def test_parse_chapter_page_image_caption_does_not_replace_verse(parser):
+    """An illustration caption after a verse is dropped instead of becoming its text."""
+    html = _page(
+        "<h3>CHAP. XIV.</h3><p>WHEN Enos was old.</p><p>2 He then prayed over them.</p>"
+        "<p> </p> <a></a> <img/><p><br/>Click to enlarge<br/>FACSIMILE.<br/> Gutenberg.<br/></p>"
+        "<img/><p><br/>Click to enlarge<br/>THE FIRST SUNRISE<br/></p>"
+        "<i><p>(See Page 13)</p></i><p>3 Then Enos</p>"
+    )
+    div = parser._parse_chapter_page(html, "Bk", 14)
+    v1, v2, v3 = _verses(div)
+    assert v2.content == ["He then prayed over them."]
+    assert v3.content == ["Then Enos"]
+
+
+def test_parse_chapter_page_plate_reference_does_not_split_sentence(parser):
+    """A plate's ``(See page N)`` line between two halves of a verse is dropped."""
+    html = _page(
+        "<h3>CHAP. I.</h3><p>49 Any one may give information, on condition</p>"
+        "<img/><p><br/>Click to enlarge<br/>AHIKAR ANSWERS<br/></p>"
+        '<p>(<i>See page <a href="#page_214">214</a></i>)</p>'
+        "<p>that if the man is proved guilty he will become his slave.</p>"
+    )
+    (verse,) = _verses(parser._parse_chapter_page(html, "Bk", 1))
+    assert _text(verse.content) == (
+        "Any one may give information, on condition that if the man is proved guilty he "
+        "will become his slave."
+    )
+
+
+def test_parse_odes_chapter_page_quoted_italic_summary(parser):
+    """The Odes parser recognises the quoted-italic summary and emits no duplicate verse 1."""
+    html = _page('<h3>ODE 35.</h3><p>"<i>No cradled child</i>."</p><p>1 The dew<br/>2 And</p>')
+    div = parser._parse_odes_chapter_page(html, "Odes", 35)
+    assert div.content[0].type_value == pyosis.OsisDivs.SUMMARY
+    assert [v.osis_id[0] for v in _verses(div)] == ["Odes.35.1", "Odes.35.2"]
 
 
 def test_parse_chapter_page_unnumbered_first_paragraph_is_verse_one(parser):

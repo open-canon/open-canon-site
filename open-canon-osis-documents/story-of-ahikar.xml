@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="story-of-ahikar" osisRefWork="Story of Ahikar" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T16:46:07</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T07:16:04</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -131,7 +131,7 @@
         <verse canonical="true" osisID="story-of-ahikar.2.64">O my son! whosoever is elegant in his dress, he is the same in his speech; and he who has a mean appearance in his dress, he also is the same in his speech.</verse>
         <verse canonical="true" osisID="story-of-ahikar.2.65">O my son! if thou hast committed a theft, make it known to the Sultan, and give him a share of it, that thou mayst be delivered from him, for otherwise thou wilt endure bitterness.</verse>
         <verse canonical="true" osisID="story-of-ahikar.2.66">O my son! make a friend of the man whose hand is satisfied and filled, and make no friend of the man whose hand is closed and hungry.</verse>
-        <verse canonical="true" osisID="story-of-ahikar.2.67">There are four things in which neither the king nor his army can be secure: oppression by the vizier, and bad government, and perversion of the will, and tyranny over the subject; and four things which cannot be hidden: the prudent, and the foolish, and the rich, and the poor.' 201:1 Cf. Psalms CXLI. 4. 203:1 Cf. "A bird in the hand is worth two in the bush." 203:2 Cf. 2 Timothy, IV, 17.</verse>
+        <verse canonical="true" osisID="story-of-ahikar.2.67">There are four things in which neither the king nor his army can be secure: oppression by the vizier, and bad government, and perversion of the will, and tyranny over the subject; and four things which cannot be hidden: the prudent, and the foolish, and the rich, and the poor.' 201:1  Cf. Psalms CXLI. 4. 203:1  Cf. "A bird in the hand is worth two in the bush." 203:2  Cf. 2 Timothy, IV, 17.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="story-of-ahikar.3" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -199,7 +199,7 @@
         <verse canonical="true" osisID="story-of-ahikar.3.60">And he did not respect the wife of his uncle, she who had brought him up like her own boy, but wanted her to fall into sin with him.</verse>
         <verse canonical="true" osisID="story-of-ahikar.3.61">But Haiqâr had been cut into the hiding-place, and he heard the weeping of his slaves and his neighbours, and he praised the Most High God, the Merciful One, and gave thanks, and he always prayed and besought the Most High God.</verse>
         <verse canonical="true" osisID="story-of-ahikar.3.62">And the swordsman came from time to time to Haiqâr whilst he was in the midst of the hiding-place: and Haiqâr came and entreated him. And he comforted him and wished him deliverance.</verse>
-        <verse canonical="true" osisID="story-of-ahikar.3.63">And when the story was reported in other countries that Haiqâr the Sage had been slain, all the kings were grieved and despised king Sennacherib, and they lamented over Haiqâr the solver of riddles. 207:1 Compare this account of Nadan's revelry and his beating of the servants with Matthew XXIV. 48-51 and Luke XII. 43-46. You will see that the language of Ahikar has colored one of our Lord's parables.</verse>
+        <verse canonical="true" osisID="story-of-ahikar.3.63">And when the story was reported in other countries that Haiqâr the Sage had been slain, all the kings were grieved and despised king Sennacherib, and they lamented over Haiqâr the solver of riddles. 207:1  Compare this account of Nadan's revelry and his beating of the servants with Matthew XXIV. 48-51 and Luke XII. 43-46. You will see that the language of Ahikar has colored one of our Lord's parables.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="story-of-ahikar.4" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -253,12 +253,7 @@
         <verse canonical="true" osisID="story-of-ahikar.5.8">And when the king heard this speech from Haiqâr he rejoiced with a great joy, and his heart was expanded and he showed him favour.</verse>
         <verse canonical="true" osisID="story-of-ahikar.5.9">And Haiqâr said to the king: 'Grant me a delay of forty days that I may consider this question and manage it.' And the king permitted this.</verse>
         <verse canonical="true" osisID="story-of-ahikar.5.10">And Haiqâr went to his dwelling, and he commanded the huntsmen to capture two young eaglets for him, and they captured them and brought them to him: and he commanded the weavers of ropes to weave two cables of cotton for him, each of them two thousand cubits long, and he had the carpenters brought and ordered them to make two great boxes, and they did this.</verse>
-        <verse canonical="true" osisID="story-of-ahikar.5.11">
-          <lgCT TEIform="lg">
-            <l TEIform="l">Click to enlarge</l>
-            <l TEIform="l">JOSEPH'S PREDICAMENT</l>
-          </lgCT>
-        </verse>
+        <verse canonical="true" osisID="story-of-ahikar.5.11">Then he took two little lads, and spent every day sacrificing lambs and feeding the eagles and the boys, and making the boys ride on the backs of the eagles, and he bound them with a firm knot, and tied the cable to the feet of the eagles, and let them soar upwards little by little every day, to a distance of ten cubits, till they grew accustomed and were educated to it; and they rose all the length of the rope till they reached the sky; the boys being on their backs. Then he drew them to himself.</verse>
         <verse canonical="true" osisID="story-of-ahikar.5.12">And when Haiqâr saw that his desire was fulfilled he charged the boys that when they were borne aloft to the sky they were to shout, saying:</verse>
         <verse canonical="true" osisID="story-of-ahikar.5.13">'Bring us clay and stone, that we may build a castle for king Pharaoh, for we are idle.'</verse>
         <verse canonical="true" osisID="story-of-ahikar.5.14">And Haiqâr was never done training them and exercising them till they had reached the utmost possible point (of skill).</verse>
@@ -424,7 +419,7 @@
         <verse canonical="true" osisID="story-of-ahikar.7.57">And his limbs swelled and his legs and his feet and his side, and he was torn and his belly burst asunder and his entrails were scattered, and he perished, and died.</verse>
         <verse canonical="true" osisID="story-of-ahikar.7.58">And his latter end was destruction, and he went to hell. For he who digs a pit for his brother shall fall into it; and he who sets up traps shall be caught in them.</verse>
         <verse canonical="true" osisID="story-of-ahikar.7.59">This is what happened and (what) we found about the tale of Haiqâr, and praise be to God for ever. Amen, and peace.</verse>
-        <verse canonical="true" osisID="story-of-ahikar.7.60">This chronicle is finished with the help of God, may He be exalted! Amen, Amen, Amen. 218:1 Compare the parable of the Prodigal Son in Luke XV. 19.</verse>
+        <verse canonical="true" osisID="story-of-ahikar.7.60">This chronicle is finished with the help of God, may He be exalted! Amen, Amen, Amen. 218:1  Compare the parable of the Prodigal Son in Luke XV. 19.</verse>
       </div>
     </div>
   </osisText>

@@ -79,8 +79,10 @@ HERODIAN_HEADING_RE: Final[re.Pattern[str]] = re.compile(r"^\s*(?:LETTER|THE)\b"
 """Chapter heading of the Letters of Herod and Pilate, whose sections are titled by document."""
 VERSE_NUMBER_RE: Final[re.Pattern[str]] = re.compile(r"^(\d+)\.?(?:\s|$)")
 """Matches the verse number at the start of a paragraph (``1 text``, ``1. text``)."""
-VERSE_PREFIX_RE: Final[re.Pattern[str]] = re.compile(r"^(?:\d+\.?\s+)?(?:¶\s*)?")
-"""Matches the verse number and pilcrow stripped from the front of a verse."""
+VERSE_PREFIX_RE: Final[re.Pattern[str]] = re.compile(r"^\d+\.?\s*")
+"""Matches the verse number stripped from the front of a verse that was numbered."""
+PILCROW_RE: Final[re.Pattern[str]] = re.compile(r"^¶\s*")
+"""Matches the pilcrow (paragraph sign) stripped from the front of a verse."""
 MAX_VERSE_JUMP: Final[int] = 5
 """Largest forward gap between verse numbers still read as a verse number."""
 FOOTNOTE_REF_RE: Final[re.Pattern[str]] = re.compile(r"^fr_")
@@ -91,6 +93,8 @@ FOOTNOTE_LINK_RE: Final[re.Pattern[str]] = re.compile(
     r"^(?:lbob(?P<page>\d+)\.htm)?#(?P<name>fn_\d+)$"
 )
 """Matches a footnote reference link; ``page`` is set when the note is on another page."""
+CONTINUATION_RE: Final[re.Pattern[str]] = re.compile(r"^\[paragraph continues\]$", re.IGNORECASE)
+"""Matches the text of the ``[paragraph continues]`` marker the site puts after a page break."""
 CREDIT_LINE_RE: Final[re.Pattern[str]] = re.compile(
     r"^The Lost Books of the Bible,?\s*\[1926\],?\s*at sacred-texts\.com$", re.IGNORECASE
 )
@@ -515,6 +519,19 @@ class LBOBParser(FBEParser):
             footnotes[str(target["name"])] = Footnote(label=label, parts=parts)
         return footnotes
 
+    @staticmethod
+    def _mark_continuations(soup: BeautifulSoup) -> None:
+        """Give every ``[paragraph continues]`` marker the ``contnote`` class.
+
+        The reader layout drops the class, so the marker is recognised by its text.
+
+        Args:
+            soup: The parsed page, modified in place.
+        """
+        for span in soup.find_all("span"):
+            if CONTINUATION_RE.match(normalize_whitespace(span.get_text())):
+                span["class"] = ["contnote"]
+
     def _mark_footnote_references(self, soup: BeautifulSoup) -> None:
         """Replace each footnote reference with a placeholder ``<span data-fn=...>``.
 
@@ -564,6 +581,7 @@ class LBOBParser(FBEParser):
             holder = plate.find_parent("p")
             if holder is not None:
                 holder.decompose()
+        self._mark_continuations(soup)
         self._footnotes = self._collect_footnotes(soup)
         self._mark_footnote_references(soup)
         return soup
@@ -679,21 +697,25 @@ class LBOBParser(FBEParser):
     # Verses
     # ------------------------------------------------------------------
 
-    def _strip_prefix(self, parts: list[InlinePart]) -> list[InlinePart]:
-        """Remove a leading verse number and pilcrow from inline parts.
+    def _strip_prefix(self, parts: list[InlinePart], numbered: bool) -> list[InlinePart]:
+        """Remove a leading verse number (when it was read as one) and pilcrow from parts.
 
         Args:
             parts: Inline parts; not modified.
+            numbered: Whether the paragraph's leading number was accepted as the verse number.
 
         Returns:
             A copy whose first string has the prefix removed.
         """
         result = list(parts)
         if result and isinstance(result[0], str):
-            result[0] = VERSE_PREFIX_RE.sub("", result[0].lstrip(), count=1)
+            text = result[0].lstrip()
+            if numbered:
+                text = VERSE_PREFIX_RE.sub("", text, count=1)
+            result[0] = PILCROW_RE.sub("", text, count=1)
         return result
 
-    def _verse_groups(self, chapter: Chapter, work: WorkDef) -> list[tuple[int, list[Tag]]]:
+    def _verse_groups(self, chapter: Chapter, work: WorkDef) -> list[tuple[int, list[Tag], bool]]:
         """Group a chapter's paragraphs into verses.
 
         A paragraph starting with the next verse number (or a number up to
@@ -706,17 +728,20 @@ class LBOBParser(FBEParser):
             work: The work the chapter belongs to.
 
         Returns:
-            ``(verse number, paragraphs)`` pairs in order.
+            ``(verse number, paragraphs, numbered)`` triples in order; ``numbered`` says the first
+            paragraph's leading number is the verse number.
         """
-        groups: list[tuple[int, list[Tag]]] = []
+        groups: list[tuple[int, list[Tag], bool]] = []
         for p_tag in chapter.paragraphs:
             number: int | None = None
+            numbered = False
             match = VERSE_NUMBER_RE.match(p_tag.get_text().strip())
             last = groups[-1][0] if groups else 0
             if match and not work.verse_per_paragraph:
                 value = int(match.group(1))
                 if last < value <= last + MAX_VERSE_JUMP:
                     number = value
+                    numbered = True
             if number is None:
                 continued = bool(p_tag.find(class_="contnote"))
                 if not groups or (work.verse_per_paragraph and not continued):
@@ -724,15 +749,18 @@ class LBOBParser(FBEParser):
                 else:
                     groups[-1][1].append(p_tag)
                     continue
-            groups.append((number, [p_tag]))
+            groups.append((number, [p_tag], numbered))
         return groups
 
-    def _build_chapter_verse(self, osis_id: str, paragraphs: list[Tag]) -> pyosis.VerseCt:
+    def _build_chapter_verse(
+        self, osis_id: str, paragraphs: list[Tag], numbered: bool
+    ) -> pyosis.VerseCt:
         """Build one verse from its paragraphs.
 
         Args:
             osis_id: Verse reference (``"Barn.2.3"``).
             paragraphs: The ``<p>`` elements of the verse.
+            numbered: Whether the first paragraph starts with the verse's number.
 
         Returns:
             The verse, with page markers, highlights and footnotes kept inline.
@@ -744,7 +772,7 @@ class LBOBParser(FBEParser):
         for index, content in enumerate(parsed):
             content_parts = list(content.content_parts)
             if index == 0:
-                content_parts = self._strip_prefix(content_parts)
+                content_parts = self._strip_prefix(content_parts, numbered)
             else:
                 if content_parts and isinstance(content_parts[0], str):
                     content_parts[0] = content_parts[0].lstrip()
@@ -753,7 +781,7 @@ class LBOBParser(FBEParser):
             if content.poetry_lines:
                 lines = list(content.poetry_lines)
                 if index == 0:
-                    lines[0] = self._strip_prefix(lines[0])
+                    lines[0] = self._strip_prefix(lines[0], numbered)
                 poetry.extend(lines)
             elif any_poetry:
                 poetry.append(content_parts if index == 0 else content_parts[1:])
@@ -809,8 +837,10 @@ class LBOBParser(FBEParser):
                     content=[pyosis.PCt(content=self.parse_inline_annotations(summary))],
                 )
             )
-        for verse_number, paragraphs in self._verse_groups(body, work):
-            content.append(self._build_chapter_verse(f"{osis_id}.{verse_number}", paragraphs))
+        for verse_number, paragraphs, numbered in self._verse_groups(body, work):
+            content.append(
+                self._build_chapter_verse(f"{osis_id}.{verse_number}", paragraphs, numbered)
+            )
         first_verse = next((c for c in content if isinstance(c, pyosis.VerseCt)), None)
         if first_verse is not None and chapter.notes:
             notes = [self._note(name) for name in chapter.notes]

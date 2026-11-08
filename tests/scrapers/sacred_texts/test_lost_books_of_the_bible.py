@@ -292,6 +292,49 @@ def test_footnote_on_a_chapter_heading_moves_to_verse_one(parser) -> None:
     assert isinstance(verse.content[0], pyosis.NoteCt) and verse.content[0].n == "5:1"
 
 
+def test_unaccepted_leading_number_is_kept_as_text(parser) -> None:
+    """A first paragraph ``161 martyrs ...`` is verse 1 and keeps its number as text."""
+    page = _page("<h3>T</h3><h4>CHAP. I.</h4><p>161 martyrs were there.</p><p>2 Two.</p>")
+    chapter = _chapters(parser.build_work_div(_work(), page))[0]
+    assert _ids(chapter) == ["Test.1.1", "Test.1.2"]
+    assert parser._extract_text(list(_verses(chapter)[0].content)) == "161 martyrs were there."
+
+
+def test_leading_numbers_are_kept_in_paragraph_per_verse_works(parser) -> None:
+    """A paragraph-per-verse work never strips digits, but still drops a pilcrow."""
+    page = _page("<h3>T</h3><h4>LETTER ONE.</h4><p>12 men came.</p><p>\u00b6 Then they went.</p>")
+    work = _work(verse_per_paragraph=True, chapter_re=lbob.HERODIAN_HEADING_RE)
+    chapter = _chapters(parser.build_work_div(work, page))[0]
+    texts = [parser._extract_text(list(v.content)) for v in _verses(chapter)]
+    assert texts == ["12 men came.", "Then they went."]
+
+
+def test_continuation_marker_survives_the_reader_layout(parser) -> None:
+    """The reader layout drops the ``contnote`` class; the marker is still recognised by text."""
+    page = _page(
+        "<h3>T</h3><h4>LETTER ONE.</h4><p>Alpha.</p><p><span>[paragraph continues]</span> beta.</p>"
+    )
+    work = _work(verse_per_paragraph=True, chapter_re=lbob.HERODIAN_HEADING_RE)
+    chapter = _chapters(parser.build_work_div(work, page))[0]
+    texts = [parser._extract_text(list(v.content)) for v in _verses(chapter)]
+    assert texts == ["Alpha. beta."]
+
+
+def test_plain_paragraph_before_poetry_is_kept(parser) -> None:
+    """A verse that opens with prose and continues in ``<br>`` lines keeps the prose line."""
+    page = _page(
+        "<h3>T</h3><h4>CHAP. I.</h4><p>1 A prose opening.</p>"
+        '<p><span class="contnote">[paragraph continues]</span> Line one<br>Line two</p>'
+    )
+    verse = _verses(_chapters(parser.build_work_div(_work(), page))[0])[0]
+    lines = verse.content[0].l
+    assert [parser._extract_text(list(line.content)).strip() for line in lines] == [
+        "A prose opening.",
+        "Line one",
+        "Line two",
+    ]
+
+
 def test_illustration_paragraph_is_dropped(parser) -> None:
     """A plate (``<img>`` and caption) between a verse and its continuation is not text."""
     plate = (

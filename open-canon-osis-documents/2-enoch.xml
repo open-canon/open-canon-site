@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="2En" osisRefWork="2 Enoch" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T16:37:26</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T00:50:32</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -142,7 +142,7 @@
           <hi type="italic" TEIform="hi">and by</hi> four to the left, each having under it a thousand stars, altogether eight thousand, issuing with the sun continually.
         </verse>
         <verse canonical="true" osisID="2En.11.5">And by day fifteen myriads of angels attend it, and by night a thousand.</verse>
-        <verse canonical="true" osisID="2En.11.6">And six-winged ones issue with the angels before the sun's wheel into the fiery flames, and a hundred angels kindle the sun and set it alight. 85:1 Cf. "Rapid Transit."</verse>
+        <verse canonical="true" osisID="2En.11.6">And six-winged ones issue with the angels before the sun's wheel into the fiery flames, and a hundred angels kindle the sun and set it alight. 85:1  Cf. "Rapid Transit."</verse>
       </div>
       <div canonical="true" type="chapter" osisID="2En.12" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -229,7 +229,7 @@
           <hi type="italic" TEIform="hi">to be</hi> under earth till heaven and earth shall end for ever.'
         </verse>
         <verse canonical="true" osisID="2En.18.6">And I said: 'Wherefore do you wait, brethren, and do not serve before the Lord's face, and have not put your services before the Lord's face, lest you anger your Lord utterly?'</verse>
-        <verse canonical="true" osisID="2En.18.7">And they listened to my admonition, and spoke to the four ranks in heaven, and lo! as I stood with those two men four trumpets trumpeted together with great voice, and the Grigori broke into song with one voice, and their voice went up before the Lord pitifully and affectingly. 87:1 Compare The Second Book of Adam and Eve. Chap. XX.</verse>
+        <verse canonical="true" osisID="2En.18.7">And they listened to my admonition, and spoke to the four ranks in heaven, and lo! as I stood with those two men four trumpets trumpeted together with great voice, and the Grigori broke into song with one voice, and their voice went up before the Lord pitifully and affectingly. 87:1  Compare The Second Book of Adam and Eve. Chap. XX.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="2En.19" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">

@@ -154,6 +154,7 @@ _HI_TAG_MAP: dict[str, str] = {
     "bold": "strong",
     "italic": "em",
     "emphasis": "em",
+    "super": "sup",
     "sup": "sup",
     "sub": "sub",
     "underline": "u",
