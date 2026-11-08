@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" TEIform="TEI.2">
+  <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="Pol" osisRefWork="Polycarp" xml:lang="en" xml:space="default" TEIform="text">
+    <header TEIform="teiHeader" canonical="false">
+      <revisionDesc TEIform="revisionDesc">
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T09:13:36</date>
+        <p TEIform="p">Scraped from https://sacred-texts.com/bib/lbob/, and converted to OSIS by open-canon contributors.</p>
+      </revisionDesc>
+      <revisionDesc TEIform="revisionDesc">
+        <date event="edition" type="ISO" xml:lang="en" TEIform="date">1926</date>
+        <p TEIform="p">The Lost Books of the Bible, Alpha House, Inc., 1926.</p>
+      </revisionDesc>
+      <work osisWork="Pol" xml:lang="en">
+        <title canonical="true" TEIform="title">The Epistle of Polycarp to the Philippians</title>
+        <description>Text from "The Lost Books of the Bible," 1926. The Epistle of Polycarp to the Philippians. Scraped from sacred-texts.com and converted to OSIS.</description>
+        <publisher>Alpha House, Inc.</publisher>
+        <type type="OSIS"/>
+      </work>
+    </header>
+    <div canonical="true" type="book" osisID="Pol" TEIform="div">
+      <title canonical="true" short="Polycarp" type="main" TEIform="title">The Epistle of Polycarp to the Philippians</title>
+      <div canonical="false" type="introduction" TEIform="div">
+        <p TEIform="p">[The genuineness of this Epistle is controverted, but implicitly believed by Archbishop Wake, whose translation is below. There is also a translation by Dr. Cave, attached to his life of Polycarp.]</p>
+      </div>
+      <div canonical="true" type="chapter" osisID="Pol.1" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">
+            <hi type="italic" TEIform="hi">Commends the Philippians for their respect to those who suffered for the Gospel; and for their own faith</hi>.
+          </p>
+        </div>
+        <verse canonical="true" osisID="Pol.1.1">POLYCARP, and the presbyters that are with him, to the church of God which  
+          <note canonical="false" type="explanation" n="192:3" TEIform="note">Sojourneth.</note> is at Philippi: mercy unto you and peace from God Almighty; and the Lord Jesus Christ, our Saviour, be multiplied.
+        </verse>
+        <verse canonical="true" osisID="Pol.1.2">I rejoiced greatly with you in our Lord Jesus Christ, that ye received the images of a true love, and accompanied, as it is behooved you, those who were in bonds, becoming saints; which are the crowns of such as are truly chosen by God and our Lord:</verse>
+        <verse canonical="true" osisID="Pol.1.3">As also that the  
+          <note canonical="false" type="explanation" n="192:4" TEIform="note">Firm root remains in you.</note> root of the faith which was preached from ancient times, remains firm in you to this day; and brings forth fruit to our Lord Jesus Christ, who suffered himself to be brought even to the death for our sins.
+        </verse>
+        <verse canonical="true" osisID="Pol.1.4">
+          <note canonical="false" type="explanation" n="192:5" TEIform="note">Acts xi. 24.</note> Whom God hath raised up, having loosed the pains of  
+          <note canonical="false" type="explanation" n="192:6" TEIform="note">1 Pet. i. 8.</note> death, whom having not seen, ye love; in whom though now ye see him not, yet believing ye rejoice with joy unspeakable and full of glory.
+        </verse>
+        <verse canonical="true" osisID="Pol.1.5">Into which many desire to enter;  
+          <note canonical="false" type="explanation" n="192:7" TEIform="note">Eph. ii. 8.</note> knowing that by grace ye are saved; not by works, but by the will of God through Jesus Christ.
+        </verse>
+        <verse canonical="true" osisID="Pol.1.6">
+          <note canonical="false" type="explanation" n="192:8" TEIform="note">1 Pet. i. 13.</note> Wherefore girding up the loins of your minds;  
+          <note canonical="false" type="explanation" n="192:9" TEIform="note">Psalm ii. 11.</note> serve the Lord with fear, and in truth: laying aside all empty and vain speech, and the error of many;  
+          <note canonical="false" type="explanation" n="192:10" TEIform="note">1 Pet. i. 21.</note> believing in him that raised up our Lord Jesus Christ from the dead, and hath given him glory and a throne at his right hand.
+        </verse>
+        <verse canonical="true" osisID="Pol.1.7">To whom all things are made subject,  
+          <note canonical="false" type="explanation" n="192:11" TEIform="note">Phil. ii. 10.</note> both that are in heaven, and that are in earth; whom every  
+          <note canonical="false" type="explanation" n="192:12" TEIform="note">Breath.</note> living creature shall worship; who shall come to be the judge of the quick and dead.: whose blood God shall require of them that believe in him.
+        </verse>
+        <verse canonical="true" osisID="Pol.1.8">But he that raised up  
+          <note canonical="false" type="explanation" n="192:13" TEIform="note">Him.</note> Christ from the dead, shall also raise up us in like manner, if we do his will and walk  
+          <note canonical="false" type="explanation" n="192:14" TEIform="note">In.</note> according to his commandments; and love those things which he loved:
+        </verse>
+        <verse canonical="true" osisID="Pol.1.9">Abstaining from all  
+          <note canonical="false" type="explanation" n="192:15" TEIform="note">Injustice.</note> unrighteousness; 
+          <note canonical="false" type="explanation" n="193:1" TEIform="note">Eph. iv. 19. Coloss. iii. 5. 1 Pet. iii. 9.</note> inordinate affection, and love of money; from evil speaking; false witness; not rendering evil for evil, or railing for railing, or striking for striking, or cursing for cursing.
+        </verse>
+        <verse canonical="true" osisID="Pol.1.10">But remembering what the Lord has  
+          <note canonical="false" type="explanation" n="193:2" TEIform="note">Said to us, teaching, Luke vi. 37. Matt. vii. 1.</note> taught us saying, Judge not, and ye shall not be judged; forgive and ye shall be forgiven; be ye merciful, and ye shall obtain mercy; for with the same measure that ye mete withal, it shall be measured to you again.
+        </verse>
+        <verse canonical="true" osisID="Pol.1.11">And again, that  
+          <note canonical="false" type="explanation" n="193:3" TEIform="note">Matt. v. 3, 10. Luke vi. 20.</note> blessed are the poor, and they that are persecuted for righteousness’ sake; for theirs is the kingdom of God.
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="Pol.2" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">2
+            <hi type="italic" TEIform="hi"> Exhorts to Faith, Hope, and Charity. </hi>5
+            <hi type="italic" TEIform="hi"> Against covetousness, and as to the duties of husbands, wives, widows, </hi>6
+            <hi type="italic" TEIform="hi"> deacons, young men, virgins, and presbyters</hi>.
+          </p>
+        </div>
+        <verse canonical="true" osisID="Pol.2.1">THESE things, my brethren, I took not the liberty of myself to write unto you concerning righteousness, but you yourselves before encouraged me to it.</verse>
+        <verse canonical="true" osisID="Pol.2.2">For neither can I, nor any other such as I am, come up to the wisdom of the blessed and renowned Paul: who being himself in person with those who then lived, did with all exactness and soundness teach the word  
+          <note canonical="false" type="explanation" n="193:4" TEIform="note">περι ἀλεθειας, concerning Truth.</note> of truth; and being gone from you wrote an  
+          <note canonical="false" type="explanation" n="193:5" TEIform="note">Epistles. Vid. Annot Coteler. in loc.</note> epistle to you.
+        </verse>
+        <verse canonical="true" osisID="Pol.2.3">Into which if you look, you will be able to edify yourselves in the faith that has been delivered unto you; which is the mother of us all; being followed with hope, and led on by a general love, both towards God and towards Christ, and towards our neighbour.</verse>
+        <verse canonical="true" osisID="Pol.2.4">For if any man  
+          <note canonical="false" type="explanation" n="193:6" TEIform="note">Be within.</note> has these things he has fulfilled the law of righteousness: for he that has charity is far from all sin.
+        </verse>
+        <verse canonical="true" osisID="Pol.2.5">But the love of money is the  
+          <note canonical="false" type="explanation" n="193:7" TEIform="note">Beginning of all troubles, or difficulties, χαλεπων, 1 Tim. vi. 7.</note> root of all evil. Knowing therefore that as we brought nothing into this world, so neither may we carry any thing out; let us  
+          <note canonical="false" type="explanation" n="193:8" TEIform="note">Be armed.</note> arm ourselves with the armour of righteousness.
+        </verse>
+        <verse canonical="true" osisID="Pol.2.6">And teach ourselves first to walk according to the commandments of the Lord; and then your wives to walk likewise  
+          <note canonical="false" type="explanation" n="193:9" TEIform="note">In.</note> according to the faith that is given to them; in  
+          <note canonical="false" type="explanation" n="193:10" TEIform="note">Love.</note> charity, and in purity; loving their own husbands with all  
+          <note canonical="false" type="explanation" n="193:11" TEIform="note">Truth.</note> sincerity, and all others alike with all temperance; and to bring up their children in the instruction  
+          <note canonical="false" type="explanation" n="193:12" TEIform="note">Of the.</note> and fear of the Lord.
+        </verse>
+        <verse canonical="true" osisID="Pol.2.7">The widows likewise teach that they be sober as to what concerns the faith of the Lord: praying always for all men; being far from all detraction, evil speaking, false witness; from covetousness, and from all evil.</verse>
+        <verse canonical="true" osisID="Pol.2.8">Knowing that they are the altars of God,  
+          <note canonical="false" type="explanation" n="193:13" TEIform="note">And that he.</note> who sees all blemishes, and from whom nothing is hid; who searches out the very reasonings, and thoughts, and secrets of our hearts.
+        </verse>
+        <verse canonical="true" osisID="Pol.2.9">Knowing therefore that God is not mocked, we ought to walk worthy both of his command and of his glory.</verse>
+        <verse canonical="true" osisID="Pol.2.10">Also the deacons must be blameless before  
+          <note canonical="false" type="explanation" n="194:1" TEIform="note">His righteousness.</note> him, as the ministers of God in Christ, and not of men. Not false accusers; not double tongued; not lovers of money; but  
+          <note canonical="false" type="explanation" n="194:2" TEIform="note">Continent.</note> moderate in all things; compassionate, careful; walking according to the truth of the Lord, who was the servant of all.
+        </verse>
+        <verse canonical="true" osisID="Pol.2.11">Whom if we please in this present world we shall also be made partakers of that which is to come, according as he has promised to us, that he will raise us from the dead; and that if we shall walk worthy of him, we shall also reign together with him, if we believe.</verse>
+        <verse canonical="true" osisID="Pol.2.12">In like manner the younger men must be unblameable in all things; above all, taking care of their purity, and to restrain themselves from all evil. For it is good to be cut off from the lusts that are in the world; because every such  
+          <note canonical="false" type="explanation" n="194:3" TEIform="note">Pet. ii. 11.</note> lust warreth against the spirit:  
+          <note canonical="false" type="explanation" n="194:4" TEIform="note">Cor. vi. 9, 10.</note> and neither fornicators, nor effeminate, nor abusers of themselves with mankind, shall inherit the kingdom of God; nor they who do such things as are foolish and unreasonable.
+        </verse>
+        <verse canonical="true" osisID="Pol.2.13">Wherefore ye must needs abstain from all these things, being subject to the  
+          <note canonical="false" type="explanation" n="194:5" TEIform="note">Elders.</note> priests and deacons, as unto God and Christ.
+        </verse>
+        <verse canonical="true" osisID="Pol.2.14">The virgins admonish to walk in a spotless and pure conscience.</verse>
+        <verse canonical="true" osisID="Pol.2.15">And let the  
+          <note canonical="false" type="explanation" n="194:6" TEIform="note">Presbyters.</note> elders be compassionate and merciful towards all;  
+          <note canonical="false" type="explanation" n="194:7" TEIform="note">Ezek. xxxiv. 4.</note> turning them from their errors; seeking out those that are weak; not forgetting the widows, the fatherless, and the poor; but always  
+          <note canonical="false" type="explanation" n="194:8" TEIform="note">Rom. xii. 17.</note> providing what is good both in the sight of God and man.
+        </verse>
+        <verse canonical="true" osisID="Pol.2.16">Abstaining from all wrath, respect of persons, and unrighteous judgment: and especially being free from all covetousness.</verse>
+        <verse canonical="true" osisID="Pol.2.17">Not  
+          <note canonical="false" type="explanation" n="194:9" TEIform="note">Swiftly believing.</note> easy to believe any thing against any; not severe in judgment; knowing that we are all debtors in point of sin.
+        </verse>
+        <verse canonical="true" osisID="Pol.2.18">If therefore we pray to the Lord that he would forgive us, we ought also to forgive others; for we are all in the sight of our Lord and God;  
+          <note canonical="false" type="explanation" n="194:10" TEIform="note">Matt. xii. 14; Rom. xiv. 10; 2 Cor. v. 10.</note> and must all stand before the judgment seat of Christ; and shall every one give an account  
+          <note canonical="false" type="explanation" n="194:11" TEIform="note">For.</note> of himself.
+        </verse>
+        <verse canonical="true" osisID="Pol.2.19">Let us therefore serve him in fear, and with all reverence as both himself hath commanded; and as the Apostles who have preached the Gospel unto us, and the prophets who have foretold the coming of our Lord have taught us.</verse>
+        <verse canonical="true" osisID="Pol.2.20">Being zealous of what is good; abstaining from all offence, and from false brethren; and from those who bear the name of Christ in hypocrisy; who deceive vain men.</verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="Pol.3" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">1
+            <hi type="italic" TEIform="hi"> As to faith in our Saviour Christ: his nature and sufferings, the resurrection and judgment. </hi>3
+            <hi type="italic" TEIform="hi"> Exhorts to prayer </hi>5
+            <hi type="italic" TEIform="hi"> and steadfastness in the faith, from the examples of Christ, </hi>7
+            <hi type="italic" TEIform="hi"> and Apostles and saints, and exhorts to carefulness in all well-doing</hi>.
+          </p>
+        </div>
+        <verse canonical="true" osisID="Pol.3.1">FOR  
+          <note canonical="false" type="explanation" n="194:12" TEIform="note">1 John iv. 3.</note> whosoever does not confess that Jesus Christ is come in the flesh, he is Antichrist: and whoever does not confess  
+          <note canonical="false" type="explanation" n="194:13" TEIform="note">The martyrdom of the cross.</note> his suffering upon the cross, is from the devil.
+        </verse>
+        <verse canonical="true" osisID="Pol.3.2">And whosoever perverts the oracles of the Lord to his own lusts; and says that there shall neither be any resurrection, nor judgment, he is the first-born of Satan.</verse>
+        <verse canonical="true" osisID="Pol.3.3">Wherefore leaving the vanity of many, and their false doctrines; let us return to the word that was delivered to us from the beginning;  
+          <note canonical="false" type="explanation" n="195:1" TEIform="note">1 Pet. vi. 7.</note> Watching unto prayer; and persevering in fasting.
+        </verse>
+        <verse canonical="true" osisID="Pol.3.4">With supplication beseeching the all seeing God  
+          <note canonical="false" type="explanation" n="195:2" TEIform="note">Matt. vi. 13.</note> not to lead us into temptation; as the Lord hath said,  
+          <note canonical="false" type="explanation" n="195:3" TEIform="note">Matt. xxvi. 41.</note> The spirit is truly willing, but the flesh is weak.
+        </verse>
+        <verse canonical="true" osisID="Pol.3.5">Let us therefore without ceasing hold steadfastly to him who is our hope, and the earnest of our righteousness, even Jesus Christ;  
+          <note canonical="false" type="explanation" n="195:4" TEIform="note">1 Pet. ii. 22, 24.</note> Who his own self bare our sins in his own body on the tree: who did no sin, neither was guile found in his mouth. But suffered all for us that we might live  
+          <note canonical="false" type="explanation" n="195:5" TEIform="note">In. 1 Pet. iii. 14, &amp;c.</note> through him.
+        </verse>
+        <verse canonical="true" osisID="Pol.3.6">Let us therefore imitate his patience; and if we suffer for his name, let us glorify him; for this example he has given us by himself, and so have we believed.</verse>
+        <verse canonical="true" osisID="Pol.3.7">Wherefore I exhort all of you that ye obey the word of righteousness, and exercise all patience; which ye have seen set forth before our eyes, not only in the blessed Ignatius, and Zozimus, and Rufus; but in others among yourselves; and in Paul himself, and the rest of the Apostles:</verse>
+        <verse canonical="true" osisID="Pol.3.8">Being  
+          <note canonical="false" type="explanation" n="195:6" TEIform="note">Persuaded.</note> confident of this, that all, these have not run in vain; but in faith and righteousness, and are gone to the place that was due to them from the Lord; with whom they also suffered.
+        </verse>
+        <verse canonical="true" osisID="Pol.3.9">For they loved not this present world; but him who died, and was raised again by God for us.</verse>
+        <verse canonical="true" osisID="Pol.3.10">Stand therefore in these things, and follow the example of the Lord; being firm and immutable in the faith, lovers of the brotherhood, lovers of one another:  
+          <note canonical="false" type="explanation" n="195:7" TEIform="note">Associated in truth.</note> companions together in the truth,  
+          <note canonical="false" type="explanation" n="195:8" TEIform="note">Yielding to each other in the mildness of the Lord. Tobit, xii. 9.</note> being kind and gentle towards each other, despising none.
+        </verse>
+        <verse canonical="true" osisID="Pol.3.11">When it is in your power to do good, defer it not, for charity delivered from death.</verse>
+        <verse canonical="true" osisID="Pol.3.12">Be all of you subject one to another,  
+          <note canonical="false" type="explanation" n="195:9" TEIform="note">1 Pet.. ii. 12.</note> having your conversation  
+          <note canonical="false" type="explanation" n="195:10" TEIform="note">Unreprovable.</note> honest among the Gentiles; that by your good works, both ye yourselves may receive praise, and the Lord may not  
+          <note canonical="false" type="explanation" n="195:11" TEIform="note">Rom. ii. 24. Titus, ii. 5.</note> be blasphemed through you. But wo be to him by whom the name of the Lord is blasphemed.
+        </verse>
+        <verse canonical="true" osisID="Pol.3.13">Therefore teach all men sobriety; in which do ye also exercise yourselves.</verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="Pol.4" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">
+            <hi type="italic" TEIform="hi">Valens, a presbyter, having fallen into the sin of covetousness, he exhorts them against it</hi>.
+          </p>
+        </div>
+        <verse canonical="true" osisID="Pol.4.1">I AM greatly afflicted for Valens, who was once a presbyter among you; that he should so little understand the place that was given to him in the church. Wherefore I admonish you that ye abstain from  
+          <note canonical="false" type="explanation" n="195:12" TEIform="note">Concupiscence; or, immoderate and filthy lusts. So Dr. Hammond on Rom. i. 29.</note> covetousness; and that ye be chaste, and true of speech.
+        </verse>
+        <verse canonical="true" osisID="Pol.4.2">
+          <note canonical="false" type="explanation" n="195:13" TEIform="note">1 Thes. v. 22. Eph. v. 5; Coloss. ii. 5.</note> Keep yourselves from all evil. For he that in these things cannot govern himself how shall he be able to prescribe them to another?
+        </verse>
+        <verse canonical="true" osisID="Pol.4.3">If a man does not keep himself from  
+          <note canonical="false" type="explanation" n="195:14" TEIform="note">As before, Dr. Hammond on 1 Cor. v. 10.</note> covetousness, he shall be polluted with idolatry and be judged as if he were a Gentile.
+        </verse>
+        <verse canonical="true" osisID="Pol.4.4">But who of you are ignorant of the judgment of God?  
+          <note canonical="false" type="explanation" n="196:1" TEIform="note">Cor. vi. 2.</note> Do we not know that the saints shall judge the world, as Paul teaches?
+        </verse>
+        <verse canonical="true" osisID="Pol.4.5">But I have neither perceived nor heard any thing of this kind in you, among whom the blessed  
+          <note canonical="false" type="explanation" n="196:2" TEIform="note">Phil. 1.</note> Paul laboured; and who are named in the beginning of his Epistle.
+        </verse>
+        <verse canonical="true" osisID="Pol.4.6">For he glories of you in all the churches who then only knew God; for we did not then know him. Wherefore, my brethren, I am exceedingly sorry both for him, and for his wife; to whom God grant a true repentance.</verse>
+        <verse canonical="true" osisID="Pol.4.7">And be ye also moderate upon this occasion; and look not upon such as enemies, but call them back as suffering, and erring members, that ye may save your whole body: for by so doing, ye shall edify your own selves.</verse>
+        <verse canonical="true" osisID="Pol.4.8">For I trust that ye are well exercised in the Holy Scriptures, and that nothing is hid from you; but at present it is not granted unto me to practice that which is  
+          <note canonical="false" type="explanation" n="196:3" TEIform="note">Said in these Scriptures. Psalm iv. 5. Eph. iv. 26.</note> written, Be angry and sin not; and again, Let not the sun go down upon your wrath.
+        </verse>
+        <verse canonical="true" osisID="Pol.4.9">Blessed be he that believeth and remembereth these things; which also I trust you do.</verse>
+        <verse canonical="true" osisID="Pol.4.10">Now the God and Father of our Lord Jesus Christ; and he himself who is our everlasting high-priest, the Son of God, even Jesus Christ, build you up in faith and in truth and in all meekness and lenity; in patience and long-suffering, in forbearance and chastity.</verse>
+        <verse canonical="true" osisID="Pol.4.11">And grant unto you a lot and portion among his saints; and us with you, and to all that are under the heavens, who shall believe in our Lord Jesus Christ, and in his Father  
+          <note canonical="false" type="explanation" n="196:4" TEIform="note">Gal. 1, 1 Tim. ii. 1, 2.</note> who raised him from the dead.
+        </verse>
+        <verse canonical="true" osisID="Pol.4.12">Pray for all the saints: pray also for kings, and  
+          <note canonical="false" type="explanation" n="196:5" TEIform="note">Powers and princes.</note> all that are in authority; and for those who persecute you, and hate you, and for the enemies of the cross; that your fruit may be manifest in all; and that ye may be perfect in  
+          <note canonical="false" type="explanation" n="196:6" TEIform="note">Him.</note> Christ.
+        </verse>
+        <verse canonical="true" osisID="Pol.4.13">
+          <note canonical="false" type="explanation" n="196:7" TEIform="note">See Annot. Usser. in loc.</note> Ye wrote to me, both ye, and also Ignatius, that if any one went from hence into Syria, he should bring your letters with him; which also I will take care of, as soon as I shall have a convenient opportunity; either by myself, or him whom I shall send upon your account.
+        </verse>
+        <verse canonical="true" osisID="Pol.4.14">The Epistles of Ignatius which he wrote  
+          <note canonical="false" type="explanation" n="196:8" TEIform="note">
+            <hi type="italic" TEIform="hi">i.e.</hi> To himself, and to the church of Smyrna.
+          </note> unto us, together with what others of his have come to our hands, we have sent to you, according to your order; which are subjoined to this epistle.
+        </verse>
+        <verse canonical="true" osisID="Pol.4.15">By which we may be greatly profited; for they treat of faith and patience, and of all things that pertain to edification in  
+          <note canonical="false" type="explanation" n="196:9" TEIform="note">Our Lord.</note> the Lord Jesus. 161 What you know certainly of Ignatius, and those that are with him signify to us.
+        </verse>
+        <verse canonical="true" osisID="Pol.4.17">If These things have I written unto you by Crescens, whom by this present epistle I have recommended to you, and do now again commend.</verse>
+        <verse canonical="true" osisID="Pol.4.18">For he has had his conversation without blame among us; and I suppose also with you.</verse>
+        <verse canonical="true" osisID="Pol.4.19">Ye will also have regard unto his sister when she shall come unto you.</verse>
+        <verse canonical="true" osisID="Pol.4.20">Be ye safe in the Lord Jesus Christ;  
+          <note canonical="false" type="explanation" n="196:10" TEIform="note">His grace be with you all. Amen.</note> and in favour with all yours. Amen.
+        </verse>
+      </div>
+    </div>
+  </osisText>
+</osis>

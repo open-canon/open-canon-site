@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" TEIform="TEI.2">
+  <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="abgarus-correspondence" osisRefWork="Abgarus Correspondence" xml:lang="en" xml:space="default" TEIform="text">
+    <header TEIform="teiHeader" canonical="false">
+      <revisionDesc TEIform="revisionDesc">
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T09:13:36</date>
+        <p TEIform="p">Scraped from https://sacred-texts.com/bib/lbob/, and converted to OSIS by open-canon contributors.</p>
+      </revisionDesc>
+      <revisionDesc TEIform="revisionDesc">
+        <date event="edition" type="ISO" xml:lang="en" TEIform="date">1926</date>
+        <p TEIform="p">The Lost Books of the Bible, Alpha House, Inc., 1926.</p>
+      </revisionDesc>
+      <work osisWork="abgarus-correspondence" xml:lang="en">
+        <title canonical="true" TEIform="title">The Epistles of Jesus Christ and Abgarus King of Edessa</title>
+        <description>Text from "The Lost Books of the Bible," 1926. The Epistles of Jesus Christ and Abgarus King of Edessa. Scraped from sacred-texts.com and converted to OSIS.</description>
+        <publisher>Alpha House, Inc.</publisher>
+        <type type="OSIS"/>
+      </work>
+    </header>
+    <div canonical="true" type="book" osisID="abgarus-correspondence" TEIform="div">
+      <title canonical="true" short="Abgarus Correspondence" type="main" TEIform="title">The Epistles of Jesus Christ and Abgarus King of Edessa</title>
+      <div canonical="false" type="introduction" TEIform="div">
+        <p TEIform="p">[The first writer who makes any mention of the Epistles that passed between Jesus Christ and Abgarus, is Eusebius, Bishop of Caesarea, in Palestine, who flourished in the early part of the fourth century. For their genuineness, he appeals to the public registers and records of the City of Edessa in Mesopotamia, where Abgarus reigned, affirms that he found them written, in the Syriac language. He published a Greek translation of them, in his Ecclesiastical History. 
+          <note canonical="false" type="explanation" n="62:1" TEIform="note">L. i. c. 13.</note> The learned world have been much divided on this subject; but, notwithstanding that the erudite Grabe, with Archbishop Cave, Dr. Parker, and other divines, has strenuously contended for their admission into the canon of Scripture, they are deemed apocryphal. The Rev. Jeremiah Jones observes, that the common people in England have this Epistle in their houses, in many places, fixed in a frame, with the picture of Christ before it; and that they generally, with much honesty and devotion, regard it as the word of God, and the genuine Epistle of Christ.]
+        </p>
+      </div>
+      <div canonical="true" type="chapter" osisID="abgarus-correspondence.1" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">
+            <hi type="italic" TEIform="hi">A copy of a letter written by King Abgarus to Jesus, and sent to him by Ananias, his footman, to Jerusalem, </hi>5
+            <hi type="italic" TEIform="hi"> inviting him to Edessa</hi>.
+          </p>
+        </div>
+        <verse canonical="true" osisID="abgarus-correspondence.1.1">ABGARUS, king of Edessa, to Jesus the good Saviour, who appears at Jerusalem, greeting.</verse>
+        <verse canonical="true" osisID="abgarus-correspondence.1.2">I have been informed concerning you and your cures, which are performed without the use of medicines and herbs.</verse>
+        <verse canonical="true" osisID="abgarus-correspondence.1.3">For it is reported, that you cause the blind to see, the lame to walk, do both cleanse lepers, and cast out unclean spirits and devils, and restore them to health who have been long diseased, and raisest up the dead;</verse>
+        <verse canonical="true" osisID="abgarus-correspondence.1.4">All which when I heard, I was persuaded of one of these two, viz: either that you are God himself descended from heaven, who do these things, or the son of God.</verse>
+        <verse canonical="true" osisID="abgarus-correspondence.1.5">On this account therefore I have wrote to you, earnestly to desire you would take the trouble of a journey hither, and cure a disease which I am under.</verse>
+        <verse canonical="true" osisID="abgarus-correspondence.1.6">For I hear the Jews ridicule you, and intend you mischief.</verse>
+        <verse canonical="true" osisID="abgarus-correspondence.1.7">My city is indeed small, but neat, and large enough for us both.</verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="abgarus-correspondence.2" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">
+            <hi type="italic" TEIform="hi">The answer of Jesus by Ananias the footman to Abgarus the king, </hi>3
+            <hi type="italic" TEIform="hi"> declining to visit Edessa</hi>.
+          </p>
+        </div>
+        <verse canonical="true" osisID="abgarus-correspondence.2.1">ABGARUS, you are happy, forasmuch as you have believed on me, whom ye have not seen.</verse>
+        <verse canonical="true" osisID="abgarus-correspondence.2.2">For it is written concerning me, that those who have seen me should not believe on me, that they who have not seen might believe and live.</verse>
+        <verse canonical="true" osisID="abgarus-correspondence.2.3">As to that part of your letter, which relates to my giving you a visit, I must inform you, that I must fulfil all the ends of my mission in this country, and after that be received up again to him who sent me.</verse>
+        <verse canonical="true" osisID="abgarus-correspondence.2.4">But after my ascension I will send one of my disciples, who will cure your disease, and give life to you, and all that are with you.</verse>
+      </div>
+    </div>
+  </osisText>
+</osis>

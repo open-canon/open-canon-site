@@ -87,6 +87,14 @@ FOOTNOTE_REF_RE: Final[re.Pattern[str]] = re.compile(r"^fr_")
 """Matches the ``name`` of the anchor marking a footnote reference in the text."""
 FOOTNOTE_TARGET_RE: Final[re.Pattern[str]] = re.compile(r"^fn_")
 """Matches the ``name`` of the anchor that starts a footnote and the ``#fn_`` link target."""
+FOOTNOTE_LINK_RE: Final[re.Pattern[str]] = re.compile(
+    r"^(?:lbob(?P<page>\d+)\.htm)?#(?P<name>fn_\d+)$"
+)
+"""Matches a footnote reference link; ``page`` is set when the note is on another page."""
+CREDIT_LINE_RE: Final[re.Pattern[str]] = re.compile(
+    r"^The Lost Books of the Bible,?\s*\[1926\],?\s*at sacred-texts\.com$", re.IGNORECASE
+)
+"""Matches the credit line the site prints as a paragraph, which is not part of any work."""
 FOOTNOTE_MARKER: Final[str] = "data-fn"
 """Attribute of the placeholder ``<span>`` that stands in for a footnote reference."""
 HEADING_TAGS: Final[tuple[str, ...]] = ("h1", "h2", "h3", "h4", "h5", "h6")
@@ -330,6 +338,8 @@ class Chapter:
     """Heading text (``"CHAP. IV."``)."""
     paragraphs: list[Tag] = field(default_factory=list)
     """The ``<p>`` elements under the heading, in order."""
+    notes: list[str] = field(default_factory=list)
+    """Footnote names referenced from the heading itself (kept at the start of verse 1)."""
 
 
 @dataclass
@@ -364,6 +374,12 @@ class LBOBParser(FBEParser):
         super().__init__(cache_dir=cache_dir, delay=delay)
         self._footnotes: dict[str, Footnote] = {}
         """Footnotes of the page being parsed, keyed by ``fn_N`` anchor name."""
+        self._foreign_pages: dict[str, int] = {}
+        """Page number holding each footnote that is printed on another page, by ``fn_N`` name."""
+        self._page_html: dict[int, str] = {}
+        """Pages already fetched (set by ``process_all``), used to resolve other pages' notes."""
+        self._page_notes: dict[int, dict[str, Footnote]] = {}
+        """Footnotes of other pages that were looked up, keyed by page number."""
 
     def fetch_page(self, page_num: int, retry_count: int = 3) -> str:
         """Fetch one page of the volume.
@@ -435,10 +451,35 @@ class LBOBParser(FBEParser):
             The note, or an empty string when the page has no such footnote.
         """
         footnote = self._footnotes.get(ref_id)
+        if footnote is None and ref_id in self._foreign_pages:
+            footnote = self._foreign_footnotes(self._foreign_pages[ref_id]).get(ref_id)
         if footnote is None:
             LOGGER.warning("Footnote %s has no text", ref_id)
             return ""
         return pyosis.NoteCt(type_value="explanation", n=footnote.label, content=footnote.parts)
+
+    def _foreign_footnotes(self, page: int) -> dict[str, Footnote]:
+        """Return the footnotes of another page.
+
+        The site prints the notes for the last verses of a page at the foot of the next one
+        (the tail of Ignatius to the Trallians has its notes on the Romans page), so a
+        reference can point at ``lbobNN.htm#fn_N``.
+
+        Args:
+            page: Page number holding the notes.
+
+        Returns:
+            That page's footnotes keyed by anchor name; empty if it cannot be read.
+        """
+        if page not in self._page_notes:
+            try:
+                html = self._page_html.get(page) or self.fetch_page(page)
+                soup = BeautifulSoup(legacy_html(html), "html.parser")
+                self._page_notes[page] = self._collect_footnotes(soup)
+            except Exception as exc:
+                LOGGER.error("Cannot read footnotes on page %d: %s", page, exc)
+                self._page_notes[page] = {}
+        return self._page_notes[page]
 
     def _collect_footnotes(self, soup: BeautifulSoup) -> dict[str, Footnote]:
         """Read the footnotes after the ``Footnotes`` heading.
@@ -474,24 +515,29 @@ class LBOBParser(FBEParser):
             footnotes[str(target["name"])] = Footnote(label=label, parts=parts)
         return footnotes
 
-    @staticmethod
-    def _mark_footnote_references(soup: BeautifulSoup) -> None:
+    def _mark_footnote_references(self, soup: BeautifulSoup) -> None:
         """Replace each footnote reference with a placeholder ``<span data-fn=...>``.
 
         A reference is an ``<a name="fr_N">`` followed by an ``<a href="#fn_N">`` carrying
         the superscript number; the placeholder lets the inline parser build a note without
         the number leaking into the text.
 
+        A link to another page's notes is remembered in ``self._foreign_pages``.
+
         Args:
             soup: The parsed page, modified in place.
         """
+        self._foreign_pages = {}
         for anchor in soup.find_all("a", attrs={"name": FOOTNOTE_REF_RE}):
             link = anchor.find_next_sibling("a")
-            href = str(link.get("href", "")) if link is not None else ""
-            if not href.startswith("#fn_"):
+            match = FOOTNOTE_LINK_RE.match(str(link.get("href", ""))) if link is not None else None
+            if match is None:
                 continue
+            name = match.group("name")
+            if match.group("page") and name not in self._footnotes:
+                self._foreign_pages[name] = int(match.group("page"))
             marker = soup.new_tag("span")
-            marker[FOOTNOTE_MARKER] = href[1:]
+            marker[FOOTNOTE_MARKER] = name
             anchor.replace_with(marker)
             link.decompose()
 
@@ -514,6 +560,10 @@ class LBOBParser(FBEParser):
             chrome.decompose()
         for chrome in soup.find_all("div", class_="filenav"):
             chrome.decompose()
+        for plate in soup.find_all("img"):
+            holder = plate.find_parent("p")
+            if holder is not None:
+                holder.decompose()
         self._footnotes = self._collect_footnotes(soup)
         self._mark_footnote_references(soup)
         return soup
@@ -528,7 +578,12 @@ class LBOBParser(FBEParser):
         Returns:
             True if it should be ignored.
         """
-        return not p_tag.get_text().strip() or FBEParser._is_standalone_page_marker(p_tag)
+        text = normalize_whitespace(p_tag.get_text())
+        return (
+            not text
+            or bool(CREDIT_LINE_RE.match(text))
+            or FBEParser._is_standalone_page_marker(p_tag)
+        )
 
     def split_page(self, html: str, work: WorkDef) -> PageParts:
         """Split a work page into its introduction and chapters.
@@ -557,12 +612,19 @@ class LBOBParser(FBEParser):
                     continue
                 if text == "Footnotes":
                     break
+                heading_notes = [
+                    str(m[FOOTNOTE_MARKER]) for m in element.find_all(attrs={FOOTNOTE_MARKER: True})
+                ]
                 if not seen_title:
                     seen_title = True
                 elif INTRODUCTION_HEADING_RE.match(text) and current is None:
                     parts.intro.append(text)
                 elif work.chapter_re.match(text):
-                    current = Chapter(text)
+                    if current is not None and not current.paragraphs:
+                        current.heading = f"{current.heading} {text}"
+                        current.notes += heading_notes
+                        continue
+                    current = Chapter(text, notes=heading_notes)
                     parts.chapters.append(current)
                 elif current is None:
                     parts.intro.append(text)
@@ -675,23 +737,26 @@ class LBOBParser(FBEParser):
         Returns:
             The verse, with page markers, highlights and footnotes kept inline.
         """
+        parsed = [self._parse_verse_content(p_tag) for p_tag in paragraphs]
+        any_poetry = any(content.poetry_lines for content in parsed)
         parts: list[InlinePart] = []
         poetry: list[list] = []
-        for index, p_tag in enumerate(paragraphs):
-            content = self._parse_verse_content(p_tag)
+        for index, content in enumerate(parsed):
+            content_parts = list(content.content_parts)
             if index == 0:
-                content_parts = self._strip_prefix(content.content_parts)
+                content_parts = self._strip_prefix(content_parts)
             else:
-                lead = list(content.content_parts)
-                if lead and isinstance(lead[0], str):
-                    lead[0] = lead[0].lstrip()
-                content_parts = [" ", *lead]
+                if content_parts and isinstance(content_parts[0], str):
+                    content_parts[0] = content_parts[0].lstrip()
+                content_parts = [" ", *content_parts]
             parts.extend(content_parts)
             if content.poetry_lines:
                 lines = list(content.poetry_lines)
                 if index == 0:
                     lines[0] = self._strip_prefix(lines[0])
                 poetry.extend(lines)
+            elif any_poetry:
+                poetry.append(content_parts if index == 0 else content_parts[1:])
         merged = self.consolidate_strings(parts)
         if merged and isinstance(merged[-1], str):
             merged[-1] = merged[-1].rstrip()
@@ -746,7 +811,14 @@ class LBOBParser(FBEParser):
             )
         for verse_number, paragraphs in self._verse_groups(body, work):
             content.append(self._build_chapter_verse(f"{osis_id}.{verse_number}", paragraphs))
-        if not any(isinstance(c, pyosis.VerseCt) for c in content):
+        first_verse = next((c for c in content if isinstance(c, pyosis.VerseCt)), None)
+        if first_verse is not None and chapter.notes:
+            notes = [self._note(name) for name in chapter.notes]
+            first_verse.content = [
+                *(n for n in notes if isinstance(n, pyosis.NoteCt)),
+                *first_verse.content,
+            ]
+        if first_verse is None:
             LOGGER.warning(
                 "%s: chapter %d (%r) has no text; skipped", book_id, number, chapter.heading
             )
@@ -943,6 +1015,7 @@ class LBOBParser(FBEParser):
             except Exception as exc:
                 LOGGER.error("Failed to fetch page %d: %s", page, exc)
 
+        self._page_html = page_html
         for book in tqdm(BOOKS, desc="Generating XML files"):
             missing = [p for p in book.pages if p not in page_html]
             if missing:

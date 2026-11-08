@@ -281,16 +281,85 @@ def test_poetry_lines_are_kept(parser) -> None:
     assert len(verse.content[0].l) == 3
 
 
-def test_empty_chapter_is_skipped_with_warning(parser, caplog) -> None:
-    """A heading with no text under it gives no chapter but keeps the numbering."""
+def test_footnote_on_a_chapter_heading_moves_to_verse_one(parser) -> None:
+    """A note referenced from a heading is kept at the start of the chapter's first verse."""
     page = _page(
-        "<h3>T</h3><h4>CHAP. IV.</h4><p>1 Four.</p><h4>CHAP. V.</h4>"
-        "<h4>A Fragment.</h4><p>1 Rest.</p>"
+        f"<h3>T</h3><h4>THE TRIAL.{_ref(9)}</h4><p>First words.</p><p>2 Second.</p>",
+        _note(9, "5:1", "About the trial."),
     )
+    work = _work(chapter_re=lbob.HERODIAN_HEADING_RE)
+    verse = _verses(_chapters(parser.build_work_div(work, page))[0])[0]
+    assert isinstance(verse.content[0], pyosis.NoteCt) and verse.content[0].n == "5:1"
+
+
+def test_illustration_paragraph_is_dropped(parser) -> None:
+    """A plate (``<img>`` and caption) between a verse and its continuation is not text."""
+    plate = (
+        '<p align="center"><A NAME="img_1"></A><span><A HREF="i.jpg"><IMG SRC="t.jpg">'
+        "<BR><FONT SIZE=-3>Click to enlarge</A><BR>A CAPTION.</FONT><BR></span></p>"
+    )
+    page = _page(
+        "<h3>T</h3><h4>CHAP. I.</h4><p>1 Before the plate</p>"
+        f'{plate}<p><span class="contnote">[paragraph continues]</span> after it.</p>'
+        "<p>2 Next.</p>"
+    )
+    chapter = _chapters(parser.build_work_div(_work(), page))[0]
+    assert _ids(chapter) == ["Test.1.1", "Test.1.2"]
+    assert parser._extract_text(list(_verses(chapter)[0].content)) == "Before the plate after it."
+
+
+def test_prose_continuation_after_poetry_is_kept(parser) -> None:
+    """A verse mixing ``<br>`` lines and a plain continuation keeps both as lines."""
+    page = _page(
+        "<h3>T</h3><h4>CHAP. I.</h4><p>1 Line one<br>Line two</p>"
+        '<p><span class="contnote">[paragraph continues]</span> and a prose tail.</p>'
+    )
+    verse = _verses(_chapters(parser.build_work_div(_work(), page))[0])[0]
+    lines = verse.content[0].l
+    assert len(lines) == 3
+    assert "prose tail" in parser._extract_text(list(lines[2].content))
+
+
+def test_empty_trailing_chapter_is_skipped_with_warning(parser, caplog) -> None:
+    """A last heading with no text under it gives no chapter."""
+    page = _page("<h3>T</h3><h4>CHAP. IV.</h4><p>1 Four.</p><h4>CHAP. V.</h4>")
     with caplog.at_level(logging.WARNING, logger=lbob.LOGGER.name):
         div = parser.build_work_div(_work(), page)
-    assert [c.osis_id[0] for c in _chapters(div)] == ["Test.1", "Test.3"]
+    assert [c.osis_id[0] for c in _chapters(div)] == ["Test.1"]
     assert "no text" in caplog.text
+
+
+def test_consecutive_chapter_headings_make_one_chapter(parser) -> None:
+    """2 Clement: ``CHAP. V.`` directly followed by ``A Fragment.`` is one chapter."""
+    page = _page(
+        "<h3>T</h3><h4>CHAP. IV.</h4><p>1 Four.</p><h4>CHAP. V.</h4>"
+        "<h4>A Fragment.</h4><p>1 Rest.</p><p>2 More.</p>"
+    )
+    chapters = _chapters(parser.build_work_div(_work(), page))
+    assert [c.osis_id[0] for c in chapters] == ["Test.1", "Test.2"]
+    assert _ids(chapters[1]) == ["Test.2.1", "Test.2.2"]
+
+
+def test_credit_line_paragraph_is_ignored(parser) -> None:
+    """The site's ``The Lost Books of the Bible, [1926], at sacred-texts.com`` line is dropped."""
+    page = _page(
+        "<h3>T</h3><p><i>The Lost Books of the Bible</i>, [1926], at sacred-texts.com</p>"
+        "<h4>CHAP. I.</h4><p>1 Text.</p>"
+    )
+    parts = parser.split_page(page, _work())
+    assert parts.intro == []
+
+
+def test_footnote_printed_on_the_next_page(parser, monkeypatch) -> None:
+    """A reference to ``lbobNN.htm#fn_N`` takes its text from that page's footnotes."""
+    ref = '<A NAME="fr_7"></A><A HREF="lbob11.htm#fn_7"><FONT SIZE="1">1</FONT></A>'
+    page = _page(f"<h3>T</h3><h4>CHAP. I.</h4><p>1 Word {ref} more.</p>")
+    other = _page("<h3>U</h3><p>1 x</p>", _note(7, "182:1", "Printed on the next page."))
+    monkeypatch.setattr(parser, "fetch_page", lambda n, retry_count=3: other)
+    verse = _verses(_chapters(parser.build_work_div(_work(), page))[0])[0]
+    notes = [p for p in verse.content if isinstance(p, pyosis.NoteCt)]
+    assert [n.n for n in notes] == ["182:1"]
+    assert parser._extract_text(list(notes[0].content)) == "Printed on the next page."
 
 
 # --- works without chapter headings ------------------------------------------------------

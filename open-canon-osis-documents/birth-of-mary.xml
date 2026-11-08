@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" TEIform="TEI.2">
+  <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="birth-of-mary" osisRefWork="Birth of Mary" xml:lang="en" xml:space="default" TEIform="text">
+    <header TEIform="teiHeader" canonical="false">
+      <revisionDesc TEIform="revisionDesc">
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T09:13:36</date>
+        <p TEIform="p">Scraped from https://sacred-texts.com/bib/lbob/, and converted to OSIS by open-canon contributors.</p>
+      </revisionDesc>
+      <revisionDesc TEIform="revisionDesc">
+        <date event="edition" type="ISO" xml:lang="en" TEIform="date">1926</date>
+        <p TEIform="p">The Lost Books of the Bible, Alpha House, Inc., 1926.</p>
+      </revisionDesc>
+      <work osisWork="birth-of-mary" xml:lang="en">
+        <title canonical="true" TEIform="title">The Gospel of the Birth of Mary</title>
+        <description>Text from "The Lost Books of the Bible," 1926. The Gospel of the Birth of Mary. Scraped from sacred-texts.com and converted to OSIS.</description>
+        <publisher>Alpha House, Inc.</publisher>
+        <type type="OSIS"/>
+      </work>
+    </header>
+    <div canonical="true" type="book" osisID="birth-of-mary" TEIform="div">
+      <title canonical="true" short="Birth of Mary" type="main" TEIform="title">The Gospel of the Birth of Mary</title>
+      <div canonical="false" type="introduction" TEIform="div">
+        <p TEIform="p">
+          <milestone type="page" n="15" marker="DEFAULT" TEIform="milestone"/>
+          <milestone type="page" n="16" marker="DEFAULT" TEIform="milestone"/>
+        </p>
+        <headCT TEIform="head">Lost Books of the Bible</headCT>
+        <headCT TEIform="head">The GOSPEL of the BIRTH OF MARY.</headCT>
+        <p TEIform="p">[In the primitive ages there was a Gospel extant bearing this name, attributed to St. Matthew, and received as genuine and authentic by several of the ancient Christian sects. It is to be found in the works of Jerome, a Father of the Church, who flourished in the fourth century, from whence the present translation is made. His contemporaries, Epiphanius, Bishop of Salamis, and Austin, also mention a Gospel under this title. The ancient copies differed from Jerome's, for from one of them the learned Faustus, a native of Britain, who became Bishop of Riez, in Provence, endeavoured to prove that Christ was not the Son of God till after his baptism; and that he was not of the house of David and tribe of Judah, because, according to the Gospel he cited, the Virgin herself was not of this tribe, but of the tribe of Levi; her father being a priest of the name of Joachim. It was likewise from this Gospel that the sect of the Collyridians, established the worship and offering of manchet bread and cracknels, or fine wafers, as sacrifices to Mary, whom they imagined to have been born of a Virgin, as Christ is related in the Canonical Gospel to have been born of her. Epiphanius likewise cites a passage concerning the death of Zacharias, which is not in Jerome's copy, viz. "That it was the occasion of the death of Zacharias in the temple, that when he had seen a vision, he, through surprise, was willing to disclose it, and his mouth was stopped. That which he saw was at the time of his offering incense, and it was a man standing in the form of an ass. When he was gone out, and had a mind to speak thus to the people, 
+          <hi type="italic" TEIform="hi">Woe unto you, whom do ye worship?</hi> he who had appeared to him in the temple took away the use of his speech. Afterwards when he recovered it, and was able to speak, he declared this to the Jews, and they slew him. They add (viz. the Gnostics in this book), that on this very account the high-priest was appointed by their lawgiver (by God to Moses), to carry little bells, that whensoever he went into the temple to sacrifice, he, whom they worshipped, hearing the noise of the bells, might have time enough to hide himself; and not be caught in that ugly shape and figure."—The principal part of this Gospel is contained in the Protevangelion of James, which follows next in order.]
+        </p>
+      </div>
+      <div canonical="true" type="chapter" osisID="birth-of-mary.1" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">1
+            <hi type="italic" TEIform="hi"> The parentage of Mary. </hi>7
+            <hi type="italic" TEIform="hi"> Joachim her father, and Anna her mother, go to Jerusalem to the feast of the dedication. </hi>9
+            <hi type="italic" TEIform="hi"> Issachar the high priest reproaches Joachim for being childless</hi>.
+          </p>
+        </div>
+        <verse canonical="true" osisID="birth-of-mary.1.1">THE blessed and ever glorious Virgin Mary, sprung from the royal race and family of David, was born in the city of Nazareth, and educated at Jerusalem, in the temple of the Lord.</verse>
+        <verse canonical="true" osisID="birth-of-mary.1.2">Her father's name was Joachim, and her mother's Anna. The family of her father was of Galilee and the city of Nazareth. The family of her mother was of Bethlehem.</verse>
+        <verse canonical="true" osisID="birth-of-mary.1.3">Their lives were plain and right in the sight of the Lord, pious and faultless before men. For they divided all their substance into three parts:</verse>
+        <verse canonical="true" osisID="birth-of-mary.1.4">One of which they devoted to the temple and officers of the temple; another they distributed among strangers, and persons in poor circumstances; and the third they reserved for themselves and the uses of their own family.</verse>
+        <verse canonical="true" osisID="birth-of-mary.1.5">In this manner they lived for about twenty years chastely, in the favour of God, and the esteem of men, without any children.</verse>
+        <verse canonical="true" osisID="birth-of-mary.1.6">But they vowed, if God should favour them with any issue, they would devote it to the service of the Lord; on which account they went at every feast in the year to the temple of the Lord 
+          <note canonical="false" type="explanation" n="18:1" TEIform="note">Sam. i. 6, 7, &amp;c.</note>
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.1.7">And it came to pass, that when the feast of the dedication drew near, Joachim, with some others of his tribe, went up to Jerusalem, and at that time, Issachar was high-priest;</verse>
+        <verse canonical="true" osisID="birth-of-mary.1.8">Who, when he saw Joachim along with the rest of his neighbours, bringing his offering, despised both him and his offerings, and asked him,</verse>
+        <verse canonical="true" osisID="birth-of-mary.1.9">Why he, who had no children, would presume to appear among those who had? Adding, that his offerings could never be acceptable to God, who was judged by him unworthy to have children; the Scripture having said, Cursed is every one who shall not beget a male in Israel.</verse>
+        <verse canonical="true" osisID="birth-of-mary.1.10">He further said, that he ought first to be free from that curse by begetting some issue, and then come with his offerings into the presence of God.</verse>
+        <verse canonical="true" osisID="birth-of-mary.1.11">But Joachim being much confounded with the shame of such reproach, retired to the shepherds, who were with the cattle in their pastures;</verse>
+        <verse canonical="true" osisID="birth-of-mary.1.12">For he was not inclined to return home, lest his neighbours, who were present and heard all this from the high-priest, should publicly reproach him in the same manner.</verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="birth-of-mary.2" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">1
+            <hi type="italic" TEIform="hi"> An angel appears to Joachim, </hi>9
+            <hi type="italic" TEIform="hi"> and informs him that Anna shall conceive and bring forth a daughter, who shall be called Mary, </hi>11
+            <hi type="italic" TEIform="hi"> be brought up in the temple, </hi>12
+            <hi type="italic" TEIform="hi"> and while yet a virgin, in a way unparalleled, bring forth the Son of God: </hi>13
+            <hi type="italic" TEIform="hi"> gives him a sign, </hi>14
+            <hi type="italic" TEIform="hi"> and departs</hi>.
+          </p>
+        </div>
+        <verse canonical="true" osisID="birth-of-mary.2.1">BUT when he had been there for some time, on a certain day when he was alone, the angel of the Lord stood by him with a prodigious light.</verse>
+        <verse canonical="true" osisID="birth-of-mary.2.2">To whom, being troubled at the appearance, the angel who had appeared to him, endeavouring to compose him said:</verse>
+        <verse canonical="true" osisID="birth-of-mary.2.3">Be not afraid, Joachim, nor troubled at the sight of me, for I am an angel of the Lord sent by him to you, that I might inform you, that your prayers are heard, and your alms ascended in the sight of God. 
+          <note canonical="false" type="explanation" n="18:2" TEIform="note">Acts x. 4.</note>
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.2.4">For he hath surely seen your shame, and heard you unjustly reproached for not having children: for God is the avenger of sin, and not of nature;</verse>
+        <verse canonical="true" osisID="birth-of-mary.2.5">And so when he shuts the womb of any person, he does it for this reason, that he may in a more wonderful manner again open it, and that which is born appear to be not the product of lust, but the gift of God.</verse>
+        <verse canonical="true" osisID="birth-of-mary.2.6">For the first mother of your nation Sarah, was she not barren even till her eightieth year: And yet even in the end of her old age brought forth Isaac, in whom the promise was made a blessing to all nations. 
+          <note canonical="false" type="explanation" n="18:3" TEIform="note">Gen. xvi. 2, &amp;c. and xviii. 10, &amp;c.</note>
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.2.7">Rachel also, so much in favour with God, and beloved so much by holy Jacob, continued barren for a long time, yet afterwards was the mot her of Joseph, who was not only governor of Egypt, but delivered many nations from perishing with hunger. 
+          <note canonical="false" type="explanation" n="19:1" TEIform="note">Gen. xxx. 1-22, and xli. 1, &amp;c.</note>
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.2.8">Who among the judges was more valiant than Samson, or more holy than Samuel? And yet both their mothers were barren. 
+          <note canonical="false" type="explanation" n="19:2" TEIform="note">Judg. xiii. 2. and 1 Sam. 6, &amp;c.</note>
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.2.9">But if reason will not convince you of the truth of my words, that there are frequent conceptions in advanced years, and that those who were barren have brought forth to their great surprise; therefore Anna your wife shall bring you a daughter, and you shall call her name Mary;</verse>
+        <verse canonical="true" osisID="birth-of-mary.2.10">She shall, according to your vow, be devoted to the Lord from her infancy, and be filled with the Holy Ghost from her mother's womb; 
+          <note canonical="false" type="explanation" n="19:3" TEIform="note">Luke i. 15.</note>
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.2.11">She shall neither eat nor drink anything which is unclean, nor shall her conversation be without among the common people, but in the temple of the Lord; that so she may not fall under any slander or suspicion of what is bad.</verse>
+        <verse canonical="true" osisID="birth-of-mary.2.12">So in the process of her years, as she shall be in a miraculous manner born of one that was barren, so she shall, while yet a virgin, in a way unparalleled, bring forth the Son of the most High God, who shall, be called Jesus, and, according to the signification of his name, be the Saviour of all nations. 
+          <note canonical="false" type="explanation" n="19:4" TEIform="note">Matth. i. 21.</note>
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.2.13">And this shall be a sign to you of the things which I declare, namely, when you come to the golden gate of Jerusalem, you shall there meet your wife Anna, who being very much troubled that you returned no sooner, shall then rejoice to see you.</verse>
+        <verse canonical="true" osisID="birth-of-mary.2.14">When the angel had said this he departed from him.</verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="birth-of-mary.3" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">1
+            <hi type="italic" TEIform="hi"> The angel appears to Anna; </hi>2
+            <hi type="italic" TEIform="hi"> tells her a daughter shall be born unto her, </hi>3
+            <hi type="italic" TEIform="hi"> devoted to the service of the Lord in the temple, </hi>5
+            <hi type="italic" TEIform="hi">, who, being a virgin and not knowing man, shall bring forth the Lord, </hi>6
+            <hi type="italic" TEIform="hi"> and gives her a sign therefore. </hi>8
+            <hi type="italic" TEIform="hi"> Joachim and Anna meet and rejoice, </hi>10
+            <hi type="italic" TEIform="hi"> and praise the Lord. </hi>11
+            <hi type="italic" TEIform="hi"> Anna conceives, and brings forth a daughter called Mary</hi>.
+          </p>
+        </div>
+        <verse canonical="true" osisID="birth-of-mary.3.1">AFTERWARDS the angel appeared to Anna his wife saying: Fear not, neither think that which you see is a spirit. 
+          <note canonical="false" type="explanation" n="19:5" TEIform="note">Matth. xiv. 26.</note>
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.3.2">For I am that angel who hath offered up your prayers and alms before God, and am now sent to you, that I may inform you, that a daughter will be born unto you, who shall be called Mary, and shall be blessed above all women. 
+          <note canonical="false" type="explanation" n="19:6" TEIform="note">Luke i. 28.</note>
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.3.3">She shall be, immediately upon her birth, full of the grace of the Lord, and shall continue during the three years of her weaning in her father's house, and afterwards, being devoted to the service of the Lord, shall not depart from the temple, till she arrives to years of discretion.</verse>
+        <verse canonical="true" osisID="birth-of-mary.3.4">In a word, she shall there serve the Lord night and day in fasting and prayer, 
+          <note canonical="false" type="explanation" n="19:7" TEIform="note">Luke ii. 37.</note> shall abstain from every unclean thing, and never know any man;
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.3.5">But, being an unparalleled instance without any pollution or defilement, and a virgin not knowing any man, shall bring forth a son, and a maid shall bring forth the Lord, who both by his grace and name and works, shall be the Saviour of the world.</verse>
+        <verse canonical="true" osisID="birth-of-mary.3.6">Arise therefore, and go up to Jerusalem, and when you shall come to that which is called the golden gate (because it is gilt with gold), as a sign of what I have told you, you shall meet your husband, for whose safety you have been so much concerned.</verse>
+        <verse canonical="true" osisID="birth-of-mary.3.7">When therefore you find these things thus accomplished, believe that all the rest which I have told you, shall also undoubtedly be accomplished.</verse>
+        <verse canonical="true" osisID="birth-of-mary.3.8">According therefore to the command of the angel, both of them left the places where they were, and when they came to the place specified in the angel's prediction, they met each other.</verse>
+        <verse canonical="true" osisID="birth-of-mary.3.9">Then, rejoicing at each other's vision, and being fully satisfied in the promise of a child, they gave due thanks to the Lord, who exalts the humble.</verse>
+        <verse canonical="true" osisID="birth-of-mary.3.10">After having praised the Lord, they returned home, and lived in a cheerful and assured expectation of the promise of God.</verse>
+        <verse canonical="true" osisID="birth-of-mary.3.11">So Anna conceived, and brought forth a daughter, and, according to the angel's command, the parents did call her name Mary.</verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="birth-of-mary.4" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">1
+            <hi type="italic" TEIform="hi"> Mary brought to the temple at three years old. </hi>6
+            <hi type="italic" TEIform="hi"> Ascends the stairs of the temple by miracle. </hi>8
+            <hi type="italic" TEIform="hi"> Her parents sacrificed and returned home</hi>.
+          </p>
+        </div>
+        <verse canonical="true" osisID="birth-of-mary.4.1">AND when three years were expired, and the time of her weaning complete, they brought the Virgin to the temple of the Lord with offerings.</verse>
+        <verse canonical="true" osisID="birth-of-mary.4.2">And there were about the temple, according to the fifteen Psalms of degrees, 
+          <note canonical="false" type="explanation" n="20:1" TEIform="note">Those Psalms are from the 120th to the 134th, including both.</note> fifteen stairs to ascend.
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.4.3">For the temple being built in a mountain, the altar of burnt-offering, which was without, could not be come near but by stairs;</verse>
+        <verse canonical="true" osisID="birth-of-mary.4.4">The parents of the blessed Virgin and infant Mary put her upon one of these stairs;</verse>
+        <verse canonical="true" osisID="birth-of-mary.4.5">But while they were putting off their clothes, in which they had travelled, and according to custom putting on some that were more neat and clean,</verse>
+        <verse canonical="true" osisID="birth-of-mary.4.6">In the mean time the Virgin of the Lord in such a manner went up all the stairs one after another, without the help of any to lead or lift her, that any one would have judged from hence that she was of perfect age.</verse>
+        <verse canonical="true" osisID="birth-of-mary.4.7">Thus the Lord did, in the infancy of his Virgin, work this extraordinary work, and evidence by this miracle how great she was like to be hereafter.</verse>
+        <verse canonical="true" osisID="birth-of-mary.4.8">But the parents having offered up their sacrifice, according to the custom of the law, and perfected their vow, left the Virgin with other virgins in the apartments of the temple, who were to be brought up there, and they returned home.</verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="birth-of-mary.5" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">2
+            <hi type="italic" TEIform="hi"> Mary ministered unto by angels. </hi>4
+            <hi type="italic" TEIform="hi"> The high-priest orders all virgins of fourteen years old to quit the temple and endeavour to be married. </hi>5
+            <hi type="italic" TEIform="hi"> Mary refuses, </hi>6
+            <hi type="italic" TEIform="hi"> having vowed her virginity to the Lord. </hi>7
+            <hi type="italic" TEIform="hi"> The high-priest commands a meeting of the chief persons of Jerusalem, </hi>11
+            <hi type="italic" TEIform="hi"> who seek the Lord for counsel in the matter. </hi>13
+            <hi type="italic" TEIform="hi"> A voice from the mercy-seat. </hi>15
+            <hi type="italic" TEIform="hi"> The</hi>
+          </p>
+        </div>
+        <verse canonical="true" osisID="birth-of-mary.5.1">
+          <hi type="italic" TEIform="hi">high priest obeys it by ordering all the unmarried men of the house of David to bring their rods to the altar, </hi>17
+          <hi type="italic" TEIform="hi"> that his rod which should flower, and on which the Spirit of God should sit, should betroth the Virgin</hi>. BUT the Virgin of the Lord, as she advanced in fears, increased also in perfections, and according to the saying of the Psalmist, her father and mother forsook her, but the Lord took care of her.
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.5.2">For she every day had the conversation of angels, and every day received visitors from God, which preserved her from all sorts of evil, and caused her to abound with all good things;</verse>
+        <verse canonical="true" osisID="birth-of-mary.5.3">So that when at length she arrived to her fourteenth year, as the wicked could not lay anything to her charge worthy of reproof, so all good persons, who were acquainted with her, admired her life and conversation.</verse>
+        <verse canonical="true" osisID="birth-of-mary.5.4">At that time the high-priest made a public order. That all the virgins who had public settlements in the temple, and were come to this age, should return home, and, as they were now of a proper maturity, should, according to the custom of their country, endeavour to be married.</verse>
+        <verse canonical="true" osisID="birth-of-mary.5.5">To which command, though all the other virgins readily yielded obedience, Mary the Virgin of the Lord alone answered, that she could not comply with it.</verse>
+        <verse canonical="true" osisID="birth-of-mary.5.6">Assigning these reasons, that both she and her parents had devoted her to the service of the Lord; and besides, that she had vowed virginity to the Lord, which vow she was resolved never to break through by lying with a man.</verse>
+        <verse canonical="true" osisID="birth-of-mary.5.7">The high priest being hereby brought into a difficulty,</verse>
+        <verse canonical="true" osisID="birth-of-mary.5.8">Seeing he durst neither on the one hand dissolve the vow, and disobey the Scripture, which says, Vow and pay, 
+          <note canonical="false" type="explanation" n="21:1" TEIform="note">Eccles. v. 4, 5, 6; and Psalm lxxvi. 11.</note>
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.5.9">Nor on the other hand introduce a custom, to which the people were strangers, commanded,</verse>
+        <verse canonical="true" osisID="birth-of-mary.5.10">That at the approaching feast all the principal persons both of Jerusalem and the neighbouring places should meet together, that he might have their advice, how he had best proceed in so difficult a case.</verse>
+        <verse canonical="true" osisID="birth-of-mary.5.11">When they were accordingly met, they unanimously agreed to seek the Lord, and ask counsel from him on this matter. 
+          <note canonical="false" type="explanation" n="21:2" TEIform="note">Num. xxvii. 21, compared with Exod. xxviii. 30; Lev. viii. 8; Deut. 8; Ezra ii. 63; Nehem. vii. 65.</note>
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.5.12">And when they were all engaged in prayer, the high-priest, according to the usual way, went to consult God.</verse>
+        <verse canonical="true" osisID="birth-of-mary.5.13">And immediately there was a voice from the ark, and the mercy seat, which all present heard, that it must be inquired or sought out by a prophecy of Isaiah to whom the Virgin should be given and be betrothed;</verse>
+        <verse canonical="true" osisID="birth-of-mary.5.14">For Isaiah saith, there shall come forth a rod out of the stem of Jesse, and a flower shall spring out of its root,</verse>
+        <verse canonical="true" osisID="birth-of-mary.5.15">And the Spirit of the Lord shall rest upon him, the Spirit of Wisdom and Understanding, the Spirit of Counsel and Might, the Spirit of Knowledge and Piety, and the Spirit of the fear of the Lord shall fill him.</verse>
+        <verse canonical="true" osisID="birth-of-mary.5.16">Then, according to this prophecy, he appointed, that all the men of the house and family of David, who were marriageable, and not married, should bring their several rods to the altar,</verse>
+        <verse canonical="true" osisID="birth-of-mary.5.17">And out of whatsoever person's rod after it was brought, a flower should bud forth, and on the top of it the Spirit of the Lord should sit in the appearance of a dove, he should be the man to whom the Virgin should be given and be betrothed.</verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="birth-of-mary.6" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">1
+            <hi type="italic" TEIform="hi"> Joseph draws back his rod. </hi>5
+            <hi type="italic" TEIform="hi"> The dove pitches on it. He betroths Mary and returns to Bethlehem. </hi>7
+            <hi type="italic" TEIform="hi"> Mary returns to her parents’ house at Galilee</hi>.
+          </p>
+        </div>
+        <verse canonical="true" osisID="birth-of-mary.6.1">AMONG the rest there was a man named Joseph, of the house and family of David, and a person very far advanced in years, who drew back his rod, when every one besides presented his.</verse>
+        <verse canonical="true" osisID="birth-of-mary.6.2">So that when nothing appeared agreeable to the heavenly voice, the high-priest judged it proper to consult God again,</verse>
+        <verse canonical="true" osisID="birth-of-mary.6.3">Who answered that he to whom the Virgin was to be betrothed was the only person of those who were brought together, who had not brought his rod.</verse>
+        <verse canonical="true" osisID="birth-of-mary.6.4">Joseph therefore was betrayed.</verse>
+        <verse canonical="true" osisID="birth-of-mary.6.5">For, when he did bring his rod, and a dove coming from Heaven pitched upon the top of it, every one plainly saw, that the Virgin was to be betrothed to him:</verse>
+        <verse canonical="true" osisID="birth-of-mary.6.6">Accordingly, the usual ceremonies of betrothing being over, he returned to his own city of Bethlehem, to set his house in order, and make the needful for the marriage.</verse>
+        <verse canonical="true" osisID="birth-of-mary.6.7">But the Virgin of the Lord, Mary, with seven other virgins of the same age, who had been weaned at the same time, and who had been appointed to attend her by the priest, returned to her parents’ house in Galilee.</verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="birth-of-mary.7" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">7
+            <hi type="italic" TEIform="hi"> The salutation of the Virgin by Gabriel, who explains to her that she shall conceive, without lying with a man, while a Virgin, </hi>19
+            <hi type="italic" TEIform="hi"> by the Holy Ghost coming upon her without the heats of lust. </hi>21
+            <hi type="italic" TEIform="hi"> She submits</hi>.
+          </p>
+        </div>
+        <verse canonical="true" osisID="birth-of-mary.7.1">NOW at this time of her first coming into Galilee, the angel Gabriel was sent to her from God, to declare to her the conception of our Saviour, and the manner and way of her conceiving him.</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.2">Accordingly going into her, he filled the chamber where she was with a prodigious light, and in a most courteous manner saluting her, he said,</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.3">Hail, Mary! Virgin of the Lord most acceptable! O Virgin full of Grace! The Lord is with you, you are blessed above all women, you are blessed above all men, that. have been hitherto born. 
+          <note canonical="false" type="explanation" n="22:1" TEIform="note">Luke i. 28.</note>
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.7.4">But the Virgin, who had before been well acquainted with the countenances of angels, and to whom such light from heaven was no uncommon thing,</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.5">Was neither terrified with the vision of the angel, nor astonished at the greatness of the light, but only troubled about the angel's words:</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.6">And began to consider what so extraordinary a salutation should mean, what it did portend, or what sort of end it would have. 
+          <note canonical="false" type="explanation" n="22:2" TEIform="note">Luke i. 29.</note>
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.7.7">To this thought the angel, divinely inspired, replies;</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.8">Fear not, Mary, as though I intended anything inconsistent with your chastity in this salutation:</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.9">For you have found favour with the Lord, because you made virginity your choice.</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.10">Therefore while you are a Virgin, you shall conceive without sin, and bring forth a son.</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.11">He shall be great, because he shall reign from sea to sea, and from the rivers to the ends of the earth. 
+          <note canonical="false" type="explanation" n="23:1" TEIform="note">Luke i. 31, &amp;c.</note>
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.7.12">And he shall be called the Son of the Highest; for he who is born in a mean state on earth reigns in an exalted one in heaven.</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.13">And the Lord shall give him the throne of his father David, and he shall reign over the house of Jacob for ever, and of his kingdom there shall be no end.</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.14">For he is the King of Kings, and Lord of Lords, and his throne is for ever and ever.</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.15">To this discourse of the angel the Virgin replied not, as though she were unbelieving, but willing to know the manner of it.</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.16">She said, How can that be? For seeing, according to my vow, I have never known any man, how can I bear a child without the addition of a man's seed?</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.17">To this the angel replied and said, Think not, Mary, that you shall conceive in the ordinary way.</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.18">For, without lying with a man, while a Virgin, you shall conceive; while a Virgin, you shall bring forth; and while a Virgin shall give suck.</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.19">For the Holy Ghost shall come upon you, and the power of the Most High shall overshadow you, without any of the heats of lust.</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.20">So that which shall be born of you shall be only holy, be. cause it only is conceived without sin, and being born, shall be called the Son of God.</verse>
+        <verse canonical="true" osisID="birth-of-mary.7.21">Then Mary stretching forth her hands, and lifting her eyes to heaven, said, Behold the handmaid of the Lord! Let it be unto me according to thy word. 
+          <note canonical="false" type="explanation" n="23:2" TEIform="note">Luke i. 38.</note>
+        </verse>
+      </div>
+      <div canonical="true" type="chapter" osisID="birth-of-mary.8" TEIform="div">
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">1
+            <hi type="italic" TEIform="hi"> Joseph returns to Galilee to marry the Virgin he had betrothed. </hi>4
+            <hi type="italic" TEIform="hi"> perceives she is with child, </hi>5
+            <hi type="italic" TEIform="hi"> is uneasy, </hi>7
+            <hi type="italic" TEIform="hi"> purposes to put her away privily, </hi>8
+            <hi type="italic" TEIform="hi"> is told by the angel of the Lord it is not the work of man but the Holy Ghost, </hi>12
+            <hi type="italic" TEIform="hi"> Marries her, but keeps chaste, </hi>13
+            <hi type="italic" TEIform="hi"> removes with her to Bethlehem, </hi>15
+            <hi type="italic" TEIform="hi"> where she brings forth Christ</hi>.
+          </p>
+        </div>
+        <verse canonical="true" osisID="birth-of-mary.8.1">JOSEPH therefore went from Judæa to Galilee, with intention to marry the Virgin who was betrothed to him:</verse>
+        <verse canonical="true" osisID="birth-of-mary.8.2">For it was now near three months since she was betrothed to him.</verse>
+        <verse canonical="true" osisID="birth-of-mary.8.3">At length it plainly appeared she was with child, and it could not be hid from Joseph:</verse>
+        <verse canonical="true" osisID="birth-of-mary.8.4">For going to the Virgin in a free manner, as one espoused, and talking familiarly with her, he perceived her to be with child.</verse>
+        <verse canonical="true" osisID="birth-of-mary.8.5">And thereupon began to be uneasy and doubtful, not knowing what course it would be best to take;</verse>
+        <verse canonical="true" osisID="birth-of-mary.8.6">For being a just man, he was not willing to expose her, nor defame her by the suspicion of being a whore, since he was a pious man.</verse>
+        <verse canonical="true" osisID="birth-of-mary.8.7">He purposed therefore privately to put an end to their agreement, and as privately to put her away.</verse>
+        <verse canonical="true" osisID="birth-of-mary.8.8">But while he was meditating these things, 
+          <note canonical="false" type="explanation" n="23:3" TEIform="note">Matt. i. 19.</note> behold the angel of the Lord appeared to him in his sleep, and said Joseph, son of David, fear not;
+        </verse>
+        <verse canonical="true" osisID="birth-of-mary.8.9">Be not willing to entertain any suspicion of the Virgin's being guilty of fornication, or to think any thing amiss of her, neither be afraid to take her to wife;</verse>
+        <verse canonical="true" osisID="birth-of-mary.8.10">For that which is begotten In her and now distresses your mind, is not the work of man, but the Holy Ghost.</verse>
+        <verse canonical="true" osisID="birth-of-mary.8.11">For she of all women is that only Virgin who shall bring forth the Son of God, and you shall call his name Jesus, that is, Saviour: for he will save his people from their sins.</verse>
+        <verse canonical="true" osisID="birth-of-mary.8.12">Joseph thereupon, according to the command of the angel, married the Virgin, and did not know her, but kept her in chastity.</verse>
+        <verse canonical="true" osisID="birth-of-mary.8.13">And now the ninth month from her conception drew near, when Joseph took his wife and what other things were necessary to Bethlehem, the city from whence he came.</verse>
+        <verse canonical="true" osisID="birth-of-mary.8.14">And it came to pass, while they were there, the days were fulfilled for her bringing forth.</verse>
+        <verse canonical="true" osisID="birth-of-mary.8.15">And she brought forth her first-born son, as the holy Evangelists have taught, even our Lord Jesus Christ, who with the Father, Son, and Holy Ghost, lives and reigns to everlasting ages.</verse>
+      </div>
+    </div>
+  </osisText>
+</osis>
