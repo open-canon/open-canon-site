@@ -18,6 +18,7 @@ SacredTextsParser = _mod.SacredTextsParser
 
 @pytest.fixture(scope="module")
 def parser() -> SacredTextsParser:
+    """Return one shared offline parser (no cache, no delay)."""
     return SacredTextsParser(cache_dir=None, delay=0)
 
 
@@ -27,7 +28,10 @@ def parser() -> SacredTextsParser:
 
 
 class TestSplitMultiVerseContent:
+    """Tests for ``split_multi_verse_content``."""
+
     def test_single_verse_unchanged(self, parser: SacredTextsParser) -> None:
+        """Text without a next verse marker comes back as one verse with the same parts."""
         parts = ["Just a single verse with no inline numbers."]
         result = parser.split_multi_verse_content(parts, 5)
         assert len(result) == 1
@@ -36,6 +40,7 @@ class TestSplitMultiVerseContent:
         assert content == parts
 
     def test_two_verses_plain_text(self, parser: SacredTextsParser) -> None:
+        """An inline ``2.`` marker splits one string into verses 1 and 2."""
         parts = ["First verse text. 2. Second verse text."]
         result = parser.split_multi_verse_content(parts, 1)
         assert len(result) == 2
@@ -45,6 +50,7 @@ class TestSplitMultiVerseContent:
         assert "Second verse text." in result[1][1][0]
 
     def test_three_verses_plain_text(self, parser: SacredTextsParser) -> None:
+        """Consecutive inline markers ``2.`` and ``3.`` yield three verses in order."""
         text = (
             "The words of the blessing of Enoch... "
             "2. And he took up his parable... "
@@ -115,7 +121,10 @@ class TestSplitMultiVerseContent:
 
 
 class TestSplitMultiVersePoetryLines:
+    """Tests for ``split_multi_verse_poetry_lines``."""
+
     def test_single_verse_unchanged(self, parser: SacredTextsParser) -> None:
+        """Lines without a verse-number prefix stay together as one verse."""
         lines = [["Line one"], ["Line two"]]
         result = parser.split_multi_verse_poetry_lines(lines, 3)
         assert len(result) == 1
@@ -123,6 +132,7 @@ class TestSplitMultiVersePoetryLines:
         assert result[0][1] == lines
 
     def test_split_on_next_verse_prefix(self, parser: SacredTextsParser) -> None:
+        """A line starting with ``4.`` opens verse 4 and has the prefix stripped."""
         lines = [
             ["When the secrets of the righteous shall be revealed"],
             ["And the godless driven from the presence"],
@@ -139,6 +149,7 @@ class TestSplitMultiVersePoetryLines:
         assert "From that time" in result[1][1][0][0]
 
     def test_leading_whitespace_in_verse_prefix(self, parser: SacredTextsParser) -> None:
+        """Leading spaces before the verse number are tolerated and removed."""
         lines = [["Line A"], ["   5. Line B"]]
         result = parser.split_multi_verse_poetry_lines(lines, 4)
         assert len(result) == 2
@@ -164,6 +175,7 @@ class TestParsePageUnnumberedPoetry:
     """
 
     def _make_parser_with_chapter(self) -> SacredTextsParser:
+        """Return a fresh parser whose book division has been started."""
         p = SacredTextsParser(cache_dir=None, delay=0)
         p.start_book()
         return p

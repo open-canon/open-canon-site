@@ -1,3 +1,8 @@
+"""Snapshot tests comparing the Jasher scraper's output with the committed OSIS document.
+
+Skipped unless the local HTML cache under ``.cache/html`` holds the original pages.
+"""
+
 from __future__ import annotations
 
 import argparse
@@ -29,17 +34,40 @@ NEW_PROVENANCE = "converted to OSIS by the open-canon-site scrapers."
 
 
 def normalize_osis_snapshot(xml: str) -> str:
+    """Normalise an OSIS snapshot for comparison.
+
+    Converts CRLF to LF, rewrites the old repository provenance note to the current one and
+    replaces the volatile eversion timestamp with ``SCRAPE_TIMESTAMP``.
+
+    Args:
+        xml: OSIS XML text.
+
+    Returns:
+        The normalised XML.
+    """
     normalized = xml.replace("\r\n", "\n").replace(OLD_PROVENANCE, NEW_PROVENANCE)
     return EVERSION_DATE_PATTERN.sub(r"\1SCRAPE_TIMESTAMP\2", normalized)
 
 
 @lru_cache(maxsize=1)
 def load_scrape_jasher_main() -> Any:
+    """Import the scraper module lazily and return its ``run`` entry point.
+
+    Returns:
+        The ``run`` function of the Jasher scraper module.
+    """
     return importlib.import_module(PACKAGE_MODULE).run
 
 
 @pytest.fixture(scope="session")
 def generated_jasher_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    """Run the Jasher scraper once per session against the local cache and return the output path.
+
+    Skips when the committed snapshot or any required cached source page is missing or invalid.
+
+    Returns:
+        Path of the freshly generated OSIS file.
+    """
     if not (DOCUMENTS_DIR / SNAPSHOT_FILE).exists():
         pytest.skip(f"Missing committed snapshot: {SNAPSHOT_FILE}")
     module = importlib.import_module(PACKAGE_MODULE)
@@ -92,6 +120,7 @@ def generated_jasher_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
 
 def test_scrape_jasher_matches_snapshot(generated_jasher_output: Path) -> None:
+    """The generated Jasher OSIS equals the committed snapshot after normalisation."""
     expected_path = DOCUMENTS_DIR / SNAPSHOT_FILE
 
     assert generated_jasher_output.exists(), "Missing generated Jasher snapshot"
@@ -104,10 +133,12 @@ def test_scrape_jasher_matches_snapshot(generated_jasher_output: Path) -> None:
 
 
 def test_scrape_jasher_generates_expected_file(generated_jasher_output: Path) -> None:
+    """The scraper writes a file named ``jasher.xml``."""
     assert generated_jasher_output.name == SNAPSHOT_FILE
 
 
 def test_scrape_jasher_omits_footer_boilerplate(generated_jasher_output: Path) -> None:
+    """Footer navigation text and the ``THE END`` marker do not leak into the OSIS output."""
     xml = generated_jasher_output.read_text(encoding="utf-8")
 
     assert "Next: Chapter" not in xml

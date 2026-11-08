@@ -1,3 +1,5 @@
+"""Snapshot tests: regenerate the FBE OSIS files from the local HTML cache and compare to committed XML."""
+
 from __future__ import annotations
 
 import argparse
@@ -38,17 +40,20 @@ NEW_PROVENANCE = "converted to OSIS by the open-canon-site scrapers."
 
 
 def normalize_osis_snapshot(xml: str) -> str:
+    """Normalise line endings, provenance wording and the scrape timestamp for comparison."""
     normalized = xml.replace("\r\n", "\n").replace(OLD_PROVENANCE, NEW_PROVENANCE)
     return EVERSION_DATE_PATTERN.sub(r"\1SCRAPE_TIMESTAMP\2", normalized)
 
 
 @lru_cache(maxsize=1)
 def load_scrape_fbe_main() -> Any:
+    """Import the scraper module lazily and return its ``run`` function."""
     return importlib.import_module(PACKAGE_MODULE).run
 
 
 @pytest.fixture(scope="session")
 def generated_fbe_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    """Run the scraper once from the cached HTML into a temp dir (skips if inputs are missing)."""
     if not SOURCE_CACHE_TREE.exists():
         pytest.skip(f"Missing local FBE HTML cache tree at {SOURCE_CACHE_TREE}")
     missing = [n for n in SNAPSHOT_FILES if not (DOCUMENTS_DIR / n).exists()]
@@ -75,6 +80,7 @@ def test_scrape_fbe_matches_snapshots(
     generated_fbe_output: Path,
     snapshot_name: str,
 ) -> None:
+    """Each generated file equals its committed snapshot after normalisation."""
     actual_path = generated_fbe_output / snapshot_name
     expected_path = DOCUMENTS_DIR / snapshot_name
 
@@ -88,6 +94,7 @@ def test_scrape_fbe_matches_snapshots(
 
 
 def test_scrape_fbe_generates_expected_files(generated_fbe_output: Path) -> None:
+    """The scraper writes exactly the expected set of XML files."""
     assert sorted(path.name for path in generated_fbe_output.glob("*.xml")) == sorted(
         SNAPSHOT_FILES
     )

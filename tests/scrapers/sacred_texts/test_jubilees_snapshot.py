@@ -1,3 +1,8 @@
+"""Snapshot tests comparing the Jubilees scraper's output with the committed OSIS document.
+
+Skipped unless the local HTML cache under ``.cache/html`` holds the original pages.
+"""
+
 from __future__ import annotations
 
 import argparse
@@ -29,17 +34,40 @@ NEW_PROVENANCE = "converted to OSIS by the open-canon-site scrapers."
 
 
 def normalize_osis_snapshot(xml: str) -> str:
+    """Normalise an OSIS snapshot for comparison.
+
+    Converts CRLF to LF, rewrites the old repository provenance note to the current one and
+    replaces the volatile eversion timestamp with ``SCRAPE_TIMESTAMP``.
+
+    Args:
+        xml: OSIS XML text.
+
+    Returns:
+        The normalised XML.
+    """
     normalized = xml.replace("\r\n", "\n").replace(OLD_PROVENANCE, NEW_PROVENANCE)
     return EVERSION_DATE_PATTERN.sub(r"\1SCRAPE_TIMESTAMP\2", normalized)
 
 
 @lru_cache(maxsize=1)
 def load_scrape_jubilees_main() -> Any:
+    """Import the scraper module lazily and return its ``run`` entry point.
+
+    Returns:
+        The ``run`` function of the Jubilees scraper module.
+    """
     return importlib.import_module(PACKAGE_MODULE).run
 
 
 @pytest.fixture(scope="session")
 def generated_jubilees_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    """Run the Jubilees scraper once per session against the local cache and return the output path.
+
+    Skips when the committed snapshot or any required cached source page is missing or invalid.
+
+    Returns:
+        Path of the freshly generated OSIS file.
+    """
     if not (DOCUMENTS_DIR / SNAPSHOT_FILE).exists():
         pytest.skip(f"Missing committed snapshot: {SNAPSHOT_FILE}")
     module = importlib.import_module(PACKAGE_MODULE)
@@ -79,6 +107,7 @@ def generated_jubilees_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
 
 
 def test_scrape_jubilees_matches_snapshot(generated_jubilees_output: Path) -> None:
+    """The generated Jubilees OSIS equals the committed snapshot after normalisation."""
     expected_path = DOCUMENTS_DIR / SNAPSHOT_FILE
 
     assert generated_jubilees_output.exists(), "Missing generated Jubilees snapshot"
@@ -93,12 +122,14 @@ def test_scrape_jubilees_matches_snapshot(generated_jubilees_output: Path) -> No
 def test_scrape_jubilees_generates_expected_file(
     generated_jubilees_output: Path,
 ) -> None:
+    """The scraper writes a file named ``jubilees.xml``."""
     assert generated_jubilees_output.name == SNAPSHOT_FILE
 
 
 def test_scrape_jubilees_preserves_inline_footnotes(
     generated_jubilees_output: Path,
 ) -> None:
+    """Footnotes survive as inline ``<note>`` elements with their labels (for example ``35:5``)."""
     xml = generated_jubilees_output.read_text(encoding="utf-8")
 
     assert "<note" in xml
@@ -108,6 +139,7 @@ def test_scrape_jubilees_preserves_inline_footnotes(
 def test_scrape_jubilees_omits_sidebar_am_dates(
     generated_jubilees_output: Path,
 ) -> None:
+    """Marginal A.M. date ranges from the source sidebar are not emitted as text."""
     xml = generated_jubilees_output.read_text(encoding="utf-8")
 
     assert "64-70 A.M." not in xml
