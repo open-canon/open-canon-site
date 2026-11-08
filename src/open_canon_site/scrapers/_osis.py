@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from typing import Union
+from typing import Final, Union
 
 import pyosis
 
@@ -103,12 +103,21 @@ def normalize_whitespace(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+_PAGE_MARKER_RE: Final[re.Pattern[str]] = re.compile(
+    r"(?<!\w)p\.\s+(\d+|[ivxlcdm]+)(?!\w)", re.IGNORECASE
+)
+"""A standalone ``p. 12`` / ``p. xiv`` token: ``p`` not ending a word, numeral not starting one."""
+
+
 def parse_page_marker_text(text: str) -> list[InlinePart]:
     """Split text on ``p. 12`` / ``p. xiv`` page markers into text and page milestones.
 
-    Markers are matched case-insensitively with arabic or roman numerals, together
-    with the whitespace around them. Each becomes a ``MilestoneCt`` of type ``page``
-    whose ``n`` is the numeral as written. Whitespace-only text segments are dropped.
+    Markers are matched case-insensitively with arabic or roman numerals, and only as
+    complete tokens: the ``p`` may not end a longer word (``Gossip. 5``) and the
+    numeral may not begin one (``p. me``). Each marker becomes a ``MilestoneCt`` of
+    type ``page`` whose ``n`` is the numeral as written. Text around the markers,
+    including whitespace-only separators, is kept verbatim so that joining the parts
+    reproduces the original spacing; only empty segments are dropped.
 
     Args:
         text: Raw text that may contain page markers.
@@ -118,7 +127,7 @@ def parse_page_marker_text(text: str) -> list[InlinePart]:
     """
     parts: list[InlinePart] = []
     last_end = 0
-    for match in re.finditer(r"\s*p\.\s+(\d+|[ivxlcdm]+)\s*", text, re.IGNORECASE):
+    for match in _PAGE_MARKER_RE.finditer(text):
         if match.start() > last_end:
             parts.append(text[last_end : match.start()])
         parts.append(pyosis.MilestoneCt(type_value="page", n=match.group(1)))
@@ -127,11 +136,7 @@ def parse_page_marker_text(text: str) -> list[InlinePart]:
     if last_end < len(text):
         parts.append(text[last_end:])
 
-    return [
-        part
-        for part in parts
-        if isinstance(part, pyosis.MilestoneCt) or (isinstance(part, str) and part.strip())
-    ]
+    return parts
 
 
 def roman_to_int(text: str) -> int:
