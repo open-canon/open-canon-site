@@ -311,6 +311,10 @@ def _generate_chapter(
     template = env.get_template("chapter.html")
 
     rendered_body_blocks = _render_body_blocks(chapter)
+    # Blocks after the last verse (a colophon or signature block) are rendered below the verses.
+    split = len(rendered_body_blocks) - chapter.trailing_body_count if chapter.verses else None
+    rendered_trailing_blocks = rendered_body_blocks[split:] if split is not None else []
+    rendered_body_blocks = rendered_body_blocks[:split]
     rendered_summary = render_content(chapter.summary) if chapter.summary else ""
 
     # Build per-verse rendered data
@@ -352,6 +356,7 @@ def _generate_chapter(
         current_div=div,
         current_chapter=chapter,
         rendered_body_blocks=rendered_body_blocks,
+        rendered_trailing_blocks=rendered_trailing_blocks,
         rendered_summary=rendered_summary,
         rendered_verses=rendered_verses,
         notes=notes,

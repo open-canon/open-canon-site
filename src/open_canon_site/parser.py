@@ -59,6 +59,9 @@ class ChapterData:
     notes: list[NoteData] = field(default_factory=list)
     verses: list[VerseData] = field(default_factory=list)
     summary: list[Any] = field(default_factory=list)
+    trailing_body_count: int = 0
+    """How many items at the end of ``body`` follow the last verse (e.g. a colophon or signature block); these are
+    rendered after the verses instead of before them."""
 
 
 @dataclass
@@ -378,6 +381,35 @@ def _parse_body_content(
     return _extract_notes_from_content(body_items, context_id, doc_slug)
 
 
+def _count_trailing_body_items(content: list[Any]) -> int:
+    """Count the body items that come after the last contained verse of *content*.
+
+    Only contained-style verses are considered; with milestone verses, or no verses, nothing is trailing. The count
+    applies to the end of the list `_parse_body_content` returns for the same content, which keeps document order.
+    """
+    last_verse = max(
+        (
+            index
+            for index, item in enumerate(content)
+            if isinstance(item, VerseCt)
+            and item.osis_id
+            and item.content
+            and item.content != [None]
+        ),
+        default=None,
+    )
+    if last_verse is None:
+        return 0
+    return sum(
+        1
+        for item in content[last_verse + 1 :]
+        if item is not None
+        and not _is_heading_item(item)
+        and not isinstance(item, (VerseCt, ChapterCt))
+        and not _is_summary_div(item)
+    )
+
+
 def _parse_verses_from_content(
     content: list[Any], chapter_id: str, doc_slug: str
 ) -> list[VerseData]:
@@ -446,6 +478,7 @@ def _parse_chapter_div(div: DivCt, doc_slug: str, parent_id: str) -> ChapterData
         notes=notes,
         verses=_parse_verses_from_content(div.content, cid, doc_slug),
         summary=summary,
+        trailing_body_count=_count_trailing_body_items(div.content),
     )
 
 
@@ -468,6 +501,7 @@ def _parse_chapter_ct(chapter: ChapterCt, doc_slug: str, parent_id: str) -> Chap
         notes=notes,
         verses=_parse_verses_from_content(content, cid, doc_slug),
         summary=summary,
+        trailing_body_count=_count_trailing_body_items(content),
     )
 
 
