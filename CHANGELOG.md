@@ -2,6 +2,51 @@
 
 <!-- version list -->
 
+## v1.9.0 (2026-11-08)
+
+### Bug Fixes
+
+- **scrapers**: Harden cache paths and page-marker parsing
+  ([`65f44ec`](https://github.com/open-canon/open-canon-site/commit/65f44ecc01fcd6269e1a12fd643b453b73be4355))
+
+- **scrapers**: Honor --cache-dir and write UTF-8 in kjv-apocrypha
+  ([`7667829`](https://github.com/open-canon/open-canon-site/commit/766782970bd66ec0a6d1aaac088b34b8420b3344))
+
+### Code Style
+
+- **scrapers**: Ruff format kjv-apocrypha
+  ([`f8a5531`](https://github.com/open-canon/open-canon-site/commit/f8a553168cf567e9020fb3ec2db3fa68a752f29f))
+
+### Documentation
+
+- **scrapers**: Document framework functions and attributes
+  ([`d029b1f`](https://github.com/open-canon/open-canon-site/commit/d029b1f56e6f05788b8ee7f5e5adaac9c7792e51))
+
+- **scrapers**: Document kjv-apocrypha functions and attributes
+  ([`2b81f1f`](https://github.com/open-canon/open-canon-site/commit/2b81f1fde9da510627aa7ed4b758dc39f66b1fdd))
+
+### Features
+
+- **scrapers**: Add open-canon-scrape CLI framework
+  ([`abc1e05`](https://github.com/open-canon/open-canon-site/commit/abc1e05bd1c049cb196cbd3327409ffbd9be0694))
+
+- **scrapers**: Wire kjv-apocrypha into open-canon-scrape
+  ([`e945795`](https://github.com/open-canon/open-canon-site/commit/e945795a4930aa43ab95f1c121c9b1406d635d93))
+
+### Refactoring
+
+- **scrapers**: Import kjv-apocrypha sources verbatim
+  ([`1108249`](https://github.com/open-canon/open-canon-site/commit/110824916cb67bc8f8949787a0bc232707c51623))
+
+### Testing
+
+- **scrapers**: Unit-test framework functions
+  ([`8e98270`](https://github.com/open-canon/open-canon-site/commit/8e9827032b9bce17f6e755474c3eabaab1517bc3))
+
+- **scrapers**: Unit-test kjv-apocrypha functions
+  ([`2d91b81`](https://github.com/open-canon/open-canon-site/commit/2d91b819ab46b44c93a653eb1c2e74cb2e9e1044))
+
+
 ## v1.8.0 (2026-04-06)
 
 ### Features
