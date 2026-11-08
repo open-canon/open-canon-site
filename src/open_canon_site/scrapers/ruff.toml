@@ -1,0 +1,11 @@
+# Documentation enforcement for the scrapers package: every public and private
+# symbol needs a Google-style docstring. See tests/scrapers/test_docstrings.py
+# for the AST-based check covering attribute docstrings, which ruff cannot do.
+extend = "../../../pyproject.toml"
+preview = true
+
+[lint]
+extend-select = ["D", "DOC"]
+
+[lint.pydocstyle]
+convention = "google"
