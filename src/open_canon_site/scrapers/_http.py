@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import logging
 import time
 from pathlib import Path
@@ -81,7 +82,8 @@ class CachedHttpFetcher:
         written to the cache and followed by another ``delay`` sleep. HTTP 429 waits
         ``delay * 2**attempt`` before retrying; transport errors (timeouts, connection
         failures) wait ``delay``. Other HTTP error statuses are raised immediately. With
-        caching enabled, a URL without a host raises ``ValueError`` (see ``_cache_path``).
+        caching enabled, a URL without a host or whose cache path would escape
+        ``cache_dir`` raises ``ValueError`` (see ``_cache_path``).
 
         Args:
             url: Absolute http(s) URL to fetch.
@@ -156,8 +158,11 @@ class CachedHttpFetcher:
     def _cache_path(self, url: str) -> Path | None:
         """Map a URL to its cache file: ``<cache_dir>/<host>/<path>``.
 
-        The query string and fragment are ignored. An empty path or one ending in
-        ``/`` becomes ``index.htm``, and a ``.html`` suffix is rewritten to ``.htm``.
+        The fragment is ignored. An empty path or one ending in ``/`` becomes
+        ``index.htm``, and a ``.html`` suffix is rewritten to ``.htm``. A URL with a
+        query string gets ``.q-<hash>`` (16 hex digits of the query's SHA-256) inserted
+        before the file suffix, so distinct queries never share a cache file while
+        query-free URLs keep the plain mirrored layout.
 
         Args:
             url: Absolute URL.
@@ -166,7 +171,8 @@ class CachedHttpFetcher:
             The cache path, or ``None`` if caching is disabled.
 
         Raises:
-            ValueError: If caching is enabled and ``url`` has no host.
+            ValueError: If caching is enabled and ``url`` has no host, or its derived
+                path would fall outside ``cache_dir`` (e.g. via ``..`` segments).
         """
         if not self.cache_dir:
             return None
@@ -184,4 +190,13 @@ class CachedHttpFetcher:
         if relative_path.endswith(".html"):
             relative_path = f"{relative_path[:-5]}.htm"
 
-        return self.cache_dir / split.netloc / relative_path
+        path = self.cache_dir / split.netloc / relative_path
+        if split.query:
+            digest = hashlib.sha256(split.query.encode("utf-8")).hexdigest()[:16]
+            path = path.with_name(f"{path.stem}.q-{digest}{path.suffix}")
+
+        root = self.cache_dir.resolve()
+        resolved = path.resolve()
+        if resolved == root or root not in resolved.parents:
+            raise ValueError(f"Cache path for URL escapes the cache directory: {url}")
+        return path
