@@ -73,3 +73,24 @@ def test_spec_is_registered() -> None:
     parser = argparse.ArgumentParser()
     lc.SPEC.add_arguments(parser)
     assert parser.parse_args([]).lang == "eng"
+
+
+@pytest.mark.asyncio
+async def test_signature_block_renders_after_the_verses(
+    site: FakeSite, make_client, tmp_path
+) -> None:
+    """On the generated reading page the byline precedes verse 1 and the signature block follows the last verse."""
+    from open_canon_site.generator import generate_site
+
+    site.pages[lc.LIVING_CHRIST.uri] = _PAGE
+    async with make_client(site) as client:
+        (path,) = await lc.write_living_christ("eng", tmp_path / "osis", client)
+    generate_site([path], tmp_path / "site")
+    html = (tmp_path / "site" / "livingchrist" / "livingchrist" / "livingchrist-1.html").read_text(
+        "utf-8"
+    )
+    byline = html.index("The Church of Jesus Christ of Latter-day Saints</p>")
+    first_verse = html.index('id="v-LivingChrist.1.1"')
+    last_verse = html.index('id="v-LivingChrist.1.2"')
+    signature = html.index("The Quorum of the Twelve")
+    assert byline < first_verse < last_verse < signature

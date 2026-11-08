@@ -107,6 +107,17 @@
         <span class="verse-text">{{ verse.html | safe }}</span>
       </div>
       {% endfor %}
+      {% if rendered_trailing_blocks %}
+        <div class="chapter-body chapter-body-trailing">
+          {% for block in rendered_trailing_blocks %}
+            {% if block.anchor %}
+              <section id="{{ block.anchor }}" class="chapter-section">{{ block.html | safe }}</section>
+            {% else %}
+              {{ block.html | safe }}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
     {% elif not rendered_body_blocks %}
       <p style="color:var(--color-muted);font-style:italic;">No content in this chapter.</p>
     {% endif %}
