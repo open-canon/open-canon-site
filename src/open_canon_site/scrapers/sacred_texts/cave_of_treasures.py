@@ -138,6 +138,10 @@ PLATE_PAGES: Final[tuple[str, ...]] = tuple(f"bct_pl{n:02d}" for n in range(16))
 """Page stems of the plates: the frontispiece (``bct_pl00``) and Plates I to XV."""
 FACING_RE: Final[re.Pattern[str]] = re.compile(r"facing\s+page\s+(?P<page>[0-9ivxlcdm]+)", re.I)
 """Matches the ``{facing page 272}`` line of a plate page."""
+FOLIO_HEADING_RE: Final[re.Pattern[str]] = re.compile(
+    r"^\[(?P<folio>Fol\.[^\]]*)\]\s*\[(?P<title>.*?)\]\.?$"
+)
+"""Matches a heading that starts with a folio reference: ``[Fol. 13b, col. 2] [The Rule of Enoch].``"""
 PLATE_FOOTER_RE: Final[re.Pattern[str]] = re.compile(
     r"^(?:Sacred Texts\s*\|\s*Christianity|(?:«\s*)?(?:Previous|Next):.*)$", re.IGNORECASE
 )
@@ -411,7 +415,7 @@ class CaveOfTreasuresParser:
                     parts.append(
                         pyosis.NoteCt(type_value="explanation", n=note.label, content=note.parts)
                     )
-                elif not href.startswith("#"):
+                else:
                     parts.extend(self.parse_inline(child, footnotes))
             elif child.name in {"i", "em", "b", "strong"}:
                 inner = _clean(self.parse_inline(child, footnotes))
@@ -549,17 +553,28 @@ class CaveOfTreasuresParser:
             if (centred or element.name == "blockquote") and CHAPTER_HEADING_RE.search(text):
                 continue
             if element.name == "blockquote" or (centred and text.startswith("[")):
-                if text.startswith("[") and isinstance(parts[0], str):
-                    parts[0] = parts[0][1:].lstrip()
-                if text.endswith("]") and isinstance(parts[-1], str):
-                    parts[-1] = parts[-1][:-1].rstrip()
+                folio = FOLIO_HEADING_RE.match(text)
+                if folio:
+                    parts = [folio.group("title")]
+                    pending.append(f"[{folio.group('folio')}] ")
+                else:
+                    if text.startswith("[") and isinstance(parts[0], str):
+                        parts[0] = parts[0][1:].lstrip()
+                    if text.endswith("]") and isinstance(parts[-1], str):
+                        parts[-1] = parts[-1][:-1].rstrip()
+                pending.extend(p for p in parts if isinstance(p, pyosis.MilestoneCt))
+                parts = [p for p in parts if not isinstance(p, pyosis.MilestoneCt)]
                 kind = "heading"
             elif NOTES_RE.match(text):
                 kind = "notes"
             else:
                 kind = "verse"
-            chapter.blocks.append(Block(kind, [*pending, *parts]))
-            pending.clear()
+            if kind == "heading":
+                # A title cannot hold milestones: they wait for the next verse.
+                chapter.blocks.append(Block(kind, parts))
+            else:
+                chapter.blocks.append(Block(kind, [*pending, *parts]))
+                pending.clear()
             if images:
                 chapter.blocks.append(Block("figures", [], images))
 

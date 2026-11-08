@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="CaveOfTreasures" osisRefWork="Cave of Treasures" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T09:10:10</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T09:13:48</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/chr/bct/index.htm and converted to OSIS by Andrew P. Sansom.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -23,7 +23,8 @@
       <div canonical="true" type="chapter" osisID="CaveOfTreasures.1" TEIform="div">
         <title canonical="false" type="chapter" TEIform="title">The First Thousand Years</title>
         <title canonical="false" type="sub" TEIform="title">THE TITLE OF THE WORK: THE SCRIBE'S PRAYER.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.1.1">[Fol. 3
+        <verse canonical="true" osisID="CaveOfTreasures.1.1">
+          <milestone type="page" n="43" marker="DEFAULT" TEIform="milestone"/>[Fol. 3
           <hi type="italic" TEIform="hi">b</hi>, col. 1.] By the might of our Lord Jesus Christ we begin to write the "Book of the Succession of the Generations," that is to say, ME`ÂRATH GAZZÊ, which was composed by SAINT MÂR APHRÊM (
           <hi type="italic" TEIform="hi">i.e.</hi> Ephraim, commonly known as "Ephraim Syrus," or "Ephraim the Syrian," who died A.D. 373). O our Lord, help Thou me in Thy Mercy. Amen.
         </verse>
@@ -56,7 +57,8 @@
           </p>
         </div>
         <title canonical="false" type="sub" TEIform="title">The Creation. Third Day.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.1.4">And on the Third Day God commanded the waters that were below the firmament (Rekî`a) to be gathered together in one place, and the dry land to appear. And when the covering of water had been rolled up from the face of the earth, the earth showed itself to be in an unsettled and unstable state, that is to say, it was of a damp (or moist) and yielding nature. And the waters were gathered together into seas that were under the earth and within it [Fol. 4
+        <verse canonical="true" osisID="CaveOfTreasures.1.4">
+          <milestone type="page" n="48" marker="DEFAULT" TEIform="milestone"/>And on the Third Day God commanded the waters that were below the firmament (Rekî`a) to be gathered together in one place, and the dry land to appear. And when the covering of water had been rolled up from the face of the earth, the earth showed itself to be in an unsettled and unstable state, that is to say, it was of a damp (or moist) and yielding nature. And the waters were gathered together into seas that were under the earth and within it [Fol. 4
           <hi type="italic" TEIform="hi">a</hi>, col. 2], and upon it. And God made in the earth from below, corridors, and shafts, and channels for the passage of the waters; and the winds which come from within the earth ascend by means of these corridors and channels, and also the heat and the cold for the service of the earth. Now, as for the earth, the lower part of it is like unto a thick sponge, for it resteth on the waters. And on this Third Day God commanded the earth, and it brought forth herbs and vegetables, and it conceived in its interior trees, and seeds, and plants and roots.
         </verse>
         <div canonical="false" type="x-notes" TEIform="div">
@@ -89,7 +91,9 @@
           </p>
         </div>
         <title canonical="false" type="sub" TEIform="title">The Creation. Sixth Day.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.1.7">And on the Sixth Day, which is the Eve of the Sabbath, God formed man out of the dust, and Eve from his rib.</verse>
+        <verse canonical="true" osisID="CaveOfTreasures.1.7">
+          <milestone type="page" n="51" marker="DEFAULT" TEIform="milestone"/>And on the Sixth Day, which is the Eve of the Sabbath, God formed man out of the dust, and Eve from his rib.
+        </verse>
         <verse canonical="true" osisID="CaveOfTreasures.1.8">And on the Seventh Day God rested from His labours, and it is called "Sabbath."</verse>
         <title canonical="false" type="sub" TEIform="title">The Creation of Adam.</title>
         <verse canonical="true" osisID="CaveOfTreasures.1.9">Now the formation of Adam took place in this wise: On the Sixth Day, which is the Eve of the Sabbath, at the first hour of the day, when quietness was reigning over [Fol. 4
@@ -367,7 +371,8 @@
       <div canonical="true" type="chapter" osisID="CaveOfTreasures.2" TEIform="div">
         <title canonical="false" type="chapter" TEIform="title">The Second Thousand Years</title>
         <title canonical="false" type="sub" TEIform="title">OF THE TRANSMISSION OF THE ART OF PLAYING THE HARP, THAT IS TO SAY, OF MUSIC, AND SINGING AND DANCING.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.2.1">Yôbâl (Jubal) and Tôbalkîn (Tubal-Cain), the two brethren, the sons of Lamech, the blind man, who killed Cain, invented and made all kinds of instruments of music. Jôbâl made reed instruments, and harps, and flutes, and whistles, and the devils went and dwelt inside them. When men blew into the pipes, the devils sang inside them, and sent out sounds from inside them. Tôbalkîn made [Fol. 12
+        <verse canonical="true" osisID="CaveOfTreasures.2.1">
+          <milestone type="page" n="87" marker="DEFAULT" TEIform="milestone"/>Yôbâl (Jubal) and Tôbalkîn (Tubal-Cain), the two brethren, the sons of Lamech, the blind man, who killed Cain, invented and made all kinds of instruments of music. Jôbâl made reed instruments, and harps, and flutes, and whistles, and the devils went and dwelt inside them. When men blew into the pipes, the devils sang inside them, and sent out sounds from inside them. Tôbalkîn made [Fol. 12
           <hi type="italic" TEIform="hi">a</hi>, col. 2] cymbals, and sistra, and tambourines (or drums). And lasciviousness and fornication increased among the children of Cain, and they had nothing to occupy them except fornication--now they had no obligation [to pay] tribute, and they had neither prince nor governor--and eating, and drinking, and lasciviousness, and drunkenness, and dancing  
           <milestone type="page" n="88" marker="DEFAULT" TEIform="milestone"/> and singing to instruments of music, and the wanton sportings of the devils, and the laughter which affordeth pleasure to the devils, and the sounds of the furious lust of men neighing after women. And Satan, finding [his] opportunity in this work of error, rejoiced greatly, because thereby he could compel the sons of Seth to come down from that holy mountain. There they had been made to occupy the place of that army [of angels] that fell [with Satan], there they were beloved by God, there they were held in honour by the angels, and were called "sons of God," even as the blessed David saith in the psalm, "I have said [Fol. 12
           <hi type="italic" TEIform="hi">b</hi>, col. 1], Ye are gods, and all of you sons of the Most High." (Ps. lxxxii. 6.)
@@ -414,11 +419,9 @@
             <hi type="bold" TEIform="hi">]</hi>
           </p>
         </div>
-        <title canonical="false" type="sub" TEIform="title">Fol. 13
-          <hi type="italic" TEIform="hi">b</hi>, col. 2] [The Rule of Enoch].
-        </title>
-        <verse canonical="true" osisID="CaveOfTreasures.2.5">And Enoch stood up to minister before God in the Cave of Treasures. And the children of Seth turned aside from the right path and willed to go down [to the children of Cain on the plain]. And Enoch and Methuselah, and Lamech and Noah mourned over them. And Enoch had ministered before God for fifty years in the three hundred and [sixty] fifth year of the life of Noah. And when Enoch knew that God was about to remove him [from the earth], he called Methuselah, and Lamech, and Noah, and said unto them, "I know that God is wroth with this generation, and that a pitiless judgment hath been decreed for the people thereof. Ye are the chiefs of this generation and the remnant thereof, for no other man shall be born on this mountain who shall be the chief of the children of his people. But take ye good heed to yourselves, and see that ye minister before God in purity and holiness." And when Enoch had given them  
-          <milestone type="page" n="96" marker="DEFAULT" TEIform="milestone"/> his commandment in these words, God removed him to the Land of Life, and to the [Fol. 14
+        <title canonical="false" type="sub" TEIform="title">The Rule of Enoch</title>
+        <verse canonical="true" osisID="CaveOfTreasures.2.5">[Fol. 13b, col. 2] 
+          <milestone type="page" n="96" marker="DEFAULT" TEIform="milestone"/>And Enoch stood up to minister before God in the Cave of Treasures. And the children of Seth turned aside from the right path and willed to go down [to the children of Cain on the plain]. And Enoch and Methuselah, and Lamech and Noah mourned over them. And Enoch had ministered before God for fifty years in the three hundred and [sixty] fifth year of the life of Noah. And when Enoch knew that God was about to remove him [from the earth], he called Methuselah, and Lamech, and Noah, and said unto them, "I know that God is wroth with this generation, and that a pitiless judgment hath been decreed for the people thereof. Ye are the chiefs of this generation and the remnant thereof, for no other man shall be born on this mountain who shall be the chief of the children of his people. But take ye good heed to yourselves, and see that ye minister before God in purity and holiness." And when Enoch had given them   his commandment in these words, God removed him to the Land of Life, and to the [Fol. 14
           <hi type="italic" TEIform="hi">a</hi>, col. 1] delectable mansions which are round about Paradise, and to that country which is beyond the reach of death. And of all the children of Seth there remained only these three Patriarchs in the "Mountain of the Triumphant Ones," viz. Methuselah, Lamech, and Noah, for all the others had betaken themselves to the encampment of the sons of Cain.
         </verse>
         <div canonical="false" type="x-notes" TEIform="div">
@@ -534,7 +537,8 @@
       <div canonical="true" type="chapter" osisID="CaveOfTreasures.3" TEIform="div">
         <title canonical="false" type="chapter" TEIform="title">The Third Thousand Years</title>
         <title canonical="false" type="sub" TEIform="title">Noah's entry into the Ark.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.3.1">The entrance of Noah into the Ark took place on the day of the eve of the Sabbath (Friday), on the seventeenth day of the blessed month of Îyâr (May). On the Friday, in the morning (
+        <verse canonical="true" osisID="CaveOfTreasures.3.1">
+          <milestone type="page" n="111" marker="DEFAULT" TEIform="milestone"/>The entrance of Noah into the Ark took place on the day of the eve of the Sabbath (Friday), on the seventeenth day of the blessed month of Îyâr (May). On the Friday, in the morning (
           <hi type="italic" TEIform="hi">i.e.</hi> the third hour) the beasts and the cattle went into the lowermost storey; and at midday all the feathered fowl and all the reptiles went into the middle storey; and at sunset Noah and his sons went into the Ark, on the east side of [the third storey], and his wife and the wives of his sons went to the west side. And the body of Adam was deposited in the middle of the Ark, wherein also all the mysteries of the Church were deposited. Thus women in church shall be on the west [side] [Fol. 17
           <hi type="italic" TEIform="hi">a</hi>, col. 2], and men on the east [side], so that the men may not see the faces of the women, and the women may not see the faces of the men. Thus also was it in the Ark; the women were on the west [side], and the men on the east [side], and the body of our father  
           <milestone type="page" n="112" marker="DEFAULT" TEIform="milestone"/> Adam was placed between [them] like a raised stand (or throne). And as quietness reigneth in the Church between men and women, so also peace reigned in the Ark between the wild beasts, and the feathered fowl, and the creeping things (or reptiles). And as kings, and judges, and rich men, and poor men, and governors, and sick men, and beggars, live in concord, that is to say, in a general bond of peace, so also was it in the Ark. For lions, and panthers, and savage beasts of prey lived in peace and harmony with the cattle; and the beasts that were fierce and strong lived in peace with those that were timid and weak; and the lion with the ox, and the wolf with the lamb, and the lion's whelp [Fol. 17
@@ -566,7 +570,9 @@
           </p>
         </div>
         <title canonical="false" type="sub" TEIform="title">Noah leaves the Ark.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.3.5">And in the six hundred and first year of the life of Noah, on the first day of the month of Nîsân (April) the waters had dried up from the face of the earth. And in the second month, which is Îyâr (May), wherein Noah went into the Ark on the twenty-seventh day, on the holy first day of the week (Sunday), their going forth took place; and he and his wife went forth, and his sons and their wives went with them. Now, when they went into the Ark they went in in separate companies, Noah and his sons [in one company], and his wife and their wives in another company; and the men did not know the women until they went forth from the Ark. And all the wild beasts, and all the cattle, and all the feathered fowl, and all the creeping things went forth from the Ark on the first day of the week.</verse>
+        <verse canonical="true" osisID="CaveOfTreasures.3.5">
+          <milestone type="page" n="116" marker="DEFAULT" TEIform="milestone"/>And in the six hundred and first year of the life of Noah, on the first day of the month of Nîsân (April) the waters had dried up from the face of the earth. And in the second month, which is Îyâr (May), wherein Noah went into the Ark on the twenty-seventh day, on the holy first day of the week (Sunday), their going forth took place; and he and his wife went forth, and his sons and their wives went with them. Now, when they went into the Ark they went in in separate companies, Noah and his sons [in one company], and his wife and their wives in another company; and the men did not know the women until they went forth from the Ark. And all the wild beasts, and all the cattle, and all the feathered fowl, and all the creeping things went forth from the Ark on the first day of the week.
+        </verse>
         <title canonical="false" type="sub" TEIform="title">Noah founds Themânôn, the city of the "Eight."</title>
         <verse canonical="true" osisID="CaveOfTreasures.3.6">And when they had gone forth Noah began work on the ground [Fol. 18
           <hi type="italic" TEIform="hi">b</hi>, col. 2], and they built a city and called the name thereof "Themânôn" (
@@ -690,7 +696,8 @@
         <verse canonical="true" osisID="CaveOfTreasures.3.17">Eber was thirty and four years old when he begot Peleg; and all the days of his life were four hundred and sixty-four [Ethiopic variant, 434] years; and he died, and Peleg his son and Reu and Sorôgh (Serug) buried him in `Ebhrîn, the city which he built after his own name.</verse>
         <verse canonical="true" osisID="CaveOfTreasures.3.18">Peleg was thirty years old when he begot Reu; and all the days of his life were two hundred and thirty-nine years, and he died [and they buried him in the city of Peleg, which he had built after his own name].</verse>
         <title canonical="false" type="sub" TEIform="title">The Migration to the land of Sêntar.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.3.19">And in the days of Peleg all the tribes and families of the children of Noah gathered together, and went up from the East. And they found a [Fol. 22
+        <verse canonical="true" osisID="CaveOfTreasures.3.19">
+          <milestone type="page" n="132" marker="DEFAULT" TEIform="milestone"/>And in the days of Peleg all the tribes and families of the children of Noah gathered together, and went up from the East. And they found a [Fol. 22
           <hi type="italic" TEIform="hi">a</hi>, col. 1] plain in the land of Sên`ar (Shinar ?), and they all sat down there; and from Adam until this time they were all of one speech and one language. They all spake this language, that is to say, SÛRYÂYÂ (Syrian), which is ÂRÂMÂYÂ (Aramean), and this language is the king of all languages. Now, ancient writers have erred in that they said that Hebrew was the first [language], and in this matter they have mingled an ignorant mistake with their writing. For all the languages there are in the world are derived from Syrian, and all the languages in books are mingled with it. In the writing of the Syrians the left hand stretcheth out to the right hand, and all the children of the left hand (
           <hi type="italic" TEIform="hi">i.e.</hi> the heathen) draw nigh to the right hand of God; now with the Greeks, and Romans, and the Hebrews, the right hand stretcheth out to the left. [Both Hebrew and Syriac are written from right to left, but Greek and Latin from left to right.]
         </verse>
@@ -800,7 +807,8 @@
           <hi type="italic" TEIform="hi">i.e.</hi> future events), and fate, but these are in error. Now Nimrod builded strong cities in the east, Babel, and Nineveh, and Râsân (Râs `Ain), and Selîk: (Seleucia), and Ctesiphon, and Âdhôrbaighân; and he made three fortresses.
         </verse>
         <title canonical="false" type="sub" TEIform="title">The History of Abraham.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.4.11">And Terah, the father of Abraham, lived two hundred and fifty years, and he died, and Abraham and Lot buried him in Hârrân. And there God spoke unto Abraham, and said unto him, "Get thee forth from thy land, and from among thy people, and come to the land which I will show thee." And Abraham took his household, Sârâ his wife [Fol. 25
+        <verse canonical="true" osisID="CaveOfTreasures.4.11">
+          <milestone type="page" n="145" marker="DEFAULT" TEIform="milestone"/>And Terah, the father of Abraham, lived two hundred and fifty years, and he died, and Abraham and Lot buried him in Hârrân. And there God spoke unto Abraham, and said unto him, "Get thee forth from thy land, and from among thy people, and come to the land which I will show thee." And Abraham took his household, Sârâ his wife [Fol. 25
           <hi type="italic" TEIform="hi">a</hi>, col. 2], and Lot, his brother's son, and he went up to the land of the Amôrâyê (Amorites); and he was seventy-five years old when he crossed the desert from the Euphrates. And he was eighty years old when he pursued the kings, and rescued Lot, his brother's son.
         </verse>
         <div canonical="false" type="x-notes" TEIform="div">
@@ -816,7 +824,9 @@
           <hi type="bold" TEIform="hi">]</hi>
         </verse>
         <title canonical="false" type="sub" TEIform="title">Abraham and Melchisedek.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.4.13">And at that time Abraham had no son, because Sârâ was barren.</verse>
+        <verse canonical="true" osisID="CaveOfTreasures.4.13">
+          <milestone type="page" n="148" marker="DEFAULT" TEIform="milestone"/>And at that time Abraham had no son, because Sârâ was barren.
+        </verse>
         <verse canonical="true" osisID="CaveOfTreasures.4.14">And when he returned from the battle of the kings, the agency of God called him, and he crossed the mountain of Yâbhôs (Jebus ?), and Melchisedek, the king of Shâlîm, the priest of the Most High God, went forth to meet him. And when Abraham saw Melchisedek, he made haste and fell upon his face, and did homage to him, and he rose up from the ground and embraced him, and kissed him, and was blessed by him; and Melchisedek blessed Abraham. And Abraham gave Melchisedek tithes of everything which he had with him, and Melchisedek made him to participate in the Holy Mysteries, [of] the bread of the Offering and the wine of redemption. And after [Fol. 25
           <hi type="italic" TEIform="hi">b</hi>, col. 1] Melchisedek had blessed him, and made him to participate in the Holy Mysteries, God spake unto Abraham, and said unto him, "Thy reward is exceedingly great. Since Melchisedek hath blessed thee, and hath made thee to partake of bread and wine [with him], I also will assuredly bless thee, and I will assuredly multiply thy seed."
         </verse>
@@ -854,7 +864,8 @@
         <title canonical="false" type="sub" TEIform="title">Nimrod founds Nisibis, Harrân and Edessa.</title>
         <verse canonical="true" osisID="CaveOfTreasures.4.22">And in the fiftieth year of [the life of] Reu, Nimrod went up and built Nisibis, and Edessa, and Harrân, which is Edessa. And Harrânîth, the wife of Dâsân, the priest of the mountain, surrounded it with a wall, and the people of Harrân made a statue of her and worshipped her. And Baltîn, who was given to Tamûzâ (Tammuz)--now because B`êlshemîn loved her, Tammuz fled before him--set fire to Harrân and burned it.</verse>
         <title canonical="false" type="sub" TEIform="title">The Death of Sârâ.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.4.23">And when Sârâ, the wife of Abraham, died, Abraham took to wife Kentôrâ [Fol. 27
+        <verse canonical="true" osisID="CaveOfTreasures.4.23">
+          <milestone type="page" n="154" marker="DEFAULT" TEIform="milestone"/>And when Sârâ, the wife of Abraham, died, Abraham took to wife Kentôrâ [Fol. 27
           <hi type="italic" TEIform="hi">a</hi>, col. 2], the daughter of Baktôr, the king of the desert. And there were born unto him by her Zamrân, and Yakshân, and Mâdhân, and Medhyân, and Ashbâk, and Shôh. [
           <hi type="italic" TEIform="hi">See</hi> Gen. xxv. 1, 2; 1 Chron. i. 32. A marginal note in the Syriac MS. says, "these sons of Kentôrâ are called sons of Daran by the prophet."] And from these are sprung the Arabs.
         </verse>
@@ -890,7 +901,9 @@
           </p>
         </div>
         <title canonical="false" type="sub" TEIform="title">Jacob and Baptism.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.4.28">And when God had shown the blessed Jacob the Cross of Christ by means of the Ladder of the Angels, and the coming down of Christ for our redemption, and the Church, the House of God, and the altar by means of the stone, and the offerings by means of the tithes, and the anointing by means of the oil, Jacob again went down to the East that there God might show him baptism. And Jacob looked, and saw, and beheld three flocks of sheep lying down by a well; and there was a great stone placed over the mouth of the well. And Jacob drew nigh, and rolled away the stone from the mouth of the well, and watered the sheep of his mother's brother. And having watered the flocks, he took Rachel and kissed her.</verse>
+        <verse canonical="true" osisID="CaveOfTreasures.4.28">
+          <milestone type="page" n="157" marker="DEFAULT" TEIform="milestone"/>And when God had shown the blessed Jacob the Cross of Christ by means of the Ladder of the Angels, and the coming down of Christ for our redemption, and the Church, the House of God, and the altar by means of the stone, and the offerings by means of the tithes, and the anointing by means of the oil, Jacob again went down to the East that there God might show him baptism. And Jacob looked, and saw, and beheld three flocks of sheep lying down by a well; and there was a great stone placed over the mouth of the well. And Jacob drew nigh, and rolled away the stone from the mouth of the well, and watered the sheep of his mother's brother. And having watered the flocks, he took Rachel and kissed her.
+        </verse>
         <verse canonical="true" osisID="CaveOfTreasures.4.29">Now by "Well" [Fol. 28
           <hi type="italic" TEIform="hi">a</hi>, col. 2] the blessed Jacob indicated (or, depicted) baptism, which was covered over (
           <hi type="italic" TEIform="hi">i.e.</hi> hidden) from the races of men, and generations and tribes. And the three flocks of sheep which were lying down by the well are a type of the three divisions and three groups [who come] for baptism, namely, men and women and children. And that Jacob saw Rachel coming with the flocks, and that he neither embraced her nor kissed her until he had rolled away the stone from the well, and she had watered the flocks, is in accordance with  
@@ -920,7 +933,8 @@
           </p>
         </div>
         <title canonical="false" type="sub" TEIform="title">The Genealogies of the "Tribes" and the "Children of Israel."</title>
-        <verse canonical="true" osisID="CaveOfTreasures.4.35">Now there are certain doctors who trace the genealogies of the Tribes from the death of Jacob, and who mix them together, but they do not do this in the light of knowledge. They set in the midst two genealogies, one of the "Tribes," and the other of the "Children of Israel" [Fol. 29
+        <verse canonical="true" osisID="CaveOfTreasures.4.35">
+          <milestone type="page" n="161" marker="DEFAULT" TEIform="milestone"/>Now there are certain doctors who trace the genealogies of the Tribes from the death of Jacob, and who mix them together, but they do not do this in the light of knowledge. They set in the midst two genealogies, one of the "Tribes," and the other of the "Children of Israel" [Fol. 29
           <hi type="italic" TEIform="hi">b</hi>, col. 1]. Now fix thine attention on these generations, and how they became mixed together. [When] they went forth from Egypt: Judah begot Pharez, Pharez begot Hesrôn (Hezron), Hezron begot Ârâm (Râm, 1 Chron. ii. 9), Ârâm begot Amminadab, Amminadab begot Nahshôn (Nahson), and Nahshôn was he who became prince of Judah. And Amminadab gave the sister of Nahshôn to `Îr (so in the text, but read Eleazar), the son of Aaron, the priest; of her was born Phinehas, the great priest, who prayed "and the plague was stayed" (Num. xxv. 7, 8; Ps. cvi. 30). Behold, I have shown thee that from Amminadab, the priesthood of the children of Israel was transmitted by the sister of Nahshôn, and the kingdom by Nahshôn her brother. Observe also that the priesthood and the kingdom were transmitted by Judah to the children of Israel.
         </verse>
         <verse canonical="true" osisID="CaveOfTreasures.4.36">And Nahshôn begot Shîlâ, that is to say, Salmôn, and Shîlâ begot Boaz. Observe now  
@@ -976,7 +990,9 @@
           </p>
         </div>
         <title canonical="false" type="sub" TEIform="title">The Successors of Moses.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.4.41">And Joshua, the son of Nôn, was the governor of the children of Israel for twenty-seven years. And after the death of Joshua, the son of Nôn, Kûshân, the Wicked (Chushanrishathayim), was lord over the people for eighty years.</verse>
+        <verse canonical="true" osisID="CaveOfTreasures.4.41">
+          <milestone type="page" n="167" marker="DEFAULT" TEIform="milestone"/>And Joshua, the son of Nôn, was the governor of the children of Israel for twenty-seven years. And after the death of Joshua, the son of Nôn, Kûshân, the Wicked (Chushanrishathayim), was lord over the people for eighty years.
+        </verse>
         <verse canonical="true" osisID="CaveOfTreasures.4.42">And `Athnâîl (Othniel), the son of Kenaz, the brother of Caleb, the son of Jephunneh, was lord over Israel for forty years.</verse>
         <verse canonical="true" osisID="CaveOfTreasures.4.43">And then the children of Israel were in subjection to the Moabites for eighteen years.</verse>
         <verse canonical="true" osisID="CaveOfTreasures.4.44">And Ahôr (Ehud), the son of Gera, ruled the children of Israel for eighty years.</verse>
@@ -1137,7 +1153,9 @@
           <figure alt="cuneiform" src="https://archive.sacred-texts.com/chr/bct/181.jpg" TEIform="figure"/>
         </div>
         <title canonical="false" type="sub" TEIform="title">Hezekiah.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.5.32">Hezekiah was twenty-five years old when [he began] to reign, and he reigned twenty-nine years in Jerusalem; and the name of his mother was Akhi (Abhi ?), the daughter of Zechariah. And he did that which was pleasing before the Lord, for he smashed the altars, and he cut in pieces the serpent of brass which Moses made in the wilderness, because the children of Israel used to worship it, and he abolished heathen practices in Jerusalem.</verse>
+        <verse canonical="true" osisID="CaveOfTreasures.5.32">
+          <milestone type="page" n="182" marker="DEFAULT" TEIform="milestone"/>Hezekiah was twenty-five years old when [he began] to reign, and he reigned twenty-nine years in Jerusalem; and the name of his mother was Akhi (Abhi ?), the daughter of Zechariah. And he did that which was pleasing before the Lord, for he smashed the altars, and he cut in pieces the serpent of brass which Moses made in the wilderness, because the children of Israel used to worship it, and he abolished heathen practices in Jerusalem.
+        </verse>
         <verse canonical="true" osisID="CaveOfTreasures.5.33">In the fourth year of his reign, Shalmaneser, king of Assyria, came up and carried away captive the rest of the children of Israel, and he sent them into Media, beyond Babel.</verse>
         <div canonical="false" type="x-notes" TEIform="div">
           <p TEIform="p">
@@ -1238,7 +1256,8 @@
           <hi type="italic" TEIform="hi">a</hi>, col. 2], and they are unable to prove whence the succession of the priests took its origin.
         </verse>
         <title canonical="false" type="sub" TEIform="title">Jehoiachin.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.5.45">And Jehoiachin was bound in prison for thirty-seven years, and after he came forth from prison he took to wife Gûlîth, the daughter of Eliakim, and he begot by her in Babel Shalathiel (Salathiel); and Jehoiachin died in Babel. And Salathiel took to wife Hetbath, the daughter of Halkânâ, and he begot by her Zûrbâbhel (Zerubbabel), who took to wife Malkath, the daughter of Ezra the scribe; but no son was born to him by her in Babel. In the days of Zerubbabel, the prince of Judah, Cyrus the Persian reigned in Babel. [A reproduction of a sculptured relief of Cyrus is given on Plate I. The official account of his conquest of Babylon is found on a baked clay cylinder now in the British Museum. See Plate II.
+        <verse canonical="true" osisID="CaveOfTreasures.5.45">
+          <milestone type="page" n="190" marker="DEFAULT" TEIform="milestone"/>And Jehoiachin was bound in prison for thirty-seven years, and after he came forth from prison he took to wife Gûlîth, the daughter of Eliakim, and he begot by her in Babel Shalathiel (Salathiel); and Jehoiachin died in Babel. And Salathiel took to wife Hetbath, the daughter of Halkânâ, and he begot by her Zûrbâbhel (Zerubbabel), who took to wife Malkath, the daughter of Ezra the scribe; but no son was born to him by her in Babel. In the days of Zerubbabel, the prince of Judah, Cyrus the Persian reigned in Babel. [A reproduction of a sculptured relief of Cyrus is given on Plate I. The official account of his conquest of Babylon is found on a baked clay cylinder now in the British Museum. See Plate II.
           <hi type="bold" TEIform="hi">]</hi>
         </verse>
         <title canonical="false" type="sub" TEIform="title">Cyrus.</title>
@@ -1265,7 +1284,8 @@
           <hi type="italic" TEIform="hi">a</hi>, col. 1] celebrated a Passover when they went up from Babel. These are the three Passovers which the children of Israel kept; the first was [kept] in Egypt in the days of Moses; the the second was [kept] in the reign of Josiah; the third was [kept] when they went up from the land of Babel. And now an end hath been made to the Passover for them for ever. From the first captivity of Jerusalem, that in which Daniel went down into captivity, to the reign of Cyrus the Persian, was seventy years according to the prophecy of Jeremiah. And the children of Israel began the [re]building of the Temple in the days of Zerubbabel, and Joshua, the son of Yôzâdôk, and Ezra the scribe, and the building thereof was finished in six and forty years, even as it is written in the holy Gospel (John ii. 19).
         </verse>
         <title canonical="false" type="sub" TEIform="title">The genealogies of the later Israelites.</title>
-        <verse canonical="true" osisID="CaveOfTreasures.6.3">Now the genealogy of the tribes (or, families) was lost by [Fol. 37
+        <verse canonical="true" osisID="CaveOfTreasures.6.3">
+          <milestone type="page" n="194" marker="DEFAULT" TEIform="milestone"/>Now the genealogy of the tribes (or, families) was lost by [Fol. 37
           <hi type="italic" TEIform="hi">a</hi>, col. 2] the scribes, and they were unable to show either whence the heads of families took [their] wives, or whence they came. I, however, possess the knowledge of the correct genealogy, and will show the truth to everyman. When the children of Israel went up from Babylon--
         </verse>
         <verse canonical="true" osisID="CaveOfTreasures.6.4">Zerubbabel begot Abiud by Malkath, the daughter of Ezra the scribe.  Abiud took to wife Zakhyath, the daughter of Joshua, the son of Yôzâdâk, the priest, and begot by her Eliakim.  Eliakim took to wife Hâlâbh, the daughter of Dôrnîbh, and begot by her `Azôr.  `Azôr took to wife Yalpath, the daughter of Hazôr, and begot by her Zadok.  Zadok took to wife Kaltîn, the daughter of Dôrnibh, and begot by her Akhîn.  Akhîn took to wife Heskath, the daughter of Ta`îl, and begot by her Eliud.  Eliud took to wife Beshtîn, the daughter of [Fol. 37
@@ -1529,7 +1549,7 @@
         </verse>
         <title canonical="false" type="sub" TEIform="title">The Flight into Egypt.
           <note canonical="false" type="explanation" n="1" TEIform="note">This is the order in which this paragraph appears in the text, though in the "Genealogy of our Lord" (
-            <hi type="italic" TEIform="hi">see</hi> below, ) the circumcision and the presentation in the Temple precede the flight into Egypt.
+            <hi type="italic" TEIform="hi">see</hi> below, page 233) the circumcision and the presentation in the Temple precede the flight into Egypt.
           </note>
         </title>
         <verse canonical="true" osisID="CaveOfTreasures.6.92">And straightway the angel said unto Joseph, "Arise, take the young Child and His mother, and flee into Egypt." And when the registration was completed, the Jews were dismissed, so that each man might depart to his own district and to his own village.</verse>

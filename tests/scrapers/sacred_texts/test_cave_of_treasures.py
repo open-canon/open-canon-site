@@ -79,11 +79,13 @@ def test_page_marker_becomes_milestone_inside_the_verse(chapter1):
     )
 
 
-def test_leading_page_marker_paragraph_is_carried_to_next_block(chapter1):
-    """A page-marker-only paragraph before the first text attaches to that text."""
-    first = chapter1.blocks[0].parts
-    assert isinstance(first[0], pyosis.MilestoneCt)
-    assert first[0].n == "43"
+def test_leading_page_marker_is_carried_past_headings_to_next_verse(chapter1):
+    """A page marker before a heading is not lost: it lands on the next verse, not the title."""
+    assert not any(isinstance(p, pyosis.MilestoneCt) for p in chapter1.blocks[0].parts)
+    first_verse = chapter1.blocks[1]
+    assert first_verse.kind == "verse"
+    assert isinstance(first_verse.parts[0], pyosis.MilestoneCt)
+    assert first_verse.parts[0].n == "43"
 
 
 def test_folio_reference_stays_in_text(chapter1):
@@ -274,3 +276,31 @@ def test_plate_footer_navigation_is_not_caption(parser):
     )
     plate = parser.parse_plate(html, "bct_pl15")
     assert not any("Previous:" in c or "Next:" in c or "Christianity" in c for c in plate.caption)
+
+
+def test_folio_prefixed_heading_keeps_folio_on_next_verse(parser):
+    """``[Fol. 13b, col. 2] [Title].`` becomes the title, with the folio moved to the verse."""
+    html = (
+        "<html><body><p align='center'>[THE SECOND THOUSAND YEARS: X.]</p>"
+        "<p align='center'>[<font><a name='f'></a>Fol. 13<i>b</i>, col. 2] [The Rule of Enoch].</p>"
+        "<p>   And Enoch ruled.</p></body></html>"
+    )
+    chapter = parser.parse_chapter(html, 2)
+    assert [b.kind for b in chapter.blocks] == ["heading", "verse"]
+    assert cot._plain(chapter.blocks[0].parts) == "The Rule of Enoch"
+    assert cot._plain(chapter.blocks[1].parts) == "[Fol. 13b, col. 2] And Enoch ruled."
+
+
+def test_internal_link_text_in_footnote_is_kept(parser):
+    """A footnote's ``#page_N`` cross-reference keeps its visible text."""
+    html = (
+        "<html><body><p>Text.<a name='page_9_fr_1'></a><a href='#page_9_note_1'>1</a></p>"
+        "<hr/><h3>Footnotes</h3>"
+        "<p><a name='page_9_note_1'></a><a href='#page_9_fr_1'>1</a> See below, "
+        "(<a href='#page_233'>page 233</a>) for more.</p></body></html>"
+    )
+    chapter = parser.parse_chapter(html, 1)
+    note = next(p for p in chapter.blocks[0].parts if isinstance(p, pyosis.NoteCt))
+    assert (
+        "".join(c for c in note.content if isinstance(c, str)) == "See below, (page 233) for more."
+    )
