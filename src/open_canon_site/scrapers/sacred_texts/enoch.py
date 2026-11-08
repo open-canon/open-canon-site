@@ -16,6 +16,12 @@ handled are:
   inside a line. A handful of numbers lose their period (``2 And``, ``2 .For``); those
   count only at the start of a paragraph or line and when they are the next verse.
 * ``boe081`` is headed ``CHAPTER LXXVII.`` but holds chapter LXXVIII.
+* Charles splits some verses into lettered parts (``6<i>a</i>.``) and moves them
+  around; a part of the next verse starts it, any other part stays with the verse in
+  progress. A bracketed passage (``[1. ...]``) is verse text, unlike editorial notes
+  such as ``[Lost passage ...]``.
+* A paragraph above a page's chapter heading is an editorial section heading
+  (``VI-XI. The Fall of the Angels ...``) and becomes a sub-title of that chapter.
 * Inline formatting uses ``<i>``/``<b>``/``<sup>``/``<sub>``; page numbers appear as
   ``<font color="green">p. 12</font>``; Charles's brackets (``⌈ ⌉``) are literal text.
 * Footnotes sit under an ``<h3>Footnotes</h3>`` heading as
@@ -87,6 +93,12 @@ FRONT_MATTER_BOILERPLATE: Final[set[str]] = {
 """Exact header and credit lines sacred-texts adds to front-matter pages; never emitted."""
 MISLABELLED_CHAPTER_PAGES: Final[dict[int, int]] = {81: 78}
 """Chapter number for pages whose heading is wrong: ``boe081`` repeats ``CHAPTER LXXVII.``."""
+MISNESTED_LETTER_RE: Final[re.Pattern[str]] = re.compile(r"<i>\s*<p>([a-z])</i>", re.IGNORECASE)
+"""A sub-verse letter whose ``<i>`` wraps the opening of its paragraph (``<i><p>i</i>``)."""
+VERSE_MARKER_RE: Final[re.Pattern[str]] = re.compile(r"^\[?(\d+)(?P<letter>[a-z])?\s*\.\s+")
+"""A verse number opening a paragraph: ``3.``, ``[1.`` (bracketed passage) or ``6a.``."""
+LEADING_NUMBER_RE: Final[re.Pattern[str]] = re.compile(r"^(\s*\[?)\d+\s*\.?\s*")
+"""A verse number (and its period) at the start of a string, keeping a leading ``[``."""
 PARAGRAPH_CONTINUES: Final[str] = "[paragraph continues]"
 """Marker the site puts at the start of a paragraph that runs on after a page break."""
 
@@ -690,6 +702,35 @@ class SacredTextsParser:
         )
 
     @staticmethod
+    def _strip_leading_number(parts: list[InlinePart]) -> list[InlinePart]:
+        """Return ``parts`` without the verse number that opens them.
+
+        ``"3. And"`` loses ``"3. "``; ``"[1. In"`` keeps its bracket. A lettered sub-verse
+        (``6<i>a</i>. In``) parses as ``"6"``, an italic ``a`` and ``". In"``: only the
+        digits go, so the letter stays as Charles printed it.
+
+        Args:
+            parts: Inline parts of a paragraph or poetry line; not modified.
+
+        Returns:
+            A new list without the number.
+        """
+        result = list(parts)
+        if not result or not isinstance(result[0], str):
+            return result
+        bare = re.fullmatch(r"(\s*\[?)\d+", result[0])
+        if bare and len(result) > 1 and isinstance(result[1], pyosis.HiCt):
+            if bare.group(1).strip():
+                result[0] = bare.group(1).strip()
+            else:
+                result.pop(0)
+            return result
+        result[0] = LEADING_NUMBER_RE.sub(r"\1", result[0])
+        if not result[0]:
+            result.pop(0)
+        return result
+
+    @staticmethod
     def _lstrip_parts(parts: list[InlinePart]) -> list[InlinePart]:
         """Return a copy of ``parts`` with leading whitespace removed from a first string.
 
@@ -901,6 +942,14 @@ class SacredTextsParser:
                     start_verse(next_verse)
                     stripped = line[0][m.end() :]
                     line = [stripped, *line[1:]] if stripped.strip() else line[1:]
+                elif (
+                    re.fullmatch(rf"\s*{re.escape(str(next_verse))}", line[0])
+                    and len(line) > 1
+                    and isinstance(line[1], pyosis.HiCt)
+                ):
+                    # A lettered sub-verse ("7<i>c</i>. And ...") keeps its letter.
+                    start_verse(next_verse)
+                    line = line[1:]
 
             for i, (seg_verse, seg_parts) in enumerate(
                 self.split_multi_verse_content(line, current_verse)
@@ -991,6 +1040,9 @@ class SacredTextsParser:
             page_num: Page number (used to identify front matter pages 0-3); the
                 default ``-1`` means a body page.
         """
+        # boe008 opens a stanza with "<i><p>i</i>. And ...": the misnested italic would
+        # close the paragraph after its letter and drop the rest of the stanza.
+        html = MISNESTED_LETTER_RE.sub(r"<p><i>\1</i>", html)
         soup = BeautifulSoup(legacy_html(html), "html.parser")
 
         # Extract footnotes first (they'll be inserted inline)
@@ -1014,7 +1066,14 @@ class SacredTextsParser:
             return
 
         # Walk headings and paragraphs in document order so each paragraph lands in
-        # the chapter whose heading precedes it.
+        # the chapter whose heading precedes it. Paragraphs above the page's chapter
+        # heading are an editorial section heading ("VI-XI. The Fall of the Angels"),
+        # which becomes a sub-title of that chapter rather than verse text.
+        chapter_heading = soup.find(
+            lambda tag: tag.name == "h3" and "CHAPTER" in tag.get_text().upper()
+        )
+        before_heading = set(chapter_heading.find_all_previous("p")) if chapter_heading else set()
+        section_headings: list[list[InlinePart]] = []
         for element in soup.find_all(["h3", "p"]):
             if element.name == "h3":
                 text = element.get_text().strip()
@@ -1029,6 +1088,15 @@ class SacredTextsParser:
                         clean_title = re.sub(r"\s+", " ", text).strip()
                         self.start_chapter(chapter_num, clean_title)
                         LOGGER.debug(f"Started chapter {chapter_num}: {clean_title}")
+                        for heading in section_headings:
+                            self.current_div.content.append(
+                                pyosis.TitleCt(
+                                    type_value=pyosis.OsisTitles.SUB,
+                                    canonical=False,
+                                    content=heading,
+                                )
+                            )
+                        section_headings = []
                 continue
 
             p = element
@@ -1050,24 +1118,41 @@ class SacredTextsParser:
                 continue
             if text.startswith("p.") and len(text) < 10:
                 continue
-            if text.startswith("[") or "Next:" in text or "Previous:" in text:
-                continue
+            if (text.startswith("[") and not VERSE_MARKER_RE.match(text)) or (
+                "Next:" in text or "Previous:" in text
+            ):
+                continue  # editorial notes such as "[Lost passage ...]"
             if "Sacred Texts" in text or "Index" in text or "«" in text or "»" in text:
                 continue
             if text in FRONT_MATTER_BOILERPLATE:
                 continue  # the title banner the archive pages carry above every chapter
             if text.startswith("⌈") and text.endswith("⌉") and len(text) < 20:
                 continue  # Skip standalone bracketed notes
+            if element in before_heading:
+                parts = self._lstrip_parts(self.parse_inline_annotations(p))
+                if parts:
+                    section_headings.append(parts)
+                continue
             if not self.current_chapter:
                 continue
 
-            # Check if text starts with a verse number
-            verse_match = re.match(r"^(\d+)\.\s+", text)
-            if not verse_match and self.current_verse is not None:
+            # Check if text starts with a verse number ("3.", "[1.", "6a.")
+            verse_match = VERSE_MARKER_RE.match(text)
+            expected = (self.current_verse or 0) + 1
+            if not verse_match:
                 # A few verse numbers lose their period ("2 And I") or misplace it ("2 .For").
                 bare = re.match(r"^(\d+)\s+\.?\s*(?=[A-Z])", text)
-                if bare and int(bare.group(1)) == self.current_verse + 1:
+                if bare and int(bare.group(1)) == expected:
                     verse_match = bare
+            if (
+                verse_match
+                and verse_match.groupdict().get("letter")
+                and int(verse_match.group(1)) != expected
+            ):
+                # Charles moves lettered parts of verses around ("6d." after "7c." in
+                # chapter V, "5a." before 2 in chapter LI); only the next verse's part
+                # starts it, the others stay with the verse in progress.
+                verse_match = None
             if not verse_match:
                 self._add_unnumbered_paragraph(p)
                 continue
@@ -1077,20 +1162,14 @@ class SacredTextsParser:
             # Parse the verse content preserving inline annotations
             verse_content = self.parse_verse_text(p)
 
-            # Remove verse number from the beginning of all content
-            verse_content.text = re.sub(r"^\d+\s*\.?\s*", "", verse_content.text)
-
-            # Remove verse number from content_parts
-            if verse_content.content_parts and isinstance(verse_content.content_parts[0], str):
-                verse_content.content_parts[0] = re.sub(
-                    r"^\s*\d+\s*\.?\s*", "", verse_content.content_parts[0]
-                )
+            # Remove the verse number (keeping a lettered sub-verse's letter)
+            verse_content.content_parts = self._strip_leading_number(verse_content.content_parts)
+            verse_content.text = extract_plain_text(verse_content.content_parts).strip()
 
             if verse_content.has_poetry and verse_content.poetry_lines:
-                # Remove verse number from the first poetry line
-                first_line = verse_content.poetry_lines[0]
-                if first_line and isinstance(first_line[0], str):
-                    first_line[0] = re.sub(r"^\s*\d+\s*\.?\s*", "", first_line[0])
+                verse_content.poetry_lines[0] = self._strip_leading_number(
+                    verse_content.poetry_lines[0]
+                )
 
                 # Split poetry lines into individual per-verse segments
                 for seg_verse_num, seg_lines in self.split_multi_verse_poetry_lines(

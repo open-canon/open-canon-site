@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="1En" osisRefWork="1 Enoch" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T00:59:57</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T07:14:17</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/boe/, and converted to OSIS by Andrew P. Sansom.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -358,14 +358,22 @@
             <l TEIform="l"> And the years of your life shall perish,</l>
             <l TEIform="l"> And ⌈the years of your destruction⌉ shall be multiplied in eternal execration,</l>
             <l TEIform="l"> And ye shall find no mercy.</l>
-            <l TEIform="l">6
+          </lgCT>
+        </verse>
+        <verse canonical="true" osisID="1En.5.6">
+          <lgCT TEIform="lg">
+            <l TEIform="l">
               <hi type="italic" TEIform="hi">a</hi>. In those days ye shall make your names an eternal execration unto all the righteous,
             </l>
             <l TEIform="l">
               <hi type="italic" TEIform="hi">b</hi>. And by you shall ⌈all⌉ who curse, curse,
             </l>
             <l TEIform="l"> And all the sinners ⌈and godless⌉ shall imprecate by you,</l>
-            <l TEIform="l"> 7
+          </lgCT>
+        </verse>
+        <verse canonical="true" osisID="1En.5.7">
+          <lgCT TEIform="lg">
+            <l TEIform="l">
               <hi type="italic" TEIform="hi">c</hi>. And for you the godless there shall be a curse.
             </l>
             <l TEIform="l">6
@@ -381,12 +389,31 @@
             <l TEIform="l">
               <hi type="italic" TEIform="hi">g</hi>. There shall be salvation unto them, a goodly light.
             </l>
-            <l TEIform="l">i</l>
-            <l TEIform="l">8 And then there shall be bestowed upon the elect wisdom,</l>
+            <l TEIform="l">
+              <hi type="italic" TEIform="hi">i</hi>. And for all of you sinners there shall be no salvation,
+            </l>
+            <l TEIform="l">
+              <hi type="italic" TEIform="hi">j</hi> But on you all shall abide a curse.
+            </l>
+            <l TEIform="l"> 7
+              <hi type="italic" TEIform="hi">a</hi>. But for the elect there shall be light and joy and peace,
+            </l>
+            <l TEIform="l">
+              <hi type="italic" TEIform="hi">b</hi>. And they shall inherit the earth.
+            </l>
+          </lgCT>
+        </verse>
+        <verse canonical="true" osisID="1En.5.8">
+          <lgCT TEIform="lg">
+            <l TEIform="l">And then there shall be bestowed upon the elect wisdom,</l>
             <l TEIform="l"> And they shall all live and never again sin,</l>
             <l TEIform="l"> Either through ungodliness or through pride:</l>
             <l TEIform="l"> But they who are wise shall be humble.</l>
-            <l TEIform="l">9 And they shall not again transgress,</l>
+          </lgCT>
+        </verse>
+        <verse canonical="true" osisID="1En.5.9">
+          <lgCT TEIform="lg">
+            <l TEIform="l">And they shall not again transgress,</l>
             <l TEIform="l"> Nor shall they sin all the days of their life,</l>
             <l TEIform="l"> Nor shall they die of (the divine) anger or wrath,</l>
             <l TEIform="l"> But they shall complete the number of the days of their life.</l>
@@ -394,14 +421,14 @@
             <l TEIform="l"> And the years of their joy shall be multiplied,</l>
             <l TEIform="l"> In eternal gladness and peace,</l>
             <l TEIform="l"> All the days of their life.</l>
-            <l TEIform="l">VI-XI. 
-              <hi type="italic" TEIform="hi">The Fall of the Angels: the Demoralisation of Mankind: the Intercession of the Angels on behalf of Mankind. The Dooms pronounced by God on the Angels: the Messianic Kingdom</hi> (a Noah fragment).
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.6" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER VI.</title>
+        <title canonical="false" type="sub" TEIform="title">VI-XI. 
+          <hi type="italic" TEIform="hi">The Fall of the Angels: the Demoralisation of Mankind: the Intercession of the Angels on behalf of Mankind. The Dooms pronounced by God on the Angels: the Messianic Kingdom</hi> (a Noah fragment).
+        </title>
         <verse canonical="true" osisID="1En.6.1">And it came to pass when the children of men had multiplied that in those days were born unto them beautiful and comely daughters.</verse>
         <verse canonical="true" osisID="1En.6.2">And the angels, the children of the heaven, saw and lusted after them, and said to one another: 'Come, let us choose us wives from among the children of men and beget us children.'</verse>
         <verse canonical="true" osisID="1En.6.3">And Semjâzâ, who was their leader, said unto them: 'I fear ye will not indeed agree to do this deed, and I alone shall have to pay the penalty of a great sin.'</verse>
@@ -471,12 +498,14 @@
         <title canonical="false" type="main" TEIform="title">CHAPTER XI.</title>
         <verse canonical="true" osisID="1En.11.1">And in those days I will open the store chambers of blessing which are in the heaven, so as to send them down ⌈upon the earth⌉ over the work and labour of the children of men.</verse>
         <verse canonical="true" osisID="1En.11.2">And truth and peace shall be associated together throughout all the days of the world and throughout all the generations 
-          <hi type="bold" TEIform="hi">of men</hi>.' XII-XVI. 
-          <hi type="italic" TEIform="hi">Dream Vision of Enoch: his intercession for Azâzêl and the fallen Angels: and his announcement to them of their first and final doom</hi>.
+          <hi type="bold" TEIform="hi">of men</hi>.'
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.12" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XII.</title>
+        <title canonical="false" type="sub" TEIform="title">XII-XVI. 
+          <hi type="italic" TEIform="hi">Dream Vision of Enoch: his intercession for Azâzêl and the fallen Angels: and his announcement to them of their first and final doom</hi>.
+        </title>
         <verse canonical="true" osisID="1En.12.1">Before these things Enoch was hidden, and no one of the children of men knew where he was hidden, and where he abode, and what had become of him.</verse>
         <verse canonical="true" osisID="1En.12.2">And his activities had to do with the Watchers, and his days were with the holy ones.</verse>
         <verse canonical="true" osisID="1En.12.3">And I, Enoch was blessing the Lord of 
@@ -537,13 +566,16 @@
       <div canonical="true" type="chapter" osisID="1En.16" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XVI.</title>
         <verse canonical="true" osisID="1En.16.1">From the days of the slaughter and destruction and death ⌈of the giants⌉, from the souls of whose flesh the spirits, having gone forth, shall destroy without incurring judgement--thus shall they destroy until the day of the consummation, the great ⌈judgement⌉ in which the age shall be consummated, over the Watchers and the godless, yea, shall be wholly consummated."</verse>
-        <verse canonical="true" osisID="1En.16.2">And now as to the Watchers who have sent thee to intercede for them, who had been ⌈⌈aforetime⌉⌉ in heaven, (say to them): "You have been in heaven, but ⌈all⌉ the mysteries had not yet been revealed to you, and you knew worthless ones, and these in the hardness of your hearts you have made known to the women, and through these mysteries women and men work much evil on earth." 4. Say to them therefore: "You have no peace."' XVII-XXXVII. 
-          <hi type="italic" TEIform="hi">Enoch's Journeys through the Earth and Sheol</hi>. XVII-XIX. 
-          <hi type="italic" TEIform="hi">The First Journey</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.16.2">And now as to the Watchers who have sent thee to intercede for them, who had been ⌈⌈aforetime⌉⌉ in heaven, (say to them): "You have been in heaven, but ⌈all⌉ the mysteries had not yet been revealed to you, and you knew worthless ones, and these in the hardness of your hearts you have made known to the women, and through these mysteries women and men work much evil on earth." 4. Say to them therefore: "You have no peace."'</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.17" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XVII.</title>
+        <title canonical="false" type="sub" TEIform="title">XVII-XXXVII. 
+          <hi type="italic" TEIform="hi">Enoch's Journeys through the Earth and Sheol</hi>.
+        </title>
+        <title canonical="false" type="sub" TEIform="title">XVII-XIX. 
+          <hi type="italic" TEIform="hi">The First Journey</hi>.
+        </title>
         <verse canonical="true" osisID="1En.17.1">And they took ⌈and⌉ brought me to a place in which those who were there were like flaming fire, and, when they wished, they appeared as men.</verse>
         <verse canonical="true" osisID="1En.17.2">And they brought me to the place of darkness, and to a mountain the point of whose summit reached to heaven.</verse>
         <verse canonical="true" osisID="1En.17.3">And I saw the places of the luminaries ⌈and the treasuries of the stars⌉ and of the thunder ⌈and⌉ in the 
@@ -569,12 +601,13 @@
         <title canonical="false" type="main" TEIform="title">CHAPTER XIX.</title>
         <verse canonical="true" osisID="1En.19.1">And Uriel said to me: 'Here shall stand the angels who have connected themselves with women, and their spirits assuming many different forms are defiling mankind and shall lead them astray into sacrificing to demons ⌈⌈as gods⌉⌉, (here shall they stand,) till ⌈⌈the day of⌉⌉ the great judgement in which they shall be judged till they are made an end of.</verse>
         <verse canonical="true" osisID="1En.19.2">And the women also of the angels who went astray shall become sirens.'</verse>
-        <verse canonical="true" osisID="1En.19.3">And I, Enoch, alone saw the vision, the ends of all things: and no man shall see as I have seen. XX. 
-          <hi type="italic" TEIform="hi">Name and Functions of the Seven Archangels</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.19.3">And I, Enoch, alone saw the vision, the ends of all things: and no man shall see as I have seen.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.20" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XX.</title>
+        <title canonical="false" type="sub" TEIform="title">XX. 
+          <hi type="italic" TEIform="hi">Name and Functions of the Seven Archangels</hi>.
+        </title>
         <verse canonical="true" osisID="1En.20.1">And these are the names of the holy angels who watch.</verse>
         <verse canonical="true" osisID="1En.20.2">Uriel, one of the holy angels, who is over the world and over Tartarus.</verse>
         <verse canonical="true" osisID="1En.20.3">Raphael, one of the holy angels, who is over the spirits of men.</verse>
@@ -582,12 +615,13 @@
         <verse canonical="true" osisID="1En.20.5">Michael, one of the holy angels, to wit, he that is set over the best part of mankind ⌈⌈and⌉⌉ over chaos.</verse>
         <verse canonical="true" osisID="1En.20.6">Saraqâêl, one of the holy angels, who is set over the spirits, who sin in the spirit.</verse>
         <verse canonical="true" osisID="1En.20.7">Gabriel, one of the holy angels, who is over Paradise and the serpents and the Cherubim.</verse>
-        <verse canonical="true" osisID="1En.20.8">Remiel, one of the holy angels, whom God set over those who rise. XXI. 
-          <hi type="italic" TEIform="hi">Preliminary and final place of punishment of the fallen angels (stars)</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.20.8">Remiel, one of the holy angels, whom God set over those who rise.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.21" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXI.</title>
+        <title canonical="false" type="sub" TEIform="title">XXI. 
+          <hi type="italic" TEIform="hi">Preliminary and final place of punishment of the fallen angels (stars)</hi>.
+        </title>
         <verse canonical="true" osisID="1En.21.1">And I proceeded to where things were chaotic.</verse>
         <verse canonical="true" osisID="1En.21.2">And I saw there something horrible: I saw neither a heaven above nor a firmly founded earth, but a place chaotic and horrible.</verse>
         <verse canonical="true" osisID="1En.21.3">And there I saw seven stars of the heaven bound together in it, like great mountains and burning with fire.</verse>
@@ -597,12 +631,13 @@
         <verse canonical="true" osisID="1En.21.7">And from thence I went to another place, which was still more horrible than the former, and I saw a horrible thing: a great fire there which burnt and blazed, and the place was cleft as far as the abyss, being full of great descending columns of fire: neither its extent or magnitude could I see, nor could I conjecture.</verse>
         <verse canonical="true" osisID="1En.21.8">Then I said: 'How fearful is the place and how terrible to look upon!'</verse>
         <verse canonical="true" osisID="1En.21.9">Then Uriel answered me, one of the holy angels who was with me, and said unto me: 'Enoch, why hast thou such fear and affright?' And I answered: 'Because of this fearful place, and because of the spectacle of the pain.'</verse>
-        <verse canonical="true" osisID="1En.21.10">And he said ⌈⌈unto me⌉⌉: 'This place is the prison of the angels, and here they will be imprisoned for ever.' XXII. 
-          <hi type="italic" TEIform="hi">Sheol, or the Underworld</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.21.10">And he said ⌈⌈unto me⌉⌉: 'This place is the prison of the angels, and here they will be imprisoned for ever.'</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.22" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXII.</title>
+        <title canonical="false" type="sub" TEIform="title">XXII. 
+          <hi type="italic" TEIform="hi">Sheol, or the Underworld</hi>.
+        </title>
         <verse canonical="true" osisID="1En.22.1">And thence I went to another place, and he showed me in the west ⌈another⌉ great and high mountain [and] of hard rock. 
           <hi type="bold" TEIform="hi">E</hi>
         </verse>
@@ -656,21 +691,24 @@
           <hi type="super" TEIform="hi">g</hi> when they die and are buried in the earth and judgement has not been executed upon them in their lifetime. 11. Here their spirits shall be set apart in this great pain, till the great day of judgement, scourgings, and torments of the accursed for ever, 
           <hi type="bold" TEIform="hi">so that</hi> (there maybe) retribution for their spirits. There He shall bind them for ever. 12. And 
           <hi type="bold" TEIform="hi">this</hi> division has been made for the spirits of those who make their suit, who make disclosures concerning their destruction, when they were slain in the days of the sinners. 13. And 
-          <hi type="bold" TEIform="hi">this</hi> has been made for the spirits of men who shall not be righteous but sinners, who are godless, and of the lawless they shall be companions: but their spirits shall not be punished in the day of judgement nor shall they be raised from thence. 14. Then I blessed the Lord of Glory and said: 'Blessed art Thou, Lord of righteousness, who rulest over the world.' XXIII. 
-          <hi type="italic" TEIform="hi">The Fire that deals with the Luminaries of Heaven</hi>.
+          <hi type="bold" TEIform="hi">this</hi> has been made for the spirits of men who shall not be righteous but sinners, who are godless, and of the lawless they shall be companions: but their spirits shall not be punished in the day of judgement nor shall they be raised from thence. 14. Then I blessed the Lord of Glory and said: 'Blessed art Thou, Lord of righteousness, who rulest over the world.'
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.23" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXIII.</title>
+        <title canonical="false" type="sub" TEIform="title">XXIII. 
+          <hi type="italic" TEIform="hi">The Fire that deals with the Luminaries of Heaven</hi>.
+        </title>
         <verse canonical="true" osisID="1En.23.1">From thence I went to another place to the west of the ends of the earth.</verse>
         <verse canonical="true" osisID="1En.23.2">And I saw a ⌈⌈burning⌉⌉ fire which ran without resting, and paused not from its course day or night but (ran) regularly.</verse>
         <verse canonical="true" osisID="1En.23.3">And I asked saying: 'What is this which rests not?'</verse>
-        <verse canonical="true" osisID="1En.23.4">Then Raguel, one of the holy angels who was with me, answered me ⌈⌈and said unto me⌉⌉: 'This course ⌈of fire⌉⌈⌈which thou hast seen⌉⌉ is the fire in the west which †persecutes† all the luminaries of heaven.' XXIV. XXV. 
-          <hi type="italic" TEIform="hi">The Seven Mountains in the North-West and the Tree of Life</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.23.4">Then Raguel, one of the holy angels who was with me, answered me ⌈⌈and said unto me⌉⌉: 'This course ⌈of fire⌉⌈⌈which thou hast seen⌉⌉ is the fire in the west which †persecutes† all the luminaries of heaven.'</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.24" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXIV.</title>
+        <title canonical="false" type="sub" TEIform="title">XXIV. XXV. 
+          <hi type="italic" TEIform="hi">The Seven Mountains in the North-West and the Tree of Life</hi>.
+        </title>
         <verse canonical="true" osisID="1En.24.1">⌈⌈And from thence I went to another place of the earth⌉⌉, and he showed me a mountain range of fire which burnt ⌈⌈day and night⌉⌉.</verse>
         <verse canonical="true" osisID="1En.24.2">And I went beyond it and saw seven magnificent mountains all differing each from the other, and the stones (thereof) were magnificent and beautiful, magnificent as a whole, of glorious appearance and fair exterior: ⌈⌈three towards⌉⌉ the east, ⌈⌈one⌉⌉ founded on the other, and three towards the south, one upon the other, and deep rough ravines, no one of which joined with any other.</verse>
         <verse canonical="true" osisID="1En.24.3">And the seventh mountain was in the midst of these, and it excelled them in height, resembling the seat of a throne: and fragrant trees encircled the throne.</verse>
@@ -691,23 +729,24 @@
             <l TEIform="l"> And in their days shall no ⌈⌈sorrow or⌉⌉ plague</l>
             <l TEIform="l"> Or torment or calamity touch them.'</l>
             <l TEIform="l">7 Then blessed I the God of Glory, the Eternal King, who hath prepared such things for the righteous, and hath created them and promised to give to them.</l>
-            <l TEIform="l">Jerusalem and the Mountains, Ravines and Streams</l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.26" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXVI.</title>
+        <title canonical="false" type="sub" TEIform="title">Jerusalem and the Mountains, Ravines and Streams</title>
         <verse canonical="true" osisID="1En.26.1">And I went from thence to the middle of the earth, and I saw a blessed place ⌈in which there were trees⌉ with branches abiding and blooming [of a dismembered tree].</verse>
         <verse canonical="true" osisID="1En.26.2">And there I saw a holy mountain, ⌈⌈and⌉⌉ underneath the mountain to the east there was a stream and it flowed towards the south.</verse>
         <verse canonical="true" osisID="1En.26.3">And I saw towards the east another mountain higher than this, and between them a deep and narrow ravine: in it also ran a stream ⌈underneath⌉ the mountain.</verse>
         <verse canonical="true" osisID="1En.26.4">And to the west thereof there was another mountain, lower than the former and of small elevation, and a ravine ⌈deep and dry⌉ between them: and another deep and dry ravine was at the extremities of the three ⌈mountains⌉.</verse>
         <verse canonical="true" osisID="1En.26.5">And all the ravines were deep ⌈⌈and narrow⌉⌉, (being formed) of hard rock, and trees were not planted upon them.</verse>
-        <verse canonical="true" osisID="1En.26.6">And I marveled ⌈⌈at the rocks, and I marveled⌉⌉ at the ravine, yea, I marveled very much. XXVII. 
-          <hi type="italic" TEIform="hi">The Purpose of the Accursed Valley</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.26.6">And I marveled ⌈⌈at the rocks, and I marveled⌉⌉ at the ravine, yea, I marveled very much.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.27" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXVII.</title>
+        <title canonical="false" type="sub" TEIform="title">XXVII. 
+          <hi type="italic" TEIform="hi">The Purpose of the Accursed Valley</hi>.
+        </title>
         <verse canonical="true" osisID="1En.27.1">Then said I: 'For what object is this blessed land, which is entirely filled with trees, and this accursed valley ⌈⌈between⌉⌉?'</verse>
         <verse canonical="true" osisID="1En.27.2">⌈⌈Then Uriel, one of the holy angels who was with me, answered and said: 'This⌉⌉ accursed valley is for those who are accursed for ever: Here shall all ⌈the accursed⌉ be gathered together who utter with their lips against the Lord unseemly words and of His glory speak hard things. 
           <hi type="bold" TEIform="hi">E</hi> Here shall they be gathered together, and here shall be their place of judgement.
@@ -717,12 +756,13 @@
           <hi type="bold" TEIform="hi">godly</hi> bless the Lord of Glory, the Eternal Kin.
         </verse>
         <verse canonical="true" osisID="1En.27.4">In the days of judgement over the former, they shall bless Him for the mercy in accordance with which He has assigned them (their lot).'</verse>
-        <verse canonical="true" osisID="1En.27.5">Then I blessed the Lord of Glory and set forth His ⌈glory⌉ and lauded Him gloriously. XXVIII-XXXIII. 
-          <hi type="italic" TEIform="hi">Further Journey to the East</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.27.5">Then I blessed the Lord of Glory and set forth His ⌈glory⌉ and lauded Him gloriously.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.28" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXVIII</title>
+        <title canonical="false" type="sub" TEIform="title">XXVIII-XXXIII. 
+          <hi type="italic" TEIform="hi">Further Journey to the East</hi>.
+        </title>
         <verse canonical="true" osisID="1En.28.1">And thence I went ⌈⌈towards the east⌉⌉, into the midst ⌈⌈of the mountain range of the desert⌉⌉, and I saw a wilderness and it was solitary, full of trees 
           <hi type="bold" TEIform="hi">and plant</hi>s.
         </verse>
@@ -738,7 +778,7 @@
       </div>
       <div canonical="true" type="chapter" osisID="1En.30" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXX.</title>
-        <verse canonical="true" osisID="1En.30.1">1 .And beyond these, I went afar to the east, and I saw another place, a valley (full) of water.</verse>
+        <verse canonical="true" osisID="1En.30.1">And beyond these, I went afar to the east, and I saw another place, a valley (full) of water.</verse>
         <verse canonical="true" osisID="1En.30.2">And ⌈therein there was⌉ a tree, the colour (?) of fragrant trees such as the mastic.</verse>
         <verse canonical="true" osisID="1En.30.3">And on the sides of those valleys I saw fragrant cinnamon. And beyond these I proceeded to the east.</verse>
       </div>
@@ -777,46 +817,52 @@
         <verse canonical="true" osisID="1En.33.1">And from thence I went to the ends of the earth and saw there great beasts, and each differed from the other; and (I saw) birds also differing in appearance and beauty and voice, the one differing from the other.</verse>
         <verse canonical="true" osisID="1En.33.2">And to the east of those beasts I saw the ends of the earth whereon the heaven rests, and the portals of the heaven open.</verse>
         <verse canonical="true" osisID="1En.33.3">And I saw how the stars of heaven come forth, and I counted the portals out of which they proceed, and wrote down all their outlets, of each individual star by itself, according to their number and their names, their courses and their positions, and their times and their months, as Uriel the holy angel who was with me showed me.</verse>
-        <verse canonical="true" osisID="1En.33.4">He showed all things to me and wrote them down for me: also their names he wrote for me, and their laws and their companies. XXXIV. XXXV. 
-          <hi type="italic" TEIform="hi">Enoch's Journey to the North</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.33.4">He showed all things to me and wrote them down for me: also their names he wrote for me, and their laws and their companies.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.34" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXXIV.</title>
+        <title canonical="false" type="sub" TEIform="title">XXXIV. XXXV. 
+          <hi type="italic" TEIform="hi">Enoch's Journey to the North</hi>.
+        </title>
         <verse canonical="true" osisID="1En.34.1">And from thence I went towards the north to the ends of the earth, and there I saw a great and glorious device at the ends of the whole earth.</verse>
         <verse canonical="true" osisID="1En.34.2">And here I saw three portals of heaven open in the heaven: through each of them proceed north winds: when they blow there is cold, hail, frost, snow, dew, and rain.</verse>
         <verse canonical="true" osisID="1En.34.3">And out of one portal they blow for good: but when they blow through the other two portals, it is with violence and affliction on the earth, and they blow with violence.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.35" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXXV.</title>
-        <verse canonical="true" osisID="1En.35.1">And from thence I went towards the west to the ends of the earth, and saw there three portals of the heaven open such as I had seen in the †east†, the same number of portals, and the same number of outlets. XXXVI. 
-          <hi type="italic" TEIform="hi">The Journey to the South</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.35.1">And from thence I went towards the west to the ends of the earth, and saw there three portals of the heaven open such as I had seen in the †east†, the same number of portals, and the same number of outlets.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.36" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXXVI.</title>
+        <title canonical="false" type="sub" TEIform="title">XXXVI. 
+          <hi type="italic" TEIform="hi">The Journey to the South</hi>.
+        </title>
         <verse canonical="true" osisID="1En.36.1">And from thence I went to the south to the ends of the earth, and saw there three open portals of the heaven: and thence there come dew, rain, †and wind†.</verse>
         <verse canonical="true" osisID="1En.36.2">And from thence I went to the east to the ends of the heaven, and saw here the three eastern portals of heaven open and small portals above them.</verse>
         <verse canonical="true" osisID="1En.36.3">Through each of these small portals pass the stars of heaven and run their course to the west on the path which is shown to them.</verse>
         <verse canonical="true" osisID="1En.36.4">And as often as I saw I blessed always the Lord of Glory, and I continued to bless the Lord of Glory who has wrought great and glorious wonders, to show the greatness of His work to the angels and to 
-          <hi type="bold" TEIform="hi">spirits</hi> and to men, that they might praise His work and all His creation: that they might see the work of His might and praise the great work of His hands and bless Him for ever. XXXVII-LXXI
+          <hi type="bold" TEIform="hi">spirits</hi> and to men, that they might praise His work and all His creation: that they might see the work of His might and praise the great work of His hands and bless Him for ever.
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.37" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXXVII.</title>
+        <title canonical="false" type="sub" TEIform="title">XXXVII-LXXI</title>
         <verse canonical="true" osisID="1En.37.1">The second vision which he saw, the vision of wisdom--which Enoch the son of Jared, the son of Mahalalel, the son of Cainan, the son of Enos, the son of Seth, the son of Adam, saw.</verse>
         <verse canonical="true" osisID="1En.37.2">And this is the beginning of the words of wisdom which I lifted up my voice to speak and say to those which dwell on earth: Hear, ye men of old time, and see, ye that come after, the words of the Holy One which I will speak before the Lord of Spirits.</verse>
         <verse canonical="true" osisID="1En.37.3">It were better to declare (them only) to the men of old time, but even from those that come after we will not withhold the beginning of wisdom.</verse>
         <verse canonical="true" osisID="1En.37.4">Till the present day such wisdom has never been given 
           <hi type="bold" TEIform="hi">by</hi> the Lord of Spirits as I have received according to my insight, according to the good pleasure of the Lord of Spirits by whom the lot of eternal life has been given to me.
         </verse>
-        <verse canonical="true" osisID="1En.37.5">Now three parables were imparted to me, and I lifted up my voice and recounted them to those that dwell on the earth. XXXVII-XLIV. 
-          <hi type="bold" TEIform="hi">The First Parable</hi>. XXXVIII. 
-          <hi type="italic" TEIform="hi">The Coming Judgement of the Wicked</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.37.5">Now three parables were imparted to me, and I lifted up my voice and recounted them to those that dwell on the earth.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.38" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXXVIII</title>
+        <title canonical="false" type="sub" TEIform="title">XXXVII-XLIV. 
+          <hi type="bold" TEIform="hi">The First Parable</hi>.
+        </title>
+        <title canonical="false" type="sub" TEIform="title">XXXVIII. 
+          <hi type="italic" TEIform="hi">The Coming Judgement of the Wicked</hi>.
+        </title>
         <verse canonical="true" osisID="1En.38.1">
           <lgCT TEIform="lg">
             <l TEIform="l">The First Parable.</l>
@@ -863,14 +909,14 @@
           <lgCT TEIform="lg">
             <l TEIform="l">And thenceforward none shall seek for themselves mercy from the Lord of Spirits</l>
             <l TEIform="l"> For their life is at an end.</l>
-            <l TEIform="l">XXXIX. 
-              <hi type="italic" TEIform="hi">The Abode of the Righteous and of the Elect One: the Praises of the Blessed</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.39" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXXIX.</title>
+        <title canonical="false" type="sub" TEIform="title">XXXIX. 
+          <hi type="italic" TEIform="hi">The Abode of the Righteous and of the Elect One: the Praises of the Blessed</hi>.
+        </title>
         <verse canonical="true" osisID="1En.39.1">[And it †shall come to pass in those days that elect and holy children †will descend from the high heaven, and their seed †will become one with the children of men.</verse>
         <verse canonical="true" osisID="1En.39.2">And in those days Enoch received books of zeal and wrath, and books of disquiet and expulsion.]
           <lgCT TEIform="lg">
@@ -899,10 +945,18 @@
             <l TEIform="l"> And righteousness flowed before them as water,</l>
             <l TEIform="l">And mercy like dew upon the earth:</l>
             <l TEIform="l"> Thus it is amongst them for ever and ever.</l>
-            <l TEIform="l">6
+          </lgCT>
+        </verse>
+        <verse canonical="true" osisID="1En.39.6">
+          <lgCT TEIform="lg">
+            <l TEIform="l">
               <hi type="italic" TEIform="hi">a</hi>. And in that place mine eyes saw the Elect One of righteousness and of faith,
             </l>
-            <l TEIform="l"> 7
+          </lgCT>
+        </verse>
+        <verse canonical="true" osisID="1En.39.7">
+          <lgCT TEIform="lg">
+            <l TEIform="l">
               <hi type="italic" TEIform="hi">a</hi>. And I saw his dwelling-place under the wings of the Lord of Spirits.
             </l>
             <l TEIform="l"> 6
@@ -916,7 +970,11 @@
             <l TEIform="l">And their lips extol the name of the Lord of Spirits,</l>
             <l TEIform="l"> And righteousness before Him shall never fail,</l>
             <l TEIform="l">[And uprightness shall never fail before Him.]</l>
-            <l TEIform="l"> 8. There I wished to dwell,</l>
+          </lgCT>
+        </verse>
+        <verse canonical="true" osisID="1En.39.8">
+          <lgCT TEIform="lg">
+            <l TEIform="l">There I wished to dwell,</l>
             <l TEIform="l"> And my spirit longed for that dwelling-place:</l>
             <l TEIform="l">And there heretofore hath been my portion,</l>
             <l TEIform="l"> For so has it been established concerning me before the Lord of Spirits.</l>
@@ -927,12 +985,13 @@
         <verse canonical="true" osisID="1En.39.11">And before Him there is no ceasing. He knows before the world was created what is for ever and what will be from generation unto generation.</verse>
         <verse canonical="true" osisID="1En.39.12">Those who sleep not bless Thee: they stand before Thy glory and bless, praise, and extol, saying: "Holy, holy, holy, is the Lord of Spirits: He filleth the earth with spirits."'</verse>
         <verse canonical="true" osisID="1En.39.13">And here my eyes saw all those who sleep not: they stand before Him and bless and say: 'Blessed be Thou, and blessed be the name of the Lord for ever and ever.'</verse>
-        <verse canonical="true" osisID="1En.39.14">And my face was changed; for I could no longer behold. XL. XLI. 2. 
-          <hi type="italic" TEIform="hi">The Four Archangels</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.39.14">And my face was changed; for I could no longer behold.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.40" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XL.</title>
+        <title canonical="false" type="sub" TEIform="title">XL. XLI. 2. 
+          <hi type="italic" TEIform="hi">The Four Archangels</hi>.
+        </title>
         <verse canonical="true" osisID="1En.40.1">And after that I saw thousands of thousands and ten thousand times ten thousand, I saw a multitude beyond number and reckoning, who stood before the Lord of Spirits.</verse>
         <verse canonical="true" osisID="1En.40.2">And on the four sides of the Lord of Spirits I saw four presences, different from those that sleep not, and I learnt their names: for the angel that went with me made known to me their names, and showed me all the hidden things.</verse>
         <verse canonical="true" osisID="1En.40.3">And I heard the voices of those four presences as they uttered praises before the Lord of glory.</verse>
@@ -956,7 +1015,7 @@
         <verse canonical="true" osisID="1En.41.4">And there I saw closed chambers out of which the winds are divided, the chamber of the hail and winds, the chamber of the mist, and of the clouds, and the cloud thereof hovers over the earth from the beginning of the world.</verse>
         <verse canonical="true" osisID="1En.41.5">And I saw the chambers of the sun and moon, whence they proceed and whither they come again, and their glorious return, and how one is superior to the other, and their stately orbit, and how they do not leave their orbit, and they add nothing to their orbit and they take nothing from it, and they keep faith with each other, in accordance with the oath by which they are bound together.</verse>
         <verse canonical="true" osisID="1En.41.6">And first the sun goes forth and traverses his path according to the commandment of the Lord of Spirits, and mighty is His name for ever and ever.</verse>
-        <verse canonical="true" osisID="1En.41.7">And after that I saw the hidden and the visible path of the moon, and she accomplishes the course of her path in that place by day and by night--the one holding a position opposite to the other before the Lord of Spirits.
+        <verse canonical="true" osisID="1En.41.7">  And after that I saw the hidden and the visible path of the moon, and she accomplishes the course of her path in that place by day and by night--the one holding a position opposite to the other before the Lord of Spirits.
           <lgCT TEIform="lg">
             <l TEIform="l">And they give thanks and praise and rest not;</l>
             <l TEIform="l"> For unto them is their thanksgiving rest.</l>
@@ -973,12 +1032,13 @@
             <l TEIform="l"> In the name of His righteousness.</l>
           </lgCT>
         </verse>
-        <verse canonical="true" osisID="1En.41.9">For no angel hinders and no power is able to hinder; for He appoints a judge for them all and He judges them all before Him. XLII. 
-          <hi type="italic" TEIform="hi">The Dwelling-places of Wisdom and of Unrighteousness</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.41.9">For no angel hinders and no power is able to hinder; for He appoints a judge for them all and He judges them all before Him.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.42" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XLII.</title>
+        <title canonical="false" type="sub" TEIform="title">XLII. 
+          <hi type="italic" TEIform="hi">The Dwelling-places of Wisdom and of Unrighteousness</hi>.
+        </title>
         <verse canonical="true" osisID="1En.42.1">
           <lgCT TEIform="lg">
             <l TEIform="l">Wisdom found no place where she might dwell;</l>
@@ -1002,14 +1062,14 @@
             </l>
             <l TEIform="l">As rain in a desert</l>
             <l TEIform="l"> And dew on a thirsty land.</l>
-            <l TEIform="l">XLIII. XLIV. 
-              <hi type="italic" TEIform="hi">Astronomical Secrets</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.43" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XLIII.</title>
+        <title canonical="false" type="sub" TEIform="title">XLIII. XLIV. 
+          <hi type="italic" TEIform="hi">Astronomical Secrets</hi>.
+        </title>
         <verse canonical="true" osisID="1En.43.1">And I saw other lightnings and the stars of heaven, and I saw how He called them all by their names and they hearkened unto Him.</verse>
         <verse canonical="true" osisID="1En.43.2">And I saw how they are weighed in a righteous balance according to their proportions of light: (I saw) the width of their spaces and the day of their appearing, and how their revolution produces lightning: and (I saw) their revolution according to the number of the angels, and (how) they keep faith with each other.</verse>
         <verse canonical="true" osisID="1En.43.3">And I asked the angel who went with me who showed me what was hidden: 'What are these?'</verse>
@@ -1017,12 +1077,14 @@
       </div>
       <div canonical="true" type="chapter" osisID="1En.44" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XLIV.</title>
-        <verse canonical="true" osisID="1En.44.1">Also another phenomenon I saw in regard to the lightnings: how some of the stars arise and become lightnings and cannot part with their new form. XLV-LVII. 
-          <hi type="bold" TEIform="hi">The Second Parable</hi>. The Lot of the Apostates: the New Heaven and the New Earth
-        </verse>
+        <verse canonical="true" osisID="1En.44.1">Also another phenomenon I saw in regard to the lightnings: how some of the stars arise and become lightnings and cannot part with their new form.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.45" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XLV.</title>
+        <title canonical="false" type="sub" TEIform="title">XLV-LVII. 
+          <hi type="bold" TEIform="hi">The Second Parable</hi>.
+        </title>
+        <title canonical="false" type="sub" TEIform="title">The Lot of the Apostates: the New Heaven and the New Earth</title>
         <verse canonical="true" osisID="1En.45.1">And this is the Second Parable concerning those who deny the name of the dwelling of the holy ones and the Lord of Spirits.</verse>
         <verse canonical="true" osisID="1En.45.2">
           <lgCT TEIform="lg">
@@ -1065,14 +1127,14 @@
             <l TEIform="l"> And have caused them to dwell before Me:</l>
             <l TEIform="l">But for the sinners there is judgement impending with Me,</l>
             <l TEIform="l"> So that I shall destroy them from the face of the earth.</l>
-            <l TEIform="l">XLVI. 
-              <hi type="italic" TEIform="hi">The Head of Days and the Son of Man</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.46" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XLVI.</title>
+        <title canonical="false" type="sub" TEIform="title">XLVI. 
+          <hi type="italic" TEIform="hi">The Head of Days and the Son of Man</hi>.
+        </title>
         <verse canonical="true" osisID="1En.46.1">
           <lgCT TEIform="lg">
             <l TEIform="l">And there I saw One who had a head of days,</l>
@@ -1130,14 +1192,14 @@
           <lgCT TEIform="lg">
             <l TEIform="l">And they persecute the houses of His congregations,</l>
             <l TEIform="l"> And the faithful who hang upon the name of the Lord of Spirits.</l>
-            <l TEIform="l">XLVII. 
-              <hi type="italic" TEIform="hi">The Prayer of the Righteous for Vengeance and their Joy at its coming</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.47" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XLVII.</title>
+        <title canonical="false" type="sub" TEIform="title">XLVII. 
+          <hi type="italic" TEIform="hi">The Prayer of the Righteous for Vengeance and their Joy at its coming</hi>.
+        </title>
         <verse canonical="true" osisID="1En.47.1">
           <lgCT TEIform="lg">
             <l TEIform="l">And in those days shall have ascended the prayer of the righteous,</l>
@@ -1171,14 +1233,14 @@
             </l>
             <l TEIform="l"> And the prayer of the righteous had been heard,</l>
             <l TEIform="l"> And the blood of the righteous been required before the Lord of Spirits.</l>
-            <l TEIform="l">XLVIII. 
-              <hi type="italic" TEIform="hi">The Fount of Righteousness; the Son of Man--the Stay of the Righteous: Judgement of the Kings and the Mighty</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.48" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XLVIII.</title>
+        <title canonical="false" type="sub" TEIform="title">XLVIII. 
+          <hi type="italic" TEIform="hi">The Fount of Righteousness; the Son of Man--the Stay of the Righteous: Judgement of the Kings and the Mighty</hi>.
+        </title>
         <verse canonical="true" osisID="1En.48.1">
           <lgCT TEIform="lg">
             <l TEIform="l">And in that place I saw the fountain of righteousness</l>
@@ -1255,14 +1317,14 @@
             <l TEIform="l">And there shall be no one to take them with his hands and raise them:</l>
             <l TEIform="l"> For they have denied the Lord of Spirits and His Anointed.</l>
             <l TEIform="l"> The name of the Lord of Spirits be blessed.</l>
-            <l TEIform="l">XLIX. 
-              <hi type="italic" TEIform="hi">The Power and Wisdom of the Elect One</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.49" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XLIX.</title>
+        <title canonical="false" type="sub" TEIform="title">XLIX. 
+          <hi type="italic" TEIform="hi">The Power and Wisdom of the Elect One</hi>.
+        </title>
         <verse canonical="true" osisID="1En.49.1">
           <lgCT TEIform="lg">
             <l TEIform="l">l. For wisdom is poured out like water,</l>
@@ -1294,14 +1356,14 @@
             <l TEIform="l">And he shall judge the secret things,</l>
             <l TEIform="l"> And none shall be able to utter a lying word before him;</l>
             <l TEIform="l"> For he is the Elect One before the Lord of Spirits according to His good pleasure.</l>
-            <l TEIform="l">L. 
-              <hi type="italic" TEIform="hi">The Glorification and Victory of the Righteous: the Repentance of the Gentiles</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.50" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER L.</title>
+        <title canonical="false" type="sub" TEIform="title">L. 
+          <hi type="italic" TEIform="hi">The Glorification and Victory of the Righteous: the Repentance of the Gentiles</hi>.
+        </title>
         <verse canonical="true" osisID="1En.50.1">
           <lgCT TEIform="lg">
             <l TEIform="l">And in those days a change shall take place for the holy and elect,</l>
@@ -1336,14 +1398,14 @@
         <verse canonical="true" osisID="1En.50.5">
           <lgCT TEIform="lg">
             <l TEIform="l">And from henceforth I will have no mercy on them, saith the Lord of Spirits.</l>
-            <l TEIform="l">LI. 
-              <hi type="italic" TEIform="hi">The Resurrection of the Dead, and the Separation by the Judge of the Righteous and the Wicked</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.51" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LI.</title>
+        <title canonical="false" type="sub" TEIform="title">LI. 
+          <hi type="italic" TEIform="hi">The Resurrection of the Dead, and the Separation by the Judge of the Righteous and the Wicked</hi>.
+        </title>
         <verse canonical="true" osisID="1En.51.1">
           <lgCT TEIform="lg">
             <l TEIform="l">And in those days shall the earth also give back that which has been entrusted to it,</l>
@@ -1374,7 +1436,11 @@
             <l TEIform="l">And in those days shall the mountains leap like rams,</l>
             <l TEIform="l"> And the hills also shall skip like lambs satisfied with milk,</l>
             <l TEIform="l"> And the faces of ⌈all⌉ the angels in heaven shall be lighted up with joy.</l>
-            <l TEIform="l">5
+          </lgCT>
+        </verse>
+        <verse canonical="true" osisID="1En.51.5">
+          <lgCT TEIform="lg">
+            <l TEIform="l">
               <hi type="italic" TEIform="hi">b</hi>. And the earth shall rejoice,
             </l>
             <l TEIform="l">
@@ -1383,16 +1449,16 @@
             <l TEIform="l">
               <hi type="italic" TEIform="hi">d</hi>. And the elect shall walk thereon.
             </l>
-            <l TEIform="l">LII. 
-              <hi type="italic" TEIform="hi">The Seven</hi>
-              <note canonical="false" type="explanation" n="69:1" TEIform="note">[Only six are mentioned; see Charles' note in his large edition--EDD.]</note>
-              <hi type="italic" TEIform="hi">Metal Mountains and the Elect One</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.52" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LII.</title>
+        <title canonical="false" type="sub" TEIform="title">LII. 
+          <hi type="italic" TEIform="hi">The Seven</hi>
+          <note canonical="false" type="explanation" n="69:1" TEIform="note">[Only six are mentioned; see Charles' note in his large edition--EDD.]</note>
+          <hi type="italic" TEIform="hi">Metal Mountains and the Elect One</hi>.
+        </title>
         <verse canonical="true" osisID="1En.52.1">l. And after those days in that place where I had seen all the visions of that which is hidden--for I had been carried off in a whirlwind and they had borne me towards the west--</verse>
         <verse canonical="true" osisID="1En.52.2">There mine eyes saw all the secret things of heaven that shall be, a mountain of iron, and a mountain of copper, and a mountain of silver, and a mountain of gold, and a mountain of soft metal, and a mountain of lead.</verse>
         <verse canonical="true" osisID="1En.52.3">And I asked the angel who went with me, saying, 'What things are these which I have seen in secret?'</verse>
@@ -1429,14 +1495,14 @@
           <lgCT TEIform="lg">
             <l TEIform="l">And all these things shall be [denied and] destroyed from the surface of the earth,</l>
             <l TEIform="l"> When the Elect One shall appear before the face of the Lord of Spirits.'</l>
-            <l TEIform="l">LIII. LVI. 6. 
-              <hi type="italic" TEIform="hi">The Valley of Judgement: the Angels of Punishment: the Communities of the Elect One</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.53" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LIII.</title>
+        <title canonical="false" type="sub" TEIform="title">LIII. LVI. 6. 
+          <hi type="italic" TEIform="hi">The Valley of Judgement: the Angels of Punishment: the Communities of the Elect One</hi>.
+        </title>
         <verse canonical="true" osisID="1En.53.1">There mine eyes saw a deep valley with open mouths, and all who dwell on the earth and sea and islands shall bring to him gifts and presents and tokens of homage, but that deep valley shall not become full.</verse>
         <verse canonical="true" osisID="1En.53.2">
           <lgCT TEIform="lg">
@@ -1463,11 +1529,11 @@
       </div>
       <div canonical="true" type="chapter" osisID="1En.54" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LIV.</title>
-        <verse canonical="true" osisID="1En.54.1">1 And I looked and turned to another part of the earth, and saw there a deep valley with burning fire.</verse>
+        <verse canonical="true" osisID="1En.54.1">And I looked and turned to another part of the earth, and saw there a deep valley with burning fire.</verse>
         <verse canonical="true" osisID="1En.54.2">And they brought the kings and the mighty, and began to cast them into this deep valley.</verse>
         <verse canonical="true" osisID="1En.54.3">And there mine eyes saw how they made these their instruments, iron chains of immeasurable weight.</verse>
         <verse canonical="true" osisID="1En.54.4">And I asked the angel of peace who went with me, saying: 'For whom are these chains being prepared?'</verse>
-        <verse canonical="true" osisID="1En.54.5">And he said unto me: 'These are being prepared for the hosts of Azâzêl, so that they may take them and cast them into the abyss of complete condemnation, and they shall cover their jaws with rough stones as the Lord of Spirits commanded.</verse>
+        <verse canonical="true" osisID="1En.54.5">  And he said unto me: 'These are being prepared for the hosts of Azâzêl, so that they may take them and cast them into the abyss of complete condemnation, and they shall cover their jaws with rough stones as the Lord of Spirits commanded.</verse>
         <verse canonical="true" osisID="1En.54.6">And Michael, and Gabriel, and Raphael, and Phanuel shall take hold of them on that great day, and cast them on that day into the burning furnace, that the Lord of Spirits may take vengeance on them for their unrighteousness in becoming subject to Satan and leading astray those who dwell on the earth.' LIV. 7.-LV 2. 
           <hi type="italic" TEIform="hi">Noachic Fragment on the first World Judgement</hi>.
         </verse>
@@ -1539,23 +1605,26 @@
             <l TEIform="l"> And they shall be swallowed up therein</l>
             <l TEIform="l">And their destruction shall be at an end;</l>
             <l TEIform="l"> Sheol shall devour the sinners in the presence of the elect.'</l>
-            <l TEIform="l">LVII. 
-              <hi type="italic" TEIform="hi">The Return from the Dispersion</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.57" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LVII.</title>
+        <title canonical="false" type="sub" TEIform="title">LVII. 
+          <hi type="italic" TEIform="hi">The Return from the Dispersion</hi>.
+        </title>
         <verse canonical="true" osisID="1En.57.1">And it came to pass after this that I saw another host of wagons, and men riding thereon, and coming on the winds from the east, and from the west to the south.</verse>
         <verse canonical="true" osisID="1En.57.2">And the noise of their wagons was heard, and when this turmoil took place the holy ones from heaven remarked it, and the pillars of the earth were moved from their place, and the sound thereof was heard from the one end of heaven to the other, in one day.</verse>
-        <verse canonical="true" osisID="1En.57.3">And they shall all fall down and worship the Lord of Spirits. And this is the end of the second Parable. LVIII-LXXI. 
-          <hi type="bold" TEIform="hi">The Third Parable</hi>. LVIII. 
-          <hi type="italic" TEIform="hi">The Blessedness of the Saints</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.57.3">And they shall all fall down and worship the Lord of Spirits. And this is the end of the second Parable.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.58" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LVIII.</title>
+        <title canonical="false" type="sub" TEIform="title">LVIII-LXXI. 
+          <hi type="bold" TEIform="hi">The Third Parable</hi>.
+        </title>
+        <title canonical="false" type="sub" TEIform="title">LVIII. 
+          <hi type="italic" TEIform="hi">The Blessedness of the Saints</hi>.
+        </title>
         <verse canonical="true" osisID="1En.58.1">And I began to speak the third Parable concerning the righteous and elect. 
           <milestone type="page" n="75" marker="DEFAULT" TEIform="milestone"/>
         </verse>
@@ -1596,20 +1665,24 @@
             <l TEIform="l"> For the darkness shall first have been destroyed,</l>
             <l TEIform="l">[And the light established before the Lord of Spirits]</l>
             <l TEIform="l"> And the light of uprightness established for ever before the Lord of Spirits.</l>
-            <l TEIform="l">LIX. 
-              <hi type="italic" TEIform="hi">The Lights and the Thunder</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.59" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LIX.</title>
-        <verse canonical="true" osisID="1En.59.1">LX. 
-          <hi type="bold" TEIform="hi">Book of Noah--a Fragment</hi>. Quaking of Heaven: Behemoth and Leviathan: the Elements
-        </verse>
+        <title canonical="false" type="sub" TEIform="title">LIX. 
+          <hi type="italic" TEIform="hi">The Lights and the Thunder</hi>.
+        </title>
+        <verse canonical="true" osisID="1En.59.1">[In those days mine eyes saw the secrets of the lightnings, and of the lights, and the judgements they execute (lit. 'their judgement'): and they lighten for a blessing or a curse as the Lord of Spirits willeth.</verse>
+        <verse canonical="true" osisID="1En.59.2">And there I saw the secrets of the thunder, and how when it resounds above in the heaven, the sound thereof is heard, and he caused me to see the judgements executed on the earth, whether they be for well-being and blessing, or for a curse according to the word of the Lord of Spirits.</verse>
+        <verse canonical="true" osisID="1En.59.3">And after that all the secrets of the lights and lightnings were shown to me, and they lighten for blessing and for satisfying.]</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.60" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LX.</title>
+        <title canonical="false" type="sub" TEIform="title">LX. 
+          <hi type="bold" TEIform="hi">Book of Noah--a Fragment</hi>.
+        </title>
+        <title canonical="false" type="sub" TEIform="title">Quaking of Heaven: Behemoth and Leviathan: the Elements</title>
         <verse canonical="true" osisID="1En.60.1">In the year five hundred, in the seventh month, on the fourteenth day of the month in the life of †Enoch†. In that Parable I saw how a mighty quaking made the heaven of heavens to quake, and the host of the Most High, and the angels, a thousand thousands and ten thousand times 
           <hi type="bold" TEIform="hi">ten</hi> thousand, were disquieted with a great disquiet.
         </verse>
@@ -1637,12 +1710,13 @@
         </verse>
         <verse canonical="true" osisID="1En.60.13">And the thunders according to the places where they fall, and all the divisions that are made among the lightnings that it may lighten, and their host that they may at once obey.</verse>
         <verse canonical="true" osisID="1En.60.14">For the thunder has †places of rest† (which) are assigned (to it) while it is waiting for its peal; and the thunder and lightning are inseparable, and although not one and undivided, they both go together through the spirit and separate not.</verse>
-        <verse canonical="true" osisID="1En.60.15">For when the lightning lightens, the thunder utters its voice, and the spirit enforces a pause during the peal, and divides equally between them; for the treasury of their peals is like the sand, and each one of them as it peals is held in with a bridle, and turned back by the power of the spirit, and pushed forward according to the many quarters of the earth. And the spirit of the sea is masculine and strong, and according to the might of his strength he draws it back with a rein, and in like manner it is driven forward and disperses amid all the mountains of the earth. 17. And the spirit of the hoar-frost is his own angel, and the spirit of the hail is a good angel. 18. And the spirit of the snow has forsaken his chambers on account of his strength--There is a special spirit therein, and that which ascends from it is like smoke, and its name is frost. 19. And the spirit of the mist is not united with them in their chambers, but it has a special chamber; for its course is †glorious† both in light and in darkness, and in winter and in summer, and in its chamber is an angel. 20. And the spirit of the dew has its dwelling at the ends of the heaven, and is connected with the chambers of the rain, and its course is in winter and summer: and its clouds and the clouds of the mist are connected, and the one gives to the other. 21. And when the spirit of the rain goes forth from its chamber, the angels come and open the chamber and lead it out, and when it is diffused over the whole earth it unites with the water on the earth. And whensoever it unites with the water on the earth . . . 22. For the waters are for those who dwell on the earth; for they are nourishment for the earth from the Most High who is in heaven: therefore there is a measure for the rain, and the angels take it in charge. 23. And these things I saw towards the Garden of the Righteous. 24. And the angel of peace who was with me said to me: 'These two monsters, prepared conformably to the greatness of God, shall feed . . . LXI. 
-          <hi type="italic" TEIform="hi">Angels go off to measure Paradise: the Judgement of the Righteous by the Elect One: the Praise of the Elect One and of God</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.60.15">For when the lightning lightens, the thunder utters its voice, and the spirit enforces a pause during the peal, and divides equally between them; for the treasury of their peals is like the sand, and each one of them as it peals is held in with a bridle, and turned back by the power of the spirit, and pushed forward according to the many quarters of the earth. And the spirit of the sea is masculine and strong, and according to the might of his strength he draws it back with a rein, and in like manner it is driven forward and disperses amid all the mountains of the earth. 17. And the spirit of the hoar-frost is his own angel, and the spirit of the hail is a good angel. 18. And the spirit of the snow has forsaken his chambers on account of his strength--There is a special spirit therein, and that which ascends from it is like smoke, and its name is frost. 19. And the spirit of the mist is not united with them in their chambers, but it has a special chamber; for its course is †glorious† both in light and in darkness, and in winter and in summer, and in its chamber is an angel. 20. And the spirit of the dew has its dwelling at the ends of the heaven, and is connected with the chambers of the rain, and its course is in winter and summer: and its clouds and the clouds of the mist are connected, and the one gives to the other. 21. And when the spirit of the rain goes forth from its chamber, the angels come and open the chamber and lead it out, and when it is diffused over the whole earth it unites with the water on the earth. And whensoever it unites with the water on the earth . . . 22. For the waters are for those who dwell on the earth; for they are nourishment for the earth from the Most High who is in heaven: therefore there is a measure for the rain, and the angels take it in charge. 23. And these things I saw towards the Garden of the Righteous. 24. And the angel of peace who was with me said to me: 'These two monsters, prepared conformably to the greatness of God, shall feed . . .</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.61" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXI.</title>
+        <title canonical="false" type="sub" TEIform="title">LXI. 
+          <hi type="italic" TEIform="hi">Angels go off to measure Paradise: the Judgement of the Righteous by the Elect One: the Praise of the Elect One and of God</hi>.
+        </title>
         <verse canonical="true" osisID="1En.61.1">And I saw in those days how long cords were given to those angels, and they took to themselves wings and flew, and they went towards the north.</verse>
         <verse canonical="true" osisID="1En.61.2">And I asked the angel, saying unto him: 'Why have those (angels) taken these cords and gone off?' And he said unto me: 'They have gone to measure.'</verse>
         <verse canonical="true" osisID="1En.61.3">
@@ -1716,14 +1790,14 @@
             </l>
             <l TEIform="l"> And all His works and all that He has created He has revealed to the righteous and elect</l>
             <l TEIform="l"> In the name of the Lord of Spirits.</l>
-            <l TEIform="l">LXII. 
-              <hi type="italic" TEIform="hi">Judgement of the Kings and the Mighty: Blessedness of the Righteous</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.62" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXII.</title>
+        <title canonical="false" type="sub" TEIform="title">LXII. 
+          <hi type="italic" TEIform="hi">Judgement of the Kings and the Mighty: Blessedness of the Righteous</hi>.
+        </title>
         <verse canonical="true" osisID="1En.62.1">And thus the Lord commanded the kings and the mighty and the exalted, and those who dwell on the earth, and said: 'Open your eyes and lift up your horns if ye are able to recognize the Elect One.'</verse>
         <verse canonical="true" osisID="1En.62.2">
           <lgCT TEIform="lg">
@@ -1832,14 +1906,14 @@
             <l TEIform="l">And these shall be the garments of life from the Lord of Spirits:</l>
             <l TEIform="l"> And your garments shall not grow old,</l>
             <l TEIform="l"> Nor your glory pass away before the Lord of Spirits.</l>
-            <l TEIform="l">LXIII. 
-              <hi type="italic" TEIform="hi">The unavailing Repentance of the Kings and the Mighty</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.63" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXIII.</title>
+        <title canonical="false" type="sub" TEIform="title">LXIII. 
+          <hi type="italic" TEIform="hi">The unavailing Repentance of the Kings and the Mighty</hi>.
+        </title>
         <verse canonical="true" osisID="1En.63.1">In those days shall the mighty and the kings who possess the earth implore (Him) to grant them a little respite from His angels of punishment to whom they were delivered, that they might fall down and worship before the Lord of Spirits, and confess their sins before Him.</verse>
         <verse canonical="true" osisID="1En.63.2">And they shall bless and glorify the Lord of Spirits, and say:
           <lgCT TEIform="lg">
@@ -1910,19 +1984,21 @@
             <l TEIform="l"> And the sword shall abide before his face in their midst.</l>
           </lgCT>
         </verse>
-        <verse canonical="true" osisID="1En.63.12">Thus spake the Lord of Spirits: 'This is the ordinance and judgement with respect to the mighty and the kings and the exalted and those who possess the earth before the Lord of Spirits.' LXIV. 
-          <hi type="italic" TEIform="hi">Vision of the fallen Angels in the Place of Punishment</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.63.12">Thus spake the Lord of Spirits: 'This is the ordinance and judgement with respect to the mighty and the kings and the exalted and those who possess the earth before the Lord of Spirits.'</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.64" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXIV.</title>
+        <title canonical="false" type="sub" TEIform="title">LXIV. 
+          <hi type="italic" TEIform="hi">Vision of the fallen Angels in the Place of Punishment</hi>.
+        </title>
         <verse canonical="true" osisID="1En.64.1">And other forms I saw hidden in that place.</verse>
-        <verse canonical="true" osisID="1En.64.2">I heard the voice of the angel saying: 'These are the angels who descended to the earth, and revealed what was hidden to the children of men and seduced the children of men into committing sin.' LXV. 
-          <hi type="italic" TEIform="hi">Enoch foretells to Noah the Deluge and his own Preservation</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.64.2">I heard the voice of the angel saying: 'These are the angels who descended to the earth, and revealed what was hidden to the children of men and seduced the children of men into committing sin.'</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.65" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXV.</title>
+        <title canonical="false" type="sub" TEIform="title">LXV. 
+          <hi type="italic" TEIform="hi">Enoch foretells to Noah the Deluge and his own Preservation</hi>.
+        </title>
         <verse canonical="true" osisID="1En.65.1">And in those days Noah saw the earth that it had sunk down and its destruction was nigh.</verse>
         <verse canonical="true" osisID="1En.65.2">And he arose from thence and went to the ends of the earth, and cried aloud to his grandfather Enoch: and Noah said three times with an embittered voice: Hear me, hear me, hear me.'</verse>
         <verse canonical="true" osisID="1En.65.3">And I said unto him: 'Tell me what it is that is falling out on the earth that the earth is in such evil plight and shaken, lest perchance I shall perish with it?'</verse>
@@ -1945,24 +2021,25 @@
             <l TEIform="l"> And will preserve thee amongst those who dwell on the earth,</l>
             <l TEIform="l"> And has destined thy righteous seed both for kingship and for great honours,</l>
             <l TEIform="l"> And from thy seed shall proceed a fountain of the righteous and holy without number for ever.</l>
-            <l TEIform="l">LXVI. 
-              <hi type="italic" TEIform="hi">The Angels of the Waters bidden to hold them in Check</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.66" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXVI.</title>
+        <title canonical="false" type="sub" TEIform="title">LXVI. 
+          <hi type="italic" TEIform="hi">The Angels of the Waters bidden to hold them in Check</hi>.
+        </title>
         <verse canonical="true" osisID="1En.66.1">And after that he showed me the angels of punishment who are prepared to come and let loose all the powers of the waters which are beneath in the earth in order to bring judgement and destruction on all who [abide and] dwell on the earth.</verse>
         <verse canonical="true" osisID="1En.66.2">And the Lord of Spirits gave commandment to the angels who were going forth, that they should not cause 
           <hi type="bold" TEIform="hi">the waters</hi> to rise but should hold them in check; for those angels were over the powers of the waters.
         </verse>
-        <verse canonical="true" osisID="1En.66.3">And I went away from the presence of Enoch. LXVII. 
-          <hi type="italic" TEIform="hi">God's Promise to Noah: Places of Punishment of the Angels and of the Kings</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.66.3">And I went away from the presence of Enoch.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.67" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXVII.</title>
+        <title canonical="false" type="sub" TEIform="title">LXVII. 
+          <hi type="italic" TEIform="hi">God's Promise to Noah: Places of Punishment of the Angels and of the Kings</hi>.
+        </title>
         <verse canonical="true" osisID="1En.67.1">And in those days the word of God came unto me, and He said unto me: 'Noah, thy lot has come up before Me, a lot without blame, a lot of love and uprightness.</verse>
         <verse canonical="true" osisID="1En.67.2">And now the angels are making a wooden (building), and when they have completed that task I will place My hand upon it and preserve it, and there shall come forth from it the seed of life, and a change shall set in so that the earth will not remain without inhabitant.</verse>
         <verse canonical="true" osisID="1En.67.3">And I will make fast thy seed before me for ever and ever, and I will spread abroad those who dwell with thee: it shall not 
@@ -1978,26 +2055,29 @@
         <verse canonical="true" osisID="1En.67.11">And those same waters will undergo a change in those days; for when those angels are punished in these waters, these water-springs shall change their temperature, and when the angels ascend, this water of the springs shall change and become cold.</verse>
         <verse canonical="true" osisID="1En.67.12">And I heard Michael answering and saying: 'This judgement wherewith the angels are judged is a testimony for the kings and the mighty who possess the earth.'</verse>
         <verse canonical="true" osisID="1En.67.13">Because these waters of judgement minister to the healing of the body of the 
-          <hi type="bold" TEIform="hi">kings</hi> and the lust of their body; therefore they will not see and will not believe that those waters will change and become a fire which burns for ever. LXVIII. 
-          <hi type="italic" TEIform="hi">Michael and Raphael astonished at the Severity of the Judgement</hi>.
+          <hi type="bold" TEIform="hi">kings</hi> and the lust of their body; therefore they will not see and will not believe that those waters will change and become a fire which burns for ever.
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.68" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXVIII.</title>
+        <title canonical="false" type="sub" TEIform="title">LXVIII. 
+          <hi type="italic" TEIform="hi">Michael and Raphael astonished at the Severity of the Judgement</hi>.
+        </title>
         <verse canonical="true" osisID="1En.68.1">And after that my grandfather Enoch gave me the teaching of all the secrets in the book in the Parables which had been given to him, and he put them together for me in the words of the book of the Parables.</verse>
         <verse canonical="true" osisID="1En.68.2">And on that day Michael answered Raphael and said: 'The power of the spirit transports and 
           <hi type="bold" TEIform="hi">makes me to tremble</hi> because of the severity of the judgement of the secrets, the judgement of the angels: who can endure the severe judgement which has been executed, and before which they melt away?'
         </verse>
         <verse canonical="true" osisID="1En.68.3">And Michael answered again, and said to Raphael: 'Who is he whose heart is not softened concerning it, and whose reins are not troubled by this word of judgement (that) has gone forth upon them because of those who have thus led them out?'</verse>
-        <verse canonical="true" osisID="1En.68.4">And it came to pass when he stood before the Lord of Spirits, Michael said thus to Raphael: 'I will not take their part under the eye of the Lord; for the Lord of Spirits has been angry with them because they do as if they were the Lord. Therefore all that is hidden shall come upon them for ever and ever; for neither angel nor man shall have his portion (in it), but alone they have received their judgement for ever and ever.' LXIX. 
-          <hi type="italic" TEIform="hi">The Names and Functions of the</hi> (
-          <hi type="italic" TEIform="hi">fallen Angels and</hi>) 
-          <hi type="italic" TEIform="hi">Satans: the secret Oath</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.68.4">And it came to pass when he stood before the Lord of Spirits, Michael said thus to Raphael: 'I will not take their part under the eye of the Lord; for the Lord of Spirits has been angry with them because they do as if they were the Lord. Therefore all that is hidden shall come upon them for ever and ever; for neither angel nor man shall have his portion (in it), but alone they have received their judgement for ever and ever.'</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.69" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXIX.</title>
-        <verse canonical="true" osisID="1En.69.1">1 And after this judgement they shall terrify and 
+        <title canonical="false" type="sub" TEIform="title">LXIX. 
+          <hi type="italic" TEIform="hi">The Names and Functions of the</hi> (
+          <hi type="italic" TEIform="hi">fallen Angels and</hi>) 
+          <hi type="italic" TEIform="hi">Satans: the secret Oath</hi>.
+        </title>
+        <verse canonical="true" osisID="1En.69.1">And after this judgement they shall terrify and 
           <hi type="bold" TEIform="hi">make</hi> them 
           <hi type="bold" TEIform="hi">to tremble</hi> because they have shown this to those who dwell on the earth.
         </verse>
@@ -2102,23 +2182,24 @@
             <l TEIform="l"> And the word of that Son of Man shall go forth</l>
             <l TEIform="l"> And be strong before the Lord of Spirits.</l>
             <l TEIform="l">This is the Third Parable of Enoch.</l>
-            <l TEIform="l">LXX. 
-              <hi type="italic" TEIform="hi">The Final Translation of Enoch</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.70" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXX.</title>
+        <title canonical="false" type="sub" TEIform="title">LXX. 
+          <hi type="italic" TEIform="hi">The Final Translation of Enoch</hi>.
+        </title>
         <verse canonical="true" osisID="1En.70.1">And it came to pass after this that his name during his lifetime was raised aloft to that Son of Man and to the Lord of Spirits from amongst those who dwell on the earth.</verse>
         <verse canonical="true" osisID="1En.70.2">And he was raised aloft on the chariots of the spirit and his name vanished among them.</verse>
         <verse canonical="true" osisID="1En.70.3">And from that day I was no longer numbered amongst them: and he set me between the two winds, between the North and the West, where the angels took the cords to measure for me the place for the elect and righteous.</verse>
-        <verse canonical="true" osisID="1En.70.4">And there I saw the first fathers and the righteous who from the beginning dwell in that place. LXXI. 
-          <hi type="italic" TEIform="hi">Two earlier visions of Enoch</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.70.4">And there I saw the first fathers and the righteous who from the beginning dwell in that place.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.71" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXI.</title>
+        <title canonical="false" type="sub" TEIform="title">LXXI. 
+          <hi type="italic" TEIform="hi">Two earlier visions of Enoch</hi>.
+        </title>
         <verse canonical="true" osisID="1En.71.1">
           <lgCT TEIform="lg">
             <l TEIform="l">And it came to pass after this that my spirit was translated</l>
@@ -2248,15 +2329,15 @@
             <l TEIform="l">And so there shall be length of days with that Son of Man,</l>
             <l TEIform="l"> And the righteous shall have peace and an upright way</l>
             <l TEIform="l"> In the name of the Lord of Spirits for ever and ever.'</l>
-            <l TEIform="l">(LXXII-LXXXII.)</l>
-            <l TEIform="l">LXXII. 
-              <hi type="italic" TEIform="hi">The Sun</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.72" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXII.</title>
+        <title canonical="false" type="sub" TEIform="title">(LXXII-LXXXII.)</title>
+        <title canonical="false" type="sub" TEIform="title">LXXII. 
+          <hi type="italic" TEIform="hi">The Sun</hi>.
+        </title>
         <verse canonical="true" osisID="1En.72.1">The book of the courses of the luminaries of the heaven, the relations of each, according to their classes, their dominion and their seasons, according to their names and places of origin, and according to their months, which Uriel, the holy angel, who was with me, who is their guide, showed me; and he showed me all their laws exactly as they are, and how it is with regard to all the years of the world and unto eternity, till the new creation is accomplished which dureth till eternity.</verse>
         <verse canonical="true" osisID="1En.72.2">And this is the first law of the luminaries: the luminary the Sun has its rising in the eastern portals of the heaven, and its setting in the western portals of the heaven.</verse>
         <verse canonical="true" osisID="1En.72.3">And I saw six portals in which the sun rises, and six portals in which the sun sets and the moon rises and sets in these portals, and the leaders of the stars and those whom they lead: six in the east and six in the west, and all following each other in accurately corresponding order: also many windows to the right and left of these portals.</verse>
@@ -2347,13 +2428,14 @@
         <verse canonical="true" osisID="1En.75.6">As for the twelve portals in the heaven, at the ends of the earth, out of which go forth the sun, moon, and stars, and all the works of heaven in the east and in the west.</verse>
         <verse canonical="true" osisID="1En.75.7">There are many windows open to the left and right of them, and one window at its (appointed) season produces warmth, corresponding (as these do) to those doors from which the stars come forth according as He has commanded them, and wherein they set corresponding to their number.</verse>
         <verse canonical="true" osisID="1En.75.8">And I saw chariots in the heaven, running in the world, above those portals in which revolve the stars that never set.</verse>
-        <verse canonical="true" osisID="1En.75.9">And one is larger than all the rest, and it is that that makes its course through the entire world. LXXVI. 
-          <hi type="italic" TEIform="hi">The Twelve Windows and their Portals</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.75.9">And one is larger than all the rest, and it is that that makes its course through the entire world.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.76" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXVI.</title>
-        <verse canonical="true" osisID="1En.76.1">1 And at the ends of the earth I saw twelve portals open to all the 
+        <title canonical="false" type="sub" TEIform="title">LXXVI. 
+          <hi type="italic" TEIform="hi">The Twelve Windows and their Portals</hi>.
+        </title>
+        <verse canonical="true" osisID="1En.76.1">And at the ends of the earth I saw twelve portals open to all the 
           <hi type="bold" TEIform="hi">quarters</hi> (of the heaven), from which the winds go forth and blow over the earth.
         </verse>
         <verse canonical="true" osisID="1En.76.2">Three of them are open on the face (
@@ -2371,12 +2453,14 @@
         <verse canonical="true" osisID="1En.76.10">And after these the north winds: from the seventh portal in the east come dew and rain, locusts and desolation.</verse>
         <verse canonical="true" osisID="1En.76.11">And from the middle portal come in a direct direction health and rain and dew and prosperity; and through the third portal in the west come cloud and hoar-frost, and snow and rain, and dew and locusts.</verse>
         <verse canonical="true" osisID="1En.76.12">And after these [four] are the west winds: through the first portal adjoining the north come forth dew and hoar-frost, and cold and snow and frost. And from the middle portal come forth dew and rain, and prosperity and blessing; and through the last portal which adjoins the south come forth drought and desolation, and burning and destruction. 14. And the twelve portals of the four 
-          <hi type="bold" TEIform="hi">quarters</hi> of the heaven are therewith completed, and all their laws and all their plagues and all their benefactions have I shown to thee, my son Methuselah. LXXVII. 
-          <hi type="italic" TEIform="hi">The Four Quarters of the World: the Seven Mountains, the Seven Rivers, &amp;c</hi>.
+          <hi type="bold" TEIform="hi">quarters</hi> of the heaven are therewith completed, and all their laws and all their plagues and all their benefactions have I shown to thee, my son Methuselah.
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.77" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXVII.</title>
+        <title canonical="false" type="sub" TEIform="title">LXXVII. 
+          <hi type="italic" TEIform="hi">The Four Quarters of the World: the Seven Mountains, the Seven Rivers, &amp;c</hi>.
+        </title>
         <verse canonical="true" osisID="1En.77.1">And the first 
           <hi type="bold" TEIform="hi">quarter</hi> is called the east, because it is the first: and the second, the south, because the Most High 
           <hi type="bold" TEIform="hi">will descend</hi> there, yea, there in quite a special sense will He who is blessed for ever 
@@ -2392,12 +2476,13 @@
         <verse canonical="true" osisID="1En.77.5">I saw seven rivers on the earth larger than all the rivers: one of them coming from the west pours its waters into the Great Sea.</verse>
         <verse canonical="true" osisID="1En.77.6">And these two come from the north to the sea and pour their waters into the Erythraean Sea in the east.</verse>
         <verse canonical="true" osisID="1En.77.7">And the remaining four come forth on the side of the north to their own sea, 〈two of them〉 to the Erythraean Sea, and two into the Great Sea and discharge themselves there [and some say: into the desert].</verse>
-        <verse canonical="true" osisID="1En.77.8">Seven great islands I saw in the sea and in the mainland: two in the mainland and five in the Great Sea. LXXVIII. 
-          <hi type="italic" TEIform="hi">The Sun and Moon: the Waxing and Waning of the Moon</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.77.8">Seven great islands I saw in the sea and in the mainland: two in the mainland and five in the Great Sea.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.78" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXVIII.</title>
+        <title canonical="false" type="sub" TEIform="title">LXXVIII. 
+          <hi type="italic" TEIform="hi">The Sun and Moon: the Waxing and Waning of the Moon</hi>.
+        </title>
         <verse canonical="true" osisID="1En.78.1">And the names of the sun are the following: the first Orjârês, and the second Tômâs.</verse>
         <verse canonical="true" osisID="1En.78.2">And the moon has four names: the first name is Asônjâ, the second Eblâ, the third Benâsê, and the fourth Erâe.</verse>
         <verse canonical="true" osisID="1En.78.3">These are the two great luminaries: their circumference is like the circumference of the heaven, and the size of the circumference of both is alike.</verse>
@@ -2414,12 +2499,13 @@
         <verse canonical="true" osisID="1En.78.14">On the side whence the light of the moon comes forth, there again she wanes till all the light vanishes and all the days of the month are at an end, and her circumference is empty, void of light.</verse>
         <verse canonical="true" osisID="1En.78.15">And three months she makes of thirty days, and at her time she makes three months of twenty-nine days each, in which she accomplishes her waning in the first period of time, and in the first portal for one hundred and seventy-seven days.</verse>
         <verse canonical="true" osisID="1En.78.16">And in the time of her going out she appears for three months (of) thirty days each, and for three months she appears (of) twenty-nine each.</verse>
-        <verse canonical="true" osisID="1En.78.17">At night she appears like a man for twenty days each time, and by day she appears like the heaven, and there is nothing else in her save her light. LXXIX-LXXX. 1. 
-          <hi type="italic" TEIform="hi">Recapitulation of several of the Laws</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.78.17">At night she appears like a man for twenty days each time, and by day she appears like the heaven, and there is nothing else in her save her light.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.79" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXIX.</title>
+        <title canonical="false" type="sub" TEIform="title">LXXIX-LXXX. 1. 
+          <hi type="italic" TEIform="hi">Recapitulation of several of the Laws</hi>.
+        </title>
         <verse canonical="true" osisID="1En.79.1">And now, my son, I have shown thee everything, and the law of all the stars of the heaven is completed.</verse>
         <verse canonical="true" osisID="1En.79.2">And he showed me all the laws of these for every day, and for every season of bearing rule, and for every year, and for its going forth, and for the order prescribed to it every month and every week:</verse>
         <verse canonical="true" osisID="1En.79.3">And the waning of the moon which takes place in the sixth portal: for in this sixth portal her light is accomplished, and after that there is the beginning of the waning:</verse>
@@ -2485,14 +2571,14 @@
           <lgCT TEIform="lg">
             <l TEIform="l">And evil shall be multiplied upon them,</l>
             <l TEIform="l"> And punishment shall come upon them So as to destroy all.'</l>
-            <l TEIform="l">LXXXI. 
-              <hi type="italic" TEIform="hi">The Heavenly Tablets and the Mission of Enoch</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.81" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXXI.</title>
+        <title canonical="false" type="sub" TEIform="title">LXXXI. 
+          <hi type="italic" TEIform="hi">The Heavenly Tablets and the Mission of Enoch</hi>.
+        </title>
         <verse canonical="true" osisID="1En.81.1">
           <lgCT TEIform="lg">
             <l TEIform="l">And he said unto me:</l>
@@ -2538,12 +2624,13 @@
             <l TEIform="l"> And be taken away on account of the doings of the godless.'</l>
           </lgCT>
         </verse>
-        <verse canonical="true" osisID="1En.81.10">And in those days they ceased to speak to me, and I came to my people, blessing the Lord of the world. LXXXII. 
-          <hi type="italic" TEIform="hi">Charge given to Enoch: the four Intercalary Days: the Stars which lead the Seasons and the Months</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.81.10">And in those days they ceased to speak to me, and I came to my people, blessing the Lord of the world.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.82" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXXII.</title>
+        <title canonical="false" type="sub" TEIform="title">LXXXII. 
+          <hi type="italic" TEIform="hi">Charge given to Enoch: the four Intercalary Days: the Stars which lead the Seasons and the Months</hi>.
+        </title>
         <verse canonical="true" osisID="1En.82.1">And now, my son Methuselah, all these things I am recounting to thee and writing down for thee, and I have revealed to thee everything, and given thee books concerning all these: so preserve, my son Methuselah, the books from thy father's hand, and (see) that thou deliver them to the generations of the world.</verse>
         <verse canonical="true" osisID="1En.82.2">
           <lgCT TEIform="lg">
@@ -2580,12 +2667,14 @@
         <verse canonical="true" osisID="1En.82.17">And these are the names of the leaders which are under them: Berka’êl, Zêlebs’êl, and another who is added a head of a thousand, called Hîlûjâsĕph: and the days of the dominion of this (leader) are at an end.</verse>
         <verse canonical="true" osisID="1En.82.18">The next leader after him is Hêl’emmêlêk, whom one names the shining sun, and all the days of his light are ninety-one days.</verse>
         <verse canonical="true" osisID="1En.82.19">And these are the signs of (his) days on the earth: glowing heat and dryness, and the trees ripen their fruits and produce all their fruits ripe and ready, and the sheep pair and become pregnant, and all the fruits of the earth are gathered in, and everything that is in the fields, and the winepress: these things take place in the days of his dominion.</verse>
-        <verse canonical="true" osisID="1En.82.20">These are the names, and the orders, and the leaders of those heads of thousands: Gîdâ’îjal, Kê’êl, and Hê’êl, and the name of the head of a thousand which is added to them, Asfâ’êl’: and the days of his dominion are at an end. (LXXXIII-XC.) LXXXIII. LXXXIV. 
-          <hi type="italic" TEIform="hi">First Dream-Vision on the Deluge</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.82.20">These are the names, and the orders, and the leaders of those heads of thousands: Gîdâ’îjal, Kê’êl, and Hê’êl, and the name of the head of a thousand which is added to them, Asfâ’êl’: and the days of his dominion are at an end.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.83" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXXIII.</title>
+        <title canonical="false" type="sub" TEIform="title">(LXXXIII-XC.)</title>
+        <title canonical="false" type="sub" TEIform="title">LXXXIII. LXXXIV. 
+          <hi type="italic" TEIform="hi">First Dream-Vision on the Deluge</hi>.
+        </title>
         <verse canonical="true" osisID="1En.83.1">And now, my son Methuselah, I will show thee all my visions which I have seen, recounting them before thee.</verse>
         <verse canonical="true" osisID="1En.83.2">Two visions I saw before I took a wife, and the one was quite unlike the other: the first when I was learning to write: the second before I took thy mother, (when) I saw a terrible vision. And regarding them I prayed to the Lord.</verse>
         <verse canonical="true" osisID="1En.83.3">I had laid me down in the house of my grandfather Mahalalel, (when) I saw in a vision how the heaven collapsed and was borne off and fell to the earth.</verse>
@@ -2648,14 +2737,14 @@
             <l TEIform="l">And now, my Lord, destroy from the earth the flesh which has aroused Thy wrath,</l>
             <l TEIform="l"> But the flesh of righteousness and uprightness establish as a plant of the eternal seed,</l>
             <l TEIform="l"> And hide not Thy face from the prayer of Thy servant, O Lord.'</l>
-            <l TEIform="l">LXXXV-XC. 
-              <hi type="italic" TEIform="hi">The Second Dream-Vision of Enoch: the History of the World to the Founding of the Messianic Kingdom</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.85" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXXV.</title>
+        <title canonical="false" type="sub" TEIform="title">LXXXV-XC. 
+          <hi type="italic" TEIform="hi">The Second Dream-Vision of Enoch: the History of the World to the Founding of the Messianic Kingdom</hi>.
+        </title>
         <verse canonical="true" osisID="1En.85.1">And after this I saw another dream, and I will show the whole dream to thee, my son.</verse>
         <verse canonical="true" osisID="1En.85.2">And Enoch lifted up (his voice) and spake to his son Methuselah: 'To thee, my son, will I speak: hear my words--incline thine ear to the dream-vision of thy father.</verse>
         <verse canonical="true" osisID="1En.85.3">Before I took thy mother Edna, I saw in a vision on my bed, and behold a bull came forth from the earth, and that bull was white; and after it came forth a heifer, and along with this (latter) came forth two bulls, one of them black and the other red.</verse>
@@ -2664,40 +2753,44 @@
         <verse canonical="true" osisID="1En.85.6">And that cow, that first one, went from the presence of that first bull in order to seek that red one, but found him not, and lamented with a great lamentation over him and sought him.</verse>
         <verse canonical="true" osisID="1En.85.7">And I looked till that first bull came to her and quieted her, and from that time onward she cried no more.</verse>
         <verse canonical="true" osisID="1En.85.8">And after that she bore another white bull, and after him she bore many bulls and black cows.</verse>
-        <verse canonical="true" osisID="1En.85.9">And I saw in my sleep that white bull likewise grow and become a great white bull, and from Him proceeded many white bulls, and they resembled him. And they began to beget many white bulls, which resembled them, one following the other, (even) many. LXXXVI. 
-          <hi type="italic" TEIform="hi">The Fall of the Angels and the Demoralization of Mankind</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.85.9">And I saw in my sleep that white bull likewise grow and become a great white bull, and from Him proceeded many white bulls, and they resembled him. And they began to beget many white bulls, which resembled them, one following the other, (even) many.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.86" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXXVI.</title>
+        <title canonical="false" type="sub" TEIform="title">LXXXVI. 
+          <hi type="italic" TEIform="hi">The Fall of the Angels and the Demoralization of Mankind</hi>.
+        </title>
         <verse canonical="true" osisID="1En.86.1">And again I saw with mine eyes as I slept, and I saw the heaven above, and behold a star fell from heaven, and it arose and eat and pastured amongst those oxen.</verse>
         <verse canonical="true" osisID="1En.86.2">And after that I saw the large and the black oxen, and behold they all changed their stalls and pastures and their cattle, and began to live with each other.</verse>
         <verse canonical="true" osisID="1En.86.3">And again I saw in the vision, and looked towards the heaven, and behold I saw many stars descend and cast themselves down from heaven to that first star, and they became bulls amongst those cattle and pastured with them ⌈amongst them⌉.</verse>
         <verse canonical="true" osisID="1En.86.4">And I looked at them and saw, and behold they all let out their privy members, like horses, and began to cover the cows of the oxen, and they all became pregnant and bare elephants, camels, and asses.</verse>
         <verse canonical="true" osisID="1En.86.5">And all the oxen feared them and were affrighted at them, and began to bite with their teeth and to devour, and to gore with their horns.</verse>
-        <verse canonical="true" osisID="1En.86.6">And they began, moreover, to devour those oxen; and behold all the children of the earth began to tremble and quake before them and to flee from them. LXXXVII. 
-          <hi type="italic" TEIform="hi">The Advent of the Seven Archangels</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.86.6">And they began, moreover, to devour those oxen; and behold all the children of the earth began to tremble and quake before them and to flee from them.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.87" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXXVII.</title>
+        <title canonical="false" type="sub" TEIform="title">LXXXVII. 
+          <hi type="italic" TEIform="hi">The Advent of the Seven Archangels</hi>.
+        </title>
         <verse canonical="true" osisID="1En.87.1">And again I saw how they began to gore each other and to devour each other, and the earth began to cry aloud.</verse>
         <verse canonical="true" osisID="1En.87.2">And I raised mine eyes again to heaven, and I saw in the vision, and behold there came forth from heaven beings who were like white men: and four went forth from that place and three with them.</verse>
         <verse canonical="true" osisID="1En.87.3">And those three that had last come forth grasped me by my hand and took me up, away from the generations of the earth, and raised me up to a lofty place, and showed me a tower raised high above the earth, and all the hills were lower.</verse>
-        <verse canonical="true" osisID="1En.87.4">And one said unto me: 'Remain here till thou seest everything that befalls those elephants, camels, and asses, and the stars and the oxen, and all of them.' LXXXVIII. 
-          <hi type="italic" TEIform="hi">The Punishment of the Fallen Angels by the Archangels</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.87.4">And one said unto me: 'Remain here till thou seest everything that befalls those elephants, camels, and asses, and the stars and the oxen, and all of them.'</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.88" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXXVIII.</title>
+        <title canonical="false" type="sub" TEIform="title">LXXXVIII. 
+          <hi type="italic" TEIform="hi">The Punishment of the Fallen Angels by the Archangels</hi>.
+        </title>
         <verse canonical="true" osisID="1En.88.1">And I saw one of those four who had come forth first, and he seized that first star which had fallen from the heaven, and bound it hand and foot and cast it into an abyss: now that abyss was narrow and deep, and horrible and dark.</verse>
         <verse canonical="true" osisID="1En.88.2">And one of them drew a sword, and gave it to those elephants and camels and asses: then they began to smite each other, and the whole earth quaked because of them.</verse>
-        <verse canonical="true" osisID="1En.88.3">And as I was beholding in the vision, lo, one of those four who had come forth stoned (them) from heaven, and gathered and took all the great stars whose privy members were like those of horses, and bound them all hand and foot, and cast them in an abyss of the earth. LXXXIX. 1-9. 
-          <hi type="italic" TEIform="hi">The Deluge and the Deliverance of Noah</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.88.3">And as I was beholding in the vision, lo, one of those four who had come forth stoned (them) from heaven, and gathered and took all the great stars whose privy members were like those of horses, and bound them all hand and foot, and cast them in an abyss of the earth.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.89" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER LXXXIX.</title>
+        <title canonical="false" type="sub" TEIform="title">LXXXIX. 1-9. 
+          <hi type="italic" TEIform="hi">The Deluge and the Deliverance of Noah</hi>.
+        </title>
         <verse canonical="true" osisID="1En.89.1">And one of those four went to that white bull and instructed him in a secret, without his being terrified: he was born a bull and became a man, and built for himself a great vessel and dwelt thereon; and three bulls dwelt with him in that vessel and they were covered in.</verse>
         <verse canonical="true" osisID="1En.89.2">And again I raised mine eyes towards heaven and saw a lofty roof, with seven water torrents thereon, and those torrents flowed with much water into an enclosure.</verse>
         <verse canonical="true" osisID="1En.89.3">And I saw again, and behold fountains were opened on the surface of that great enclosure, and that water began to swell and rise upon the surface, and I saw that enclosure till all its surface was covered with water.</verse>
@@ -2797,12 +2890,13 @@
           <hi type="italic" TEIform="hi">i.e.</hi> the beasts), and they (
           <hi type="italic" TEIform="hi">i.e.</hi> the shepherds) did not save them out of the hand of the beasts.
         </verse>
-        <verse canonical="true" osisID="1En.89.76">And this one who wrote the book carried it up, and showed it and read it before the Lord of the sheep, and implored Him on their account, and besought Him on their account as he showed Him all the doings of the shepherds, and gave testimony before Him against all the shepherds. And he took the actual book and laid it down beside Him and departed. XC. 1-5. 
-          <hi type="italic" TEIform="hi">Third Period--from Alexander the Great to the Graeco-Syrian Domination</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.89.76">And this one who wrote the book carried it up, and showed it and read it before the Lord of the sheep, and implored Him on their account, and besought Him on their account as he showed Him all the doings of the shepherds, and gave testimony before Him against all the shepherds. And he took the actual book and laid it down beside Him and departed.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.90" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XC.</title>
+        <title canonical="false" type="sub" TEIform="title">XC. 1-5. 
+          <hi type="italic" TEIform="hi">Third Period--from Alexander the Great to the Graeco-Syrian Domination</hi>.
+        </title>
         <verse canonical="true" osisID="1En.90.1">And I saw till that in this manner thirty-five shepherds undertook the pasturing (of the sheep), and they severally completed their periods as did the first; and others received them into their hands, to pasture them for their period, each shepherd in his own period.</verse>
         <verse canonical="true" osisID="1En.90.2">And after that I saw in my vision all the birds of heaven coming, the eagles, the vultures, the kites, the ravens; but the eagles led all the birds; and they began to devour those sheep, and to pick out their eyes and to devour their flesh.</verse>
         <verse canonical="true" osisID="1En.90.3">And the sheep cried out because their flesh was being devoured by the birds, and as for me I looked and lamented in my sleep over that shepherd who pastured the sheep.</verse>
@@ -2860,12 +2954,14 @@
         <verse canonical="true" osisID="1En.90.39">And I slept in their midst: and I awoke and saw everything.</verse>
         <verse canonical="true" osisID="1En.90.40">This is the vision which I saw while I slept, and I awoke and blessed the Lord of righteousness and gave Him glory.</verse>
         <verse canonical="true" osisID="1En.90.41">Then I wept with a great weeping and my tears stayed not till I could no longer endure it: when I saw, they flowed on account of what I had seen; for everything shall come and be fulfilled, and all the deeds of men in their order were shown to me.</verse>
-        <verse canonical="true" osisID="1En.90.42">On that night I remembered the first dream, and because of it I wept and was troubled--because I had seen that vision.' (XCII-CV.) XCII. XCI. 1-10. 18-19 
-          <hi type="italic" TEIform="hi">Enoch's Book of Admonition for his Children</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.90.42">On that night I remembered the first dream, and because of it I wept and was troubled--because I had seen that vision.'</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.92" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XCII.</title>
+        <title canonical="false" type="sub" TEIform="title">(XCII-CV.)</title>
+        <title canonical="false" type="sub" TEIform="title">XCII. XCI. 1-10. 18-19 
+          <hi type="italic" TEIform="hi">Enoch's Book of Admonition for his Children</hi>.
+        </title>
         <verse canonical="true" osisID="1En.92.1">The book written by Enoch--[Enoch indeed wrote this complete doctrine of wisdom, (which is) praised of all men and a judge of all the earth] for all my children who shall dwell on the earth. And for the future generations who shall observe uprightness and peace.</verse>
         <verse canonical="true" osisID="1En.92.2">
           <lgCT TEIform="lg">
@@ -2891,14 +2987,14 @@
           <lgCT TEIform="lg">
             <l TEIform="l">And sin shall perish in darkness for ever,</l>
             <l TEIform="l"> And shall no more be seen from that day for evermore.</l>
-            <l TEIform="l">XCI. 1-11. 18-19. 
-              <hi type="italic" TEIform="hi">Enoch's Admonition to his Children</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.91" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XCI.</title>
+        <title canonical="false" type="sub" TEIform="title">XCI. 1-11. 18-19. 
+          <hi type="italic" TEIform="hi">Enoch's Admonition to his Children</hi>.
+        </title>
         <verse canonical="true" osisID="1En.91.1">
           <lgCT TEIform="lg">
             <l TEIform="l">'And now, my son Methuselah, call to me all thy brothers</l>
@@ -2978,6 +3074,7 @@
             <l TEIform="l"> And wisdom shall arise and be given unto them.</l>
           </lgCT>
         </verse>
+        <verse canonical="true" osisID="1En.91.11">[And after that the roots of unrighteousness shall be cut off, and the sinners shall be destroyed by the sword . . . shall be cut off from the blasphemers in every place, and those who plan violence and those who commit blasphemy shall perish by the sword.]</verse>
         <verse canonical="true" osisID="1En.91.18">
           <lgCT TEIform="lg">
             <l TEIform="l">And now I tell you, my sons, and show you</l>
@@ -2992,14 +3089,14 @@
             <l TEIform="l"> And walk in the paths of righteousness,</l>
             <l TEIform="l"> And walk not in the paths of violence;</l>
             <l TEIform="l"> For all who walk in the paths of unrighteousness shall perish for ever.'</l>
-            <l TEIform="l">XCIII. XCI. 12-17. 
-              <hi type="italic" TEIform="hi">The Apocalypse of Weeks</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.93" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XCIII.</title>
+        <title canonical="false" type="sub" TEIform="title">XCIII. XCI. 12-17. 
+          <hi type="italic" TEIform="hi">The Apocalypse of Weeks</hi>.
+        </title>
         <verse canonical="true" osisID="1En.93.1">And after that Enoch both †gave† and began to recount from the books. And Enoch said:
           <lgCT TEIform="lg">
             <l TEIform="l">'Concerning the children of righteousness and concerning the elect of the world,</l>
@@ -3072,14 +3169,18 @@
             <l TEIform="l">And at its close shall be elected</l>
             <l TEIform="l"> The elect righteous of the eternal plant of righteousness,</l>
             <l TEIform="l"> To receive sevenfold instruction concerning all His creation.</l>
-            <l TEIform="l">XCI. 12.-17. 
-              <hi type="italic" TEIform="hi">The Last Three Weeks</hi>.
-            </l>
           </lgCT>
         </verse>
+        <verse canonical="true" osisID="1En.93.11">[For who is there of all the children of men that is able to hear the voice of the Holy One without being troubled? And who can think His thoughts? and who is there that can behold all the works of heaven?</verse>
+        <verse canonical="true" osisID="1En.93.12">And how should there be one who could behold the heaven, and who is there that could understand the things of heaven and see a soul or a spirit and could tell thereof, or ascend and see all their ends and think them or do like them?</verse>
+        <verse canonical="true" osisID="1En.93.13">And who is there of all men that could know what is the breadth and the length of the earth, and to whom has been shown the measure of all of them?</verse>
+        <verse canonical="true" osisID="1En.93.14">Or is there any one who could discern the length of the heaven and how great is its height, and upon what it is founded, and how great is the number of the stars, and where all the luminaries rest?]</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.91" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XCI.</title>
+        <title canonical="false" type="sub" TEIform="title">XCI. 12.-17. 
+          <hi type="italic" TEIform="hi">The Last Three Weeks</hi>.
+        </title>
         <verse canonical="true" osisID="1En.91.12">
           <lgCT TEIform="lg">
             <l TEIform="l">And after that there shall be another, the eighth week, that of righteousness,</l>
@@ -3093,7 +3194,11 @@
           <lgCT TEIform="lg">
             <l TEIform="l">And at its close they shall acquire houses through their righteousness,</l>
             <l TEIform="l"> And a house shall be built for the Great King in glory for evermore,</l>
-            <l TEIform="l"> 14
+          </lgCT>
+        </verse>
+        <verse canonical="true" osisID="1En.91.14">
+          <lgCT TEIform="lg">
+            <l TEIform="l">
               <hi type="italic" TEIform="hi">d</hi>. And all mankind shall look to the path of uprightness.
             </l>
             <l TEIform="l">14
@@ -3126,14 +3231,14 @@
             <l TEIform="l">And after that there will be many weeks without number for ever,</l>
             <l TEIform="l"> And all shall be in goodness and righteousness,</l>
             <l TEIform="l"> And sin shall no more be mentioned for ever.</l>
-            <l TEIform="l">XCIV. 1-5. 
-              <hi type="italic" TEIform="hi">Admonitions to the Righteous</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.94" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XCIV.</title>
+        <title canonical="false" type="sub" TEIform="title">XCIV. 1-5. 
+          <hi type="italic" TEIform="hi">Admonitions to the Righteous</hi>.
+        </title>
         <verse canonical="true" osisID="1En.94.1">
           <lgCT TEIform="lg">
             <l TEIform="l">And now I say unto you, my sons, love righteousness and walk therein;</l>
@@ -3221,14 +3326,14 @@
           <lgCT TEIform="lg">
             <l TEIform="l">And your righteous ones in those days shall be</l>
             <l TEIform="l"> A reproach to the sinners and the godless.</l>
-            <l TEIform="l">XCV. 
-              <hi type="italic" TEIform="hi">Enoch's Grief: fresh Woes against the Sinners</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.95" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XCV.</title>
+        <title canonical="false" type="sub" TEIform="title">XCV. 
+          <hi type="italic" TEIform="hi">Enoch's Grief: fresh Woes against the Sinners</hi>.
+        </title>
         <verse canonical="true" osisID="1En.95.1">
           <lgCT TEIform="lg">
             <l TEIform="l">Oh that mine eyes were [a cloud of] waters</l>
@@ -3274,18 +3379,28 @@
             <l TEIform="l">Woe to you, sinners, for ye persecute the righteous;</l>
             <l TEIform="l"> For ye shall be delivered up and persecuted because of injustice,</l>
             <l TEIform="l"> And heavy shall its yoke be upon you.</l>
-            <l TEIform="l">XCVI. 
-              <hi type="italic" TEIform="hi">Grounds of Hopefulness for the Righteous: Woes for the Wicked</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.96" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XCVI.</title>
+        <title canonical="false" type="sub" TEIform="title">XCVI. 
+          <hi type="italic" TEIform="hi">Grounds of Hopefulness for the Righteous: Woes for the Wicked</hi>.
+        </title>
         <verse canonical="true" osisID="1En.96.1">
           <lgCT TEIform="lg">
             <l TEIform="l">Be hopeful, ye righteous; for suddenly shall the sinners perish before you,</l>
             <l TEIform="l"> And ye shall have lordship over them according to your desires.</l>
+          </lgCT>
+        </verse>
+        <verse canonical="true" osisID="1En.96.2">
+          <lgCT TEIform="lg">
+            <l TEIform="l">[And in the day of the tribulation of the sinners,</l>
+            <l TEIform="l"> Your children shall mount and rise as eagles,</l>
+            <l TEIform="l"> And higher than the vultures will be your nest,</l>
+            <l TEIform="l"> And ye shall ascend and enter the crevices of the earth,</l>
+            <l TEIform="l"> And the clefts of the rock for ever as coneys before the unrighteous,</l>
+            <l TEIform="l"> And the sirens shall sigh because of you-and weep.]</l>
           </lgCT>
         </verse>
         <verse canonical="true" osisID="1En.96.3">
@@ -3336,14 +3451,14 @@
               <milestone type="page" n="138" marker="DEFAULT" TEIform="milestone"/>
             </l>
             <l TEIform="l"> In those days many and good days shall come to the righteous--in the day of your judgement.</l>
-            <l TEIform="l">XCVII. 
-              <hi type="italic" TEIform="hi">The Evils in Store for Sinners and the Possessors of unrighteous Wealth</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.97" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XCVII.</title>
+        <title canonical="false" type="sub" TEIform="title">XCVII. 
+          <hi type="italic" TEIform="hi">The Evils in Store for Sinners and the Possessors of unrighteous Wealth</hi>.
+        </title>
         <verse canonical="true" osisID="1En.97.1">
           <lgCT TEIform="lg">
             <l TEIform="l">Believe, ye righteous, that the sinners will become a shame</l>
@@ -3417,14 +3532,14 @@
             <l TEIform="l"> But speedily ascend from you;</l>
             <l TEIform="l">For ye have acquired it all in unrighteousness,</l>
             <l TEIform="l"> And ye shall be given over to a great curse.</l>
-            <l TEIform="l">XCVIII. 
-              <hi type="italic" TEIform="hi">Self-indulgence of Sinners: Sin originated by Man: all Sin recorded in Heaven: Woes for the Sinners</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.98" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XCVIII.</title>
+        <title canonical="false" type="sub" TEIform="title">XCVIII. 
+          <hi type="italic" TEIform="hi">Self-indulgence of Sinners: Sin originated by Man: all Sin recorded in Heaven: Woes for the Sinners</hi>.
+        </title>
         <verse canonical="true" osisID="1En.98.1">
           <lgCT TEIform="lg">
             <l TEIform="l">And now I swear unto you, to the wise and to the foolish,</l>
@@ -3488,12 +3603,13 @@
         <verse canonical="true" osisID="1En.98.13">Woe to you who rejoice in the tribulation of the righteous; for no grave shall be dug for you.</verse>
         <verse canonical="true" osisID="1En.98.14">Woe to you who set at nought the words of the righteous; for ye shall have no hope of life.</verse>
         <verse canonical="true" osisID="1En.98.15">Woe to you who write down lying and godless words; for they write down their lies that men may hear them and act godlessly towards (their) neighbour.</verse>
-        <verse canonical="true" osisID="1En.98.16">Therefore they shall have no peace but die a sudden death. XCIX. 
-          <hi type="italic" TEIform="hi">Woes pronounced on the Godless, the Lawbreakers: evil Plight of Sinners in the last Days: further Woes</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.98.16">Therefore they shall have no peace but die a sudden death.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.99" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XCIX.</title>
+        <title canonical="false" type="sub" TEIform="title">XCIX. 
+          <hi type="italic" TEIform="hi">Woes pronounced on the Godless, the Lawbreakers: evil Plight of Sinners in the last Days: further Woes</hi>.
+        </title>
         <verse canonical="true" osisID="1En.99.1">
           <lgCT TEIform="lg">
             <l TEIform="l">Woe to you who work godlessness,</l>
@@ -3601,14 +3717,14 @@
             </l>
             <l TEIform="l"> And destroy you all with the sword;</l>
             <l TEIform="l"> And all the holy and righteous shall remember your sins.</l>
-            <l TEIform="l">C. 
-              <hi type="italic" TEIform="hi">The Sinners destroy each other: Judgement of the fallen Angels: the Safety of the Righteous: further Woes for the Sinners</hi>.
-            </l>
           </lgCT>
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.100" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER C.</title>
+        <title canonical="false" type="sub" TEIform="title">C. 
+          <hi type="italic" TEIform="hi">The Sinners destroy each other: Judgement of the fallen Angels: the Safety of the Righteous: further Woes for the Sinners</hi>.
+        </title>
         <verse canonical="true" osisID="1En.100.1">
           <lgCT TEIform="lg">
             <l TEIform="l">And in those days in one place the fathers together with their sons shall be smitten</l>
@@ -3684,12 +3800,13 @@
         <verse canonical="true" osisID="1En.100.10">And now, know ye that from the angels He will inquire as to your deeds in heaven, from the sun and from the moon and from the stars in reference to your sins because upon the earth ye execute judgement on the righteous.</verse>
         <verse canonical="true" osisID="1En.100.11">And He will summon to testify against you every cloud and mist and dew and rain; for they shall all be withheld because of you from descending upon you, and they shall be mindful of your sins.</verse>
         <verse canonical="true" osisID="1En.100.12">And now give presents to the rain that it be not withheld from descending upon you, nor yet the dew, when it has received gold and silver from you that it may descend.</verse>
-        <verse canonical="true" osisID="1En.100.13">When the hoar-frost and snow with their chilliness, and all the snow-storms with all their plagues fall upon you, in those days ye shall not be able to stand before them. CI. 
-          <hi type="italic" TEIform="hi">Exhortation to the Fear of God: all Nature fears Him, but not the Sinners</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.100.13">When the hoar-frost and snow with their chilliness, and all the snow-storms with all their plagues fall upon you, in those days ye shall not be able to stand before them.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.101" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER CI.</title>
+        <title canonical="false" type="sub" TEIform="title">CI. 
+          <hi type="italic" TEIform="hi">Exhortation to the Fear of God: all Nature fears Him, but not the Sinners</hi>.
+        </title>
         <verse canonical="true" osisID="1En.101.1">Observe the heaven, ye children of heaven, and every work of the Most High, and fear ye Him and work no evil in His presence.</verse>
         <verse canonical="true" osisID="1En.101.2">If He closes the windows of heaven, and withholds the rain and the dew from descending on the earth on your account, what will ye do then?</verse>
         <verse canonical="true" osisID="1En.101.3">And if He sends His anger upon you because of your deeds, ye cannot petition Him; for ye spake proud and insolent words against His righteousness: therefore ye shall have no peace.</verse>
@@ -3701,12 +3818,14 @@
         <verse canonical="true" osisID="1En.101.7">And at His reproof it is afraid and dries up, and all its fish die and all that is in it; But ye sinners that are on the earth fear Him not.</verse>
         <verse canonical="true" osisID="1En.101.8">Has He not made the heaven and the earth, and all that is therein? Who has given understanding and wisdom to everything that moves on the earth and in the sea.</verse>
         <verse canonical="true" osisID="1En.101.9">Do not the 
-          <hi type="bold" TEIform="hi">sailors</hi> of the ships fear the sea? Yet sinners fear not the Most High. CII. 
-          <hi type="italic" TEIform="hi">Terrors of the Day of Judgement: the adverse Fortunes of the Righteous on the Earth</hi>.
+          <hi type="bold" TEIform="hi">sailors</hi> of the ships fear the sea? Yet sinners fear not the Most High.
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.102" TEIform="div">
         <title canonical="false" type="main" TEIform="title">Chapter CII.</title>
+        <title canonical="false" type="sub" TEIform="title">CII. 
+          <hi type="italic" TEIform="hi">Terrors of the Day of Judgement: the adverse Fortunes of the Righteous on the Earth</hi>.
+        </title>
         <verse canonical="true" osisID="1En.102.1">
           <lgCT TEIform="lg">
             <l TEIform="l">In those days when He hath brought a grievous fire upon you,</l>
@@ -3771,12 +3890,13 @@
         </verse>
         <verse canonical="true" osisID="1En.102.9">I tell you, ye sinners, ye are content to eat and drink, and rob and sin, and strip men naked, and acquire wealth and see good days.</verse>
         <verse canonical="true" osisID="1En.102.10">Have ye seen the righteous how their end falls out, that no manner of violence is found in them till their death?</verse>
-        <verse canonical="true" osisID="1En.102.11">"Nevertheless they perished and became as though they had not been, and their spirits descended into Sheol in tribulation." CIII. 
-          <hi type="italic" TEIform="hi">Different Destinies of the Righteous and the Sinners: fresh Objections of the Sinners</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.102.11">"Nevertheless they perished and became as though they had not been, and their spirits descended into Sheol in tribulation."</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.103" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER CIII.</title>
+        <title canonical="false" type="sub" TEIform="title">CIII. 
+          <hi type="italic" TEIform="hi">Different Destinies of the Righteous and the Sinners: fresh Objections of the Sinners</hi>.
+        </title>
         <verse canonical="true" osisID="1En.103.1">Now, therefore, I swear to you, the righteous, by the glory of the Great and Honoured and 2 Mighty One in dominion, and by His greatness I swear to you:</verse>
         <verse canonical="true" osisID="1En.103.2">
           <lgCT TEIform="lg">
@@ -3877,12 +3997,13 @@
             <l TEIform="l"> And would not hearken to our voice.</l>
           </lgCT>
         </verse>
-        <verse canonical="true" osisID="1En.103.15">And they helped those who robbed us and devoured us and those who made us few; and they concealed their oppression, and they did not remove from us the yoke of those that devoured us and dispersed us and murdered us, and they concealed their murder, and remembered not that they had lifted up their hands against us. CIV. 
-          <hi type="italic" TEIform="hi">Assurances given to the Righteous: Admonitions to Sinners and the Falsifiers of the Words of Uprightness</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.103.15">And they helped those who robbed us and devoured us and those who made us few; and they concealed their oppression, and they did not remove from us the yoke of those that devoured us and dispersed us and murdered us, and they concealed their murder, and remembered not that they had lifted up their hands against us.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.104" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER CIV.</title>
+        <title canonical="false" type="sub" TEIform="title">CIV. 
+          <hi type="italic" TEIform="hi">Assurances given to the Righteous: Admonitions to Sinners and the Falsifiers of the Words of Uprightness</hi>.
+        </title>
         <verse canonical="true" osisID="1En.104.1">I swear unto you, that in heaven the angels remember you for good before the glory of the Great One: and your names are written before the glory of the Great One.</verse>
         <verse canonical="true" osisID="1En.104.2">Be hopeful; for aforetime ye were put to shame through ill and affliction; but now ye shall shine as the lights of heaven, ye shall shine and ye shall be seen, and the portals of heaven shall be opened to you.</verse>
         <verse canonical="true" osisID="1En.104.3">And in your cry, cry for judgement, and it shall appear to you; for all your tribulation shall be visited on the rulers, and on all who helped those who plundered you.</verse>
@@ -3890,22 +4011,24 @@
         <verse canonical="true" osisID="1En.104.5">What shall ye be obliged to do? Ye shall not have to hide on the day of the great judgement and ye shall not be found as sinners, and the eternal judgement shall be far from you for all the generations of the world.</verse>
         <verse canonical="true" osisID="1En.104.6">And now fear not, ye righteous, when ye see the sinners growing strong and prospering in their ways: be not companions with them, but keep afar from their violence; for ye shall become companions of the hosts of heaven.</verse>
         <verse canonical="true" osisID="1En.104.7">And, although ye sinners say: "All our sins shall not be searched out and be written down," nevertheless they shall write down all your sins every day.</verse>
-        <verse canonical="true" osisID="1En.104.8">And now I show unto you that light and darkness, day and night, see all your sins.</verse>
+        <verse canonical="true" osisID="1En.104.8"> And now I show unto you that light and darkness, day and night, see all your sins.</verse>
         <verse canonical="true" osisID="1En.104.9">Be not godless in your hearts, and lie not and alter not the words of uprightness, nor charge with lying the words of the Holy Great One, nor take account of your idols; for all your lying and all your godlessness issue not in righteousness but in great sin.</verse>
         <verse canonical="true" osisID="1En.104.10">And now I know this mystery, that sinners will alter and pervert the words of righteousness in many ways, and will speak wicked words, and lie, and practice great deceits, and write books concerning their words.</verse>
         <verse canonical="true" osisID="1En.104.11">But when they write down truthfully all my words in their languages, and do not change or minish ought from my words but write them all down truthfully--all that I first testified concerning them.</verse>
         <verse canonical="true" osisID="1En.104.12">Then, I know another mystery, that books will be given to the righteous and the wise to become a cause of joy and uprightness and much wisdom.</verse>
-        <verse canonical="true" osisID="1En.104.13">And to them shall the books be given, and they shall believe in them and rejoice over them, and then shall all the righteous who have learnt therefrom all the paths of uprightness be recompensed.' CV. 
-          <hi type="italic" TEIform="hi">God and the Messiah to dwell with Man</hi>.
-        </verse>
+        <verse canonical="true" osisID="1En.104.13">And to them shall the books be given, and they shall believe in them and rejoice over them, and then shall all the righteous who have learnt therefrom all the paths of uprightness be recompensed.'</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.105" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER CV.</title>
+        <title canonical="false" type="sub" TEIform="title">CV. 
+          <hi type="italic" TEIform="hi">God and the Messiah to dwell with Man</hi>.
+        </title>
         <verse canonical="true" osisID="1En.105.1">In those days the Lord bade (them) to summon and testify to the children of earth concerning their wisdom: Show (it) unto them; for ye are their guides, and a recompense over the whole earth.</verse>
-        <verse canonical="true" osisID="1En.105.2">For I and My son will be united with them for ever in the paths of uprightness in their lives; and ye shall have peace: rejoice, ye children of uprightness. Amen. (CVI-CVII.)</verse>
+        <verse canonical="true" osisID="1En.105.2">For I and My son will be united with them for ever in the paths of uprightness in their lives; and ye shall have peace: rejoice, ye children of uprightness. Amen.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.106" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER CVI.</title>
+        <title canonical="false" type="sub" TEIform="title">(CVI-CVII.)</title>
         <verse canonical="true" osisID="1En.106.1">And after some days my son Methuselah took a wife for his son Lamech, and she became pregnant by him and bore a son.</verse>
         <verse canonical="true" osisID="1En.106.2">And his body was white as snow and red as the blooming of a rose, and the hair of his head †and his long locks were white as wool, and his eyes beautiful†. And when he opened his eyes, he lighted up the whole house like the sun, and the whole house was very bright.</verse>
         <verse canonical="true" osisID="1En.106.3">And thereupon he arose in the hands of the midwife, opened his mouth, and †conversed with† the Lord of righteousness.</verse>

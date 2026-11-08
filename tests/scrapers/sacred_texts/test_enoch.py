@@ -751,6 +751,66 @@ def test_parse_page_paragraph_number_without_period(parser, marker: str) -> None
     assert _text(verses["1En.100.2"].content) == "And two. 5 And five."
 
 
+def test_parse_page_lettered_verses(parser) -> None:
+    """Lettered sub-verses start the next verse; others stay with the verse in progress."""
+    html = (
+        "<h3>CHAPTER V.</h3><p>5. Therefore shall ye execrate your days.</p>"
+        "<p>6<i>a</i>. In those days,<br/> <i>b</i>. And by you,<br/> 7<i>c</i>. And for you.</p>"
+        "<p>6<i>d</i>. And all the . . . shall rejoice.</p>"
+        "<i>\n<p>i</i>. And for all of you sinners<br/> 7<i>a</i>. But for the elect.</p>"
+        "<p>8 And then there shall be wisdom.</p>"
+    )
+    parser.parse_page(html, 8)
+    verses = _verses(parser)
+    assert list(verses) == ["1En.5.5", "1En.5.6", "1En.5.7", "1En.5.8"]
+    assert _lines(verses["1En.5.6"]) == ["a. In those days,", "b. And by you,"]
+    assert _lines(verses["1En.5.7"]) == [
+        "c. And for you.",
+        "6d. And all the . . . shall rejoice.",
+        "i. And for all of you sinners",
+        "7a. But for the elect.",
+    ]
+
+
+def test_parse_page_lettered_part_of_a_later_verse_stays(parser) -> None:
+    """``5a.`` before verse 2 (chapter LI) does not open verse 5 early."""
+    html = (
+        "<h3>CHAPTER LI.</h3><p>1. And in those days.</p>"
+        "<p>5<i>a</i>. For in those days,<br/> 2. And he shall choose.</p>"
+        "<p>3. Three.</p><p>4. Four.</p><p>5<i>b</i>. And the earth shall rejoice.</p>"
+    )
+    parser.parse_page(html, 54)
+    assert list(_verses(parser)) == [f"1En.51.{n}" for n in range(1, 6)]
+
+
+def test_parse_page_section_heading_becomes_chapter_subtitle(parser) -> None:
+    """An editorial heading above the chapter heading is a sub-title, not verse text."""
+    parser.parse_page("<h3>CHAPTER V.</h3><p>1. Five.</p>", 8)
+    parser.parse_page(
+        "<p>VI-XI. <i>The Fall of the Angels</i>.</p><h3>CHAPTER VI.</h3><p>1. Six.</p>", 9
+    )
+    assert _text(parser.root_div.content[-2].content[-1].content) == "Five."
+    title = parser.current_div.content[1]
+    assert isinstance(title, pyosis.TitleCt) and title.canonical is False
+    assert title.type_value == pyosis.OsisTitles.SUB
+    assert _text(title.content) == "VI-XI. The Fall of the Angels."
+
+
+def test_parse_page_bracketed_passage_keeps_bracket(parser) -> None:
+    """A bracketed passage (chapter LIX) is verse text, not an editorial note."""
+    html = "<h3>CHAPTER LIX.</h3><p>[1. In those days. 2. And there.]</p><p>[Lost passage.]</p>"
+    parser.parse_page(html, 62)
+    verses = _verses(parser)
+    assert [_text(v.content) for v in verses.values()] == ["[In those days.", "And there.]"]
+
+
+@pytest.mark.parametrize("marker", ["1 And", "1 .And"])
+def test_parse_page_first_verse_number_without_period(parser, marker: str) -> None:
+    """Verse 1 printed without (or with a stray) period loses its number too."""
+    parser.parse_page(f"<h3>CHAPTER XXX.</h3><p>{marker} beyond these.</p>", 33)
+    assert _verses(parser)["1En.30.1"].content == ["And beyond these."]
+
+
 def test_parse_page_mislabelled_chapter_page(parser) -> None:
     """boe081 prints ``CHAPTER LXXVII.`` for chapter LXXVIII."""
     parser.parse_page("<h3>CHAPTER LXXVII.</h3><p>1. The sun.</p>", 81)
