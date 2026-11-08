@@ -2,6 +2,39 @@
 
 <!-- version list -->
 
+## v1.12.0 (2026-11-08)
+
+### Bug Fixes
+
+- **scrapers**: Drop FBE plate cross-references from verses
+  ([`b10696a`](https://github.com/open-canon/open-canon-site/commit/b10696a557624ea24139ea6dd1bb885ca9e8ff2d))
+
+- **scrapers**: Handle lettered verses and section headings in 1 Enoch
+  ([`a4fdac7`](https://github.com/open-canon/open-canon-site/commit/a4fdac7374f8d131c0e166f3f321861eed58f462))
+
+- **scrapers**: Keep FBE chapter summaries and image captions out of verses
+  ([`d376543`](https://github.com/open-canon/open-canon-site/commit/d376543cf08d29825bd08a332e3a97446caec255))
+
+- **scrapers**: Keep proclamation bylines and colophons in the chapter
+  ([`887dde0`](https://github.com/open-canon/open-canon-site/commit/887dde02da6480d7b80c8d3e7ee8f07f2acadefd))
+
+- **scrapers**: Parse every 1 Enoch verse and render superscripts
+  ([`d24ef57`](https://github.com/open-canon/open-canon-site/commit/d24ef57e3cc17fcf2f297af8ab5ad8a503dbbb6e))
+
+- **scrapers**: Treat the 1980 dateline as front matter, not a verse
+  ([`ec21ee1`](https://github.com/open-canon/open-canon-site/commit/ec21ee146b22387a58df6c9f1ce5af97776e0c62))
+
+### Documentation
+
+- List the lds-proclamations scraper in the README
+  ([`06b4818`](https://github.com/open-canon/open-canon-site/commit/06b4818d7cd0cc9dbb6ac390a8d21c6f85b8627f))
+
+### Features
+
+- **scrapers**: Scrape the 1980, 1995 and 2020 LDS proclamations
+  ([`7c89fc0`](https://github.com/open-canon/open-canon-site/commit/7c89fc0dae3877fdd93a3c844969eaced1b1debc))
+
+
 ## v1.11.0 (2026-11-08)
 
 ### Bug Fixes
