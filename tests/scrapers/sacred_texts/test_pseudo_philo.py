@@ -57,7 +57,7 @@ def test_verse_marker_re(verse: int, text: str, matches: bool) -> None:
 
 
 def test_first_chapter_page(parser: PseudoPhiloParser) -> None:
-    """Chapter I: the Roman numeral opens verse 1, inline numbers split verses, margin refs drop."""
+    """Chapter I: the Roman numeral opens verse 1, inline numbers split verses, margin refs become notes."""
     (chapter,) = parser.parse_chapter_page(17, fixture("bap17"))
     assert chapter.number == 1
     assert [verse.number for verse in chapter.verses] == [1, 2, 3, 4, 5, 6]
@@ -65,6 +65,16 @@ def test_first_chapter_page(parser: PseudoPhiloParser) -> None:
     assert isinstance(first.parts[0], pyosis.NoteCt)
     assert flatten(first.parts).startswith("The beginning of the world.")
     assert "Gen. 5:4" not in "".join(flatten(v.parts) for v in chapter.verses)
+    refs = [
+        part
+        for verse in chapter.verses
+        for part in verse.parts
+        if isinstance(part, pyosis.NoteCt) and part.type_value == "crossReference"
+    ]
+    assert [ref.content for ref in refs] == [["Gen. 5:4"], ["Gen. 5:7"], ["Gen. 5:24"]]
+    assert [flatten(v.parts) for v in chapter.verses if v.number == 2] == [
+        "And Adam lived after he begat Seth 700 years, and begat 12 sons and 8 daughters."
+    ]
     assert (
         flatten(chapter.verses[1].parts)
         == "And Adam lived after he begat Seth 700 years, and begat 12 sons and 8 daughters."

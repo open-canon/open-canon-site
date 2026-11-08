@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Final
 
 import pyosis
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup, NavigableString, Tag
 from tqdm import tqdm
 
 from open_canon_site.scrapers._osis import (
@@ -94,6 +94,12 @@ INLINE_BEFORE_PARAGRAPH_RE: Final[re.Pattern[str]] = re.compile(r"(?i)(<[ib]>)\s
 A page break splits an italic passage this way. The parser would close the paragraph at the
 ``</I>`` and lose the text after it, so the tags are swapped to ``<P><I>`` first.
 """
+REFERENCE_START: Final[str] = "\ue000"
+"""Private-use character that opens a margin reference left in the text by ``_body``."""
+REFERENCE_END: Final[str] = "\ue001"
+"""Private-use character that closes a margin reference left in the text by ``_body``."""
+REFERENCE_RE: Final[re.Pattern[str]] = re.compile(f"{REFERENCE_START}(.*?){REFERENCE_END}")
+"""Matches a margin reference placeholder, capturing the reference text (``Gen. 5:4``)."""
 HEADING_TAGS: Final[tuple[str, ...]] = ("h1", "h2", "h3", "h4", "h5", "h6")
 """Heading tag names."""
 
@@ -166,7 +172,8 @@ class PseudoPhiloParser(JubileesParser):
     printed page boundaries, so the verses are found by scanning for the next expected number
     rather than by paragraph. A chapter's first verse carries the chapter's Roman numeral
     instead of ``1.``, which is also how the two chapters sharing a page with another are told
-    apart. Biblical cross-references printed in the margin (tables) are dropped.
+    apart. Biblical cross-references printed in the margin (right-aligned tables) become
+    ``crossReference`` notes at the point where they are printed.
     """
 
     def __init__(self, cache_dir: str | None = None, delay: float = 1.0) -> None:
@@ -348,7 +355,9 @@ class PseudoPhiloParser(JubileesParser):
                 after_marker = True
                 continue
 
-            parts = self.trim_parts(self.parse_inline_content(element, footnotes))
+            parts = self.trim_parts(
+                self._expand_references(self.parse_inline_content(element, footnotes))
+            )
             text = normalize_whitespace(self.extract_text_without_notes(parts))
             if not text:
                 continue
@@ -383,7 +392,9 @@ class PseudoPhiloParser(JubileesParser):
         """Parse a page (in either site layout) and return its body.
 
         An emphasis tag opened just before a ``<P>`` is moved inside it first (see
-        ``INLINE_BEFORE_PARAGRAPH_RE``).
+        ``INLINE_BEFORE_PARAGRAPH_RE``). Each right-aligned margin table (a Bible
+        cross-reference) is replaced by its text between ``REFERENCE_START`` and
+        ``REFERENCE_END``, which ``_split_references`` later turns into a note.
 
         Args:
             raw_text: Raw page HTML.
@@ -393,7 +404,53 @@ class PseudoPhiloParser(JubileesParser):
         """
         html = INLINE_BEFORE_PARAGRAPH_RE.sub(r"<P>\g<1>", legacy_html(raw_text))
         soup = BeautifulSoup(html, "html.parser")
+        for table in soup.find_all("table", attrs={"align": re.compile("^right$", re.I)}):
+            reference = normalize_whitespace(table.get_text(" ", strip=True))
+            table.replace_with(
+                NavigableString(f"{REFERENCE_START}{reference}{REFERENCE_END}" if reference else "")
+            )
         return soup.body if soup.body else soup
+
+    @staticmethod
+    def _split_references(text: str) -> list[InlinePart]:
+        """Split a string at margin reference placeholders, turning each into a note.
+
+        Args:
+            text: A string that may contain ``REFERENCE_START`` .. ``REFERENCE_END`` runs.
+
+        Returns:
+            Strings and ``crossReference`` notes in order; empty strings are dropped.
+        """
+        result: list[InlinePart] = []
+        position = 0
+        for match in REFERENCE_RE.finditer(text):
+            if match.start() > position:
+                result.append(text[position : match.start()])
+            result.append(pyosis.NoteCt(type_value="crossReference", content=[match.group(1)]))
+            position = match.end()
+        if position < len(text):
+            result.append(text[position:])
+        return result
+
+    def _expand_references(self, parts: list[InlinePart]) -> list[InlinePart]:
+        """Turn margin reference placeholders in strings (and highlights) into notes.
+
+        Args:
+            parts: Inline parts.
+
+        Returns:
+            Parts with every placeholder replaced by a ``crossReference`` note.
+        """
+        result: list[InlinePart] = []
+        for part in parts:
+            if isinstance(part, str):
+                result.extend(self._split_references(part))
+            elif isinstance(part, pyosis.HiCt):
+                part.content = self._expand_references(part.content)
+                result.append(part)
+            else:
+                result.append(part)
+        return self.consolidate_parts(result)
 
     @staticmethod
     def _clean_string(text: str) -> str:
@@ -463,8 +520,6 @@ class PseudoPhiloParser(JubileesParser):
                 if not item:
                     continue
                 previous_space = item[-1].isspace()
-            else:
-                previous_space = False
             if style != run_style:
                 close_run()
                 run = []
@@ -545,9 +600,19 @@ class PseudoPhiloParser(JubileesParser):
                 continue
 
             scanned: list[Atom] = []
+            leading: list[Atom] = []
             at_paragraph_start = True
-            for part, style in self._atoms(parts):
+            for part, style in self._atoms(self._expand_references(parts)):
+                if at_paragraph_start and (
+                    isinstance(part, pyosis.NoteCt) or (isinstance(part, str) and not part.strip())
+                ):
+                    # A margin reference printed before the paragraph's first word: it
+                    # belongs with that word, which may open a new chapter.
+                    leading.append((part, style))
+                    continue
                 if not isinstance(part, str):
+                    scanned.extend(leading)
+                    leading = []
                     scanned.append((part, style))
                     at_paragraph_start = False
                     continue
@@ -567,11 +632,15 @@ class PseudoPhiloParser(JubileesParser):
                         current = Chapter(number=number, page_number=page_number)
                         chapters.append(current)
                         verse_number = 1
+                        verse_parts.extend(leading)
+                        leading = []
                         text = text[end:]
                         at_paragraph_start = False
                         continue
 
                     at_paragraph_start = False
+                    scanned.extend(leading)
+                    leading = []
                     if current is None:
                         raise RuntimeError(
                             f"Text before the opening chapter marker on bap{page_number:02d}: "
@@ -593,6 +662,7 @@ class PseudoPhiloParser(JubileesParser):
                     text = text[match_.end() :]
 
             verse_parts.extend(scanned)
+            verse_parts.extend(leading)
             verse_parts.append((" ", None))
 
         flush_verse()
