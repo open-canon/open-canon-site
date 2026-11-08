@@ -19,6 +19,7 @@ import zipfile
 import httpx
 import pyosis
 
+from open_canon_site.scrapers._http import CachedHttpFetcher
 from open_canon_site.scrapers.base import ScraperSpec
 
 logger = logging.getLogger(__name__)
@@ -51,8 +52,18 @@ Books whose code is not a key here are ignored when parsing; iteration order is 
 """
 
 
-def download_xml() -> bytes:
-    """Download the KJV zip from ebible.org and return the XML member's bytes.
+def download_xml(cache_dir: str | pathlib.Path | None = None) -> bytes:
+    """Return the KJV XML member's bytes, using an on-disk copy of the zip when available.
+
+    With ``cache_dir`` set, the archive is cached at the path ``CachedHttpFetcher`` would use
+    for ``DOWNLOAD_URL`` (``<cache_dir>/ebible.org/Scriptures/eng-kjv_vpl.zip``). A valid
+    cached archive is used without touching the network; an unreadable one (corrupt or
+    missing the XML member) is discarded and downloaded again. Only archives that extract
+    successfully are written to the cache.
+
+    Args:
+        cache_dir: Root directory for cached responses, or ``None`` to always download and
+            never write a cache.
 
     Returns:
         The raw contents of ``XML_FILENAME`` extracted from the archive at ``DOWNLOAD_URL``.
@@ -60,10 +71,44 @@ def download_xml() -> bytes:
     Network and archive errors propagate unchanged: ``httpx.HTTPStatusError`` for an error
     status, ``zipfile.BadZipFile`` for a corrupt body and ``KeyError`` if the member is missing.
     """
+    cache_path: pathlib.Path | None = None
+    if cache_dir:
+        fetcher = CachedHttpFetcher(cache_dir=cache_dir)
+        fetcher.close()
+        cache_path = fetcher.cache_path_for(DOWNLOAD_URL)
+
+    if cache_path and cache_path.exists():
+        try:
+            xml_bytes = _extract_member(cache_path.read_bytes())
+        except (zipfile.BadZipFile, KeyError):
+            logger.warning("Ignoring unreadable cached archive %s", cache_path)
+        else:
+            logger.info("Loaded %s from cache", cache_path)
+            return xml_bytes
+
     logger.info("Downloading %s ...", DOWNLOAD_URL)
     response = httpx.get(DOWNLOAD_URL, follow_redirects=True)
     response.raise_for_status()
-    with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
+    xml_bytes = _extract_member(response.content)
+    if cache_path:
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        cache_path.write_bytes(response.content)
+    return xml_bytes
+
+
+def _extract_member(archive: bytes) -> bytes:
+    """Read ``XML_FILENAME`` out of zip ``archive`` bytes.
+
+    Args:
+        archive: Contents of a zip file.
+
+    Returns:
+        The bytes of the XML member.
+
+    ``zipfile.BadZipFile`` propagates if ``archive`` is not a valid zip and ``KeyError`` if it
+    has no ``XML_FILENAME`` member.
+    """
+    with zipfile.ZipFile(io.BytesIO(archive)) as zf:
         return zf.read(XML_FILENAME)
 
 
@@ -218,7 +263,8 @@ def run(args: argparse.Namespace) -> list[pathlib.Path]:
 
     Args:
         args: Parsed CLI arguments. ``output_dir`` is created if missing; ``per_book``
-            (optional, default false) enables per-book files.
+            (optional, default false) enables per-book files; ``cache_dir`` (optional,
+            ``None`` disables) holds the cached source archive. Output is written as UTF-8.
 
     Returns:
         Paths written, per-book files first (canonical order) and the combined file last.
@@ -226,7 +272,7 @@ def run(args: argparse.Namespace) -> list[pathlib.Path]:
     output_dir = pathlib.Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    books = parse_books(download_xml())
+    books = parse_books(download_xml(getattr(args, "cache_dir", None)))
 
     written: list[pathlib.Path] = []
     all_book_divs = []
@@ -238,12 +284,12 @@ def run(args: argparse.Namespace) -> list[pathlib.Path]:
 
         if getattr(args, "per_book", False):
             path = output_dir / book_file_name(book_name)
-            path.write_text(books_to_osis_xml([book_div]).to_xml())
+            path.write_text(books_to_osis_xml([book_div]).to_xml(), encoding="utf-8")
             logger.info("Saved %s", path.name)
             written.append(path)
 
     combined = output_dir / "kjv_apocrypha.xml"
-    combined.write_text(books_to_osis_xml(all_book_divs).to_xml())
+    combined.write_text(books_to_osis_xml(all_book_divs).to_xml(), encoding="utf-8")
     logger.info("Saved %s", combined.name)
     written.append(combined)
     return written

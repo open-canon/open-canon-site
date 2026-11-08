@@ -59,6 +59,58 @@ def _mock_get(monkeypatch, handler):
     return calls
 
 
+# --- download_xml caching --------------------------------------------------------------
+
+
+def _cached_zip(tmp_path: Path) -> Path:
+    """Return the cache location of the archive under ``tmp_path / "cache"``."""
+    return tmp_path / "cache" / "ebible.org" / "Scriptures" / "eng-kjv_vpl.zip"
+
+
+def test_download_xml_writes_cache_then_serves_from_it(monkeypatch, tmp_path):
+    """With ``cache_dir`` the archive is stored once and later calls need no network."""
+    archive = _zip_bytes({mod.XML_FILENAME: VPL})
+    calls = _mock_get(monkeypatch, lambda request: httpx.Response(200, content=archive))
+    assert mod.download_xml(tmp_path / "cache") == VPL
+    assert _cached_zip(tmp_path).read_bytes() == archive
+    assert mod.download_xml(tmp_path / "cache") == VPL
+    assert len(calls) == 1
+
+
+def test_download_xml_without_cache_dir_never_writes_or_reads_cache(monkeypatch, tmp_path):
+    """``cache_dir=None`` downloads every time and creates nothing."""
+    archive = _zip_bytes({mod.XML_FILENAME: VPL})
+    calls = _mock_get(monkeypatch, lambda request: httpx.Response(200, content=archive))
+    monkeypatch.chdir(tmp_path)
+    mod.download_xml(None)
+    mod.download_xml(None)
+    assert len(calls) == 2
+    assert list(tmp_path.iterdir()) == []
+
+
+@pytest.mark.parametrize(
+    "bad", [b"not a zip", _zip_bytes({"other.xml": b"<a/>"})], ids=["corrupt", "no-member"]
+)
+def test_download_xml_replaces_unreadable_cached_archive(monkeypatch, tmp_path, bad):
+    """An unusable cached archive is ignored, re-downloaded and overwritten."""
+    archive = _zip_bytes({mod.XML_FILENAME: VPL})
+    cached = _cached_zip(tmp_path)
+    cached.parent.mkdir(parents=True)
+    cached.write_bytes(bad)
+    calls = _mock_get(monkeypatch, lambda request: httpx.Response(200, content=archive))
+    assert mod.download_xml(tmp_path / "cache") == VPL
+    assert len(calls) == 1
+    assert cached.read_bytes() == archive
+
+
+def test_download_xml_does_not_cache_invalid_download(monkeypatch, tmp_path):
+    """A response that is not a usable archive is not written to the cache."""
+    _mock_get(monkeypatch, lambda request: httpx.Response(200, content=b"not a zip"))
+    with pytest.raises(zipfile.BadZipFile):
+        mod.download_xml(tmp_path / "cache")
+    assert not _cached_zip(tmp_path).exists()
+
+
 # --- constants -------------------------------------------------------------------------
 
 
@@ -271,7 +323,15 @@ def test_add_arguments_per_book_flag_defaults_false():
 @pytest.fixture
 def fake_download(monkeypatch):
     """Replace ``download_xml`` with one returning the synthetic VPL document."""
-    monkeypatch.setattr(mod, "download_xml", lambda: VPL)
+    seen = []
+
+    def fake(cache_dir=None):
+        """Record the ``cache_dir`` argument and return the synthetic VPL document."""
+        seen.append(cache_dir)
+        return VPL
+
+    monkeypatch.setattr(mod, "download_xml", fake)
+    return seen
 
 
 def _args(tmp_path: Path, **extra) -> argparse.Namespace:
@@ -312,6 +372,23 @@ def test_run_creates_missing_output_dir(tmp_path, fake_download):
     target = tmp_path / "a" / "b"
     args = argparse.Namespace(output_dir=str(target), per_book=False)
     assert mod.run(args) == [target / "kjv_apocrypha.xml"]
+
+
+def test_run_passes_cache_dir_to_download(tmp_path, fake_download):
+    """``run`` forwards ``args.cache_dir`` so ``--cache-dir`` / ``--no-cache`` take effect."""
+    mod.run(argparse.Namespace(output_dir=tmp_path, cache_dir=tmp_path / "c"))
+    mod.run(argparse.Namespace(output_dir=tmp_path, cache_dir=None))
+    assert fake_download == [tmp_path / "c", None]
+
+
+def test_run_writes_utf8_regardless_of_locale(tmp_path, monkeypatch):
+    """Output is UTF-8 encoded even when the locale's preferred encoding is not."""
+    vpl = VPL.replace(b"First verse.", "Caf\u00e9 \u2014 \u03b1".encode())
+    monkeypatch.setattr(mod, "download_xml", lambda cache_dir=None: vpl)
+    monkeypatch.setattr("locale.getpreferredencoding", lambda *a, **k: "ascii")
+    paths = mod.run(_args(tmp_path, per_book=True))
+    assert "Caf\u00e9 \u2014 \u03b1" in paths[0].read_bytes().decode("utf-8")
+    assert "Caf\u00e9 \u2014 \u03b1" in paths[-1].read_bytes().decode("utf-8")
 
 
 # --- SPEC ------------------------------------------------------------------------------
