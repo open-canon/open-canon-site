@@ -2,6 +2,19 @@
 
 <!-- version list -->
 
+## v1.16.0 (2026-11-08)
+
+### Bug Fixes
+
+- **site**: Render content after the last verse below the verses
+  ([`f9324e9`](https://github.com/open-canon/open-canon-site/commit/f9324e9ebc974cc5070f5c2f25506becf6a0f093))
+
+### Features
+
+- **scrapers**: Scrape "The Living Christ: The Testimony of the Apostles"
+  ([`6bdac00`](https://github.com/open-canon/open-canon-site/commit/6bdac00d6db0dfa5902976d6a1425d081b6b12ce))
+
+
 ## v1.15.0 (2026-11-08)
 
 ### Bug Fixes
