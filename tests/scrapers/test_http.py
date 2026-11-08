@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import re
 from pathlib import Path
 
 import httpx
@@ -114,7 +115,6 @@ def test_close_closes_client():
         ("https://example.org/a/", "example.org/a/index.htm"),
         ("https://example.org", "example.org/index.htm"),
         ("https://example.org/", "example.org/index.htm"),
-        ("https://example.org/x.xml?q=1", "example.org/x.xml"),
         ("https://example.org/p.html#frag", "example.org/p.htm"),
         ("https://example.org/a.html.html", "example.org/a.html.htm"),
         ("https://example.org/noext", "example.org/noext"),
@@ -126,6 +126,71 @@ def test_cache_path_for_layout(tmp_path, url, expected):
     """URLs map to ``<cache>/<host>/<path>`` with index/htm normalisation edge cases."""
     fetcher = _fetcher(tmp_path)
     assert fetcher.cache_path_for(url) == tmp_path / "cache" / expected
+    fetcher.close()
+
+
+def test_cache_path_for_query_gets_hashed_suffix(tmp_path):
+    """A query string adds a deterministic ``.q-<hash>`` before the suffix; fragments don't."""
+    fetcher = _fetcher(tmp_path)
+    path = fetcher.cache_path_for("https://example.org/x.xml?q=1")
+    assert path.parent == tmp_path / "cache" / "example.org"
+    assert re.fullmatch(r"x\.q-[0-9a-f]{16}\.xml", path.name)
+    assert fetcher.cache_path_for("https://example.org/x.xml?q=1#frag") == path
+    assert fetcher.cache_path_for("https://example.org/x.xml?q=2") != path
+    assert (
+        fetcher.cache_path_for("https://example.org/x.xml")
+        == tmp_path / "cache" / "example.org/x.xml"
+    )
+    fetcher.close()
+
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://example.org/../../../victim.xml",
+        "https://example.org/a/../../../victim.xml",
+        "https://example.org/..",
+        "https://../victim.xml",
+    ],
+)
+def test_cache_path_for_rejects_paths_escaping_cache_dir(tmp_path, url):
+    """``..`` segments that would leave the cache root raise ``ValueError``."""
+    fetcher = _fetcher(tmp_path)
+    with pytest.raises(ValueError, match="escapes the cache directory"):
+        fetcher.cache_path_for(url)
+    fetcher.close()
+
+
+def test_cache_path_for_allows_dotdot_that_stays_inside(tmp_path):
+    """A ``..`` that stays under the host directory is harmless and allowed."""
+    fetcher = _fetcher(tmp_path)
+    path = fetcher.cache_path_for("https://example.org/a/../b.htm")
+    assert path.resolve() == (tmp_path / "cache" / "example.org" / "b.htm").resolve()
+    fetcher.close()
+
+
+def test_fetch_text_escaping_url_does_not_touch_outside_file(tmp_path, sleeps):
+    """An escaping URL neither reads nor overwrites a file outside the cache."""
+    victim = tmp_path / "victim.xml"
+    victim.write_text("secret", encoding="utf-8")
+    handler, log = _sequence(httpx.Response(200, text="overwritten"))
+    fetcher = _fetcher(tmp_path, handler)
+    with pytest.raises(ValueError):
+        fetcher.fetch_text(url="https://example.org/../../victim.xml")
+    assert victim.read_text(encoding="utf-8") == "secret"
+    assert log == []
+    fetcher.close()
+
+
+def test_fetch_text_distinct_queries_are_cached_separately(tmp_path, sleeps):
+    """Two URLs differing only by query each get their own cached response."""
+    handler, log = _sequence(httpx.Response(200, text="one"), httpx.Response(200, text="two"))
+    fetcher = _fetcher(tmp_path, handler)
+    assert fetcher.fetch_text(url="https://example.org/text?chapter=1") == "one"
+    assert fetcher.fetch_text(url="https://example.org/text?chapter=2") == "two"
+    assert fetcher.fetch_text(url="https://example.org/text?chapter=1") == "one"
+    assert fetcher.fetch_text(url="https://example.org/text?chapter=2") == "two"
+    assert len(log) == 2
     fetcher.close()
 
 
