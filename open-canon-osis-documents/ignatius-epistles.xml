@@ -1,0 +1,1190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osis xmlns="http://www.bibletechnologies.net/2003/OSIS/namespace" TEIform="TEI.2">
+  <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="Ign" osisRefWork="Ignatius" xml:lang="en" xml:space="default" TEIform="text">
+    <header TEIform="teiHeader" canonical="false">
+      <revisionDesc TEIform="revisionDesc">
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T10:53:37</date>
+        <p TEIform="p">Scraped from https://sacred-texts.com/bib/lbob/, and converted to OSIS by open-canon contributors.</p>
+      </revisionDesc>
+      <revisionDesc TEIform="revisionDesc">
+        <date event="edition" type="ISO" xml:lang="en" TEIform="date">1926</date>
+        <p TEIform="p">The Lost Books of the Bible, Alpha House, Inc., 1926.</p>
+      </revisionDesc>
+      <work osisWork="Ign" xml:lang="en">
+        <title canonical="true" TEIform="title">The Epistles of Ignatius</title>
+        <description>Text from "The Lost Books of the Bible," 1926. The Epistles of Ignatius. Scraped from sacred-texts.com and converted to OSIS.</description>
+        <publisher>Alpha House, Inc.</publisher>
+        <type type="OSIS"/>
+      </work>
+    </header>
+    <div canonical="true" type="book" osisID="Ign" TEIform="div">
+      <title canonical="true" short="Ignatius" type="main" TEIform="title">The Epistles of Ignatius</title>
+      <div canonical="true" type="book" osisID="Ign.Eph" TEIform="div">
+        <title canonical="true" short="Ephesians" type="main" TEIform="title">The Epistle of Ignatius to the Ephesians</title>
+        <div canonical="false" type="introduction" TEIform="div">
+          <headCT TEIform="head">¶ Of the Epistles of Ignatius.</headCT>
+          <p TEIform="p">[The Epistles of Ignatius are translated by Archbishop Wake from the text of Vossius. He says that there were considerable differences in the editions; the best for a long time extant containing fabrications, and the genuine being altered and corrupted. Archbishop Usher printed old Latin translations of them at Oxford, in 1644. At Amsterdam, two years afterwards, Vossius printed six of them, in their ancient and pure Greek; and the seventh greatly amended from the ancient Latin version, was printed at Paris, by Ruinart, in 1689, in the Acts and Martyrdom of Ignatius, from a Greek uninterpolated copy. These are supposed to form the collection that Polycarp made of the Epistles of Ignatius, mentioned by Irenæus, Origen, Eusebius, Jerome, Athanasius, Theodoret, and other ancients; but many learned men have imagined all of them to be apocryphal. This supposition, the piety of Archbishop Wake, and his persuasion of their utility to the faith of the church, will not permit him to entertain; hence he has taken great pains to render the present translation acceptable, by adding numerous readings and references to the Canonical Books.]</p>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Eph.1" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">1
+              <hi type="italic" TEIform="hi"> Commends them for sending Onesimus, and other members of the church to him. </hi>8
+              <hi type="italic" TEIform="hi"> Exhorts them to unity, </hi>13
+              <hi type="italic" TEIform="hi"> by a due subjection to their bishop</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Eph.1.1">IGNATIUS, who is also called Theophorus, to the church which is at Ephesus in Asia; most deservedly happy; being blessed  
+            <note canonical="false" type="explanation" n="166:1" TEIform="note">In.</note> through the greatness and fulness  
+            <note canonical="false" type="explanation" n="166:2" TEIform="note">See Eph. iii. 19.</note> of God the Father, and predestinated before the world began, that it should be always unto an enduring and unchangeable glory; being united and chosen  
+            <note canonical="false" type="explanation" n="166:3" TEIform="note">In.</note> through his true passion, according to the will of the Father, and Jesus Christ our God; all  
+            <note canonical="false" type="explanation" n="166:4" TEIform="note">Health, Joy.</note> happiness, by Jesus Christ, and  
+            <note canonical="false" type="explanation" n="166:5" TEIform="note">Received. Vid. Epist. Interpol.</note> his undefiled grace.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.2">I have heard of your name much beloved in God; which ye have  
+            <note canonical="false" type="explanation" n="166:6" TEIform="note">Vid. Coteler. in loc. Comp. Gal. iv. 8.</note> very justly attained by a  
+            <note canonical="false" type="explanation" n="166:7" TEIform="note">Pearson Vind. Ignat. Par. 2, cap. 14.</note> habit of righteousness, according to the faith and love which is in Jesus Christ our Saviour.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.3">How that being  
+            <note canonical="false" type="explanation" n="166:8" TEIform="note">Imitators.</note> followers of God, and stirring up yourselves by the blood of Christ ye have perfectly accomplished the work that was con-natural unto you.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.4">For hearing that I came bound from Syria, for the common name and  
+            <note canonical="false" type="explanation" n="166:9" TEIform="note">Viz. of Christ.</note> hope, trusting through your prayers to fight with beasts at Rome; so that by  
+            <note canonical="false" type="explanation" n="166:10" TEIform="note">Martyrdom.</note> suffering I may become indeed the disciple of him  
+            <note canonical="false" type="explanation" n="166:11" TEIform="note">Eph. v. 2.</note> who gave himself to God, an offering and sacrifice for us;  
+            <note canonical="false" type="explanation" n="166:12" TEIform="note">See the old Lat. Ed. of Bishop Usher.</note> (ye hastened to see me). I received, therefore, in the name of God, your whole multitude in Onesimus.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.5">Who by inexpressible love is ours, but according to the flesh is your bishop; whom I beseech you, by Jesus Christ, to love; and that you would all strive to be like unto him. And blessed be God, who has granted unto you, who are so worthy of him, to  
+            <note canonical="false" type="explanation" n="166:13" TEIform="note">Possess.</note> enjoy such an excellent bishop.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.6">For what concerns my fellow servant Burrhus, and your  
+            <note canonical="false" type="explanation" n="166:14" TEIform="note">Blessed in all things.</note> most blessed deacon in things pertaining to God; I entreat you that he may tarry longer, both for yours, and your bishop's honour.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.7">And Crocus also worthy both our God and you, whom I have received as the pattern of your love, has in all things refreshed me, as the Father of our Lord Jesus Christ shall also refresh him; together with Onesimus, and Burrhus, and Euclus, and Fronto,  
+            <note canonical="false" type="explanation" n="167:1" TEIform="note">By.</note> in whom I have, as to your charity, seen all of you. And may I always,  
+            <note canonical="false" type="explanation" n="167:2" TEIform="note">See Philem. 20. Wisd. xxx. 2.</note> have joy of you, if I shall be worthy of it.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.8">It is therefore fitting that you should  
+            <note canonical="false" type="explanation" n="167:3" TEIform="note">In all manner of ways.</note> by all means glorify Jesus Christ who hath glorified you: that  
+            <note canonical="false" type="explanation" n="167:4" TEIform="note">In one.</note> by a uniform obedience  
+            <note canonical="false" type="explanation" n="167:5" TEIform="note">1 Cor. i. 10.</note> ye may be perfectly joined together, in the same mind, and in the same judgment: and may all speak the same things concerning everything.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.9">And that being subject to  
+            <note canonical="false" type="explanation" n="167:6" TEIform="note">The.</note> your bishop, and the presbytery, ye may be wholly and thoroughly sanctified.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.10">These things I  
+            <note canonical="false" type="explanation" n="167:7" TEIform="note">Command you.</note> prescribe to you, not as if I were somebody extraordinary: for though I am bound  
+            <note canonical="false" type="explanation" n="167:8" TEIform="note">In.</note> for his name, I am not yet perfect in Christ Jesus.  
+            <note canonical="false" type="explanation" n="167:9" TEIform="note">For.</note> But now I begin to learn, and I speak to you as fellow disciples together with me.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.11">For I ought to have been stirred up by you, in faith, in admonition, in patience, in long-suffering; but forasmuch as charity suffers me not to be silent  
+            <note canonical="false" type="explanation" n="167:10" TEIform="note">Concerning.</note> towards you, I have first taken upon me to exhort you, that ye would all run together according to the will of God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.12">For even Jesus Christ, our inseparable life, is sent by the  
+            <note canonical="false" type="explanation" n="167:11" TEIform="note">Mind, counsel, opinion, &amp;c.</note> will of the Father; as the bishops, appointed unto the utmost bounds of the earth, are by the will of Jesus Christ.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.13">
+            <note canonical="false" type="explanation" n="167:12" TEIform="note">Whence.</note> Wherefore it will become you to run together according to the will of your bishop, as also ye do.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.14">For your  
+            <note canonical="false" type="explanation" n="167:13" TEIform="note">Worthy to be named.</note> famous presbytery, worthy of God, is fitted as exactly to the bishop, as the strings are to the harp.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.15">Therefore in your concord and agreeing charity, Jesus Christ is sung; and every single person among you makes up the chorus:</verse>
+          <verse canonical="true" osisID="Ign.Eph.1.16">That so being all consonant in  
+            <note canonical="false" type="explanation" n="167:14" TEIform="note">Concord.</note> love, and taking up the song of God, ye may in a perfect unity with one voice, sing to the Father by Jesus Christ; to the end that he may both hear you, and perceive by your works, that ye are indeed the members of his son.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.1.17">Wherefore it is profitable for you to live in an unblameable unity, that so ye may always  
+            <note canonical="false" type="explanation" n="167:15" TEIform="note">Partake of.</note> have a fellowship with God.
+          </verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Eph.2" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">1
+              <hi type="italic" TEIform="hi"> The benefit of subjection. </hi>4
+              <hi type="italic" TEIform="hi"> The bishop not to be respected the less because he is not forward in exacting it: </hi>8
+              <hi type="italic" TEIform="hi"> warns them against heretics; bidding them cleave to Jesus, whose divine and human nature is declared; commends them for their care to keep themselves front false teachers; and shews them the way to God</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Eph.2.1">FOR if I in this little time have had such a familiarity with your bishop, I mean not a carnal, but spiritual acquaintance with him; how much more must I think you happy who are so joined to him, as the church is to Jesus Christ, and Jesus Christ to the Father; that so all things may agree in the same unity?</verse>
+          <verse canonical="true" osisID="Ign.Eph.2.2">Let no man deceive himself; if a man be not within the altar, he is deprived of the bread of God. For if the prayers of  
+            <note canonical="false" type="explanation" n="168:1" TEIform="note">Matt. xviii. 19.</note> one or two be of such force, as we are told; how much more powerful shall that of the bishop and the whole church be?
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.2.3">He therefore that does not come together in the same place with it, is 
+            <note canonical="false" type="explanation" n="168:2" TEIform="note">Is already proud and has, &amp;c.</note> proud, and has already  
+            <note canonical="false" type="explanation" n="168:3" TEIform="note">Judged, or separated.</note> condemned himself. For it is written,  
+            <note canonical="false" type="explanation" n="168:4" TEIform="note">James, iv. 6.</note> God resisteth the proud. Let us take heed therefore, that we do not set ourselves against the bishop, that we may be subject to God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.2.4">
+            <note canonical="false" type="explanation" n="168:5" TEIform="note">And the.</note> The more any one sees his bishop silent, the more let him revere him. For whomsoever the master of the house sends to be over his own household, we ought in like manner to receive him, as we would do him that sent him. It is therefore evident that we ought to look upon the bishop, even as we would do upon the Lord himself.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.2.5">And indeed Onesimus himself does greatly commend your good order in God: that you all live according to the truth, and that no heresy dwells among you. For neither do ye hearken to any one more than to Jesus Christ speaking to you in truth.</verse>
+          <verse canonical="true" osisID="Ign.Eph.2.6">For some there are who  
+            <note canonical="false" type="explanation" n="168:6" TEIform="note">Accustom themselves to carry.</note> carry about the name of Christ  
+            <note canonical="false" type="explanation" n="168:7" TEIform="note">In wicked deceit.</note> in deceitfulness, but do things unworthy of God; whom ye must  
+            <note canonical="false" type="explanation" n="168:8" TEIform="note">Avoid.</note> flee, as ye would do so many wild beasts. For they are ravening dogs, who bite secretly: against whom ye must guard yourselves, as men hardly to be cured.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.2.7">There is one physician, both fleshly and spiritual; made and not made; God incarnate; true life in death; both of Mary and of God; first passable, then impassible; even Jesus Christ our Lord.</verse>
+          <verse canonical="true" osisID="Ign.Eph.2.8">Wherefore let no man deceive you; as indeed neither are ye deceived. being wholly the servants of God. For inasmuch as there is no contention nor strife among you, 
+            <note canonical="false" type="explanation" n="168:9" TEIform="note">Which can.</note> to trouble you, 
+            <note canonical="false" type="explanation" n="168:10" TEIform="note">Without doubt ye live.</note> ye must needs live according to God's will.  
+            <note canonical="false" type="explanation" n="168:11" TEIform="note">Vid. Voss. Annot. in loc. Pearson, Vind. Ign. par. 2, pp. 207, 208.</note> My soul be for yours; and I myself the expiatory offering for your church of Ephesus, so famous  
+            <note canonical="false" type="explanation" n="168:12" TEIform="note">To ages.</note> throughout the world.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.2.9">They that are of the flesh cannot do the works of the spirit; neither they that are of the spirit the works of the flesh.  
+            <note canonical="false" type="explanation" n="168:13" TEIform="note">As neither is faith the things of infidelity, nor infidelity the things of faith.</note> As he that has faith cannot be an infidel; nor he that is an infidel have faith. But even those things which ye do according to the flesh are spiritual; forasmuch as ye do all things in Jesus Christ.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.2.10">Nevertheless I have  
+            <note canonical="false" type="explanation" n="168:14" TEIform="note">Known.</note> heard of some who have  
+            <note canonical="false" type="explanation" n="168:15" TEIform="note">Passed thither.</note> passed by you, having perverse doctrine; whom ye did not suffer to sow  
+            <note canonical="false" type="explanation" n="168:16" TEIform="note">Upon.</note> among you; but stopped your ears, that ye might not receive those things that were sown by them;  
+            <note canonical="false" type="explanation" n="168:17" TEIform="note">Comp. Eph. ii. 20, 21, 22. 1 Pet. ii. 5.</note> as becoming the stones of the temple of the Father, prepared for  
+            <note canonical="false" type="explanation" n="168:18" TEIform="note">The building of God the Father.</note> his building; and drawn up on high by the Cross of Christ,  
+            <note canonical="false" type="explanation" n="168:19" TEIform="note">By the engine of the cross, etc.</note> as by an engine.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.2.11">Using the Holy Ghost as the rope: your faith being your; and your charity the way that leads unto God.</verse>
+          <verse canonical="true" osisID="Ign.Eph.2.12">Ye are therefore, with all your companions in the same  
+            <note canonical="false" type="explanation" n="169:1" TEIform="note">Pearson, ib. part 2, cap. 12.</note> journey, full of God; his spiritual temples, 
+            <note canonical="false" type="explanation" n="169:2" TEIform="note">Carriers.</note> full of Christ, full of holiness: adorned in all things with the commands of Christ.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.2.13">In whom also I rejoice that I have been thought worthy by  
+            <note canonical="false" type="explanation" n="169:3" TEIform="note">These things I write.</note> this present epistle to converse, and joy together with you; that with respect to the other life, ye love nothing but God only.
+          </verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Eph.3" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">1
+              <hi type="italic" TEIform="hi"> Exhorts them to prayer; to be unblameable. </hi>5
+              <hi type="italic" TEIform="hi"> To be careful of salvation; </hi>11
+              <hi type="italic" TEIform="hi"> frequent in public devotion; </hi>13
+              <hi type="italic" TEIform="hi"> and to live in charity</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Eph.3.1">PRAY also without ceasing for other men: for there is hope of repentance in them, that they may attain unto God. Let them therefore at least be instructed by your works, if they will be no other way.</verse>
+          <verse canonical="true" osisID="Ign.Eph.3.2">Be ye mild at their anger; humble at their boasting; to their blasphemies return your prayers: to their error, your  
+            <note canonical="false" type="explanation" n="169:4" TEIform="note">Be ye firm.</note> firmness in the faith: when they are cruel, be ye gentle; not endeavouring to imitate their ways. (3 Let us be their brethren in all kindness and moderation, but let us be followers of the Lord;  
+            <note canonical="false" type="explanation" n="169:5" TEIform="note">Who has been more, etc.</note> for who was ever more unjustly used? More destitute? More despised?)
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.3.4">That so no herb of the devil may be found in you: but ye may remain in all holiness and sobriety  
+            <note canonical="false" type="explanation" n="169:6" TEIform="note">In Jesus Christ both bodily and spiritually. 1 Cor. vii. 34.</note> both of body and spirit, in Christ Jesus.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.3.5">The last times  
+            <note canonical="false" type="explanation" n="169:7" TEIform="note">Remain: or, for it remains.</note> are come upon us: let us therefore be very reverent and fear the long-suffering of God, that it be not to us e unto condemnation.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.3.6">For let us either fear the wrath that is to come, or let us love the grace  
+            <note canonical="false" type="explanation" n="169:8" TEIform="note">Is present.</note> that we at present enjoy: that  
+            <note canonical="false" type="explanation" n="169:9" TEIform="note">One of the two, only that we may be found, etc.</note> by the one, or other, of these we may be found in Christ Jesus, unto true life.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.3.7">
+            <note canonical="false" type="explanation" n="169:10" TEIform="note">Without him.</note> Besides him, let nothing  
+            <note canonical="false" type="explanation" n="169:11" TEIform="note">Become you.</note> be worthy of you;  
+            <note canonical="false" type="explanation" n="169:12" TEIform="note">In.</note> for whom also I bear about these bonds, those spiritual jewels, in which I would to God that I might arise through your prayers.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.3.8">Of which I entreat you to make me always partaker, that I may be found in the lot of the Christians of Ephesus, who have always  
+            <note canonical="false" type="explanation" n="169:13" TEIform="note">Assented to.</note> agreed with the Apostles,  
+            <note canonical="false" type="explanation" n="169:14" TEIform="note">In.</note> through the power of Jesus Christ.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.3.9">I know both who I am, and to whom I write; I, a person condemned: ye, such as have obtained mercy: I, exposed to danger; ye, confirmed against danger.</verse>
+          <verse canonical="true" osisID="Ign.Eph.3.10">Ye are the passage of those that are killed for God; the companions of Paul in the mysteries of the Gospel; the Holy, the  
+            <note canonical="false" type="explanation" n="169:15" TEIform="note">Witnessed of.</note> martyr, the deservedly most happy Paul: at whose feet may I be found, when I shall have attained unto God; who  
+            <note canonical="false" type="explanation" n="169:16" TEIform="note">Vid. Coteler. in loc. Pears. Vind. Ign. Par 2, cap. 10.</note> throughout all his epistle, makes mention of you in Christ Jesus.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.3.11">Let it be your care therefore to come more fully together, to the praise and glory of God. For when ye meet fully together in the same place, the powers of the devil are destroyed, and his  
+            <note canonical="false" type="explanation" n="170:1" TEIform="note">Destruction.</note> mischief is dissolved by the  
+            <note canonical="false" type="explanation" n="170:2" TEIform="note">Concord.</note> unity of their faith.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.3.12">And indeed, nothing is better than peace, by which all war both  
+            <note canonical="false" type="explanation" n="170:3" TEIform="note">Of things in heaven and of things on earth.</note> spiritual and earthly is abolished.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.3.13">Of all which nothing is hid from you, if ye have perfect faith and charity in Christ Jesus, which are the beginning and end of life.</verse>
+          <verse canonical="true" osisID="Ign.Eph.3.14">For the beginning is faith; the end is charity. And these two  
+            <note canonical="false" type="explanation" n="170:4" TEIform="note">Being in unity.</note>joined together, are of God: but all other things which concern a holy life are the consequences of these.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.3.15">No man professing a true faith, sinneth; neither does he who has charity hate any.</verse>
+          <verse canonical="true" osisID="Ign.Eph.3.16">
+            <note canonical="false" type="explanation" n="170:5" TEIform="note">Matt. xii. 38.</note> The tree is made manifest by its fruit; so they who profess themselves to be Christians  
+            <note canonical="false" type="explanation" n="170:6" TEIform="note">Shall be seen or made manifest.</note> are known by what they do.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.3.17">For Christianity is not the work of an outward profession; but shows itself in the power of faith, if a man be found faithful unto the end.</verse>
+          <verse canonical="true" osisID="Ign.Eph.3.18">It is better for a man to hold his peace, and be;  
+            <note canonical="false" type="explanation" n="170:7" TEIform="note">Speaking, not to be.</note> than to say he is a Christian and not to be.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.3.19">It is good to teach;  
+            <note canonical="false" type="explanation" n="170:8" TEIform="note">If he who says, does.</note> if what he says he does likewise.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.3.20">There is therefore one master who spake, and it was done; and even those things which he did without speaking, are worthy of the Father.</verse>
+          <verse canonical="true" osisID="Ign.Eph.3.21">He that possesses the word of Jesus is truly able to hear his very silence, that he may be perfect;  
+            <note canonical="false" type="explanation" n="170:9" TEIform="note">That he may.</note> and both do according to what he speaks, and be known by those things of which he is silent.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.3.22">There is nothing hid from God, but even our secrets are nigh unto him.</verse>
+          <verse canonical="true" osisID="Ign.Eph.3.23">Let us therefore do all things, as becomes those who have  
+            <note canonical="false" type="explanation" n="170:10" TEIform="note">Him.</note> God dwelling in them; that we may be his temples, and he may be our God: as also he is, and will manifest himself before our faces, by those things  
+            <note canonical="false" type="explanation" n="170:11" TEIform="note">Out of.</note> for which we justly love him.
+          </verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Eph.4" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">1
+              <hi type="italic" TEIform="hi"> To have a care for the Gospel. </hi>9
+              <hi type="italic" TEIform="hi"> The virginity of Mary, the incarnation, and the death of Christ, were hid front the Devil. </hi>11
+              <hi type="italic" TEIform="hi"> How the birth of Christ was revealed. </hi>16
+              <hi type="italic" TEIform="hi"> Exhorts to unity</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Eph.4.1">BE not deceived, my brethren: those that  
+            <note canonical="false" type="explanation" n="170:12" TEIform="note">The corrupters of houses. 1 Cor. vi. 9, 10.</note> corrupt families inherit adultery, shall not inherit the kingdom of God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.4.2">If therefore they who do this according to the flesh,  
+            <note canonical="false" type="explanation" n="170:13" TEIform="note">1 Cor. x. 8.</note> have suffered death; how much more shall he die, who by his wicked doctrine corrupts the faith of God, for which Christ was crucified?
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.4.3">
+            <note canonical="false" type="explanation" n="170:14" TEIform="note">Such a one being become defiled.</note> He that is thus defiled, shall depart into unquenchable fire, and so also shall he that  
+            <note canonical="false" type="explanation" n="170:15" TEIform="note">Hears him.</note> hearkens to him.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.4.4">For this cause did the Lord  
+            <note canonical="false" type="explanation" n="170:16" TEIform="note">Receives ointment. Psalm xliv. 8, cxxxii. 2.</note> suffer the ointment to be poured on his head; that he might breathe the breath of immortality unto his church.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.4.5">Be not ye therefore anointed with the evil savour of the doctrine of the prince of this world: let him not take you captive from the life that is set before you.</verse>
+          <verse canonical="true" osisID="Ign.Eph.4.6">And why are we not all wise, seeing we have receive the knowledge of God, which is Jesus Christ? Why  
+            <note canonical="false" type="explanation" n="171:1" TEIform="note">Are we foolishly destroyed?</note> do we suffer ourselves foolishly to perish;  
+            <note canonical="false" type="explanation" n="171:2" TEIform="note">Not knowing.</note> not considering the gift which the Lord has truly sent to us?
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.4.7">
+            <note canonical="false" type="explanation" n="171:3" TEIform="note">See Dr. Smith's note in loc. 1 Cor. i. 18, 23, 24.</note> Let my life be sacrificed for the doctrine of the cross; which is indeed a scandal to the unbelievers, but to us is salvation and life eternal.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.4.8">
+            <note canonical="false" type="explanation" n="171:4" TEIform="note">1 Cor. i. 20.</note> Where is the wise man? Where is the disputer? Where is the boasting of those who are called wise?
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.4.9">For our God Jesus Christ was according to the dispensation of God  
+            <note canonical="false" type="explanation" n="171:5" TEIform="note">Carried.</note> conceived in the womb of Mary, of the seed of David,  
+            <note canonical="false" type="explanation" n="171:6" TEIform="note">But by.</note> by the Holy Ghost;  
+            <note canonical="false" type="explanation" n="171:7" TEIform="note">Who was.</note> he was born and baptized, that through his passion he might purify water, to the washing away of sin.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.4.10">Now the Virginity of Mary, and he who was born of her, was kept in secret from the prince of this world; as was also the death of our Lord: three of the  
+            <note canonical="false" type="explanation" n="171:8" TEIform="note">Mysteries of noise.</note> mysteries the most spoken of throughout the world, yet done in  
+            <note canonical="false" type="explanation" n="171:9" TEIform="note">Silence or quietness. See Rom. xvi. 25.</note> secret by God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.4.11">How then was our Saviour manifested to the world? A star shone in heaven beyond all the other stars, and its light was inexpressible, and its novelty struck terror into men's minds. All the rest of the stars, together with the sun and moon, were the chorus to this star; but that sent out its light exceedingly above them all.</verse>
+          <verse canonical="true" osisID="Ign.Eph.4.12">And men  
+            <note canonical="false" type="explanation" n="171:10" TEIform="note">There was a disorder.</note> began to be troubled to think whence this  
+            <note canonical="false" type="explanation" n="171:11" TEIform="note">Novelty.</note> new star came so unlike to  
+            <note canonical="false" type="explanation" n="171:12" TEIform="note">Them.</note> all the others.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.4.13">Hence all the power of magic became dissolved; and every bond of wickedness was  
+            <note canonical="false" type="explanation" n="171:13" TEIform="note">Disappeared.</note> destroyed: men's ignorance was taken away; and the old kingdom abolished; God himself  
+            <note canonical="false" type="explanation" n="171:14" TEIform="note">Being made manifest.</note> appearing in the form of a man, for the renewal of eternal life.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.4.14">From thence began what God had prepared: from thenceforth things were disturbed; forasmuch as he designed to abolish death.</verse>
+          <verse canonical="true" osisID="Ign.Eph.4.15">But if Jesus Christ shall give me grace through your prayers, and it be his will, I purpose in a second epistle which I will suddenly write unto you to manifest to you more fully the dispensation of which I have now begun to speak, unto the new man, which is Jesus Christ; both in his faith, and charity; in his suffering, and in his resurrection.</verse>
+          <verse canonical="true" osisID="Ign.Eph.4.16">Especially if the Lord shall  
+            <note canonical="false" type="explanation" n="171:15" TEIform="note">Reveal.</note> make known unto me, that ye all by name come together in common in one faith, and in one Jesus Christ; who was of the race of David according to the flesh; the Son of man, and Son of God;  
+            <note canonical="false" type="explanation" n="171:16" TEIform="note">That ye may obey.</note> obeying your bishop and the presbytery with an entire  
+            <note canonical="false" type="explanation" n="171:17" TEIform="note">Mind.</note> affection; breaking one and the same bread, which is the medicine of immortality; our antidote that we should not die, but live forever in Christ Jesus.
+          </verse>
+          <verse canonical="true" osisID="Ign.Eph.4.17">My soul be for yours, and theirs whom ye have sent to the glory of God, even unto Smyrna; from whence also I write to you; giving thanks unto the Lord and loving Polycarp even as I do you. Remember me, as Jesus Christ does remember you.</verse>
+          <verse canonical="true" osisID="Ign.Eph.4.18">Pray for the church which is in Syria, from whence I am carried bound to Rome; being the least of all the faithful which are there, as I have been thought worthy to be found to the glory of God.</verse>
+          <verse canonical="true" osisID="Ign.Eph.4.19">Fare ye well in God the Father, and in Jesus Christ, our common Hope. Amen. ¶ 
+            <hi type="italic" TEIform="hi">To the Ephesians</hi>.
+          </verse>
+        </div>
+      </div>
+      <div canonical="true" type="book" osisID="Ign.Magn" TEIform="div">
+        <title canonical="true" short="Magnesians" type="main" TEIform="title">The Epistle of Ignatius to the Magnesians</title>
+        <div canonical="true" type="chapter" osisID="Ign.Magn.1" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">4
+              <hi type="italic" TEIform="hi"> Mentions the arrival of Damon, their bishop, and others, </hi>6
+              <hi type="italic" TEIform="hi"> whom he exhorts them to reverence, notwithstanding he was a young man</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Magn.1.1">IGNATIUS who is also called Theophorus; to the blessed  
+            <note canonical="false" type="explanation" n="172:1" TEIform="note">Vid. Interp. Lat. Epist. Interpol.</note> (church)  
+            <note canonical="false" type="explanation" n="172:2" TEIform="note">In.</note> by the grace of God the Father in  
+            <note canonical="false" type="explanation" n="172:3" TEIform="note">According to.</note> Jesus Christ our Saviour: in whom I salute the church which is at Magnesia near the Mæander: and wish it all joy in God the Father and in Jesus Christ.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.1.2">When I heard of your well ordered love and charity in God, being full of joy, I desired much to speak unto you in the faith of Jesus Christ.</verse>
+          <verse canonical="true" osisID="Ign.Magn.1.3">For having  
+            <note canonical="false" type="explanation" n="172:4" TEIform="note">Been vouchsafed a name carrying a great deal of divinity in it.</note> been thought worthy to obtain a most excellent name,  
+            <note canonical="false" type="explanation" n="172:5" TEIform="note">See Bishop Pearson. Vind. Ign. par. ii. cap. 12, p. 146.</note> in the bonds which I carry about, I  
+            <note canonical="false" type="explanation" n="172:6" TEIform="note">Sing, commend.</note> salute the churches; wishing in them a union both of the body and spirit of Jesus Christ, our eternal life: as also of faith and charity, to which nothing is preferred: but especially of Jesus and the Father in whom  
+            <note canonical="false" type="explanation" n="172:7" TEIform="note">Undergoing, escaping.</note> if we undergo all the injuries of the prince of this pre sent world, and escape, we shall enjoy God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.1.4">Seeing then I have been judged worthy to see you, by Damas your  
+            <note canonical="false" type="explanation" n="172:8" TEIform="note">Worthy of God.</note> most excellent bishop; and by your very worthy presbyters, Bassus and Apollonius; and by my fellow-servant Sotio, the deacon;
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.1.5">In whom  
+            <note canonical="false" type="explanation" n="172:9" TEIform="note">Whom may I enjoy.</note> I rejoice, forasmuch as he is the subject unto his bishop as to the grace of God, and to the presbytery as to the law of Jesus Christ;  
+            <note canonical="false" type="explanation" n="172:10" TEIform="note">Apud. Vet. Lat. Interp. Glorificato Deum Patrem D. nostri Jesu Christi.</note> I determined to write unto you.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.1.6">Wherefore it will become you also not  
+            <note canonical="false" type="explanation" n="172:11" TEIform="note">Vid. Voss. Annot. in loc. Pearson Præf. ad Vind. Ignat.</note> to use your bishop too familiarly upon the account of his youth; but to yield all reverence to him according to the power of God the Father; as also I perceive that your holy presbyters do: not considering is  
+            <note canonical="false" type="explanation" n="172:12" TEIform="note">Seeming youthful state.</note> age, which indeed to appearance is young; but as becomes those who are prudent in God, submitting to him, or rather not to him, but to the Father of our Lord Jesus Christ, the bishop of us all.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.1.7">It will therefore  
+            <note canonical="false" type="explanation" n="172:13" TEIform="note">It is becoming.</note> behoove you  
+            <note canonical="false" type="explanation" n="172:14" TEIform="note">Without any hypocrisy.</note> with all sincerity, to obey your bishop; in honour him  
+            <note canonical="false" type="explanation" n="172:15" TEIform="note">Who willeth it.</note> whose pleasure it is that ye should do so.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.1.8">Because he that does not do so, deceives not the bishop whom he sees, but  
+            <note canonical="false" type="explanation" n="173:1" TEIform="note">Deludes.</note> affronts him that is invisible.  
+            <note canonical="false" type="explanation" n="173:2" TEIform="note">Vid. Epist. Interp. ad loc.</note> For whatsoever of this kind is done, it reflects not upon  
+            <note canonical="false" type="explanation" n="173:3" TEIform="note">Flesh.</note> man, but upon God, who knows the secrets of our hearts.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.1.9">It is therefore fitting, that we should not only be called Christians, but be so.</verse>
+          <verse canonical="true" osisID="Ign.Magn.1.10">As some call indeed their governor, bishop; but yet do all things without him.</verse>
+          <verse canonical="true" osisID="Ign.Magn.1.11">But I can never think that such as these have a good conscience, seeing that they are not gathered together  
+            <note canonical="false" type="explanation" n="173:4" TEIform="note">Firmly.</note> thoroughly according to God's commandment.
+          </verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Magn.2" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">1
+              <hi type="italic" TEIform="hi"> That as all must die, </hi>4
+              <hi type="italic" TEIform="hi"> he exhorts them to live orderly and in unity</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Magn.2.1">SEEING then all things have an end, there are these two  
+            <note canonical="false" type="explanation" n="173:5" TEIform="note">Together.</note> indifferently set before us, death and life: and every one shall depart unto his proper place.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.2.2">For as there are two sorts of coins, the one of God, the other of the world; and each of these has its proper  
+            <note canonical="false" type="explanation" n="173:6" TEIform="note">Character set.</note> inscription engraven upon it; so also is it here.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.2.3">The unbelievers are of this world; but the faithful, through charity, have the character of God the Father by Jesus Christ: by whom if we are not readily disposed to die after the likeness of his passion, his life is not in us.</verse>
+          <verse canonical="true" osisID="Ign.Magn.2.4">Forasmuch, therefore, as I have in the persons before mentioned seen  
+            <note canonical="false" type="explanation" n="173:7" TEIform="note">Your whole multitude.</note> all of you in faith and charity; I exhort you that ye study to do all things in  
+            <note canonical="false" type="explanation" n="173:8" TEIform="note">The concord of God.</note> divine concord:
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.2.5">Your bishop presiding in the place of God; your presbyters in the place of the council of the Apostles; and your deacons most  
+            <note canonical="false" type="explanation" n="173:9" TEIform="note">Sweet.</note> dear to me being entrusted with the ministry of Jesus Christ; who was the Father before all ages, and appeared in the  
+            <note canonical="false" type="explanation" n="173:10" TEIform="note">Was made manifest. Heb. ix. 26.</note> end to us.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.2.6">Wherefore taking the same  
+            <note canonical="false" type="explanation" n="173:11" TEIform="note">Habit of God.</note> holy course, see that ye all reverence one another: and let no one look upon his neighbour after the flesh; but do ye all mutually love each other in Jesus Christ.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.2.7">Let there be nothing that may be able to make a division among you; but be ye united to your bishop, and those who preside over you, to be your pattern and direction in the way to immortality.</verse>
+          <verse canonical="true" osisID="Ign.Magn.2.8">
+            <note canonical="false" type="explanation" n="173:12" TEIform="note">John x. 30, xiv. 11, 12, xvii. 21, 22.</note> As therefore the Lord did nothing without the Father, being united to him; neither by himself nor yet by his Apostles, so neither do ye do anything without your bishop and presbyters:
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.2.9">Neither endeavour to let anything appear rational to yourselves apart;</verse>
+          <verse canonical="true" osisID="Ign.Magn.2.10">But being come together into the same place  
+            <note canonical="false" type="explanation" n="173:13" TEIform="note">Eph. iv. 3, 4, 5, 6.</note> have one common prayer; one supplication; one mind; one hope; one in charity, and in joy undefiled.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.2.11">There is one Lord Jesus Christ, than whom nothing is better. Wherefore  
+            <note canonical="false" type="explanation" n="173:14" TEIform="note">Run.</note> come ye all together as unto one temple of God; as to one  
+            <note canonical="false" type="explanation" n="173:15" TEIform="note">John xvi. 28.</note> altar, as to one Jesus Christ; who proceeded from one Father, and exists in one, and is returned to one.
+          </verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Magn.3" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">1
+              <hi type="italic" TEIform="hi"> He cautions them against false opinions. </hi>4
+              <hi type="italic" TEIform="hi"> Especially those of </hi>
+              <note canonical="false" type="explanation" n="173:16" TEIform="note">Pearson, Vind. Ign. par. 2, cap. 4.</note>
+              <hi type="italic" TEIform="hi"> Ebion and the Judaizing Christians</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Magn.3.1">BE not deceived with  
+            <note canonical="false" type="explanation" n="174:1" TEIform="note">Heterodox.</note> strange doctrines; nor with old fables which are unprofitable. For if we still continue to live according to the Jewish law, we do confess ourselves not to have received grace. For even the most 
+            <note canonical="false" type="explanation" n="174:2" TEIform="note">Most divine.</note> holy prophets lived according to Christ Jesus.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.3.2">And for this cause were they persecuted, being inspired by his grace,  
+            <note canonical="false" type="explanation" n="174:3" TEIform="note">Fully to satisfy.</note> to convince the unbelievers and disobedient that there is one God who has manifested himself by Jesus Christ his Son; who is his  
+            <note canonical="false" type="explanation" n="174:4" TEIform="note">John, i. 1.</note> eternal word, not coming forth from silence, who in all things pleased him that sent him.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.3.3">Wherefore if they who were brought up in these ancient  
+            <note canonical="false" type="explanation" n="174:5" TEIform="note">Things.</note> laws came nevertheless to the newness of hope: no longer observing sabbaths,  
+            <note canonical="false" type="explanation" n="174:6" TEIform="note">Or, living according to.</note> but keeping the Lord's day in which also our life is sprung up by him, and through his death,  
+            <note canonical="false" type="explanation" n="174:7" TEIform="note">Or, which.</note> whom yet some deny:
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.3.4">(By which mystery we have  
+            <note canonical="false" type="explanation" n="174:8" TEIform="note">Received.</note> been brought to believe and therefore wait that we may be found the disciples of Jesus Christ, our only master:)
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.3.5">How shall we be able to live  
+            <note canonical="false" type="explanation" n="174:9" TEIform="note">Without.</note> different from him whose disciples the very prophets themselves being, did by the spirit expect him as their master.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.3.6">
+            <note canonical="false" type="explanation" n="174:10" TEIform="note">Matt. xxvii. 52.</note> And therefore he whom they justly waited for, being come, raised them up from the dead.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.3.7">Let us not then be insensible of his goodness; for should he  
+            <note canonical="false" type="explanation" n="174:11" TEIform="note">Vid. Annot. Voss. in loc. should he have imitated our works, Gr.</note> have dealt with us according to our works, we had not no had a being.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.3.8">Wherefore being become his disciples, let us learn to live according to the rules of Christianity; for whosoever is called by any other name  
+            <note canonical="false" type="explanation" n="174:12" TEIform="note">More than.</note> besides this, he is not of God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.3.9">Lay aside therefore the old and sour and evil leaven; and be ye changed into the new leaven, which is Jesus Christ.</verse>
+          <verse canonical="true" osisID="Ign.Magn.3.10">Be ye salted in him, lest any one among you should be corrupted; for by your savour ye shall be  
+            <note canonical="false" type="explanation" n="174:13" TEIform="note">Convicted, overthrown.</note> judged.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.3.11">It is absurd to name Jesus Christ, and to Judaize. For the Christian religion did not  
+            <note canonical="false" type="explanation" n="174:14" TEIform="note">Believe.</note> embrace the Jewish, but the Jewish the Christian; that so every tongue that believed might be gathered together unto God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.3.12">These things, my beloved, I write unto you; not that I know of any among you that  
+            <note canonical="false" type="explanation" n="174:15" TEIform="note">Have yourselves so.</note> lie under this error; but as  
+            <note canonical="false" type="explanation" n="174:16" TEIform="note">Lesser than you.</note> one of the least among you, I am desirous to forewarn you, that ye fall not into the  
+            <note canonical="false" type="explanation" n="174:17" TEIform="note">Hooks.</note> snares of false doctrine.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.3.13">But that ye be fully instructed in the birth, and suffering, and resurrection of Jesus Christ, our hope; which was accomplished in the time of the government of Pontius Pilate, and that most truly and  
+            <note canonical="false" type="explanation" n="174:18" TEIform="note">Firmly.</note> certainly and from which God forbid that any among you should be turned aside.
+          </verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Magn.4" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">1
+              <hi type="italic" TEIform="hi"> Commends their faith and piety; exhorts them to persevere; </hi>10
+              <hi type="italic" TEIform="hi"> desires their prayers for himself and the church at Antioch</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Magn.4.1">MAY I therefore have joy of you in all things, if I shall be worthy of it. For though I am bound, yet I am not worthy to be compared to one of you that are at liberty.</verse>
+          <verse canonical="true" osisID="Ign.Magn.4.2">I know that ye are not puffed up; for ye have Jesus Christ  
+            <note canonical="false" type="explanation" n="175:1" TEIform="note">In yourselves.</note> in your hearts.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.4.3">And especially when I commend you, I know that ye are ashamed, as it is written,  
+            <note canonical="false" type="explanation" n="175:2" TEIform="note">Prov. xviii. 17 Sept.</note> The just man condemneth himself.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.4.4">Study therefore to be confirmed in the doctrine of our Lord, and of his Apostles; that so whatever ye do, ye may prosper both in body and spirit, in faith and charity, in the Son, and in the Father and in the Holy Spirit: in the beginning, and in the end.</verse>
+          <verse canonical="true" osisID="Ign.Magn.4.5">Together with your most worthy bishop, and the  
+            <note canonical="false" type="explanation" n="175:3" TEIform="note">Worthily complicated.</note> well-wrought spiritual crown of your presbytery, and your deacons, which are according to God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.4.6">Be subject to your bishop, and to one another, as Jesus Christ to the Father, according to the flesh: and the Apostles both to Christ, and to the Father, and to the Holy Ghost: that so ye may  
+            <note canonical="false" type="explanation" n="175:4" TEIform="note">There may be a union both fleshly and spiritual.</note> be united both in body and spirit.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.4.7">
+            <note canonical="false" type="explanation" n="175:5" TEIform="note">Eph. iii. 4.</note> Knowing you to be full of God, I have the more briefly exhorted you.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.4.8">Be mindful of me in your prayers, that I may  
+            <note canonical="false" type="explanation" n="175:6" TEIform="note">Find, enjoy.</note> attain unto God, and of the Church that is in Syria, from  
+            <note canonical="false" type="explanation" n="175:7" TEIform="note">Whence.</note> which I am not worthy to be called.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.4.9">For I stand in need of your joint prayers in God, and of your charity, that the church which is in Syria may be thought worthy to be  
+            <note canonical="false" type="explanation" n="175:8" TEIform="note">Bedewed. Vid. Epist. Inter. in loc.</note> nourished by your church.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.4.10">The Ephesians  
+            <note canonical="false" type="explanation" n="175:9" TEIform="note">Which came to Smyrna upon my account.</note> from Smyrna salute you, from which place I write unto you: (being present here to the glory of God, in like manner as you are,) who have in all things refreshed me, together with Polycarp, the bishop of the Smyrnæans.
+          </verse>
+          <verse canonical="true" osisID="Ign.Magn.4.11">The rest of the churches in the honour of Jesus Christ, salute you.</verse>
+          <verse canonical="true" osisID="Ign.Magn.4.12">
+            <note canonical="false" type="explanation" n="175:10" TEIform="note">Ἔρρωσθε.</note> Farewell, and be ye strengthened in the concord of God:  
+            <note canonical="false" type="explanation" n="175:11" TEIform="note">Possessing.</note> enjoying his inseparable spirit, which is Jesus Christ. ¶ 
+            <hi type="italic" TEIform="hi">To the Magnesians</hi>.
+          </verse>
+        </div>
+      </div>
+      <div canonical="true" type="book" osisID="Ign.Trall" TEIform="div">
+        <title canonical="true" short="Trallians" type="main" TEIform="title">The Epistle of Ignatius to the Trallians</title>
+        <div canonical="true" type="chapter" osisID="Ign.Trall.1" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">1
+              <hi type="italic" TEIform="hi"> Acknowledges the coming of their bishop. </hi>5
+              <hi type="italic" TEIform="hi"> Commends them for their subjection to their bishop, priests, and deacons; and exhorts them to continue in it: </hi>15
+              <hi type="italic" TEIform="hi"> is afraid even of his over-great desire to suffer, lest it should be prejudicial to him</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Trall.1.1">IGNATIUS, who is also called Theophorus, to the holy church which is at Tralles in Asia: beloved of God the Father of Jesus Christ, elect and worthy of God, having peace  
+            <note canonical="false" type="explanation" n="175:12" TEIform="note">In.</note> through the flesh and blood, and passion of Jesus Christ our hope, in the resurrection which is  
+            <note canonical="false" type="explanation" n="175:13" TEIform="note">Unto.</note> by him: which also I salute in its fulness, continuing in the apostolical character, wishing all joy and happiness unto it.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.1.2">I have  
+            <note canonical="false" type="explanation" n="175:14" TEIform="note">Known.</note> heard of your blameless and  
+            <note canonical="false" type="explanation" n="175:15" TEIform="note">Inseparable mind.</note> constant disposition through patience, which  
+            <note canonical="false" type="explanation" n="175:16" TEIform="note">Which you have not according to use, but according to possession.</note> not only appears in your outward conversation, but is naturally rooted and grounded in you.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.1.3">In like manner as Polybius your bishop has declared unto me, who came to me to Smyrna, by the will of God and Jesus Christ, and so rejoiced together with me  
+            <note canonical="false" type="explanation" n="176:1" TEIform="note">Who am bound.</note> in my bonds for Jesus Christ, that in effect I saw your whole  
+            <note canonical="false" type="explanation" n="176:2" TEIform="note">Multitude.</note> church in him.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.1.4">Having therefore received  
+            <note canonical="false" type="explanation" n="176:3" TEIform="note">Your benevolence.</note> testimony of your good will towards me  
+            <note canonical="false" type="explanation" n="176:4" TEIform="note">According to God.</note> for God's sake, by him;  
+            <note canonical="false" type="explanation" n="176:5" TEIform="note">Vid. Vossium in loc.</note> I seemed to find you, as also I knew that ye were the  
+            <note canonical="false" type="explanation" n="176:6" TEIform="note">Imitators.</note> followers of God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.1.5">For  
+            <note canonical="false" type="explanation" n="176:7" TEIform="note">When.</note> whereas ye are subject to your bishop as to Jesus Christ, ye appear to me to live not after the manner of men, but according to Jesus Christ; who died for us, that so believing in his death, ye might  
+            <note canonical="false" type="explanation" n="176:8" TEIform="note">Flee from.</note> escape death.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.1.6">It is therefore necessary, that as ye do, so without your bishop, you should do nothing: also be ye subject to your presbyters, as to the Apostles of Jesus Christ our hope; in whom if we walk, we shall be found in him.</verse>
+          <verse canonical="true" osisID="Ign.Trall.1.7">
+            <note canonical="false" type="explanation" n="176:9" TEIform="note">Vid Vossium in loc.</note> The deacons also, as being the ministers of the mysteries of Jesus Christ, must by all means please ye. For they are not the  
+            <note canonical="false" type="explanation" n="176:10" TEIform="note">Deacons.</note> ministers of meat and drink, but of the church of God. Wherefore they must avoid all offences, as they would do fire.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.1.8">In like manner let us reverence the deacons  
+            <note canonical="false" type="explanation" n="176:11" TEIform="note">As also the bishop like Jesus Christ the Son of the Father. Vossius in loc. vid. aliter Cotelerium.</note> as Jesus Christ; and the bishop as the father; and the presbyters as the Sanhedrim of God, and college of the Apostles.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.1.9">Without these there is no  
+            <note canonical="false" type="explanation" n="176:12" TEIform="note">A church is not called.</note> church. Concerning all which I am persuaded that ye  
+            <note canonical="false" type="explanation" n="176:13" TEIform="note">So do.</note> think after the very same manner: for I have received, and even now have with me, the pattern of your love, in your bishop.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.1.10">Whose very  
+            <note canonical="false" type="explanation" n="176:14" TEIform="note">Habit of body is great instruction.</note> look is instructive; and whose mildness  
+            <note canonical="false" type="explanation" n="176:15" TEIform="note">Power.</note> powerful:  
+            <note canonical="false" type="explanation" n="176:16" TEIform="note">Vid. Vossium et Usserium in loc.</note> whom I am persuaded, the very Atheists themselves cannot but reverence.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.1.11">But because I have a love towards you, I will not write any more sharply unto you about this matter, though I very well might; but now I have done so; lest being a condemned man, I should seem to prescribe to you as an Apostle.</verse>
+          <verse canonical="true" osisID="Ign.Trall.1.12">I have  
+            <note canonical="false" type="explanation" n="176:17" TEIform="note">I understand many things.</note> great knowledge in God; but I  
+            <note canonical="false" type="explanation" n="176:18" TEIform="note">Measure.</note> refrain myself, lest I should perish in my boasting.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.1.13">For now I ought the more to fear; and not to hearken to those that would puff me up.</verse>
+          <verse canonical="true" osisID="Ign.Trall.1.14">For they that speak to me, in my praise, chasten me.</verse>
+          <verse canonical="true" osisID="Ign.Trall.1.15">For I indeed  
+            <note canonical="false" type="explanation" n="176:19" TEIform="note">Love.</note> desire to suffer, but I cannot tell whether I am worthy so to do.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.1.16">
+            <note canonical="false" type="explanation" n="176:20" TEIform="note">Vid. Annot. Vossii in loc.</note> And this desire, though to others it does not appear, yet to myself it is for that very reason the more violent. I have, therefore, need of  
+            <note canonical="false" type="explanation" n="176:21" TEIform="note">Mildness.</note> moderation; by which the prince of this world is destroyed.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.1.17">Am I not able to write to you of heavenly things?—But I fear lest I should harm you, who are yet but babes in Christ: (excuse me this care;) and lest per chance being not able to receive them, ye should be choken with them. 13 For even I myself, although I am in bonds,  
+            <note canonical="false" type="explanation" n="177:1" TEIform="note">Orders.</note> yet am not therefore able to understand heavenly things:
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.1.19">As the places of the angels, and the several companies of them, under their respective princes; things visible and invisible; but in these I am yet a learner.</verse>
+          <verse canonical="true" osisID="Ign.Trall.1.20">For many things are wanting to us, that we come not short of God.</verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Trall.2" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">1
+              <hi type="italic" TEIform="hi"> Warns them against heretics, </hi>4
+              <hi type="italic" TEIform="hi"> exhorts them to humility and unity, </hi>10
+              <hi type="italic" TEIform="hi"> briefly sets before them the true doctrine concerning Christ</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Trall.2.1">I EXHORT you therefore, or rather not I, but the love of Jesus Christ; that ye use none but Christian nourishment; abstaining from pasture which is of another kind, I mean heresy.</verse>
+          <verse canonical="true" osisID="Ign.Trall.2.2">
+            <note canonical="false" type="explanation" n="177:2" TEIform="note">Vid. de hoc loco conjecturas Vossii, Cotelerii, et Junii spud Usserium. Comp. Epist. Intercol. in loc. et Voss. Annot. in Epist. ad Phil. p. 281.</note> For they that are heretics, confound together the doctrine of Jesus Christ, with their own poison:  
+            <note canonical="false" type="explanation" n="177:3" TEIform="note">Being believed for their dignity.</note> whilst they seem worthy of belief:
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.2.3">As men give a deadly potion mixed with sweet wine; which he who drinks of, does with the treacherous pleasure sweetly drink in his own death.</verse>
+          <verse canonical="true" osisID="Ign.Trall.2.4">Wherefore guard yourselves against such persons. And that you will do if you are not puffed up; but continue inseparable from Jesus Christ our God, and from your bishop, and from the commands of the Apostles.</verse>
+          <verse canonical="true" osisID="Ign.Trall.2.5">
+            <note canonical="false" type="explanation" n="177:4" TEIform="note">Vid. Usserii Obs. Marg. Comp Coteler. ib.</note> He that is within the altar is pure; but he that is without, that is, that does anything without the bishop, the presbyters, and deacons, is not pure in his conscience.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.2.6">Not that I know there is any thing of this nature among you; but I fore-arm you, as being greatly beloved by me, foreseeing the snares of the devil.</verse>
+          <verse canonical="true" osisID="Ign.Trall.2.7">Wherefore putting on meekness, renew yourselves in faith, that is, the flesh of the Lord; and in charity, that is, the blood of Jesus Christ.</verse>
+          <verse canonical="true" osisID="Ign.Trall.2.8">Let no man have any  
+            <note canonical="false" type="explanation" n="177:5" TEIform="note">Any thing.</note> grudge against his neighbour. Give no occasion to the Gentiles; lest by means of a few foolish men, the whole congregation of God be evil spoken of.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.2.9">For woe to that man  
+            <note canonical="false" type="explanation" n="177:6" TEIform="note">Through whom in vanity: Isaiah lii. 5.</note> through whose vanity my name is blasphemed by any.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.2.10">Stop your ears therefore, as often as any one shall  
+            <note canonical="false" type="explanation" n="177:7" TEIform="note">Without.</note> speak contrary to Jesus Christ; who was of the race of David, of the Virgin Mary.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.2.11">Who was truly born and did eat and drink; was truly persecuted under Pontius Pilate; was truly crucified and dead; both those in heaven and on earth,  
+            <note canonical="false" type="explanation" n="177:8" TEIform="note">Seeing, or looking on.</note> being spectators of it.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.2.12">Who was also truly raised from the dead  
+            <note canonical="false" type="explanation" n="177:9" TEIform="note">His Father raising him.</note> by his Father. after the same manner as  
+            <note canonical="false" type="explanation" n="177:10" TEIform="note">The Father.</note> he will also raise up us who believe in him by Christ Jesus; without whom we have no true life.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.2.13">But if, as some who are Atheists, that is to say infidels, pretend, that he only seemed to suffer: (they themselves only seeming to exist) why then am I bound?—Why do I desire to fight with beasts?—Therefore do I die in vain: therefore I will not speak falsely against the Lord.</verse>
+          <verse canonical="true" osisID="Ign.Trall.2.14">Flee therefore these evil  
+            <note canonical="false" type="explanation" n="178:1" TEIform="note">Plants.</note> sprouts which bring forth deadly fruit; of which if any one taste, he shall presently die.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.2.15">For these are not the plants of the Father; seeing if they were, they would appear to be the branches of the cross, and their fruit would be incorruptible; by which he invites you through his passion, who are members of him.</verse>
+          <verse canonical="true" osisID="Ign.Trall.2.16">For the head cannot be without its members, God having promised a union, that is himself.</verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Trall.3" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">
+              <hi type="italic" TEIform="hi">He again exhorts to unity: and desires their prayers for himself and for his church at Antioch</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Trall.3.1">I SALUTE you from Smyrna,  
+            <note canonical="false" type="explanation" n="178:2" TEIform="note">I.e. The delegates of the church.</note> together with the churches of God that are present with me; who have refreshed me in all things, both in the flesh and in the spirit.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.3.2">My bonds, which I carry about me for the sake of Christ, beseeching him that I may attain unto God) exhort you, that you continue in  
+            <note canonical="false" type="explanation" n="178:3" TEIform="note">The concord of you.</note> concord among yourselves and in prayer with one another.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.3.3">For it becomes every one of you, especially the presbyters, to refresh the bishop, to the honour of the Father of Jesus Christ and of the Apostles.</verse>
+          <verse canonical="true" osisID="Ign.Trall.3.4">I beseech you, that you hearken to me in love; that I may not  
+            <note canonical="false" type="explanation" n="178:4" TEIform="note">Be a testimony among you, writing.</note> by those things which I write, rise up in witness against you.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.3.5">Pray also for me; who through the mercy of God stand in need of your prayers, that I may be worthy of the portion which I am about to obtain that I be not found a reprobate.</verse>
+          <verse canonical="true" osisID="Ign.Trall.3.6">The love of those who are at Smyrna and Ephesus salute you. Remember in your prayers the church of Syria, from which I am not worthy to be called, being one of the least  
+            <note canonical="false" type="explanation" n="178:5" TEIform="note">Them.</note> of it.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.3.7">Fare ye well in Jesus Christ; being subject to your bishop as to the command of God; and so likewise to the presbytery.</verse>
+          <verse canonical="true" osisID="Ign.Trall.3.8">Love every one his brother with an  
+            <note canonical="false" type="explanation" n="178:6" TEIform="note">Undivided.</note> unfeigned heart.  
+            <note canonical="false" type="explanation" n="178:7" TEIform="note">Vid. Annot. Vossii et Coteler. in loc.</note> My soul be your expiation, not only now, but when I shall have attained unto God; for I am yet under danger.
+          </verse>
+          <verse canonical="true" osisID="Ign.Trall.3.9">But the Father is faithful in Jesus Christ, to fulfil both mine and your petition; in whom may ye be found unblamable. ¶ 
+            <hi type="italic" TEIform="hi">To the Trallians</hi>.
+          </verse>
+        </div>
+      </div>
+      <div canonical="true" type="book" osisID="Ign.Rom" TEIform="div">
+        <title canonical="true" short="Romans" type="main" TEIform="title">The Epistle of Ignatius to the Romans</title>
+        <div canonical="true" type="chapter" osisID="Ign.Rom.1" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">
+              <hi type="italic" TEIform="hi">He testifies his desire to see, and his hopes of suffering for Christ, </hi>5
+              <hi type="italic" TEIform="hi"> which he earnestly entreats them not to prevent, </hi>10
+              <hi type="italic" TEIform="hi"> but to pray for him, that God would strengthen him to the combat</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Rom.1.1">IGNATIUS,  
+            <note canonical="false" type="explanation" n="178:8" TEIform="note">Vid. Pearson. Vind. Ignat. par 2, ch. xvi. p. 214.</note> who is also called Theophorus, to the church which has obtained mercy  
+            <note canonical="false" type="explanation" n="178:9" TEIform="note">In.</note> from the majesty of the Most High Father, and his only  
+            <note canonical="false" type="explanation" n="178:10" TEIform="note">Omitted, Gr.</note> begotten Son Jesus Christ; beloved, and illuminated  
+            <note canonical="false" type="explanation" n="179:1" TEIform="note">In.</note> through the will of who willeth all things which are according to the love of Jesus Christ our  
+            <note canonical="false" type="explanation" n="179:2" TEIform="note">God; which also presides in the place of the region of the Romans, worthy of God; most decent, most blessed, most praised, most worthy to obtain what it desires; most pure, most charitable, called by the name of Christ and the Father; Gr.</note> God which also presides in the  
+            <note canonical="false" type="explanation" n="179:3" TEIform="note">Type of the chorus, 
+              <hi type="italic" TEIform="hi">i.e.</hi>, the church of the Romans. See Voss. Annot. in loc.
+            </note> place of the region of the Romans; and which  
+            <note canonical="false" type="explanation" n="179:4" TEIform="note">Also.</note> I salute in the name of Jesus Christ ( 
+            <note canonical="false" type="explanation" n="179:5" TEIform="note">The Son of the Father; to those who are—Gr.</note> as being) united both in flesh and spirit to all his commands, and  
+            <note canonical="false" type="explanation" n="179:6" TEIform="note">Wholly filled. Gr.</note> filled with the grace of God;  
+            <note canonical="false" type="explanation" n="179:7" TEIform="note">(Being absolutely separated from any other colour; much pure, or immaculate joy.)</note> (all joy) in Jesus Christ our God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.1.2">
+            <note canonical="false" type="explanation" n="179:8" TEIform="note">Gr.</note> Forasmuch as I have at last  
+            <note canonical="false" type="explanation" n="179:9" TEIform="note">Vid. Voss. Annot. in loc.</note> obtained through my prayers to God, to see your  
+            <note canonical="false" type="explanation" n="179:10" TEIform="note">Worthy of God.</note> faces,  
+            <note canonical="false" type="explanation" n="179:11" TEIform="note">And have received even more than I asked, being bound.</note> which I much desired to do; being bound in Jesus Christ, I hope ere long to salute you, if it shall be the will  
+            <note canonical="false" type="explanation" n="179:12" TEIform="note">Gr.</note> of God to grant me to attain unto the end I long for.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.1.3">For the beginning is well disposed, if I shall but have grace, without hindrance, to receive  
+            <note canonical="false" type="explanation" n="179:13" TEIform="note">My lot.</note> what is appointed for me.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.1.4">But I fear your love, lest it do me an injury. For it is easy for you to do what you please; but it  
+            <note canonical="false" type="explanation" n="179:14" TEIform="note">Is.</note> will be hard for me to attain unto God, if you spare me.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.1.5">But I  
+            <note canonical="false" type="explanation" n="179:15" TEIform="note">I will not please you as men. Gr.</note> would not that ye should please men, but God  
+            <note canonical="false" type="explanation" n="179:16" TEIform="note">As.</note> whom also ye do please. For neither shall I hereafter have such an opportunity  
+            <note canonical="false" type="explanation" n="179:17" TEIform="note">Attaining unto.</note> of going unto God; nor will you if ye shall now be silent, ever be entitled to a better work. For if you shall be silent  
+            <note canonical="false" type="explanation" n="179:18" TEIform="note">From me.</note> in my behalf, I shall be made partaker of God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.1.6">But if you shall love my  
+            <note canonical="false" type="explanation" n="179:19" TEIform="note">Flesh.</note> body, I shall have my course again to run. Wherefore ye cannot do me a greater kindness, than to suffer me to be sacrificed unto God, now that the altar is already prepared:
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.1.7">That  
+            <note canonical="false" type="explanation" n="179:20" TEIform="note">Being become a chorus.</note> when ye shall be gathered together in love, ye may  
+            <note canonical="false" type="explanation" n="179:21" TEIform="note">Sing.</note> give thanks to the Father through Christ Jesus; that he has vouchsafed  
+            <note canonical="false" type="explanation" n="179:22" TEIform="note">That a bishop of Syria should be found.</note> to bring a bishop of Syria unto you, being called from the east unto the west.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.1.8">For it is good for me to set from the world, unto God; that I may rise again unto him.</verse>
+          <verse canonical="true" osisID="Ign.Rom.1.9">Ye have never envied any one; ye have taught other. I would therefore that ye  
+            <note canonical="false" type="explanation" n="179:23" TEIform="note">That those things also should be firm.</note> should now do those things yourselves, which in your instructions you have  
+            <note canonical="false" type="explanation" n="179:24" TEIform="note">Commanded. Vid. Annot. Userii in loc. N. 26, 27.</note> prescribed to others.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.1.10">Only pray for me, that God would give me both inward and outward strength, that I may not only say, but will; nor be only called a Christian, but be found one.</verse>
+          <verse canonical="true" osisID="Ign.Rom.1.11">For if I shall be found a Christian, I may then deservedly be called one; and be thought faithful, when I shall no longer appear to the world.</verse>
+          <verse canonical="true" osisID="Ign.Rom.1.12">Nothing is  
+            <note canonical="false" type="explanation" n="179:25" TEIform="note">Nothing that is seen is eternal: for the things which are seen are temporal, but the things that are not seen are eternal. Gr.</note> good, that is seen.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.1.13">For even our God, Jesus Christ, now that he is in the Father, does so much the more appear.</verse>
+          <verse canonical="true" osisID="Ign.Rom.1.14">A Christian is not a work of  
+            <note canonical="false" type="explanation" n="180:1" TEIform="note">Persuasion, or silence. Gr.</note> opinion; but of greatness of mind, ( 
+            <note canonical="false" type="explanation" n="180:2" TEIform="note">(Desunt, Gr.)</note> especially when he is hated by the world.)
+          </verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Rom.2" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">
+              <hi type="italic" TEIform="hi">Expresses his great desire and determination to suffer martyrdom</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Rom.2.1">I WRITE to the churches, and  
+            <note canonical="false" type="explanation" n="180:3" TEIform="note">Vid. Usser. Annot. N. 31.</note> signify to them all, that am willing to die for God, unless  
+            <note canonical="false" type="explanation" n="180:4" TEIform="note">Forbid me.</note> hinder me.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.2.2">I beseech you that you  
+            <note canonical="false" type="explanation" n="180:5" TEIform="note">Be not.</note> shew not an unseasonable good will towards me. Suffer me to be food to the wild beasts; by whom I shall attain unto God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.2.3">For I am the wheat of God; and I shall be ground by the teeth of the wild beasts, that I may be found the pure bread  
+            <note canonical="false" type="explanation" n="180:6" TEIform="note">Vid Lat. Vet. Interps. et Annot. Usser. N. 32.</note> of Christ.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.2.4">Rather  
+            <note canonical="false" type="explanation" n="180:7" TEIform="note">Flatter.</note> encourage the beasts, that they may become my sepulchre; and may leave nothing of my body; that being dead I mazy not be troublesome to any.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.2.5">Then shall I be truly the disciple of Jesus Christ, when the world shall not see so much as my body, Pray therefore unto Christ for me, that by these instruments I may be made the sacrifice  
+            <note canonical="false" type="explanation" n="180:8" TEIform="note">Desunt. Gr.</note> of God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.2.6">I do not, as Peter and Paul, command you. They were Apostles, I a condemned man; they were free, but I am even to this day a servant:</verse>
+          <verse canonical="true" osisID="Ign.Rom.2.7">But if I shall suffer, I shall then become the freeman of Jesus Christ, and shall rise  
+            <note canonical="false" type="explanation" n="180:9" TEIform="note">Free in him. Gr.</note> free. And now, being in bonds, I learn, not to desire  
+            <note canonical="false" type="explanation" n="180:10" TEIform="note">Any worldly or vain things. Gr.</note> anything.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.2.8">From Syria even unto Rome, I fight with beasts both by sea and land; both night and day: being bound to ten leopards, that is to say, to such a band of soldiers; who, though treated with all manner of kindness, are the worse for it.</verse>
+          <verse canonical="true" osisID="Ign.Rom.2.9">But I am the more instructed by their injuries;  
+            <note canonical="false" type="explanation" n="180:11" TEIform="note">Cor. iv. 4.</note> yet am I not therefore justified.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.2.10">May I enjoy the wild beasts that are prepared for me; which also I wish may  
+            <note canonical="false" type="explanation" n="180:12" TEIform="note">Vid. Voss. in loc. Usser. Annot. N. 48. May be ready for me. Gr.</note> exercise all their fierceness upon me.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.2.11">And whom for that end I will  
+            <note canonical="false" type="explanation" n="180:13" TEIform="note">Usser. Annot. N. 48.</note> encourage, that they may be sure to devour me, and not serve me as they have done some, whom out of fear they have not touched. But, and if they will not do it willingly, I will provoke them to it.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.2.12">Pardon me in this matter; I know what is profitable for me. Now I begin to  
+            <note canonical="false" type="explanation" n="180:14" TEIform="note">Luke xiv. 27.</note> be a disciple. Nor  
+            <note canonical="false" type="explanation" n="180:15" TEIform="note">Vid. Coteler. in loc. Rom. viii. 38, 39.</note> shall anything move me, whether visible or invisible, that I may attain to Jesus Christ.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.2.13">Let fire, and the cross; let the  
+            <note canonical="false" type="explanation" n="180:16" TEIform="note">Force, or rage.</note> companies of wild beasts;  
+            <note canonical="false" type="explanation" n="180:17" TEIform="note">Let tearings, and rendings. Gr.</note> let breakings of bones and tearing of members; let the  
+            <note canonical="false" type="explanation" n="180:18" TEIform="note">Vid. Usser. Annot. N. 56.</note> shattering in pieces of the whole body, and all the wicked  
+            <note canonical="false" type="explanation" n="180:19" TEIform="note">Ib. N. 57. </note> torments of the devil come upon me; only let  
+            <note canonical="false" type="explanation" n="180:20" TEIform="note">That I may enjoy.</note> me enjoy Jesus Christ.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.2.14">All the  
+            <note canonical="false" type="explanation" n="181:1" TEIform="note">Gr. Pleasures.</note> ends of the world, and the kingdoms  
+            <note canonical="false" type="explanation" n="181:2" TEIform="note">Of this age.</note> of it, will profit me nothing: I would rather die  
+            <note canonical="false" type="explanation" n="181:3" TEIform="note">Gr. unto.</note> for Jesus Christ, than rule to the utmost ends of the earth.  
+            <note canonical="false" type="explanation" n="181:4" TEIform="note">For what is a man profited if he shall gain the whole world and lose his own soul. Gr. Add.</note> Him I seek who died for us; him I desire, that rose again for us. This is the  
+            <note canonical="false" type="explanation" n="181:5" TEIform="note">Usury. Gr. Via. Voss. Correct. p. 301.</note> gain that is laid up for me.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.2.15">Pardon me, my brethren, ye shall not hinder me from living.  
+            <note canonical="false" type="explanation" n="181:6" TEIform="note">Nor desire that I should die, who seek to go to God, rejoice not in the world. Gr.</note> Nor seeing I desire to go to God, may you separate me from him, for the sake of this world; nor reduce me by any of the  
+            <note canonical="false" type="explanation" n="181:7" TEIform="note">By matter.</note> desires of it. Suffer me to  
+            <note canonical="false" type="explanation" n="181:8" TEIform="note">Take: have hold on.</note> enter into pure light: Where being come, I shall be indeed the  
+            <note canonical="false" type="explanation" n="181:9" TEIform="note">Man.</note> servant of  
+            <note canonical="false" type="explanation" n="181:10" TEIform="note">Vid. Annot. Voss. in loc.</note> God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.2.16">Permit me to imitate the passion of my God. If any one has him within himself, let him consider what I desire; and let him have compassion on me, as knowing  
+            <note canonical="false" type="explanation" n="181:11" TEIform="note">What things constrain me.</note> how I am straightened.
+          </verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Rom.3" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">Further expresses his desire to suffer.</p>
+          </div>
+          <verse canonical="true" osisID="Ign.Rom.3.1">THE prince of this world would fain carry me away, and corrupt  
+            <note canonical="false" type="explanation" n="181:12" TEIform="note">Mind: will.</note> my resolution towards my God. Let none of you  
+            <note canonical="false" type="explanation" n="181:13" TEIform="note">Who are present.</note> therefore help  
+            <note canonical="false" type="explanation" n="181:14" TEIform="note">Vid. Voss. Annot. in loc.</note> him: Rather do ye join with me, that is, with God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.3.2">Do not speak with Jesus Christ, and yet covet the world. Let not any envy dwell with you; No not though I myself when I shall be come unto you, should exhort you to it, yet do not ye hearken to me; but rather believe what I now write to you.</verse>
+          <verse canonical="true" osisID="Ign.Rom.3.3">For though I am alive, at the writing this, yet my desire is to die. My love is crucified;  
+            <note canonical="false" type="explanation" n="181:15" TEIform="note">(And there is not any fire within me that loves matter, but living and speaking water saying within me. Gr.)</note> (and the  
+            <note canonical="false" type="explanation" n="181:16" TEIform="note">Cotelerius aliter explicat. Annot. in loc. Usser. N. 79.</note> fire that is within me does not desire any water; but being alive and  
+            <note canonical="false" type="explanation" n="181:17" TEIform="note">Voss. in loc. Contr. Coteler. q. y.</note> springing within me, says,) Come to the Father.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.3.4">I take no pleasure in the food of corruption, nor in the pleasures of this life.</verse>
+          <verse canonical="true" osisID="Ign.Rom.3.5">I desire the bread of God  
+            <note canonical="false" type="explanation" n="181:18" TEIform="note">The heavenly bread which is. Gr.</note> which is the flesh of Jesus Christ, ( 
+            <note canonical="false" type="explanation" n="181:19" TEIform="note">(The Son of God made in these last times of the seed of David and Abraham, and the drink of God that I long for. Gr.).</note> of the seed of David; and the drink that I long for) is his blood, which is incorruptible love. 
+            <note canonical="false" type="explanation" n="181:20" TEIform="note">Gr. Adds, and perpetual life.</note>
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.3.6">I have no desire to live any longer after the manner of men,  
+            <note canonical="false" type="explanation" n="181:21" TEIform="note">And that, shall he.</note> neither shall I, if you consent. Be ye therefore willing, that ye yourselves also may be  
+            <note canonical="false" type="explanation" n="181:22" TEIform="note">Willed.</note> pleasing to God. I  
+            <note canonical="false" type="explanation" n="181:23" TEIform="note">Vid. Annot. Voss. in loc.</note> exhort you  
+            <note canonical="false" type="explanation" n="181:24" TEIform="note">By a short letter.</note> in a few words; I pray you believe me.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.3.7">Jesus Christ will shew you that I speak truly. My mouth is without deceit, and the Father hath truly spoken  
+            <note canonical="false" type="explanation" n="181:25" TEIform="note">In.</note> by it. Pray therefore for me, that I may accomplish what I desire.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.3.8">I have not written to you after the flesh, but according to the will of God. If I shall suffer,  
+            <note canonical="false" type="explanation" n="181:26" TEIform="note">Ye have willed it.</note> ye have loved me; but if I shall be rejected,  
+            <note canonical="false" type="explanation" n="182:1" TEIform="note">Viz. as unworthy to suffer.</note> ye have hated me.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.3.9">Remember in your prayers the church of Syria, which now enjoys God for its shepherd instead of me:  
+            <note canonical="false" type="explanation" n="182:2" TEIform="note">Vid. Vet. Interp. Lat.</note> Let Jesus Christ only  
+            <note canonical="false" type="explanation" n="182:3" TEIform="note">Shall oversee it.</note> oversee it, and your charity.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.3.10">But I am even ashamed to be reckoned as one of them: For neither am I worthy, being the least among them, and as one  
+            <note canonical="false" type="explanation" n="182:4" TEIform="note">1 Cor. xv. 8.</note> born out of due season. But through mercy I have obtained to be somebody, if I shall get unto God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.3.11">My spirit salutes you; and the charity of the churches that have received me in the name of Jesus Christ; not as a passenger. For even they that were not near to me in the way, have gone before me to the next city to meet me.</verse>
+          <verse canonical="true" osisID="Ign.Rom.3.12">These things I write to you from Smyrna, by the most worthy of the church of Ephesus.</verse>
+          <verse canonical="true" osisID="Ign.Rom.3.13">There is now with me, together with many others, Crocus, most beloved of me. As for those which are  
+            <note canonical="false" type="explanation" n="182:5" TEIform="note">Vid Vet. Intern. Lat.</note> come from Syria, and are gone before me to Rome, to the glory of God, I suppose you are not ignorant of them.
+          </verse>
+          <verse canonical="true" osisID="Ign.Rom.3.14">Ye shall therefore signify to them, that I draw near, for they are all worthy both of God and of you: Whom it is fit that you refresh in all things.</verse>
+          <verse canonical="true" osisID="Ign.Rom.3.15">This have I written to you, the day before the ninth of the calends of September.  
+            <note canonical="false" type="explanation" n="182:6" TEIform="note">That is the xxxiiid of August. Gr.</note> Be strong unto the end, in the patience of Jesus Christ.  
+            <note canonical="false" type="explanation" n="182:7" TEIform="note">Amen. Gr.</note> ¶ 
+            <hi type="italic" TEIform="hi">To the Roman</hi>s.
+          </verse>
+        </div>
+      </div>
+      <div canonical="true" type="book" osisID="Ign.Phld" TEIform="div">
+        <title canonical="true" short="Philadelphians" type="main" TEIform="title">The Epistle of Ignatius to the Philadelphians</title>
+        <div canonical="true" type="chapter" osisID="Ign.Phld.1" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">
+              <hi type="italic" TEIform="hi">Commends their bishop whom they had sent unto him, </hi>5
+              <hi type="italic" TEIform="hi"> warns them against divisions and schism</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Phld.1.1">IGNATIUS, who is also called Theophorus, to the church of God the Father, and our Lord Jesus Christ, which is at Philadelphia in Asia; which has obtained mercy, being fixed in the concord of God, and rejoicing  
+            <note canonical="false" type="explanation" n="182:8" TEIform="note">Inseparably.</note> evermore in the passion of our Lord, and being fulfilled in all mercy through his resurrection: Which also I salute in the blood of Jesus Christ,  
+            <note canonical="false" type="explanation" n="182:9" TEIform="note">Vid. Vet. Interpr. Lat.</note> which is our eternal and undefiled joy; especially if they are at unity with the bishop, and presbyters who are with him, and the deacons appointed  
+            <note canonical="false" type="explanation" n="182:10" TEIform="note">In.</note> according to the  
+            <note canonical="false" type="explanation" n="182:11" TEIform="note">Will, order.</note> mind of Jesus Christ; whom he has settled according to his own will in all firmness by his Holy Spirit:
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.1.2">Which bishop I know obtained  
+            <note canonical="false" type="explanation" n="182:12" TEIform="note">Ministry belonging to the public.</note> that great ministry among you, not of himself, neither by men, nor out of vain glory; but  
+            <note canonical="false" type="explanation" n="182:13" TEIform="note">In.</note> by the love of God the Father, and our Lord Jesus Christ.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.1.3">Whose moderation  
+            <note canonical="false" type="explanation" n="182:14" TEIform="note">Has struck me with wonder.</note> I admire; who by his silence is able to do more than  
+            <note canonical="false" type="explanation" n="182:15" TEIform="note">Those that speak vain things.</note> others with all their vain talk. For he is fitted to the commands, as the harp to its strings.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.1.4">Wherefore my soul esteems his mind towards God most happy, knowing it to be fruitful in all virtue, and perfect; full of constancy, free from passion,  
+            <note canonical="false" type="explanation" n="183:1" TEIform="note">In.</note> and according to all the moderation of the living God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.1.5">Wherefore as becomes the children both of the light and of truth; flee divisions and false doctrines; but where your shepherd is, there do ye, as sheep, follow after.</verse>
+          <verse canonical="true" osisID="Ign.Phld.1.6">For there are many wolves  
+            <note canonical="false" type="explanation" n="183:2" TEIform="note">Vid. Vossii Annot in loc.</note> who seem worthy of belief with a  
+            <note canonical="false" type="explanation" n="183:3" TEIform="note">Evil.</note> false pleasure lead captive those that run in the course of God; but in the concord they shall find no place.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.1.7">Abstain therefore from evil herbs which Jesus does not dress; because such are not the plantation of the Father. Not that I have found any division among you, but rather all manner of  
+            <note canonical="false" type="explanation" n="183:4" TEIform="note">Cleanliness made by sifting.</note> purity.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.1.8">For as many as are of God, and of Jesus Christ, are also with their bishop. And as many as shall with repentance return into the unity of the church, even these shall also be the servants of God, that they may live according to Jesus.</verse>
+          <verse canonical="true" osisID="Ign.Phld.1.9">Be not deceived, brethren; if any one follows him that makes a schism in the church, he shall not inherit the kingdom of God. If any one walks after any other opinion, he agrees not with the passion of Christ.</verse>
+          <verse canonical="true" osisID="Ign.Phld.1.10">Wherefore let it be your endeavour to partake all of the same holy eucharist.</verse>
+          <verse canonical="true" osisID="Ign.Phld.1.11">For there is but one flesh of our Lord Jesus Christ; and one cup in the unity of his blood; one altar;</verse>
+          <verse canonical="true" osisID="Ign.Phld.1.12">As also there is one bishop, together with his presbytery, and the deacons my fellow-servants: that so whatsoever ye do, ye may do it according to the will of God.</verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Phld.2" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">
+              <hi type="italic" TEIform="hi">Desires their prayers, and to be united but not to Judaize</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Phld.2.1">MY brethren, the love I have towards you makes me the  
+            <note canonical="false" type="explanation" n="183:5" TEIform="note">Very much poured out.</note> more large; and having a great joy in you, I endeavour to secure you against danger; or rather not I, but Jesus Christ; in whom being bound I the more fear, as being yet only  
+            <note canonical="false" type="explanation" n="183:6" TEIform="note">Vid. Voss. in loc. Imperfect.</note> on the way to suffering.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.2.2">But your prayer to God shall make me perfect, that I may attain to that portion, which by God's mercy is allotted to me: Fleeing to the Gospel as to the flesh of Christ; and to the Apostles as to the presbytery of the church.</verse>
+          <verse canonical="true" osisID="Ign.Phld.2.3">Let us also love the prophets, forasmuch as they also have  
+            <note canonical="false" type="explanation" n="183:7" TEIform="note">Or preached of the Gospel; and hoped in him, and expected him.</note> led us to the Gospel, and to hope in  
+            <note canonical="false" type="explanation" n="183:8" TEIform="note">Vid. Voss. in loc.</note> Christ, and to expect him.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.2.4">In whom also believing they were saved in the unity of Jesus Christ; being holy men, worthy to be loved, and had in wonder;</verse>
+          <verse canonical="true" osisID="Ign.Phld.2.5">Who have received testimony from Jesus Christ, and are numbered in the Gospel of our common hope.</verse>
+          <verse canonical="true" osisID="Ign.Phld.2.6">But if any one shall preach the  
+            <note canonical="false" type="explanation" n="183:9" TEIform="note">Judaism.</note> Jewish law unto you, hearken not unto him; for  
+            <note canonical="false" type="explanation" n="183:10" TEIform="note">Opinion: council.</note> it is better to receive the doctrine of Christ from one that has been circumcised, than Judaism from one that has not.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.2.7">But if either the one, or other, do not speak concerning Christ Jesus, they seem to me to be but as monuments and sepulchres of the dead, upon which are written only the names of men.</verse>
+          <verse canonical="true" osisID="Ign.Phld.2.8">Flee therefore the wicked arts and snares of the prince of this world; lest at any time being oppressed by his cunning ye grow  
+            <note canonical="false" type="explanation" n="184:1" TEIform="note">Weak.</note> cold in your charity. But come all together into the same place with an undivided heart.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.2.9">And I bless my God that I have a good conscience towards you, and that no one among you has whereof to boast either openly or privately, that I have been burthensome to him in much or little.</verse>
+          <verse canonical="true" osisID="Ign.Phld.2.10">And I wish to all among whom I have conversed, that it may not turn to a witness against them.</verse>
+          <verse canonical="true" osisID="Ign.Phld.2.11">For although some would have deceived me according to the flesh, yet the spirit, being from God, is not deceived; for it knows both whence it comes and whither it goes, and reproves the secrets of the heart.</verse>
+          <verse canonical="true" osisID="Ign.Phld.2.12">I cried whilst I was among you; I spake with a loud voice: attend to the bishop, and to the presbytery, and to the deacons.</verse>
+          <verse canonical="true" osisID="Ign.Phld.2.13">Now some supposed that I spake this as foreseeing the division  
+            <note canonical="false" type="explanation" n="184:2" TEIform="note">Of some.</note> that should come among you.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.2.14">But he is my witness for whose sake I am in bonds that I knew nothing from any man. But the spirit spake, saying on this wise: Do nothing without the bishop:</verse>
+          <verse canonical="true" osisID="Ign.Phld.2.15">Keep your  
+            <note canonical="false" type="explanation" n="184:3" TEIform="note">Flesh.</note> bodies as the temples of God: Love unity; Flee divisions; Be the followers of Christ, as he was of his Father.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.2.16">I therefore did as became me, as a man composed to unity. For where there is division, and wrath, God dwelleth not.</verse>
+          <verse canonical="true" osisID="Ign.Phld.2.17">But the Lord forgives all that repent, if they  
+            <note canonical="false" type="explanation" n="184:4" TEIform="note">Repent.</note> return to the unity of God, and to the council of the bishop.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.2.18">For I trust in the grace of Jesus Christ  
+            <note canonical="false" type="explanation" n="184:5" TEIform="note">Who will loose from you.</note> that he will free you from every bond.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.2.19">Nevertheless I exhort you that you do nothing out of strife, but according to the instruction of Christ.</verse>
+          <verse canonical="true" osisID="Ign.Phld.2.20">Because I have heard of some who say; unless I find it written in the  
+            <note canonical="false" type="explanation" n="184:6" TEIform="note">Archives, Vid. Voss. Annot. in loc.</note> originals, I will not believe it to be written in the Gospel. And when I said, It is written; they answered what lay before them in their corrupted copies.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.2.21">But to me Jesus Christ is instead of all the uncorrupted monuments in the world; together with those  
+            <note canonical="false" type="explanation" n="184:7" TEIform="note">Untouched.</note> undefiled monuments, his cross, and death, and resurrection, and the faith which is by him; by which I desire, through your prayers, to be justified.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.2.22">The priests indeed are good; but much better is the High Priest to whom the Holy of Holies has been committed; and who alone has been entrusted with the secrets of God.</verse>
+          <verse canonical="true" osisID="Ign.Phld.2.23">He is the door of the Father; by which Abraham, and Isaac, and Jacob, and all the prophets, enter in; as well as the Apostles, and the church.</verse>
+          <verse canonical="true" osisID="Ign.Phld.2.24">And all these things tend to the unity which is of God. Howbeit the Gospel has some. what in it far above all other dispensations; namely, the appearance of our Saviour, the Lord Jesus Christ, his passion and resurrection.</verse>
+          <verse canonical="true" osisID="Ign.Phld.2.25">For the beloved prophets referred to him; but the gospel is the perfection of incorruption. All therefore together are good, if ye believe with charity.</verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Phld.3" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">
+              <hi type="italic" TEIform="hi">Informs them he had heard that the persecution was stopped at Antioch, and directs them to send a messenger hitherto to congratulate with the church</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Phld.3.1">NOW as concerning the church of Antioch which is in Syria, seeing I am told that through your prayers and the bowels which ye have towards it in Jesus Christ, it is in peace; it will become you, as the church of God, to ordain some  
+            <note canonical="false" type="explanation" n="185:1" TEIform="note">Messenger or Minister.</note> deacon to go to them thither as the ambassador of God; that he may rejoice with them when they meet together, and glorify God's name.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.3.2">Blessed be that man in Jesus Christ, who shall be found worthy of such a ministry; and ye yourselves also shall be glorified.</verse>
+          <verse canonical="true" osisID="Ign.Phld.3.3">Now if you be willing, it is not impossible for you to do this for the grace of God; as also the other neighbouring churches have sent them, some bishops, some priests and deacons.</verse>
+          <verse canonical="true" osisID="Ign.Phld.3.4">As concerning Philo the deacon of Cilicia, a most worthy  
+            <note canonical="false" type="explanation" n="185:2" TEIform="note">Vid. Vossius, a martyr or confessor. Vid. Annot. in loc.</note> man, he still ministers unto me in the word of God: together with Rheus  
+            <note canonical="false" type="explanation" n="185:3" TEIform="note">Vid. Vossius Annot. in Ep. ad. Smyrn. p. 261. See chap. iii. v. 11.</note> of Agathopolis, a singular good person, who has followed me even from Syria, not regarding his life: These also bear witness unto you.
+          </verse>
+          <verse canonical="true" osisID="Ign.Phld.3.5">And I myself give thanks to God for you that you receive them as the Lord shall receive you. But for those that dishonoured them, may they be forgiven through the grace of Jesus Christ.</verse>
+          <verse canonical="true" osisID="Ign.Phld.3.6">The charity of the brethren that are at Troas salutes you: from whence also I now write by Burrhus, who was sent together with me by those of Ephesus and Smyrna, for respect sake.</verse>
+          <verse canonical="true" osisID="Ign.Phld.3.7">May our Lord Jesus Christ honour them; in whom they hope, both in flesh, and soul, and spirit; in faith, in love, in unity. Farewell in Christ Jesus our common hope.</verse>
+        </div>
+      </div>
+      <div canonical="true" type="book" osisID="Ign.Smyrn" TEIform="div">
+        <title canonical="true" short="Smyrnæans" type="main" TEIform="title">The Epistle of Ignatius to the Smyrnæans</title>
+        <div canonical="true" type="chapter" osisID="Ign.Smyrn.1" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">1
+              <hi type="italic" TEIform="hi"> Declares his joy for their firmness in the Gospel. </hi>4
+              <hi type="italic" TEIform="hi"> Enlarges on the person of Christ, against such as pretend that Christ did not really suffer</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Smyrn.1.1">IGNATIUS, who is also called Theophorus, to the church of God the Father, and of the beloved Jesus Christ, which God hath mercifully  
+            <note canonical="false" type="explanation" n="185:4" TEIform="note">Comp. 1 Cor. vii. 25.</note> blessed with every good gift; being filled with faith and charity, so that this is wanting in no gift; most worthy of God, and fruitful in saints: the church which is at Smyrna in Asia; all joy, through his immaculate spirit, and the word of God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.1.2">I glorify God, even Jesus Christ, who has given you such wisdom.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.1.3">For I have observed that you are settled in an immovable faith, as if you were nailed to the cross of our Lord Jesus Christ, both in the flesh and in the spirit; and are confirmed in love through the blood of Christ; being fully persuaded of those things which relate  
+            <note canonical="false" type="explanation" n="186:1" TEIform="note">Unto the Lord.</note> unto our Lord.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.1.4">Who truly was of the race of David according to the flesh, but the Son of God according to the will and power of God; truly born of the Virgin, and baptized of John; that so  
+            <note canonical="false" type="explanation" n="186:2" TEIform="note">Matt. iii. 15.</note> all righteousness might be fulfilled by him.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.1.5">He was also truly crucified by Pontius Pilate, and Herod the Tetrarch, being nailed for us in the flesh; by the fruits of which we are, even by his most blessed passion.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.1.6">That he might set  
+            <note canonical="false" type="explanation" n="186:3" TEIform="note">Vid. Voss. Annot. in loc.</note> up a token for all ages through his resurrection, to all his holy and faithful servants, whether they be Jews or Gentiles, in one body of his church.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.1.7">Now all these things he suffered for us that we might be saved. And he suffered truly, as he also truly raised up himself: And not, as some unbelievers say, that he only seemed to suffer, they themselves only seeming to be. 
+            <note canonical="false" type="explanation" n="186:4" TEIform="note">
+              <hi type="italic" TEIform="hi">i.e.</hi> Christians.
+            </note>
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.1.8">And as they believe so shall it happen unto them; when being divested of the body they shall become  
+            <note canonical="false" type="explanation" n="186:5" TEIform="note">Incorporeal and dæmoniac.</note> mere spirits.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.1.9">But I know that even after his resurrection he was in the flesh; and I believed that he is still so.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.1.10">And when he came to those who were with Peter,  
+            <note canonical="false" type="explanation" n="186:6" TEIform="note">Ex. Evang. Sec. Hebr. See Dr. Grabe Spicileg. tom. ii. p. 26.</note> he said unto them, Take, handle me, and see that I am not an incorporeal dæmon. And straightway they felt and believed; being convinced both by his flesh and spirit.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.1.11">For this cause they despised death, and were found to be above  
+            <note canonical="false" type="explanation" n="186:7" TEIform="note">Death.</note> it.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.1.12">But after his resurrection he did eat and drink with them, as he was flesh; although as to his Spirit he was united to the Father.</verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Smyrn.2" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">1
+              <hi type="italic" TEIform="hi"> Exhorts them against heretics. </hi>8
+              <hi type="italic" TEIform="hi"> The danger of their doctrine</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Smyrn.2.1">NOW these things, beloved,  
+            <note canonical="false" type="explanation" n="186:8" TEIform="note">Admonish.</note> put you in mind of, not questioning but that you yourselves also  
+            <note canonical="false" type="explanation" n="186:9" TEIform="note">Have so.</note> believe that they are so.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.2">But I arm you before-hand against certain beasts in the shape of men whom you must not only not receive, but if it be possible must not meet with.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.3">Only you must pray for them, that if it be the will of God they may repent; which yet will be very hard. But of this our Lord Jesus Christ has the power, who is our true life.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.4">For if all these things were done only in shew by our Lord, then do I also seem only to be bound.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.5">And why have I given up myself to death, to the fire, to the sword, to wild beasts!</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.6">But now the nearer I am to the sword, the nearer I am to God: when I shall come among the wild beasts, I shall come to God.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.7">Only in the name of Jesus Christ, I undergo all, to suffer together with him; he who was made a perfect man strengthening me.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.8">Whom some not knowing, do deny; or rather have been denied by him, being the advocates of death, rather than of the truth. Whom neither the prophecies, nor the law of Moses have persuaded; nor the Gospel itself even to this day, nor the sufferings of every one of us.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.9">For they think also the same things of us. For what does a man profit me, if he shall praise me, and blaspheme my Lord; not confessing that he  
+            <note canonical="false" type="explanation" n="187:1" TEIform="note">Had true flesh.</note> was truly made man?
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.10">Now he that doth not say this, does in effect deny him, and is in death. But for the names of such as do this, they being unbelievers, I thought it not fitting to write them unto you.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.11">Yea, God forbid that I should make any mention of them, till they shall repent to a true belief of Christ's passion, which is our resurrection.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.12">Let no man deceive himself; both the things which are in heaven and the glorious angels, and princes, whether visible or invisible, if they believe not in the blood of Christ,  
+            <note canonical="false" type="explanation" n="187:2" TEIform="note">It is.</note> it shall be to them to condemnation.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.13">
+            <note canonical="false" type="explanation" n="187:3" TEIform="note">Matt. xix. 12.</note> He that is able to receive this, let him receive it. Let no man's  
+            <note canonical="false" type="explanation" n="187:4" TEIform="note">Vid. Epist. Interpol.</note> place or state in the world puff him up: that which is worth all his faith and charity, to which nothing is to be preferred.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.14">But consider those who are of a different opinion from us, as to what concerns the grace of Jesus Christ which is come unto us, how contrary they are to the design of God.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.15">They have no regard to charity, no care of the widow, the fatherless, and the oppressed; of the bond or free, of the hungry or thirsty.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.16">They abstain from the eucharist, and from  
+            <note canonical="false" type="explanation" n="187:5" TEIform="note">Vid. Annot. Coteler. in loc. Or, Prayers.</note> the public offices; because they confess not the eucharist to be the flesh of our Saviour Jesus Christ; which suffered for our sins, and which the Father of his goodness, raised again from the dead.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.17">And for this cause contradicting the gift of God, they die in their disputes:  
+            <note canonical="false" type="explanation" n="187:6" TEIform="note">Vid. Coteler. Annot.</note> but much better would it be for them to  
+            <note canonical="false" type="explanation" n="187:7" TEIform="note">Love.</note> receive it, that they might one day rise through it.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.18">It will therefore become you to abstain from such persons; and not to speak with them neither in private nor in public.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.19">But to hearken to the prophets, and especially to the Gospel, in which both Christ's passion is manifested unto us, and his resurrection perfectly declared.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.2.20">But flee all divisions, as the beginning of evils.</verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Smyrn.3" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">1
+              <hi type="italic" TEIform="hi"> Exhorts them to follow their bishop and pastors; but especially their bishop. </hi>6
+              <hi type="italic" TEIform="hi"> Thanks them for their kindness, </hi>11
+              <hi type="italic" TEIform="hi"> and acquaints them with the ceasing of the persecution at Antioch</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Smyrn.3.1">SEE that ye all follow your bishop, as Jesus Christ, the Father; and the presbytery, as the Apostles. And reverence the deacons, as the command of God.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.2">Let no man do anything of what belongs to the church separately from the bishop.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.3">Let that eucharist be looked upon as well established, which is either offered by the bishop, or by him to whom the bishop has given his consent.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.4">Wheresoever the bishop shall appear, there let the  
+            <note canonical="false" type="explanation" n="188:1" TEIform="note">Multitude.</note> people also be: as where Jesus Christ is, there is the Catholic church.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.5">It is not lawful without the bishop, neither to baptize, nor  
+            <note canonical="false" type="explanation" n="188:2" TEIform="note">Make a love-feast.</note> to celebrate the Holy Communion; but whatsoever he shall approve of, that is also pleasing unto God; that so whatever is done, may be sure and well done.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.6">For what remains, it is very reasonable that we should  
+            <note canonical="false" type="explanation" n="188:3" TEIform="note">Return to a sound mind.</note> repent whilst there is yet time to return unto God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.7">It is a good thing to have a due regard both to God, and to the bishop: he that honours the bishop, shall be honoured of God. But he that does anything without his knowledge,  
+            <note canonical="false" type="explanation" n="188:4" TEIform="note">Does worship.</note> ministers unto the devil.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.8">Let all things therefore abound to you in charity; seeing that ye are worthy.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.9">Ye have refreshed me in all things; so shall Jesus Christ you. Ye have loved me both when I was present with you, and now being absent, ye cease not to do so.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.10">May God be your reward, from whom whilst ye undergo all things, ye shall attain unto him.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.11">Ye have done well in that ye have received Philo, and Rheus  
+            <note canonical="false" type="explanation" n="188:5" TEIform="note">Vid. Voss. Annot. in loc.</note> Agathopus, who followed me  
+            <note canonical="false" type="explanation" n="188:6" TEIform="note">Unto.</note> for the word of God, as the deacons of Christ our God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.12">Who also gave thanks unto the Lord for you, forasmuch as ye have refreshed them in all  
+            <note canonical="false" type="explanation" n="188:7" TEIform="note">Ways.</note> things.  
+            <note canonical="false" type="explanation" n="188:8" TEIform="note">Vid. Epist. Interpol.</note> Nor shall any thing that you have done be lost to you.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.13">My  
+            <note canonical="false" type="explanation" n="188:9" TEIform="note">Spirit.</note> soul be for yours, and my bonds which ye have not despised, nor been ashamed of. Wherefore neither shall Jesus Christ, our perfect faith, be ashamed of you.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.14">Your prayer is come to the church of Antioch which is in Syria. From whence being sent bound with chains becoming God, I salute the  
+            <note canonical="false" type="explanation" n="188:10" TEIform="note">All the.</note> churches; being not worthy to be called  
+            <note canonical="false" type="explanation" n="188:11" TEIform="note">
+              <hi type="italic" TEIform="hi">i.e.</hi> the bishop of that church.
+            </note> from thence, as being the least among them.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.15">Nevertheless by the will of God I have been thought worthy of this honour; not for that I think I have deserved it, but by the grace of God.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.16">Which I wish may be perfectly given unto me, that through your prayers I may attain unto God.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.17">And therefore that your work may be fully accomplished both upon earth and in heaven; it will be fitting, and for the honour of God,  
+            <note canonical="false" type="explanation" n="188:12" TEIform="note">Vid. Voss. Annot. in loc.</note> that your church appoint some worthy delegate, who being come as far as Syria, may rejoice together with them that they are in peace; and that they are again restored to their former  
+            <note canonical="false" type="explanation" n="188:13" TEIform="note">Bulk, greatness.</note> state, and have again received their proper body.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.18">Wherefore I should think it a worthy action, to send some one from you with an epistle, to congratulate with them their peace in God; and that through your prayers they have now gotten to their harbor.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.19">For inasmuch as ye are perfect yourselves, you ought to think those things that are perfect. For when you are desirous to do well, God is ready to  
+            <note canonical="false" type="explanation" n="188:14" TEIform="note">Help you.</note> enable you thereunto.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.20">The love of the brethren that are at Troas salute you; from whence I write to you by Burrhus whom you sent with me, together with the Ephesians your brethren; and who has in all things refreshed me.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.21">And I would to God that all would imitate him, as being a pattern of the ministry of God. May his grace fully reward him.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.22">I salute your very worthy bishop, and your venerable presbytery; and your deacons, my fellow-servants; and all of you in general, and every one in particular, in the name of Jesus Christ, and in his flesh and blood; in his passion and resurrection both fleshly and spiritually; and in  
+            <note canonical="false" type="explanation" n="189:1" TEIform="note">Vid. Voss. Annot. in loc.</note> the unity of God with you.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.23">Grace be with you, and mercy, and peace, and patience, for evermore.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.24">I salute the families of my brethren, with their wives and children; and the  
+            <note canonical="false" type="explanation" n="189:2" TEIform="note">
+              <hi type="italic" TEIform="hi">i.e.</hi> The deaconesses See the reason for the name, Voss. Annot. in loc. Add. Coteler. ib.
+            </note> virgins that are called widows. Be strong in the power of the Holy Ghost. Philo, who is present with me salutes you.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.25">I salute the house of Tavias, and pray that it may be strengthened in faith and charity, both of flesh and spirit.</verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.26">I salute Alce my well-beloved,  
+            <note canonical="false" type="explanation" n="189:3" TEIform="note">See Voss. Annot. ex Epist. Interpol.</note> together with the incomparable Daphnus, and Eutechnus, and all by name.
+          </verse>
+          <verse canonical="true" osisID="Ign.Smyrn.3.27">Farewell in the grace of God. ¶ 
+            <hi type="italic" TEIform="hi">To the Smyrnæans from Troas</hi>.
+          </verse>
+        </div>
+      </div>
+      <div canonical="true" type="book" osisID="Ign.Pol" TEIform="div">
+        <title canonical="true" short="Polycarp" type="main" TEIform="title">The Epistle of Ignatius to Polycarp</title>
+        <div canonical="true" type="chapter" osisID="Ign.Pol.1" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">
+              <hi type="italic" TEIform="hi">Blesses God for the firm establishment of Polycarp in the faith, and gives him particular directions for improving it</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Pol.1.1">IGNATIUS, who is also called Theophorus, to Polycarp, bishop of the church  
+            <note canonical="false" type="explanation" n="189:4" TEIform="note">of the Smyrnæans.</note> which is at Smyrna; their overseer, but rather himself overlooked by God the Father, and the Lord Jesus Christ: all happiness.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.1.2">Having known that thy mind towards God, is fixed as it were upon an immovable rock; I exceedingly give thanks, that I have been thought worthy to behold thy  
+            <note canonical="false" type="explanation" n="189:5" TEIform="note">Innocent.</note> blessed face, in which may I always rejoice in God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.1.3">Wherefore I beseech thee by the grace of God with which thou art clothed, to press forward in thy course, and to exhort all others that they may be saved.</verse>
+          <verse canonical="true" osisID="Ign.Pol.1.4">Maintain thy place with all care  
+            <note canonical="false" type="explanation" n="189:6" TEIform="note">Vid. 1 Cor. vii. 34.</note> both of flesh and spirit: Make it thy endeavour to preserve unity, than which nothing is better. Bear with all men, even as the Lord with thee.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.1.5">Support all in love, as also thou dost.  
+            <note canonical="false" type="explanation" n="189:7" TEIform="note">Be at leisure to, etc.</note> Pray without ceasing: ask more understanding than what thou already hast. Be watchful, having thy spirit always awake.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.1.6">Speak to every one  
+            <note canonical="false" type="explanation" n="189:8" TEIform="note">Vid. Voss. in loc. aliter Vet. Lat. Interpr.</note> according as God shall enable thee. Bear the  
+            <note canonical="false" type="explanation" n="189:9" TEIform="note">The diseases.</note> infirmities of all, as a perfect combatant; where the labour is great, the gain  
+            <note canonical="false" type="explanation" n="189:10" TEIform="note">Is much.</note> is the more.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.1.7">If thou shalt love the good disciples, what thank is it? But rather do thou subject to thee those that are mischievous, in meekness.</verse>
+          <verse canonical="true" osisID="Ign.Pol.1.8">Every wound is not healed with the same plaster: if the accessions of the disease be vehement, modify them with  
+            <note canonical="false" type="explanation" n="190:1" TEIform="note">Superfusions.</note> soft remedies: be in all things  
+            <note canonical="false" type="explanation" n="190:2" TEIform="note">Matt. x. 16.</note> wise as a serpent, but harmless as a dove.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.1.9">For this cause thou art composed of flesh and spirit; that thou mayest modify those things that appear before thy face.</verse>
+          <verse canonical="true" osisID="Ign.Pol.1.10">And as for those that are not seen, pray to God that he would reveal them unto thee, that so thou mayest be wanting in nothing, but mayest abound in every gift.</verse>
+          <verse canonical="true" osisID="Ign.Pol.1.11">The times demand thee, as the pilots the winds; and he that is tossed in a tempest, the haven where he would be; that thou mayst attain unto God.</verse>
+          <verse canonical="true" osisID="Ign.Pol.1.12">Be sober as the combatant of God: the  
+            <note canonical="false" type="explanation" n="190:3" TEIform="note">Vid. Voss. Annot. in loc Collat. cum Coteler. ib.</note> crown proposed to thee is immortality, and eternal life; concerning which thou art also fully persuaded. I will be thy surety in all things, and my bonds, which thou hast loved.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.1.13">Let not those that seem worthy of credit, but teach other doctrines,  
+            <note canonical="false" type="explanation" n="190:4" TEIform="note">Amaze thee.</note> disturb thee. Stand firm and immovable, as au anvil when it is beaten upon.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.1.14">It is the part of a brave combatant to be  
+            <note canonical="false" type="explanation" n="190:5" TEIform="note">Beaten.</note> wounded, and yet overcome. But especially we ought to endure all things for God's sake, that he may bear with us.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.1.15">Be every day  
+            <note canonical="false" type="explanation" n="190:6" TEIform="note">More studious, diligent.</note> better than other: consider the times; and expect him, who is above all time, eternal, invisible, though for our sakes made visible: impalpable, and impassable, yet for us subjected to sufferings; enduring all manner of ways for our salvation.
+          </verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Pol.2" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">1
+              <hi type="italic" TEIform="hi"> Continues his advice, </hi>6
+              <hi type="italic" TEIform="hi"> and teaches him how to advise others. </hi>12
+              <hi type="italic" TEIform="hi"> Enforces unity and subjection to the bishop</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Pol.2.1">LET not the widows be neglected: be thou after God, their guardian.</verse>
+          <verse canonical="true" osisID="Ign.Pol.2.2">Let nothing be done without thy knowledge and consent; neither do thou anything but according to the will of God; as also thou dost,  
+            <note canonical="false" type="explanation" n="190:7" TEIform="note">being well settled.</note> with all constancy.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.2.3">Let your assemblies be more full: inquire into all by name.</verse>
+          <verse canonical="true" osisID="Ign.Pol.2.4">Overlook not the men and maid servants; neither let them be puffed up: but rather let them be the more subject to the glory of God, that they may obtain from him a better liberty.</verse>
+          <verse canonical="true" osisID="Ign.Pol.2.5">Let them not desire to  
+            <note canonical="false" type="explanation" n="190:8" TEIform="note">Vid. Annot. Coteler. in loc.</note> be set free at the public cost, that they be not slaves to their own lusts.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.2.6">Flee evil  
+            <note canonical="false" type="explanation" n="190:9" TEIform="note">Or, trades.</note> arts; or rather, make not any mention of them.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.2.7">Say to my sisters, that they love the Lord; and be satisfied with their own husbands, both in the flesh and spirit.</verse>
+          <verse canonical="true" osisID="Ign.Pol.2.8">In like manner, exhort my brethren, in the name of Jesus Christ, that they love their wives, even as the Lord the Church.</verse>
+          <verse canonical="true" osisID="Ign.Pol.2.9">If any man can remain in a virgin state,  
+            <note canonical="false" type="explanation" n="190:10" TEIform="note">Vid. Annot. Vossii et Coteler. in loc.</note> to the honour of the flesh of Christ, let him remain without boasting; but if he boast, he is undone. And if he desire to be more taken notice of than the bishop he is corrupted.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.2.10">But it becomes all such as are married, whether men or women to come together with the consent of the bishop, that so their marriage may be according to godliness, and not in lust.</verse>
+          <verse canonical="true" osisID="Ign.Pol.2.11">Let all things be done to the honour of God.</verse>
+          <verse canonical="true" osisID="Ign.Pol.2.12">
+            <note canonical="false" type="explanation" n="191:1" TEIform="note">Observe, from the foregoing verses, that Ignatius here speaks not to Polycarp, but through him to the Church of Smyrna.</note> Hearken unto the bishop, that God also may hearken unto you. My soul be security for them that submit to their bishop, with their presbyters and deacons. And may my portion be together with theirs in God.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.2.13">Labour with one another; contend together, run together, suffer together; sleep together, and rise together; as the stewards, and assessors, and ministers of God.</verse>
+          <verse canonical="true" osisID="Ign.Pol.2.14">Please him under whom ye war, and from whom ye receive your wages. Let none of you be found a deserter; but let your baptism remain, as your arms; your faith, as your helmet; your charity, as your spear; your patience, as your whole armour.</verse>
+          <verse canonical="true" osisID="Ign.Pol.2.15">Let your works be your  
+            <note canonical="false" type="explanation" n="191:2" TEIform="note">That which is committed to your custody, to keep secure.</note> charge, that so you may receive a suitable reward. Be longsuffering therefore towards each other in meekness: as God is towards you.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.2.16">Let me have joy of you in all things.</verse>
+        </div>
+        <div canonical="true" type="chapter" osisID="Ign.Pol.3" TEIform="div">
+          <div canonical="false" type="summary" TEIform="div">
+            <p TEIform="p">1
+              <hi type="italic" TEIform="hi"> Greets Polycarp on the peace of the church at Antioch: and desires him to write to that and other churches</hi>.
+            </p>
+          </div>
+          <verse canonical="true" osisID="Ign.Pol.3.1">NOW forasmuch as the church of Antioch in Syria,  
+            <note canonical="false" type="explanation" n="191:3" TEIform="note">It has been manifested unto me.</note> is, as I am told, [one word illegible.—JBH] through your prayers; I also have been the more comforted  
+            <note canonical="false" type="explanation" n="191:4" TEIform="note">In the security of God.</note> and without care in God; if so be that by suffering, I shall attain unto God; that through your prayers I may be found a disciple of Christ.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.3.2">It will be very fit, O most worthy Polycarp, to call a  
+            <note canonical="false" type="explanation" n="191:5" TEIform="note">Most becoming God.</note> select council, and choose some one whom ye particularly love, and who is patient of labour; that he may be the messenger of God; and that going unto Syria, he may glorify your incessant love, to the praise of Christ.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.3.3">A Christian has not the power of himself: but must be always at leisure for God's service. Now this work is both God's and your's: when ye shall have perfected it.</verse>
+          <verse canonical="true" osisID="Ign.Pol.3.4">For I trust through the grace of God that ye are ready to every good work that is fitting for you in the Lord.</verse>
+          <verse canonical="true" osisID="Ign.Pol.3.5">Knowing therefore your earnest affection for the truth, I have exhorted you by  
+            <note canonical="false" type="explanation" n="191:6" TEIform="note">Viz. To the Smyrnæans, and this to himself. See Pearson in loc.</note> these short letters.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.3.6">But forasmuch as I have not been able to write to all the churches, because I must suddenly sail from Troas to Neapolis; (for so is the command of those to whose pleasure I am subject;) do you write to the churches that are near you, as being instructed in the will of God, that they also may do in like manner.</verse>
+          <verse canonical="true" osisID="Ign.Pol.3.7">Let those that are able send  
+            <note canonical="false" type="explanation" n="191:7" TEIform="note">Footmen.</note> messengers; and let the rest send their letters by those who shall be sent by you: that you may be glorified  
+            <note canonical="false" type="explanation" n="192:1" TEIform="note">Vid. Voss. in loc. in the Eternal work.</note> to all eternity, of which you are worthy.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.3.8">I salute all by name, particularly the wife of Epitropus, with all her house and children. I salute Attalus my well-beloved.</verse>
+          <verse canonical="true" osisID="Ign.Pol.3.9">I salute him who shall be thought worthy to be sent by you into Syria. Let grace be ever with him,  
+            <note canonical="false" type="explanation" n="192:2" TEIform="note">Ex. Vet. Interp. Vid. Voss. Annot.</note> and with Polycarp who sends him.
+          </verse>
+          <verse canonical="true" osisID="Ign.Pol.3.10">I wish you all happiness in our God, Jesus Christ; in whom continue, in the unity and protection of God.</verse>
+          <verse canonical="true" osisID="Ign.Pol.3.11">I salute Alce my well-beloved. Farewell in the Lord. ¶ 
+            <hi type="italic" TEIform="hi">To Polycarp</hi>.
+          </verse>
+        </div>
+      </div>
+    </div>
+  </osisText>
+</osis>

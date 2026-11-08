@@ -2,6 +2,27 @@
 
 <!-- version list -->
 
+## v1.13.0 (2026-11-08)
+
+### Bug Fixes
+
+- **scrapers**: Validate the full page sequence in the Kebra Nagast index
+  ([`d9192a6`](https://github.com/open-canon/open-canon-site/commit/d9192a61f75f12f679b6a2f5e9354c7e495b9bb8))
+
+### Features
+
+- **osis**: Add generated kebra-nagast.xml
+  ([`d84ed76`](https://github.com/open-canon/open-canon-site/commit/d84ed76a70aa7c1b1f89cc008ab1ff64d744413b))
+
+- **scrapers**: Add Kebra Nagast scraper (Budge translation)
+  ([`13a0229`](https://github.com/open-canon/open-canon-site/commit/13a02299e48f5be1d58f0bec8d03fc996133526f))
+
+### Testing
+
+- **scrapers**: Expect the index validation error for a truncated Kebra Nagast index
+  ([`98894d9`](https://github.com/open-canon/open-canon-site/commit/98894d99ad8edea5c1bf89ffec514f7bea09a2a5))
+
+
 ## v1.12.0 (2026-11-08)
 
 ### Bug Fixes
