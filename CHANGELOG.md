@@ -2,6 +2,60 @@
 
 <!-- version list -->
 
+## v1.11.0 (2026-11-08)
+
+### Bug Fixes
+
+- **scrapers**: Do not treat "p." inside a word as a page marker
+  ([`3b2917a`](https://github.com/open-canon/open-canon-site/commit/3b2917a52f54d15414dd07d50b9c9b320f43a93b))
+
+- **scrapers**: Keep top-level italics/bold in Jubilees footnotes
+  ([`9101454`](https://github.com/open-canon/open-canon-site/commit/91014541c6392e8e0d4a46e348ffc742e9334a18))
+
+- **scrapers**: Treat a missing class as empty in LDS extract_markup
+  ([`780e09d`](https://github.com/open-canon/open-canon-site/commit/780e09db14d8f066a1cf80a55030892b0c1d8984))
+
+### Code Style
+
+- **scrapers**: Ruff format churchofjesuschrist
+  ([`06d6eb2`](https://github.com/open-canon/open-canon-site/commit/06d6eb2d14e59a411eb7b2c1dffe3e0a3914a9f5))
+
+- **scrapers**: Ruff format sacred-texts
+  ([`88849a5`](https://github.com/open-canon/open-canon-site/commit/88849a5956e902d12f02f90aace963afaf9ba9f7))
+
+### Documentation
+
+- **scrapers**: Document lds-standard-works functions and attributes
+  ([`4e795d8`](https://github.com/open-canon/open-canon-site/commit/4e795d80e9ab3f380b773148c25a8c3a7bc3a4a1))
+
+- **scrapers**: Document sacred-texts functions and attributes
+  ([`6168930`](https://github.com/open-canon/open-canon-site/commit/61689304c15f6f581188ae03f7339833e725c43d))
+
+### Features
+
+- **scrapers**: Wire lds-standard-works into open-canon-scrape
+  ([`f63db15`](https://github.com/open-canon/open-canon-site/commit/f63db15fbda49e0cc171646bbe66241beda5840f))
+
+- **scrapers**: Wire sacred-texts scrapers into open-canon-scrape
+  ([`150016b`](https://github.com/open-canon/open-canon-site/commit/150016bdfe0d0ab5350d0c33e3f9f560266bd352))
+
+### Refactoring
+
+- **scrapers**: Import churchofjesuschrist sources verbatim
+  ([`8843246`](https://github.com/open-canon/open-canon-site/commit/88432466533fb0515a615a612979de0a2eb1e789))
+
+- **scrapers**: Import sacred-texts sources verbatim
+  ([`44321ba`](https://github.com/open-canon/open-canon-site/commit/44321ba8875e8d127fdbcf5bd4f8210da3b8429d))
+
+### Testing
+
+- **scrapers**: Unit-test lds-standard-works functions
+  ([`d69b86f`](https://github.com/open-canon/open-canon-site/commit/d69b86f9175ec73fc5c3deae56373edc298add27))
+
+- **scrapers**: Unit-test sacred-texts functions
+  ([`6aaf5e6`](https://github.com/open-canon/open-canon-site/commit/6aaf5e67a078bdf435d0447782cdb532d03d59e8))
+
+
 ## v1.10.0 (2026-11-08)
 
 ### Code Style
