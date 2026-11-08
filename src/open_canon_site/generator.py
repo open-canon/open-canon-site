@@ -321,6 +321,7 @@ def _generate_chapter(
                 "id": verse.verse_id,
                 "number": verse.number,
                 "html": _verse_html(verse),
+                "heading_html": render_content(verse.heading) if verse.heading else "",
                 "has_notes": bool(verse.notes),
                 "note_ids": [n.note_id for n in verse.notes],
             }
