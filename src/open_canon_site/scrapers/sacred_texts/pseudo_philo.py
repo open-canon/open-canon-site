@@ -108,7 +108,7 @@ def verse_marker_re(verse: int) -> re.Pattern[str]:
     """Build the pattern for the marker that opens ``verse`` inside a text string.
 
     The marker must start the string or follow whitespace. The usual form is ``7. `` but the
-    source also prints ``3, `` and, before a capital letter, ``4 `` with no punctuation. A
+    source also prints ``3, `` (never ``2,000`` or ``2.5``: a digit after the punctuation is not a marker) and, before a capital letter, ``4 `` with no punctuation. A
     marker may end a string when a footnote reference follows it.
 
     Args:
@@ -117,7 +117,7 @@ def verse_marker_re(verse: int) -> re.Pattern[str]:
     Returns:
         A compiled pattern matching the marker and the whitespace after it.
     """
-    return re.compile(rf"(?<![^\s]){verse}(?:[.,]\s*|\s+(?=[A-Z(\[<“\"']))")
+    return re.compile(rf"(?<![^\s]){verse}(?:[.,](?!\d)\s*|\s+(?=[A-Z(\[<“\"']))")
 
 
 Atom = tuple["str | pyosis.NoteCt | pyosis.HiCt | pyosis.MilestoneCt", "pyosis.OsisHi | None"]

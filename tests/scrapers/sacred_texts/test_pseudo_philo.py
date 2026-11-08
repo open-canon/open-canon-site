@@ -49,6 +49,9 @@ def parser():
         (4, "4 sons", False),
         (4, "of 14. And", False),
         (2, "2.", True),
+        (2, "and 2,000 men", False),
+        (2, "and 2.5 men", False),
+        (2, "and 2, 000", True),
     ],
 )
 def test_verse_marker_re(verse: int, text: str, matches: bool) -> None:
