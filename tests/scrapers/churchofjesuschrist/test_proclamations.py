@@ -85,3 +85,12 @@ def test_spec_is_registered() -> None:
     parser = argparse.ArgumentParser()
     proc.add_arguments(parser)
     assert parser.parse_args([]).lang == "eng"
+
+
+def test_build_proclamation_dateline_is_front_matter() -> None:
+    """A leading italic-only paragraph becomes an introduction and verses start after it."""
+    body = '<div class="body-block"><p><em>From the Presidency, 1980</em></p><p>Text</p></div>'
+    div = proc.build_proclamation(proc.PROCLAMATIONS[0], _content(body))
+    intro, chapter = div.content
+    assert intro.type_value == osis.OsisDivs.INTRODUCTION and intro.canonical is False
+    assert [v.osis_id for v in chapter.content] == [["Proc1980.1.1"]]

@@ -84,7 +84,7 @@ def build_proclamation(
 
     The page has a ``header`` (``h1#title1``, optional ``p.subtitle``, optional ``div.byline``), a ``div.body-block`` of
     plain paragraphs and, for the 1995 and 2020 texts, a trailing ``div.event`` note on when it was read. Title and
-    subtitle become the book's titles, the byline a non-canonical introduction, every body paragraph a verse
+    subtitle become the book's titles, the byline (and an italic-only dateline paragraph, as in 1980) a non-canonical introduction, every other body paragraph a verse
     ``<osis_id>.1.<n>`` and the event note a non-canonical colophon.
 
     Args:
@@ -142,9 +142,23 @@ def build_proclamation(
             )
         )
 
+    paragraphs = body.find_all("p", recursive=False)
+    if paragraphs and [c.name for c in paragraphs[0].children if getattr(c, "name", None)] == [
+        "em"
+    ]:
+        # A leading paragraph that is only italic text is a dateline ("From the First Presidency ... 1980").
+        dateline = paragraphs.pop(0)
+        front.append(
+            pyosis.generated.DivCt(
+                canonical=False,
+                type_value=pyosis.generated.OsisDivs.INTRODUCTION,
+                content=extract_markup(dateline, footnotes, no_container=True),
+            )
+        )
+
     chapter_id = f"{proclamation.osis_id}.1"
     verses: list[object] = []
-    for number, paragraph in enumerate(body.find_all("p", recursive=False), start=1):
+    for number, paragraph in enumerate(paragraphs, start=1):
         verse_id = f"{chapter_id}.{number}"
         verses.append(
             pyosis.generated.VerseCt(
