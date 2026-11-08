@@ -193,7 +193,7 @@ def test_process_rejects_unexpected_page_sequence(parser, monkeypatch):
     """An index missing the colophon link fails before any page is fetched."""
     index = fixture("index.htm").replace('<A HREF="kn118.htm">Colophon</A>', "")
     calls = stub_fetch(parser, monkeypatch, {kebra_nagast.INDEX_URL: index})
-    with pytest.raises(RuntimeError, match="Unexpected Kebra Nagast page sequence"):
+    with pytest.raises(RuntimeError, match="did not contain the Kebra Nagast index"):
         parser.process()
     assert calls == [kebra_nagast.INDEX_URL]
 
