@@ -168,11 +168,11 @@ def test_generate_osis_structure_renders_as_expected():
     osis = lof.generate_osis(lof.extract_editions(make_bundle()))
     document = parse_osis_text(osis.osis.osis_text)
     old, rse = document.divisions
-    assert (old.div_id, old.short_title) == ("LoF1835", "1835 Edition")
+    assert (old.div_id, old.short_title) == ("LoF", "1835 Edition")
     assert (rse.div_id, rse.short_title) == ("LoFRSE", "Revised Standard Edition")
     assert [chapter.chapter_id for chapter in old.chapters] == [
-        "LoF1835.Preface",
-        *(f"LoF1835.{n}" for n in range(1, 8)),
+        "LoF.Preface",
+        *(f"LoF.{n}" for n in range(1, 8)),
     ]
     assert [chapter.chapter_id for chapter in rse.chapters] == [f"LoFRSE.{n}" for n in range(1, 8)]
 
@@ -186,7 +186,7 @@ def test_generate_osis_structure_renders_as_expected():
 
     first = old.chapters[1]
     assert first.title == "Lecture First"
-    assert [verse.verse_id for verse in first.verses] == ["LoF1835.1.1", "LoF1835.1.2"]
+    assert [verse.verse_id for verse in first.verses] == ["LoF.1.1", "LoF.1.2"]
     assert [section.title for section in first.sections] == [lof.QA_HEADING]
     assert first.trailing_body_count == 1
     assert [verse.verse_id for verse in rse.chapters[0].verses] == [
@@ -203,10 +203,10 @@ def test_generate_osis_structure_renders_as_expected():
 def test_generate_osis_xml_contains_question_and_answer():
     """Questions are bold and answers keep their paragraph references verbatim, inside a book group."""
     xml = lof.generate_osis(lof.extract_editions(make_bundle())).to_xml()
-    assert 'type="bookGroup" osisID="LoF"' in xml
+    assert 'type="bookGroup"' in xml
     assert '<hi type="bold"' in xml and "Question 1?</hi>" in xml
     assert "Answer 1. (1:1)" in xml
-    assert 'osisID="LoF1835.7.2"' in xml and 'osisID="LoFRSE.7.3"' in xml
+    assert 'osisID="LoF.7.2"' in xml and 'osisID="LoFRSE.7.3"' in xml
 
 
 class FakeFetcher:
@@ -239,7 +239,7 @@ def test_run_writes_output_file(tmp_path, monkeypatch):
     (path,) = lof.run(args)
     assert path == tmp_path / "lectures_on_faith.xml"
     text = path.read_text("utf-8")
-    assert "index-Cpfpq6uF.js" in text and 'osisID="LoF1835.1.1"' in text
+    assert "index-Cpfpq6uF.js" in text and 'osisID="LoF.1.1"' in text
     assert fetcher.closed
 
 
@@ -248,3 +248,15 @@ def test_spec_is_registered():
     spec = registry.get_scraper("lectures-on-faith")
     assert spec is lof.SPEC
     assert spec.outputs == ("lectures_on_faith.xml",)
+
+
+def test_1835_edition_is_canonical_with_the_plain_work_ids():
+    """References to the work (``LoF.1.1``) resolve to the 1835 text; the revised edition is not canonical."""
+    osis = lof.generate_osis(lof.extract_editions(make_bundle()))
+    group = osis.osis.osis_text.div[0]
+    old, rse = (div for div in group.content if getattr(div, "osis_id", None))
+    assert old.osis_id == ["LoF"] and old.canonical is True
+    assert rse.osis_id == ["LoFRSE"] and rse.canonical is False
+    xml = osis.to_xml()
+    assert 'canonical="true" osisID="LoF.1.1"' in xml
+    assert 'canonical="false" osisID="LoFRSE.1.1"' in xml

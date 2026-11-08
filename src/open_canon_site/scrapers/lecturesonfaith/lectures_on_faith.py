@@ -13,8 +13,10 @@ deployments, so the arrays are found by their shape, the factories by their bodi
 small parser for the subset of JavaScript they use (arrays, objects with bare keys, strings, numbers and factory calls)
 rather than by evaluating any code.
 
-The result is a book group ``LoF`` holding one book per edition, ``LoF1835`` and ``LoFRSE``. The 1835 book starts with
-the preface as a front-matter page. Each lecture is a chapter (``LoF1835.1`` ... ``LoF1835.7``) whose numbered
+The result is a book group holding one book per edition. The 1835 edition is the canonical text, so it takes the plain
+work ids (book ``LoF``, verses ``LoF.1.1`` ...) that references to the Lectures on Faith resolve to; the revised edition
+is the book ``LoFRSE`` and is marked ``canonical="false"``. The 1835 book starts with the preface as a front-matter
+page. Each lecture is a chapter (``LoF.1`` ... ``LoF.7``, ``LoFRSE.1`` ... ``LoFRSE.7``) whose numbered
 paragraphs are verses, followed by its closing note (lecture 6) and its "Questions and Answers on the Foregoing
 Principles" (lectures 1-5).
 
@@ -47,7 +49,7 @@ SOURCE_URL: Final[str] = "https://lecturesonfaith.com/"
 OUTPUT_FILENAME: Final[str] = "lectures_on_faith.xml"
 """Name of the OSIS file written."""
 OSIS_WORK_ID: Final[str] = "LoF"
-"""OSIS work id, also the id of the book group holding both editions."""
+"""OSIS work id, also the book id of the canonical 1835 edition."""
 BOOK_TITLE: Final[str] = "Lectures on Faith"
 """Title of the work."""
 QA_HEADING: Final[str] = "Questions and Answers on the Foregoing Principles"
@@ -68,17 +70,20 @@ class Edition:
     """Short title shown in the library and sidebar under "Lectures on Faith"."""
     has_preface: bool
     """Whether the edition starts with the 1835 preface (lecture 0)."""
+    canonical: bool
+    """Whether this is the canonical text, written with ``canonical="true"``."""
 
 
 EDITION_1835: Final[Edition] = Edition(
-    "LoF1835", "Lectures on Faith (1835)", "1835 Edition", has_preface=True
+    OSIS_WORK_ID, "Lectures on Faith (1835)", "1835 Edition", has_preface=True, canonical=True
 )
-"""The text as printed in the 1835 Doctrine and Covenants."""
+"""The text as printed in the 1835 Doctrine and Covenants: the canonical book, with the plain ``LoF`` ids."""
 EDITION_RSE: Final[Edition] = Edition(
     "LoFRSE",
     "Lectures on Faith (Revised Standard Edition)",
     "Revised Standard Edition",
     has_preface=False,
+    canonical=False,
 )
 """The site's modernised edition, with its own paragraph numbering and no preface."""
 EDITIONS: Final[tuple[Edition, ...]] = (EDITION_1835, EDITION_RSE)
@@ -501,10 +506,11 @@ def _preface_div(edition: Edition, preface: Lecture) -> pyosis.DivCt:
     )
 
 
-def _qa_div(lecture: Lecture) -> pyosis.DivCt:
+def _qa_div(edition: Edition, lecture: Lecture) -> pyosis.DivCt:
     """Build a lecture's catechism: the heading, then each question (in bold) followed by its answer.
 
     Args:
+        edition: The edition the lecture belongs to.
         lecture: A lecture with a non-empty ``qa``.
 
     Returns:
@@ -518,7 +524,9 @@ def _qa_div(lecture: Lecture) -> pyosis.DivCt:
             )
         )
         content.append(pyosis.PCt(content=[pair.answer]))
-    return pyosis.DivCt(type_value=pyosis.OsisDivs.SECTION, canonical=True, content=content)
+    return pyosis.DivCt(
+        type_value=pyosis.OsisDivs.SECTION, canonical=edition.canonical, content=content
+    )
 
 
 def _lecture_div(edition: Edition, lecture: Lecture) -> pyosis.DivCt:
@@ -538,13 +546,20 @@ def _lecture_div(edition: Edition, lecture: Lecture) -> pyosis.DivCt:
     ]
     for paragraph in lecture.paragraphs:
         verse_id = f"{chapter_id}.{paragraph.number}"
-        content.append(pyosis.VerseCt(osis_id=[verse_id], canonical=True, content=[paragraph.text]))
+        content.append(
+            pyosis.VerseCt(
+                osis_id=[verse_id], canonical=edition.canonical, content=[paragraph.text]
+            )
+        )
     if lecture.note:
         content.extend(_paragraphs_of(lecture.note))
     if lecture.qa:
-        content.append(_qa_div(lecture))
+        content.append(_qa_div(edition, lecture))
     return pyosis.DivCt(
-        type_value=pyosis.OsisDivs.CHAPTER, osis_id=[chapter_id], canonical=True, content=content
+        type_value=pyosis.OsisDivs.CHAPTER,
+        osis_id=[chapter_id],
+        canonical=edition.canonical,
+        content=content,
     )
 
 
@@ -569,7 +584,10 @@ def _book_div(edition: Edition, lectures: list[Lecture]) -> pyosis.DivCt:
         else:
             content.append(_lecture_div(edition, lecture))
     return pyosis.DivCt(
-        type_value=pyosis.OsisDivs.BOOK, osis_id=[edition.osis_id], canonical=True, content=content
+        type_value=pyosis.OsisDivs.BOOK,
+        osis_id=[edition.osis_id],
+        canonical=edition.canonical,
+        content=content,
     )
 
 
@@ -583,11 +601,10 @@ def generate_osis(
         bundle_url: Where the text was read from, recorded in the header.
 
     Returns:
-        The OSIS document: a ``bookGroup`` ``LoF`` holding one book per edition.
+        The OSIS document: a ``bookGroup`` holding one book per edition, the canonical 1835 edition first.
     """
     book_group = pyosis.DivCt(
         type_value=pyosis.OsisDivs.BOOK_GROUP,
-        osis_id=[OSIS_WORK_ID],
         canonical=True,
         content=[
             pyosis.TitleCt(type_value=pyosis.OsisTitles.MAIN, content=[BOOK_TITLE]),
