@@ -75,6 +75,15 @@ def test_first_chapter_page(parser: PseudoPhiloParser) -> None:
         if isinstance(part, pyosis.NoteCt) and part.type_value == "crossReference"
     ]
     assert [ref.content for ref in refs] == [["Gen. 5:4"], ["Gen. 5:7"], ["Gen. 5:24"]]
+    owners = {
+        verse.number: [
+            part.content[0]
+            for part in verse.parts
+            if isinstance(part, pyosis.NoteCt) and part.type_value == "crossReference"
+        ]
+        for verse in chapter.verses
+    }
+    assert owners == {1: [], 2: ["Gen. 5:4"], 3: [], 4: [], 5: ["Gen. 5:7"], 6: ["Gen. 5:24"]}
     assert [flatten(v.parts) for v in chapter.verses if v.number == 2] == [
         "And Adam lived after he begat Seth 700 years, and begat 12 sons and 8 daughters."
     ]
@@ -101,6 +110,7 @@ def test_page_with_two_chapters(parser: PseudoPhiloParser) -> None:
         "And it came to pass in the time of those days"
     )
     assert isinstance(chapters[0].verses[0].parts[-1], pyosis.NoteCt)
+    assert chapters[1].verses[0].parts[1].content == ["Jud. 13:24"]
 
 
 def test_verse_marker_variants_and_page_breaks(parser: PseudoPhiloParser) -> None:
@@ -108,6 +118,11 @@ def test_verse_marker_variants_and_page_breaks(parser: PseudoPhiloParser) -> Non
     (chapter,) = parser.parse_chapter_page(72, fixture("bap72"))
     assert chapter.number == 58
     assert [v.number for v in chapter.verses] == [1, 2, 3, 4]
+    assert [
+        part.content
+        for part in chapter.verses[3].parts
+        if isinstance(part, pyosis.NoteCt) and part.type_value == "crossReference"
+    ] == [["Ex. 15:13"]]
     assert flatten(chapter.verses[3].parts).endswith(
         "Therefore he that was saved alive by thee shall die now, and 40 men returned unto his house."
     )

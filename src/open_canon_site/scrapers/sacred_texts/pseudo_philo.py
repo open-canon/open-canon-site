@@ -639,16 +639,17 @@ class PseudoPhiloParser(JubileesParser):
                         continue
 
                     at_paragraph_start = False
-                    scanned.extend(leading)
-                    leading = []
                     if current is None:
                         raise RuntimeError(
                             f"Text before the opening chapter marker on bap{page_number:02d}: "
                             f"{text[:60]!r}"
                         )
 
-                    search = verse_marker_re(verse_number + 1)
-                    match_ = search.search(text)
+                    match_ = verse_marker_re(verse_number + 1).search(text)
+                    opens_verse = match_ is not None and not text[: match_.start()].strip()
+                    if leading and not opens_verse:
+                        scanned.extend(leading)
+                        leading = []
                     if match_ is None:
                         scanned.append((text, style))
                         text = ""
@@ -659,6 +660,8 @@ class PseudoPhiloParser(JubileesParser):
                     scanned = []
                     flush_verse()
                     verse_number += 1
+                    verse_parts.extend(leading)  # references printed before the marker
+                    leading = []
                     text = text[match_.end() :]
 
             verse_parts.extend(scanned)

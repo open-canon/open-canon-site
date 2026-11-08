@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="PsPhilo" osisRefWork="Pseudo-Philo" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T10:42:00</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T10:56:30</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/bap/ and converted to OSIS by Andrew P. Sansom.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -1112,10 +1112,9 @@
           <hi type="italic" TEIform="hi">daughters</hi>.
         </verse>
         <verse canonical="true" osisID="PsPhilo.1.3">And these are the names of the males: Eliseel, Suris, Elamiel, Brabal, Naat, Zarama, Zasam, Maathal, and Anath.</verse>
-        <verse canonical="true" osisID="PsPhilo.1.4">And these are his daughters: Phua, Iectas, Arebica, Sifa, Tecia, Saba, Asin. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 5:7</note>
-        </verse>
+        <verse canonical="true" osisID="PsPhilo.1.4">And these are his daughters: Phua, Iectas, Arebica, Sifa, Tecia, Saba, Asin.</verse>
         <verse canonical="true" osisID="PsPhilo.1.5">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 5:7</note>
           <hi type="italic" TEIform="hi">And Seth lived</hi> 105 
           <hi type="italic" TEIform="hi">years and begat Enos</hi>. 
           <hi type="italic" TEIform="hi">And Seth lived after he begat Enos</hi> 707 
@@ -1123,40 +1122,36 @@
           <hi type="italic" TEIform="hi">sons and</hi> 2 
           <hi type="italic" TEIform="hi">daughters</hi>.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.1.6">And these are the names of his sons: Elidia, Phonna, and Matha: and of his daughters, Malida and Thila. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 5:9, 5:10</note>
-        </verse>
+        <verse canonical="true" osisID="PsPhilo.1.6">And these are the names of his sons: Elidia, Phonna, and Matha: and of his daughters, Malida and Thila.</verse>
         <verse canonical="true" osisID="PsPhilo.1.7">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 5:9, 5:10</note>
           <hi type="italic" TEIform="hi">And Enos lived</hi> 180 
           <hi type="italic" TEIform="hi">years and begat Cainan</hi>. 
           <hi type="italic" TEIform="hi">And Enos lived after he begat Cainan</hi> 715 
           <hi type="italic" TEIform="hi">years, and begat</hi> 2 
           <hi type="italic" TEIform="hi">sons and a daughter</hi>.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.1.8">And these are the names of his sons: Phoë and Thaal; and of the daughter, Catennath. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 5:12, 5:13</note>
-        </verse>
+        <verse canonical="true" osisID="PsPhilo.1.8">And these are the names of his sons: Phoë and Thaal; and of the daughter, Catennath.</verse>
         <verse canonical="true" osisID="PsPhilo.1.9">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 5:12, 5:13</note>
           <hi type="italic" TEIform="hi">And Cainan lived</hi> 520 
           <hi type="italic" TEIform="hi">years and begat Malalech. And Cainan lived after he begat Malalech</hi> 730 
           <hi type="italic" TEIform="hi">years, and begat</hi> 3 
           <hi type="italic" TEIform="hi">sons and</hi> 2 
           <hi type="italic" TEIform="hi">daughters</hi>.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.1.10">And these are the names of the males: Athach, Socer, Lopha: and the names of the daughters, Ana and Leua. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 5:15, 5:16</note>
-        </verse>
+        <verse canonical="true" osisID="PsPhilo.1.10">And these are the names of the males: Athach, Socer, Lopha: and the names of the daughters, Ana and Leua.</verse>
         <verse canonical="true" osisID="PsPhilo.1.11">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 5:15, 5:16</note>
           <hi type="italic" TEIform="hi">And Malalech lived</hi> 165
           <hi type="italic" TEIform="hi"> years and begat Jareth. And Malalech lived after he begat Jareth</hi> 730 
           <hi type="italic" TEIform="hi">years, and begat</hi> 7 
           <hi type="italic" TEIform="hi">sons and</hi> 5 
           <hi type="italic" TEIform="hi">daughters</hi>.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.1.12">And these are the names of the males: Leta, Matha, Cethar, Melie, Suriel, Lodo, Othim. And these are the names of the daughters: Ada and Noa, Iebal, Mada, Sella. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 5:18, 5:19</note>
-        </verse>
+        <verse canonical="true" osisID="PsPhilo.1.12">And these are the names of the males: Leta, Matha, Cethar, Melie, Suriel, Lodo, Othim. And these are the names of the daughters: Ada and Noa, Iebal, Mada, Sella.</verse>
         <verse canonical="true" osisID="PsPhilo.1.13">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 5:18, 5:19</note>
           <hi type="italic" TEIform="hi">And Jareth lived</hi> 172 
           <hi type="italic" TEIform="hi">years and begat Enoch</hi>. 
           <hi type="italic" TEIform="hi">And Jareth lived after he begat Enoch</hi> 800
@@ -1164,10 +1159,9 @@
           <hi type="italic" TEIform="hi">sons and</hi> 2 
           <hi type="italic" TEIform="hi">daughters</hi>.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.1.14">And these are the names of the males: Lead, Anac, Soboac and Iectar: and of the daughters, Tetzeco, Lesse. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 5:22, 5:23</note>
-        </verse>
+        <verse canonical="true" osisID="PsPhilo.1.14">And these are the names of the males: Lead, Anac, Soboac and Iectar: and of the daughters, Tetzeco, Lesse.</verse>
         <verse canonical="true" osisID="PsPhilo.1.15">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 5:22, 5:23</note>
           <hi type="italic" TEIform="hi">And Enoch lived</hi> 165 
           <hi type="italic" TEIform="hi">years and begat Matusalam. And Enoch lived after he begat Matusalam</hi> 200 
           <hi type="italic" TEIform="hi">years, and begat</hi> 5 
@@ -1229,10 +1223,10 @@
         <verse canonical="true" osisID="PsPhilo.2.5">
           <note canonical="false" type="explanation" n="78:1" TEIform="note">5. 
             <hi type="italic" TEIform="hi">Jerahmeel</hi> says that Enoch, son of Cain, took Niba, daughter of Shem, to wife. His source is unknown to me.
-          </note>Then took Enoch a wife of the daughters of Seth, which bare him Ciram and Cuuth and Madab. But Ciram begat Matusael, and Matusael begat Lamech. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 4:19</note>
+          </note>Then took Enoch a wife of the daughters of Seth, which bare him Ciram and Cuuth and Madab. But Ciram begat Matusael, and Matusael begat Lamech.
         </verse>
         <verse canonical="true" osisID="PsPhilo.2.6">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 4:19</note>
           <hi type="italic" TEIform="hi">But Lamech took unto himself two wives: the name of the one was Ada and the name of the other Sella.</hi>
         </verse>
         <verse canonical="true" osisID="PsPhilo.2.7">
@@ -1247,10 +1241,10 @@
           <hi type="italic" TEIform="hi">lute</hi> (
           <hi type="italic" TEIform="hi">kinnor</hi>) 
           <hi type="italic" TEIform="hi">and the harp</hi> and on every instrument of sweet psalmody (
-          <hi type="italic" TEIform="hi">lit</hi>. psaltery), and to corrupt the earth. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 4:22</note>
+          <hi type="italic" TEIform="hi">lit</hi>. psaltery), and to corrupt the earth.
         </verse>
         <verse canonical="true" osisID="PsPhilo.2.9">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 4:22</note>
           <hi type="italic" TEIform="hi">But Sella bare Tubal</hi> and Misa and Theffa, and this is that Tubal which showed unto men arts in lead and tin and iron and copper and silver and gold: and then began the inhabiters of the earth to make graven images and to worship them.
         </verse>
         <verse canonical="true" osisID="PsPhilo.2.10">
@@ -1306,10 +1300,10 @@
           <note canonical="false" type="crossReference" TEIform="note">Gen. 7:2-4</note>dwellers upon earth. 
           <hi type="italic" TEIform="hi">Now of clean beasts and of the fowls of the heaven that are clean thou shalt take by sevens male and female, that their seed may be saved alive upon the earth. But of unclean beasts and fowls thou shalt take to thee by twos male and</hi> 
           <note canonical="false" type="crossReference" TEIform="note">Gen. 6:21</note>
-          <hi type="italic" TEIform="hi">female, and shalt take provision for thee and for them also</hi>. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 7:5, 7:7</note>
+          <hi type="italic" TEIform="hi">female, and shalt take provision for thee and for them also</hi>.
         </verse>
         <verse canonical="true" osisID="PsPhilo.3.5">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 7:5, 7:7</note>
           <hi type="italic" TEIform="hi">And Noe did that which God commanded him and entered into the ark, he and all his sons with</hi> 
           <note canonical="false" type="crossReference" TEIform="note">Gen. 7:10</note>
           <hi type="italic" TEIform="hi">him. And it came to pass after</hi> 7 
@@ -1324,10 +1318,9 @@
           <hi type="super" TEIform="hi">nd</hi> (1656
           <hi type="super" TEIform="hi">th</hi>) year from the time when God had made the heaven and the earth in the day when the earth was corrupted with the inhabiters thereof by reason of the iniquity of their works.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.3.7">And when the flood continued 140 days upon the earth, Noe only and they that were with him in the ark remained alive: and when God remembered Noe, he made the water to diminish. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 8:16</note>
-        </verse>
-        <verse canonical="true" osisID="PsPhilo.3.8">And it came to pass on the 90
+        <verse canonical="true" osisID="PsPhilo.3.7">And when the flood continued 140 days upon the earth, Noe only and they that were with him in the ark remained alive: and when God remembered Noe, he made the water to diminish.</verse>
+        <verse canonical="true" osisID="PsPhilo.3.8">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 8:16</note>And it came to pass on the 90
           <hi type="super" TEIform="hi">th</hi> day that God dried the earth, and said 
           <hi type="italic" TEIform="hi">unto Noe: Go out of the ark, thou</hi> and all that are with thee, 
           <hi type="italic" TEIform="hi">and grow and multiply upon the earth. And Noe went out of the ark, he an d his sons and his sons' wives, and all the beasts and creeping things and fowls and cattle</hi> brought he forth with him as God commanded him. 
@@ -1356,10 +1349,10 @@
           <note canonical="false" type="explanation" n="82:1" TEIform="note">
             <hi type="italic" TEIform="hi">that hath been justified in me</hi>. The word occurs in XLIX. 45 "Is Armathem 
             <hi type="italic" TEIform="hi">iustificata</hi> more than all the cities of Israel?" and in LI. 2.
-          </note>. And there shall be another earth and another heaven, even an everlasting habitation. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 9:8</note>
+          </note>. And there shall be another earth and another heaven, even an everlasting habitation.
         </verse>
         <verse canonical="true" osisID="PsPhilo.3.11">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 9:8</note>
           <hi type="italic" TEIform="hi">And the Lord spake</hi> further 
           <hi type="italic" TEIform="hi">unto Noe and to his sons saying: Behold I will make my covenant with you and with your seed after you, and will not</hi> 
           <note canonical="false" type="crossReference" TEIform="note">Gen. 9:2</note>
@@ -1374,10 +1367,10 @@
           <note canonical="false" type="explanation" n="82:2" TEIform="note">IV. The variants in the forms and divisions of the names are many. In the Appendix on Readings I have pointed out the Biblical equivalents. It is obvious that some names and words have dropped out of 
             <hi type="italic" TEIform="hi">Philo</hi>. In the translation I have introduced very few corrections.
           </note>
-          <hi type="italic" TEIform="hi">And the sons of Noe which went forth of the ark were Sem, Cham, and Japheth</hi>. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 10:2</note>
+          <hi type="italic" TEIform="hi">And the sons of Noe which went forth of the ark were Sem, Cham, and Japheth</hi>.
         </verse>
         <verse canonical="true" osisID="PsPhilo.4.2">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 10:2</note>
           <hi type="italic" TEIform="hi">The sons of Japheth: Gomer, Magog, and Madai</hi>, Nidiazech, 
           <hi type="italic" TEIform="hi">Tubal</hi>, Mocteras, Cenez, 
           <hi type="italic" TEIform="hi">Riphath, and Thogorma, Elisa</hi>, Dessin, Cethin, Tudant. And the sons of Gomer: Thelez, Lud, Deberlet. And the sons of Magog: Cesse, Thipha, Pharuta, Ammiel, Phimei, Goloza, Samanach. And the sons of Duden: Sallus, Phelucta Phallita. And the sons of Tubal: Phanatonova, Eteva. And the sons of Tyras: Maac, Tabel, Ballana, Samplameac, Elaz. And the sons of Mellech: Amboradat, Urach, Bosara. And the sons of &lt;&lt;As&gt;&gt;cenez: Jubal, Zaraddana, Anac. And the sons of Heri: Phuddet, Doad, Dephadzeat, Enoc. And the sons of Togorma: Abiud, Saphath, Asapli, Zepthir. And the sons of Elisa: Etzaac, Zenez, Mastisa, Rira. And the sons of Zepti: Macziel, Temna, Aela, Phinon. And the sons of Tessis: Meccul, Loon, Zelataban. And the sons of Duodennin: Itheb, Beath, Phenech.
@@ -1387,24 +1380,22 @@
           <hi type="italic" TEIform="hi">sc</hi>. Javan) and his sons took Ceel; Tubal and his sons took Pheed; Misech and his sons took Nepthi; &lt;&lt;T&gt;&gt;iras and his sons took &lt;&lt;Rôô&gt;&gt;; Duodennut and his sons took [paragraph continues] Goda; Riphath and his sons took Bosarra; Torgoma and his sons took Fud; Elisa and his sons took Thabola; Thesis (
           <hi type="italic" TEIform="hi">sc</hi>. Tarshish) and his sons took Marecham; Cethim and his sons took Thaan; Dudennin and his sons took Caruba.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.4.5">And then began they to till the earth and to sow upon it: and when the earth was athirst, the dwellers therein cried unto the Lord and he heard them and gave rain abundantly, and it was so, when the rain descended upon the earth, that the bow appeared in the cloud, and the dwellers upon earth saw the memorial of the covenant and fell upon their faces and sacrificed, offering burnt offerings unto the Lord. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 10:6</note>
-        </verse>
+        <verse canonical="true" osisID="PsPhilo.4.5">And then began they to till the earth and to sow upon it: and when the earth was athirst, the dwellers therein cried unto the Lord and he heard them and gave rain abundantly, and it was so, when the rain descended upon the earth, that the bow appeared in the cloud, and the dwellers upon earth saw the memorial of the covenant and fell upon their faces and sacrificed, offering burnt offerings unto the Lord.</verse>
         <verse canonical="true" osisID="PsPhilo.4.6">
-          <hi type="italic" TEIform="hi">Now the sons of Cham were Chus, Mestra, and Phuni, and Chanaan.</hi> And the sons of Chus: Saba, and . . . Tudan. And the sons of Phuni: [Effuntenus], Zeleutelup, Geluc, Lephuc. And the sons of Chanaan were Sydona, Endain, Racin, Simmin, Uruin, Nenugin, Amathin, Nephiti, Telaz, Elat, Cusin. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 10:8</note>
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 10:6</note>
+          <hi type="italic" TEIform="hi">Now the sons of Cham were Chus, Mestra, and Phuni, and Chanaan.</hi> And the sons of Chus: Saba, and . . . Tudan. And the sons of Phuni: [Effuntenus], Zeleutelup, Geluc, Lephuc. And the sons of Chanaan were Sydona, Endain, Racin, Simmin, Uruin, Nenugin, Amathin, Nephiti, Telaz, Elat, Cusin.
         </verse>
         <verse canonical="true" osisID="PsPhilo.4.7">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 10:8</note>
           <hi type="italic" TEIform="hi">And Chus begat Nembroth. He began to be</hi> proud 
           <hi type="italic" TEIform="hi">before the Lord</hi>. 
           <note canonical="false" type="crossReference" TEIform="note">Gen. 10:13, 10:14</note>
           <hi type="italic" TEIform="hi">But Mestram begat Ludin</hi> and Megimin and Labin and Latuin and Petrosonoin and Ceslun: 
           <hi type="italic" TEIform="hi">thence came forth the Philistines</hi> and the Cappadocians.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.4.8">And then did they also begin to build cities: and these are the cities which they built: Sydon, and the parts that lie about it, that is Resun, Beosa, Maza, Gerara, Ascalon, Dabir, Camo, Tellun, Lacis, Sodom and Gomorra, Adama and Seboim. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 10:22</note>
-        </verse>
+        <verse canonical="true" osisID="PsPhilo.4.8">And then did they also begin to build cities: and these are the cities which they built: Sydon, and the parts that lie about it, that is Resun, Beosa, Maza, Gerara, Ascalon, Dabir, Camo, Tellun, Lacis, Sodom and Gomorra, Adama and Seboim.</verse>
         <verse canonical="true" osisID="PsPhilo.4.9">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 10:22</note>
           <hi type="italic" TEIform="hi">And the sons of Sem: Elam, Assur, Arphaxa, Luzi, Aram</hi>. And the sons of Aram: Gedrum, Ese. 
           <hi type="italic" TEIform="hi">And Arphaxa begat Sale, Sale begat Heber, and unto Heber were born two sons: the name of</hi> 
           <hi type="italic" TEIform="hi">the one was Phalech, for in his days the earth was divided, and the name of his brother was Jectan</hi>.
@@ -1545,23 +1536,24 @@
           <hi type="italic" TEIform="hi">But Abram went forth thence and dwell in the land of Chanaan, and took with him Loth his</hi> 
           <note canonical="false" type="crossReference" TEIform="note">Gen. 16:1</note>
           <hi type="italic" TEIform="hi">brothers son, and Sarai his wife</hi>. And because Sarai was barren and had no offspring, then Abram 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 25:12</note>took Agar her maid, and she bare him Ismahel. And Ismahel begat 12 sons. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 13:12, 13:13</note>
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 25:12</note>took Agar her maid, and she bare him Ismahel. And Ismahel begat 12 sons.
         </verse>
         <verse canonical="true" osisID="PsPhilo.8.2">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 13:12, 13:13</note>
           <note canonical="false" type="explanation" n="96:1" TEIform="note">VIII. 2. [
             <hi type="italic" TEIform="hi">But Abram dwelt in the land of Cam</hi>] obviously intrusive, repeated from ver. 1, 
             <hi type="italic" TEIform="hi">Cam</hi> being for 
             <hi type="italic" TEIform="hi">Canaan</hi>.
-          </note>Then Loth departed from Abram and dwelt in Sodom [but Abram dwelt in the land of Cam]. And the men of Sodom were very evil and sinners exceedingly. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 13:14, 17:3</note>
+          </note>Then Loth departed from Abram and dwelt in Sodom [but Abram dwelt in the land of Cam]. And the men of Sodom were very evil and sinners exceedingly.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.8.3">And God appeared unto Abraham saying: Unto thy seed will I give this land; and thy 
+        <verse canonical="true" osisID="PsPhilo.8.3">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 13:14, 17:3</note>And God appeared unto Abraham saying: Unto thy seed will I give this land; and thy 
           <note canonical="false" type="crossReference" TEIform="note">Gen. 17:16</note>name shall be called Abraham, and Sarai thy wife shall be called Sara. Ana I will give thee of her an eternal seed and make my covenant with 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 21:2, 21:3</note>thee. And Abraham knew Sara his wife, and she conceived and bare Isaac. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 25:20 sqq .</note>
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 21:2, 21:3</note>thee. And Abraham knew Sara his wife, and she conceived and bare Isaac.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.8.4">And Isaac took him a wife of Mesopotamia, the daughter of Bathuel, which conceived and bare him Esau and Jacob.</verse>
+        <verse canonical="true" osisID="PsPhilo.8.4">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 25:20 sqq .</note>And Isaac took him a wife of Mesopotamia, the daughter of Bathuel, which conceived and bare him Esau and Jacob.
+        </verse>
         <verse canonical="true" osisID="PsPhilo.8.5">And Esau took to him 
           <note canonical="false" type="crossReference" TEIform="note">Gen. 26:3, 36</note>for wives Judin the daughter of Bereu, and Basemath the daughter of Elon, and Elibema the daughter of Anan, and Manem the daughter of Samahel. And &lt;&lt;Basemath&gt;&gt; 
           <hi type="italic" TEIform="hi">bare him Adelifan</hi>, and the 
@@ -1583,18 +1575,18 @@
             <hi type="italic" TEIform="hi">after</hi> his affliction is told in the 
             <hi type="italic" TEIform="hi">Testament of Job</hi> and the Targum on Job. etc. Note that 
             <hi type="italic" TEIform="hi">Philo</hi> disregards the Biblical names of Job's daughters, though he accepts the Bible story of Job.
-          </note>And thereafter Job took her to wife and begat of her 14 sons and 6 daughters, even 7 sons and 3 daughters before he was smitten with affliction, and thereafter when he was made whole 7 sons and 3 daughters. And these are their names: Eliphac, Erinoe, Diasat, Philias, Diffar, Zellud, Thelon: and his daughters [paragraph continues] Meru, Litaz, Zeli. And such as had been the names of the former, so were they also of the latter. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 37</note>
+          </note>And thereafter Job took her to wife and begat of her 14 sons and 6 daughters, even 7 sons and 3 daughters before he was smitten with affliction, and thereafter when he was made whole 7 sons and 3 daughters. And these are their names: Eliphac, Erinoe, Diasat, Philias, Diffar, Zellud, Thelon: and his daughters [paragraph continues] Meru, Litaz, Zeli. And such as had been the names of the former, so were they also of the latter.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.8.9">Now Jacob and his 12 sons dwelt in the land of Chanaan: and 
-          <hi type="italic" TEIform="hi">his sons</hi> hated their brother Joseph, whom also they delivered into Egypt, to Petephres the chief of the cooks of Pharao, and he abode with him 14 years. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 41</note>
+        <verse canonical="true" osisID="PsPhilo.8.9">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 37</note>Now Jacob and his 12 sons dwelt in the land of Chanaan: and 
+          <hi type="italic" TEIform="hi">his sons</hi> hated their brother Joseph, whom also they delivered into Egypt, to Petephres the chief of the cooks of Pharao, and he abode with him 14 years.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.8.10">And it came to pass after that the king of Egypt had seen a dream, that they told him of Joseph, and he declared him the dreams. And it was so after he declared his dreams, that Pharao made him prince over all the land of Egypt. At that time there was a famine in all the land, as 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 41,42, etc.</note>Joseph had foreseen. And his brethren came down into Egypt to buy food, because in Egypt only was there food. And Joseph knew his brethren, and was made known to them, and dealt not evilly with them. And he sent and called his father out of the land of Chanaan, and he came down unto him. 
-          <note canonical="false" type="crossReference" TEIform="note">Gen. 46:8 sqq .</note>
+        <verse canonical="true" osisID="PsPhilo.8.10">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 41</note>And it came to pass after that the king of Egypt had seen a dream, that they told him of Joseph, and he declared him the dreams. And it was so after he declared his dreams, that Pharao made him prince over all the land of Egypt. At that time there was a famine in all the land, as 
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 41,42, etc.</note>Joseph had foreseen. And his brethren came down into Egypt to buy food, because in Egypt only was there food. And Joseph knew his brethren, and was made known to them, and dealt not evilly with them. And he sent and called his father out of the land of Chanaan, and he came down unto him.
         </verse>
         <verse canonical="true" osisID="PsPhilo.8.11">
+          <note canonical="false" type="crossReference" TEIform="note">Gen. 46:8 sqq .</note>
           <note canonical="false" type="explanation" n="98:1" TEIform="note">11 
             <hi type="italic" TEIform="hi">seq</hi>. On the names here see Appendix on Readings.
           </note>
@@ -1709,10 +1701,11 @@
         <verse canonical="true" osisID="PsPhilo.10.1">Now when the king of Egypt was dead another king arose, and afflicted all the people of Israel. But they cried unto the Lord and he heard them, and sent Moses and delivered them out of the land of Egypt: and God sent also upon them 10 plagues and smote them. Now these were the plagues, namely, blood, and frogs, and all manner of flies, 
           <note canonical="false" type="explanation" n="104:1" TEIform="note">X. 1. 
             <hi type="italic" TEIform="hi">All manner of flies, pammixia</hi>. See p. 23.
-          </note>hail, and death of cattle, locusts and gnats, and darkness that might be felt, and the death of the firstborn. 
-          <note canonical="false" type="crossReference" TEIform="note">Ex. 14:8 sqq .</note>
+          </note>hail, and death of cattle, locusts and gnats, and darkness that might be felt, and the death of the firstborn.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.10.2">And when they had gone forth thence and were journeying, the heart of the Egyptians was yet again hardened, and they continued to pursue them, and found them by the Red Sea. And the children of Israel cried unto their God and spake to Moyses saying: Lo, now is come the time of our destruction, for the sea is before us and the multitude of enemies behind us, and we in the midst. Was it for this that God brought us out, or are these the covenants which he made with our fathers saying: To your seed will I give the land wherein ye dwell? and now let him do with us that which seemeth good in his sight.</verse>
+        <verse canonical="true" osisID="PsPhilo.10.2">
+          <note canonical="false" type="crossReference" TEIform="note">Ex. 14:8 sqq .</note>And when they had gone forth thence and were journeying, the heart of the Egyptians was yet again hardened, and they continued to pursue them, and found them by the Red Sea. And the children of Israel cried unto their God and spake to Moyses saying: Lo, now is come the time of our destruction, for the sea is before us and the multitude of enemies behind us, and we in the midst. Was it for this that God brought us out, or are these the covenants which he made with our fathers saying: To your seed will I give the land wherein ye dwell? and now let him do with us that which seemeth good in his sight.
+        </verse>
         <verse canonical="true" osisID="PsPhilo.10.3">Then did the children of Israel sever their counsels into three divisions of counsels, 
           <note canonical="false" type="explanation" n="104:2" TEIform="note">3. The idea of the divided counsels of the tribes comes from Deborah's song (Judges 5:15, 15:16): "for the divisions of Reuben there were great searchings of heart." It appears in Jashar, but there four divisions are given.</note>because of the fear of the time. For the tribe of Ruben and of Isachar and. of Zabulon and of Symeon said: Come, let us cast ourselves into the sea, for it is better for us to die in the water than to be slain of our enemies. And the tribe of Gad and of Aser and of Dan and Neptalim said: Nay, but let us return with them, and if they will give us our lives, we will serve them. But the tribe of Levi and of Juda and Joseph and the tribe of Benjamin said: Not so, but let us take our weapons and fight them, and God will be with us.
         </verse>
@@ -1775,16 +1768,16 @@
           <hi type="italic" TEIform="hi">unto the third and fourth generation, doing</hi> (or 
           <hi type="italic" TEIform="hi">shewing</hi>) 
           <hi type="italic" TEIform="hi">mercy unto</hi> 1000 
-          <hi type="italic" TEIform="hi">generations to them that love me and keep my commandments</hi>. 
-          <note canonical="false" type="crossReference" TEIform="note">Ex. 20:7</note>
+          <hi type="italic" TEIform="hi">generations to them that love me and keep my commandments</hi>.
         </verse>
         <verse canonical="true" osisID="PsPhilo.11.7">
+          <note canonical="false" type="crossReference" TEIform="note">Ex. 20:7</note>
           <hi type="italic" TEIform="hi">Thou shall not take the name of the Lord thy God in vain</hi>, that my ways be not made vain. 
           <hi type="italic" TEIform="hi">For God</hi> abominateth 
-          <hi type="italic" TEIform="hi">him that taketh his name in vain</hi>. 
-          <note canonical="false" type="crossReference" TEIform="note">Ex. 20:8</note>
+          <hi type="italic" TEIform="hi">him that taketh his name in vain</hi>.
         </verse>
         <verse canonical="true" osisID="PsPhilo.11.8">
+          <note canonical="false" type="crossReference" TEIform="note">Ex. 20:8</note>
           <note canonical="false" type="explanation" n="108:1" TEIform="note">8. The gloss on the 4th Commandment, as Dr. Cohn says, shows that the writer has little interest in the Temple services, and is appropriate to a time when those services had ceased. It is rather the Synagogue and its ritual that occur to him as the obvious form of worship. The words are adapted from Ps. cvii. 32.</note>
           <hi type="italic" TEIform="hi">Keep the sabbath day to sanctify it. Six days do thy work, but the seventh day is the sabbath of the Lord. In it thou shall do no work, thou and all</hi> thy 
           <note canonical="false" type="crossReference" TEIform="note">Ps. 107:32</note>labourers, saving that therein 
@@ -1796,10 +1789,10 @@
           </note>and all the order of the heaven, 
           <hi type="italic" TEIform="hi">and God rested</hi> 
           <note canonical="false" type="crossReference" TEIform="note">Gen. 2:3</note>
-          <hi type="italic" TEIform="hi">the seventh day. Therefore God sanctified the seventh day</hi>, because he rested therein. 
-          <note canonical="false" type="crossReference" TEIform="note">Ex. 20:12</note>
+          <hi type="italic" TEIform="hi">the seventh day. Therefore God sanctified the seventh day</hi>, because he rested therein.
         </verse>
         <verse canonical="true" osisID="PsPhilo.11.9">
+          <note canonical="false" type="crossReference" TEIform="note">Ex. 20:12</note>
           <hi type="italic" TEIform="hi">Thou shalt love thy father and my mother</hi> and fear them: and then shall thy light rise, and I will command the heaven and it shall pay thee the rain thereof, and the earth shall hasten her fruit and thy days shall be many, and thou shalt dwell in thy land, and shalt not be childless, for thy seed shall not fail, even that of them that dwell therein.
         </verse>
         <verse canonical="true" osisID="PsPhilo.11.10">
@@ -1840,10 +1833,10 @@
           <note canonical="false" type="explanation" n="110:1" TEIform="note">XII. 1. descended into the place where is the light of the suit and moon. Compare with this the Revelation vouchsafed to Moses which is related in Jerahmeel, c. 52, as reported by R. Joshua ben Levi.</note>And Moses came down: and whereas he was covered with invisible light--for he had gone down into the place where is the light of the sun and moon,--the light of his face overcame the brightness of the sun and moon, and he knew it 
           <note canonical="false" type="crossReference" TEIform="note">Ex. 34:29, etc.</note>not. And it was so, when he came down to the children of Israel, they saw him and knew him not. But when he spake, then they knew him. And this was like that which was done in Egypt 
           <note canonical="false" type="crossReference" TEIform="note">Gen. 42:8</note>when 
-          <hi type="italic" TEIform="hi">Joseph knew his brethren but they knew not him</hi>. And it came to pass after that, when Moses knew that his face was become glorious, he made him a veil to cover his face. 
-          <note canonical="false" type="crossReference" TEIform="note">Ex. 32</note>
+          <hi type="italic" TEIform="hi">Joseph knew his brethren but they knew not him</hi>. And it came to pass after that, when Moses knew that his face was become glorious, he made him a veil to cover his face.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.12.2">But while he was in the mount, the heart of the people was corrupted, and 
+        <verse canonical="true" osisID="PsPhilo.12.2">
+          <note canonical="false" type="crossReference" TEIform="note">Ex. 32</note>But while he was in the mount, the heart of the people was corrupted, and 
           <hi type="italic" TEIform="hi">they came together to Aaron saying: Make us gods</hi> that we may serve them, as the other nations also have. For this Moses by whom the wonders were done before us, is taken from us. And Aaron said unto them: Have patience, for Moses will come and bring judgement near to us, and light up a law for us, and set forth from his mouth the great excellency of God, and appoint judgements unto our people.
         </verse>
         <verse canonical="true" osisID="PsPhilo.12.3">And when he said this, they hearkened not unto him, that the word might be fulfilled which was spoken in the day when the people sinned in building the tower, when God said: And now if I forbid them not, 
@@ -2177,9 +2170,9 @@
             <hi type="italic" TEIform="hi">Assumption of Moses</hi> puts it in 2500, the Hebrew in 2706, the LXX in 3859, 
             <hi type="italic" TEIform="hi">Jubilees</hi> in 2450.
           </note>
-          <note canonical="false" type="crossReference" TEIform="note">Dt. 34:6</note>
         </verse>
-        <verse canonical="true" osisID="PsPhilo.19.16">And Moses when he heard was filled with under standing, and his likeness was changed gloriously: 
+        <verse canonical="true" osisID="PsPhilo.19.16">
+          <note canonical="false" type="crossReference" TEIform="note">Dt. 34:6</note>And Moses when he heard was filled with under standing, and his likeness was changed gloriously: 
           <hi type="italic" TEIform="hi">and he died</hi> in glory according 
           <hi type="italic" TEIform="hi">to the mouth of the Lord, and he buried him</hi> as he had promised him, and the angels lamented at his death, and lightnings and torches and arrows went before him with one accord. And on that day the hymn of the hosts was not said because of the departure of Moses. Neither was there any day like unto it since the Lord made man upon earth, neither shall there be any such for ever, that he should make the hymn of the angels to cease because of a man; for he loved him greatly; and he buried him with his own hands on an high place of the earth, and in the light of the whole world.
         </verse>
@@ -2196,10 +2189,9 @@
         <verse canonical="true" osisID="PsPhilo.20.6">And when he heard that, Jesus thought to send spies into Jericho. And he called Cenez and Seenamias his brother, the two sons of Caleph, and spake to them, saying: I and your father were sent of Moses in the wilderness 
           <note canonical="false" type="crossReference" TEIform="note">Jos. 14:6 sqq .</note>and went up with other ten men: and they returned and spake evil of the lands and melted the heart of the people, and they were scattered and the heart of the people with them. But I and your father only fulfilled the word of the Lord, and lo, we are alive this day. And now will I send you to spy out the land of Jericho. Do like unto your father and ye also shall live.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.20.7">And they went up and spied out the city. And when they brought back word, the people went up and besieged the city and burned it with fire. 
-          <note canonical="false" type="crossReference" TEIform="note">Jos. 5:12</note>
-        </verse>
-        <verse canonical="true" osisID="PsPhilo.20.8">And after that Moses was dead, the manna ceased to come down for the children of Israel, and then began they to eat the fruits of the land. And these are the three things which God gave his people for the sake of three persons, that is, the well of the water of Mara for Maria's sake, and the pillar of cloud for Aaron's sake, and the manna for the sake of Moses. And when these three came to an end, those three gifts were taken away from them. 
+        <verse canonical="true" osisID="PsPhilo.20.7">And they went up and spied out the city. And when they brought back word, the people went up and besieged the city and burned it with fire.</verse>
+        <verse canonical="true" osisID="PsPhilo.20.8">
+          <note canonical="false" type="crossReference" TEIform="note">Jos. 5:12</note>And after that Moses was dead, the manna ceased to come down for the children of Israel, and then began they to eat the fruits of the land. And these are the three things which God gave his people for the sake of three persons, that is, the well of the water of Mara for Maria's sake, and the pillar of cloud for Aaron's sake, and the manna for the sake of Moses. And when these three came to an end, those three gifts were taken away from them. 
           <note canonical="false" type="explanation" n="135:1" TEIform="note">8. In the same way Cohn cites Midrashim (
             <hi type="italic" TEIform="hi">Seder Olam Rabbah</hi>, etc.) which agree exactly with 
             <hi type="italic" TEIform="hi">Philo</hi> as to the withdrawal of the three heavenly gifts. The Babylonian Talmud (
@@ -2246,10 +2238,10 @@
         <verse canonical="true" osisID="PsPhilo.22.1">
           <note canonical="false" type="crossReference" TEIform="note">Jos. 22</note>And it came to pass after these things, when Jesus and all Israel had heard that the children of Ruben and the children of Gad and the half tribe of Manasse which dwelt about Jordan had built them an altar and did offer sacrifices thereon and had made priests for the sanctuary, all the people were troubled above measure and came unto them to Silon.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.22.2">And Jesus and all the elders spake to them saying: What be these works which are done among you, while as yet we are not settled in our land? Are not these the words which Moses spake to you in the wilderness saying: See that when ye enter into the land ye spoil not your doings, and corrupt all the people? And now wherefore is it that our enemies have so much abounded, save because ye do corrupt your ways and have made all this trouble, and therefore will they assemble against us and overcome us. 
-          <note canonical="false" type="crossReference" TEIform="note">Jos. 22:21 sqq .</note>
+        <verse canonical="true" osisID="PsPhilo.22.2">And Jesus and all the elders spake to them saying: What be these works which are done among you, while as yet we are not settled in our land? Are not these the words which Moses spake to you in the wilderness saying: See that when ye enter into the land ye spoil not your doings, and corrupt all the people? And now wherefore is it that our enemies have so much abounded, save because ye do corrupt your ways and have made all this trouble, and therefore will they assemble against us and overcome us.</verse>
+        <verse canonical="true" osisID="PsPhilo.22.3">
+          <note canonical="false" type="crossReference" TEIform="note">Jos. 22:21 sqq .</note>And the children of Ruben and the children of Gad and the half tribe of Manasse said unto Jesus and all the people of Israel: Lo now hath God enlarged the fruit of the womb of men, and hath set up a light that that which is in darkness may see, for he knoweth what is in the secret places of the deep, and with him light abideth. Now the Lord God of our fathers knoweth if any of us or if we ourselves have done this thing in the way of iniquity, but only for our posterity's sake, that their heart be not separated from the [paragraph continues] Lord our God lest they say to us: Behold now, our brethren which be beyond Jordan have an altar, to make offerings upon it, but we in this place that have no altar, let us depart from the Lord our God, because our God hath set us afar off from his ways, that we should not serve him.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.22.3">And the children of Ruben and the children of Gad and the half tribe of Manasse said unto Jesus and all the people of Israel: Lo now hath God enlarged the fruit of the womb of men, and hath set up a light that that which is in darkness may see, for he knoweth what is in the secret places of the deep, and with him light abideth. Now the Lord God of our fathers knoweth if any of us or if we ourselves have done this thing in the way of iniquity, but only for our posterity's sake, that their heart be not separated from the [paragraph continues] Lord our God lest they say to us: Behold now, our brethren which be beyond Jordan have an altar, to make offerings upon it, but we in this place that have no altar, let us depart from the Lord our God, because our God hath set us afar off from his ways, that we should not serve him.</verse>
         <verse canonical="true" osisID="PsPhilo.22.4">And then verily spake we among ourselves: Let us make us an altar, that they may have a zeal to seek the Lord. And verily there be some of us that stand by and know that we are your brothers and stand guiltless before your face. Do ye therefore that which is pleasing in the sight of the Lord.</verse>
         <verse canonical="true" osisID="PsPhilo.22.5">And Jesus said: Is not the Lord our king mightier than woo sacrifices? And wherefore taught ye not your sons the words of the Lord which ye heard of us? For if your sons had been 
           <hi type="italic" TEIform="hi">occupied</hi> in the meditation of the law of the Lord, their mind would not have been led aside after a sanctuary made with hands. Or know ye not that when the people were forsaken for a moment in the wilderness when Moses went up to receive the tables, their mind was led astray, and they made themselves idols? And except the mercy of the God of your fathers had kept 
@@ -2576,9 +2568,10 @@
         </verse>
         <verse canonical="true" osisID="PsPhilo.29.2">Now Cenez had three daughters whose names are these: Ethema the firstborn, the second Pheila, the third Zelpha. And Zebul gave to the firstborn all that was round about the land of the Phœnicians, and to the second he gave the olive yard of Accaron, and to the third all the tilled land that was about Azotus. And he gave them husbands, namely to the firstborn Elisephan, to the second Odiel, and to the third Doel. 
           <note canonical="false" type="explanation" n="168:1" TEIform="note">XXIX 2. The giving of an inheritance to the daughters of Kenaz is modelled on Num. 36: the sacred treasury, perhaps, was suggested by 2 Kings 12; 2 Chron. 24.</note>
-          <note canonical="false" type="crossReference" TEIform="note">Cf. 2 Chr. 24:8</note>
         </verse>
-        <verse canonical="true" osisID="PsPhilo.29.3">Now in those days Zebul set up a treasury for the Lord and said unto the people: Behold, if any man will sanctify unto the Lord gold and silver, let him bring it to the Lord's treasury in Sylo: only let not any that hath stuff belonging to idols think to sanctify it to the Lord's treasures, for the Lord desireth not the abominations of the accursed things, lest ye disturb the synagogue of the Lord, for the wrath that is passed by sufficeth. And all the people brought that which their heart moved them to bring, both men and women, even gold and silver. And all that was brought was weighed, and it was 20 talents of gold, and 250 talents of silver.</verse>
+        <verse canonical="true" osisID="PsPhilo.29.3">
+          <note canonical="false" type="crossReference" TEIform="note">Cf. 2 Chr. 24:8</note>Now in those days Zebul set up a treasury for the Lord and said unto the people: Behold, if any man will sanctify unto the Lord gold and silver, let him bring it to the Lord's treasury in Sylo: only let not any that hath stuff belonging to idols think to sanctify it to the Lord's treasures, for the Lord desireth not the abominations of the accursed things, lest ye disturb the synagogue of the Lord, for the wrath that is passed by sufficeth. And all the people brought that which their heart moved them to bring, both men and women, even gold and silver. And all that was brought was weighed, and it was 20 talents of gold, and 250 talents of silver.
+        </verse>
         <verse canonical="true" osisID="PsPhilo.29.4">And Zebul judged the people twenty and five years. And when he had accomplished his time, he sent and called all the people and said: Lo, now I depart to die. Look ye to the testimonies which they that went before us testified, and let not your heart be like unto the waves of the sea, but like as the wave of the sea under standeth not save only those things which are in the sea, so let your heart also think upon nothing save only those things which belong unto the law. And Zebul slept with his fathers, and was buried in the sepulchre of his father.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="PsPhilo.30" TEIform="div">
@@ -2610,10 +2603,10 @@
         </verse>
         <verse canonical="true" osisID="PsPhilo.31.2">And when Debbora and the people and Barach went down to meet their enemies, immediately the Lord disturbed the goings of his stars, and spake unto them saying: Hasten and go ye, for our (
           <hi type="italic" TEIform="hi">or</hi> your) enemies fall upon you: confound their arms and break the strength of their hearts, for I am come that my people may prevail. For though it be that my people have sinned, yet will I have mercy on them. And when this was said, the stars went forth as it was commanded them and burned up their enemies. And the number of them that were gathered (
-          <hi type="italic" TEIform="hi">or</hi> burned) and slain in one hour was go times 97,000 men. But Sisara they destroyed not, for so it was commanded them. 
-          <note canonical="false" type="crossReference" TEIform="note">Jud. 4:17</note>
+          <hi type="italic" TEIform="hi">or</hi> burned) and slain in one hour was go times 97,000 men. But Sisara they destroyed not, for so it was commanded them.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.31.3">And when Sisara had fled on his horse to deliver his soul, Jahel the wife of Aber the Cinean decked herself with her ornaments and came out to meet him: now the woman was very fair: and when she saw him she said: Come in and take food, and sleep: and in. the evening I will send my servants with thee, for I know that thou wilt remember me and recompense me. And Sisara came in, and when he saw roses scattered upon the bed he said: If I be delivered, O Jahel, I will go unto my mother and thou shalt (
+        <verse canonical="true" osisID="PsPhilo.31.3">
+          <note canonical="false" type="crossReference" TEIform="note">Jud. 4:17</note>And when Sisara had fled on his horse to deliver his soul, Jahel the wife of Aber the Cinean decked herself with her ornaments and came out to meet him: now the woman was very fair: and when she saw him she said: Come in and take food, and sleep: and in. the evening I will send my servants with thee, for I know that thou wilt remember me and recompense me. And Sisara came in, and when he saw roses scattered upon the bed he said: If I be delivered, O Jahel, I will go unto my mother and thou shalt (
           <hi type="italic" TEIform="hi">or</hi> Jahel shall) be my wife.
         </verse>
         <verse canonical="true" osisID="PsPhilo.31.4">And thereafter was Sisara athirst and he said to Jahel: Give me a little water, for I am faint and my soul burneth by reason of the flame which I beheld in the stars. And Jahel said unto him: Rest a little while and then thou shalt drink.</verse>
@@ -2634,10 +2627,11 @@
           <hi type="italic" TEIform="hi">there</hi> until Barach should return.
         </verse>
         <verse canonical="true" osisID="PsPhilo.31.8">Now the mother of Sisara was called Themech, 
-          <note canonical="false" type="crossReference" TEIform="note">Jud. 5:28</note>and she sent unto her friends saying: Come, let us go forth together to meet my son, and ye shall see the daughters of the Hebrews whom my son will bring hither to be his concubines. 
-          <note canonical="false" type="crossReference" TEIform="note">Jud. 4:22</note>
+          <note canonical="false" type="crossReference" TEIform="note">Jud. 5:28</note>and she sent unto her friends saying: Come, let us go forth together to meet my son, and ye shall see the daughters of the Hebrews whom my son will bring hither to be his concubines.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.31.9">But Barach returned from following after Sisara and was greatly vexed because he found him not, and Jahel came forth to meet him, and said: Come, enter in, thou blessed of God, and I will deliver thee thine enemy whom thou followedst after and hast not found. And Barach went in and found Sisara dead, and said: Blessed be the Lord which sent his spirit and said: Into the hands of a woman shall Sisara be delivered. And when he had so said he cut off the head of Sisara and sent it unto his mother, and gave her a message saying: Receive thy son whom thou didst look for to come with spoil.</verse>
+        <verse canonical="true" osisID="PsPhilo.31.9">
+          <note canonical="false" type="crossReference" TEIform="note">Jud. 4:22</note>But Barach returned from following after Sisara and was greatly vexed because he found him not, and Jahel came forth to meet him, and said: Come, enter in, thou blessed of God, and I will deliver thee thine enemy whom thou followedst after and hast not found. And Barach went in and found Sisara dead, and said: Blessed be the Lord which sent his spirit and said: Into the hands of a woman shall Sisara be delivered. And when he had so said he cut off the head of Sisara and sent it unto his mother, and gave her a message saying: Receive thy son whom thou didst look for to come with spoil.
+        </verse>
       </div>
       <div canonical="true" type="chapter" osisID="PsPhilo.32" TEIform="div">
         <verse canonical="true" osisID="PsPhilo.32.1">
@@ -2807,17 +2801,17 @@
       </div>
       <div canonical="true" type="chapter" osisID="PsPhilo.39" TEIform="div">
         <verse canonical="true" osisID="PsPhilo.39.1">And after these things came the children 
-          <note canonical="false" type="crossReference" TEIform="note">Jud. 10:17, 10:18</note>of Ammon and began to fight against Israel and took many of their cities. And when the people were greatly straitened, they gathered together in Masphath, saying every man to his neighbours: Behold now, we see the strait which encompasseth us, and the Lord is departed from us, and is no more with us, and our enemies have taken our cities, and there is no leader to go in and out before our face. Now therefore let us see whom we may set over us to fight our battle. 
-          <note canonical="false" type="crossReference" TEIform="note">Jud. 11:1</note>
+          <note canonical="false" type="crossReference" TEIform="note">Jud. 10:17, 10:18</note>of Ammon and began to fight against Israel and took many of their cities. And when the people were greatly straitened, they gathered together in Masphath, saying every man to his neighbours: Behold now, we see the strait which encompasseth us, and the Lord is departed from us, and is no more with us, and our enemies have taken our cities, and there is no leader to go in and out before our face. Now therefore let us see whom we may set over us to fight our battle.
         </verse>
         <verse canonical="true" osisID="PsPhilo.39.2">
+          <note canonical="false" type="crossReference" TEIform="note">Jud. 11:1</note>
           <hi type="italic" TEIform="hi">Now Jepthan the Galaadite was a mighty man of valour</hi>, and because he was jealous of his brothers, they had cast him out of his land, and he went 
           <note canonical="false" type="crossReference" TEIform="note">Jud. 11:3</note>and 
           <hi type="italic" TEIform="hi">dwelt in the land of Tobi</hi>. 
-          <hi type="italic" TEIform="hi">And vagrant men gathered themselves unto him</hi> and abode with him. 
-          <note canonical="false" type="crossReference" TEIform="note">Jud. 11:5</note>
+          <hi type="italic" TEIform="hi">And vagrant men gathered themselves unto him</hi> and abode with him.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.39.3">And it came to pass when Israel was overcome in battle, that they came into the land of Tobi to Jepthan and said unto him: Come, rule 
+        <verse canonical="true" osisID="PsPhilo.39.3">
+          <note canonical="false" type="crossReference" TEIform="note">Jud. 11:5</note>And it came to pass when Israel was overcome in battle, that they came into the land of Tobi to Jepthan and said unto him: Come, rule 
           <note canonical="false" type="crossReference" TEIform="note">Esther 4:14</note>over the people. For who knoweth whether thou wast therefore preserved to this day or wast therefore delivered out of the hands of thy brethren that thou mightest at this time bear rule over thy people?
         </verse>
         <verse canonical="true" osisID="PsPhilo.39.4">And Jepthan said unto them: Doth love so return after hatred, or doth time overcome all things? For ye did cast me out of my land and out of my father's house; and now are ye come unto me when ye are in a strait? And they said unto him: If the God of our fathers remembered not our sins, but delivered us when we had sinned against him and he had given us over before the face of our enemies, and we were oppressed by them, why wilt thou that art a mortal man remember the iniquities which happened unto us, in the time of our affliction? Therefore be it not so before thee, lord.</verse>
@@ -2862,14 +2856,14 @@
         <verse canonical="true" osisID="PsPhilo.40.6">Yet I have not been satisfied with my bed of marriage, neither filled with the garlands of my wedding. For I have not been arrayed with brightness, sitting in my maidenhood; I have not used my precious ointment, neither hath my soul enjoyed the oil of anointing which was prepared for me. O my mother, to no purpose hast thou borne thine only begotten, and begotten her upon the earth, for hell is become my marriage chamber. Let all the mingling of oil which thou hast prepared for me be poured out, and the white robe which my mother wove for me, let the moth eat it, and the crown of flowers which my nurse plaited for me aforetime, let it wither, and the coverlet which she wove of violet and purple for my virginity, let the worm spoil it; and when the virgins, my fellows, tell of me, let them bewail me with groaning for 
           <hi type="italic" TEIform="hi">many</hi> days.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.40.7">Bow down your branches, O ye trees, and lament my youth. Come, ye beasts of the forest, and trample upon my virginity. For my years are cut off, and the days of my life are waxen old in darkness. 
-          <note canonical="false" type="crossReference" TEIform="note">Jud. 11:39</note>
+        <verse canonical="true" osisID="PsPhilo.40.7">Bow down your branches, O ye trees, and lament my youth. Come, ye beasts of the forest, and trample upon my virginity. For my years are cut off, and the days of my life are waxen old in darkness.</verse>
+        <verse canonical="true" osisID="PsPhilo.40.8">
+          <note canonical="false" type="crossReference" TEIform="note">Jud. 11:39</note>And when she had so said, Seila returned unto her father, and he did all that he had vowed, and offered burnt offerings. Then all the maidens of Israel gathered together and buried the daughter of Jepthan and bewailed her. And the children 
+          <note canonical="false" type="crossReference" TEIform="note">Jud. 11:40</note>of Israel made a great lamentation and appointed in that month, on the 14th day of the month, that they should come together every year and lament for the daughter of Jepthan four days. And they called the name of her sepulchre according to her own name Seila.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.40.8">And when she had so said, Seila returned unto her father, and he did all that he had vowed, and offered burnt offerings. Then all the maidens of Israel gathered together and buried the daughter of Jepthan and bewailed her. And the children 
-          <note canonical="false" type="crossReference" TEIform="note">Jud. 11:40</note>of Israel made a great lamentation and appointed in that month, on the 14th day of the month, that they should come together every year and lament for the daughter of Jepthan four days. And they called the name of her sepulchre according to her own name Seila. 
-          <note canonical="false" type="crossReference" TEIform="note">Jud. 12:7</note>
+        <verse canonical="true" osisID="PsPhilo.40.9">
+          <note canonical="false" type="crossReference" TEIform="note">Jud. 12:7</note>And Jepthan judged the children of Israel ten years, and died, and was buried with his fathers.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.40.9">And Jepthan judged the children of Israel ten years, and died, and was buried with his fathers.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="PsPhilo.41" TEIform="div">
         <verse canonical="true" osisID="PsPhilo.41.1">
@@ -2923,13 +2917,13 @@
           <hi type="italic" TEIform="hi">or</hi> was 
           <note canonical="false" type="crossReference" TEIform="note">16:1</note>enraged against) Azotus. And they shut him in and compassed the city about and said: Behold, now is our adversary delivered into our hands. Now therefore let us gather ourselves together and succour the souls one of another. And when Samson was arisen in the night and saw the city closed in he said: Lo, now, these fleas have shut me up in their city. And now shall the Lord be with me, and I will go forth by their gates and fight against them.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.43.3">And he went and set his left hand under the bar of the gate and shook it and threw down the gate of the wall. One of the gates he held in his right hand for a shield, and the other he laid upon his shoulders and bare it away, and because he had no sword he pursued after the Philistines with it, and killed therewith 25,000 men. And he lifted up all the purtenances of the gate and set them up on a mountain. 
-          <note canonical="false" type="crossReference" TEIform="note">Jud. 15</note>
+        <verse canonical="true" osisID="PsPhilo.43.3">And he went and set his left hand under the bar of the gate and shook it and threw down the gate of the wall. One of the gates he held in his right hand for a shield, and the other he laid upon his shoulders and bare it away, and because he had no sword he pursued after the Philistines with it, and killed therewith 25,000 men. And he lifted up all the purtenances of the gate and set them up on a mountain.</verse>
+        <verse canonical="true" osisID="PsPhilo.43.4">
+          <note canonical="false" type="crossReference" TEIform="note">Jud. 15</note>Now concerning the lion which he slew, and the jawbone of the ass wherewith he smote the Philistines, and the bands which he brake off from his arms as it were of themselves, and the foxes which he caught, are not these things written in the book of the Judges?
         </verse>
-        <verse canonical="true" osisID="PsPhilo.43.4">Now concerning the lion which he slew, and the jawbone of the ass wherewith he smote the Philistines, and the bands which he brake off from his arms as it were of themselves, and the foxes which he caught, are not these things written in the book of the Judges? 
-          <note canonical="false" type="crossReference" TEIform="note">Jud. 16:4</note>
+        <verse canonical="true" osisID="PsPhilo.43.5">
+          <note canonical="false" type="crossReference" TEIform="note">Jud. 16:4</note>Then Samson went down unto Gerara, a city of the Philistines, and saw there an harlot whose name was Dalila, and was led away after her, and took her to him to wife. And God said: Behold, now Samson is led astray by his eyes and hath forgotten the mighty works which I have wrought with him, and is mingled with the daughters of the Philistines, and hath not considered my servant Joseph which was in a strange land and became a crown unto his brethren because he would not afflict his seed. Now therefore shall his concupiscence be a stumbling-block unto Samson, and his mingling shall be his destruction, and I will deliver him to his enemies and they shall blind him. Yet in the hour of his death will I remember him, and will avenge him yet once upon the Philistines.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.43.5">Then Samson went down unto Gerara, a city of the Philistines, and saw there an harlot whose name was Dalila, and was led away after her, and took her to him to wife. And God said: Behold, now Samson is led astray by his eyes and hath forgotten the mighty works which I have wrought with him, and is mingled with the daughters of the Philistines, and hath not considered my servant Joseph which was in a strange land and became a crown unto his brethren because he would not afflict his seed. Now therefore shall his concupiscence be a stumbling-block unto Samson, and his mingling shall be his destruction, and I will deliver him to his enemies and they shall blind him. Yet in the hour of his death will I remember him, and will avenge him yet once upon the Philistines.</verse>
         <verse canonical="true" osisID="PsPhilo.43.6">And after these things his wife was importunate 
           <note canonical="false" type="crossReference" TEIform="note">Jud. 16:6</note>unto him, saying unto him: Show me thy strength, and wherein is thy might. So shall I know that thou lovest me. And when Samson had deceived her three times, and she continued importunate unto him every day, the fourth time he showed her his heart. But she made him 
           <note canonical="false" type="crossReference" TEIform="note">Jud. 16:16</note>drunk, and when he slumbered she called a barber, and he shaved the seven locks of his head, and his might departed from him, for so had himself revealed unto her. And she called the Philistines, 
@@ -2946,10 +2940,11 @@
       </div>
       <div canonical="true" type="chapter" osisID="PsPhilo.44" TEIform="div">
         <verse canonical="true" osisID="PsPhilo.44.1">And in those days there was no 
-          <note canonical="false" type="crossReference" TEIform="note">Jud. 17:6</note>prince in Israel: but every man did that which was pleasing in his sight. 
-          <note canonical="false" type="crossReference" TEIform="note">Jud. 17:2</note>
+          <note canonical="false" type="crossReference" TEIform="note">Jud. 17:6</note>prince in Israel: but every man did that which was pleasing in his sight.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.44.2">At that time Michas arose, the son of Dedila the mother of Heliu, and he had 1000 drachms of gold and four wedges of molten gold, and 40 didrachms of silver. And his mother Dedila said unto him: My son, hear my voice and thou shalt make thee a name before thy death: take thou that gold and melt it, and thou shalt make thee idols, and they shall be to thee gods, and thou shalt become a priest to them.</verse>
+        <verse canonical="true" osisID="PsPhilo.44.2">
+          <note canonical="false" type="crossReference" TEIform="note">Jud. 17:2</note>At that time Michas arose, the son of Dedila the mother of Heliu, and he had 1000 drachms of gold and four wedges of molten gold, and 40 didrachms of silver. And his mother Dedila said unto him: My son, hear my voice and thou shalt make thee a name before thy death: take thou that gold and melt it, and thou shalt make thee idols, and they shall be to thee gods, and thou shalt become a priest to them.
+        </verse>
         <verse canonical="true" osisID="PsPhilo.44.3">And it shall be that whoso will inquire by them, they shall come to thee and thou shalt answer them. And there shall be in thine house an altar and a pillar built, and of that gold thou hast, thou shalt buy thee incense for burning and sheep for sacrifices. And it shall be that whoso will offer sacrifice, he shall give for sheep 7 didrachms, and for incense, if he will burn it, he shall give one didrachm of silver of 
           <hi type="italic" TEIform="hi">full</hi> weight. And thy name shall be Priest, and thou shalt be called a worshipper of the gods.
         </verse>
@@ -3007,10 +3002,9 @@
         </verse>
       </div>
       <div canonical="true" type="chapter" osisID="PsPhilo.46" TEIform="div">
-        <verse canonical="true" osisID="PsPhilo.46.1">And when it was day the people of Israel were greatly moved and said: Let us go up and search out the sin that is done, that the iniquity may be taken away from us. And they spake thus, and said: Let us inquire first of the Lord and learn whether he will deliver our brethren into our hands. And if not, let us forbear. And Phinees said unto them: Let us offer the Demonstration and the Truth. And the Lord answered them and said: Go up, for I will deliver them into your hands. But he deceived them, that he might accomplish his word. 
-          <note canonical="false" type="crossReference" TEIform="note">Jud. 20:13</note>
-        </verse>
-        <verse canonical="true" osisID="PsPhilo.46.2">And they went up to battle and came to the city of Benjamin and sent messengers saying: Send us the men that have done this wickedness and we will spare you, but requite to every man his evil doing. And the people of Benjamin hardened their heart and said unto the people of Israel: Wherefore should we deliver our brethren unto you? If ye spare 
+        <verse canonical="true" osisID="PsPhilo.46.1">And when it was day the people of Israel were greatly moved and said: Let us go up and search out the sin that is done, that the iniquity may be taken away from us. And they spake thus, and said: Let us inquire first of the Lord and learn whether he will deliver our brethren into our hands. And if not, let us forbear. And Phinees said unto them: Let us offer the Demonstration and the Truth. And the Lord answered them and said: Go up, for I will deliver them into your hands. But he deceived them, that he might accomplish his word.</verse>
+        <verse canonical="true" osisID="PsPhilo.46.2">
+          <note canonical="false" type="crossReference" TEIform="note">Jud. 20:13</note>And they went up to battle and came to the city of Benjamin and sent messengers saying: Send us the men that have done this wickedness and we will spare you, but requite to every man his evil doing. And the people of Benjamin hardened their heart and said unto the people of Israel: Wherefore should we deliver our brethren unto you? If ye spare 
           <hi type="italic" TEIform="hi">them</hi> not, we will even fight 
           <note canonical="false" type="crossReference" TEIform="note">Jud. 20:21</note>against you. And the people of Benjamin came out against the children of Israel and pursued after them, and the children of Israel fell before them and they smote of them 45,000 men.
         </verse>
@@ -3216,10 +3210,11 @@
         <verse canonical="true" osisID="PsPhilo.53.10">Therefore, lo, the days shall come that I will cut off (
           <hi type="italic" TEIform="hi">lit</hi>. stop) the flower that came forth at that time, and I will go forth against them because they do transgress the word which I spake unto my 
           <note canonical="false" type="crossReference" TEIform="note">Deut. 22:26</note>servant Moses, saying: 
-          <hi type="italic" TEIform="hi">If thou meet with a nest, thou shalt not take the mother with the young</hi>, therefore it shall befall them that the mothers shall die with the children, and the fathers perish with the sons. 
-          <note canonical="false" type="crossReference" TEIform="note">1 Sam. 3:15</note>
+          <hi type="italic" TEIform="hi">If thou meet with a nest, thou shalt not take the mother with the young</hi>, therefore it shall befall them that the mothers shall die with the children, and the fathers perish with the sons.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.53.11">And when Samuel heard these words his heart was melted, and he said: Hath it thus come against me in my youth that I should prophesy unto the destruction of him that fostered me? and how then was I granted at the request of my mother? and who is he that brought me up? how hath he charged me to bear evil tidings?</verse>
+        <verse canonical="true" osisID="PsPhilo.53.11">
+          <note canonical="false" type="crossReference" TEIform="note">1 Sam. 3:15</note>And when Samuel heard these words his heart was melted, and he said: Hath it thus come against me in my youth that I should prophesy unto the destruction of him that fostered me? and how then was I granted at the request of my mother? and who is he that brought me up? how hath he charged me to bear evil tidings?
+        </verse>
         <verse canonical="true" osisID="PsPhilo.53.12">And Samuel arose in the morning and would not tell 
           <note canonical="false" type="crossReference" TEIform="note">1 Sam. 3:17</note>it unto Heli. And Heli said unto him: Hear now, my son. Behold, before thou wast born God promised Israel that he would send thee unto them to prophesy. And now, when thy mother came hither and prayed, for she knew not that which had been done, I said unto her: Go forth, for that which shall be born of thee shall be a son unto me. Thus spake I unto thy mother, and thus hath the Lord directed thy way. And even if thou chasten thy nursing-father, as the Lord liveth, hide thou not from me the things that thou hast heard.
         </verse>
@@ -3250,10 +3245,9 @@
           <note canonical="false" type="crossReference" TEIform="note">1 Sam. 4:17</note>Israel. Yea, and the priests also are slain with the sword, and the ark is delivered unto the 
           <note canonical="false" type="crossReference" TEIform="note">1 Sam. 4:18</note>Philistines.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.54.5">And when Heli heard of the taking of the ark, he said: Behold, Samuel prophesied of me and my sons that we should die together, but the ark he named not unto me. And now the testimonies are delivered up unto the enemy, and what can I more say? Behold, Israel is perished from the truth, for the judgements are taken away from him. And because Heli despaired wholly, he fell off from his seat. And they died in one day, even Heli and Ophni and Phinees his sons. 
-          <note canonical="false" type="crossReference" TEIform="note">4:19</note>
-        </verse>
-        <verse canonical="true" osisID="PsPhilo.54.6">And Heli's son's wife sat and travailed; and when she heard these things, all her bowels were 
+        <verse canonical="true" osisID="PsPhilo.54.5">And when Heli heard of the taking of the ark, he said: Behold, Samuel prophesied of me and my sons that we should die together, but the ark he named not unto me. And now the testimonies are delivered up unto the enemy, and what can I more say? Behold, Israel is perished from the truth, for the judgements are taken away from him. And because Heli despaired wholly, he fell off from his seat. And they died in one day, even Heli and Ophni and Phinees his sons.</verse>
+        <verse canonical="true" osisID="PsPhilo.54.6">
+          <note canonical="false" type="crossReference" TEIform="note">4:19</note>And Heli's son's wife sat and travailed; and when she heard these things, all her bowels were 
           <note canonical="false" type="crossReference" TEIform="note">4:20</note>melted. And the midwife said unto her: Be of good cheer, neither let thy soul faint, for a son is born to thee. And she said to her: Lo now is one soul born and we four die, that is, my father 
           <note canonical="false" type="crossReference" TEIform="note">4:21</note>and his two sons and his daughter-in-law. And she called his name, Where is the glory? saying: The glory of God is perished in Israel because the ark of the Lord is taken captive. And when she had thus said she gave up the ghost.
         </verse>
@@ -3317,10 +3311,10 @@
           <hi type="italic" TEIform="hi">or</hi> But even if the Lord so will), it seemeth unto me that a king cannot be established.
         </verse>
         <verse canonical="true" osisID="PsPhilo.56.3">And the Lord said unto him in the night: Be not grieved, for I will send them a 
-          <note canonical="false" type="crossReference" TEIform="note">1 Sam. 9:15</note>king which shall lay them waste, and he himself shall be laid waste thereafter. Now he that shall come unto thee to-morrow at the sixth hour, he it is that shall reign over them. 
-          <note canonical="false" type="crossReference" TEIform="note">1 Sam. 9:1-4</note>
+          <note canonical="false" type="crossReference" TEIform="note">1 Sam. 9:15</note>king which shall lay them waste, and he himself shall be laid waste thereafter. Now he that shall come unto thee to-morrow at the sixth hour, he it is that shall reign over them.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.56.4">And on the next day, Saul, the son of Cis, was coming from Mount Effrem, seeking the asses of his father; and when he was come to Armathem, he entered in to inquire of Samuel for the asses. Now he was walking hard by Baam, and Saul 
+        <verse canonical="true" osisID="PsPhilo.56.4">
+          <note canonical="false" type="crossReference" TEIform="note">1 Sam. 9:1-4</note>And on the next day, Saul, the son of Cis, was coming from Mount Effrem, seeking the asses of his father; and when he was come to Armathem, he entered in to inquire of Samuel for the asses. Now he was walking hard by Baam, and Saul 
           <note canonical="false" type="crossReference" TEIform="note">1 Sam. 9:9</note>said unto him: Where is he that seeth? For at that time a prophet was called Seer. And Samuel 
           <note canonical="false" type="crossReference" TEIform="note">1 Sam. 9:16</note>said unto him: I am he that seeth. And he said: Canst thou tell me of the asses of my father? for they are lost.
         </verse>
@@ -3362,10 +3356,9 @@
         <verse canonical="true" osisID="PsPhilo.58.2">And Saul departed and fought against Amalech, and 
           <note canonical="false" type="crossReference" TEIform="note">Ex. 15:1</note>, saved alive Agag the king of Amalech because he said to him: I will shew thee hidden treasures. Therefore he spared him and saved him alive and brought him unto Armathem.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.58.3">And God said unto Samuel: Hast thou seen how the king is corrupted with money even in a moment, and hath saved alive Agag king of Amalech and his wife? Now therefore suffer Agag and his wife to come together this night, and to-morrow thou shalt slay him; but his wife they shall preserve till she bring forth a male child, and then she also shall die, and he that is born of her shall be an offence unto Saul. But thou, arise on the morrow and slay Agag: for the sin of Saul is written before my face alway. 
-          <note canonical="false" type="crossReference" TEIform="note">Ex. 15:13</note>
-        </verse>
-        <verse canonical="true" osisID="PsPhilo.58.4">And when Samuel was risen on the morrow, Saul came forth to meet him and said unto him: The Lord hath delivered our enemies into our hands as he said. And Samuel said to Saul: Whom hath Israel wronged? for before the time was come that a king should rule over him, he demanded thee for his king, and thou, when thou wast sent to do the will of the Lord, hast transgressed it. Therefore he that was saved alive by thee shall die now, and those hidden treasures whereof he spake he shall not show thee, and he that is born of him shall be an offence unto thee. And Samuel came unto Agag with a sword and slew him, and returned 
+        <verse canonical="true" osisID="PsPhilo.58.3">And God said unto Samuel: Hast thou seen how the king is corrupted with money even in a moment, and hath saved alive Agag king of Amalech and his wife? Now therefore suffer Agag and his wife to come together this night, and to-morrow thou shalt slay him; but his wife they shall preserve till she bring forth a male child, and then she also shall die, and he that is born of her shall be an offence unto Saul. But thou, arise on the morrow and slay Agag: for the sin of Saul is written before my face alway.</verse>
+        <verse canonical="true" osisID="PsPhilo.58.4">
+          <note canonical="false" type="crossReference" TEIform="note">Ex. 15:13</note>And when Samuel was risen on the morrow, Saul came forth to meet him and said unto him: The Lord hath delivered our enemies into our hands as he said. And Samuel said to Saul: Whom hath Israel wronged? for before the time was come that a king should rule over him, he demanded thee for his king, and thou, when thou wast sent to do the will of the Lord, hast transgressed it. Therefore he that was saved alive by thee shall die now, and those hidden treasures whereof he spake he shall not show thee, and he that is born of him shall be an offence unto thee. And Samuel came unto Agag with a sword and slew him, and returned 
           <note canonical="false" type="crossReference" TEIform="note">1 Sam. 15:3</note>unto his house.
         </verse>
       </div>
@@ -3379,10 +3372,11 @@
         </verse>
         <verse canonical="true" osisID="PsPhilo.59.4">Then David began to sing this psalm, and 
           <note canonical="false" type="crossReference" TEIform="note">Ps. 61:2</note>said: In the ends of the earth will I begin to glorify 
-          <hi type="italic" TEIform="hi">him</hi>, and unto everlasting days will I sing praises. Abel at the first when he fed the sheep, his sacrifice was acceptable rather than his brother's. And his brother envied him and slew him. But it is not so with me, for God hath kept me, and hath delivered me unto his angels and his watchers to keep me, for my brethren envied me, and my father and my mother made me of no account, and when the prophet came they called not for me, and when the Lord's anointed was proclaimed they forgat me. But God came near unto me with his right hand, and with his mercy: therefore will I not cease to sing praises all the days of my life. 
-          <note canonical="false" type="crossReference" TEIform="note">1 Sam. 17:34</note>
+          <hi type="italic" TEIform="hi">him</hi>, and unto everlasting days will I sing praises. Abel at the first when he fed the sheep, his sacrifice was acceptable rather than his brother's. And his brother envied him and slew him. But it is not so with me, for God hath kept me, and hath delivered me unto his angels and his watchers to keep me, for my brethren envied me, and my father and my mother made me of no account, and when the prophet came they called not for me, and when the Lord's anointed was proclaimed they forgat me. But God came near unto me with his right hand, and with his mercy: therefore will I not cease to sing praises all the days of my life.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.59.5">And as David yet spake, behold a fierce lion out of the wood and a she-bear out of the mountain took the bulls of David. And David said: Lo, this shall be a sign unto me for a mighty beginning of my victory in the battle. I will go out after them and deliver that which is carried off and will slay them. And David went out after them and took stones out of the wood and slew them. And God said unto him: Lo, by stones have I delivered thee these beasts in thy sight. And this shall be a sign unto thee that hereafter thou shalt slay with stones the adversary of my people.</verse>
+        <verse canonical="true" osisID="PsPhilo.59.5">
+          <note canonical="false" type="crossReference" TEIform="note">1 Sam. 17:34</note>And as David yet spake, behold a fierce lion out of the wood and a she-bear out of the mountain took the bulls of David. And David said: Lo, this shall be a sign unto me for a mighty beginning of my victory in the battle. I will go out after them and deliver that which is carried off and will slay them. And David went out after them and took stones out of the wood and slew them. And God said unto him: Lo, by stones have I delivered thee these beasts in thy sight. And this shall be a sign unto thee that hereafter thou shalt slay with stones the adversary of my people.
+        </verse>
       </div>
       <div canonical="true" type="chapter" osisID="PsPhilo.60" TEIform="div">
         <verse canonical="true" osisID="PsPhilo.60.1">
@@ -3442,10 +3436,11 @@
           <hi type="italic" TEIform="hi">Saul</hi> went out after him.
         </verse>
         <verse canonical="true" osisID="PsPhilo.62.2">And the spirit abode in Saul, and he prophesied, 
-          <note canonical="false" type="crossReference" TEIform="note">1 Sam. 19:23</note>saying: Why art thou deceived, O Saul, or whom dost thou persecute in vain? The time of thy kingdom is fulfilled. Go unto thy place, for thou shalt die and David shall reign. Shalt not thou and thy son die together? And then shall the kingdom of David appear. And the spirit departed from Saul, and he knew not what he had prophesied. 
-          <note canonical="false" type="crossReference" TEIform="note">1 Sam. 20</note>
+          <note canonical="false" type="crossReference" TEIform="note">1 Sam. 19:23</note>saying: Why art thou deceived, O Saul, or whom dost thou persecute in vain? The time of thy kingdom is fulfilled. Go unto thy place, for thou shalt die and David shall reign. Shalt not thou and thy son die together? And then shall the kingdom of David appear. And the spirit departed from Saul, and he knew not what he had prophesied.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.62.3">But David came unto Jonathan and said unto him: Come and let us make a covenant before we be parted one from the other. For Saul, thy father, seeketh to slay me without cause. And since he hath perceived that thou lovest me he telleth thee not what he deviseth concerning me.</verse>
+        <verse canonical="true" osisID="PsPhilo.62.3">
+          <note canonical="false" type="crossReference" TEIform="note">1 Sam. 20</note>But David came unto Jonathan and said unto him: Come and let us make a covenant before we be parted one from the other. For Saul, thy father, seeketh to slay me without cause. And since he hath perceived that thou lovest me he telleth thee not what he deviseth concerning me.
+        </verse>
         <verse canonical="true" osisID="PsPhilo.62.4">But for this cause he hateth me, because thou lovest me, and lest I should reign in his stead. And whereas I have done him good he requiteth me with evil. And whereas I slew Golia by the word of the Most Mighty, see thou what an end he purposeth for me. For he hath determined concerning my father's house, to destroy it. And would that the judgement of truth might be put in the balance, that the multitude of the prudent might hear the sentence.</verse>
         <verse canonical="true" osisID="PsPhilo.62.5">And now I fear lest he kill me and lose his own life for my sake. For he shall never shed innocent blood without punishment. Wherefore should my soul suffer persecution? For I was the, least among my brethren, feeding the sheep, and wherefore am I in peril of death? For I am righteous and have none iniquity. And wherefore doth thy father hate me? Yet the righteousness of my father shall help me that I fall not into thy father's hands. And seeing I am young and tender of age, it is to no purpose that Saul envieth me.</verse>
         <verse canonical="true" osisID="PsPhilo.62.6">If I had wronged him, I would pray him to forgive me the sin. For if God forgiveth iniquity, how much more thy father who is flesh and blood? I have walked in his house with a perfect heart, yea, I grew up before his face like a swift eagle, I put mine hands unto the harp and blessed him in songs, and he hath devised to slay me, and like a sparrow that fleeth before the face of the hawk, so have I fled before his face.</verse>
@@ -3489,10 +3484,9 @@
           <hi type="italic" TEIform="hi">or</hi> Adod) the Madianite, which deceived the people of Israel with sorceries: and lo she 
           <note canonical="false" type="crossReference" TEIform="note">1 Sam. 28:8-11</note>dwelleth in Endor.
         </verse>
-        <verse canonical="true" osisID="PsPhilo.64.4">And Saul put on vile raiment and went unto her, he and two men with him, by night and said unto her: Raise up unto me Samuel. And she said: I am afraid of the king Saul. And Saul said unto her: Thou shalt not be harmed of Saul in this matter. And Saul said within himself: When I was king in Israel, even though the Gentiles saw me not, yet knew they that I was Saul. And Saul asked the woman, saying: Hast thou seen Saul at any time? And she said: Oftentimes. And Saul went out and wept and said: Lo, now I know that my beauty is changed, and that the glory of my kingdom is passed from me. 
-          <note canonical="false" type="crossReference" TEIform="note">1 Sam. 28:12</note>
-        </verse>
-        <verse canonical="true" osisID="PsPhilo.64.5">And it came to pass, when the woman saw Samuel coming up, and beheld Saul with him, 
+        <verse canonical="true" osisID="PsPhilo.64.4">And Saul put on vile raiment and went unto her, he and two men with him, by night and said unto her: Raise up unto me Samuel. And she said: I am afraid of the king Saul. And Saul said unto her: Thou shalt not be harmed of Saul in this matter. And Saul said within himself: When I was king in Israel, even though the Gentiles saw me not, yet knew they that I was Saul. And Saul asked the woman, saying: Hast thou seen Saul at any time? And she said: Oftentimes. And Saul went out and wept and said: Lo, now I know that my beauty is changed, and that the glory of my kingdom is passed from me.</verse>
+        <verse canonical="true" osisID="PsPhilo.64.5">
+          <note canonical="false" type="crossReference" TEIform="note">1 Sam. 28:12</note>And it came to pass, when the woman saw Samuel coming up, and beheld Saul with him, 
           <note canonical="false" type="crossReference" TEIform="note">1. Sam. 28:13</note>that she cried out and said: Behold, 
           <hi type="italic" TEIform="hi">thou art Saul, wherefore hast thou deceived me</hi>? And he said unto her: 
           <hi type="italic" TEIform="hi">Fear not, but tell me what thou sawest</hi>. And she said: Lo, these 40 years have I raised up the dead for the Philistines, but this appearance hath not been seen, neither shall it be seen hereafter.
