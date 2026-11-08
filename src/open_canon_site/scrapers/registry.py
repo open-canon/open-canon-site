@@ -7,6 +7,7 @@ from open_canon_site.scrapers.churchofjesuschrist.living_christ import SPEC as L
 from open_canon_site.scrapers.churchofjesuschrist.proclamations import SPEC as LDS_PROCLAMATIONS
 from open_canon_site.scrapers.churchofjesuschrist.standard_works import SPEC as LDS_STANDARD_WORKS
 from open_canon_site.scrapers.ebible.kjv_apocrypha import SPEC as KJV_APOCRYPHA
+from open_canon_site.scrapers.lecturesonfaith.lectures_on_faith import SPEC as LECTURES_ON_FAITH
 from open_canon_site.scrapers.sacred_texts.cave_of_treasures import SPEC as CAVE_OF_TREASURES
 from open_canon_site.scrapers.sacred_texts.enoch import SPEC as ENOCH
 from open_canon_site.scrapers.sacred_texts.forgotten_books_of_eden import (
@@ -39,6 +40,7 @@ SCRAPERS: tuple[ScraperSpec, ...] = (
     LDS_STANDARD_WORKS,
     LDS_PROCLAMATIONS,
     LDS_LIVING_CHRIST,
+    LECTURES_ON_FAITH,
 )
 """All registered scrapers in the order ``open-canon-scrape all`` runs them."""
 
