@@ -1,4 +1,8 @@
-"""Build the OSIS file format for the Doctrine and Covenants."""
+"""Build the OSIS file format for the Doctrine and Covenants.
+
+Sections 1-138 are fetched as chapters of ``/scriptures/dc-testament/dc``; the Official Declarations as chapters of
+``/scriptures/dc-testament/od``; front matter pages are ``introduction`` and ``chron-order``.
+"""
 
 import asyncio
 import datetime
@@ -17,7 +21,9 @@ from open_canon_site.scrapers.churchofjesuschrist.build_osis import (
 )
 
 DC_SECTION_COUNT = 138
+"""Number of numbered sections in the Doctrine and Covenants (sections 1 to this value are fetched)."""
 OD_COUNT = 2
+"""Number of Official Declarations (1 and 2)."""
 
 
 async def _build_dc_front_matter_div(
@@ -38,6 +44,10 @@ async def _build_dc_front_matter_div(
         client: An asynchronous HTTP client used to fetch scripture content.
         canonical: Whether the division should be marked as canonical in the OSIS output.
         front_matter_type_value: The OSIS division type for the content (default is PREFACE).
+
+    The page body is expected to contain an optional ``p#title1``/``h1#title1`` (-> head), optional ``p#subtitle1``
+    (-> title), an optional ``header`` (-> introduction div), a required ``div.body-block`` and an optional
+    ``div.closing-block`` (``p.signature`` -> ``signed``; ``p#closing1`` -> markup).
 
     Returns:
         An OSIS DivCt object representing the structured front matter division.
@@ -207,14 +217,12 @@ async def build_doctrine_and_covenants_sections(
         An OSIS DivCt object representing the complete Doctrine and Covenants text.
     """
     section_nums = list(range(1, DC_SECTION_COUNT + 1))
-    section_contents = await asyncio.gather(
-        *[
-            church_website_models.get_scripture_content(
-                lang, "DoctrineAndCovenants", "Doctrine and Covenants", section_num, client
-            )
-            for section_num in section_nums
-        ]
-    )
+    section_contents = await asyncio.gather(*[
+        church_website_models.get_scripture_content(
+            lang, "DoctrineAndCovenants", "Doctrine and Covenants", section_num, client
+        )
+        for section_num in section_nums
+    ])
 
     osis_chapters: list[object] = []
     for section_num, section_content in zip(section_nums, section_contents):
@@ -244,6 +252,9 @@ async def build_doctrine_and_covenants_header(
     Args:
         lang: The language code to fetch the scripture content in.
         client: An asynchronous HTTP client used to make requests.
+
+    A ``div.copyright-info`` of the form ``"... Source: 2013/10"`` yields an edition revision (``/`` replaced with
+    ``.``); without a ``Source:`` date no edition revision is added.
 
     Returns:
         An OSIS HeaderCt object populated with metadata for the Doctrine and Covenants.
@@ -337,9 +348,9 @@ async def build_doctrine_and_covenants(
         build_doctrine_and_covenants_sections(lang, client),
         build_doctrine_and_covenants_header(lang, client),
     )
-    od_divs = await asyncio.gather(
-        *[_build_official_declaration(lang, od_num, client) for od_num in range(1, OD_COUNT + 1)]
-    )
+    od_divs = await asyncio.gather(*[
+        _build_official_declaration(lang, od_num, client) for od_num in range(1, OD_COUNT + 1)
+    ])
 
     return pyosis.serialization.OsisXML(
         osis=pyosis.generated.Osis(

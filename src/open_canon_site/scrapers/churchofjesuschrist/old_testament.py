@@ -4,7 +4,6 @@ import asyncio
 import datetime
 
 import bs4
-import bs4.element
 import httpx
 import pyosis.generated
 import pyosis.serialization
@@ -33,6 +32,10 @@ async def _build_ot_front_matter_div(
         client: An asynchronous HTTP client used to fetch scripture content.
         canonical: Whether the division should be marked as canonical in the OSIS output.
         front_matter_type_value: The OSIS division type for the content.
+
+    The page body is expected to contain an optional ``p#title1``/``h1#title1`` (-> head), optional ``p#subtitle1``
+    (-> title), an optional ``header`` (-> introduction div) and a required ``div.body-block`` (converted as
+    markup).
 
     Returns:
         An OSIS DivCt object representing the structured front matter division.

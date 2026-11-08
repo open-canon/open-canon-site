@@ -1,5 +1,8 @@
-"""Pydantic models representing JSON responses from the Scripture Content API of the Church of Jesus Christ of
-Latter-day Saints website.
+"""Pydantic models and URL helpers for the Scripture Content API of the churchofjesuschrist.org website.
+
+The Study API (``/study/api/v3/language-pages/type/content?lang=eng&uri=/scriptures/...``) answers with JSON
+describing one page: ``meta`` (title, canonical URL), ``content`` (HTML ``body`` and a ``footnotes`` dictionary) and
+a few bookkeeping fields. This module models those responses, maps book names to URI segments and fetches pages.
 """
 
 from __future__ import annotations
@@ -16,104 +19,142 @@ import pydantic
 
 
 class RedirectionError(ValueError):
-    """Redirected while attempting to access Scripture Content."""
+    """Redirected while attempting to access Scripture Content.
+
+    Raised by `get_scripture_content_from_uri` when the API answers with a page whose
+    ``meta.canonicalUrl`` differs from the requested URI. The Church site does this, for
+    example, when a single-chapter book's table of contents is requested: it returns the
+    parent book's table of contents instead.
+    """
 
 
 class Audio(pydantic.BaseModel):
-    """Audio for a scripture chapter or verse."""
+    """Audio recording of a scripture chapter or verse, as listed in ``meta.audio``."""
 
     mediaUrl: str
+    """Absolute URL of the audio file."""
     variant: str
+    """Voice variant of the recording (for example ``"male"`` or ``"female"``)."""
 
 
 class Meta(pydantic.BaseModel):
-    """Metadata about a scripture chapter or verse."""
+    """Metadata about a scripture chapter or verse (the ``meta`` object of the study API response)."""
 
     archived: bool
+    """Whether the page is an archived (superseded) revision."""
     title: str
+    """Human readable page title, e.g. ``"1 Nephi 6"``."""
     canonicalUrl: str
+    """Canonical URI of the page, e.g. ``"/scriptures/bofm/1-ne/6"``; differs from the requested URI on redirects."""
     contentType: str  # "text/html"
+    """MIME type of ``Content.body`` (always ``"text/html"`` for scriptures)."""
     audio: Optional[list[Audio]] = None  # noqa: UP007, UP045
+    """Audio recordings available for the page, or ``None`` when the API omits the field."""
     pageAttributes: Any
-    # "pageAttributes": {
-    #     "data-asset-id": "34085354c9883ef35ff0623e36634ee00725eca2",  # pragma: allowlist secret
-    #     "data-aid": "128345022",
-    #     "data-aid-version": "6",
-    #     "data-content-type": "chapter",
-    #     "data-uri": "/scriptures/bofm/1-ne/6",
-    #     "lang": "eng",
-    #     "data-orig-id": "34085354c9883ef35ff0623e36634ee00725eca2",  # pragma: allowlist secret
-    #     "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
-    # },
+    """Raw HTML attributes of the page root, such as ``data-uri``, ``data-content-type`` and ``lang``.
+
+    Example: ``{"data-uri": "/scriptures/bofm/1-ne/6", "data-content-type": "chapter", "lang": "eng"}``.
+    """
     scopedClassName: str  # "classic-scripture"
+    """CSS scope class applied to the page body (``"classic-scripture"`` for scriptures)."""
 
 
 class ReferenceUri(pydantic.BaseModel):
     """Represents a reference URI with its type, hyperlink, and display text."""
 
     type: str
+    """Kind of reference, as labelled by the API (for example ``"scripture"``)."""
     href: str
+    """Link target of the reference, usually a site-relative study URL."""
     text: str
+    """Display text of the reference."""
 
 
 class Footnote(pydantic.BaseModel):
     """Represents a footnote with associated metadata and references."""
 
     id: str
+    """Footnote identifier, matching the ``#note...`` fragment of the ``<a class="study-note-ref">`` link."""
     marker: str = ""
+    """Footnote marker letter shown in the text (e.g. ``"a"``); empty when absent."""
     pid: str = ""
+    """Paragraph id of the verse that the footnote is attached to; empty when absent."""
     context: str = ""
+    """Quoted phrase of the verse that the footnote annotates; empty when absent."""
     text: str
+    """HTML fragment containing the footnote text (may include cross-reference links)."""
     referenceUris: list[ReferenceUri] = pydantic.Field(default_factory=list)
+    """Cross references cited by the footnote."""
 
     def uris(self) -> list[str]:
-        """Returns a list of href strings from the referenceUris attribute.
+        """Return the href of every reference cited by the footnote.
 
         Returns:
-            A list of href strings extracted from each uri in referenceUris.
+            A list of href strings extracted from each uri in referenceUris, in order.
         """
         return [uri.href for uri in self.referenceUris]
 
 
 class Content(pydantic.BaseModel):
-    """Represents the content structure for a church website."""
+    """Represents the ``content`` object of a study API response: the page HTML and its footnotes."""
 
     head: Any
+    """Page head data; not interpreted by the scrapers."""
     body: str
+    """HTML body of the page (verses, titles, headers, tables and so on)."""
     footnotes: dict[str, Footnote]
+    """Footnotes keyed by footnote id (as used in ``#note...`` link fragments of ``body``)."""
 
 
 class ScriptureStudyContent(pydantic.BaseModel):
-    """Content for a scripture chapter or verse."""
+    """Content for a scripture chapter or verse (the full study API response)."""
 
     meta: Meta
+    """Page metadata."""
     content: Content
+    """Page HTML and footnotes."""
     pids: Any
+    """Paragraph id data; not interpreted by the scrapers."""
     tableOfContentsUri: str
+    """URI of the table of contents containing this page."""
     uri: str
+    """URI of the page itself."""
     verified: bool
+    """Whether the Church site marks the content as verified."""
 
 
 class ContentApiContent(pydantic.BaseModel):
     """Represents content retrieved from the Content API."""
 
     id: str
+    """Identifier of the content paragraph."""
     markup: str
+    """HTML markup of the paragraph."""
     displayId: str = ""
+    """Human readable identifier (e.g. verse number); empty when absent."""
 
 
 class ContentApiResponse(pydantic.BaseModel):
     """Represents the response from the content API."""
 
     content: list[ContentApiContent]
+    """Paragraphs returned for the requested reference."""
     headline: str
+    """Headline of the page the content belongs to."""
     publication: str
+    """Name of the publication the content belongs to."""
     referenceURIDisplayText: Union[str, Any]  # noqa: UP007, UP045
+    """Display text of the reference URI."""
     referenceURI: Union[str, Any]  # noqa: UP007, UP045
+    """URI of the reference that was requested."""
     type: str
+    """Content type reported by the API."""
     uri: str
+    """URI of the content."""
     image: Any
+    """Image data attached to the response; not interpreted by the scrapers."""
     idNotationUri: Union[str, Any] = ""  # noqa: UP007, UP045
+    """Identifier notation URI; empty when absent."""
 
 
 BookOfMormonBooksUri = {
@@ -133,6 +174,7 @@ BookOfMormonBooksUri = {
     "Ether": "ether",
     "Moroni": "moro",
 }
+"""Book of Mormon book names mapped to their URI path segment on churchofjesuschrist.org (e.g. ``"1 Nephi"`` -> ``"1-ne"``)."""
 
 OldTestamentBooksUri = {
     "Genesis": "gen",
@@ -175,6 +217,7 @@ OldTestamentBooksUri = {
     "Zechariah": "zech",
     "Malachi": "mal",
 }
+"""Old Testament book names mapped to their URI path segment (e.g. ``"Genesis"`` -> ``"gen"``)."""
 
 NewTestamentBooksUri = {
     "Matthew": "matt",
@@ -205,10 +248,12 @@ NewTestamentBooksUri = {
     "Jude": "jude",
     "Revelation": "rev",
 }
+"""New Testament book names mapped to their URI path segment (e.g. ``"Matthew"`` -> ``"matt"``)."""
 
 DoctrineAndCovenantsBooksUri = {
     "Doctrine and Covenants": "dc",
 }
+"""Doctrine and Covenants "book" name mapped to its URI path segment; the whole work is a single book, ``dc``."""
 
 PearlOfGreatPriceBooksUri = {
     "Moses": "moses",
@@ -217,6 +262,7 @@ PearlOfGreatPriceBooksUri = {
     "Joseph Smith--History": "js-h",
     "Articles of Faith": "a-of-f",
 }
+"""Pearl of Great Price book names mapped to their URI path segment (e.g. ``"Moses"`` -> ``"moses"``)."""
 
 parent_book_uri_mapper: dict[str, tuple[str, dict[str, str]]] = {
     "BookOfMormon": ("bofm", BookOfMormonBooksUri),
@@ -225,24 +271,34 @@ parent_book_uri_mapper: dict[str, tuple[str, dict[str, str]]] = {
     "DoctrineAndCovenants": ("dc-testament", DoctrineAndCovenantsBooksUri),
     "PearlOfGreatPrice": ("pgp", PearlOfGreatPriceBooksUri),
 }
+"""Standard work key (as passed to `prepare_uri`) mapped to its (URI path segment, book name mapping) pair."""
 
 
 BASE_STUDY_CONTENT_URL = (
     "https://www.churchofjesuschrist.org/study/api/v3/language-pages/type/content"
 )
+"""Endpoint of the Study API that returns a scripture page (HTML body plus footnotes) as JSON."""
 BASE_CONTENT_URL = "https://www.churchofjesuschrist.org/content/api/v3"
+"""Base endpoint of the Content API (paragraph-level content lookups)."""
 STUDY_CONTENT_URL_FORMAT = f"{BASE_STUDY_CONTENT_URL}?lang={{lang}}&uri={{uri}}"
+"""Format string for a Study API request, filled with ``lang`` and ``uri``."""
 BASE_CONTENT_URL_FORMAT = "/{lang}/scriptures/{parent_book_uri}/{book_uri}/{chapter}.{verse}"
+"""Format string for a Content API verse reference path."""
 
 NOTE_ID_REGEX = re.compile(r"note(\d+)(\w+)")
+"""Matches footnote ids of the form ``note<number><marker>`` (e.g. ``note2b``)."""
 
 T = TypeVar("T")
+"""Generic type variable (currently unused)."""
 
 
 def prepare_uri(
     parent_book: str, book: str | None, chapter: int | None, book_uri: str | None = None
 ) -> str:
     """Prepare the uri for a chapter or verse.
+
+    Produces site-relative paths such as ``/scriptures/bofm/1-ne/6`` (chapter) or
+    ``/scriptures/bofm/1-ne`` (book table of contents).
 
     Args:
         parent_book: The parent book of the chapter or verse.
@@ -252,6 +308,10 @@ def prepare_uri(
 
     Returns:
         The uri of the chapter or verse.
+
+    Raises:
+        ValueError: If ``parent_book`` is not a key of ``parent_book_uri_mapper``, if both ``book`` and ``book_uri``
+            are None, or if ``book`` is not a known book of the parent book.
     """
     if parent_book not in parent_book_uri_mapper:
         raise ValueError(f"Invalid parent book: {parent_book}")
@@ -287,7 +347,8 @@ async def get_scripture_content(
         book_uri: Specific book uri to use (book is ignored if this is provided)
 
     Returns:
-        The content of the chapter or verse.
+        The content of the chapter or verse. Invalid book arguments raise ``ValueError`` (see `prepare_uri`) and a
+        redirect raises `RedirectionError` (see `get_scripture_content_from_uri`).
     """
     uri = prepare_uri(parent_book=parent_book, book=book, chapter=chapter, book_uri=book_uri)
     return await get_scripture_content_from_uri(lang, uri, client)

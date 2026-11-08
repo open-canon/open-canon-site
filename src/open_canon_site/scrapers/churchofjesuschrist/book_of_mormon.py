@@ -1,4 +1,9 @@
-"""Build the OSIS file format for the Book of Mormon."""
+"""Build the OSIS file format for the Book of Mormon.
+
+Front and back matter pages (``title-page``, ``bofm-title``, ``introduction``, ``three``, ``eight``, ``js``,
+``explanation``, ``illustrations`` and ``pronunciation``) are fetched from the Study API as individual
+pages under ``/scriptures/bofm/``; the fifteen books come from `build_osis.build_book`.
+"""
 
 import asyncio
 import datetime
@@ -32,10 +37,15 @@ async def _build_bom_front_matter_div(
 
     Args:
         lang: The language code for the scripture content.
-        book_uri: The URI identifying the Book of Mormon resource.
+        book_uri: URI path segment of the front/back matter page under ``/scriptures/bofm/`` (e.g. ``"introduction"``).
         client: An asynchronous HTTP client used to fetch scripture content.
         canonical: Whether the division should be marked as canonical in the OSIS output.
-        front_matter_type_value: The OSIS division type for the front matter (default is INTRODUCTION).
+        front_matter_type_value: The OSIS division type for the front matter (default is PREFACE).
+
+    The page body is expected to contain an optional ``p#title1``/``h1#title1`` (-> head), optional ``p#subtitle1``
+    (-> title), an optional ``header`` (-> introduction div), a required ``div.body-block`` and an optional
+    ``div.closing-block`` whose ``p.signature`` elements become a ``signed`` element and whose ``p#closing1``
+    is converted as ordinary markup.
 
     Returns:
         An OSIS DivCt object representing the structured front matter for the Book of Mormon.
@@ -240,6 +250,9 @@ async def build_book_of_mormon_header(
         lang: The language code to fetch the scripture content in.
         client: An asynchronous HTTP client used to make requests.
 
+    ``div.publish-info`` gives the publisher text; ``div.copyright-info`` text of the form ``"... Source: 2013/10"``
+    gives the edition date (``/`` replaced with ``.``); either is empty when the element or ``Source:`` is missing.
+
     Returns:
         An OSIS HeaderCt object populated with metadata for the Book of Mormon.
     """
@@ -351,9 +364,9 @@ async def build_book_of_mormon(
     """
     book_names = church_website_models.BookOfMormonBooksUri.keys()
     front_matter = await build_book_of_mormon_front_matter(lang, client)
-    osis_books = await asyncio.gather(
-        *[build_book(lang, "BookOfMormon", book_name, client) for book_name in book_names]
-    )
+    osis_books = await asyncio.gather(*[
+        build_book(lang, "BookOfMormon", book_name, client) for book_name in book_names
+    ])
     back_matter = await build_book_of_mormon_back_matter(lang, client)
 
     header = await build_book_of_mormon_header(lang, client)
