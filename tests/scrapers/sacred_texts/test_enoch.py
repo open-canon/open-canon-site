@@ -669,6 +669,105 @@ def test_parse_page_numbered_poetry_splits_on_inline_markers(parser) -> None:
     assert lines == {"1En.1.1": ["A", "B"], "1En.1.2": ["C", "D"]}
 
 
+def _lines(verse: pyosis.VerseCt) -> list[str]:
+    """Return the text of each poetry line in a verse's first line group."""
+    lg = next(c for c in verse.content if isinstance(c, pyosis.LgCt))
+    return [_text(line.content).strip() for line in lg.l]
+
+
+def test_parse_page_unnumbered_chapter_is_verse_one(parser) -> None:
+    """A chapter whose only paragraph has no number (chapter III) is verse 1."""
+    parser.parse_page("<h3>CHAPTER II.</h3><p>1. Two.</p>", 5)
+    parser.parse_page("<h3>CHAPTER III.</h3><p>Observe and see.</p>", 6)
+    assert parser.current_div.osis_id == ["1En.3"]
+    assert _verses(parser)["1En.3.1"].content == ["Observe and see."]
+
+
+def test_parse_page_prose_after_page_break_continues_verse(parser) -> None:
+    """Prose that runs on past a page marker extends the verse and splits on its markers."""
+    html = (
+        "<h3>CHAPTER XIII.</h3><p>1. And Enoch said: 'Azazel,</p>"
+        '<p><a name="page_40"><font color="green">p. 40</font></a></p>'
+        "<p>thou shalt have no peace. 2. And thou shalt not. 3. Then I went.</p>"
+    )
+    parser.parse_page(html, 16)
+    verses = _verses(parser)
+    assert [_text(v.content) for v in verses.values()] == [
+        "And Enoch said: 'Azazel, thou shalt have no peace.",
+        "And thou shalt not.",
+        "Then I went.",
+    ]
+
+
+def test_parse_page_paragraph_continues_marker_is_dropped(parser) -> None:
+    """``[paragraph continues]`` paragraphs are kept, without the marker."""
+    html = (
+        "<h3>CHAPTER LXXXIII.</h3><p>1. I prayed to the</p>"
+        '<p><span class="contnote"><font color="green">[paragraph continues]</font></span>'
+        " Lord. 2. I had laid me down.</p>"
+    )
+    parser.parse_page(html, 86)
+    verses = _verses(parser)
+    assert _text(verses["1En.83.1"].content) == "I prayed to the Lord."
+    assert _text(verses["1En.83.2"].content) == "I had laid me down."
+
+
+def test_parse_page_unnumbered_stanza_continues_verse(parser) -> None:
+    """An unnumbered stanza belongs to the verse before it, not to the next number."""
+    html = (
+        "<h3>CHAPTER I.</h3><p>8. But with the righteous He will make peace.</p>"
+        "<p>And will protect the elect,<br/> And mercy shall be upon them.</p>"
+        "<p>9. And behold!<br/> To execute judgement</p>"
+    )
+    parser.parse_page(html, 4)
+    verses = _verses(parser)
+    assert list(verses) == ["1En.1.8", "1En.1.9"]
+    assert _lines(verses["1En.1.8"]) == [
+        "And will protect the elect,",
+        "And mercy shall be upon them.",
+    ]
+
+
+def test_parse_page_poetry_line_with_inline_marker_splits(parser) -> None:
+    """A verse marker inside a poetry line, or a line-start number without a period, splits."""
+    html = (
+        "<h3>CHAPTER XCI.</h3><p>1. 'And now, my son,<br/> That shall befall you.'"
+        "<br/>2 And Methuselah went. 3. And he spake:<br/>'Hear, ye sons.</p>"
+    )
+    parser.parse_page(html, 95)
+    verses = _verses(parser)
+    assert list(verses) == ["1En.91.1", "1En.91.2", "1En.91.3"]
+    assert _lines(verses["1En.91.2"]) == ["And Methuselah went."]
+    assert _lines(verses["1En.91.3"]) == ["And he spake:", "'Hear, ye sons."]
+
+
+@pytest.mark.parametrize("marker", ["2 And", "2 .And"])
+def test_parse_page_paragraph_number_without_period(parser, marker: str) -> None:
+    """A paragraph opening with the next number and a stray or missing period is that verse."""
+    html = f"<h3>CHAPTER C.</h3><p>1. One.</p><p>{marker} two.</p><p>5 And five.</p>"
+    parser.parse_page(html, 104)
+    verses = _verses(parser)
+    assert list(verses) == ["1En.100.1", "1En.100.2"]
+    assert _text(verses["1En.100.2"].content) == "And two. 5 And five."
+
+
+def test_parse_page_mislabelled_chapter_page(parser) -> None:
+    """boe081 prints ``CHAPTER LXXVII.`` for chapter LXXVIII."""
+    parser.parse_page("<h3>CHAPTER LXXVII.</h3><p>1. The sun.</p>", 81)
+    assert parser.current_div.osis_id == ["1En.78"]
+    assert parser.current_div.content[0].content == ["CHAPTER LXXVIII."]
+
+
+def test_parse_page_stops_at_footnotes(parser) -> None:
+    """Paragraphs after the Footnotes heading are not verse text."""
+    html = (
+        "<h3>CHAPTER I.</h3><p>1. Text.</p><h3>Footnotes</h3>"
+        '<p><a name="fn_0"></a><a href="#fr_0">1:1</a> A note.</p><p>Stray.</p>'
+    )
+    parser.parse_page(html, 4)
+    assert [_text(v.content) for v in _verses(parser).values()] == ["Text."]
+
+
 def test_parse_page_footnote_is_inlined_as_note(parser) -> None:
     """A footnote on the page is attached to the verse that references it."""
     html = (

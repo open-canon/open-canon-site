@@ -9,8 +9,13 @@ handled are:
 * Chapter headings are ``<h3>CHAPTER IV.</h3>`` with a Roman numeral.
 * Verses are ``<p>`` elements that start with an Arabic ``N. `` marker. Several
   verses may share one ``<p>`` (later markers inline, e.g. ``"... 2. And he..."``).
-* Poetry lines inside a verse are separated by ``<br>``; a stanza straddling two
-  verses can sit in an unnumbered ``<p>`` after the verse it continues.
+* An unnumbered ``<p>`` continues the verse before it: prose running on past a page
+  marker (sometimes flagged ``[paragraph continues]``) or a further stanza of the same
+  verse. At the start of a chapter it is verse 1 (chapter III has no number at all).
+* Poetry lines inside a verse are separated by ``<br>``; a verse marker may also sit
+  inside a line. A handful of numbers lose their period (``2 And``, ``2 .For``); those
+  count only at the start of a paragraph or line and when they are the next verse.
+* ``boe081`` is headed ``CHAPTER LXXVII.`` but holds chapter LXXVIII.
 * Inline formatting uses ``<i>``/``<b>``/``<sup>``/``<sub>``; page numbers appear as
   ``<font color="green">p. 12</font>``; Charles's brackets (``⌈ ⌉``) are literal text.
 * Footnotes sit under an ``<h3>Footnotes</h3>`` heading as
@@ -80,6 +85,10 @@ FRONT_MATTER_BOILERPLATE: Final[set[str]] = {
     "Scanned at sacred-texts.com, June 2004. Proofed and formatted by John Bruno Hare. This text is in the public domain in the United States because it was published prior to 1923.",
 }
 """Exact header and credit lines sacred-texts adds to front-matter pages; never emitted."""
+MISLABELLED_CHAPTER_PAGES: Final[dict[int, int]] = {81: 78}
+"""Chapter number for pages whose heading is wrong: ``boe081`` repeats ``CHAPTER LXXVII.``."""
+PARAGRAPH_CONTINUES: Final[str] = "[paragraph continues]"
+"""Marker the site puts at the start of a paragraph that runs on after a page break."""
 
 
 @dataclass
@@ -549,6 +558,7 @@ class SacredTextsParser:
             self._check_verse_gaps()
 
         self.current_chapter = chapter_num
+        self.current_verse = None
         chapter_osis_id = f"{OSIS_BOOK_ID}.{chapter_num}"
 
         chapter_content = []
@@ -645,6 +655,118 @@ class SacredTextsParser:
             poetry_lines=extra_lines,
         )
         self.add_verse(verse_num, seg_content)
+
+    def _extend_verse_with_parts(self, verse_num: int, extra_parts: list[InlinePart]) -> None:
+        """Append prose parts to the most recently added verse.
+
+        Prose that continues a verse after a page break sits in its own unnumbered
+        ``<p>``. The parts are joined to the verse with a space; a verse already holding
+        poetry gets them as one more line instead.
+
+        Args:
+            verse_num: The verse number whose content should be extended.
+            extra_parts: Parsed inline parts to append.
+        """
+        if not extra_parts or not self.current_div or not self.current_chapter:
+            return
+
+        verse_osis_id = f"{OSIS_BOOK_ID}.{self.current_chapter}.{verse_num}"
+        for item in reversed(self.current_div.content):
+            if isinstance(item, pyosis.VerseCt) and item.osis_id == [verse_osis_id]:
+                for c in item.content:
+                    if isinstance(c, pyosis.LgCt):
+                        c.l.append(pyosis.LCt(content=list(extra_parts)))
+                        return
+                item.content = self.consolidate_strings([
+                    *item.content,
+                    " ",
+                    *self._lstrip_parts(extra_parts),
+                ])
+                return
+
+        self.add_verse(
+            verse_num,
+            VerseContent(text=extract_plain_text(extra_parts), content_parts=list(extra_parts)),
+        )
+
+    @staticmethod
+    def _lstrip_parts(parts: list[InlinePart]) -> list[InlinePart]:
+        """Return a copy of ``parts`` with leading whitespace removed from a first string.
+
+        Args:
+            parts: Inline parts; not modified.
+
+        Returns:
+            The parts, the first one left-stripped when it is a string.
+        """
+        result = list(parts)
+        if result and isinstance(result[0], str):
+            result[0] = result[0].lstrip()
+        return result
+
+    def _add_unnumbered_paragraph(self, p: Tag) -> None:
+        """Place a paragraph that does not start with a verse number.
+
+        At the start of a chapter it is verse 1 (some chapters are a single unnumbered
+        verse). After a verse, prose continues that verse, as when a page break splits
+        it, and inline ``N.`` markers in it start the following verses; an unnumbered
+        stanza likewise continues the verse before it.
+
+        Args:
+            p: The paragraph.
+        """
+        verse_content = self.parse_verse_text(p)
+
+        if self.current_verse is None:
+            if verse_content.has_poetry and verse_content.poetry_lines:
+                for num, lines in self.split_multi_verse_poetry_lines(
+                    verse_content.poetry_lines, 1
+                ):
+                    self.add_verse(
+                        num,
+                        VerseContent(
+                            text="", content_parts=[], has_poetry=True, poetry_lines=lines
+                        ),
+                    )
+            else:
+                for num, parts in self.split_multi_verse_content(
+                    self._lstrip_parts(verse_content.content_parts), 1
+                ):
+                    self.add_verse(
+                        num, VerseContent(text=extract_plain_text(parts), content_parts=parts)
+                    )
+            return
+
+        if not (verse_content.has_poetry and verse_content.poetry_lines):
+            segments = self.split_multi_verse_content(
+                verse_content.content_parts, self.current_verse
+            )
+            for i, (num, parts) in enumerate(segments):
+                if i == 0:
+                    self._extend_verse_with_parts(num, parts)
+                else:
+                    self.add_verse(
+                        num, VerseContent(text=extract_plain_text(parts), content_parts=parts)
+                    )
+            return
+
+        # Poetry: an unnumbered stanza continues the current verse (Charles breaks a
+        # verse into several stanzas, each its own <p>). An inline "N+1." line inside it
+        # starts the next verse, so the lines before it stay with the current verse.
+        segments = self.split_multi_verse_poetry_lines(
+            verse_content.poetry_lines, self.current_verse
+        )
+        for i, (seg_verse_num, seg_lines) in enumerate(segments):
+            if i == 0:
+                if seg_lines:
+                    self._extend_verse_with_poetry(seg_verse_num, seg_lines)
+            else:
+                self.add_verse(
+                    seg_verse_num,
+                    VerseContent(
+                        text="", content_parts=[], has_poetry=True, poetry_lines=seg_lines
+                    ),
+                )
 
     def _check_verse_gaps(self) -> None:
         """Log a warning for any gaps in verse numbering within the current chapter.
@@ -744,8 +866,11 @@ class SacredTextsParser:
     ) -> list[tuple[int, list[list[InlinePart]]]]:
         """Split poetry lines that span multiple verses into per-verse groups.
 
-        A poetry line that begins with " N. " (where N is the expected next verse
-        number) marks the start of a new verse inside the same paragraph.
+        A line that begins with the next expected verse number starts a new verse; the
+        number may lack its period there (``"4 And ..."``) as long as a capitalised word
+        follows. A ``" N. "`` marker inside a line (prose verses sharing a line with
+        poetry) splits that line, with the same rules as
+        :meth:`split_multi_verse_content`.
 
         Args:
             poetry_lines: Inline parts per line.
@@ -760,29 +885,32 @@ class SacredTextsParser:
         current_verse = starting_verse_num
         current_lines: list[list[InlinePart]] = []
 
+        def start_verse(number: int) -> None:
+            """Close the verse in progress and start ``number``."""
+            nonlocal current_verse, current_lines
+            result.append((current_verse, current_lines))
+            current_lines = []
+            current_verse = number
+
         for line_parts in poetry_lines:
-            next_verse = current_verse + 1
-            # Check whether this line starts with the next verse number
-            if line_parts and isinstance(line_parts[0], str):
-                m = re.match(rf"^\s*{re.escape(str(next_verse))}\.\s+", line_parts[0])
+            line = list(line_parts)
+            if line and isinstance(line[0], str):
+                next_verse = current_verse + 1
+                m = re.match(rf"^\s*{re.escape(str(next_verse))}(?:\.\s+|\s+(?=[A-Z]))", line[0])
                 if m:
-                    # Close out the current verse
-                    result.append((current_verse, current_lines))
-                    current_lines = []
-                    current_verse = next_verse
+                    start_verse(next_verse)
+                    stripped = line[0][m.end() :]
+                    line = [stripped, *line[1:]] if stripped.strip() else line[1:]
 
-                    # Strip the verse-number prefix from this line
-                    stripped = line_parts[0][m.end() :]
-                    new_line_parts: list[InlinePart] = (
-                        [stripped] + list(line_parts[1:])
-                        if stripped.strip()
-                        else list(line_parts[1:])
-                    )
-                    if new_line_parts:
-                        current_lines.append(new_line_parts)
-                    continue
-
-            current_lines.append(line_parts)
+            for i, (seg_verse, seg_parts) in enumerate(
+                self.split_multi_verse_content(line, current_verse)
+            ):
+                if i > 0:
+                    start_verse(seg_verse)
+                if extract_plain_text(seg_parts).strip() or any(
+                    not isinstance(part, str) for part in seg_parts
+                ):
+                    current_lines.append(seg_parts)
 
         if current_lines:
             result.append((current_verse, current_lines))
@@ -885,25 +1013,37 @@ class SacredTextsParser:
                 LOGGER.debug(f"Added front matter: {title}")
             return
 
-        # First look for chapter headings in h3 tags
-        for h3 in soup.find_all("h3"):
-            text = h3.get_text().strip()
-            if "CHAPTER" in text.upper():
-                chapter_num = self.extract_chapter_number(text)
-                if chapter_num:
-                    clean_title = re.sub(r"\s+", " ", text).strip()
-                    self.start_chapter(chapter_num, clean_title)
-                    LOGGER.debug(f"Started chapter {chapter_num}: {clean_title}")
+        # Walk headings and paragraphs in document order so each paragraph lands in
+        # the chapter whose heading precedes it.
+        for element in soup.find_all(["h3", "p"]):
+            if element.name == "h3":
+                text = element.get_text().strip()
+                if "Footnotes" in text:
+                    break  # footnote bodies were already read by extract_footnotes
+                if "CHAPTER" in text.upper():
+                    chapter_num = self.extract_chapter_number(text)
+                    if page_num in MISLABELLED_CHAPTER_PAGES:
+                        chapter_num = MISLABELLED_CHAPTER_PAGES[page_num]
+                        text = f"CHAPTER {_osis.int_to_roman(chapter_num)}."
+                    if chapter_num:
+                        clean_title = re.sub(r"\s+", " ", text).strip()
+                        self.start_chapter(chapter_num, clean_title)
+                        LOGGER.debug(f"Started chapter {chapter_num}: {clean_title}")
+                continue
 
-        # Now process paragraphs for verses
-        paragraphs = soup.find_all("p")
-
-        for p in paragraphs:
+            p = element
             # Skip if paragraph is within navigation/header elements
             if p.find_parent(["nav", "header", "footer"]):
                 continue
+            if p.find("a", attrs={"name": lambda x: x and x.startswith("fn_")}):
+                continue  # a footnote body
 
             text = p.get_text().strip()
+            if text.startswith(PARAGRAPH_CONTINUES):
+                # The site's note that a paragraph runs on past a page break.
+                for node in p.find_all(string=lambda s: PARAGRAPH_CONTINUES in s):
+                    node.replace_with(str(node).replace(PARAGRAPH_CONTINUES, ""))
+                text = p.get_text().strip()
 
             # Skip empty paragraphs, navigation links, and page numbers
             if not text:
@@ -918,108 +1058,63 @@ class SacredTextsParser:
                 continue  # the title banner the archive pages carry above every chapter
             if text.startswith("⌈") and text.endswith("⌉") and len(text) < 20:
                 continue  # Skip standalone bracketed notes
+            if not self.current_chapter:
+                continue
 
             # Check if text starts with a verse number
             verse_match = re.match(r"^(\d+)\.\s+", text)
-            if verse_match and self.current_chapter:
-                verse_num = int(verse_match.group(1))
+            if not verse_match and self.current_verse is not None:
+                # A few verse numbers lose their period ("2 And I") or misplace it ("2 .For").
+                bare = re.match(r"^(\d+)\s+\.?\s*(?=[A-Z])", text)
+                if bare and int(bare.group(1)) == self.current_verse + 1:
+                    verse_match = bare
+            if not verse_match:
+                self._add_unnumbered_paragraph(p)
+                continue
 
-                # Parse the verse content preserving inline annotations
-                verse_content = self.parse_verse_text(p)
+            verse_num = int(verse_match.group(1))
 
-                # Remove verse number from the beginning of all content
-                verse_content.text = re.sub(r"^\d+\.\s+", "", verse_content.text)
+            # Parse the verse content preserving inline annotations
+            verse_content = self.parse_verse_text(p)
 
-                # Remove verse number from content_parts
-                if verse_content.content_parts and isinstance(verse_content.content_parts[0], str):
-                    verse_content.content_parts[0] = re.sub(
-                        r"^\d+\.\s+", "", verse_content.content_parts[0]
+            # Remove verse number from the beginning of all content
+            verse_content.text = re.sub(r"^\d+\s*\.?\s*", "", verse_content.text)
+
+            # Remove verse number from content_parts
+            if verse_content.content_parts and isinstance(verse_content.content_parts[0], str):
+                verse_content.content_parts[0] = re.sub(
+                    r"^\s*\d+\s*\.?\s*", "", verse_content.content_parts[0]
+                )
+
+            if verse_content.has_poetry and verse_content.poetry_lines:
+                # Remove verse number from the first poetry line
+                first_line = verse_content.poetry_lines[0]
+                if first_line and isinstance(first_line[0], str):
+                    first_line[0] = re.sub(r"^\s*\d+\s*\.?\s*", "", first_line[0])
+
+                # Split poetry lines into individual per-verse segments
+                for seg_verse_num, seg_lines in self.split_multi_verse_poetry_lines(
+                    verse_content.poetry_lines, verse_num
+                ):
+                    seg_content = VerseContent(
+                        text="",
+                        content_parts=[],
+                        has_poetry=True,
+                        poetry_lines=seg_lines,
                     )
-
-                if verse_content.has_poetry and verse_content.poetry_lines:
-                    # Remove verse number from the first poetry line
-                    first_line = verse_content.poetry_lines[0]
-                    if first_line and isinstance(first_line[0], str):
-                        first_line[0] = re.sub(r"^\d+\.\s+", "", first_line[0])
-
-                    # Split poetry lines into individual per-verse segments
-                    for seg_verse_num, seg_lines in self.split_multi_verse_poetry_lines(
-                        verse_content.poetry_lines, verse_num
-                    ):
-                        seg_content = VerseContent(
-                            text="",
-                            content_parts=[],
-                            has_poetry=True,
-                            poetry_lines=seg_lines,
-                        )
-                        self.add_verse(seg_verse_num, seg_content)
-                        LOGGER.debug(f"Added verse {self.current_chapter}.{seg_verse_num}")
-                else:
-                    # Split non-poetry content into individual per-verse segments
-                    for seg_verse_num, seg_parts in self.split_multi_verse_content(
-                        verse_content.content_parts, verse_num
-                    ):
-                        seg_content = VerseContent(
-                            text=extract_plain_text(seg_parts),
-                            content_parts=seg_parts,
-                        )
-                        self.add_verse(seg_verse_num, seg_content)
-                        LOGGER.debug(f"Added verse {self.current_chapter}.{seg_verse_num}")
-
-            elif not verse_match and self.current_chapter and self.current_verse is not None:
-                # Paragraph without a verse number following a known verse:
-                # sacred-texts.com sometimes places a poetry stanza that straddles
-                # two verses in an unnumbered <p>.  The paragraph may begin with
-                # tail lines that still belong to the current verse, followed by an
-                # inline "N." marker that starts the next verse.
-                #
-                # Strategy: split starting from current_verse so that
-                # split_multi_verse_poetry_lines can detect the "N+1." marker.
-                # - If the split produces >1 segment the first segment extends the
-                #   already-emitted current verse; subsequent segments are new verses.
-                # - If no inline marker is found the whole paragraph is the next verse.
-                verse_content = self.parse_verse_text(p)
-                if verse_content.has_poetry and verse_content.poetry_lines:
-                    segments = self.split_multi_verse_poetry_lines(
-                        verse_content.poetry_lines, self.current_verse
+                    self.add_verse(seg_verse_num, seg_content)
+                    LOGGER.debug(f"Added verse {self.current_chapter}.{seg_verse_num}")
+            else:
+                # Split non-poetry content into individual per-verse segments
+                for seg_verse_num, seg_parts in self.split_multi_verse_content(
+                    verse_content.content_parts, verse_num
+                ):
+                    seg_content = VerseContent(
+                        text=extract_plain_text(seg_parts),
+                        content_parts=seg_parts,
                     )
-                    if len(segments) == 1:
-                        # No inline verse marker — the entire paragraph is the next verse
-                        seg_verse_num = self.current_verse + 1
-                        seg_content = VerseContent(
-                            text="",
-                            content_parts=[],
-                            has_poetry=True,
-                            poetry_lines=segments[0][1],
-                        )
-                        self.add_verse(seg_verse_num, seg_content)
-                        LOGGER.debug(
-                            f"Added verse {self.current_chapter}.{seg_verse_num}"
-                            " (unnumbered poetry paragraph)"
-                        )
-                    else:
-                        # First segment extends the current verse; the rest are new
-                        for i, (seg_verse_num, seg_lines) in enumerate(segments):
-                            if i == 0:
-                                self._extend_verse_with_poetry(self.current_verse, seg_lines)
-                                LOGGER.debug(
-                                    f"Extended verse"
-                                    f" {self.current_chapter}.{self.current_verse}"
-                                    " with continuation poetry"
-                                )
-                            else:
-                                seg_content = VerseContent(
-                                    text="",
-                                    content_parts=[],
-                                    has_poetry=True,
-                                    poetry_lines=seg_lines,
-                                )
-                                self.add_verse(seg_verse_num, seg_content)
-                                LOGGER.debug(
-                                    f"Added verse"
-                                    f" {self.current_chapter}.{seg_verse_num}"
-                                    " (unnumbered poetry paragraph)"
-                                )
+                    self.add_verse(seg_verse_num, seg_content)
+                    LOGGER.debug(f"Added verse {self.current_chapter}.{seg_verse_num}")
 
     def generate_osis(self) -> pyosis.OsisXML:
         """Build the complete OSIS document from everything parsed so far.
