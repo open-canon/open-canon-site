@@ -12,6 +12,7 @@ from open_canon_site.scrapers.sacred_texts.forgotten_books_of_eden import (
 )
 from open_canon_site.scrapers.sacred_texts.jasher import SPEC as JASHER
 from open_canon_site.scrapers.sacred_texts.jubilees import SPEC as JUBILEES
+from open_canon_site.scrapers.sacred_texts.kebra_nagast import SPEC as KEBRA_NAGAST
 from open_canon_site.scrapers.sacred_texts.vita_adae_et_evae import SPEC as VITA_ADAE_ET_EVAE
 
 # Each port layer adds one import line per scraper and appends its SPEC below, e.g.:
@@ -24,6 +25,7 @@ SCRAPERS: tuple[ScraperSpec, ...] = (
     FORGOTTEN_BOOKS_OF_EDEN,
     JASHER,
     JUBILEES,
+    KEBRA_NAGAST,
     VITA_ADAE_ET_EVAE,
     LDS_STANDARD_WORKS,
     LDS_PROCLAMATIONS,

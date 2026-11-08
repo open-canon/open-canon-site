@@ -91,6 +91,7 @@ Common options (accepted by every scraper and by `all`):
 | `forgotten-books-of-eden` (`--start-page`, `--end-page`) | sacred-texts.com, Forgotten Books of Eden | `adam-and-eve.xml`, `2-enoch.xml`, `psalms-of-solomon.xml`, `odes-of-solomon.xml`, `letter-of-aristeas.xml`, `4-maccabees.xml`, `story-of-ahikar.xml`, `testaments-twelve-patriarchs.xml` |
 | `jasher` | sacred-texts.com, Book of Jasher | `jasher.xml` |
 | `jubilees` | sacred-texts.com, Book of Jubilees | `jubilees.xml` |
+| `kebra-nagast` | sacred-texts.com, Kebra Nagast (Budge) | `kebra-nagast.xml` |
 | `vita-adae-et-evae` | sacred-texts.com, Vita Adae et Evae | `vita-adae-et-evae.xml` |
 | `lds-standard-works` | [churchofjesuschrist.org](https://www.churchofjesuschrist.org/study/scriptures) | `book_of_mormon.xml`, `doctrine_and_covenants.xml`, `new_testament.xml`, `old_testament.xml`, `pearl_of_great_price.xml` (options: `--works book-of-mormon,new-testament,...` default all, `--lang eng`) |
 | `lds-proclamations` | [churchofjesuschrist.org](https://www.churchofjesuschrist.org/study/scriptures/the-family-a-proclamation-to-the-world) | `lds_proclamations.xml` (1980, 1995 and 2020 official proclamations; option: `--lang eng`) |
