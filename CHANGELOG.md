@@ -2,6 +2,49 @@
 
 <!-- version list -->
 
+## v1.10.0 (2026-11-08)
+
+### Code Style
+
+- **scrapers**: Ruff format churchofjesuschrist
+  ([`139f2cb`](https://github.com/open-canon/open-canon-site/commit/139f2cbebc368e8f81a716e45b3b01b0098f3fe3))
+
+- **scrapers**: Ruff format sacred-texts
+  ([`83b5189`](https://github.com/open-canon/open-canon-site/commit/83b51893d1710f3f85bbca5124ea3204c04ee0a6))
+
+### Documentation
+
+- **scrapers**: Document lds-standard-works functions and attributes
+  ([`d8a1135`](https://github.com/open-canon/open-canon-site/commit/d8a11356eefc853bd650d32898166e65ffc8d4c4))
+
+- **scrapers**: Document sacred-texts functions and attributes
+  ([`8ed1784`](https://github.com/open-canon/open-canon-site/commit/8ed17842ce9fb2043ff424931af4665e1986a4a0))
+
+### Features
+
+- **scrapers**: Wire lds-standard-works into open-canon-scrape
+  ([`9a54f60`](https://github.com/open-canon/open-canon-site/commit/9a54f604b8144606df4ade5558873439346ccaff))
+
+- **scrapers**: Wire sacred-texts scrapers into open-canon-scrape
+  ([`85a8945`](https://github.com/open-canon/open-canon-site/commit/85a8945fc21106b27a0e87fb7021dd33cc226a1f))
+
+### Refactoring
+
+- **scrapers**: Import churchofjesuschrist sources verbatim
+  ([`42859db`](https://github.com/open-canon/open-canon-site/commit/42859dbdabb1006c8f2cef83063d80810cfa755c))
+
+- **scrapers**: Import sacred-texts sources verbatim
+  ([`fad41e4`](https://github.com/open-canon/open-canon-site/commit/fad41e461928d97bc992912b8d9b40d6d3cf567d))
+
+### Testing
+
+- **scrapers**: Unit-test lds-standard-works functions
+  ([`7f2a561`](https://github.com/open-canon/open-canon-site/commit/7f2a5613338d815e3ff0ed13f985d09a403348d0))
+
+- **scrapers**: Unit-test sacred-texts functions
+  ([`168d4f2`](https://github.com/open-canon/open-canon-site/commit/168d4f2397ef580252e762ea28e3e7d7702badb9))
+
+
 ## v1.9.0 (2026-11-08)
 
 ### Bug Fixes
