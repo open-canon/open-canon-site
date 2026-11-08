@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="adam-and-eve" osisRefWork="Adam and Eve" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T18:31:54</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.07T22:47:11</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -364,7 +364,7 @@
         <verse canonical="true" osisID="1-adam-and-eve.23.6">Then Adam and Eve stood under the altar and wept, thus entreating God, "Forgive us our trespass 1 and our sin, and look upon us with Thine eye of mercy. For when we were in the garden our praises and our hymns went up before Thee without ceasing.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.23.7">"But when we came into this strange land, pure praise was no longer ours, nor righteous prayer, nor understanding hearts, nor sweet thoughts, nor just counsels, nor long discernment, nor upright feelings, neither is our bright nature left us. But our body is changed from the similitude in which it was at first, when we were created.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.23.8">"Yet now look upon our blood which is offered upon these stones, and accept it at our hands, like the praise we used to sing unto Thee at first, when in the garden."</verse>
-        <verse canonical="true" osisID="1-adam-and-eve.23.9">And Adam began to make more requests unto God. 16:1 ORIGINAL OF THE LORD'S PRAYER SAID TO BE USED ABOUT 150 YEARS BEFORE OUR LORD: Our Father, Who art in Heaven, be gracious unto us, O Lord our God, hallowed be Thy Name, and let the remembrance of Thee be glorified in Heaven above and upon earth here below. Let Thy kingdom reign over us now and forever. The Holy Men of old said remit and forgive unto all men whatsoever they have done unto me. And lead us not into temptation, but deliver us from the evil thing; for Thine is the kingdom and Thou shalt reign in glory forever and forevermore, AMEN.</verse>
+        <verse canonical="true" osisID="1-adam-and-eve.23.9">And Adam began to make more requests unto God. 16:1  ORIGINAL OF THE LORD'S PRAYER SAID TO BE USED ABOUT 150 YEARS BEFORE OUR LORD: Our Father, Who art in Heaven, be gracious unto us, O Lord our God, hallowed be Thy Name, and let the remembrance of Thee be glorified in Heaven above and upon earth here below. Let Thy kingdom reign over us now and forever. The Holy Men of old said remit and forgive unto all men whatsoever they have done unto me. And lead us not into temptation, but deliver us from the evil thing; for Thine is the kingdom and Thou shalt reign in glory forever and forevermore, AMEN.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1-adam-and-eve.24" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -928,6 +928,11 @@
         <verse canonical="true" osisID="1-adam-and-eve.59.8">Then Adam wept before the Lord, and said, "O Lord because I transgressed a little, Thou hast sorely plagued me in return for it, I ask Thee to deliver me out of his hands; or else have pity on me, and take my soul out of my body now in this strange land."</verse>
         <verse canonical="true" osisID="1-adam-and-eve.59.9">Then God said unto Adam, "If only there had been this sighing and praying before, ere thou didst transgress! Then wouldst thou have rest from the trouble in which thou art now."</verse>
         <verse canonical="true" osisID="1-adam-and-eve.59.10">But God had patience with Adam, and let him and Eve remain in the cave until they had fulfilled the forty days.</verse>
+        <verse canonical="true" osisID="1-adam-and-eve.59.11">
+          <lgCT TEIform="lg">
+            <l TEIform="l">But as to Adam and Eve, their strength and flesh withered from fasting and praying, from hunger and thirst; for they had not tasted either food or drink since they left the garden; nor were the functions of their bodies yet settled; and they had no strength left to continue in prayer from hunger, until the end of the next day to the fortieth. They were fallen down in the cave; yet what speech escaped from their mouths, was only in praises.</l>
+          </lgCT>
+        </verse>
       </div>
       <div canonical="true" type="chapter" osisID="1-adam-and-eve.60" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">

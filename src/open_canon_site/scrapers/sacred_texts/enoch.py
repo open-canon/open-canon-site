@@ -46,6 +46,7 @@ from open_canon_site.scrapers._osis import (
     parse_page_marker_text,
 )
 from open_canon_site.scrapers.base import ScraperSpec
+from open_canon_site.scrapers.sacred_texts._layout import legacy_html
 
 LOGGER = logging.getLogger(__name__)
 """Module logger."""
@@ -57,7 +58,7 @@ DEFAULT_START_PAGE: Final[int] = 0  # 0 includes the title page and front matter
 DEFAULT_END_PAGE: Final[int] = 112
 """Default last page to process (the appendix)."""
 
-BASE_URL: Final[str] = "https://sacred-texts.com/bib/boe/"
+BASE_URL: Final[str] = "https://archive.sacred-texts.com/bib/boe/"
 """Directory URL of the Charles translation; page files are appended to it."""
 FILE_RANGE: Final[tuple[int, int]] = (0, 112)
 """Inclusive range of page numbers, ``boe000.htm`` (title page) to ``boe112.htm`` (appendix)."""
@@ -862,7 +863,7 @@ class SacredTextsParser:
             page_num: Page number (used to identify front matter pages 0-3); the
                 default ``-1`` means a body page.
         """
-        soup = BeautifulSoup(html, "html.parser")
+        soup = BeautifulSoup(legacy_html(html), "html.parser")
 
         # Extract footnotes first (they'll be inserted inline)
         self.extract_footnotes(soup)
@@ -913,6 +914,8 @@ class SacredTextsParser:
                 continue
             if "Sacred Texts" in text or "Index" in text or "«" in text or "»" in text:
                 continue
+            if text in FRONT_MATTER_BOILERPLATE:
+                continue  # the title banner the archive pages carry above every chapter
             if text.startswith("⌈") and text.endswith("⌉") and len(text) < 20:
                 continue  # Skip standalone bracketed notes
 
@@ -1192,7 +1195,7 @@ def run(args: argparse.Namespace) -> list[Path]:
 SPEC = ScraperSpec(
     name="1-enoch",
     help="Book of Enoch (R. H. Charles, 1917) to OSIS",
-    source="https://sacred-texts.com/bib/boe/",
+    source="https://archive.sacred-texts.com/bib/boe/",
     outputs=(OUTPUT_FILENAME,),
     run=run,
     add_arguments=add_arguments,

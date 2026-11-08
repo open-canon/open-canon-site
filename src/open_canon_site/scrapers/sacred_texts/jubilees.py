@@ -24,6 +24,7 @@ from open_canon_site.scrapers._osis import (
     roman_to_int,
 )
 from open_canon_site.scrapers.base import ScraperSpec
+from open_canon_site.scrapers.sacred_texts._layout import is_reader_layout, legacy_html
 
 LOGGER = logging.getLogger(__name__)
 """Module logger; warns when an invalid cached page is discarded."""
@@ -31,8 +32,12 @@ LOGGER = logging.getLogger(__name__)
 OUTPUT_FILENAME: Final[str] = "jubilees.xml"
 """Name of the OSIS file written into the output directory."""
 
-BASE_URL: Final[str] = "https://sacred-texts.com/bib/jub/"
-"""Directory URL of the book on sacred-texts.com; pages are ``jub<NN>.htm`` beneath it."""
+BASE_URL: Final[str] = "https://archive.sacred-texts.com/bib/jub/"
+"""Directory URL of the book on the sacred-texts.com archive host; pages are ``jub<NN>.htm``.
+
+The archive host still serves the original page layout, whose footnotes are complete; the
+redesigned site drops some footnotes and the title page.
+"""
 PAGE_RANGE: Final[tuple[int, int]] = (0, 87)
 """Inclusive ``(first, last)`` page numbers of the book (``jub00`` .. ``jub87``)."""
 FRONT_MATTER_END_PAGE: Final[int] = 11
@@ -65,6 +70,16 @@ MARKDOWN_LINK_RE: Final[re.Pattern[str]] = re.compile(r"\[([^\]]*)\]\([^)]*\)")
 """Matches a Markdown link ``[text](url)``; the text is captured in group 1 (mirror-derived text)."""
 MARKDOWN_HEADING_RE: Final[re.Pattern[str]] = re.compile(r"^#+\s+")
 """Matches leading Markdown heading markers (``#`` characters and following space)."""
+MARGIN_DATE_RE: Final[re.Pattern[str]] = re.compile(
+    r"\s*(?:\(\d+(?:-\d+)?\)\s*)?\b\d{1,4}(?:-\d{1,4})?(?:\s*\(\?\d+\))?\s+A\.?\s?M\."
+    r"(?:\s*\(A\.M\.\s*=\s*Anno Mundi\))?(?=\s|$)"
+)
+"""Matches an *anno mundi* margin date such as ``1309-1659 A.M.`` with its leading space.
+
+The old pages put these dates in table cells, which the parser skips; the redesigned
+reader layout flattens them into the running text. Variants seen: ``A M.``, ``AM.``,
+``2057 (?2050) A.M.``, ``(99-127) 130 A.M.`` and ``2450 A.M. (A.M. = Anno Mundi)``.
+"""
 HEADING_CHAPTER_RE: Final[re.Pattern[str]] = re.compile(
     r"\((?P<chapter>[ivxlcdm]+)\.", re.IGNORECASE
 )
@@ -83,12 +98,28 @@ e.g. ``II. And the angel ...`` (``chapter`` and ``text`` groups).
 
 The numeral stands in for verse 1's own number.
 """
+FOOTNOTE_HREF_RE: Final[re.Pattern[str]] = re.compile(r"^#fn_")
+"""Matches the ``href`` of a link from a footnote reference to its note."""
+VERSE_REFERENCE_TAIL_RE: Final[re.Pattern[str]] = re.compile(r"\.\s+\S")
+"""Matches the text after a footnote reference that is really a verse number (``. And ...``)."""
+SENTENCE_END_RE: Final[re.Pattern[str]] = re.compile(r"""[.!?:;"')\u201d\]]\s*$""")
+"""Matches text ending in sentence-final punctuation (plus trailing whitespace)."""
 VERSE_LINE_RE: Final[re.Pattern[str]] = re.compile(r"^(?P<verse>\d+)\.\s+(?P<text>.+)$")
 """Matches a paragraph starting with ``<digits>. `` (``verse`` and ``text`` groups)."""
-INLINE_VERSE_RE: Final[re.Pattern[str]] = re.compile(r"(?:(?<=^)|(?<=\s))(?P<verse>\d+)\.\s+")
-"""Matches an inline verse marker ``<digits>. `` that sits at the start of a string or after
-whitespace, capturing the number as ``verse``; verses run on within one paragraph.
+INLINE_VERSE_RE: Final[re.Pattern[str]] = re.compile(
+    r"(?:(?<=^)|(?<=\s))(?P<verse>\d+)(?:(?P<dot>\.\s+)|\s\.\s+|\s+(?=[A-Z\u201c\"(]))"
+)
+"""Matches an inline verse marker that sits at the start of a string or after whitespace,
+capturing the number as ``verse``; verses run on within one paragraph.
+
+The usual form is ``<digits>. `` (``dot`` group set). The source also prints the number
+without its period (``15 And``) or with a space before it (``20 . And``); the parser only
+accepts those looser forms when the number is the next verse in sequence.
 """
+MARGIN_ONLY_RE: Final[re.Pattern[str]] = re.compile(r"^\d+\s*[IVXl1]?\s*A\.?\s?M\.$")
+"""Matches a paragraph that is only a stray *anno mundi* margin date such as ``195 I A.M.``."""
+VERSE_MARKER_WINDOW: Final[int] = 1500
+"""How far (in characters) from a verse-number link to look for the note marker it displaced."""
 JOIN_WITH_PREVIOUS_PREFIXES: Final[tuple[str, ...]] = (
     "and ",
     "or ",
@@ -410,11 +441,13 @@ class JubileesParser:
             if child.name in {"table", "tbody", "tr", "td"}:
                 continue
 
+            if child.name == "a" and child.get("name", "").startswith("page_"):
+                continue
+
             if child.name == "a" and child.get("name", "").startswith("fr_"):
-                ref_id = child.get("name", "").replace("fr_", "fn_")
                 next_sibling = child.find_next_sibling("a")
-                if next_sibling and next_sibling.get("href", "").endswith(f"#{ref_id}"):
-                    footnote = footnotes.get(ref_id)
+                if next_sibling and FOOTNOTE_HREF_RE.match(next_sibling.get("href", "")):
+                    footnote = footnotes.get(next_sibling["href"].split("#", 1)[1])
                     if footnote:
                         result.append(
                             pyosis.NoteCt(
@@ -536,15 +569,22 @@ class JubileesParser:
 
         return footnotes
 
-    def extract_page_components(self, raw_text: str) -> tuple[list[str], list[PageParagraph]]:
+    def extract_page_components(
+        self, raw_text: str, restore_verses: bool = False
+    ) -> tuple[list[str], list[PageParagraph]]:
         """Split a page into headings and content paragraphs.
 
-        Site chrome (archive banner, navigation words, bracketed lines, ``Sacred Texts``
-        paragraphs, ``p. N`` page markers) is dropped and extraction stops at the
-        ``Footnotes`` heading.
+        The main content is isolated first with ``legacy_html`` (a no-op for old-layout
+        pages; the redesigned reader layout's sidebars, toolbars and panels are dropped),
+        and on a reader-layout page the margin dates it flattened into the text are removed.
+        Remaining site chrome (archive banner, navigation words, bracketed lines,
+        ``Sacred Texts`` paragraphs, ``p. N`` page markers) is dropped and extraction stops
+        at the ``Footnotes`` heading.
 
         Args:
             raw_text: Raw page HTML.
+            restore_verses: Put back verse numbers the site rendered as footnote references
+                (see ``restore_verse_numbers``); for chapter pages only.
 
         Returns:
             ``(headings, paragraphs)`` in document order.
@@ -557,8 +597,12 @@ class JubileesParser:
                 "Jubilees scraper expects original sacred-texts HTML, not mirror-derived markdown or interstitial pages"
             )
 
-        soup = BeautifulSoup(raw_text, "html.parser")
+        soup = BeautifulSoup(legacy_html(raw_text), "html.parser")
         body = soup.body if soup.body else soup
+        if is_reader_layout(raw_text):
+            self.strip_margin_dates(body)
+        if restore_verses:
+            self.restore_verse_numbers(body)
         footnotes = self.extract_footnotes(body)
 
         headings: list[str] = []
@@ -596,12 +640,121 @@ class JubileesParser:
             if paragraph is None:
                 continue
 
-            if paragraph.text.startswith("p. "):
+            if paragraph.text.startswith("p. ") or MARGIN_ONLY_RE.match(paragraph.text):
                 continue
 
             paragraphs.append(paragraph)
 
         return headings, paragraphs
+
+    @staticmethod
+    def restore_verse_numbers(body: Tag) -> None:
+        """Repair footnote references that stand in for a verse number.
+
+        In a few places the source prints a footnote reference where the verse number
+        belongs (``... (here) am I."<ref>2</ref>. And He said``), so the verse number is
+        swallowed by the note marker. A reference whose label is a number, that directly
+        follows sentence-ending punctuation and is itself followed by ``. `` is such a
+        marker. Its label is turned back into plain text, ahead of the period, so the verse
+        splits off as usual.
+
+        The note itself belongs to the plain digit with the same label that the source
+        leaves unlinked elsewhere in the paragraph (``... sons 3 and ...``); when there is
+        one, the note moves to that digit. Otherwise it stays where the reference was.
+
+        Args:
+            body: Parsed page content, modified in place.
+        """
+        for link in body.find_all("a", href=FOOTNOTE_HREF_RE):
+            label = link.get_text(strip=True)
+            following = link.next_sibling
+            anchor = link.find_previous_sibling("a")
+            preceding = anchor.previous_sibling if anchor is not None else None
+            if (
+                not label.isdigit()
+                or not isinstance(following, NavigableString)
+                or not VERSE_REFERENCE_TAIL_RE.match(str(following))
+                or not isinstance(preceding, NavigableString)
+                or not SENTENCE_END_RE.search(str(preceding))
+            ):
+                continue
+            following.replace_with(NavigableString(f"{label}{following}"))
+            marker = JubileesParser.find_displaced_marker(link, label)
+            if marker is None or anchor is None or anchor.get("name") is None:
+                link.clear()
+                continue
+
+            text = str(marker)
+            match = re.search(rf"(?<![\w.:\-]){label}(?![\w.:\-])", text)
+            if match is None:  # pragma: no cover - find_displaced_marker just matched it
+                link.clear()
+                continue
+            new_anchor = copy.copy(anchor)
+            new_link = copy.copy(link)
+            anchor.extract()
+            link.extract()
+            parent = marker.parent
+            position = parent.index(marker)
+            marker.extract()
+            for offset, node in enumerate((
+                NavigableString(text[: match.start()].rstrip()),
+                new_anchor,
+                new_link,
+                NavigableString(text[match.end() :]),
+            )):
+                parent.insert(position + offset, node)
+
+    @staticmethod
+    def find_displaced_marker(link: Tag, label: str) -> NavigableString | None:
+        """Find the plain-text digit that is the real marker for a footnote.
+
+        Args:
+            link: The footnote link that is really a verse number.
+            label: The link's text (the digit to look for).
+
+        Returns:
+            The nearest text node, within ``VERSE_MARKER_WINDOW`` characters in the same
+            paragraph, holding ``label`` as a standalone unlinked number that is not itself
+            a verse number (``N. ``), or ``None``.
+        """
+        paragraph = link.find_parent("p")
+        if paragraph is None:
+            return None
+        digit_re = re.compile(rf"(?<![\w.:\-]){label}(?![\w.:\-])(?!\s?\.\s)")
+        best: NavigableString | None = None
+        best_distance = VERSE_MARKER_WINDOW + 1
+        offset = 0
+        link_offset: int | None = None
+        nodes: list[tuple[NavigableString, int]] = []
+        for node in paragraph.find_all(string=True):
+            if node.find_parent("a") is not None and node.find_parent("a") is not link:
+                offset += len(node)
+                continue
+            if node.find_parent("a") is link:
+                link_offset = offset
+                continue
+            nodes.append((node, offset))
+            offset += len(node)
+        if link_offset is None:
+            return None
+        for node, node_offset in nodes:
+            match = digit_re.search(str(node))
+            if match is None:
+                continue
+            distance = abs(node_offset + match.start() - link_offset)
+            if distance < best_distance:
+                best, best_distance = node, distance
+        return best if best_distance <= VERSE_MARKER_WINDOW else None
+
+    @staticmethod
+    def strip_margin_dates(body: Tag) -> None:
+        """Remove *anno mundi* margin dates (``MARGIN_DATE_RE``) from every text node.
+
+        Args:
+            body: Parsed page content, modified in place.
+        """
+        for text_node in list(body.find_all(string=MARGIN_DATE_RE)):
+            text_node.replace_with(NavigableString(MARGIN_DATE_RE.sub("", str(text_node))))
 
     @staticmethod
     def should_join_with_previous(paragraph: str, previous: str) -> bool:
@@ -815,6 +968,9 @@ class JubileesParser:
             if isinstance(part, str):
                 last_end = 0
                 for match in INLINE_VERSE_RE.finditer(part):
+                    expected = 1 if current_verse_number is None else current_verse_number + 1
+                    if not match.group("dot") and int(match.group("verse")) != expected:
+                        continue
                     prefix = part[last_end : match.start()]
                     if current_verse_number is None:
                         if prefix:
@@ -864,7 +1020,7 @@ class JubileesParser:
         Raises:
             RuntimeError: If the page has no heading.
         """
-        headings, content_lines = self.extract_page_components(raw_text)
+        headings, content_lines = self.extract_page_components(raw_text, restore_verses=True)
         if not headings:
             raise RuntimeError(f"Missing section heading for Jubilees page {page_number}")
 
@@ -1112,7 +1268,7 @@ def run(args: argparse.Namespace) -> list[Path]:
 SPEC = ScraperSpec(
     name="jubilees",
     help="Book of Jubilees (R. H. Charles, 1917) to OSIS",
-    source="https://sacred-texts.com/bib/jub/",
+    source="https://archive.sacred-texts.com/bib/jub/",
     outputs=(OUTPUT_FILENAME,),
     run=run,
     add_arguments=add_arguments,

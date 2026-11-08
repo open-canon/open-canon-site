@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import string
+from pathlib import Path
 
 import pyosis
 import pytest
@@ -90,7 +91,7 @@ def test_close_closes_http_client(parser):
 
 def test_page_url_zero_pads_page_number():
     """Page numbers are zero-padded to two digits under the base URL."""
-    assert JubileesParser.page_url(3) == "https://sacred-texts.com/bib/jub/jub03.htm"
+    assert JubileesParser.page_url(3) == "https://archive.sacred-texts.com/bib/jub/jub03.htm"
     assert JubileesParser.page_url(87).endswith("jub87.htm")
 
 
@@ -827,3 +828,236 @@ def test_spec_describes_scraper():
     assert jubilees.SPEC.outputs == (jubilees.OUTPUT_FILENAME,)
     assert jubilees.SPEC.run is jubilees.run
     assert jubilees.SPEC.add_arguments is jubilees.add_arguments
+
+
+# --- redesigned reader layout ---------------------------------------------------------
+
+READER_FIXTURES = Path(__file__).parent / "fixtures" / "reader_layout"
+"""Trimmed copies of real redesigned sacred-texts.com pages."""
+
+
+def reader_fixture(name: str) -> str:
+    """Return the text of a reader-layout fixture page."""
+    return (READER_FIXTURES / name).read_text(encoding="utf-8")
+
+
+def test_is_valid_page_accepts_reader_layout_page():
+    """A redesigned reader-layout page still counts as a genuine Jubilees page."""
+    assert JubileesParser.is_valid_page(reader_fixture("jub13.htm"))
+
+
+def test_extract_page_components_ignores_reader_layout_chrome(parser):
+    """The "Chapters" sidebar heading and other panels are not taken as headings."""
+    headings, paragraphs = parser.extract_page_components(reader_fixture("jub13.htm"))
+    assert headings == ["God commands the Angel to write (i. 27-29)."]
+    assert [p.text[:30] for p in paragraphs] == [
+        "27. And He said to the angel o",
+        "of all, and all will know that",
+    ]
+
+
+def test_parse_section_page_reads_reader_layout_verses_and_footnotes(parser):
+    """Verses and their footnote notes (with page:note labels) come out of a reader page."""
+    section = parser.parse_section_page(13, reader_fixture("jub13.htm"))
+    assert section.title == "God commands the Angel to write (i. 27-29)."
+    assert section.chapter_number == 1
+    assert [verse.verse_numbers for verse in section.verses] == [[27], [28], [29]]
+    labels = [
+        [part.n for part in verse.content_parts if isinstance(part, pyosis.NoteCt)]
+        for verse in section.verses
+    ]
+    assert labels == [
+        ["39:6", "39:7"],
+        ["39:8", "40:1", "40:2", "40:3"],
+        ["40:4", "40:5", "40:6", "40:7", "40:8"],
+    ]
+    first_note = section.verses[0].content_parts[1]
+    assert isinstance(first_note, pyosis.NoteCt)
+    assert any(isinstance(part, pyosis.HiCt) for part in first_note.content)
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("of the 2450 A.M. (A.M. = Anno Mundi) exodus", "of the exodus"),
+        ("from the day of 1309-1659 A.M. Noah's death", "from the day of Noah's death"),
+        ("fourth year (99-127) 130 A.M. of the", "fourth year of the"),
+        ("of Dânêl, 587 AM. the daughter", "of Dânêl, the daughter"),
+        ("fourteenth 652 A M. jubilee", "fourteenth jubilee"),
+        ("1-25). 2057 (?2050) A.M. XXI. And", "1-25). XXI. And"),
+        ("nation. 195 I A.M. p. 91", "nation. 195 I A.M. p. 91"),
+        ("in the 2450th year", "in the 2450th year"),
+    ],
+)
+def test_margin_date_re_removes_flattened_anno_mundi_dates(text, expected):
+    """Margin dates and their variants are removed; other text is left alone."""
+    assert jubilees.MARGIN_DATE_RE.sub("", text) == expected
+
+
+@given(st.integers(min_value=1, max_value=2450), st.integers(min_value=0, max_value=50))
+def test_margin_date_re_removes_any_year_or_range(start, length):
+    """Any ``N A.M.`` or ``N-M A.M.`` date between two words is removed with its space."""
+    date = f"{start} A.M." if length == 0 else f"{start}-{start + length} A.M."
+    assert jubilees.MARGIN_DATE_RE.sub("", f"before {date} after") == "before after"
+
+
+def test_strip_margin_dates_rewrites_text_nodes_in_place():
+    """Every matching text node under the body is rewritten; markup is kept."""
+    body = soup_body("<p>of the 2450 A.M. exodus <i>in 8 A.M. May</i></p>")
+    JubileesParser.strip_margin_dates(body)
+    assert str(body.find("p")) == "<p>of the exodus <i>in May</i></p>"
+
+
+def test_extract_page_components_strips_margin_dates_only_on_reader_pages(parser):
+    """Reader pages lose flattened margin dates; old pages keep any text outside tables."""
+    paragraph = "<p>1. And in the first week 1-7 A.M. of the first jubilee.</p>"
+    old_page = page("Jubilees 3:1-35 (iii. 1-35)", [paragraph])
+    _, old_paragraphs = parser.extract_page_components(old_page)
+    assert old_paragraphs[0].text == "1. And in the first week 1-7 A.M. of the first jubilee."
+
+    reader_page = reader_fixture("jub13.htm").replace(
+        "27. And He said", "27. And in the first week 1-7 A.M. He said"
+    )
+    _, reader_paragraphs = parser.extract_page_components(reader_page)
+    assert reader_paragraphs[0].text.startswith("27. And in the first week He said")
+
+
+# --- verse numbers rendered as footnote references -----------------------------------------
+
+VERSE_REF_HTML = (
+    '1. And he said, "Here." '
+    '<a name="fr_5"></a><a href="#fn_5"><font size="1">2</font></a>. And He said, '
+    '"Take thy son." 3. And he rose.'
+)
+VERSE_REF_FOOTNOTES = '<p><a name="fn_5"></a><a href="#fr_5">109:2</a> A note.</p>'
+
+
+def test_restore_verse_numbers_moves_label_out_of_the_reference():
+    """A numeric reference after a sentence end, before ``. X``, hands its number to the text."""
+    body = soup_body(f"<p>{VERSE_REF_HTML}</p>")
+    JubileesParser.restore_verse_numbers(body)
+    assert body.find("a", href="#fn_5").get_text() == ""
+    assert "2. And He said" in body.get_text()
+
+
+@pytest.mark.parametrize(
+    "html",
+    [
+        '<p>word <a name="fr_1"></a><a href="#fn_1">2</a>. And</p>',
+        '<p>end. <a name="fr_1"></a><a href="#fn_1">a</a>. And</p>',
+        '<p>end. <a name="fr_1"></a><a href="#fn_1">2</a> and more</p>',
+        '<p>end. <a name="fr_1"></a><a href="#fn_1">2</a>.</p>',
+        '<p><a name="fr_1"></a><a href="#fn_1">2</a>. And</p>',
+    ],
+)
+def test_restore_verse_numbers_leaves_real_footnote_references(html):
+    """Mid-sentence, non-numeric, not-followed-by-a-period and leading references stay put."""
+    body = soup_body(html)
+    before = str(body)
+    JubileesParser.restore_verse_numbers(body)
+    assert str(body) == before
+
+
+def test_extract_page_components_restores_verse_numbers_on_request(parser):
+    """With ``restore_verses`` the footnote is kept and verse 2 is its own verse."""
+    html = page("Jubilees 18:1-3 (xviii. 1-3)", [VERSE_REF_HTML], VERSE_REF_FOOTNOTES)
+    _, plain = parser.extract_page_components(html)
+    _, restored = parser.extract_page_components(html, restore_verses=True)
+    assert "2. And He said" not in plain[0].text
+    assert "2. And He said" in restored[0].text
+    assert any(isinstance(p, pyosis.NoteCt) for p in restored[0].content_parts)
+
+
+def test_parse_section_page_splits_verse_hidden_in_a_reference(parser):
+    """The verse behind a numeric reference becomes its own verse, keeping the note."""
+    html = page("Jubilees 18:1-3 (xviii. 1-3)", [VERSE_REF_HTML], VERSE_REF_FOOTNOTES)
+    section = parser.parse_section_page(40, html)
+    numbers = [v.verse_numbers for v in section.verses]
+    assert numbers == [[1], [2], [3]]
+    assert any(isinstance(p, pyosis.NoteCt) for p in section.verses[0].content_parts)
+
+
+# --- source-markup quirks ------------------------------------------------------------------
+
+
+def ref(n: int, label: str, href_n: int | None = None) -> str:
+    """Build an old-layout footnote reference pair whose link text is ``label``."""
+    return f'<a name="fr_{n}"></a><a href="#fn_{href_n or n}"><font size="1">{label}</font></a>'
+
+
+def note(n: int, label: str, text: str) -> str:
+    """Build an old-layout footnote paragraph."""
+    return f'<p><a name="fn_{n}"></a><a href="#fr_{n}">{label}</a> {text}</p>'
+
+
+def test_parse_inline_content_pairs_by_link_target_not_anchor_name(parser):
+    """A ``fr_N`` anchor whose link points at a different ``fn_M`` still gets note M."""
+    body = soup_body(f"<p>word. {ref(9, '2', href_n=8)} more</p>")
+    notes = {
+        "fn_8": FootnoteInfo(ref_id="fn_8", label="1:2", content_parts=["Right."]),
+        "fn_9": FootnoteInfo(ref_id="fn_9", label="1:3", content_parts=["Wrong."]),
+    }
+    parts = parser.parse_inline_content(body.find("p"), notes)
+    assert [p.n for p in parts if isinstance(p, pyosis.NoteCt)] == ["1:2"]
+
+
+def test_parse_inline_content_skips_inline_page_markers(parser):
+    """An inline ``page_N`` anchor (``p. 144``) is dropped from the text."""
+    body = soup_body(
+        '<p>unto death, <a name="page_144"><font size="1">p. 144</font></a> And thy</p>'
+    )
+    parts = parser.parse_inline_content(body.find("p"), {})
+    assert "p. 144" not in "".join(p for p in parts if isinstance(p, str))
+
+
+def test_extract_page_components_drops_stray_margin_date_paragraphs(parser):
+    """A paragraph that is only ``195 I A.M.`` is not content."""
+    html = page("Jubilees 1:1 (i. 1)", ["1. And he spoke.", "195 I A.M."])
+    _, paragraphs = parser.extract_page_components(html)
+    assert [p.text for p in paragraphs] == ["1. And he spoke."]
+
+
+@pytest.mark.parametrize(
+    ("text", "numbers"),
+    [
+        ("1. And a. 2. And b. 3. And c.", [1, 2, 3]),
+        ("1. And a. 2 And b. 3. And c.", [1, 2, 3]),
+        ("1. And a. 2 . And b.", [1, 2]),
+        ("1. And a. 5 And b.", [1]),
+        ("1. And a. 2. And b. 2 Enoch c.", [1, 2]),
+    ],
+)
+def test_parse_verses_accepts_loose_markers_only_in_sequence(parser, text, numbers):
+    """``N And`` and ``N .`` count as verse numbers only when ``N`` is the next verse."""
+    verses = parser.parse_verses(1, 1, [pp(text)])
+    assert [v.verse_numbers[0] for v in verses] == numbers
+
+
+def test_restore_verse_numbers_moves_the_note_to_its_plain_digit():
+    """The note goes to the unlinked digit with the same label; the verse number stays text."""
+    body = soup_body(
+        f"<p>1. He saw his sons 3 and wept. {ref(7, '3')}. And he rose. 4. And more.</p>"
+    )
+    JubileesParser.restore_verse_numbers(body)
+    paragraph = body.find("p")
+    anchors = paragraph.find_all("a", attrs={"name": "fr_7"})
+    assert len(anchors) == 1
+    assert "sons" in str(anchors[0].previous_sibling)
+    assert "wept.\u00a03. And he rose." in paragraph.get_text()
+
+
+def test_restore_verse_numbers_finds_a_plain_digit_after_the_link():
+    """The plain digit may follow the link, not only precede it."""
+    body = soup_body(f"<p>1. Said. {ref(7, '3')}. And on. 5. To Bethel 3 west.</p>")
+    JubileesParser.restore_verse_numbers(body)
+    anchor = body.find("a", attrs={"name": "fr_7"})
+    assert "Bethel" in str(anchor.previous_sibling)
+    assert "Bethel" not in str(body.find("p").get_text()).split("3. And on")[0]
+
+
+def test_find_displaced_marker_ignores_verse_numbers_and_far_digits():
+    """``3. `` is a verse number and a digit beyond the window is out of reach."""
+    near = soup_body(f"<p>x. 3. And y. {ref(1, '3')}. Z</p>")
+    assert JubileesParser.find_displaced_marker(near.find("a", href="#fn_1"), "3") is None
+    far = soup_body(f"<p>a 3 b {'x' * 2000} {ref(1, '3')}. Z</p>")
+    assert JubileesParser.find_displaced_marker(far.find("a", href="#fn_1"), "3") is None

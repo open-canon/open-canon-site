@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import string
+from pathlib import Path
 
 import pyosis
 import pytest
@@ -216,7 +217,7 @@ def test_fetch_index_text_rejects_interstitial(parser, monkeypatch):
 
 def test_fetch_chapter_text_formats_url_and_validates_chapter(parser, monkeypatch):
     """The chapter URL contains the number and the page must name that chapter."""
-    url = "https://sacred-texts.com/chr/apo/jasher/12.htm"
+    url = "https://archive.sacred-texts.com/chr/apo/jasher/12.htm"
     calls = stub_fetch(parser, monkeypatch, {url: chapter_html(12)})
     assert parser.fetch_chapter_text(12) == chapter_html(12)
     assert calls == [url]
@@ -224,7 +225,7 @@ def test_fetch_chapter_text_formats_url_and_validates_chapter(parser, monkeypatc
 
 def test_fetch_chapter_text_raises_for_mismatched_page(parser, monkeypatch):
     """A page for the wrong chapter is rejected with the chapter number in the message."""
-    url = "https://sacred-texts.com/chr/apo/jasher/12.htm"
+    url = "https://archive.sacred-texts.com/chr/apo/jasher/12.htm"
     stub_fetch(parser, monkeypatch, {url: chapter_html(13)})
     with pytest.raises(RuntimeError, match="chapter 12"):
         parser.fetch_chapter_text(12)
@@ -486,7 +487,7 @@ def test_add_arguments_registers_nothing():
 def test_run_writes_output_file_using_prepopulated_cache(tmp_path):
     """``run`` reads pages from a pre-populated cache and writes ``jasher.xml``."""
     cache = tmp_path / "cache"
-    base = cache / "sacred-texts.com" / "chr" / "apo" / "jasher"
+    base = cache / "archive.sacred-texts.com" / "chr" / "apo" / "jasher"
     base.mkdir(parents=True)
     (base / "index.htm").write_text(INDEX_HTML, encoding="utf-8")
     for n in jasher.EXPECTED_CHAPTERS:
@@ -514,3 +515,73 @@ def test_spec_describes_scraper():
     assert jasher.SPEC.name == "jasher"
     assert jasher.SPEC.outputs == (jasher.OUTPUT_FILENAME,)
     assert jasher.SPEC.run is jasher.run and jasher.SPEC.add_arguments is jasher.add_arguments
+
+
+# --- redesigned reader layout ---------------------------------------------------------
+
+READER_FIXTURES = Path(__file__).parent / "fixtures" / "reader_layout"
+"""Trimmed copies of real redesigned sacred-texts.com pages."""
+
+
+def reader_fixture(name: str) -> str:
+    """Return the text of a reader-layout fixture page."""
+    return (READER_FIXTURES / name).read_text(encoding="utf-8")
+
+
+def test_is_valid_index_accepts_reader_layout_book_overview():
+    """The redesigned book overview page is a valid index (title and 91-chapter count)."""
+    assert JasherParser.is_valid_index(reader_fixture("jasher-index.htm"))
+
+
+def test_is_valid_index_rejects_book_overview_with_wrong_title_or_count():
+    """An overview page for another book, or with another chapter count, is rejected."""
+    page = reader_fixture("jasher-index.htm")
+    assert not JasherParser.is_valid_index(page.replace(">The Book of Jasher<", ">Other<"))
+    assert not JasherParser.is_valid_index(page.replace("91 chapters", "90 chapters"))
+
+
+def test_extract_chapter_numbers_uses_book_overview_chapter_count():
+    """The paginated overview table of contents yields chapters 1 through its count."""
+    assert JasherParser.extract_chapter_numbers(reader_fixture("jasher-index.htm")) == list(
+        range(1, 92)
+    )
+
+
+def test_extract_chapter_numbers_on_book_overview_without_count_is_empty():
+    """An overview page with no chapter count yields no chapters."""
+    page = '<article data-module-id="book-overview-about"><p>About</p></article>'
+    assert JasherParser.extract_chapter_numbers(page) == []
+
+
+def test_parse_front_matter_from_book_overview_uses_about_text():
+    """The overview has no title page block; its "About this book" text is the introduction."""
+    title_page, intro = JasherParser.parse_front_matter(reader_fixture("jasher-index.htm"))
+    assert title_page == FrontMatterSection(
+        title="The Book of Jasher", div_type=pyosis.OsisDivs.TITLE_PAGE, paragraphs=[]
+    )
+    assert intro.title == "Introduction"
+    assert len(intro.paragraphs) == 2
+    assert intro.paragraphs[0].startswith("This is one of the apochrypal Books of Jasher.")
+    assert intro.paragraphs[1].endswith("albeit with several minor variations.")
+
+
+def test_parse_front_matter_from_book_overview_rejects_other_book():
+    """An overview page for another book raises."""
+    page = reader_fixture("jasher-index.htm").replace(">The Book of Jasher<", ">Other<")
+    with pytest.raises(RuntimeError, match="Unexpected Jasher index heading"):
+        JasherParser.parse_front_matter(page)
+
+
+def test_is_valid_chapter_page_accepts_reader_layout_page():
+    """A reader-layout chapter page validates against its own chapter only."""
+    page = reader_fixture("jasher-1.htm")
+    assert JasherParser.is_valid_chapter_page(page, 1)
+    assert not JasherParser.is_valid_chapter_page(page, 2)
+
+
+def test_parse_chapter_reads_reader_layout_page():
+    """Verses are read from the reader content, ignoring the chapter sidebar."""
+    chapter = JasherParser.parse_chapter(1, reader_fixture("jasher-1.htm"))
+    assert chapter.number == 1
+    assert [verse.number for verse in chapter.verses] == [1, 2, 3]
+    assert chapter.verses[0].text.startswith("And God said, Let us make man in our image")

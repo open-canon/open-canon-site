@@ -18,7 +18,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 DOCUMENTS_DIR = REPO_ROOT / "open-canon-osis-documents"
 PACKAGE_MODULE = "open_canon_site.scrapers.sacred_texts.jubilees"
 SOURCE_CACHE_DIR = REPO_ROOT / ".cache" / "html"
-JUBILEES_CACHE_FILE = SOURCE_CACHE_DIR / "sacred-texts.com" / "bib" / "jub" / "jub00.htm"
+JUBILEES_CACHE_FILE = SOURCE_CACHE_DIR / "archive.sacred-texts.com" / "bib" / "jub" / "jub00.htm"
 SNAPSHOT_FILE = "jubilees.xml"
 EVERSION_DATE_PATTERN = re.compile(
     r'(<date event="eversion" type="ISO" xml:lang="en" TEIform="date">)'
@@ -75,7 +75,11 @@ def generated_jubilees_output(tmp_path_factory: pytest.TempPathFactory) -> Path:
     invalid_cache_files = []
     for page_number in range(module.PAGE_RANGE[0], module.PAGE_RANGE[1] + 1):
         cache_file = (
-            SOURCE_CACHE_DIR / "sacred-texts.com" / "bib" / "jub" / f"jub{page_number:02d}.htm"
+            SOURCE_CACHE_DIR
+            / "archive.sacred-texts.com"
+            / "bib"
+            / "jub"
+            / f"jub{page_number:02d}.htm"
         )
         if not cache_file.exists():
             missing_cache_files.append(cache_file)
