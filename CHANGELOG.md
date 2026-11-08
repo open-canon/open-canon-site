@@ -2,6 +2,25 @@
 
 <!-- version list -->
 
+## v1.17.0 (2026-11-08)
+
+### Bug Fixes
+
+- **scrapers**: Require the qa field in Lectures on Faith entries
+  ([`02e16a8`](https://github.com/open-canon/open-canon-site/commit/02e16a872b5694b7ca532e3c05afac0a8efacda0))
+
+### Features
+
+- **scrapers**: Add the Revised Standard Edition of the Lectures on Faith
+  ([`8d8713c`](https://github.com/open-canon/open-canon-site/commit/8d8713cb47fed8b6b3131399396b894ef53824c8))
+
+- **scrapers**: Make the 1835 Lectures on Faith the canonical edition
+  ([`1ecedf5`](https://github.com/open-canon/open-canon-site/commit/1ecedf533971b79661da2d4525b044ef0d3f0620))
+
+- **scrapers**: Scrape the "Lectures on Faith" (1835)
+  ([`0cd6a18`](https://github.com/open-canon/open-canon-site/commit/0cd6a184d56cbf31e535105c576b29dc5db9c3c1))
+
+
 ## v1.16.0 (2026-11-08)
 
 ### Bug Fixes
