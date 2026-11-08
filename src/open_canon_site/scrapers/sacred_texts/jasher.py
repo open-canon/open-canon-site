@@ -17,6 +17,11 @@ from bs4 import BeautifulSoup
 from open_canon_site.scrapers._http import CachedHttpFetcher
 from open_canon_site.scrapers._osis import normalize_whitespace
 from open_canon_site.scrapers.base import ScraperSpec
+from open_canon_site.scrapers.sacred_texts._layout import (
+    book_overview_parts,
+    is_book_overview_layout,
+    legacy_html,
+)
 
 LOGGER = logging.getLogger(__name__)
 """Module logger; warns when an invalid cached page is discarded."""
@@ -211,9 +216,14 @@ class JasherParser:
             text: Raw page HTML.
 
         Returns:
-            True if it has the book title, the "Faithfully Translated" subtitle and a link to
-            chapter 91, and is not a Cloudflare interstitial ("Just a moment").
+            For an old-layout page, True if it has the book title, the "Faithfully
+            Translated" subtitle and a link to chapter 91, and is not a Cloudflare
+            interstitial ("Just a moment"). For a redesigned book overview page, True if its
+            title is ``BOOK_TITLE`` and its table of contents counts 91 chapters.
         """
+        if is_book_overview_layout(text):
+            title, _, chapter_count = book_overview_parts(text)
+            return title == BOOK_TITLE and chapter_count == len(EXPECTED_CHAPTERS)
         return (
             "The Book of Jasher" in text
             and "Faithfully Translated" in text
@@ -231,12 +241,14 @@ class JasherParser:
 
         Returns:
             True if the heading names that chapter, a verse-1 paragraph (``<P>1 ...``) is
-            present and it is not a Cloudflare interstitial ("Just a moment").
+            present in the main content (isolated with ``legacy_html``) and it is not a
+            Cloudflare interstitial ("Just a moment").
         """
+        content = legacy_html(text)
         return (
-            f"Book of Jasher, Chapter {chapter_number}" in text
+            f"Book of Jasher, Chapter {chapter_number}" in content
             and "Just a moment" not in text
-            and bool(re.search(r"(?i)<p(?:\s+[^>]*)?>\s*1\s+", text))
+            and bool(re.search(r"(?i)<p(?:\s+[^>]*)?>\s*1\s+", content))
         )
 
     @staticmethod
@@ -258,6 +270,9 @@ class JasherParser:
     def _extract_content_after_heading(cls, raw_html: str) -> tuple[str, str]:
         """Split a page into its ``<h1>`` heading text and the content before the footer ``<HR>``.
 
+        The main content is isolated with ``legacy_html`` first, so a redesigned reader-layout
+        page yields the same split as the old page.
+
         Args:
             raw_html: Raw page HTML.
 
@@ -268,7 +283,7 @@ class JasherParser:
         Raises:
             RuntimeError: If there is no ``<h1>`` or no later ``<hr>``.
         """
-        match = BODY_AFTER_H1_RE.search(raw_html)
+        match = BODY_AFTER_H1_RE.search(legacy_html(raw_html))
         if not match:
             raise RuntimeError("Could not locate Jasher heading in source HTML")
 
@@ -304,6 +319,9 @@ class JasherParser:
         The title page lines come from the ``<h6>``/``<h5>`` headings and the ``<font>`` block;
         the introduction is the text after the closing ``</CENTER>`` minus those lines.
 
+        A redesigned book overview page no longer carries the title page block, so its title
+        page has no lines; its introduction is the "About this book" blurb.
+
         Args:
             raw_index_html: Raw index page HTML.
 
@@ -313,6 +331,9 @@ class JasherParser:
         Raises:
             RuntimeError: If the heading is not ``BOOK_TITLE`` or the structure is missing.
         """
+        if is_book_overview_layout(raw_index_html):
+            return cls._parse_book_overview_front_matter(raw_index_html)
+
         heading, content_html = cls._extract_content_after_heading(raw_index_html)
         if heading != BOOK_TITLE:
             raise RuntimeError(
@@ -355,11 +376,46 @@ class JasherParser:
             ),
         ]
 
+    @classmethod
+    def _parse_book_overview_front_matter(cls, raw_index_html: str) -> list[FrontMatterSection]:
+        """Extract the front matter from a redesigned book overview (index) page.
+
+        Args:
+            raw_index_html: Raw book overview page HTML.
+
+        Returns:
+            Two sections: a title page without lines (the overview page omits the old
+            title page block) and the "About this book" paragraphs as the introduction.
+
+        Raises:
+            RuntimeError: If the overview title is not ``BOOK_TITLE``.
+        """
+        title, about_html, _ = book_overview_parts(raw_index_html)
+        if title != BOOK_TITLE:
+            raise RuntimeError(
+                f"Unexpected Jasher index heading: expected {BOOK_TITLE!r}, got {title!r}"
+            )
+        intro_paragraphs = cls._extract_lines("".join(about_html))
+        return [
+            FrontMatterSection(
+                title=BOOK_TITLE,
+                div_type=pyosis.OsisDivs.TITLE_PAGE,
+                paragraphs=[],
+            ),
+            FrontMatterSection(
+                title="Introduction",
+                div_type=pyosis.OsisDivs.FRONT,
+                paragraphs=intro_paragraphs,
+            ),
+        ]
+
     @staticmethod
     def extract_chapter_numbers(raw_index_html: str) -> list[int]:
         """List the chapter numbers linked from the index page.
 
-        Only anchors whose ``href`` is ``<digits>.htm`` count; duplicates are dropped.
+        Only anchors whose ``href`` is ``<digits>.htm`` count; duplicates are dropped. A
+        redesigned book overview page paginates its table of contents, so there the
+        chapters are ``1`` through the stated chapter count (empty if it has none).
 
         Args:
             raw_index_html: Raw index page HTML.
@@ -367,6 +423,10 @@ class JasherParser:
         Returns:
             Chapter numbers in order of first appearance.
         """
+        if is_book_overview_layout(raw_index_html):
+            _, _, chapter_count = book_overview_parts(raw_index_html)
+            return list(range(1, (chapter_count or 0) + 1))
+
         soup = BeautifulSoup(raw_index_html, "html.parser")
         chapter_numbers: list[int] = []
         seen: set[int] = set()

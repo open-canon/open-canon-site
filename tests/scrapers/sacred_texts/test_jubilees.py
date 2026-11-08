@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import string
+from pathlib import Path
 
 import pyosis
 import pytest
@@ -827,3 +828,95 @@ def test_spec_describes_scraper():
     assert jubilees.SPEC.outputs == (jubilees.OUTPUT_FILENAME,)
     assert jubilees.SPEC.run is jubilees.run
     assert jubilees.SPEC.add_arguments is jubilees.add_arguments
+
+
+# --- redesigned reader layout ---------------------------------------------------------
+
+READER_FIXTURES = Path(__file__).parent / "fixtures" / "reader_layout"
+"""Trimmed copies of real redesigned sacred-texts.com pages."""
+
+
+def reader_fixture(name: str) -> str:
+    """Return the text of a reader-layout fixture page."""
+    return (READER_FIXTURES / name).read_text(encoding="utf-8")
+
+
+def test_is_valid_page_accepts_reader_layout_page():
+    """A redesigned reader-layout page still counts as a genuine Jubilees page."""
+    assert JubileesParser.is_valid_page(reader_fixture("jub13.htm"))
+
+
+def test_extract_page_components_ignores_reader_layout_chrome(parser):
+    """The "Chapters" sidebar heading and other panels are not taken as headings."""
+    headings, paragraphs = parser.extract_page_components(reader_fixture("jub13.htm"))
+    assert headings == ["God commands the Angel to write (i. 27-29)."]
+    assert [p.text[:30] for p in paragraphs] == [
+        "27. And He said to the angel o",
+        "of all, and all will know that",
+    ]
+
+
+def test_parse_section_page_reads_reader_layout_verses_and_footnotes(parser):
+    """Verses and their footnote notes (with page:note labels) come out of a reader page."""
+    section = parser.parse_section_page(13, reader_fixture("jub13.htm"))
+    assert section.title == "God commands the Angel to write (i. 27-29)."
+    assert section.chapter_number == 1
+    assert [verse.verse_numbers for verse in section.verses] == [[27], [28], [29]]
+    labels = [
+        [part.n for part in verse.content_parts if isinstance(part, pyosis.NoteCt)]
+        for verse in section.verses
+    ]
+    assert labels == [
+        ["39:6", "39:7"],
+        ["39:8", "40:1", "40:2", "40:3"],
+        ["40:4", "40:5", "40:6", "40:7", "40:8"],
+    ]
+    first_note = section.verses[0].content_parts[1]
+    assert isinstance(first_note, pyosis.NoteCt)
+    assert any(isinstance(part, pyosis.HiCt) for part in first_note.content)
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("of the 2450 A.M. (A.M. = Anno Mundi) exodus", "of the exodus"),
+        ("from the day of 1309-1659 A.M. Noah's death", "from the day of Noah's death"),
+        ("fourth year (99-127) 130 A.M. of the", "fourth year of the"),
+        ("of Dânêl, 587 AM. the daughter", "of Dânêl, the daughter"),
+        ("fourteenth 652 A M. jubilee", "fourteenth jubilee"),
+        ("1-25). 2057 (?2050) A.M. XXI. And", "1-25). XXI. And"),
+        ("nation. 195 I A.M. p. 91", "nation. 195 I A.M. p. 91"),
+        ("in the 2450th year", "in the 2450th year"),
+    ],
+)
+def test_margin_date_re_removes_flattened_anno_mundi_dates(text, expected):
+    """Margin dates and their variants are removed; other text is left alone."""
+    assert jubilees.MARGIN_DATE_RE.sub("", text) == expected
+
+
+@given(st.integers(min_value=1, max_value=2450), st.integers(min_value=0, max_value=50))
+def test_margin_date_re_removes_any_year_or_range(start, length):
+    """Any ``N A.M.`` or ``N-M A.M.`` date between two words is removed with its space."""
+    date = f"{start} A.M." if length == 0 else f"{start}-{start + length} A.M."
+    assert jubilees.MARGIN_DATE_RE.sub("", f"before {date} after") == "before after"
+
+
+def test_strip_margin_dates_rewrites_text_nodes_in_place():
+    """Every matching text node under the body is rewritten; markup is kept."""
+    body = soup_body("<p>of the 2450 A.M. exodus <i>in 8 A.M. May</i></p>")
+    JubileesParser.strip_margin_dates(body)
+    assert str(body.find("p")) == "<p>of the exodus <i>in May</i></p>"
+
+
+def test_extract_page_components_strips_margin_dates_only_on_reader_pages(parser):
+    """Reader pages lose flattened margin dates; old pages keep any text outside tables."""
+    paragraph = "<p>1. And in the first week 1-7 A.M. of the first jubilee.</p>"
+    old_page = page("Jubilees 3:1-35 (iii. 1-35)", [paragraph])
+    _, old_paragraphs = parser.extract_page_components(old_page)
+    assert old_paragraphs[0].text == "1. And in the first week 1-7 A.M. of the first jubilee."
+
+    reader_page = reader_fixture("jub13.htm").replace(
+        "27. And He said", "27. And in the first week 1-7 A.M. He said"
+    )
+    _, reader_paragraphs = parser.extract_page_components(reader_page)
+    assert reader_paragraphs[0].text.startswith("27. And in the first week He said")

@@ -46,6 +46,7 @@ from open_canon_site.scrapers._osis import (
     parse_page_marker_text,
 )
 from open_canon_site.scrapers.base import ScraperSpec
+from open_canon_site.scrapers.sacred_texts._layout import legacy_html
 
 LOGGER = logging.getLogger(__name__)
 """Module logger."""
@@ -862,7 +863,7 @@ class SacredTextsParser:
             page_num: Page number (used to identify front matter pages 0-3); the
                 default ``-1`` means a body page.
         """
-        soup = BeautifulSoup(html, "html.parser")
+        soup = BeautifulSoup(legacy_html(html), "html.parser")
 
         # Extract footnotes first (they'll be inserted inline)
         self.extract_footnotes(soup)
@@ -913,6 +914,8 @@ class SacredTextsParser:
                 continue
             if "Sacred Texts" in text or "Index" in text or "«" in text or "»" in text:
                 continue
+            if text in FRONT_MATTER_BOILERPLATE:
+                continue  # the title banner the archive pages carry above every chapter
             if text.startswith("⌈") and text.endswith("⌉") and len(text) < 20:
                 continue  # Skip standalone bracketed notes
 

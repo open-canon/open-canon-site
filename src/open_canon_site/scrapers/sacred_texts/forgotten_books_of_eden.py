@@ -55,6 +55,7 @@ from open_canon_site.scrapers._osis import (
     parse_page_marker_text,
 )
 from open_canon_site.scrapers.base import ScraperSpec
+from open_canon_site.scrapers.sacred_texts._layout import legacy_html
 
 LOGGER = logging.getLogger(__name__)
 """Module logger; progress, warnings for missing pages and per-work errors go here."""
@@ -618,7 +619,7 @@ class FBEParser:
         Returns:
             Heading texts in order of appearance.
         """
-        soup = BeautifulSoup(html, "html.parser")
+        soup = BeautifulSoup(legacy_html(html), "html.parser")
         body = soup.find("body")
         root = body if body else soup
 
@@ -683,7 +684,7 @@ class FBEParser:
         Returns:
             The ordered OSIS elements.
         """
-        soup = BeautifulSoup(html, "html.parser")
+        soup = BeautifulSoup(legacy_html(html), "html.parser")
         elements: list[pyosis.TitleCt | pyosis.PCt | pyosis.HeadCt | pyosis.MilestoneCt] = []
         intro_headings = self._extract_intro_headings(html)
 
@@ -754,7 +755,7 @@ class FBEParser:
         Returns:
             The ``<div type="chapter">`` with osisID ``{book_osis_id}.{chapter_num}``.
         """
-        soup = BeautifulSoup(html, "html.parser")
+        soup = BeautifulSoup(legacy_html(html), "html.parser")
         chapter_osis_id = f"{book_osis_id}.{chapter_num}"
 
         # Collect all top-level content elements from the body
@@ -927,7 +928,7 @@ class FBEParser:
         Returns:
             The chapter div; falls back to ``_parse_chapter_page`` when no verses are found.
         """
-        soup = BeautifulSoup(html, "html.parser")
+        soup = BeautifulSoup(legacy_html(html), "html.parser")
         chapter_osis_id = f"{book_osis_id}.{chapter_num}"
         chapter_content: list = []
 
@@ -1043,7 +1044,7 @@ class FBEParser:
             The chapter div; falls back to ``_parse_chapter_page`` if a numbered
             non-poetry paragraph is found.
         """
-        soup = BeautifulSoup(html, "html.parser")
+        soup = BeautifulSoup(legacy_html(html), "html.parser")
         chapter_osis_id = f"{book_osis_id}.{chapter_num}"
         chapter_content: list = []
 
@@ -1252,7 +1253,7 @@ class FBEParser:
         Returns:
             The parsed chapter number or ``fallback``.
         """
-        soup = BeautifulSoup(html, "html.parser")
+        soup = BeautifulSoup(legacy_html(html), "html.parser")
         h3 = soup.find("h3")
         if h3:
             n = self.extract_chapter_number(h3.get_text().strip())
@@ -1274,7 +1275,7 @@ class FBEParser:
             The text of the nearest preceding italic element with trailing periods
             removed, or ``None`` if there is no ``<h3>`` or no non-empty italic text.
         """
-        soup = BeautifulSoup(html, "html.parser")
+        soup = BeautifulSoup(legacy_html(html), "html.parser")
         h3 = soup.find("h3")
         if not h3:
             return None

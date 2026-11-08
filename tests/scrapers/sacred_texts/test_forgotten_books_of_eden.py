@@ -1081,3 +1081,44 @@ def test_spec_is_wired_to_module():
     assert fbe.SPEC.run is fbe.run and fbe.SPEC.add_arguments is fbe.add_arguments
     assert fbe.SPEC.outputs == fbe.OUTPUT_FILENAMES
     assert fbe.SPEC.source == fbe.BASE_URL
+
+
+# --- redesigned reader layout ---------------------------------------------------------
+
+READER_FIXTURES = Path(__file__).parent / "fixtures" / "reader_layout"
+"""Trimmed copies of real redesigned sacred-texts.com pages."""
+
+
+def reader_fixture(name: str) -> str:
+    """Return the text of a reader-layout fixture page."""
+    return (READER_FIXTURES / name).read_text(encoding="utf-8")
+
+
+def test_parse_chapter_page_reader_layout(parser):
+    """A reader-layout chapter keeps its italic summary and numbered verses."""
+    html = reader_fixture("fbe010.htm")
+    assert parser._detect_chapter_number(html, 0) == 5
+    div = parser._parse_chapter_page(html, "Bk", 5)
+    summary = div.content[0]
+    assert summary.type_value == pyosis.OsisDivs.SUMMARY
+    assert _text(summary.content[0].content).startswith("In which Eve makes a noble")
+    verses = _verses(div)
+    assert [v.osis_id[0] for v in verses] == [f"Bk.5.{n}" for n in range(1, 15)]
+    assert _text(verses[11].content).endswith(
+        "while we dwell in it on account of our transgression."
+    )
+
+
+def test_parse_chapter_page_reader_layout_matches_old_layout(parser):
+    """The reader-layout page and the equivalent old-layout markup parse identically."""
+    old = _page(
+        '<h3 align="CENTER">CHAP. V.</h3> <i>\n<p align="CENTER">In which Eve makes a noble '
+        "and emotionable intercession, taking the blame on herself</i>.</p>"
+        "<p>THEN Adam and Eve entered the cave, and stood praying, in their own tongue, "
+        "unknown to us, but which they knew well.</p>"
+    )
+    new = reader_fixture("fbe010.htm")
+    old_div = parser._parse_chapter_page(old, "Bk", 5)
+    new_div = parser._parse_chapter_page(new, "Bk", 5)
+    assert new_div.content[0] == old_div.content[0]
+    assert _verses(new_div)[0] == _verses(old_div)[0]

@@ -16,6 +16,7 @@ import pyosis
 from open_canon_site.scrapers._http import CachedHttpFetcher
 from open_canon_site.scrapers._osis import normalize_whitespace, roman_to_int
 from open_canon_site.scrapers.base import ScraperSpec
+from open_canon_site.scrapers.sacred_texts._layout import legacy_html
 
 LOGGER = logging.getLogger(__name__)
 """Module logger; warns when an invalid cached page is discarded."""
@@ -210,7 +211,8 @@ class VitaAdaeEtEvaeParser:
     def extract_main_text(cls, raw_text: str) -> tuple[str, list[str]]:
         """Extract the source line and content lines from the page.
 
-        For original HTML the body lies between ``<h1>VITA ADAE ET EVAE</h1>`` and the
+        The main content is isolated with ``legacy_html`` first, so a redesigned
+        reader-layout page is handled like the old page. For original HTML the body lies between ``<h1>VITA ADAE ET EVAE</h1>`` and the
         ``Scanned and Edited by`` footer (or ``</body>``); the first ``<b>`` element is the
         source line. Mirror-derived Markdown text is also accepted: the part after the
         ``## VITA ADAE ET EVAE`` heading up to the footer markers, with emphasis markers removed.
@@ -224,7 +226,7 @@ class VitaAdaeEtEvaeParser:
         Raises:
             RuntimeError: If the title, body or source heading cannot be located.
         """
-        text = raw_text.replace("\r\n", "\n")
+        text = legacy_html(raw_text).replace("\r\n", "\n")
 
         if "<html" in text.lower():
             main_match = re.search(

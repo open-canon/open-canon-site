@@ -760,3 +760,45 @@ def test_run_writes_osis_from_prepopulated_cache(tmp_path: Path) -> None:
     assert written == [out / "1-enoch.xml"]
     xml = written[0].read_text(encoding="utf-8")
     assert "1En.1.1" in xml and "The words of the blessing." in xml and "1En.1.2" in xml
+
+
+# --- redesigned reader layout ---------------------------------------------------------
+
+READER_FIXTURES = Path(__file__).parent / "fixtures" / "reader_layout"
+"""Trimmed copies of real redesigned sacred-texts.com pages."""
+
+
+def reader_fixture(name: str) -> str:
+    """Return the text of a reader-layout fixture page."""
+    return (READER_FIXTURES / name).read_text(encoding="utf-8")
+
+
+def test_parse_page_reader_layout_front_matter_restores_demoted_heading(parser) -> None:
+    """The title page's demoted second ``<h1>`` is kept, and sidebar text is not."""
+    parser.parse_page(reader_fixture("boe000.htm"), page_num=0)
+    front = parser.root_div.content[-1]
+    lines = [_text(item.content) for item in front.content]
+    assert lines[:4] == ["Title Page", "THE", "BOOK OF ENOCH", "TRANSLATED BY"]
+    assert lines[-1] == "[1917]"
+    assert not any("Chapters" in line for line in lines)
+
+
+def test_parse_page_reader_layout_chapter(parser) -> None:
+    """A reader-layout chapter page starts its chapter and splits its inline verses."""
+    parser.parse_page(reader_fixture("boe010.htm"), page_num=10)
+    assert parser.current_chapter == 7
+    verses = _verses(parser)
+    assert list(verses) == [f"1En.7.{n}" for n in range(1, 7)]
+    assert (
+        _text(verses["1En.7.6"].content)
+        == "Then the earth laid accusation against the lawless ones."
+    )
+
+
+def test_parse_page_skips_archive_title_banner_between_verses(parser) -> None:
+    """The archive's "The Book of Enoch, by ..." banner is not taken as the next verse."""
+    banner = "<i>The Book of Enoch</i>, by R.H. Charles, [1917], at sacred-texts.com"
+    html = f"<h3>CHAPTER I.</h3><p>1. First verse.</p><p>{banner}</p><p>2. Second verse.</p>"
+    parser.parse_page(html, page_num=5)
+    assert list(_verses(parser)) == ["1En.1.1", "1En.1.2"]
+    assert _verses(parser)["1En.1.1"].content == ["First verse."]

@@ -24,6 +24,7 @@ from open_canon_site.scrapers._osis import (
     roman_to_int,
 )
 from open_canon_site.scrapers.base import ScraperSpec
+from open_canon_site.scrapers.sacred_texts._layout import is_reader_layout, legacy_html
 
 LOGGER = logging.getLogger(__name__)
 """Module logger; warns when an invalid cached page is discarded."""
@@ -65,6 +66,16 @@ MARKDOWN_LINK_RE: Final[re.Pattern[str]] = re.compile(r"\[([^\]]*)\]\([^)]*\)")
 """Matches a Markdown link ``[text](url)``; the text is captured in group 1 (mirror-derived text)."""
 MARKDOWN_HEADING_RE: Final[re.Pattern[str]] = re.compile(r"^#+\s+")
 """Matches leading Markdown heading markers (``#`` characters and following space)."""
+MARGIN_DATE_RE: Final[re.Pattern[str]] = re.compile(
+    r"\s*(?:\(\d+(?:-\d+)?\)\s*)?\b\d{1,4}(?:-\d{1,4})?(?:\s*\(\?\d+\))?\s+A\.?\s?M\."
+    r"(?:\s*\(A\.M\.\s*=\s*Anno Mundi\))?(?=\s|$)"
+)
+"""Matches an *anno mundi* margin date such as ``1309-1659 A.M.`` with its leading space.
+
+The old pages put these dates in table cells, which the parser skips; the redesigned
+reader layout flattens them into the running text. Variants seen: ``A M.``, ``AM.``,
+``2057 (?2050) A.M.``, ``(99-127) 130 A.M.`` and ``2450 A.M. (A.M. = Anno Mundi)``.
+"""
 HEADING_CHAPTER_RE: Final[re.Pattern[str]] = re.compile(
     r"\((?P<chapter>[ivxlcdm]+)\.", re.IGNORECASE
 )
@@ -539,9 +550,12 @@ class JubileesParser:
     def extract_page_components(self, raw_text: str) -> tuple[list[str], list[PageParagraph]]:
         """Split a page into headings and content paragraphs.
 
-        Site chrome (archive banner, navigation words, bracketed lines, ``Sacred Texts``
-        paragraphs, ``p. N`` page markers) is dropped and extraction stops at the
-        ``Footnotes`` heading.
+        The main content is isolated first with ``legacy_html`` (a no-op for old-layout
+        pages; the redesigned reader layout's sidebars, toolbars and panels are dropped),
+        and on a reader-layout page the margin dates it flattened into the text are removed.
+        Remaining site chrome (archive banner, navigation words, bracketed lines,
+        ``Sacred Texts`` paragraphs, ``p. N`` page markers) is dropped and extraction stops
+        at the ``Footnotes`` heading.
 
         Args:
             raw_text: Raw page HTML.
@@ -557,8 +571,10 @@ class JubileesParser:
                 "Jubilees scraper expects original sacred-texts HTML, not mirror-derived markdown or interstitial pages"
             )
 
-        soup = BeautifulSoup(raw_text, "html.parser")
+        soup = BeautifulSoup(legacy_html(raw_text), "html.parser")
         body = soup.body if soup.body else soup
+        if is_reader_layout(raw_text):
+            self.strip_margin_dates(body)
         footnotes = self.extract_footnotes(body)
 
         headings: list[str] = []
@@ -602,6 +618,16 @@ class JubileesParser:
             paragraphs.append(paragraph)
 
         return headings, paragraphs
+
+    @staticmethod
+    def strip_margin_dates(body: Tag) -> None:
+        """Remove *anno mundi* margin dates (``MARGIN_DATE_RE``) from every text node.
+
+        Args:
+            body: Parsed page content, modified in place.
+        """
+        for text_node in list(body.find_all(string=MARGIN_DATE_RE)):
+            text_node.replace_with(NavigableString(MARGIN_DATE_RE.sub("", str(text_node))))
 
     @staticmethod
     def should_join_with_previous(paragraph: str, previous: str) -> bool:

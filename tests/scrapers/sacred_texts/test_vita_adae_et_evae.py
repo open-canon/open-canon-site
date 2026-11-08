@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from pathlib import Path
 
 import pyosis
 import pytest
@@ -451,3 +452,31 @@ def test_spec_describes_scraper():
     assert vita.SPEC.name == "vita-adae-et-evae"
     assert vita.SPEC.outputs == (vita.OUTPUT_FILENAME,)
     assert vita.SPEC.run is vita.run and vita.SPEC.add_arguments is vita.add_arguments
+
+
+# --- redesigned reader layout ---------------------------------------------------------
+
+READER_FIXTURES = Path(__file__).parent / "fixtures" / "reader_layout"
+"""Trimmed copies of real redesigned sacred-texts.com pages."""
+
+
+def reader_fixture(name: str) -> str:
+    """Return the text of a reader-layout fixture page."""
+    return (READER_FIXTURES / name).read_text(encoding="utf-8")
+
+
+def test_is_valid_source_accepts_reader_layout_page():
+    """The redesigned reader-layout page is a genuine source page."""
+    assert VitaAdaeEtEvaeParser.is_valid_source(reader_fixture("adamnev.htm"))
+
+
+def test_extract_main_text_reads_reader_layout_page():
+    """The source line and numbered lines come from the reader content only."""
+    source, lines = VitaAdaeEtEvaeParser.extract_main_text(reader_fixture("adamnev.htm"))
+    assert source == (
+        'From "The Apocrypha and Pseudepigrapha of the Old Testament" R.H. Charles '
+        "Oxford: Clarendon Press, 1913"
+    )
+    assert lines[0].startswith("i 1 When they were driven out from paradise")
+    assert lines[1].startswith("ii 1 But after seven days")
+    assert not any("Chapters" in line or "Comments and social" in line for line in lines)
