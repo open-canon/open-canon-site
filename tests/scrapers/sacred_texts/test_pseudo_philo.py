@@ -173,3 +173,24 @@ def test_spec_and_run(monkeypatch, tmp_path: Path) -> None:
     (path,) = pseudo_philo.run(args)
     assert path == tmp_path / "pseudo-philo.xml"
     assert "PsPhilo.1.1" in path.read_text(encoding="utf-8")
+
+
+def test_italic_opened_before_paragraph_and_marker_inside_italics(
+    parser: PseudoPhiloParser,
+) -> None:
+    """``<I><P>`` (italics cut by a page break) keeps its text, and markers inside italics split verses."""
+    html = (
+        "<html>Philo<hr><h3>CHAPTER LXV.</h3>"
+        "<P>LXV. <I>And the Philistines fought</I>&nbsp;</P>"
+        '<P><A NAME="page_242"><FONT SIZE=1>p. 242</FONT></A></P>'
+        "<I><P>before the Philistines</I>: and Saul fled. 2. <I>And Saul said: Slay me. 3. And he bowed</I>.</P>"
+        "<hr></html>"
+    )
+    (chapter,) = parser.parse_chapter_page(79, html)
+    assert [v.number for v in chapter.verses] == [1, 2, 3]
+    assert (
+        flatten(chapter.verses[0].parts)
+        == "And the Philistines fought before the Philistines: and Saul fled."
+    )
+    assert flatten(chapter.verses[1].parts) == "And Saul said: Slay me."
+    assert isinstance(chapter.verses[2].parts[0], pyosis.HiCt)

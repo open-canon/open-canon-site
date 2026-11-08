@@ -88,6 +88,12 @@ CHAPTER_MARKER_RE: Final[re.Pattern[str]] = re.compile(r"^(?P<roman>[IVXLC]+)\.?
 
 The period is sometimes missing (``XXIX And``).
 """
+INLINE_BEFORE_PARAGRAPH_RE: Final[re.Pattern[str]] = re.compile(r"(?i)(<[ib]>)\s*<p>")
+"""Matches an emphasis tag opened just before a ``<P>`` (``<I><P>and Sella``).
+
+A page break splits an italic passage this way. The parser would close the paragraph at the
+``</I>`` and lose the text after it, so the tags are swapped to ``<P><I>`` first.
+"""
 HEADING_TAGS: Final[tuple[str, ...]] = ("h1", "h2", "h3", "h4", "h5", "h6")
 """Heading tag names."""
 
@@ -106,6 +112,10 @@ def verse_marker_re(verse: int) -> re.Pattern[str]:
         A compiled pattern matching the marker and the whitespace after it.
     """
     return re.compile(rf"(?<![^\s]){verse}(?:[.,]\s*|\s+(?=[A-Z(\[<“\"']))")
+
+
+Atom = tuple["str | pyosis.NoteCt | pyosis.HiCt | pyosis.MilestoneCt", "pyosis.OsisHi | None"]
+"""A string or note with the highlight type it sits in (``None`` outside any highlight)."""
 
 
 @dataclass
@@ -372,13 +382,17 @@ class PseudoPhiloParser(JubileesParser):
     def _body(raw_text: str) -> Tag:
         """Parse a page (in either site layout) and return its body.
 
+        An emphasis tag opened just before a ``<P>`` is moved inside it first (see
+        ``INLINE_BEFORE_PARAGRAPH_RE``).
+
         Args:
             raw_text: Raw page HTML.
 
         Returns:
             The ``<body>`` tag (or the soup when there is none).
         """
-        soup = BeautifulSoup(legacy_html(raw_text), "html.parser")
+        html = INLINE_BEFORE_PARAGRAPH_RE.sub(r"<P>\g<1>", legacy_html(raw_text))
+        soup = BeautifulSoup(html, "html.parser")
         return soup.body if soup.body else soup
 
     @staticmethod
@@ -392,6 +406,74 @@ class PseudoPhiloParser(JubileesParser):
             The text with each whitespace run replaced by a single plain space.
         """
         return re.sub(r"\s+", " ", text)
+
+    def _atoms(self, parts: list[InlinePart]) -> list[Atom]:
+        """Flatten inline parts so verse markers inside highlights can be found.
+
+        Highlights are replaced by their strings, each tagged with the highlight's type (the
+        innermost one for nested highlights); notes are kept whole.
+
+        Args:
+            parts: Inline parts of a paragraph.
+
+        Returns:
+            ``(string or note, highlight type or None)`` pairs in order.
+        """
+        atoms: list[Atom] = []
+        for part in parts:
+            if isinstance(part, str):
+                atoms.append((part, None))
+            elif isinstance(part, pyosis.HiCt):
+                style = part.type_value
+                for inner, inner_style in self._atoms(part.content):
+                    atoms.append((inner, inner_style or style))
+            else:
+                atoms.append((part, None))
+        return atoms
+
+    def _regroup(self, atoms: list[Atom]) -> list[InlinePart]:
+        """Rebuild inline parts from atoms, wrapping runs of one style in a highlight.
+
+        Args:
+            atoms: ``(string or note, highlight type or None)`` pairs.
+
+        Returns:
+            Consolidated inline parts.
+        """
+        result: list[InlinePart] = []
+        run: list[InlinePart] = []
+        run_style = None
+
+        def close_run() -> None:
+            """Move the pending run into ``result``, wrapped when it has a style."""
+            if not run:
+                return
+            if run_style is None:
+                result.extend(run)
+            else:
+                result.append(
+                    pyosis.HiCt(type_value=run_style, content=self.consolidate_parts(run))
+                )
+
+        previous_space = True
+        for item, style in atoms:
+            if isinstance(item, str):
+                if previous_space:
+                    item = item.lstrip()
+                if not item:
+                    continue
+                previous_space = item[-1].isspace()
+            else:
+                previous_space = False
+            if style != run_style:
+                close_run()
+                run = []
+                run_style = style
+            run.append(item)
+        close_run()
+        if result and isinstance(result[-1], pyosis.HiCt):
+            result[-1].content = self.trim_parts(result[-1].content)
+        return self.consolidate_parts(result)
 
     def parse_chapter_page(self, page_number: int, raw_text: str) -> list[Chapter]:
         """Parse a chapter page into one or more chapters.
@@ -424,7 +506,7 @@ class PseudoPhiloParser(JubileesParser):
         first_chapter: int | None = None
         chapters: list[Chapter] = []
         current: Chapter | None = None
-        verse_parts: list[InlinePart] = []
+        verse_parts: list[Atom] = []
         verse_number = 0
 
         def flush_verse() -> None:
@@ -436,7 +518,7 @@ class PseudoPhiloParser(JubileesParser):
             nonlocal verse_parts
             if current is None or verse_number == 0:
                 return
-            parts = self.trim_parts(verse_parts)
+            parts = self.trim_parts(self._regroup(verse_parts))
             if not normalize_whitespace(self.extract_text_without_notes(parts)):
                 raise RuntimeError(
                     f"Empty verse {current.number}:{verse_number} on bap{page_number:02d}"
@@ -462,11 +544,11 @@ class PseudoPhiloParser(JubileesParser):
             if not normalize_whitespace(self.extract_text_without_notes(parts)):
                 continue
 
-            scanned: list[InlinePart] = []
+            scanned: list[Atom] = []
             at_paragraph_start = True
-            for part in parts:
+            for part, style in self._atoms(parts):
                 if not isinstance(part, str):
-                    scanned.append(part)
+                    scanned.append((part, style))
                     at_paragraph_start = False
                     continue
 
@@ -499,11 +581,11 @@ class PseudoPhiloParser(JubileesParser):
                     search = verse_marker_re(verse_number + 1)
                     match_ = search.search(text)
                     if match_ is None:
-                        scanned.append(text)
+                        scanned.append((text, style))
                         text = ""
                         continue
 
-                    scanned.append(text[: match_.start()])
+                    scanned.append((text[: match_.start()], style))
                     verse_parts.extend(scanned)
                     scanned = []
                     flush_verse()
@@ -511,7 +593,7 @@ class PseudoPhiloParser(JubileesParser):
                     text = text[match_.end() :]
 
             verse_parts.extend(scanned)
-            verse_parts.append(" ")
+            verse_parts.append((" ", None))
 
         flush_verse()
 
