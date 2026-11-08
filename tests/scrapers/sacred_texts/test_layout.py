@@ -421,3 +421,23 @@ def test_clean_footnote_body_keeps_a_space_between_unwrapped_paragraphs():
     prose = '<p>Text <a></a><a data-footnote-ref="1" href="#fn-a">1</a></p>'
     paragraph = body_of(reader_page(prose, notes)).find("h3").find_next_sibling("p")
     assert "First part. Second part." in paragraph.get_text()
+
+
+# --- close_character_references ------------------------------------------------------------
+
+
+def test_close_character_references_adds_missing_semicolons():
+    """``&#7730araite`` becomes ``&#7730;araite``; closed and named references are untouched."""
+    from open_canon_site.scrapers.sacred_texts._layout import close_character_references
+
+    assert close_character_references("&#7730araite &#146 x") == "&#7730;araite &#146; x"
+    assert close_character_references("&#7730; &amp; &eacute;") == "&#7730; &amp; &eacute;"
+
+
+def test_legacy_html_keeps_the_rest_of_a_page_after_an_unterminated_reference():
+    """The malformed reference no longer swallows the markup that follows it."""
+    from bs4 import BeautifulSoup
+
+    html = "<html><body><p>and &#7730araite Jews.</p><h3>Footnotes</h3></body></html>"
+    soup = BeautifulSoup(legacy_html(html), "html.parser")
+    assert soup.find("h3") is not None

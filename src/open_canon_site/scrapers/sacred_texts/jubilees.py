@@ -32,8 +32,12 @@ LOGGER = logging.getLogger(__name__)
 OUTPUT_FILENAME: Final[str] = "jubilees.xml"
 """Name of the OSIS file written into the output directory."""
 
-BASE_URL: Final[str] = "https://sacred-texts.com/bib/jub/"
-"""Directory URL of the book on sacred-texts.com; pages are ``jub<NN>.htm`` beneath it."""
+BASE_URL: Final[str] = "https://archive.sacred-texts.com/bib/jub/"
+"""Directory URL of the book on the sacred-texts.com archive host; pages are ``jub<NN>.htm``.
+
+The archive host still serves the original page layout, whose footnotes are complete; the
+redesigned site drops some footnotes and the title page.
+"""
 PAGE_RANGE: Final[tuple[int, int]] = (0, 87)
 """Inclusive ``(first, last)`` page numbers of the book (``jub00`` .. ``jub87``)."""
 FRONT_MATTER_END_PAGE: Final[int] = 11
@@ -102,10 +106,20 @@ SENTENCE_END_RE: Final[re.Pattern[str]] = re.compile(r"""[.!?:;"')\u201d\]]\s*$"
 """Matches text ending in sentence-final punctuation (plus trailing whitespace)."""
 VERSE_LINE_RE: Final[re.Pattern[str]] = re.compile(r"^(?P<verse>\d+)\.\s+(?P<text>.+)$")
 """Matches a paragraph starting with ``<digits>. `` (``verse`` and ``text`` groups)."""
-INLINE_VERSE_RE: Final[re.Pattern[str]] = re.compile(r"(?:(?<=^)|(?<=\s))(?P<verse>\d+)\.\s+")
-"""Matches an inline verse marker ``<digits>. `` that sits at the start of a string or after
-whitespace, capturing the number as ``verse``; verses run on within one paragraph.
+INLINE_VERSE_RE: Final[re.Pattern[str]] = re.compile(
+    r"(?:(?<=^)|(?<=\s))(?P<verse>\d+)(?:(?P<dot>\.\s+)|\s\.\s+|\s+(?=[A-Z\u201c\"(]))"
+)
+"""Matches an inline verse marker that sits at the start of a string or after whitespace,
+capturing the number as ``verse``; verses run on within one paragraph.
+
+The usual form is ``<digits>. `` (``dot`` group set). The source also prints the number
+without its period (``15 And``) or with a space before it (``20 . And``); the parser only
+accepts those looser forms when the number is the next verse in sequence.
 """
+MARGIN_ONLY_RE: Final[re.Pattern[str]] = re.compile(r"^\d+\s*[IVXl1]?\s*A\.?\s?M\.$")
+"""Matches a paragraph that is only a stray *anno mundi* margin date such as ``195 I A.M.``."""
+VERSE_MARKER_WINDOW: Final[int] = 1500
+"""How far (in characters) from a verse-number link to look for the note marker it displaced."""
 JOIN_WITH_PREVIOUS_PREFIXES: Final[tuple[str, ...]] = (
     "and ",
     "or ",
@@ -427,11 +441,13 @@ class JubileesParser:
             if child.name in {"table", "tbody", "tr", "td"}:
                 continue
 
+            if child.name == "a" and child.get("name", "").startswith("page_"):
+                continue
+
             if child.name == "a" and child.get("name", "").startswith("fr_"):
-                ref_id = child.get("name", "").replace("fr_", "fn_")
                 next_sibling = child.find_next_sibling("a")
-                if next_sibling and next_sibling.get("href", "").endswith(f"#{ref_id}"):
-                    footnote = footnotes.get(ref_id)
+                if next_sibling and FOOTNOTE_HREF_RE.match(next_sibling.get("href", "")):
+                    footnote = footnotes.get(next_sibling["href"].split("#", 1)[1])
                     if footnote:
                         result.append(
                             pyosis.NoteCt(
@@ -624,7 +640,7 @@ class JubileesParser:
             if paragraph is None:
                 continue
 
-            if paragraph.text.startswith("p. "):
+            if paragraph.text.startswith("p. ") or MARGIN_ONLY_RE.match(paragraph.text):
                 continue
 
             paragraphs.append(paragraph)
@@ -633,14 +649,18 @@ class JubileesParser:
 
     @staticmethod
     def restore_verse_numbers(body: Tag) -> None:
-        """Turn footnote references that stand in for a verse number back into the number.
+        """Repair footnote references that stand in for a verse number.
 
         In a few places the source prints a footnote reference where the verse number
         belongs (``... (here) am I."<ref>2</ref>. And He said``), so the verse number is
         swallowed by the note marker. A reference whose label is a number, that directly
         follows sentence-ending punctuation and is itself followed by ``. `` is such a
-        marker: its label is moved out of the reference, to just before the period, so the
-        footnote is kept and the verse splits off as usual.
+        marker. Its label is turned back into plain text, ahead of the period, so the verse
+        splits off as usual.
+
+        The note itself belongs to the plain digit with the same label that the source
+        leaves unlinked elsewhere in the paragraph (``... sons 3 and ...``); when there is
+        one, the note moves to that digit. Otherwise it stays where the reference was.
 
         Args:
             body: Parsed page content, modified in place.
@@ -658,8 +678,73 @@ class JubileesParser:
                 or not SENTENCE_END_RE.search(str(preceding))
             ):
                 continue
-            link.clear()
             following.replace_with(NavigableString(f"{label}{following}"))
+            marker = JubileesParser.find_displaced_marker(link, label)
+            if marker is None or anchor is None or anchor.get("name") is None:
+                link.clear()
+                continue
+
+            text = str(marker)
+            match = re.search(rf"(?<![\w.:\-]){label}(?![\w.:\-])", text)
+            if match is None:  # pragma: no cover - find_displaced_marker just matched it
+                link.clear()
+                continue
+            new_anchor = copy.copy(anchor)
+            new_link = copy.copy(link)
+            anchor.extract()
+            link.extract()
+            parent = marker.parent
+            position = parent.index(marker)
+            marker.extract()
+            for offset, node in enumerate((
+                NavigableString(text[: match.start()].rstrip()),
+                new_anchor,
+                new_link,
+                NavigableString(text[match.end() :]),
+            )):
+                parent.insert(position + offset, node)
+
+    @staticmethod
+    def find_displaced_marker(link: Tag, label: str) -> NavigableString | None:
+        """Find the plain-text digit that is the real marker for a footnote.
+
+        Args:
+            link: The footnote link that is really a verse number.
+            label: The link's text (the digit to look for).
+
+        Returns:
+            The nearest text node, within ``VERSE_MARKER_WINDOW`` characters in the same
+            paragraph, holding ``label`` as a standalone unlinked number that is not itself
+            a verse number (``N. ``), or ``None``.
+        """
+        paragraph = link.find_parent("p")
+        if paragraph is None:
+            return None
+        digit_re = re.compile(rf"(?<![\w.:\-]){label}(?![\w.:\-])(?!\s?\.\s)")
+        best: NavigableString | None = None
+        best_distance = VERSE_MARKER_WINDOW + 1
+        offset = 0
+        link_offset: int | None = None
+        nodes: list[tuple[NavigableString, int]] = []
+        for node in paragraph.find_all(string=True):
+            if node.find_parent("a") is not None and node.find_parent("a") is not link:
+                offset += len(node)
+                continue
+            if node.find_parent("a") is link:
+                link_offset = offset
+                continue
+            nodes.append((node, offset))
+            offset += len(node)
+        if link_offset is None:
+            return None
+        for node, node_offset in nodes:
+            match = digit_re.search(str(node))
+            if match is None:
+                continue
+            distance = abs(node_offset + match.start() - link_offset)
+            if distance < best_distance:
+                best, best_distance = node, distance
+        return best if best_distance <= VERSE_MARKER_WINDOW else None
 
     @staticmethod
     def strip_margin_dates(body: Tag) -> None:
@@ -883,6 +968,9 @@ class JubileesParser:
             if isinstance(part, str):
                 last_end = 0
                 for match in INLINE_VERSE_RE.finditer(part):
+                    expected = 1 if current_verse_number is None else current_verse_number + 1
+                    if not match.group("dot") and int(match.group("verse")) != expected:
+                        continue
                     prefix = part[last_end : match.start()]
                     if current_verse_number is None:
                         if prefix:
@@ -1180,7 +1268,7 @@ def run(args: argparse.Namespace) -> list[Path]:
 SPEC = ScraperSpec(
     name="jubilees",
     help="Book of Jubilees (R. H. Charles, 1917) to OSIS",
-    source="https://sacred-texts.com/bib/jub/",
+    source="https://archive.sacred-texts.com/bib/jub/",
     outputs=(OUTPUT_FILENAME,),
     run=run,
     add_arguments=add_arguments,

@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="Jub" osisRefWork="Jubilees" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T00:13:09</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T00:25:47</date>
         <p TEIform="p">Scraped from https://www.sacred-texts.com/bib/jub/ and converted to OSIS by Andrew P. Sansom.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -39,6 +39,13 @@
         <p TEIform="p">NEW YORK: THE MACMILLAN COMPANY</p>
         <p TEIform="p">1917</p>
         <p TEIform="p">Scanned at sacred-texts.com, July 2004. John Bruno Hare, redactor. This text is in the public domain in the USA. These files may be used for any non-commercial purpose, provided this notice of attribution is left intact.</p>
+        <p TEIform="p">TRANSLATIONS OF EARLY DOCUMENTS</p>
+        <p TEIform="p">SERIES I</p>
+        <p TEIform="p">PALESTINIAN JEWISH TEXTS</p>
+        <p TEIform="p">(PRE-RABBINIC)</p>
+        <p TEIform="p">THE BOOK OF JUBILEES</p>
+        <p TEIform="p">OR</p>
+        <p TEIform="p">THE LITTLE GENESIS</p>
       </div>
       <div canonical="false" type="front" TEIform="div">
         <title canonical="false" type="main" TEIform="title">Editors' Preface</title>
@@ -86,7 +93,7 @@
       </div>
       <div canonical="false" type="front" TEIform="div">
         <title canonical="false" type="main" TEIform="title">Introduction: Versions and Original Language</title>
-        <p TEIform="p">The complete text of the Book is extant in an Ethiopic Version, which is also the most accurate that has survived. Four MSS. of it are known, and are preserved in European Libraries, the two most important in the National Library in Paris and in the British Museum respectively. A critical edition of the text, based on all the known MSS., has been published by Dr. Charles (Oxford, 1895), which was preceded by an important one by Dillmann (published 1859). Fragments of a Greek, Latin and (possibly) a Syriac version are also extant. The fragments of the Greek version are contained in numerous citations in Justin Martyr, Origen, Diodorus of Antioch, Isidore of Alexandria, Epiphanius, Syncellus and other writers. The Latin version, of -which about one-fourth has been preserved, is very valuable for the criticism of the text. The fragments that have survived were first published by Ceriani (in his 
+        <p TEIform="p">The complete text of the Book is extant in an Ethiopic Version, which is also the most accurate that has survived. Four MSS. of it are known, and are preserved in European Libraries, the two most important in the National Library in Paris and in the British  Museum respectively. A critical edition of the text, based on all the known MSS., has been published by Dr. Charles (Oxford, 1895), which was preceded by an important one by Dillmann (published 1859). Fragments of a Greek, Latin and (possibly) a Syriac version are also extant. The fragments of the Greek version are contained in numerous citations in Justin Martyr, Origen, Diodorus of Antioch, Isidore of Alexandria, Epiphanius, Syncellus and other writers. The Latin version, of -which about one-fourth has been preserved, is very valuable for the criticism of the text. The fragments that have survived were first published by Ceriani (in his 
           <hi type="italic" TEIform="hi">Monumenta Sacra el Profana</hi>, 1861), and have been edited by Rönsch (1874), and more recently by Charles (in his edition of the Ethiopic text referred to above). What may possibly be a fragment of a Syriac Version of our Book is contained in a British Museum MS. (Add. 12154, fol. 180) entitled "Names of the Wives of the Patriarchs according to the Hebrew Book called Jubilees." But whether this is really part of a complete version is very doubtful (see Charles, 
           <hi type="italic" TEIform="hi">op. cit.</hi>, Appendix iii.).
         </p>
@@ -388,11 +395,12 @@
       <div canonical="true" type="chapter" osisID="Jub.1" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.1.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">God's Revelation to Moses on Mount Sinai</title>
-          <verse canonical="true" osisID="Jub.1.1">And it came to pass in the first year of the exodus of the children of Israel out of Egypt, in the third month, 
+          <verse canonical="true" osisID="Jub.1.1">And it came to pass in the first year of the
+  exodus of the children of Israel out of Egypt, in the third month, 
             <note canonical="false" type="explanation" n="35:5" TEIform="note">Cf. Exod. xix. i.</note> on the sixteenth day of the month, that God spake to Moses, saying: "Come up to Me on the Mount, and I will give thee two tables of stone of the law and of the commandment, which I have written, that thou mayst teach them." 
             <note canonical="false" type="explanation" n="35:6" TEIform="note">Cf. Exod. xxiv. 12.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.1.2">And Moses went up into the mount of God, and the glory of the Lord abode on Mount Sinai, and a cloud overshadowed it six days.</verse>
+          <verse canonical="true" osisID="Jub.1.2">And Moses went up into the mount of God, and the glory of the Lord abode on Mount  Sinai, and a cloud overshadowed it six days.</verse>
           <verse canonical="true" osisID="Jub.1.3">And He called to Moses on the seventh day out of the midst of the cloud, and the appearance of the glory of the Lord was like a flaming fire on the top of the Mount.</verse>
           <verse canonical="true" osisID="Jub.1.4">And Moses was on the Mount forty days and forty nights, and God taught him the earlier and the later history 
             <note canonical="false" type="explanation" n="36:1" TEIform="note">Cf. i. 26. According to the Jewish Midrash, also, God showed Moses "all the generations that should arise," as well as "all the minutiæ of the Law" (
@@ -491,9 +499,9 @@
         </div>
         <div canonical="false" type="section" osisID="Jub.1.s2" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">God commands the Angel to write (i. 27-29).</title>
-          <verse canonical="true" osisID="Jub.1.27">And He said to the angel of the presence: 
+          <verse canonical="true" osisID="Jub.1.27">And He said to the angel of the presence:  
             <note canonical="false" type="explanation" n="39:6" TEIform="note">Cf. Isa. lxiii. 9; 
-              <hi type="italic" TEIform="hi">Test. XII. Patr., Judah 25: probably Michael is meant. Note that the medium of communication is an angel, and cf. Gal. iii. 19 (" The Law . . . ordained through angels"). Later Judaism rejected this idea. </hi>
+              <hi type="italic" TEIform="hi">Test. XII. Patr., Judah 25: probably Michael is meant. Note that the medium of communication is an angel, and cf. Gal. iii. 19 (" The Law . . . ordained through angels"). Later Judaism rejected this idea.</hi>
             </note> "Write 
             <note canonical="false" type="explanation" n="39:7" TEIform="note">
               <hi type="italic" TEIform="hi">i. e.</hi> not the Pentateuch, "but a history up to the Messianic Kingdom" (Charles, in Oxford 
@@ -503,7 +511,7 @@
           <verse canonical="true" osisID="Jub.1.28">
             <note canonical="false" type="explanation" n="39:8" TEIform="note">Read this ver. after ver. 25.</note> And the Lord will appear to the eyes of all, 
             <note canonical="false" type="explanation" n="40:1" TEIform="note">Cf. Rev. i. 7 (in the final theophany).</note> and all will know that I am the God of Israel and the Father of all the children of Jacob, 
-            <note canonical="false" type="explanation" n="40:2" TEIform="note">Cf. i. 24; Jer. xxxi. i.</note> and King on Mount Zion 
+            <note canonical="false" type="explanation" n="40:2" TEIform="note">Cf. i. 24; Jer. xxxi. i.</note> and King on Mount  Zion 
             <note canonical="false" type="explanation" n="40:3" TEIform="note">Cf. Isa. xxiv. 23.</note> for all eternity. And Zion and Jerusalem will be holy."
           </verse>
           <verse canonical="true" osisID="Jub.1.29">And the angel of the presence who went before the camp of Israel 
@@ -586,7 +594,9 @@
             <note canonical="false" type="explanation" n="44:1" TEIform="note">The two chief orders of angels observe the Sabbath with God (and Israel). The third order and the Gentiles are denied this privilege.</note> in heaven and on earth.
           </verse>
           <verse canonical="true" osisID="Jub.2.19">And He said unto us: "Behold, I will separate unto Myself 
-            <note canonical="false" type="explanation" n="44:2" TEIform="note">Cf. 1 Kings viii. 53.</note> a people from among all the peoples, and these will keep the Sabbath day, and I will sanctify them unto Myself as My people, and will bless them; as I have sanctified the Sabbath day and do sanctify (it) unto Myself, even so shall I bless them, and they will be My people and I shall be their God. 20 . And I have chosen the seed of Jacob 
+            <note canonical="false" type="explanation" n="44:2" TEIform="note">Cf. 1 Kings viii. 53.</note> a people from among all the peoples, and these will keep the Sabbath day, and I will sanctify them unto Myself as My people, and will bless them; as I have sanctified the Sabbath day and do sanctify (it) unto Myself, even so shall I bless them, and they will be My people and I shall be their God.
+          </verse>
+          <verse canonical="true" osisID="Jub.2.20">And I have chosen the seed of Jacob 
             <note canonical="false" type="explanation" n="44:3" TEIform="note">Cf. Isa. xli. 8 (" Jacob whom I have chosen "), xliv. 1, 2.</note> from amongst all that I have seen, and have written him down as My firstborn son, 
             <note canonical="false" type="explanation" n="44:4" TEIform="note">Cf. Exod. iv. 22; Ps. lxxxix. 27.</note> and have sanctified him unto Myself for ever and ever; and I will teach them the Sabbath day, that they may keep Sabbath thereon from all work."
           </verse>
@@ -677,7 +687,7 @@
           <verse canonical="true" osisID="Jub.3.10">And for this reason the commandment is written on the heavenly tables 
             <note canonical="false" type="explanation" n="47:6" TEIform="note">Cf. 1 Enoch lxxxi. 1, 2, xciii. 2, ciii. 2; the expression also occurs in 
               <hi type="italic" TEIform="hi">Test. XII. Patriarchs</hi>. In our Book the 
-              <hi type="italic" TEIform="hi">heavenly</hi> p. 48 
+              <hi type="italic" TEIform="hi">heavenly</hi>  
               <hi type="italic" TEIform="hi">tables</hi> are conceived of as the divine statute book of which the Mosaic Law is the earthly reproduction; but they also contain records of events and predictions. The underlying idea is predestinarian.
             </note> in regard to her that giveth birth: "if she beareth a male, she shall remain in her uncleanness seven days according to the first week of days, and thirty and three days shall she remain in the blood of her purifying, and she shall not touch any hallowed thing, nor enter into the sanctuary, until she accomplisheth these days which (are enjoined) in the case of a male child.
           </verse>
@@ -685,7 +695,8 @@
           <verse canonical="true" osisID="Jub.3.12">And when she had completed these eighty days we brought her into the Garden of Eden, for it is holier than all the earth besides, and every tree that is planted in it is holy.</verse>
           <verse canonical="true" osisID="Jub.3.13">Therefore, there was ordained regarding her who beareth a male or a female child the statute of those days that she should touch no hallowed thing, nor enter into the sanctuary until these days for the male or female child are accomplished.</verse>
           <verse canonical="true" osisID="Jub.3.14">This is the law and testimony which was written down for Israel, in order that they should observe (it) all the days.</verse>
-          <verse canonical="true" osisID="Jub.3.15">And in the first week of the first jubilee, Adam and his wife were in the Garden of Eden for seven 
+          <verse canonical="true" osisID="Jub.3.15">And in the first week 
+  of the first jubilee, Adam and his wife were in the Garden of Eden for seven 
             <note canonical="false" type="explanation" n="48:1" TEIform="note">According to 
               <hi type="italic" TEIform="hi">Ber. rabba</hi> xviii., 
               <hi type="italic" TEIform="hi">Sanh.</hi> 38b, Adam was only six hours in the Garden; cf. 
@@ -701,7 +712,8 @@
             <note canonical="false" type="explanation" n="49:1" TEIform="note">The bracketed words are a dittograph.</note>
           </verse>
           <verse canonical="true" osisID="Jub.3.17">
-            <note canonical="false" type="explanation" n="49:2" TEIform="note">For 17-22 cf. Gen. iii. 1-7.</note> And after the completion of the seven years, which he had completed there, seven years exactly, and in the second month, on the seventeenth day (of the month), the serpent came and approached the woman, and the serpent said to the woman, "Hath God commanded you, saying, Ye shall not eat of every tree of the garden?"
+            <note canonical="false" type="explanation" n="49:2" TEIform="note">For 17-22 cf. Gen. iii. 1-7.</note> And after the completion of the seven years, which he had completed there, seven years exactly, and in the second month, on the seventeenth 
+  day (of the month), the serpent came and approached the woman, and the serpent said to the woman, "Hath God commanded you, saying, Ye shall not eat of every tree of the garden?"
           </verse>
           <verse canonical="true" osisID="Jub.3.18">And she said to it, "Of all the fruit of the trees of the garden God hath said unto us, Eat; but of the fruit of the tree which is in the midst of the garden God hath said unto us, Ye shall not eat thereof, neither shall ye touch it, lest ye die."</verse>
           <verse canonical="true" osisID="Jub.3.19">And the serpent said unto the woman, "Ye shall not surely die: for God doth know that on the day ye shall eat thereof, your eyes will be opened, and ye will be as gods, and ye will know good and evil."</verse>
@@ -733,7 +745,8 @@
           </verse>
           <verse canonical="true" osisID="Jub.3.29">And He sent out of the Garden of Eden all flesh that was in the Garden of Eden, and all flesh was scattered according to its kinds, and according to its types unto the places which had been created for them.</verse>
           <verse canonical="true" osisID="Jub.3.30">And to Adam alone did He give (the wherewithal) to cover his shame, of all the beasts and cattle.</verse>
-          <verse canonical="true" osisID="Jub.3.31">On this account, it is prescribed on the heavenly tables as touching all those who know the judgment of the law, that they should cover their shame, and should not uncover themselves as the Gentiles uncover themselves. 
+          <verse canonical="true" osisID="Jub.3.31">On this account, it is prescribed on the heavenly tables as touching all those who know the judgment of the law, that they should cover their shame, and should not uncover themselves as the Gentiles uncover 
+  themselves. 
             <note canonical="false" type="explanation" n="50:4" TEIform="note">A protest against the Greek custom of exposing the person in public athletic sports; cf. 1 Macc. i. 13 f.; 2 Macc. iv. 9-14; Josephus, 
               <hi type="italic" TEIform="hi">Ant.</hi> xii. 5, 1.
             </note>
@@ -753,7 +766,10 @@
       <div canonical="true" type="chapter" osisID="Jub.4" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.4.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">Cain and Abel (iv. 1-12; cf. Gen. iv.).</title>
-          <verse canonical="true" osisID="Jub.4.1">And in the third week in the second jubilee she gave birth to Cain, and in the fourth she gave birth to Abel, and in the fifth she gave birth to her daughter ’Âwân. 
+          <verse canonical="true" osisID="Jub.4.1">And in the third week in the second jubilee 
+  she gave birth to Cain, and in the fourth she gave birth 
+  to Abel, and in the fifth she gave birth to her daughter 
+  ’Âwân. 
             <note canonical="false" type="explanation" n="51:3" TEIform="note">
               <hi type="italic" TEIform="hi">i.e.</hi> "iniquity" (Heb. 
               <hi type="italic" TEIform="hi">’āwen</hi>). Another daughter, 
@@ -761,7 +777,8 @@
               <hi type="italic" TEIform="hi">Pirḳe de R. Eliezer</hi>, Cain's wife was his twin-sister (xxi.).
             </note>
           </verse>
-          <verse canonical="true" osisID="Jub.4.2">And in the first (year) of the third jubilee, Cain slew Abel because (God) accepted the sacrifice of Abel, and did not accept the offering of Cain.</verse>
+          <verse canonical="true" osisID="Jub.4.2">And in the first (year) of the third jubilee, 
+  Cain slew Abel because (God) accepted the sacrifice of Abel, and did not accept the offering of Cain.</verse>
           <verse canonical="true" osisID="Jub.4.3">And he slew him in the field: and his blood cried from the ground to heaven, complaining because he had slain him. 
             <note canonical="false" type="explanation" n="51:4" TEIform="note">Cf. Gen. iv. 4, 5, 8, 10.</note>
           </verse>
@@ -772,20 +789,25 @@
             <note canonical="false" type="explanation" n="51:6" TEIform="note">Cf. Deut. xxvii. 24.</note>
           </verse>
           <verse canonical="true" osisID="Jub.4.6">And for this reason we announce when we come before the Lord our God all the sin which is committed in heaven and on earth, and in light and in darkness, and everywhere.</verse>
-          <verse canonical="true" osisID="Jub.4.7">And Adam and his wife mourned for Abel four weeks of years, and in the fourth year of the fifth week they became joyful, and Adam knew his wife again, and she bare him a son, and he 
+          <verse canonical="true" osisID="Jub.4.7">And Adam and his wife mourned for Abel four weeks of years, and in the fourth year 
+  of the fifth week they became joyful, and Adam knew his wife again, and she bare him a son, and he 
             <note canonical="false" type="explanation" n="52:1" TEIform="note">So Sam.; but MT "she." In our Book it is generally the father who names the child.</note> called his name Seth; for he said "God hath raised up a second seed unto us on the earth instead of Abel; for Cain slew him." 
             <note canonical="false" type="explanation" n="52:2" TEIform="note">Cf. Gen. iv. 25.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.4.8">And in the sixth week he begat his daughter ’Azûrâ.</verse>
+          <verse canonical="true" osisID="Jub.4.8">And in the sixth week he 
+  begat his daughter ’Azûrâ.</verse>
           <verse canonical="true" osisID="Jub.4.9">And Cain took ’Âwân his sister to be his wife and she bare him Enoch 
-            <note canonical="false" type="explanation" n="52:3" TEIform="note">Cf. Gen. iv. 17.</note> at the close of the fourth jubilee. And in the first year of the first week of the fifth jubilee, houses were built on the earth, and Cain built a city, and called its name after the name of his son Enoch.
+            <note canonical="false" type="explanation" n="52:3" TEIform="note">Cf. Gen. iv. 17.</note> at 
+  the close of the fourth jubilee. And in the first year of the first week of the fifth jubilee, houses were built 
+  on the earth, and Cain built a city, and called its name after the name of his son Enoch.
           </verse>
           <verse canonical="true" osisID="Jub.4.10">And Adam knew Eve his wife and she bare yet nine sons. 
             <note canonical="false" type="explanation" n="52:4" TEIform="note">Pseudo-Philo, 
               <hi type="italic" TEIform="hi">Bibl. Antiq.</hi>, gives the names of these nine sons.
             </note>
           </verse>
-          <verse canonical="true" osisID="Jub.4.11">And in the fifth week of the fifth jubilee Seth took ’Azûrâ his sister to be his wife, and in the fourth (year of the sixth week) she bare him Enos. 
+          <verse canonical="true" osisID="Jub.4.11">And in the fifth week of the fifth jubilee Seth took ’Azûrâ his sister to be his wife, and in the fourth 
+  (year of the sixth week) she bare him Enos. 
             <note canonical="false" type="explanation" n="52:5" TEIform="note">Cf. Gen. iv. 26.</note>
           </verse>
           <verse canonical="true" osisID="Jub.4.12">He 
@@ -795,12 +817,17 @@
         <div canonical="false" type="section" osisID="Jub.4.s2" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">The Patriarchs from Adam to Noah (cf. Gen. v.); Life of Enoch; Death of Adam and Gain (iv. 13-33).</title>
           <verse canonical="true" osisID="Jub.4.13">
-            <note canonical="false" type="explanation" n="52:7" TEIform="note">For 13-14 cf. Gen. v. 9, 12.</note> And in the seventh jubilee in the third week Enos took Nôâm his sister to be his wife, and she bare him a son in the third year of the fifth week, and he called his name Kenan.
+            <note canonical="false" type="explanation" n="52:7" TEIform="note">For 13-14 cf. Gen. v. 9, 12.</note> And in the seventh jubilee in the third week Enos took Nôâm his sister to be his wife, and she bare 
+  him a son in the third year of the fifth week, and he called his name Kenan.
           </verse>
-          <verse canonical="true" osisID="Jub.4.14">And at the close of the eighth jubilee Kenan took Mûalêlêth 
-            <note canonical="false" type="explanation" n="52:8" TEIform="note">A fem. form = "she who praises God."</note> his sister to be his wife, and she bare him a son in the ninth jubilee, in the first week in the third year of this week, and he called his name Mahalalel.
+          <verse canonical="true" osisID="Jub.4.14">And at the close of the 
+  eighth jubilee Kenan took Mûalêlêth 
+            <note canonical="false" type="explanation" n="52:8" TEIform="note">A fem. form = "she who praises God."</note> his sister to be his wife, and she bare him a son in the ninth jubilee, 
+  in the first week in the third year of this week, and 
+  he called his name Mahalalel.
           </verse>
-          <verse canonical="true" osisID="Jub.4.15">And in the second week of the tenth jubilee Mahalalel took unto him to wife Dînâh, the daughter of Barâkî’êl the daughter of his father's brother, and she bare him a son in the third week in the sixth year, and he called his name Jared; 
+          <verse canonical="true" osisID="Jub.4.15">And in the second week of the tenth jubilee Mahalalel took unto him to wife Dînâh, the daughter of Barâkî’êl the daughter of his father's brother, and she bare him a son in the third 
+  week in the sixth year, and he called his name Jared; 
             <note canonical="false" type="explanation" n="52:9" TEIform="note">Cf. Gen. v. 15.</note> for in his days the angels of the Lord descended on the earth, 
             <note canonical="false" type="explanation" n="53:1" TEIform="note">This last line looks like a quotation from 1 Enoch vi. 6 ("who descended in the days of Jared"). Note the play in Hebrew on the name 
               <hi type="italic" TEIform="hi">Jared</hi> (
@@ -811,7 +838,9 @@
             <note canonical="false" type="explanation" n="53:2" TEIform="note">This name is given to angels in Dan. iv. 13, 17, 23; in 1 Enoch it is applied especially to the fallen angels (cf. 1 Enoch i. 5, x. 9, 15 and often).</note> that they should instruct the children of men, 
             <note canonical="false" type="explanation" n="53:3" TEIform="note">This statement is interesting. It describes what was probably the original commission by God to the angelic watchers, who, however, fell when they descended to the earth. According to 1 Enoch, Enoch acquired his supernatural knowledge from the instruction of angels.</note> and that they should do judgment and uprightness on the earth.
           </verse>
-          <verse canonical="true" osisID="Jub.4.16">And in the eleventh jubilee Jared took to himself a wife, and her name was Bâraka, the daughter of Râsûjâl, a daughter of his father's brother, in the fourth week of this jubilee, and she bare him a son in the fifth week, in the fourth year of the jubilee, and he called his name Enoch. 
+          <verse canonical="true" osisID="Jub.4.16">And in the eleventh jubilee Jared took to himself 
+  a wife, and her name was Bâraka, the daughter of Râsûjâl, a daughter of his father's brother, in the fourth week of this jubilee, and she bare him a son in the fifth week, in the fourth year of the jubilee, 
+  and he called his name Enoch. 
             <note canonical="false" type="explanation" n="53:4" TEIform="note">Cf. Gen. v. 18.</note>
           </verse>
           <verse canonical="true" osisID="Jub.4.17">And he 
@@ -829,12 +858,14 @@
             <note canonical="false" type="explanation" n="54:2" TEIform="note">
               <hi type="italic" TEIform="hi">i. e.</hi> Enoch. The writings of Enoch are mentioned elsewhere (1 Enoch, 
               <hi type="italic" TEIform="hi">Test. XII. Patriarchs</hi>).
-            </note> saw and understood everything, and wrote his testimony, and placed the testimony on earth for all the children of men and for their generations.
+            </note> saw and understood everything, and wrote his testimony, and placed the testimony on earth for all the children of men and 
+  for their generations.
           </verse>
           <verse canonical="true" osisID="Jub.4.20">And in the twelfth jubilee, in the seventh week thereof, he took to himself a wife, and her name was Ednî, 
             <note canonical="false" type="explanation" n="54:3" TEIform="note">
               <hi type="italic" TEIform="hi">Edna</hi> in 1 Enoch lxxxv. 3.
-            </note> the daughter of Dânêl, the daughter of his father's brother, and in the sixth year in this week she bare him a son and he called his name Methuselah. 
+            </note> the daughter of Dânêl, 
+  the daughter of his father's brother, and in the sixth year in this week she bare him a son and he called his name Methuselah. 
             <note canonical="false" type="explanation" n="54:4" TEIform="note">Cf. Gen. V. 21.</note>
           </verse>
           <verse canonical="true" osisID="Jub.4.21">And he was moreover with the angels of God these six jubilees of years, and they showed him everything which is on earth 
@@ -857,13 +888,16 @@
             <note canonical="false" type="explanation" n="55:4" TEIform="note">The exact identification is uncertain; possibly the mount above Eden, where the Scthites live, is meant. Other suggestions are Mt. Ephraim, which would imply a Samaritan authorship, and Lubar, on Ararat, which would connect well with the history of Noah.</note> and this mountain on which thou art this day, Mount Sinai, and Mount Zion (which) will be sanctified in the new creation for a sanctification of the earth; through it will the earth be sanctified from all (its) guilt and its uncleanness throughout the generations of the world. 
             <note canonical="false" type="explanation" n="55:5" TEIform="note">Cf. i. 29.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.4.27">And in the fourteenth jubilee Methuselah took unto himself a wife, Ednâ the daughter of ’Âzrîâl, the daughter of his father's brother, in the third week, in the first year of this week, and he begat a son and called his name Lamech. 
+          <verse canonical="true" osisID="Jub.4.27">And in the fourteenth 
+  jubilee Methuselah took unto himself a wife, Ednâ the daughter of ’Âzrîâl, the daughter of his father's brother, in the third week, in the first year of this week, and he begat a son and called his name Lamech. 
             <note canonical="false" type="explanation" n="55:6" TEIform="note">Cf. Gen. v. 25.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.4.28">And in the fifteenth jubilee in the third week Lamech took to himself a wife, and her name was Bêtênôs the daughter of Bârâkî’îl, the daughter of his father's brother, and in this week she bare him a son and he called his name Noah, saying, "This one will comfort me for my trouble and all my work, and for the ground which the Lord hath cursed." 
+          <verse canonical="true" osisID="Jub.4.28">And in the fifteenth jubilee in the third week 
+  Lamech took to himself a wife, and her name was Bêtênôs the daughter of Bârâkî’îl, the daughter of his father's brother, and in this week she bare him a son and he called his name Noah, saying, "This one will comfort me for my trouble and all my work, and for the ground which the Lord hath cursed." 
             <note canonical="false" type="explanation" n="55:7" TEIform="note">Cf. Gen. v. 29.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.4.29">And at the close of the nineteenth jubilee, in the seventh week in the sixth year thereof, Adam died, and all his sons buried him in the land of his creation, 
+          <verse canonical="true" osisID="Jub.4.29">And at the close of the nineteenth jubilee, in the seventh week in the sixth year thereof, Adam died, and all 
+  his sons buried him in the land of his creation, 
             <note canonical="false" type="explanation" n="55:8" TEIform="note">Cf. iii. 32.</note> and he was the first to be buried 
             <note canonical="false" type="explanation" n="55:9" TEIform="note">This implies the view that Abel's body was not buried before Adam's. According to 
               <hi type="italic" TEIform="hi">Pirḳe de R. Eliezer</hi> (xxi.), Adam was at first uncertain what to do, but then buried Abel's corpse.
@@ -882,7 +916,11 @@
               <hi type="italic" TEIform="hi">lex talionis</hi>; cf. Exod. xxi. 24 ("eye for eye, tooth for tooth"); Lev. xxiv. 19. Similar examples are given in 2 Macc. v. 19 f., xv. 32 f. The rigorous application of this "law" was upheld by the Sadducees, as against the Pharisees.
             </note>
           </verse>
-          <verse canonical="true" osisID="Jub.4.33">And in the twenty-fifth jubilee Noah took to himself a wife, and her name was ’Ĕmzârâ, the daughter of Râkê’êl, the daughter of his father's brother, in the first year in the fifth week: and in the third year thereof she bare him Shem, in the fifth year thereof she bare him Ham, and in the first year in the sixth week she bare him Japheth. 
+          <verse canonical="true" osisID="Jub.4.33">And in 
+  the twenty-fifth jubilee Noah took to himself a wife, and her name was ’Ĕmzârâ, the daughter of Râkê’êl, the daughter of his father's brother, in the first year 
+  in the fifth week: and in the third year thereof she 
+  bare him Shem, in the fifth year thereof she bare him 
+  Ham, and in the first year in the sixth week she bare him Japheth. 
             <note canonical="false" type="explanation" n="56:3" TEIform="note">Cf. Gen. V. 22. Note that Shem is represented as the eldest; cf. Gen. x. 21 (R.V.).</note>
           </verse>
         </div>
@@ -948,8 +986,10 @@
           <verse canonical="true" osisID="Jub.5.21">And He commanded Noah to make him an ark, that he might save himself from the waters of the flood. 
             <note canonical="false" type="explanation" n="59:2" TEIform="note">Cf. Gen. vi. 14.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.5.22">And Noah made the ark in all respects as He commanded him, in the twenty-seventh jubilee of years, in the fifth week in the fifth year (on the new moon of the first month).</verse>
-          <verse canonical="true" osisID="Jub.5.23">And he entered in the sixth (year) thereof, in the second month, on the new moon of the second month, till the sixteenth; and he entered, and all that we brought to him, into the ark, and the Lord closed 
+          <verse canonical="true" osisID="Jub.5.22">And Noah made the ark in all respects as He commanded him, in the twenty-seventh jubilee 
+  of years, in the fifth week in the fifth year (on the new moon of the first month).</verse>
+          <verse canonical="true" osisID="Jub.5.23">And he entered in the sixth (year) thereof, in the second month, on 
+  the new moon of the second month, till the sixteenth; and he entered, and all that we brought to him, into the ark, and the Lord closed 
             <note canonical="false" type="explanation" n="59:3" TEIform="note">Cf. Gen. vii. 16.</note> it from without on the seventeenth 
             <note canonical="false" type="explanation" n="59:4" TEIform="note">Cf. Gen. vii. 11.</note> evening.
           </verse>
@@ -957,7 +997,7 @@
             <note canonical="false" type="explanation" n="59:5" TEIform="note">Cf. 1 Enoch lxxxix. 2. Note the recurrence of the number seven in these connexions.</note> of heaven,  And the mouths of the fountains of the great deep, seven mouths in number.
           </verse>
           <verse canonical="true" osisID="Jub.5.25">And the flood-gates began to pour down water from the heaven forty days and forty nights,  And the fountains of the deep also sent up waters, until the whole world was full of water.</verse>
-          <verse canonical="true" osisID="Jub.5.26">And the waters increased upon the earth  Fifteen cubits did the waters rise above all the high mountains, p. 60  And the ark was lift up above the earth,  And it moved upon the face of the waters. 
+          <verse canonical="true" osisID="Jub.5.26">And the waters increased upon the earth  Fifteen cubits did the waters rise above all the high mountains,   And the ark was lift up above the earth,  And it moved upon the face of the waters. 
             <note canonical="false" type="explanation" n="60:1" TEIform="note">For 24-26 cf. Gen. vii. 11, 12, 18, 20.</note>
           </verse>
           <verse canonical="true" osisID="Jub.5.27">And the water prevailed on the face of the earth five months-one hundred and fifty days. 
@@ -966,7 +1006,8 @@
           <verse canonical="true" osisID="Jub.5.28">And the ark went and rested on the top of Lûbâr, one of the mountains of Ararat. 
             <note canonical="false" type="explanation" n="60:3" TEIform="note">Cf. Gen. viii. 4. Lubar is mentioned again in vii. 1, 17.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.5.29">And (on the new moon) in the fourth month the fountains of the great deep were closed and the flood-gates of heaven were restrained; and on the new moon of the seventh month all the mouths of the abysses of the earth were opened, and the water began to descend into the deep below. 
+          <verse canonical="true" osisID="Jub.5.29">And (on the new moon) in the fourth month the fountains of the great deep were closed and the flood-gates of heaven were restrained; and on the new moon of the seventh month all the mouths of the abysses of the earth were opened, and the water began to descend into the deep 
+  below. 
             <note canonical="false" type="explanation" n="60:4" TEIform="note">Cf. Gen. viii. 2; 1 Enoch lxxxix. 7.</note>
           </verse>
           <verse canonical="true" osisID="Jub.5.30">And on the new moon of the tenth month the tops of the mountains were seen, and on the new moon of the first month the earth became visible. 
@@ -1022,7 +1063,9 @@
           </verse>
           <verse canonical="true" osisID="Jub.6.14">And for this law there is no limit of days, for it is for ever. They shall observe it throughout their generations, so that they may continue supplicating on your behalf with blood before the altar; 
             <note canonical="false" type="explanation" n="62:4" TEIform="note">Cf. Lev. xvii. ii.</note> every day and at the time of morning and evening they shall seek forgiveness 
-            <note canonical="false" type="explanation" n="62:5" TEIform="note">Cf. Num. xxviii. 3-8. -Note that in our text here 11-14 deal with the Mosaic development of the covenant with Noah.</note> on your behalf perpetually before the Lord that they may keep it and not be rooted out. 15 And He gave to Noah 
+            <note canonical="false" type="explanation" n="62:5" TEIform="note">Cf. Num. xxviii. 3-8. -Note that in our text here 11-14 deal with the Mosaic development of the covenant with Noah.</note> on your behalf perpetually before the Lord that they may keep it and not be rooted out.
+          </verse>
+          <verse canonical="true" osisID="Jub.6.15">And He gave to Noah 
             <note canonical="false" type="explanation" n="62:6" TEIform="note">The text here returns to Noah.</note> and his sons a sign that there should not again be a flood on the earth.
           </verse>
           <verse canonical="true" osisID="Jub.6.16">He set His bow in the cloud for a sign of the eternal covenant that there should not again be a flood on the earth to destroy it all the days of the earth. 
@@ -1031,7 +1074,8 @@
           <verse canonical="true" osisID="Jub.6.17">For this reason it is ordained and written on the heavenly tables, that they should celebrate the feast of weeks 
             <note canonical="false" type="explanation" n="63:1" TEIform="note">The "Feast of Weeks" (cf. Exod. xxxiv. 22) is here only connected with Noah's covenant, the establishment of which it is supposed to commemorate. Later Judaism associated it with the giving of the Law on Sinai. It was celebrated, according to our Book, on the 15th day of the 3rd month.</note> in this month once a year, to renew the covenant every year.
           </verse>
-          <verse canonical="true" osisID="Jub.6.18">And this whole festival was celebrated in heaven from the day of creation till the days of Noah-twenty-six jubilees and five weeks of years: and Noah and his sons observed it for seven jubilees and one week of years, till the day of Noah's death, and from the day of Noah's death his sons did away with (it) until the days of Abraham, and they ate blood. 
+          <verse canonical="true" osisID="Jub.6.18">And this whole festival was celebrated in heaven from the day of creation till the days of Noah-twenty-six jubilees and five weeks of years: and Noah and his sons observed it for seven jubilees and one week of years, till the day of Noah's death, and from the day of 
+  Noah's death his sons did away with (it) until the days of Abraham, and they ate blood. 
             <note canonical="false" type="explanation" n="63:2" TEIform="note">Notice that the non-observance of the Feast signalizes the breaking of the covenant-condition about eating blood.</note>
           </verse>
           <verse canonical="true" osisID="Jub.6.19">But Abraham observed it, and Isaac and Jacob and his children observed it up to thy days, and in thy days the children of Israel forgot it until ye celebrated it anew on this mountain.</verse>
@@ -1090,10 +1134,12 @@
         <div canonical="false" type="section" osisID="Jub.7.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">Noah offers Sacrifice; the Cursing of Canaan (cf. Gen. ix. 20-28): Noah's Sons and Grandsons (cf. Gen. x.) and their Cities. Noah's Admonitions (vii. 1-39).</title>
           <verse canonical="true" osisID="Jub.7.1">And in the seventh week in the first year thereof, in this jubilee, Noah planted vines on the mountain on which the ark had rested, named Lûbâr, 
-            <note canonical="false" type="explanation" n="66:2" TEIform="note">Cf. v. 28.</note> one of the Ararat Mountains, and they produced fruit in the fourth year, 
+            <note canonical="false" type="explanation" n="66:2" TEIform="note">Cf. v. 28.</note> one of the Ararat Mountains, and they 
+  produced fruit in the fourth year, 
             <note canonical="false" type="explanation" n="66:3" TEIform="note">Cf. Lev. xix. 23-25 (fruit of trees not to be touched during the first three years after planting).</note> and he guarded their fruit, and gathered it in this year in the seventh month.
           </verse>
-          <verse canonical="true" osisID="Jub.7.2">And he made wine therefrom and put it into a vessel, and kept it until the fifth year, until the first day, on the new moon of the first month.</verse>
+          <verse canonical="true" osisID="Jub.7.2">And he made wine therefrom and put it 
+  into a vessel, and kept it until the fifth year, until the first day, on the new moon of the first month.</verse>
           <verse canonical="true" osisID="Jub.7.3">And he celebrated with joy the day of this feast, and he made a burnt sacrifice unto the Lord, one young ox and one ram, and seven sheep, each a year old, and a kid of the goats, that he might make atonement thereby for himself and his sons. 
             <note canonical="false" type="explanation" n="66:4" TEIform="note">Cf. Num. xxix. 2, 5.</note>
           </verse>
@@ -1126,7 +1172,8 @@
           <verse canonical="true" osisID="Jub.7.18">And these are the sons of Shem: Elam, and Asshur, and Arpachshad--this (son) was born two years after the flood--and Lud, and Aram. 
             <note canonical="false" type="explanation" n="68:2" TEIform="note">Cf. Gen. x. 22.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.7.19">The sons of Japheth: Gomer and Magog and Madai and Javan, Tubal and Meshech and Tiras: these are the sons of Noah. 
+          <verse canonical="true" osisID="Jub.7.19">The sons of Japheth: Gomer and Magog and Madai and Javan, Tubal and Meshech and Tiras: these are 
+  the sons of Noah. 
             <note canonical="false" type="explanation" n="68:3" TEIform="note">Cf. Gen. x. 2.</note>
           </verse>
           <verse canonical="true" osisID="Jub.7.20">
@@ -1166,7 +1213,7 @@
           <verse canonical="true" osisID="Jub.7.28">For whoso sheddeth man's blood, and whoso eateth the blood of any flesh, will all be destroyed from the earth. 
             <note canonical="false" type="explanation" n="69:8" TEIform="note">Cf. Gen. ix. 4, 6; Lev. vii. 27.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.7.29">And there will not be left any man that eateth blood.  Or that sheddeth the blood of man on the earth,  Nor will there be left to him any seed or descendants living under heaven;  For into Sheol will they go,  And into the place of condemnation will they descend. p. 70  And into the darkness of the deep will they all be removed by a violent death. 
+          <verse canonical="true" osisID="Jub.7.29">And there will not be left any man that eateth blood.  Or that sheddeth the blood of man on the earth,  Nor will there be left to him any seed or descendants living under heaven;  For into Sheol will they go,  And into the place of condemnation will they descend.   And into the darkness of the deep will they all be removed by a violent death. 
             <note canonical="false" type="explanation" n="70:1" TEIform="note">Cf. xxii. 22; 1 Enoch ciii. 7, 8.</note>
           </verse>
           <verse canonical="true" osisID="Jub.7.30">There shall be no blood seen upon you of all the blood there shall be all the days in which ye have killed any beasts or cattle or whatever flieth upon the earth, and work ye a good work to your souls by covering that which hath been shed 
@@ -1194,7 +1241,7 @@
             </note> eat before the altar which receiveth (it).
           </verse>
           <verse canonical="true" osisID="Jub.7.37">And in the fifth year 
-            <note canonical="false" type="explanation" n="71:2" TEIform="note">Charles suspects a lacuna in the text here.</note> . . . . . . . make ye the release so that ye release it 
+            <note canonical="false" type="explanation" n="71:2" TEIform="note">Charles suspects a lacuna in the text here.</note> .        .        .        .        .        .        . make ye the release so that ye release it 
             <note canonical="false" type="explanation" n="71:3" TEIform="note">Or render "(In the seventh year) ye will let it (the land) rest and lie fallow" (Charles).</note> in righteousness and uprightness, and ye shall be righteous, and all that you plant will prosper.
           </verse>
           <verse canonical="true" osisID="Jub.7.38">For thus did Enoch, the father of your father command Methuselah, his son, and Methuselah his son Lamech, and Lamech commanded me all the things which his fathers commanded him.</verse>
@@ -1206,7 +1253,9 @@
       <div canonical="true" type="chapter" osisID="Jub.8" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.8.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">Genealogy of the Descendants of Shem: Noah and his Sons divide the Earth (viii. 1-30; cf. Gen. x.).</title>
-          <verse canonical="true" osisID="Jub.8.1">In the twenty-ninth jubilee, in the first week, in the beginning thereof Arpachshad took to himself a wife and her name was Râsû’ĕjâ, [the daughter of Sûsân,] the daughter of Elam, and she bare him a son in the third year in this week, and he called his name Kâinâm. 
+          <verse canonical="true" osisID="Jub.8.1">In the twenty-ninth jubilee, in the first week, 
+  in the beginning thereof Arpachshad took to himself a wife and her name was Râsû’ĕjâ, [the daughter of Sûsân,] the daughter of Elam, and she bare him a son in the third year in this week, and he called his name 
+  Kâinâm. 
             <note canonical="false" type="explanation" n="71:5" TEIform="note">This name occurs in the LXX of Gen. xi. 13, but not in the MT or other Versions. It also occurs in the genealogy in Luke iii. 36.</note>
           </verse>
           <verse canonical="true" osisID="Jub.8.2">And the son grew, and his father taught him writing, and he went to seek for himself a place where he might seize for himself a city.</verse>
@@ -1216,27 +1265,34 @@
             </note>
           </verse>
           <verse canonical="true" osisID="Jub.8.4">And he wrote it down and said nothing regarding it; for he was afraid to speak to Noah about it lest he should be angry with him on account of it.</verse>
-          <verse canonical="true" osisID="Jub.8.5">And in the thirtieth jubilee, in the second week, in the first year thereof, he took to himself a wife, and her name was Mêlkâ, the daughter of Madai, the son of Japheth, and in the fourth year he begat a son, and called his name Shelah; 
+          <verse canonical="true" osisID="Jub.8.5">And in the thirtieth jubilee, in the second week, in the 
+  first year thereof, he took to himself a wife, and her name was Mêlkâ, the daughter of Madai, the son of 
+  Japheth, and in the fourth year he begat a son, and called his name Shelah; 
             <note canonical="false" type="explanation" n="72:2" TEIform="note">Cf. Gen. X. 24.</note> for he said: "Truly I have been sent." 
             <note canonical="false" type="explanation" n="72:3" TEIform="note">A paronomasia is implied in the original Hebrew here.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.8.6">[And in the fourth year he was born], and Shelah grew up and took to himself a wife, and her name was Mû’ak, the daughter of Kêsêd, his father's brother, in the one and thirtieth jubilee, in the fifth week, in the first year thereof.</verse>
-          <verse canonical="true" osisID="Jub.8.7">And she bare him a son in the fifth year thereof, and he called his name Eber: and he took unto himself a wife, and her name was ’Azûrâd 
+          <verse canonical="true" osisID="Jub.8.6">[And in the fourth year he was born], and Shelah grew up and took to himself a wife, and her name was Mû’ak, the daughter of Kêsêd, his father's brother, in the one and thirtieth 
+  jubilee, in the fifth week, in the first year thereof.</verse>
+          <verse canonical="true" osisID="Jub.8.7">And she bare him a son in the fifth year thereof, and he called his name Eber: and he took unto 
+  himself a wife, and her name was ’Azûrâd 
             <note canonical="false" type="explanation" n="72:4" TEIform="note">Read 
               <hi type="italic" TEIform="hi">’Azûrâ</hi>.
-            </note> the daughter of Nêbrôd, in the thirty-second jubilee, in the seventh week, in the third year thereof.
+            </note> the daughter 
+  of Nêbrôd, in the thirty-second jubilee, in the seventh week, in the third year thereof.
           </verse>
-          <verse canonical="true" osisID="Jub.8.8">And in the sixth year thereof, she bare him a son, and he called his name Peleg; for in the days when he was born the children of Noah began to divide the earth amongst themselves: for this reason he called his name Peleg. 
+          <verse canonical="true" osisID="Jub.8.8">And in the sixth 
+  year thereof, she bare him a son, and he called his name Peleg; for in the days when he was born the children of Noah began to divide the earth amongst themselves: for this reason he called his name Peleg. 
             <note canonical="false" type="explanation" n="72:5" TEIform="note">There is a play (in the original Hebrew) on the meaning of the name 
               <hi type="italic" TEIform="hi">Peleg</hi> here.
             </note>
           </verse>
           <verse canonical="true" osisID="Jub.8.9">And they divided (it) secretly 
-            <note canonical="false" type="explanation" n="72:6" TEIform="note">The secret division of the earth is followed by an authoritative one by Noah, and made binding on his descendants. Canaan is included in Shem's lot. Hence, the Israelite conquest p. 73 later is justified. 'Noah's division of the earth is alluded to in 
+            <note canonical="false" type="explanation" n="72:6" TEIform="note">The secret division of the earth is followed by an authoritative one by Noah, and made binding on his descendants. Canaan is included in Shem's lot. Hence, the Israelite conquest  later is justified. 'Noah's division of the earth is alluded to in 
               <hi type="italic" TEIform="hi">Pirḳe de R. Eliezer</hi> xxiii. (end).
             </note> amongst themselves, and told it to Noah.
           </verse>
-          <verse canonical="true" osisID="Jub.8.10">And it came to pass in the beginning of the thirty-third jubilee that they divided the earth into three parts, for Shem and Ham and Japheth, according to the inheritance of each, in the first year in the first week, when one of us, 
+          <verse canonical="true" osisID="Jub.8.10">And it came to pass in the beginning of the thirty-third jubilee that they divided 
+  the earth into three parts, for Shem and Ham and Japheth, according to the inheritance of each, in the first year in the first week, when one of us, 
             <note canonical="false" type="explanation" n="73:1" TEIform="note">
               <hi type="italic" TEIform="hi">i. e.</hi> one of the angels.
             </note> who had been sent, was with them.
@@ -1266,10 +1322,10 @@
           <verse canonical="true" osisID="Jub.8.14">[paragraph continues] And his portion extendeth along the great sea, and it extendeth in a straight line till it reacheth the west of the tongue which looketh towards the south; 
             <note canonical="false" type="explanation" n="74:1" TEIform="note">
               <hi type="italic" TEIform="hi">i. e.</hi> (?) the promontory on which Mt. Sindi is situated.
-            </note> for this sea is named the tongue of the Egyptian Sea. 
+            </note> for this sea is named the tongue of the Egyptian  Sea. 
             <note canonical="false" type="explanation" n="74:2" TEIform="note">I 
               <hi type="italic" TEIform="hi">i</hi>
-              <hi type="italic" TEIform="hi">. e.</hi> the Gulf of Akaba; cf. Isa. xi. 15.
+              <hi type="italic" TEIform="hi">. e.</hi> the Gulf  of Akaba; cf. Isa. xi. 15.
             </note>
           </verse>
           <verse canonical="true" osisID="Jub.8.15">And it turneth from here towards the south towards the mouth of the great sea 
@@ -1297,7 +1353,7 @@
             <note canonical="false" type="explanation" n="75:2" TEIform="note">
               <hi type="italic" TEIform="hi">i. e.</hi> Senir (Deut. iii. 9; Ezek. xxvii. 5) = Hermon.
             </note> and ’Amânâ, 
-            <note canonical="false" type="explanation" n="75:3" TEIform="note">? Mt. Amanus in N. Syria.</note> and the mountains of Asshur in the north, and all the land of Elam, Asshur, and Bâbêl, and Sûsân and Mâ‘ĕdâi 
+            <note canonical="false" type="explanation" n="75:3" TEIform="note">? Mt. Amanus in N.  Syria.</note> and the mountains of Asshur in the north, and all the land of Elam, Asshur, and Bâbêl, and Sûsân and Mâ‘ĕdâi 
             <note canonical="false" type="explanation" n="75:4" TEIform="note">
               <hi type="italic" TEIform="hi">i. e.</hi> Media; cf. x. 35.
             </note> and all the mountains of Ararat, and all the region beyond the sea, which is beyond the mountains of Asshur towards the north, a blessed and spacious land, and all that is in it is very good.
@@ -1330,7 +1386,7 @@
             <note canonical="false" type="explanation" n="76:3" TEIform="note">
               <hi type="italic" TEIform="hi">i. e.</hi> the river Don.
             </note> to the north of the outflow of its waters, and it extendeth north-easterly to the whole region of Gog 
-            <note canonical="false" type="explanation" n="76:4" TEIform="note">In N. Asia. Josephus identifies Gog with the Scythians.</note> and to all the country east thereof.
+            <note canonical="false" type="explanation" n="76:4" TEIform="note">In N.  Asia. Josephus identifies Gog with the Scythians.</note> and to all the country east thereof.
           </verse>
           <verse canonical="true" osisID="Jub.8.26">And it extendeth northerly to the north, and it extendeth to the mountains of Qêlt 
             <note canonical="false" type="explanation" n="76:5" TEIform="note">
@@ -1345,7 +1401,7 @@
             </note>
           </verse>
           <verse canonical="true" osisID="Jub.8.28">And it extendeth to the region of the river Tînâ in a northeasterly direction until it approacheth the boundary of its waters towards the mountain Râfâ, 
-            <note canonical="false" type="explanation" n="76:9" TEIform="note">? the Ural mountains (Cf. viii. 12 above).</note> and it turneth round towards the north.
+            <note canonical="false" type="explanation" n="76:9" TEIform="note">? the Ural  mountains (Cf. viii. 12 above).</note> and it turneth round towards the north.
           </verse>
           <verse canonical="true" osisID="Jub.8.29">This is the land which came forth for Japheth and his sons as the portion of his inheritance which he should possess for himself and his sons, for their generations for ever; five great islands, 
             <note canonical="false" type="explanation" n="76:10" TEIform="note">Including, probably, Cyprus, Sicily, Sardinia, Corsica.</note> and a great land in the north.
@@ -1386,7 +1442,8 @@
             <note canonical="false" type="explanation" n="77:8" TEIform="note">According to Josephus the descendants of Lud were the Lydians.</note> the fifth portion, the mountains of Asshur and all appertaining to them till it reacheth the Great Sea, and till it reacheth the east of Asshur his brother.
           </verse>
           <verse canonical="true" osisID="Jub.9.7">And Japheth also divided the land of his inheritance amongst his sons.</verse>
-          <verse canonical="true" osisID="Jub.9.8">And the first portion came forth for Gomer to the east from the north side to the river Tînâ; and in the north there came forth for Magog all the inner portions of the north until it reacheth to the sea of Mê’at. 9 And for Madai came forth as his portion that he should possess from the west of his two brothers to the islands, 
+          <verse canonical="true" osisID="Jub.9.8">And the first portion came forth for Gomer to the east from the north side to the river Tînâ; and in the north there came forth for Magog all the inner portions of the north until it reacheth to the sea of Mê’at.</verse>
+          <verse canonical="true" osisID="Jub.9.9">And for Madai came forth as his portion that he should possess from the west of his two brothers to the islands, 
             <note canonical="false" type="explanation" n="78:1" TEIform="note">Including (?) Britain and Ireland.</note> and to the coasts of the islands.
           </verse>
           <verse canonical="true" osisID="Jub.9.10">And for Javan 
@@ -1458,8 +1515,9 @@
           <verse canonical="true" osisID="Jub.10.13">And Noah wrote down all things in a book as we instructed him concerning every kind of medicine. Thus the evil spirits were precluded from (hurting) the sons of Noah.</verse>
           <verse canonical="true" osisID="Jub.10.14">And he gave all that he had written to Shem, his eldest son; for he loved him exceedingly above all his sons.</verse>
           <verse canonical="true" osisID="Jub.10.15">And Noah slept with his fathers, and was buried on Mount Lûbâr in the land of Ararat.</verse>
-          <verse canonical="true" osisID="Jub.10.16">Nine hundred and fifty years he completed in his life, nineteen jubilees and two weeks and five years.</verse>
-          <verse canonical="true" osisID="Jub.10.17">And in his life on earth he excelled the children of men save Enoch because of the righteousness, wherein he was perfect. For Enoch's office was ordained for a testimony to the generations of the world, 1 so that he should recount all the deeds of generation unto generation, till the day of judgment.</verse>
+          <verse canonical="true" osisID="Jub.10.16">Nine hundred and fifty years he completed in his life, nineteen jubilees and two 
+  weeks and five years.</verse>
+          <verse canonical="true" osisID="Jub.10.17">And in his life on earth he excelled the children of men save Enoch because of the righteousness, wherein he was perfect. For Enoch's office was ordained for a testimony to the generations of the world, 1 so that he should recount all the deeds of generation unto generation, till the day of judgment.</verse>
         </div>
         <div canonical="false" type="section" osisID="Jub.10.s2" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">The Tower of Babel and the Confusion of Tongues (x. 18-27; cf. Gen. xi. 1-9).</title>
@@ -1490,7 +1548,8 @@
             <note canonical="false" type="explanation" n="82:4" TEIform="note">An old tradition; cf. 
               <hi type="italic" TEIform="hi">Sibyll. Oracles</hi> iii. 98-103; Josephus, 
               <hi type="italic" TEIform="hi">Ant.</hi> i. 4, 3.
-            </note> against the tower and overthrew it upon the earth, and behold it was between Asshur and Babylon in the land of Shinar, and they called its name "Overthrow." 
+            </note> against the tower and overthrew it upon the earth, and behold it was between Asshur and Babylon in the land of Shinar, and they called its name 
+  "Overthrow." 
             <note canonical="false" type="explanation" n="82:5" TEIform="note">A play on the preceding verb (" overthrew "). But its real name was Babel.</note>
           </verse>
           <verse canonical="true" osisID="Jub.10.27">In the fourth week in the first year in the beginning thereof in the four and thirtieth jubilee, were they dispersed from the land of Shinar.</verse>
@@ -1526,7 +1585,8 @@
       <div canonical="true" type="chapter" osisID="Jub.11" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.11.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">The History of the Patriarchs from Reu to Abraham (cf. Gen. xi, 20-30); the Corruption of the Human Race (xi. 1-15).</title>
-          <verse canonical="true" osisID="Jub.11.1">And in the thirty-fifth jubilee, in the third week, in the first year thereof, Reu took to himself a wife, and her name was ’Ôrâ, the daughter of ’Ûr, the son of Kêsêd, and she bare him a son, and he called his name Sêrôḫ, 
+          <verse canonical="true" osisID="Jub.11.1">And in the thirty-fifth jubilee, in the third week, in the first year thereof, Reu took to himself a wife, and her name was ’Ôrâ, the daughter of ’Ûr, the son of Kêsêd, and she bare him a son, and he 
+  called his name Sêrôḫ, 
             <note canonical="false" type="explanation" n="84:1" TEIform="note">Cf. Gen. xi. 20 f. (MT. has 
               <hi type="italic" TEIform="hi">Serug</hi> for 
               <hi type="italic" TEIform="hi">Sêrôḫ</hi>).
@@ -1549,21 +1609,25 @@
             <note canonical="false" type="explanation" n="85:1" TEIform="note">Cf. 1 Enoch xvi.</note>
           </verse>
           <verse canonical="true" osisID="Jub.11.6">For this reason he called the name of Sêrôḫ, Serug, for every one turned to do all manner of sin and transgression.</verse>
-          <verse canonical="true" osisID="Jub.11.7">And he grew up, and dwelt in Ur of the Chaldees, near to the father of his wife's mother, and he worshipped idols, and he took to himself a wife in the thirty-sixth jubilee, in the fifth week, in the first year thereof, and her name was Mêlkâ, 
+          <verse canonical="true" osisID="Jub.11.7">And he grew up, and dwelt in Ur of the Chaldees, near to the father of his wife's mother, and he worshipped idols, and he took to himself a wife in the thirty-sixth jubilee, in the 
+  fifth week, in the first year thereof, and her name was Mêlkâ, 
             <note canonical="false" type="explanation" n="85:2" TEIform="note">In Gen. xi. 29 Milcah is the name of the wife of Nahor, Abram's brother.</note> the daughter of Kâbêr, the daughter of his father's brother.
           </verse>
           <verse canonical="true" osisID="Jub.11.8">And she bare him Nahor, in the first year of this week, and he grew and dwelt in Ur of the Chaldees, and his father taught him the researches of the Chaldees to divine and augur, according to the signs of heaven.</verse>
-          <verse canonical="true" osisID="Jub.11.9">And in the thirty-seventh jubilee, in the sixth week, in the first year thereof, he took to himself a wife, and her name was ’Îjâskâ, 
+          <verse canonical="true" osisID="Jub.11.9">And in the thirty-seventh jubilee, in the sixth week, in the first 
+  year thereof, he took to himself a wife, and her name was ’Îjâskâ, 
             <note canonical="false" type="explanation" n="85:3" TEIform="note">= Iscah (cf. Gen. xi. 29; but there she is daughter of Haran).</note> the daughter of Nêstâg of the Chaldees.
           </verse>
           <verse canonical="true" osisID="Jub.11.10">And she bare him Terah 
-            <note canonical="false" type="explanation" n="85:4" TEIform="note">Cf. Gen. xi. 24.</note> in the seventh year of this week.
+            <note canonical="false" type="explanation" n="85:4" TEIform="note">Cf. Gen. xi. 24.</note> in the seventh year 
+  of this week.
           </verse>
           <verse canonical="true" osisID="Jub.11.11">And the prince Mastêmâ sent ravens and birds to devour the seed which was sown in the land, in order to destroy the land, and rob the children of men of their labours. Before they could plough in the seed, the ravens picked (it) from the surface of the ground.</verse>
           <verse canonical="true" osisID="Jub.11.12">And for this reason he called his name Terah, because the ravens and the birds reduced them to destitution and devoured their seed. 
             <note canonical="false" type="explanation" n="85:5" TEIform="note">Apparently some play on the name Terah is involved in the original Hebrew; but the explanation is uncertain.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.11.13">And the years began to be barren, owing to the birds, and they devoured all the fruit of the trees from the trees: it was only with great effort that they could save a little of all the fruit of the earth in their days.</verse>
+          <verse canonical="true" osisID="Jub.11.13">And the years began to be barren, owing to the birds, and they devoured all the fruit of the trees from the trees: it was only with great effort that they could save a little of all the fruit of the 
+  earth in their days.</verse>
           <verse canonical="true" osisID="Jub.11.14">And in this thirty-ninth jubilee, in the second week in the first year, Terah took to himself a wife, and her name was ’Êdnâ, 
             <note canonical="false" type="explanation" n="86:1" TEIform="note">According to the Talmud (
               <hi type="italic" TEIform="hi">Baba bathra</hi> 91
@@ -1571,7 +1635,8 @@
             </note> the daughter of ’Abrâm 
             <note canonical="false" type="explanation" n="86:2" TEIform="note">
               <hi type="italic" TEIform="hi">i. e.</hi> the grandfather of the Biblical Abram.
-            </note> the daughter of his father's sister.
+            </note> the daughter of his father's 
+  sister.
           </verse>
           <verse canonical="true" osisID="Jub.11.15">And in the seventh year of this week she bare him a son, and he called his name Abram, by the name of the father of his mother; for he had died before his daughter had conceived a son. 
             <note canonical="false" type="explanation" n="86:3" TEIform="note">it was customary to name a child after a grandfather. Here the child's name apparently perpetuates the memory of a grandfather who had died before the child was conceived.</note>
@@ -1579,7 +1644,8 @@
         </div>
         <div canonical="false" type="section" osisID="Jub.11.s2" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">Abram's Knowledge of God and wonderful Deeds (xi. 16-24).</title>
-          <verse canonical="true" osisID="Jub.11.16">And the child began to understand the errors of the earth that all went astray after graven images and after uncleanness, and his father taught him writing, and he was two weeks of years old, and he separated himself from his father 
+          <verse canonical="true" osisID="Jub.11.16">And the child began to understand the errors of the earth that all went astray after graven images and after uncleanness, and his father taught him 
+  writing, and he was two weeks of years old, and he separated himself from his father 
             <note canonical="false" type="explanation" n="86:4" TEIform="note">This is the theme of much later Jewish legend. See especially the first part of the 
               <hi type="italic" TEIform="hi">Apocalypse of Abraham</hi>, an edition of which appears in this series. Cf. xii. 1-14 below.
             </note> that he might not worship idols with him.
@@ -1590,7 +1656,8 @@
           <verse canonical="true" osisID="Jub.11.20">And he caused the clouds of ravens to turn back that day seventy times, and of all the ravens throughout all the land where Abram was there settled there not so much as one.</verse>
           <verse canonical="true" osisID="Jub.11.21">And all who were with him throughout all the land saw him cry out, and all the ravens turn back, and his name became great in all the land of the Chaldees.</verse>
           <verse canonical="true" osisID="Jub.11.22">And there came to him this year all those that wished to sow, and he went with them until the time of sowing ceased: and they sowed their land, and that year they brought enough grain home and ate and were satisfied.</verse>
-          <verse canonical="true" osisID="Jub.11.23">And in the first year of the fifth week Abram taught those who made implements for oxen, the artificers in wood, and they made a vessel above the ground, facing the frame of the plough, 
+          <verse canonical="true" osisID="Jub.11.23">And in the first year of the fifth week Abram taught 
+  those who made implements for oxen, the artificers in wood, and they made a vessel above the ground, facing the frame of the plough, 
             <note canonical="false" type="explanation" n="87:1" TEIform="note">An improved method of sowing by means of a seed-scatterer attached to the plough (Arab. 
               <hi type="italic" TEIform="hi">bûk</hi>) is here described. This marked an advance on the primitive method of scattering the seed by hand, and its invention is ascribed to Abraham. In Rabbinical tradition Noah is the inventor of the plough and kindred instruments. Cf. Krauss, 
               <hi type="italic" TEIform="hi">Talmudische Archäologie</hi>, ii. 553 (note 151).
@@ -1602,7 +1669,8 @@
       <div canonical="true" type="chapter" osisID="Jub.12" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.12.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">Abram seeks to convert Terah from Idolatry; the Family of Terah (cf. Gen. xi. 27-30). Abram burns the Idols. Death of Haran (cf. Gen. xi. 28) (xii. 1-14).</title>
-          <verse canonical="true" osisID="Jub.12.1">And it came to pass in the sixth week, in the seventh year thereof, that Abram said to Terah his father, saying, "Father!" And he said, "Behold, here am I, my son."</verse>
+          <verse canonical="true" osisID="Jub.12.1">And it came to pass in the 
+  sixth week, in the seventh year thereof, that Abram said to Terah his father, saying, "Father!" And he said, "Behold, here am I, my son."</verse>
           <verse canonical="true" osisID="Jub.12.2">And he said, "What help and profit have we from those idols which thou dost worship,  And before which thou dost bow thyself? 
             <note canonical="false" type="explanation" n="88:1" TEIform="note">In 1-14 we have an early form of the legend of Abram's protest against idolatry. This section has remarkable parallels, both in thought and expression, with chaps. i.-viii. of the Apocalypse of Abraham. In the later (Rabbinic) forms of the legend Abram's birth excites the alarm of Nimrod, who endeavours to destroy him in a furnace of fire.</note>
           </verse>
@@ -1624,14 +1692,17 @@
             </note> my son, lest they slay thee."
           </verse>
           <verse canonical="true" osisID="Jub.12.8">And these words he spake to his two brothers, and they were angry with him and he kept silent.</verse>
-          <verse canonical="true" osisID="Jub.12.9">And in the fortieth jubilee, in the second week, in the seventh year thereof, Abram took to himself a wife, and her name was Sarai, the daughter of his father, and she became his wife. 
+          <verse canonical="true" osisID="Jub.12.9">And in the fortieth jubilee, in the second week, in the seventh year 
+  thereof, Abram took to himself a wife, and her name was Sarai, the daughter of his father, and she became his wife. 
             <note canonical="false" type="explanation" n="89:2" TEIform="note">Cf. Gen. xx. 12, according to which Sarah was Abraham's half-sister. According to Rabbinic tradition marriage with half-sisters on the father's side was permitted to the descendants of Noah. In Lev. xviii. 9, 11, xx. 17, marriage with a sister or half-sister is strictly forbidden.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.12.10">And Haran, his brother, took to himself a wife in the third year of the third week, and she bare him a son in the seventh year of this week and he called his name Lot.</verse>
+          <verse canonical="true" osisID="Jub.12.10">And Haran, his brother, took to himself a wife in the third year of the third week, and she bare him a son in the seventh year of this 
+  week and he called his name Lot.</verse>
           <verse canonical="true" osisID="Jub.12.11">And Nahor, his brother, took to himself a wife. 
             <note canonical="false" type="explanation" n="89:3" TEIform="note">According to Gen. xi. 29, Milcah.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.12.12">And in the sixtieth year of the life of Abram, that is, in the fourth week, in the fourth year thereof, Abram arose by night, and burned the house of the idols, and he burned all that was in the house, and no man knew it.</verse>
+          <verse canonical="true" osisID="Jub.12.12">And in the sixtieth year of the life of Abram, that is, in the fourth 
+  week, in the fourth year thereof, Abram arose by night, and burned the house of the idols, and he burned all that was in the house, and no man knew it.</verse>
           <verse canonical="true" osisID="Jub.12.13">And they arose in the night and sought to save their gods from the midst of the fire.</verse>
           <verse canonical="true" osisID="Jub.12.14">And Haran hasted to save them, but the fire flamed over him, and he was burnt in the fire, and he died in Ur of the Chaldees before Terah his father, and they buried him in Ur of the Chaldees. 
             <note canonical="false" type="explanation" n="89:4" TEIform="note">In 
@@ -1647,10 +1718,10 @@
           <verse canonical="true" osisID="Jub.12.16">And in the sixth week, in the fifth year thereof, Abram sat up throughout the night on the new moon of the seventh month to observe the stars from the evening to the morning, in order to see what would be the character of the year with regard to the rains, and he was alone as he sat and observed.</verse>
           <verse canonical="true" osisID="Jub.12.17">And a word came into his heart and he said: "All the signs of the stars, and the signs of the moon and of the sun are all in the hand of the Lord. Why do I search (them) out?</verse>
           <verse canonical="true" osisID="Jub.12.18">If He desireth, He causeth it to rain, morning and evening;  And if He desireth, He withholdeth it, And all things are in His hand."</verse>
-          <verse canonical="true" osisID="Jub.12.19">And he prayed that night and said  "My God, God Most High, Thou alone art my God,  And Thee and Thy dominion have I chosen.  And Thou hast created all things,  And all things that are are the work of Thy hands.</verse>
+          <verse canonical="true" osisID="Jub.12.19">And he prayed that night and said  "My God, God Most High, Thou alone art my God,  And Thee and Thy dominion have I chosen.  And Thou hast created all things,  And all things that are are the work of Thy hands.</verse>
           <verse canonical="true" osisID="Jub.12.20">Deliver me from the hands of evil spirits who have sway over the thoughts of men's hearts,  And let them not lead me astray from Thee, my God.  And stablish Thou me and my seed for ever  That we go not astray from henceforth and for evermore." [paragraph continues]</verse>
           <verse canonical="true" osisID="Jub.12.21">And he said Shall I return unto Ur of the Chaldees who seek my face that I may return to them, or am I to remain here in this place? The right path before Thee prosper it in the hands of Thy servant that he may fulfil (it) and that I may not walk in the deceitfulness of my heart, O my God."</verse>
-          <verse canonical="true" osisID="Jub.12.22">And he made an end of speaking and praying, and behold the word of the Lord was sent to him through me, saying: "Get thee up from thy country, and from thy kindred and from the house of thy father unto a land which I shall show thee, and I shall make thee a great and numerous nation. 195 I A.M.</verse>
+          <verse canonical="true" osisID="Jub.12.22">And he made an end of speaking and praying, and behold the word of the Lord was sent to him through me, saying: "Get thee up from thy country, and from thy kindred and from the house of thy father unto a land which I shall show thee, and I shall make thee a great and numerous nation.</verse>
           <verse canonical="true" osisID="Jub.12.23">And I shall bless thee  And I shall make thy name great, And thou wilt be blessed in the earth,  And in thee will all families of the earth be blessed, And I shall bless them that bless thee,  And curse them that curse thee. 
             <note canonical="false" type="explanation" n="91:1" TEIform="note">Cf. Gen. xii. 1-3 (cf. Acts vii. 3).</note> [paragraph continues]
           </verse>
@@ -1668,7 +1739,8 @@
               <hi type="italic" TEIform="hi">i. e.</hi> the winter.
             </note>
           </verse>
-          <verse canonical="true" osisID="Jub.12.28">And it came to pass in the seventh year of the sixth week that he spoke to his father, and informed him that he would leave Haran to go into the land of Canaan to see it and return to him.</verse>
+          <verse canonical="true" osisID="Jub.12.28">And it came to pass in the seventh year of the sixth week 
+  that he spoke to his father, and informed him that he would leave Haran to go into the land of Canaan to see it and return to him.</verse>
           <verse canonical="true" osisID="Jub.12.29">And Terah his father said unto him; "Go in peace: May the eternal God make thy path straight,  And the Lord [(be) with thee, and] protect thee from all evil,  And grant unto thee grace, mercy and favour before those who see thee,  And may none of the children of men have power over thee to harm thee;  Go in peace. [paragraph continues]</verse>
           <verse canonical="true" osisID="Jub.12.30">And if thou seest a land pleasant to thy eyes to dwell in, then arise and take me to thee and take Lot with thee, the son of Haran thy brother, as thine own son: the Lord be with thee.</verse>
           <verse canonical="true" osisID="Jub.12.31">And Nahor thy brother leave with me till thou returnest in peace, and we go with thee all together."</verse>
@@ -1683,17 +1755,17 @@
             </note> and proceeded to Shechem, and dwelt near a lofty oak. 
             <note canonical="false" type="explanation" n="92:2" TEIform="note">For 1 cf. Gen. xii. 5-6. For "lofty oak" (so LXX) NIT has "oak of Moreh."</note>
           </verse>
-          <verse canonical="true" osisID="Jub.13.2">And he saw, and, behold, the land was very pleasant from the entering of Hamath to the lofty oak. 
-            <note canonical="false" type="explanation" n="92:3" TEIform="note">Supply (?) "to the east of Bethel with" (Charles).</note>
-          </verse>
+          <verse canonical="true" osisID="Jub.13.2">And he saw, and, behold, the land was very pleasant from the entering of Hamath to the lofty oak.</verse>
           <verse canonical="true" osisID="Jub.13.3">And the Lord said to him: "To thee and to thy seed will I give this land."</verse>
           <verse canonical="true" osisID="Jub.13.4">And he built an altar there, and he offered thereon a burnt sacrifice to the Lord, who had appeared to him.</verse>
-          <verse canonical="true" osisID="Jub.13.5">And he removed from thence unto the mountain . . . 3 Bethel on the west and Ai on the east, and pitched his tent there. 
+          <verse canonical="true" osisID="Jub.13.5">And he removed from thence unto the mountain . . .
+            <note canonical="false" type="explanation" n="92:3" TEIform="note">Supply (?) "to the east of Bethel with" (Charles).</note> Bethel on the west and Ai on the east, and pitched his tent there. 
             <note canonical="false" type="explanation" n="92:4" TEIform="note">For 3-5 cf. Gen. xii. 7, 8.</note>
           </verse>
           <verse canonical="true" osisID="Jub.13.6">And he saw and behold, the land was very wide and good, and everything grew thereon--vines and figs and pomegranates, oaks and ilexes, and terebinths and oil trees, and cedars and cypresses and date trees, and all trees of the field, and there was water on the mountains.</verse>
           <verse canonical="true" osisID="Jub.13.7">And he blessed the Lord who had led him out of Ur of the Chaldees, and had brought him to this land.</verse>
-          <verse canonical="true" osisID="Jub.13.8">And it came to pass in the first year, in the seventh week, on the new moon of the first month, that he built an altar on this mountain, and called on the name of the Lord: "Thou, the eternal God, art my God." 
+          <verse canonical="true" osisID="Jub.13.8">And it came 
+  to pass in the first year, in the seventh week, on the new moon of the first month, that he built an altar on this mountain, and called on the name of the Lord: "Thou, the eternal God, art my God." 
             <note canonical="false" type="explanation" n="92:5" TEIform="note">Cf. Gen. xii. 8.</note>
           </verse>
           <verse canonical="true" osisID="Jub.13.9">And he offered on the altar a burnt sacrifice unto the Lord that He should be with him and not forsake him all the days of his life.</verse>
@@ -1702,7 +1774,8 @@
             <note canonical="false" type="explanation" n="93:2" TEIform="note">A town in S. Judah (Josh. XV. 24)</note> and there was a famine in the land.
           </verse>
           <verse canonical="true" osisID="Jub.13.11">And Abram went into Egypt 
-            <note canonical="false" type="explanation" n="93:3" TEIform="note">Cf. Gen. xii. 10.</note> in the third year of the week, and he dwelt in Egypt five years before his wife was torn away from him.
+            <note canonical="false" type="explanation" n="93:3" TEIform="note">Cf. Gen. xii. 10.</note> in the third 
+  year of the week, and he dwelt in Egypt five years before his wife was torn away from him.
           </verse>
           <verse canonical="true" osisID="Jub.13.12">NOW Tanais 
             <note canonical="false" type="explanation" n="93:4" TEIform="note">
@@ -1715,10 +1788,12 @@
             <note canonical="false" type="explanation" n="93:6" TEIform="note">For 13-15a cf. Gen. xii. 15-20 (note that Gen. xii. 18 is omitted).</note> and he journeyed to the place where he had pitched his tent at the beginning, to the place of the altar, with Ai on the east, and Bethel on the west, and he blessed the Lord his God who had brought him back in peace. 
             <note canonical="false" type="explanation" n="93:7" TEIform="note">Cf. Gen. xiii. 3-4.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.13.16">And it came to pass in the forty-first jubilee, in the third year of the first week, that he returned to this place and offered thereon a burnt sacrifice, and called on the name of the Lord, and said: "Thou, the most high God, art my God for ever and ever." 
+          <verse canonical="true" osisID="Jub.13.16">And it came to pass in the forty-first jubilee, in the third year of the 
+  first week, that he returned to this place and offered thereon a burnt sacrifice, and called on the name of the Lord, and said: "Thou, the most high God, art my God for ever and ever." 
             <note canonical="false" type="explanation" n="93:8" TEIform="note">Cf. 8 above.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.13.17">And in the fourth year of this week Lot parted from him, and Lot dwelt in Sodom, and the men of Sodom were sinners exceedingly. 
+          <verse canonical="true" osisID="Jub.13.17">And in the fourth year 
+  of this week Lot parted from him, and Lot dwelt in Sodom, and the men of Sodom were sinners exceedingly. 
             <note canonical="false" type="explanation" n="93:9" TEIform="note">Cf. Gen. xiii. 11, 13.</note>
           </verse>
           <verse canonical="true" osisID="Jub.13.18">And it grieved him in his heart that his brother's son had parted from him; for he had no children.</verse>
@@ -1748,7 +1823,9 @@
             <note canonical="false" type="explanation" n="94:7" TEIform="note">Cf. Gen. xiv. 14.</note>
           </verse>
           <verse canonical="true" osisID="Jub.13.24">And one who had escaped came and told Abram that his brother's son had been taken captive and (Abram) armed 
-            <note canonical="false" type="explanation" n="94:8" TEIform="note">R.V. "led forth"; the rendering "armed" has the support of the Targum Onkelos.</note> his household servants. 25 . . . . . . . . . . . . . for Abram, and for his seed, a tenth of the first-fruits to the Lord, 
+            <note canonical="false" type="explanation" n="94:8" TEIform="note">R.V. "led forth"; the rendering "armed" has the support of the Targum Onkelos.</note> his household servants.
+          </verse>
+          <verse canonical="true" osisID="Jub.13.25">. . . . . . . . . . . . for Abram, and for his seed, a tenth of the first-fruits to the Lord, 
             <note canonical="false" type="explanation" n="95:1" TEIform="note">Charles suspects a lacuna at the beginning of 25. It no doubt contained an account of the pursuit of the kings and told of Melchizedek (cf. Gen. xiv. 15-20). That Abraham should have given tithes to Melchizedek (who was uncircumcised) was a difficulty to later Jews (cf. Justin, Trypho xix.). One way of overcoming it was to identify Melchizedek with Shem.</note> and the Lord ordained it as an ordinance for ever that they should give it to the priests who served before Him, that they should possess it for ever. 
             <note canonical="false" type="explanation" n="95:2" TEIform="note">The law about tithes is made to apply for the Levitical priesthood; cf. xxxii. 15.</note>
           </verse>
@@ -2016,8 +2093,8 @@
           <verse canonical="true" osisID="Jub.16.15">And it came to pass in the seventh week, in the first year thereof, in the first month in this jubilee, 
             <note canonical="false" type="explanation" n="108:4" TEIform="note">According to the chronology of our Book (Cf. xvi. 12 with this passage) Isaac was twenty-three years old when he was offered up; according to the Seder Olam. he was thirty-seven.</note> on the twelfth of this month, there were voices in heaven regarding Abraham, that he was faithful in all that He told him, and that he loved the Lord, and that in every affliction he was faithful.
           </verse>
-          <verse canonical="true" osisID="Jub.16.16">And the prince Mastêmâ 1 came and said before God, "Behold, Abraham loveth Isaac his son, and he delighteth in him above all things else; bid him offer him as a burnt-offering on the altar, and Thou wilt see if he will do this command, and Thou wilt know if he is faithful in everything wherein Thou dost try him."</verse>
-          <verse canonical="true" osisID="Jub.16.17">And the Lord knew that Abraham was faithful in all his afflictions; for He had tried him through his country and with famine, and had tried him with the wealth of kings, and had tried him again through his wife, when she was torn (from him), and with circumcision, and had tried him through Ishmael and Hagar, his maid-servant, when he sent them away. 2</verse>
+          <verse canonical="true" osisID="Jub.16.16">And the prince Mastêmâ 1 came and said before God, "Behold, Abraham loveth Isaac his son, and he delighteth in him above all things else; bid him offer him as a burnt-offering on the altar, and Thou wilt see if he will do this command, and Thou wilt know if he is faithful in everything wherein Thou dost try him."</verse>
+          <verse canonical="true" osisID="Jub.16.17">And the Lord knew that Abraham was faithful in all his afflictions; for He had tried him through his country and with famine, and had tried him with the wealth of kings, and had tried him again through his wife, when she was torn (from him), and with circumcision, and had tried him through Ishmael and Hagar, his maid-servant, when he sent them away. 2</verse>
           <verse canonical="true" osisID="Jub.16.18">And in everything wherein He had tried him, he was found faithful, and his soul was not impatient, and he was not slow to act; for he was faithful and a lover of the Lord.</verse>
         </div>
       </div>
@@ -2025,11 +2102,12 @@
         <div canonical="false" type="section" osisID="Jub.17.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">The Expulsion of Hagar and Ishmael (xvii. 1-14; cf. Gen. xxi. 8-21).</title>
           <verse canonical="true" osisID="Jub.17.1">And in the first year of the †fifth† 
-            <note canonical="false" type="explanation" n="107:1" TEIform="note">Read "fourth" (Charles).</note> week Isaac was weaned in this jubilee, and Abraham made a great banquet in the third month, on the day his son Isaac was weaned. 
+            <note canonical="false" type="explanation" n="107:1" TEIform="note">Read "fourth" (Charles).</note> week 
+  Isaac was weaned in this jubilee, and Abraham made a great banquet in the third month, on the day his son Isaac was weaned. 
             <note canonical="false" type="explanation" n="107:2" TEIform="note">Cf. Gen. xxi. 8.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.17.2">And Ishmael, the son of Hagar, the Egyptian, was before the face of Abraham, his father, in his place, and Abraham rejoiced and blessed God because he had seen his sons 3 and had not died childless. 
-            <note canonical="false" type="explanation" n="107:3" TEIform="note">Cf. xvi. 16.</note>
+          <verse canonical="true" osisID="Jub.17.2">And Ishmael, the son of Hagar, the Egyptian, was before the face of Abraham, his father, in his place, and Abraham rejoiced and blessed God because he had seen his sons
+            <note canonical="false" type="explanation" n="107:3" TEIform="note">Cf. xvi. 16.</note> and had not died childless.
           </verse>
           <verse canonical="true" osisID="Jub.17.3">And he remembered the words which He had spoken to him on the day on which Lot had parted from him, and he rejoiced because the Lord had given him seed upon the earth to inherit the earth, and he blessed with all his mouth the Creator of all things. 
             <note canonical="false" type="explanation" n="107:4" TEIform="note">Cf. xiii. 19 ff.</note>
@@ -2119,7 +2197,8 @@
       <div canonical="true" type="chapter" osisID="Jub.19" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.19.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">The Death and Burial of Sarah (xix. 1-9; cf. Gen. xxiii.).</title>
-          <verse canonical="true" osisID="Jub.19.1">And in the first year of the first week in the forty-second jubilee, Abraham returned and dwelt opposite Hebron, that is Kirjath Arba, two weeks of years.</verse>
+          <verse canonical="true" osisID="Jub.19.1">And in the first year of the first week in the 
+  forty-second jubilee, Abraham returned and dwelt opposite Hebron, that is Kirjath Arba, two weeks of years.</verse>
           <verse canonical="true" osisID="Jub.19.2">And in the first year of the †third† 
             <note canonical="false" type="explanation" n="112:1" TEIform="note">Read "second" (Charles).</note> week of this jubilee the days of the life of Sarah were accomplished, and she died in Hebron.
           </verse>
@@ -2137,11 +2216,12 @@
           <verse canonical="true" osisID="Jub.19.8">This is the tenth 
             <note canonical="false" type="explanation" n="112:2" TEIform="note">This is the tenth trial of Abraham; cf. xvii. 17 note.</note> trial wherewith Abraham was tried, and he was found faithful, patient in spirit.
           </verse>
-          <verse canonical="true" osisID="Jub.19.9">And he said not a single word regarding the rumour in the land how that God had said that He would give it to him and to his seed after him, and he begged a place there to bury his dead; for he was found faithful, and was recorded on the heavenly tables as the friend of God. 1</verse>
+          <verse canonical="true" osisID="Jub.19.9">And he said not a single word regarding the rumour in the land how that God had said that He would give it to him and to his seed after him, and he begged a place there to bury his dead; for he was found faithful, and was recorded on the heavenly tables as the friend of God. 1</verse>
         </div>
         <div canonical="false" type="section" osisID="Jub.19.s2" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">Marriage of Isaac and second Marriage of Abraham (cf. Gen. xxiv. 15, xxv. 1-4); the Birth of Esau and Jacob (cf. Gen. xxv. 19 ff.) (xix. 10-14).</title>
-          <verse canonical="true" osisID="Jub.19.10">And in the fourth year thereof he took a wife for his son Isaac and her name was Rebecca [the daughter of Bethuel, the son of Nahor, the brother of Abraham] 
+          <verse canonical="true" osisID="Jub.19.10">And in the fourth year thereof he took a wife 
+  for his son Isaac and her name was Rebecca [the daughter of Bethuel, the son of Nahor, the brother of Abraham] 
             <note canonical="false" type="explanation" n="113:2" TEIform="note">The bracketed words a dittograph.</note> the sister of Laban and daughter of Bethuel; and Bethuel was the son of Mêlcâ, who was the wife of Nahor, the brother of Abraham.
           </verse>
           <verse canonical="true" osisID="Jub.19.11">And Abraham took to himself a third wife, and her name was Keturah, from among the daughters of his household servants, for Hagar had died before Sarah. 
@@ -2151,7 +2231,8 @@
             </note>
           </verse>
           <verse canonical="true" osisID="Jub.19.12">And she bare him six sons, Zimram, and Jokshan, and Medan, and Midian, and Ishbak, and Shuah, in the two weeks of years.</verse>
-          <verse canonical="true" osisID="Jub.19.13">And in the sixth week, in the second year thereof, Rebecca bare to Isaac two sons, Jacob and Esau, and Jacob was a smooth and upright 
+          <verse canonical="true" osisID="Jub.19.13">And in the sixth week, 
+  in the second year thereof, Rebecca bare to Isaac two sons, Jacob and Esau, and Jacob was a smooth and upright 
             <note canonical="false" type="explanation" n="113:4" TEIform="note">Cf. Gen. xxv. 27 (where "plain" = lit. "upright"), and Gen. xxvii. 11 (combined here).</note> man, and Esau was fierce, a man of the field, and hairy, and Jacob dwelt in tents.
           </verse>
           <verse canonical="true" osisID="Jub.19.14">And the youths grew, and Jacob learned to write; 
@@ -2197,7 +2278,8 @@
       <div canonical="true" type="chapter" osisID="Jub.20" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.20.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">Abraham's Last Words to his Children and Grandchildren (xx. i-ii).</title>
-          <verse canonical="true" osisID="Jub.20.1">And in the forty-second jubilee, in the first year of the †seventh† 
+          <verse canonical="true" osisID="Jub.20.1">And in the forty-second jubilee, in the first 
+  year of the †seventh† 
             <note canonical="false" type="explanation" n="115:4" TEIform="note">Probably corrupt for "sixth" (Charles).</note> week, Abraham called Ishmael, and his twelve sons, 
             <note canonical="false" type="explanation" n="115:5" TEIform="note">Cf. Gen. xxv. 13-15.</note> and Isaac and his two sons, and the six sons of Keturah, and their sons.
           </verse>
@@ -2217,7 +2299,7 @@
           <verse canonical="true" osisID="Jub.20.6">"And guard yourselves from all fornication and uncleanness,  And from all pollution of sin,  Lest ye make our name a curse,  And your whole life a hissing, 
             <note canonical="false" type="explanation" n="116:5" TEIform="note">Cf. Isa. lxv. 15; Jer. xxix. 18.</note>  And all your sons be destroyed by the sword,  And ye become accursed like Sodom,  And all your remnant as the sons of Gomorrah.
           </verse>
-          <verse canonical="true" osisID="Jub.20.7">I implore you, my sons, love the God of heaven,  And cleave ye to all His commandments. p. 117  And walk not after their idols, and after their uncleannesses,</verse>
+          <verse canonical="true" osisID="Jub.20.7">I implore you, my sons, love the God of heaven,  And cleave ye to all His commandments.   And walk not after their idols, and after their uncleannesses,</verse>
           <verse canonical="true" osisID="Jub.20.8">
             <note canonical="false" type="explanation" n="117:1" TEIform="note">For 8 cf. xii. 5, xxii. 18.</note> And make not for yourselves molten or graven gods; 
             <note canonical="false" type="explanation" n="117:2" TEIform="note">Cf. Deut. xxvii. 15.</note>  For they are vanity,  And there is no spirit in them;  For they are work of (men's) hands,  And all who trust in them, trust in nothing.  Serve them not, nor worship them, 
@@ -2328,7 +2410,7 @@
           </verse>
           <verse canonical="true" osisID="Jub.21.23">Turn away from all their deeds and all their uncleanness,  And observe the ordinance of the Most High God,  And do His will and be upright in all things.</verse>
           <verse canonical="true" osisID="Jub.21.24">And He will bless thee in all thy deeds,  And will raise up from thee the plant of righteousness 
-            <note canonical="false" type="explanation" n="121:5" TEIform="note">Cf. xvi. 26.</note> through all the earth, throughout all generations of the earth,  And my name and thy name will not be forgotten under heaven for ever. p. 122
+            <note canonical="false" type="explanation" n="121:5" TEIform="note">Cf. xvi. 26.</note> through all the earth, throughout all generations of the earth,  And my name and thy name will not be forgotten under heaven for ever.
           </verse>
           <verse canonical="true" osisID="Jub.21.25">Go, my son, in peace.  May the Most High God, my God and thy God, strengthen thee to do His will,  And may He bless all thy seed and the residue of thy seed for the generations for ever, with all righteous blessings,  That thou mayest be a blessing on all the earth." 
             <note canonical="false" type="explanation" n="122:1" TEIform="note">Cf. xx. 10.</note> [paragraph continues]
@@ -2404,7 +2486,7 @@
             <note canonical="false" type="explanation" n="125:7" TEIform="note">Cf. vii. 8.</note> Canaan erred, 
             <note canonical="false" type="explanation" n="125:8" TEIform="note">Canaan wrongfully seized Palestine; cf. x. 29-34.</note>  And all his seed will be destroyed from off the earth and all the residue thereof,  And none springing from him will be saved on the day of judgment.
           </verse>
-          <verse canonical="true" osisID="Jub.22.22">And as for all the worshippers of idols and the profane  
+          <verse canonical="true" osisID="Jub.22.22">And as for all the worshippers of idols and the profane   
             <note canonical="false" type="explanation" n="125:9" TEIform="note">The four following lines have been transposed by Charles for the sake of parallelism.</note>(
             <hi type="italic" TEIform="hi">b</hi>) There will be no hope for them in the land of the living; (
             <hi type="italic" TEIform="hi">e</hi>) And there will be no remembrance of them on the earth;  (
@@ -2524,7 +2606,7 @@
         <div canonical="false" type="section" osisID="Jub.23.s4" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">Renewed Study of the Law followed by a Renewal of Mankind. The Messianic Kingdom and the Blessedness of the Righteous (xxiii. 26-32; cf. Isa. lxv. 17 ff. [Eschatological.]</title>
           <verse canonical="true" osisID="Jub.23.26">And in those days the children will begin to study the laws,  And to seek the commandments,  And to return to the path of righteousness.</verse>
-          <verse canonical="true" osisID="Jub.23.27">And the days will begin to grow many and increase amongst those children of men, p. 132  Till their days draw nigh to one thousand years, 
+          <verse canonical="true" osisID="Jub.23.27">And the days will begin to grow many and increase amongst those children of men,   Till their days draw nigh to one thousand years, 
             <note canonical="false" type="explanation" n="132:1" TEIform="note">The span of life originally designed for mankind. Adam fell short of this because of his sin.</note>  And to a greater number of years than (before) was the number of the days.
           </verse>
           <verse canonical="true" osisID="Jub.23.28">And there will be no old man  Nor one who is not satisfied with his days,  For all will be (as) children and youths. 
@@ -2561,7 +2643,9 @@
               <hi type="italic" TEIform="hi">Beer-lahai-roi</hi> ("the well of the Living One that seeth me"); Gen. xxv. iii.
             </note> in the first year of the third week of this jubilee, seven years.
           </verse>
-          <verse canonical="true" osisID="Jub.24.2">And in the first year of the fourth week a famine began in the land, besides the first famine, which had been in the days of Abraham. 
+          <verse canonical="true" osisID="Jub.24.2">And in the 
+  first year of the fourth week a famine began in 
+  the land, besides the first famine, which had been in the days of Abraham. 
             <note canonical="false" type="explanation" n="133:2" TEIform="note">Cf. Gen. xxvi. 11.</note>
           </verse>
           <verse canonical="true" osisID="Jub.24.3">And Jacob sod lentil pottage, and Esau came from the field hungry. And he said to Jacob his brother: "Give me of this red pottage." 
@@ -2591,7 +2675,8 @@
           <verse canonical="true" osisID="Jub.24.14">And Isaac waxed strong among the Philistines, and he got many possessions, oxen and sheep and camels and asses and a great household.</verse>
           <verse canonical="true" osisID="Jub.24.15">And he sowed in the land of the Philistines and brought in a hundred-fold, and Isaac became exceedingly great, and the Philistines envied him.</verse>
           <verse canonical="true" osisID="Jub.24.16">Now all the wells which the servants of Abraham had dug during the life of Abraham, the Philistines had stopped them after the death of Abraham, and filled them with earth.</verse>
-          <verse canonical="true" osisID="Jub.24.17">And Abimelech said unto Isaac: "Go from us, for thou art much mightier than we"; and Isaac departed thence in the first year of the seventh week, and sojourned in the valleys of Gerar.</verse>
+          <verse canonical="true" osisID="Jub.24.17">And Abimelech said unto Isaac: "Go from us, for thou art much mightier than we"; and Isaac departed thence in 
+  the first year of the seventh week, and sojourned in the valleys of Gerar.</verse>
           <verse canonical="true" osisID="Jub.24.18">And they digged again the wells of water which the servants of Abraham, his father, had digged, and which the Philistines had closed after the death of Abraham his father, and he called their names as Abraham his father had named them.</verse>
           <verse canonical="true" osisID="Jub.24.19">And the servants of Isaac dug a well in the valley, and found living water, and the shepherds of Gerar strove with the shepherds of Isaac, saying: "The water is ours "; and Isaac called the name of the well "Perversity," 
             <note canonical="false" type="explanation" n="134:2" TEIform="note">= Esek; cf. Gen. xxvi. 20.</note> because they had been perverse with us.
@@ -2603,7 +2688,8 @@
           <verse canonical="true" osisID="Jub.24.21">And he went up from thence to the Well of the Oath 
             <note canonical="false" type="explanation" n="135:3" TEIform="note">
               <hi type="italic" TEIform="hi">i. e.</hi> Beersheba.
-            </note> in the first year of the first week in the forty-fourth jubilee.
+            </note> in the first year of the first week in the forty-fourth 
+  jubilee.
           </verse>
           <verse canonical="true" osisID="Jub.24.22">And the Lord appeared to him that night, on the new moon of the first month, and said unto him: "I am the God of Abraham thy father; fear not, for I am with thee, and shall bless thee and shall surely multiply thy seed as the sand of the earth, for the sake of Abraham my servant."</verse>
           <verse canonical="true" osisID="Jub.24.23">And he built an altar there, which Abraham his father had first built, and he called upon the name of the Lord, and he offered sacrifice to the God of Abraham his father.</verse>
@@ -2631,20 +2717,21 @@
               <hi type="italic" TEIform="hi">i. e.</hi> Judah under the Maccabees.
             </note> root out in judgment from under heaven; for they will be the enemies and foes of my children throughout their generations upon the earth.
           </verse>
-          <verse canonical="true" osisID="Jub.24.30">And no remnant will be left to them,  Nor one that will be saved on the day of the wrath of judgment;  For for destruction and rooting out and expulsion from the earth is the whole seed of the Philistines (reserved),  And there will no longer be left for these Caphtorim 
+          <verse canonical="true" osisID="Jub.24.30">And no remnant will be left to them,  Nor one that will be saved on the day of the wrath of judgment;  For for destruction and rooting out and expulsion from the earth is the whole seed of the Philistines (reserved),  And there will no longer be left for these Caphtorim 
             <note canonical="false" type="explanation" n="136:4" TEIform="note">The Philistines came originally from Caphtor according to Amos ix. 7 (Deut. ii. 23; Jer. xlvii. 4).</note> a name or a seed on the earth.
           </verse>
           <verse canonical="true" osisID="Jub.24.31">
             <note canonical="false" type="explanation" n="136:5" TEIform="note">The basis of 31-32 seems to be Amos ix. 2-4.</note> For though he ascend unto heaven,  Thence will he be brought down,  And though he make himself strong on earth,  Thence will he be dragged forth,  And though he hide himself amongst the nations,  Even from thence will he be rooted out;  And though he descend into Sheol,  There also will his condemnation be great,  And there also he will have no peace.
           </verse>
-          <verse canonical="true" osisID="Jub.24.32">And if he go into captivity,  By the hands of those that seek his life will they slay him on the way, p. 137  And neither name nor seed will be left to him on all the earth;  For into eternal malediction will he depart." [paragraph continues]</verse>
+          <verse canonical="true" osisID="Jub.24.32">And if he go into captivity,  By the hands of those that seek his life will they slay him on the way,   And neither name nor seed will be left to him on all the earth;  For into eternal malediction will he depart." [paragraph continues]</verse>
           <verse canonical="true" osisID="Jub.24.33">And thus is it written and engraved concerning him on the heavenly tables, to do unto him on the day of judgment, so that he may be rooted out of the earth.</verse>
         </div>
       </div>
       <div canonical="true" type="chapter" osisID="Jub.25" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.25.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">Rebecca admonishes Jacob not to marry a Canaanitish Woman. Rebecca's Blessing (xxv. 1-23; cf. Gen. xxviii. 1-4). 1</title>
-          <verse canonical="true" osisID="Jub.25.1">And in the second year of this week in this jubilee, Rebecca called Jacob her son, and spake unto him, saying: "My son, do not take thee a wife of the daughters of Canaan, as Esau, thy brother, who took him two wives of the daughters of Canaan, 
+          <verse canonical="true" osisID="Jub.25.1">And in the second year of this week in this 
+  jubilee, Rebecca called Jacob her son, and spake unto him, saying: "My son, do not take thee a wife of the daughters of Canaan, as Esau, thy brother, who took him two wives of the daughters of Canaan, 
             <note canonical="false" type="explanation" n="137:2" TEIform="note">Cf. Gen. xxvi. 34.</note> and they have embittered my soul 
             <note canonical="false" type="explanation" n="137:3" TEIform="note">Cf. Gen. xxvii. 46, xxvi. 35.</note> with all their unclean deeds: for all their deeds are fornication and lust, and there is no righteousness with them, for (their deeds) are evil.
           </verse>
@@ -2679,7 +2766,7 @@
             <note canonical="false" type="explanation" n="139:2" TEIform="note">Read "thy" (Charles).</note> life,  The womb of her that bare thee blesseth thee,  [My affection] and my breasts bless thee  And my mouth and my tongue praise thee greatly.
           </verse>
           <verse canonical="true" osisID="Jub.25.20">Increase and spread over the earth,  And may thy seed be perfect in the joy of heaven and earth for ever;  And may thy seed rejoice,  And on the great day of peace may it have peace.</verse>
-          <verse canonical="true" osisID="Jub.25.21">And may thy name and thy seed endure to all the ages,  And may the Most High God be their God,  And may the God of righteousness dwell with them, p. 140  And by them may His sanctuary be built unto all the ages. 
+          <verse canonical="true" osisID="Jub.25.21">And may thy name and thy seed endure to all the ages,  And may the Most High God be their God,  And may the God of righteousness dwell with them,   And by them may His sanctuary be built unto all the ages. 
             <note canonical="false" type="explanation" n="140:1" TEIform="note">Cf. i. 29.</note>
           </verse>
           <verse canonical="true" osisID="Jub.25.22">Blessed be he that blesseth thee,  And all flesh that curseth thee falsely may it be cursed." 
@@ -2737,7 +2824,7 @@
           <verse canonical="true" osisID="Jub.26.33">And Isaac answered and said unto him: "Behold, far from the dew of the earth shall be thy dwelling,  And far from the dew of heaven from above.</verse>
           <verse canonical="true" osisID="Jub.26.34">And by thy sword wilt thou live,  And thou wilt serve thy brother.  And it shall come to pass when thou becomest great, 
             <note canonical="false" type="explanation" n="143:1" TEIform="note">So Sam. of Gen. xxvii. 40: MT "when Thou shalt break loose."</note>  And dost shake his yoke from off thy neck,  Thou wilt sin a complete sin unto death, 
-            <note canonical="false" type="explanation" n="143:2" TEIform="note">This line is a complete departure from the original text, which has: "thou shalt shake his yoke from off thy neck." The interpretation here given in the text has no support elsewhere.</note>  p. 144 And thy seed will be rooted out from under heaven."
+            <note canonical="false" type="explanation" n="143:2" TEIform="note">This line is a complete departure from the original text, which has: "thou shalt shake his yoke from off thy neck." The interpretation here given in the text has no support elsewhere.</note>   And thy seed will be rooted out from under heaven."
           </verse>
           <verse canonical="true" osisID="Jub.26.35">And Esau kept threatening Jacob because of the blessing wherewith his father blessed him, and he said in his heart: "May the days of mourning for my father now come, so that I may slay my brother Jacob."</verse>
         </div>
@@ -2791,7 +2878,8 @@
             </note>
           </verse>
           <verse canonical="true" osisID="Jub.28.2">
-            <note canonical="false" type="explanation" n="147:2" TEIform="note">For 2-4 cf. Gen. xxix. 21-25.</note> And in the first year of the third week he said unto him: "Give me my wife, for whom I have served thee seven years;" and Laban said unto Jacob. "I will give thee thy wife."
+            <note canonical="false" type="explanation" n="147:2" TEIform="note">For 2-4 cf. Gen. xxix. 21-25.</note> And in the first year of the third week he said unto him: "Give 
+  me my wife, for whom I have served thee seven years;" and Laban said unto Jacob. "I will give thee thy wife."
           </verse>
           <verse canonical="true" osisID="Jub.28.3">And Laban made a feast, and took Leah his elder daughter, and gave (her) to Jacob as a wife, and gave her Zilpah his handmaid for an handmaid; and Jacob did not know, for he thought that she was Rachel.</verse>
           <verse canonical="true" osisID="Jub.28.4">And he went in unto her, and behold, she was Leah; and Jacob was angry with Laban, and said unto him: "Why hast thou dealt thus with me? Did not I serve thee for Rachel and not for Leah? Why hast thou wronged me? Take thy daughter, and I will go; for thou hast done evil to me."</verse>
@@ -2818,7 +2906,8 @@
           </verse>
           <verse canonical="true" osisID="Jub.28.10">And he served yet other seven years for Rachel, for Leah had been given to him for nothing.</verse>
           <verse canonical="true" osisID="Jub.28.11">And the Lord opened the womb of Leah, and she conceived and bare Jacob a son, and he 
-            <note canonical="false" type="explanation" n="148:4" TEIform="note">Gen. xxix. 32 has "she called.".</note> called his name Reuben, 
+            <note canonical="false" type="explanation" n="148:4" TEIform="note">Gen. xxix. 32 has "she called.".</note> called his name 
+  Reuben, 
             <note canonical="false" type="explanation" n="148:5" TEIform="note">The twelve sons of Jacob appear in our text in the same order as in Gen. xxix. 32-34, xxx. 1-24, xxxv. 17-18, viz. (1) Reuben; (2) Simeon; (3) Levi; (4) Judah; (5) Dan; (6) Naphtali; (7) Gad; (8) Asher; (9) Issachar; (110) Zebulon; (11) Joseph; (12) Benjamin. A different order is given in Gen. xlix. and in the 
               <hi type="italic" TEIform="hi">Test. XII Patriarchs</hi>. The order of birth, as given in 
               <hi type="italic" TEIform="hi">Jubilees</hi>, is complicated by textual difficulties; see Charles 
@@ -2826,23 +2915,33 @@
             </note> on the fourteenth day of the ninth month, in the first year of the third week.
           </verse>
           <verse canonical="true" osisID="Jub.28.12">But the womb of Rachel was closed, for the Lord saw that Leah was hated and Rachel loved.</verse>
-          <verse canonical="true" osisID="Jub.28.13">And again Jacob went in unto Leah, and she conceived, and bare Jacob a second son, and he called his name Simeon, on the twenty-first of the tenth month, and in the third year of this week.</verse>
-          <verse canonical="true" osisID="Jub.28.14">And again Jacob went in unto Leah, and she conceived, and bare him a third son, and he called his name Levi, in the new moon of the first month in the sixth year of this week.</verse>
-          <verse canonical="true" osisID="Jub.28.15">And again Jacob went in unto her, and she conceived, and bare him a fourth son, and he called his name Judah, on the fifteenth of the third month, in the †first† year of the †fourth† week.</verse>
+          <verse canonical="true" osisID="Jub.28.13">And again Jacob went in unto Leah, and she conceived, and bare Jacob a second son, and he called his name 
+  Simeon, on the twenty-first of the tenth month, and in the third year of this week.</verse>
+          <verse canonical="true" osisID="Jub.28.14">And again Jacob went in unto Leah, and she conceived, and bare him a third son, and he called his name Levi, in the new 
+  moon of the first month in the sixth year of this week.</verse>
+          <verse canonical="true" osisID="Jub.28.15">And again Jacob went in unto her, and she conceived, and bare him a fourth son, and he called his name Judah, on the fifteenth of the third month, 
+  in the †first† year of the †fourth† week.</verse>
           <verse canonical="true" osisID="Jub.28.16">And on account of all this Rachel envied Leah, for she did not bear, and she said to Jacob: "Give me children "; and Jacob said: "Have I withheld from thee the fruits of thy womb? Have I forsaken thee?"</verse>
           <verse canonical="true" osisID="Jub.28.17">And when Rachel saw that Leah had borne four sons to Jacob, Reuben and Simeon and Levi and Judah, she said unto him: "Go in unto Bilhah my handmaid, and she will conceive, and bear a son unto me."</verse>
-          <verse canonical="true" osisID="Jub.28.18">(And she gave (him) Bilhah her handmaid to wife.) And he went in unto her, and she conceived, and bare him a son, and he called his name Dan, on the ninth of the sixth month, in the †sixth† year of the †third† week.</verse>
-          <verse canonical="true" osisID="Jub.28.19">And Jacob went in again unto Bilhah a second time, and she conceived, and bare Jacob another son, and Rachel called his name Naphtali, on the fifth of the seventh month, in the second year of the fourth week.</verse>
+          <verse canonical="true" osisID="Jub.28.18">(And she gave (him) Bilhah her handmaid to wife.) And he went in unto her, and she conceived, and bare him a son, and he called his name Dan, on the ninth of 
+  the sixth month, in the †sixth† year of the †third† week.</verse>
+          <verse canonical="true" osisID="Jub.28.19">And Jacob went in again unto Bilhah a second time, and she conceived, and bare Jacob another son, and Rachel called his name Naphtali, on the fifth of the seventh month, in the second year 
+  of the fourth week.</verse>
           <verse canonical="true" osisID="Jub.28.20">And when Leah saw that she had become sterile and did not bear, she envied (Rachel) and she also gave her handmaid Zilpah to Jacob to wife, and she conceived, and bare a son, and Leah called his name Gad, on the twelfth of the eighth month, in the third year of the fourth week.</verse>
-          <verse canonical="true" osisID="Jub.28.21">And he went in again unto her, and she conceived, and bare him a second son, and Leah called his name Asher, on the second of the eleventh month, in the †fifth† year of the fourth week.</verse>
-          <verse canonical="true" osisID="Jub.28.22">And Jacob went in unto Leah, and she conceived, and bare a son, and she called his name Issachar, on the fourth of the fifth month, in the †fourth† year of the fourth week, and she gave him to a nurse.</verse>
-          <verse canonical="true" osisID="Jub.28.23">And Jacob went in again unto her, and she conceived, and bare two (children), a son and a daughter, and she called the name of the son Zebulon, and the name of the daughter Dinah, in the seventh of the seventh month, in the sixth year of the fourth week.</verse>
-          <verse canonical="true" osisID="Jub.28.24">And the Lord was gracious to Rachel, and opened her womb, and she conceived, and bare a son, and she called his name Joseph, on the new moon of the fourth month, in the †sixth† year in this fourth week.</verse>
+          <verse canonical="true" osisID="Jub.28.21">And 
+  he went in again unto her, and she conceived, and bare him a second son, and Leah called his name Asher, on the second of the eleventh month, in the †fifth† 
+  year of the fourth week.</verse>
+          <verse canonical="true" osisID="Jub.28.22">And Jacob went in unto Leah, and she conceived, and bare a son, and she called his name Issachar, on the fourth of the fifth month, in the †fourth† year of the fourth week, 
+  and she gave him to a nurse.</verse>
+          <verse canonical="true" osisID="Jub.28.23">And Jacob went in again unto her, and she conceived, and bare two (children), a son and a daughter, and she called the name of the son Zebulon, and the name of the daughter Dinah, in the seventh of the seventh month, in the 
+  sixth year of the fourth week.</verse>
+          <verse canonical="true" osisID="Jub.28.24">And the Lord was gracious to Rachel, and opened her womb, and she conceived, and bare a son, and she called his name Joseph, on the new moon of the fourth month, in the 
+  †sixth† year in this fourth week.</verse>
           <verse canonical="true" osisID="Jub.28.25">And in the days when Joseph was born, Jacob said to Laban: "Give me my wives and sons, and let me go to my father Isaac, and let me make me an house; for I have completed the years in which I have served thee for thy two daughters, and I will go to the house of my father."</verse>
-          <verse canonical="true" osisID="Jub.28.26">And Laban said to Jacob: "†Tarry with me for thy wages† 1, and pasture my flock for me again, and take thy wages."</verse>
-          <verse canonical="true" osisID="Jub.28.27">And they agreed with one another that he should give him as his wages those of the lambs and kids which were born black and spotted and white, 2 (these) were to be his wages.</verse>
-          <verse canonical="true" osisID="Jub.28.28">And all the sheep brought forth spotted and speckled and black, variously marked, 3 and they brought forth again lambs like themselves, and all that were spotted were Jacob's and those which were not were Laban's.</verse>
-          <verse canonical="true" osisID="Jub.28.29">And Jacob's possessions multiplied exceedingly, and he possessed oxen and sheep 4 and asses and camels, and menservants and maidservants.</verse>
+          <verse canonical="true" osisID="Jub.28.26">And Laban said to Jacob: "†Tarry with me for thy wages† 1, and pasture my flock for me again, and take thy wages."</verse>
+          <verse canonical="true" osisID="Jub.28.27">And they agreed with one another that he should give him as his wages those of the lambs and kids which were born black and spotted and white, 2 (these) were to be his wages.</verse>
+          <verse canonical="true" osisID="Jub.28.28">And all the sheep brought forth spotted and speckled and black, variously marked, 3 and they brought forth again lambs like themselves, and all that were spotted were Jacob's and those which were not were Laban's.</verse>
+          <verse canonical="true" osisID="Jub.28.29">And Jacob's possessions multiplied exceedingly, and he possessed oxen and sheep 4 and asses and camels, and menservants and maidservants.</verse>
           <verse canonical="true" osisID="Jub.28.30">And Laban and his sons envied Jacob, and Laban took back his sheep from him, and he observed him with evil intent.</verse>
         </div>
       </div>
@@ -2852,15 +2951,32 @@
           <verse canonical="true" osisID="Jub.29.1">And it came to pass when Rachel had borne Joseph, that Laban went to shear his sheep; for they were distant from him a three days' journey.</verse>
           <verse canonical="true" osisID="Jub.29.2">And Jacob saw that Laban was going to shear his sheep, and Jacob called Leah and Rachel, and spake kindly unto them that they should come with him to the land of Canaan.</verse>
           <verse canonical="true" osisID="Jub.29.3">For he told them how he had seen everything in a dream, even all that He had spoken unto him that he should return to his father's house; and they said: "To every place whither thou goest we will go with thee."</verse>
-          <verse canonical="true" osisID="Jub.29.4">And Jacob blessed the God of Isaac his father, and the God of Abraham his father's father, and he arose and mounted his wives and his children, and took all his possessions and crossed the river, and came to the land of Gilead, and Jacob hid 1 his intention from 
-  Laban and told him not.</verse>
+          <verse canonical="true" osisID="Jub.29.4">And Jacob blessed the God of Isaac his father, and the God of Abraham his father's father, and he arose and mounted his wives and his children, and took all his possessions and crossed the river, and came to the land of Gilead, and Jacob hid 
+            <note canonical="false" type="explanation" n="151:1" TEIform="note">So LXX (Gen. xxxi. 20) and Targ. Onkelos; but MT Sam., Vulg., ''stole" (the heart of Laban).</note> his intention from 
+  Laban and told him not.
+          </verse>
           <verse canonical="true" osisID="Jub.29.5">And in the seventh year of the fourth week Jacob turned (his face) toward Gilead in the first month, on the twenty-first thereof. And Laban pursued after him and overtook Jacob in the mountain of Gilead in the third month, on the thirteenth thereof.</verse>
           <verse canonical="true" osisID="Jub.29.6">And the Lord did not suffer him to injure Jacob; for He appeared to him in a dream by night. And Laban spake to Jacob,</verse>
           <verse canonical="true" osisID="Jub.29.7">And on the fifteenth of those days Jacob made a feast for Laban, and for all who came with him, and Jacob sware to Laban that day, and Laban also to Jacob, that neither should cross the mountain of Gilead to the other with evil purpose.</verse>
-          <verse canonical="true" osisID="Jub.29.8">And he made there a heap for a witness; wherefore the name of that place is called: "The Heap of Witness," after this heap. 2</verse>
-          <verse canonical="true" osisID="Jub.29.9">But before they used to call the land of Gilead the land of the Rephaim; 3 for it was the land of the Rephaim, and the Rephaim were born (there), giants whose height was ten, nine, eight down to seven cubits.</verse>
-          <verse canonical="true" osisID="Jub.29.10">4 And their habitation was from the land of the children of Ammon to Mount Hermon, and the seats of their kingdom were Karnaim and [paragraph continues] Ashtaroth, 1 and Edrei, and Mîsûr, 2 and Beon. 3</verse>
-          <verse canonical="true" osisID="Jub.29.11">And the Lord destroyed them because of the evil of their deeds; for they were very malignant, and the Amorites dwelt in their stead, wicked and sinful, and there is no people to-day which hath wrought to the full all their sins, and they have no longer length of life on the earth. 4</verse>
+          <verse canonical="true" osisID="Jub.29.8">And he made there a heap for a witness; wherefore the name of that place is called: "The Heap of Witness," after this heap. 
+            <note canonical="false" type="explanation" n="151:2" TEIform="note">Cf. Gen. xxxi. 47 ("Galeed" = "Heap of Witness").</note>
+          </verse>
+          <verse canonical="true" osisID="Jub.29.9">But before they used to call the land of Gilead the land of the Rephaim; 
+            <note canonical="false" type="explanation" n="151:3" TEIform="note">Cf. Gen. xiv. 5.</note> for it was the land of the Rephaim, and the Rephaim were born (there), giants whose height was ten, nine, eight down to seven cubits.
+          </verse>
+          <verse canonical="true" osisID="Jub.29.10">
+            <note canonical="false" type="explanation" n="151:4" TEIform="note">The places here mentioned were, perhaps, associated with Maccabean victories in the mind of our author (Charles).</note> And their habitation was from the land of the children of Ammon to Mount Hermon, and the seats of their kingdom were Karnaim and [paragraph continues] Ashtaroth, 
+            <note canonical="false" type="explanation" n="152:1" TEIform="note">In MT of Gen. xiv. 5, Asheroth-karnaim is one place; but Syr. and some MSS. of LXX support our text. Karnaim was captured by. Judas Maccabæus (1 Macc. 43 f.).</note> and Edrei, and Mîsûr, 
+            <note canonical="false" type="explanation" n="152:2" TEIform="note">In Deut. iii. 10 "plain" = 
+              <hi type="italic" TEIform="hi">mîshôr</hi>.
+            </note> and Beon. 
+            <note canonical="false" type="explanation" n="152:3" TEIform="note">= probably the 
+              <hi type="italic" TEIform="hi">Bæan</hi> of 1 Macc. v. 4 f., which was destroyed by Judas.
+            </note>
+          </verse>
+          <verse canonical="true" osisID="Jub.29.11">And the Lord destroyed them because of the evil of their deeds; for they were very malignant, and the Amorites dwelt in their stead, wicked and sinful, and there is no people to-day which hath wrought to the full all their sins, and they have no longer length of life on the earth. 
+            <note canonical="false" type="explanation" n="152:4" TEIform="note">Judas "must have nearly annihilated" the Amorites (Charles).</note>
+          </verse>
           <verse canonical="true" osisID="Jub.29.12">And Jacob sent away Laban, and he departed into Mesopotamia, the land of the East, and Jacob returned to the land  of Gilead.</verse>
         </div>
         <div canonical="false" type="section" osisID="Jub.29.s2" TEIform="div">
@@ -2868,8 +2984,9 @@
           <verse canonical="true" osisID="Jub.29.13">And he passed over the Jabbok 
             <note canonical="false" type="explanation" n="152:5" TEIform="note">Cf. Gen. xxxi. 22.</note> in the ninth month, on the eleventh thereof. And on that day Esau, his brother, came to him, and he was reconciled to him, and departed from him unto the land of Seir, but Jacob dwelt in tents.
           </verse>
-          <verse canonical="true" osisID="Jub.29.14">And in the first year of the fifth week in this jubilee he crossed the Jordan, and dwelt beyond the Jordan, and he pastured his sheep from the sea †of the heap† 
-            <note canonical="false" type="explanation" n="152:6" TEIform="note">Text corrupt. Latin has "from the Salt Sea."</note> unto Bethshan, 
+          <verse canonical="true" osisID="Jub.29.14">And in the first 
+  year of the fifth week in this jubilee he crossed the Jordan, and dwelt beyond the Jordan, and he pastured his sheep from the sea †of the heap† 
+            <note canonical="false" type="explanation" n="152:6" TEIform="note">Text corrupt. Latin has "from the Salt  Sea."</note> unto Bethshan, 
             <note canonical="false" type="explanation" n="152:7" TEIform="note">Cf. 1 Macc. v. 52, xii. 10.</note> and unto Dothan and unto the †forest† 
             <note canonical="false" type="explanation" n="152:8" TEIform="note">? read "ascent" (cf. Num. xxxiv. 4; Josh. xv. 3). Judas fought in this district (of Idumea); cf. 1 Macc. v. 3.</note> of Akrabbim.
           </verse>
@@ -2886,7 +3003,8 @@
       <div canonical="true" type="chapter" osisID="Jub.30" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.30.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">Dinah ravished. Slaughter of the Shechemites. Laws against Intermarriage between Israel and the Heathen. The Choice of Levi (xxx. 1-26; cf. Gen. xxxiv.).</title>
-          <verse canonical="true" osisID="Jub.30.1">And in the first year of the sixth week he went up to Salem, to the east of Shechem, in peace, 
+          <verse canonical="true" osisID="Jub.30.1">And in the first year of the sixth week he 
+  went up to Salem, to the east of Shechem, in peace, 
             <note canonical="false" type="explanation" n="153:2" TEIform="note">Based upon xxxiii. 18 (cf. R.V. marg.). Our text combines two readings ("Shalem," the name of a city, and shālōm, "peace").</note> in the fourth month.
           </verse>
           <verse canonical="true" osisID="Jub.30.2">And there they carried off Dinah, the daughter of Jacob, into the house of Shechem, the son of Hamor, the Hivite, the prince of the land, and he lay with her and defiled her, and she was a little girl, a child of twelve years.</verse>
@@ -2957,7 +3075,7 @@
           <title canonical="false" type="sub" TEIform="title">Jacob's Journey to Bethel and Hebron. Isaac blesses Levi and Judah (xxxi. 1-25; cf. Gen. xxxv.).</title>
           <verse canonical="true" osisID="Jub.31.1">And on the new moon of the month Jacob spake to all the people of his house, saying: "Purify yourselves and change your garments, and let us arise and go up to Bethel, where I vowed a vow to Him on the day when I fled from the face of Esau my brother, because He hath been with me and brought me into this land in peace, and put ye away the strange gods that are among you."</verse>
           <verse canonical="true" osisID="Jub.31.2">And they gave up the strange gods and that which was in their ears and which was †on their necks,† 
-            <note canonical="false" type="explanation" n="157:3" TEIform="note">Corrupt.</note> and the idols which Rachel stole from Laban her brother she gave wholly to Jacob. And he burnt and brake them to pieces and destroyed them, and hid them under an oak which is in the land of Shechem.
+            <note canonical="false" type="explanation" n="157:3" TEIform="note">Corrupt.</note> and the idols which Rachel stole from Laban her brother she gave wholly to Jacob. And he burnt and brake them to pieces and destroyed them, and hid them under an oak which is in the land  of Shechem.
           </verse>
           <verse canonical="true" osisID="Jub.31.3">And he went up on the new moon of the seventh month to Bethel. And he built an altar at the place where he had slept, and he set up a pillar there, and he sent word to his father Isaac to come to him to his sacrifice, and to his mother Rebecca. [paragraph continues]</verse>
           <verse canonical="true" osisID="Jub.31.4">And Isaac said: "Let my son Jacob come, and let me see him before I die." 
@@ -3005,7 +3123,7 @@
               <hi type="italic" TEIform="hi">Test. Levi</hi> viii. 16 ("and the table of the Lord shall thy seed apportion").
             </note>  And do thou and thy sons eat thereof;  And may thy table be full unto all generations,  And thy food fail not unto all the ages.
           </verse>
-          <verse canonical="true" osisID="Jub.31.17">And let all who hate thee fall down before thee,  And let all thy adversaries be rooted out and perish;  And blessed be he that blesseth thee,  And cursed be every nation that curseth thee. p. 160</verse>
+          <verse canonical="true" osisID="Jub.31.17">And let all who hate thee fall down before thee,  And let all thy adversaries be rooted out and perish;  And blessed be he that blesseth thee,  And cursed be every nation that curseth thee.</verse>
           <verse canonical="true" osisID="Jub.31.18">And to Judah he said:  May the Lord give thee strength and power  To tread down all that hate thee;  A prince shalt thou be, thou and one of thy sons, 
             <note canonical="false" type="explanation" n="160:1" TEIform="note">
               <hi type="italic" TEIform="hi">i. e.</hi>? the Messiah who is to spring from Judah: but if so the expression of the hope is somewhat vague. More probably the reference is to the historical David.
@@ -3139,16 +3257,17 @@
               <hi type="italic" TEIform="hi">‘aṣereth</hi>) when it was recorded amongst the days of the feast days in the number of the days of the year."
             </note> And its name was called †"Addition," † †because that† it was recorded amongst the days of the feast days, †according to† the number of the days of the year.
           </verse>
-          <verse canonical="true" osisID="Jub.32.30">And in the night, on the twenty-third of this month, Deborah Rebecca's nurse died, and they buried her beneath the city under the oak of the river, and he called the name of this place, "The river of Deborah," and the oak, "The oak of the mourning of Deborah." 
+          <verse canonical="true" osisID="Jub.32.30">And in the night, on the twenty-third of this month, Deborah Rebecca's nurse died, and they buried her beneath the city under the oak of the river, and he called the name of this place, "The river  of Deborah," and the oak, "The oak of the mourning of Deborah." 
             <note canonical="false" type="explanation" n="166:1" TEIform="note">Cf. Gen. xxxv. 8 (R.V. marg.).</note>
           </verse>
           <verse canonical="true" osisID="Jub.32.31">And Rebecca went and returned to her house to his father Isaac, and Jacob sent by her hand rams and sheep and he-goats that she should prepare a meal for his father such as he desired.</verse>
-          <verse canonical="true" osisID="Jub.32.32">And he went after his mother till he came to the land of Kabrâtân, 
+          <verse canonical="true" osisID="Jub.32.32">And he went after his mother till he came to the land  of Kabrâtân, 
             <note canonical="false" type="explanation" n="166:2" TEIform="note">Due to a misunderstanding of the words rendered "some distance" (
               <hi type="italic" TEIform="hi">kibrath hā’ares</hi>) in Gen. xxxv. 16. The LXX also took kibrath to be a proper name (Χιβραθο).
             </note> and he dwelt there.
           </verse>
-          <verse canonical="true" osisID="Jub.32.33">And Rachel bare a son in the night, and called his name "Son of my sorrow"; for she suffered in giving him birth: but his father called his name Benjamin, on the eleventh of the eighth month in the first of the sixth week of this jubilee.</verse>
+          <verse canonical="true" osisID="Jub.32.33">And Rachel bare a son in the night, and called his name "Son of my sorrow"; for she suffered in giving him birth: but his father called his name Benjamin, on the eleventh of the eighth month in the first of the sixth week of this 
+  jubilee.</verse>
           <verse canonical="true" osisID="Jub.32.34">And Rachel died there and she was buried in the land 
             <note canonical="false" type="explanation" n="166:3" TEIform="note">"On the way to" in the text of Gen. xxxv. 19.</note> of Ephrath, the same is Bethlehem, and Jacob built a pillar on the grave of Rachel, on the road above her grave.
           </verse>
@@ -3158,7 +3277,7 @@
         <div canonical="false" type="section" osisID="Jub.33.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">Reuben's Sin with Bilhah. Laws regarding Incest. Jacob's Children (xxxiii. 1-23; Cf. Gen. xxxv. 21-27).</title>
           <verse canonical="true" osisID="Jub.33.1">And Jacob went and dwelt to the south of Magdalâdrâ’êf. 
-            <note canonical="false" type="explanation" n="166:4" TEIform="note">A compound of migdal ‘eder ’ephrāth ("the tower of Eder of Ephrath"); cf. Gen. xxxv. 21, also 
+            <note canonical="false" type="explanation" n="166:4" TEIform="note">A compound of migdal ‘eder ’ephrāth ("the tower  of Eder of Ephrath"); cf. Gen. xxxv. 21, also 
               <hi type="italic" TEIform="hi">Test. Reuben</hi> iii. 9--15, where the same incident is narrated. In later Jewish tradition an explanation is given which exculpates Reuben (cf. Targ. Ps.-Jon. on Gen. xxxv. 22).
             </note> And he went to his father Isaac, he and Leah his wife, on the new moon of the tenth month.
           </verse>
@@ -3204,7 +3323,8 @@
       <div canonical="true" type="chapter" osisID="Jub.34" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.34.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">War of the Amorite Kings against Jacob and his Sons. Joseph sold into Egypt (cf. Gen. xxxvii.). The Death of Bilhah and Dinah (xxxiv. 1-19).</title>
-          <verse canonical="true" osisID="Jub.34.1">And in the sixth year of this week of this forty-fourth jubilee Jacob sent his sons to pasture their sheep, and his servants with them, to the pastures of Shechem.</verse>
+          <verse canonical="true" osisID="Jub.34.1">And in the sixth year of this week of this 
+  forty-fourth jubilee Jacob sent his sons to pasture their sheep, and his servants with them, to the pastures of Shechem.</verse>
           <verse canonical="true" osisID="Jub.34.2">
             <note canonical="false" type="explanation" n="169:2" TEIform="note">The account given in 2-8 of the conquest of Shechem is given in a fuller form in the 
               <hi type="italic" TEIform="hi">Test. Judah</hi> iii-vii., and in the Midrash Wajjissau (cf. Gaster, 
@@ -3245,9 +3365,10 @@
               <hi type="italic" TEIform="hi">Timnath-heres</hi> (Jud. ii. 9); cf. 1 Macc. ix. 50.
             </note>
           </verse>
-          <verse canonical="true" osisID="Jub.34.9">And he returned in peace, and made peace with them, and they became his servants, until the day that he and his sons went down into Egypt.</verse>
+          <verse canonical="true" osisID="Jub.34.9">And he returned in peace, and made peace with them, and they became his servants, until the day that he and his sons went down into 
+  Egypt.</verse>
           <verse canonical="true" osisID="Jub.34.10">
-            <note canonical="false" type="explanation" n="170:12" TEIform="note">For 10-11 cf. Gen. xxxvii. 12 ff.</note> And in the seventh year of this week he sent Joseph to learn about the welfare of his brothers from his house to the land of Shechem, and he found them in the land of Dothan.
+            <note canonical="false" type="explanation" n="170:12" TEIform="note">For 10-11 cf. Gen. xxxvii. 12 ff.</note> And in the seventh year of this week he sent Joseph to learn about the welfare of his brothers from his house to the land of Shechem, and he found them in the land  of Dothan.
           </verse>
           <verse canonical="true" osisID="Jub.34.11">And they dealt treacherously with him, and formed a plot against him to slay him, but changing their minds, they sold him to Ishmaelite merchants, and they brought him down into Egypt, and they sold him to Potiphar, the eunuch 
             <note canonical="false" type="explanation" n="171:1" TEIform="note">Or "court official."</note> of Pharaoh, the chief of the cooks, 
@@ -3374,7 +3495,8 @@
           <verse canonical="true" osisID="Jub.36.20">And Jacob dwelt in the mountains of Hebron, in the tower of the land of the sojournings of his father Abraham, and he worshipped the Lord with all his heart and according to the visible commands according as He had divided the days of his generations. 
             <note canonical="false" type="explanation" n="178:3" TEIform="note">These commands had been made visible to Jacob on the seven tables which the angel had shown him in a vision; Cf. xxxii. 21.</note>
           </verse>
-          <verse canonical="true" osisID="Jub.36.21">And Leah his wife died in the fourth year of the second week of the forty-fifth jubilee, and he buried her in the double cave near Rebecca his mother, to the left of the grave of Sarah, his father's mother.</verse>
+          <verse canonical="true" osisID="Jub.36.21">And Leah his wife died 
+  in the fourth year of the second week of the forty-fifth jubilee, and he buried her in the double cave near Rebecca his mother, to the left of the grave of Sarah, his father's mother.</verse>
           <verse canonical="true" osisID="Jub.36.22">And all her sons and his sons came to mourn over Leah his wife with him, and to comfort him regarding her, for he was lamenting her.</verse>
           <verse canonical="true" osisID="Jub.36.23">For he loved her exceedingly after Rachel her sister died; for she was perfect and upright in all her ways and honoured Jacob, and all the days that she lived with him he did not hear from her mouth a harsh word, for she was gentle and peaceable and upright and honourable.</verse>
           <verse canonical="true" osisID="Jub.36.24">And he remembered all her deeds which she had done during her life, and he lamented her exceedingly; for he loved her with all his heart and with all his soul.</verse>
@@ -3386,7 +3508,8 @@
           <verse canonical="true" osisID="Jub.37.1">
             <note canonical="false" type="explanation" n="179:1" TEIform="note">The legend of the wars between the sons of Jacob and Esau contained in chaps. xxxvii-xxxviii. here seems to be ancient. It is also found in 
               <hi type="italic" TEIform="hi">Test. Judah</hi> ix. and in the Jewish Midrashic literature. Our text contains the oldest form.
-            </note> And on the day that Isaac the father of Jacob and Esau died, the sons of Esau heard that Isaac had given the portion of the elder to his younger son Jacob and they were very angry.
+            </note> And on the day that Isaac the father 
+  of Jacob and Esau died, the sons of Esau heard that Isaac had given the portion of the elder to his younger son Jacob and they were very angry.
           </verse>
           <verse canonical="true" osisID="Jub.37.2">And they strove with their father, saying: "Why hath thy father given Jacob the portion of the elder and passed over thee, although thou art the elder and Jacob the younger?"</verse>
           <verse canonical="true" osisID="Jub.37.3">And he said unto them "Because I sold my birthright to Jacob for a small mess of lentils; and on the day my father sent me to hunt and catch and bring him something that he should eat and bless me, he came with guile and brought my father food and drink, and my father blessed him and put me under his hand.</verse>
@@ -3426,7 +3549,7 @@
             <note canonical="false" type="explanation" n="181:2" TEIform="note">Charles thinks the bracketed words may be out of place or corrupt.</note>
           </verse>
           <verse canonical="true" osisID="Jub.37.21">And if the wolves make peace with the lambs so as not to devour or do them violence,  And if their hearts are towards them for good,  Then there will be peace in my heart towards thee.</verse>
-          <verse canonical="true" osisID="Jub.37.22">And if the lion becometh the friend of the ox and maketh peace with him, p. 182  And if he is bound under one yoke with him and plougheth with him,  Then shall I make peace with thee.</verse>
+          <verse canonical="true" osisID="Jub.37.22">And if the lion becometh the friend of the ox and maketh peace with him,   And if he is bound under one yoke with him and plougheth with him,  Then shall I make peace with thee.</verse>
           <verse canonical="true" osisID="Jub.37.23">And when the raven becometh white as the râzâ, 
             <note canonical="false" type="explanation" n="182:1" TEIform="note">"A large white bird which eats grasshoppers" (Isenberg, quoted by Charles).</note>  Then know that -I have loved thee  And shall make peace with thee.  Thou shalt be rooted out,  And thy sons shall be rooted out,  And there shall be no peace for thee." [paragraph continues]
           </verse>
@@ -3590,8 +3713,8 @@
             </note> and he placed a ring on his hand and made him ruler over all his house, and magnified him, and said unto him: "Only on the throne shall I be greater than thou."
           </verse>
           <verse canonical="true" osisID="Jub.40.8">And Joseph ruled over all the land of Egypt, and all the princes of Pharaoh, and all his servants, and all who did the king's business loved him, for he walked in uprightness, for he was without pride and arrogance, and he had no respect of persons, and did not accept gifts, but he judged in uprightness all the people of the land.</verse>
-          <verse canonical="true" osisID="Jub.40.9">And the land of Egypt was at peace before Pharaoh because of Joseph, for the Lord was with him, and gave him favour and mercy for all his generations before all those who knew him and those who heard concerning him, and Pharaoh's kingdom was well ordered, and there was no Satan 1 and no evil person (therein).</verse>
-          <verse canonical="true" osisID="Jub.40.10">And the king called Joseph's name Sĕphânṭîphâns, 2 and gave Joseph to wife the daughter of Potiphar, the daughter of the priest of Heliopolis, the chief cook. 3</verse>
+          <verse canonical="true" osisID="Jub.40.9">And the land of Egypt was at peace before Pharaoh because of Joseph, for the Lord was with him, and gave him favour and mercy for all his generations before all those who knew him and those who heard concerning him, and Pharaoh's kingdom was well ordered, and there was no Satan 1 and no evil person (therein).</verse>
+          <verse canonical="true" osisID="Jub.40.10">And the king called Joseph's name Sĕphânṭîphâns, 2 and gave Joseph to wife the daughter of Potiphar, the daughter of the priest of Heliopolis, the chief cook. 3</verse>
           <verse canonical="true" osisID="Jub.40.11">And on the day that Joseph stood before Pharaoh he was thirty years old [when he stood before Pharaoh].</verse>
           <verse canonical="true" osisID="Jub.40.12">And in that year Isaac died. And it came to pass as Joseph had said in the interpretation of his two dreams, according as he had said it, there were seven years of plenty over all the land of Egypt, and the land of Egypt produced abundantly, one measure (producing) eighteen hundred measures.</verse>
           <verse canonical="true" osisID="Jub.40.13">And Joseph gathered food into every city until they were full of corn until they could no longer count and measure it for its multitude.</verse>
@@ -3617,7 +3740,9 @@
               <hi type="italic" TEIform="hi">i. e.</hi> Bathshua; Cf. xxxiv. 20.
             </note> the wife of Judah, did not permit her son Shelah to marry. And Bêdsû’êl, the wife of Judah, died in the fifth year of this week.
           </verse>
-          <verse canonical="true" osisID="Jub.41.8">And in the sixth year Judah went up to shear his sheep at Timnah. And they told Tamar: "Behold thy father-in-law goeth up to Timnah to shear his sheep."</verse>
+          <verse canonical="true" osisID="Jub.41.8">And 
+  in the sixth year Judah went up to shear his sheep at 
+  Timnah. And they told Tamar: "Behold thy father-in-law goeth up to Timnah to shear his sheep."</verse>
           <verse canonical="true" osisID="Jub.41.9">And she put off her widow's clothes, and put on a veil, and adorned herself, and sat in the gate adjoining the way to Timnah.</verse>
           <verse canonical="true" osisID="Jub.41.10">And as Judah was going along he found her, and thought her to be an harlot, and he said unto her: "Let me come in unto thee"; and she said unto him: "Come in," and he went in.</verse>
           <verse canonical="true" osisID="Jub.41.11">And she said unto him: "Give me my hire"; and he said unto her: "I have nothing in my hand save my ring that is on my finger, and my necklace, and my staff which is in my hand."</verse>
@@ -3632,7 +3757,8 @@
           <verse canonical="true" osisID="Jub.41.18">And it came to pass when they brought her forth to bum her that she sent to her father-in-law the ring and the necklace, and the staff, saying: "Discern whose are these, for by him am I with child."</verse>
           <verse canonical="true" osisID="Jub.41.19">And Judah acknowledged, and said: "Tamar is more righteous than I am. And therefore let them burn her not."</verse>
           <verse canonical="true" osisID="Jub.41.20">And for that reason she was not given to Shelah, and he did not again approach her.</verse>
-          <verse canonical="true" osisID="Jub.41.21">And after that she bare two sons, Perez and Zerah, in the seventh year of this second week.</verse>
+          <verse canonical="true" osisID="Jub.41.21">And after that she bare 
+  two sons, Perez and Zerah, in the seventh year of this second week.</verse>
           <verse canonical="true" osisID="Jub.41.22">And thereupon the seven years of fruitfulness were accomplished, of which Joseph spake to Pharaoh. 
             <note canonical="false" type="explanation" n="190:2" TEIform="note">Cf. Gen. xli. 53.</note>
           </verse>
@@ -3653,9 +3779,12 @@
       <div canonical="true" type="chapter" osisID="Jub.42" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.42.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">The Two Journeys of the Sons of Jacob to Egypt (xlii. 1-25; cf. Gen. xlii., xliii.).</title>
-          <verse canonical="true" osisID="Jub.42.1">And in the first year of the third week of the forty-fifth jubilee the famine began to come into the land, and the rain refused to be given to the earth, for none whatever fell.</verse>
+          <verse canonical="true" osisID="Jub.42.1">And in the first year of the third week of 
+  the forty-fifth jubilee the famine began to come into the land, and the rain refused to be given to the earth, for none whatever fell.</verse>
           <verse canonical="true" osisID="Jub.42.2">And the earth grew barren, but in the land of Egypt there was food, for Joseph had gathered the seed of the land in the seven years of plenty and had preserved it. 
-            <note canonical="false" type="explanation" n="191:4" TEIform="note">Cf. Gen. xli. 54.</note> 3 . And the Egyptians came to Joseph that he might give them food, and he opened the storehouses where was the grain of the first year, and he sold it to the people of the land for gold. 
+            <note canonical="false" type="explanation" n="191:4" TEIform="note">Cf. Gen. xli. 54.</note>
+          </verse>
+          <verse canonical="true" osisID="Jub.42.3">And the Egyptians came to Joseph that he might give them food, and he opened the storehouses where was the grain of the first year, and he sold it to the people of the land for gold. 
             <note canonical="false" type="explanation" n="191:5" TEIform="note">Cf. Gen. xli. 56.</note>
           </verse>
           <verse canonical="true" osisID="Jub.42.4">(Now the famine was very sore in the land of Canaan), and Jacob heard that there was food in Egypt, and he sent his ten sons that they should procure food for him in Egypt; but Benjamin he did not send, and (the ten sons of Jacob) arrived (in Egypt) among those that went (there.)</verse>
@@ -3678,7 +3807,8 @@
           <verse canonical="true" osisID="Jub.42.17">And Israel saw that if he did not send him with them, they should all perish by reason of the famine.</verse>
           <verse canonical="true" osisID="Jub.42.18">And Reuben said: "Give him into my hand, and if I do not bring him back to thee, slay my two sons instead of his soul." And he said unto him He will not go with thee."</verse>
           <verse canonical="true" osisID="Jub.42.19">And Judah came near and said: "Send him with me, and if I do not bring him back to thee, let me bear the blame before thee all the days of my life."</verse>
-          <verse canonical="true" osisID="Jub.42.20">And he sent him with them in the second year of this week on the first day of the month, and they came to the land of Egypt with all those who went, and (they had) presents in their hands, stacte and almonds and terebinth nuts and pure honey.</verse>
+          <verse canonical="true" osisID="Jub.42.20">And he sent him with them in the second year of this 
+  week on the first day of the month, and they came to the land of Egypt with all those who went, and (they had) presents in their hands, stacte and almonds and terebinth nuts and pure honey.</verse>
           <verse canonical="true" osisID="Jub.42.21">And they went and stood before Joseph, and he saw Benjamin his brother, and he knew him, and said unto them: "Is this your youngest brother?" And they said unto him: "It is he." And he said: "The Lord be gracious to thee, my son!"</verse>
           <verse canonical="true" osisID="Jub.42.22">And he sent him into his house and he brought forth Simeon unto them and he made a feast for them, and they presented to him the gift which they had brought in their hands.</verse>
           <verse canonical="true" osisID="Jub.42.23">And they ate before him and he gave them all a portion, but the portion of Benjamin was seven times larger than that of any of theirs.</verse>
@@ -3694,7 +3824,7 @@
           <verse canonical="true" osisID="Jub.43.1">And he did as Joseph had told him, and filled all their sacks for them with food and put their money in their sacks, and put the cup in Benjamin's sack.</verse>
           <verse canonical="true" osisID="Jub.43.2">And early in the morning they departed, and it came to pass that, when they had gone from thence, Joseph said unto the steward of his house: "Pursue them, run and seize them, saying, 'For good ye have requited me with evil; you have stolen from me the silver cup out of which my lord drinks.' And bring back to me their youngest brother, and fetch (him) quickly before I go forth to my seat of judgment."</verse>
           <verse canonical="true" osisID="Jub.43.3">And he ran after them and said unto them according to these words.</verse>
-          <verse canonical="true" osisID="Jub.43.4">And they said unto him: "God forbid that thy servants should do this thing, and steal from the house of thy lord any utensil, and the money also which we found in our sacks the first time, we thy servants brought back from the land of Canaan.</verse>
+          <verse canonical="true" osisID="Jub.43.4">And they said unto him: "God forbid that thy servants should do this thing, and steal from the house of thy lord any utensil, and the money also which we found in our sacks the first time, we thy servants brought back from the land  of Canaan.</verse>
           <verse canonical="true" osisID="Jub.43.5">How then should we steal any utensil? Behold here are we and our sacks; search, and wherever thou findest the cup in the sack of any man amongst us, let him be slain, and we and our asses will serve thy lord."</verse>
           <verse canonical="true" osisID="Jub.43.6">And he said unto them: "Not so, the man with whom I find, him only shall I take as a servant, and ye will return in peace unto your house."</verse>
           <verse canonical="true" osisID="Jub.43.7">And as he was searching in their vessels, beginning with the eldest and ending with the youngest, it was found in Benjamin's sack.</verse>
@@ -3715,7 +3845,7 @@
           <verse canonical="true" osisID="Jub.43.16">And he said unto them: "Weep not over me, but hasten and bring my father to me; and ye see that it is my mouth that speaketh and the eyes of my brother Benjamin see.</verse>
           <verse canonical="true" osisID="Jub.43.17">For behold this is the second year of the famine, and there are still five years without harvest or fruit of trees or ploughing.</verse>
           <verse canonical="true" osisID="Jub.43.18">Come down quickly ye and your households, so that ye perish not through the famine, and do not be grieved for your possessions, for the Lord sent me before you to set things in order that many people might live.</verse>
-          <verse canonical="true" osisID="Jub.43.19">And tell my father that I am still alive, and ye, behold, ye see that the Lord hath made me as a father to Pharaoh, and ruler over his house and over all the land of Egypt.</verse>
+          <verse canonical="true" osisID="Jub.43.19">And tell my father that I am still alive, and ye, behold, ye see that the Lord hath made me as a father to Pharaoh, and ruler over his house and over all the land  of Egypt.</verse>
           <verse canonical="true" osisID="Jub.43.20">And tell my father of all my glory, and all the riches and glory that the Lord hath given Me."</verse>
           <verse canonical="true" osisID="Jub.43.21">And by the command of the mouth of Pharaoh he gave them chariots and provisions for the way, and he gave them all many-coloured raiment and silver.</verse>
           <verse canonical="true" osisID="Jub.43.22">And to their father he sent raiment and silver and ten asses which carried com, and he sent them away.</verse>
@@ -3798,7 +3928,8 @@
       <div canonical="true" type="chapter" osisID="Jub.45" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.45.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">Joseph receives Jacob. The Land of Egypt is acquired for Pharaoh. Jacob's Death and Burial (xlv. 1-16; cf. Gen. xlvi. 28 ff., xlvii. 11 ff.).</title>
-          <verse canonical="true" osisID="Jub.45.1">And Israel went into the country of Egypt, into the land of Goshen, on the new moon of the fourth month, in the second year of the third week of the forty-fifth jubilee.</verse>
+          <verse canonical="true" osisID="Jub.45.1">And Israel went into the country of Egypt, 
+  into the land  of Goshen, on the new moon of the fourth month, in the second year of the third week of the forty-fifth jubilee.</verse>
           <verse canonical="true" osisID="Jub.45.2">And Joseph went to meet his father Jacob, to the land of Goshen, and he fell on his father's neck and wept.</verse>
           <verse canonical="true" osisID="Jub.45.3">And Israel said unto Joseph: "Now let me die since I have seen thee, and now may the Lord God of Israel be blessed, the God of Abraham and the God of Isaac who hath not withheld His mercy and His grace from His servant Jacob.</verse>
           <verse canonical="true" osisID="Jub.45.4">It is enough for me that I have seen thy face whilst †I am† 
@@ -3814,18 +3945,20 @@
           <verse canonical="true" osisID="Jub.45.8">And the land of Egypt suffered by reason of the famine, and Joseph acquired all the land of Egypt for Pharaoh in return for food, and he got possession of the people and their cattle and everything for Pharaoh.</verse>
           <verse canonical="true" osisID="Jub.45.9">And the years of the famine were accomplished, and Joseph gave to the people in the land seed and food that they might sow (the land) in the eighth year, for the river had overflowed all the land of Egypt.</verse>
           <verse canonical="true" osisID="Jub.45.10">For in the seven years of the famine it had not overflowed and had irrigated only a few places on the banks of the river, but now it overflowed and the Egyptians sowed the land, and it bore much corn that year.</verse>
-          <verse canonical="true" osisID="Jub.45.11">And this was the first year of the fourth week of the forty-fifth jubilee.</verse>
-          <verse canonical="true" osisID="Jub.45.12">And Joseph took of the corn of the harvest the fifth part for the king and left four parts for them for food and for seed, and Joseph made it an ordinance for the land of Egypt until this day.</verse>
+          <verse canonical="true" osisID="Jub.45.11">And this was the 
+  first year of the fourth week of the forty-fifth jubilee.</verse>
+          <verse canonical="true" osisID="Jub.45.12">And Joseph took of the corn of the harvest the fifth part for the king and left four parts for them for food and for seed, and Joseph made it an ordinance for the land  of Egypt until this day.</verse>
           <verse canonical="true" osisID="Jub.45.13">And Israel lived in the land of Egypt seventeen years, and all the days which he lived were three jubilees, one hundred and forty-seven years, and he died in the fourth year of the fifth week of the forty-fifth jubilee.</verse>
-          <verse canonical="true" osisID="Jub.45.14">And Israel blessed his sons before he died and told them everything 1 that would befall them in the land of Egypt; and he made known to them what would come upon them in the last days, and blessed them and gave to Joseph two portions 2 in the land.</verse>
-          <verse canonical="true" osisID="Jub.45.15">And he slept with his fathers, and he was buried in the double cave in the land of Canaan, near Abraham his father in the grave which he dug for himself in the double cave in the land of Hebron. 3</verse>
-          <verse canonical="true" osisID="Jub.45.16">And he gave all his books and the books of his fathers to Levi his son that he might preserve them and renew them for his children until this day. 4</verse>
+          <verse canonical="true" osisID="Jub.45.14">And Israel blessed his sons before he died and told them everything 1 that would befall them in the land of Egypt; and he made known to them what would come upon them in the last days, and blessed them and gave to Joseph two portions 2 in the land.</verse>
+          <verse canonical="true" osisID="Jub.45.15">And he slept with his fathers, and he was buried in the double cave in the land of Canaan, near Abraham his father in the grave which he dug for himself in the double cave in the land of Hebron. 3</verse>
+          <verse canonical="true" osisID="Jub.45.16">And he gave all his books and the books of his fathers to Levi his son that he might preserve them and renew them for his children until this day. 4</verse>
         </div>
       </div>
       <div canonical="true" type="chapter" osisID="Jub.46" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.46.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">The Death of Joseph. The Bones of Jacob's Sons (except Joseph) interred at Hebron. The Oppression of Israel by Egypt (xlvi. 1-16; cf. Gen. l.; Exod. i.).</title>
-          <verse canonical="true" osisID="Jub.46.1">And it came to pass that after Jacob died the children of Israel multiplied in the land of Egypt, and they became a great nation, and they were of one accord in heart, so that brother loved brother and every man helped his brother, and they increased abundantly and multiplied exceedingly, ten weeks of years, all the days of the life of Joseph. 
+          <verse canonical="true" osisID="Jub.46.1">And it came to pass that after Jacob died the children of Israel multiplied in the land of Egypt, and they became a great nation, and they were of one accord in heart, so that brother loved brother and every man helped his brother, and they increased abundantly and multiplied exceedingly, ten weeks 
+  of years, all the days of the life of Joseph. 
             <note canonical="false" type="explanation" n="201:5" TEIform="note">Cf. Exod. i.</note>
           </verse>
           <verse canonical="true" osisID="Jub.46.2">And there was no Satan 
@@ -3854,14 +3987,16 @@
               <hi type="italic" TEIform="hi">Chron. Jerahmeel</hi> xlv. it is between Cush and Syria.
             </note> and he was stronger than he, and he returned to the land of Canaan, and the gates of Egypt were closed, and none went out and none came into Egypt.
           </verse>
-          <verse canonical="true" osisID="Jub.46.8">And Joseph died in the forty-sixth jubilee, in the sixth week, in the second year, and they buried him in the land of Egypt, and his brethren died after him.</verse>
-          <verse canonical="true" osisID="Jub.46.9">And the king of Egypt went forth to war with the king of Canaan in the forty-seventh jubilee, in the second week in the second year, and the children of Israel brought forth all the bones of the children of Jacob save the bones of Joseph, and they buried them in the field in the double cave in the mountain.</verse>
+          <verse canonical="true" osisID="Jub.46.8">And Joseph died 
+  in the forty-sixth jubilee, in the sixth week, in the second year, and they buried him in the land of Egypt, and his brethren died after him.</verse>
+          <verse canonical="true" osisID="Jub.46.9">And the king of Egypt went forth to war with the king of 
+  Canaan in the forty-seventh jubilee, in the second week in the second year, and the children of Israel brought forth all the bones of the children of Jacob save the bones of Joseph, and they buried them in the field in the double cave in the mountain.</verse>
           <verse canonical="true" osisID="Jub.46.10">And the most (of them) returned to Egypt, but a few of them remained in the mountains of Hebron, and [paragraph continues] Amram thy father remained with them</verse>
           <verse canonical="true" osisID="Jub.46.1"/>
           <verse canonical="true" osisID="Jub.46.11">And the king of Canaan was victorious over the king of Egypt, and he closed the gates of Egypt.</verse>
           <verse canonical="true" osisID="Jub.46.12">And he devised an evil device against the children of Israel of afflicting them; and he said unto the people of Egypt:</verse>
           <verse canonical="true" osisID="Jub.46.13">"Behold the people of the children of Israel have increased and multiplied more than we. Come and let us deal wisely with them before they become too many, and let us afflict them with slavery before war come upon us and before they too fight against us; else they will join themselves unto our enemies and get them up out of our land, for their hearts and faces are towards the land of Canaan."</verse>
-          <verse canonical="true" osisID="Jub.46.14">And he set over them taskmasters to afflict them with slavery; and they built strong 2 cities for Pharaoh, Pithom and Raamses, and they built all the walls and all the fortifications which had fallen in the cities of Egypt.</verse>
+          <verse canonical="true" osisID="Jub.46.14">And he set over them taskmasters to afflict them with slavery; and they built strong 2 cities for Pharaoh, Pithom and Raamses, and they built all the walls and all the fortifications which had fallen in the cities of Egypt.</verse>
           <verse canonical="true" osisID="Jub.46.15">And they made them serve with rigour, and the more they dealt evilly with them, the more they increased and multiplied.</verse>
           <verse canonical="true" osisID="Jub.46.16">And the people of Egypt abominated the children of Israel.</verse>
         </div>
@@ -3869,10 +4004,12 @@
       <div canonical="true" type="chapter" osisID="Jub.47" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.47.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">The Birth and Early Years of Moses (xlvii. 1-12; cf. Exod. ii.).</title>
-          <verse canonical="true" osisID="Jub.47.1">And in the seventh week, in the seventh year, in the forty-seventh jubilee, thy father 
+          <verse canonical="true" osisID="Jub.47.1">And in the seventh week, in the seventh 
+  year, in the forty-seventh jubilee, thy father 
             <note canonical="false" type="explanation" n="203:3" TEIform="note">
               <hi type="italic" TEIform="hi">i. e.</hi> Moses' father, Amram.
-            </note> went forth from the land of Canaan, and thou wast born in the fourth week, in the sixth year thereof, in the forty-eighth jubilee; this was the time of tribulation on the children of Israel.
+            </note> went forth from the land  of Canaan, and thou wast born in the fourth week, in the sixth year thereof, in the 
+  forty-eighth jubilee; this was the time of tribulation on the children of Israel.
           </verse>
           <verse canonical="true" osisID="Jub.47.2">And Pharaoh, king of Egypt, issued a command regarding them that they should cast all their male children which were born into the river.</verse>
           <verse canonical="true" osisID="Jub.47.3">And they cast them in for seven months until the day that thou wast born. And thy mother hid thee for three months, and they told regarding her.</verse>
@@ -3890,7 +4027,8 @@
           <verse canonical="true" osisID="Jub.47.9">And afterwards, when thou wast grown up, they brought thee unto the daughter of Pharaoh, and thou didst become her son, and Amram thy father taught thee writing, 
             <note canonical="false" type="explanation" n="204:3" TEIform="note">Contrast Acts vii. 22.</note> and after thou hadst completed three weeks they brought thee into the royal court.
           </verse>
-          <verse canonical="true" osisID="Jub.47.10">And thou wast three weeks of years at court until the time when thou didst go forth from the royal court and didst see an Egyptian smiting thy friend who was of the children of Israel, and thou didst slay him and hide him in the sand.</verse>
+          <verse canonical="true" osisID="Jub.47.10">And thou 
+  wast three weeks of years at court until the time when thou didst go forth from the royal court and didst see an Egyptian smiting thy friend who was of the children of Israel, and thou didst slay him and hide him in the sand.</verse>
           <verse canonical="true" osisID="Jub.47.11">And on the second day thou didst find two of the children of Israel striving together, and thou didst say to him who was doing the wrong: "Why dost thou smite thy brother?</verse>
           <verse canonical="true" osisID="Jub.47.12">And he was angry and indignant, and said "Who made thee a prince and a judge over us? Thinkest thou to kill me as thou killedst the Egyptian yesterday?" And thou didst fear and flee on account of these words.</verse>
         </div>
@@ -3898,7 +4036,8 @@
       <div canonical="true" type="chapter" osisID="Jub.48" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.48.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">From the Flight of Moses to the Exodus (xlviii. 1-19; cf. Exod. ii. 15 ff., iv. 19-24, vii-xiv.).</title>
-          <verse canonical="true" osisID="Jub.48.1">And in the sixth year of the third week of the forty-ninth jubilee thou didst depart and dwell in the land of Midian 
+          <verse canonical="true" osisID="Jub.48.1">And in the sixth year of the third week 
+  of the forty-ninth jubilee thou didst depart and dwell in the land  of Midian 
             <note canonical="false" type="explanation" n="205:1" TEIform="note">Cf. Exod. ii. 15.</note> five weeks and one year. And thou didst return into Egypt 
             <note canonical="false" type="explanation" n="205:2" TEIform="note">Cf. Exod. iv. 19.</note> in the second week in the second year in the fiftieth jubilee.
           </verse>
@@ -4009,26 +4148,27 @@
               <hi type="italic" TEIform="hi">War</hi>, vi. 9,3. ii. 14, 3).
             </note> which hath been sanctified in the name of the Lord.
           </verse>
-          <verse canonical="true" osisID="Jub.49.21">And they may not celebrate the passover in their cities, 1 nor in any place save before the tabernacle of the Lord, or before His house where His name hath dwelt; and they will not go astray from the Lord.</verse>
-          <verse canonical="true" osisID="Jub.49.22">And do thou, Moses, command the children of Israel to observe the ordinances of the passover, as it was commanded unto thee; declare thou unto them every year †and the day of its days, and† 2 the festival of unleavened bread, that they should eat unleavened bread seven days, (and) that they should observe its festival, and that they bring an oblation every day during those seven days of joy before the Lord on the altar of your God.</verse>
-          <verse canonical="true" osisID="Jub.49.23">For ye celebrated this festival with haste 3 when ye went forth from Egypt till ye entered into the wilderness of Shur; 4 for on the shore of the sea ye completed it.</verse>
+          <verse canonical="true" osisID="Jub.49.21">And they may not celebrate the passover in their cities, 1 nor in any place save before the tabernacle of the Lord, or before His house where His name hath dwelt; and they will not go astray from the Lord.</verse>
+          <verse canonical="true" osisID="Jub.49.22">And do thou, Moses, command the children of Israel to observe the ordinances of the passover, as it was commanded unto thee; declare thou unto them every year †and the day of its days, and† 2 the festival of unleavened bread, that they should eat unleavened bread seven days, (and) that they should observe its festival, and that they bring an oblation every day during those seven days of joy before the Lord on the altar of your God.</verse>
+          <verse canonical="true" osisID="Jub.49.23">For ye celebrated this festival with haste 3 when ye went forth from Egypt till ye entered into the wilderness of Shur; 4 for on the shore of the sea ye completed it.</verse>
         </div>
       </div>
       <div canonical="true" type="chapter" osisID="Jub.50" TEIform="div">
         <div canonical="false" type="section" osisID="Jub.50.s1" TEIform="div">
           <title canonical="false" type="sub" TEIform="title">Laws regarding the Jubilees and the Sabbath (l. 1-13).</title>
-          <verse canonical="true" osisID="Jub.50.1">And after this law I made known to thee the days of the Sabbaths in the desert of Sin[ai], which is between Elim and Sinai. 5</verse>
-          <verse canonical="true" osisID="Jub.50.2">And I told thee of the Sabbaths of the land on Mount Sinai, and I told thee of the jubilee years 6 in the sabbaths of years: but the year thereof have I not told thee till ye enter the land which ye are to possess.</verse>
-          <verse canonical="true" osisID="Jub.50.3">And the land also will keep its sabbaths while they dwell upon it, 7 and they will know the jubilee year.</verse>
-          <verse canonical="true" osisID="Jub.50.4">Wherefore I have ordained for thee the year-weeks 8 and the years and the jubilees: there are forty-nine jubilees from the days of Adam until this day, and one week and two years and there are yet forty years to come (lit. "distant for learning the commandments of the Lord, until they pass over into the land of Canaan, crossing the Jordan to the west.</verse>
-          <verse canonical="true" osisID="Jub.50.5">And the jubilees will pass by, until Israel is cleansed from all guilt of fornication, and uncleanness, and pollution, and sin, and error, and dwelleth with confidence in all the land, and there will be no more a Satan or any evil one, and the land will be clean from that time for evermore. 1</verse>
+          <verse canonical="true" osisID="Jub.50.1">And after this law I made known to thee the days of the Sabbaths in the desert of Sin[ai], which is between Elim and Sinai.</verse>
+          <verse canonical="true" osisID="Jub.50.2">And I told thee of the Sabbaths of the land on Mount Sinai, and I told thee of the jubilee years  in the sabbaths of years: but the year thereof have I not told thee till ye enter the land which ye are to possess.</verse>
+          <verse canonical="true" osisID="Jub.50.3">And the land also will keep its sabbaths while they dwell upon it,  and they will know the jubilee year.</verse>
+          <verse canonical="true" osisID="Jub.50.4">Wherefore I have ordained for thee the year-weeks  and the years and the jubilees: there are forty-nine jubilees from the days of Adam until this day, and one week 
+  and two years and there are yet forty years to come (lit. "distant for learning the commandments of the Lord, until they pass over into the land of Canaan, crossing the Jordan to the west.</verse>
+          <verse canonical="true" osisID="Jub.50.5">And the jubilees will pass by, until Israel is cleansed from all guilt of fornication, and uncleanness, and pollution, and sin, and error, and dwelleth with confidence in all the land, and there will be no more a Satan or any evil one, and the land will be clean from that time for evermore.</verse>
           <verse canonical="true" osisID="Jub.50.6">And behold the commandment regarding the Sabbaths--I have written (them) down for thee and all the judgments of its laws.</verse>
-          <verse canonical="true" osisID="Jub.50.7">Six days wilt thou labour, but on the seventh day is the Sabbath of the Lord your God. 2 In it ye shall do no manner of work, ye and your sons, and your men-servants and your maid-servants, and all your cattle and the sojourner also who is with you.</verse>
-          <verse canonical="true" osisID="Jub.50.8">And the man that doeth any work on it shall die: 3 whoever desecrateth that day, whoever lieth with (his) wife 4 or whoever saith he will do something on it, that he will set out on a journey thereon 5 in regard to any buying or selling: 6 and whoever draweth water thereon 7 which he had not prepared for himself on the sixth day, and whoever taketh up any burden to carry it out of his tent 8 or out of his house shall die.</verse>
+          <verse canonical="true" osisID="Jub.50.7">Six days wilt thou labour, but on the seventh day is the Sabbath of the Lord your God.  In it ye shall do no manner of work, ye and your sons, and your men-servants and your maid-servants, and all your cattle and the sojourner also who is with you.</verse>
+          <verse canonical="true" osisID="Jub.50.8">And the man that doeth any work on it shall die:  whoever desecrateth that day, whoever lieth with (his) wife  or whoever saith he will do something on it, that he will set out on a journey thereon  in regard to any buying or selling:  and whoever draweth water thereon  which he had not prepared for himself on the sixth day, and whoever taketh up any burden to carry it out of his tent  or out of his house shall die.</verse>
           <verse canonical="true" osisID="Jub.50.9">Ye shall do no work whatever on the Sabbath day save that ye have prepared for yourselves on the sixth day, so as to eat, and drink, and rest, and keep Sabbath from all work on that day, and to bless the Lord your God, who has given you a day of festival, and a holy day: and a day of the holy kingdom for all Israel is this day among their days for ever.</verse>
-          <verse canonical="true" osisID="Jub.50.10">For great is the honour which the Lord hath given to Israel that they should eat and drink and be satisfied on this festival day, and rest thereon from all labour 1 which belongeth to the labour of the children of men, save burning frankincense and bringing oblations and sacrifices before the Lord for days and for Sabbaths.</verse>
-          <verse canonical="true" osisID="Jub.50.11">This work alone shall be done on the Sabbath-days 2 in the sanctuary of the Lord your God; that they may atone for Israel with sacrifice continually from day to day for a memorial well-pleasing before the Lord, and that He may receive them always from day to day according as thou hast been commanded.</verse>
-          <verse canonical="true" osisID="Jub.50.12">And every man who doeth any work thereon, or goeth a journey, or tilleth (his) farm, 3 whether in his house or any other place, 4 and whoever lighteth a fire, 5 or rideth on any beast, 6 or travelleth by ship on the sea, and whoever striketh or killeth anything, or slaughtereth 7 a beast or a bird, or whoever catcheth an animal or a bird or a fish, or whoever fasteth or maketh war on the Sabbaths: 8</verse>
+          <verse canonical="true" osisID="Jub.50.10">For great is the honour which the Lord hath given to Israel that they should eat and drink and be satisfied on this festival day, and rest thereon from all labour  which belongeth to the labour of the children of men, save burning frankincense and bringing oblations and sacrifices before the Lord for days and for Sabbaths.</verse>
+          <verse canonical="true" osisID="Jub.50.11">This work alone shall be done on the Sabbath-days  in the sanctuary of the Lord your God; that they may atone for Israel with sacrifice continually from day to day for a memorial well-pleasing before the Lord, and that He may receive them always from day to day according as thou hast been commanded.</verse>
+          <verse canonical="true" osisID="Jub.50.12">And every man who doeth any work thereon, or goeth a journey, or tilleth (his) farm,  whether in his house or any other place,  and whoever lighteth a fire,  or rideth on any beast,  or travelleth by ship on the sea, and whoever striketh or killeth anything, or slaughtereth  a beast or a bird, or whoever catcheth an animal or a bird or a fish, or whoever fasteth or maketh war on the Sabbaths:</verse>
           <verse canonical="true" osisID="Jub.50.13">The man who doeth any of these things on the Sabbath shall die, so that the children of Israel shall observe the Sabbaths according to the commandments regarding the Sabbaths of the land, as it is written in the tables, which He gave into my hands that I should write out for thee the laws of the seasons, and the seasons according to the division of their days.</verse>
         </div>
       </div>

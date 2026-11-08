@@ -89,6 +89,8 @@ that join consecutive paragraphs with the whitespace between them then glue word
 
 KEPT_ATTRIBUTES: Final[frozenset[str]] = frozenset({"name", "href", "color", "size"})
 """Attributes kept on rebuilt content; the reader app's classes and data attributes go."""
+UNTERMINATED_CHARREF_RE: Final[re.Pattern[str]] = re.compile(r"&#(\d+)(?![\d;])")
+"""Matches a decimal character reference that lacks its closing ``;`` (digits in group 1)."""
 
 
 def is_reader_layout(raw_html: str) -> bool:
@@ -559,18 +561,38 @@ def book_overview_parts(raw_html: str) -> tuple[str, list[str], int | None]:
     return title, about_html, chapter_count
 
 
-def legacy_html(raw_html: str) -> str:
-    """Return a page in old-layout form, whichever layout it was fetched in.
+def close_character_references(raw_html: str) -> str:
+    """Add the missing semicolon to decimal character references.
 
-    Old-layout pages (and anything that is not a reader-layout text page, such as
-    mirror Markdown or a book overview page) are returned unchanged.
+    The old pages contain references such as ``&#7730araite`` (no ``;``). With character
+    references converted, ``html.parser`` then buffers everything from there to the end of
+    the page as one text node, losing the rest of the markup (and, on Jubilees' introduction,
+    most of the text and every footnote).
 
     Args:
         raw_html: Raw page HTML.
 
     Returns:
-        ``raw_html`` itself, or the rebuilt document from :func:`reader_page_to_legacy`.
+        The HTML with every ``&#<digits>`` not followed by a digit or ``;`` closed.
     """
+    return UNTERMINATED_CHARREF_RE.sub(r"&#\1;", raw_html)
+
+
+def legacy_html(raw_html: str) -> str:
+    """Return a page in old-layout form, whichever layout it was fetched in.
+
+    Old-layout pages (and anything that is not a reader-layout text page, such as
+    mirror Markdown or a book overview page) are returned as they are, apart from
+    :func:`close_character_references`.
+
+    Args:
+        raw_html: Raw page HTML.
+
+    Returns:
+        The page with its character references closed, or the rebuilt document from
+        :func:`reader_page_to_legacy`.
+    """
+    raw_html = close_character_references(raw_html)
     if not is_reader_layout(raw_html):
         return raw_html
     return reader_page_to_legacy(raw_html)
