@@ -138,6 +138,11 @@ PLATE_PAGES: Final[tuple[str, ...]] = tuple(f"bct_pl{n:02d}" for n in range(16))
 """Page stems of the plates: the frontispiece (``bct_pl00``) and Plates I to XV."""
 FACING_RE: Final[re.Pattern[str]] = re.compile(r"facing\s+page\s+(?P<page>[0-9ivxlcdm]+)", re.I)
 """Matches the ``{facing page 272}`` line of a plate page."""
+PLATE_FOOTER_RE: Final[re.Pattern[str]] = re.compile(
+    r"^(?:Sacred Texts\s*\|\s*Christianity|(?:«\s*)?(?:Previous|Next):.*)$", re.IGNORECASE
+)
+"""Matches the footer navigation of a page: ``Sacred Texts | Christianity`` and the
+``« Previous: …`` / ``Next: … »`` links."""
 LIST_NUMBER_RE: Final[re.Pattern[str]] = re.compile(r"^\d+\.$")
 """Matches the number cell of a numbered-list table row such as ``12.``."""
 
@@ -492,9 +497,7 @@ class CaveOfTreasuresParser:
             number = normalize_whitespace(cells[0].get_text()) if cells else ""
             if len(cells) >= 2 and LIST_NUMBER_RE.match(number):
                 body = _clean(self.parse_inline(cells[1], footnotes))
-                blocks.append(
-                    Block("verse", [*pending, number + " ", *body] if body else [*pending])
-                )
+                blocks.append(Block("verse", _clean([*pending, number + " ", *body])))
                 pending.clear()
             else:
                 LOGGER.debug("Skipping non-list table row: %s", number)
@@ -584,8 +587,10 @@ class CaveOfTreasuresParser:
         for element in body.find_all(["p", "td"]):
             if element.find(["p", "td", "table"]):
                 continue
-            text = normalize_whitespace(element.get_text(" "))
+            text = _plain(_clean(self.parse_inline(element, {})))
             if not text or text.isdigit() or NAVIGATION_RE.match(text):
+                continue
+            if PLATE_FOOTER_RE.match(text):
                 continue
             match = FACING_RE.search(text)
             if match:

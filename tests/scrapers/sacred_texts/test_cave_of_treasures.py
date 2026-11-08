@@ -253,3 +253,24 @@ def test_is_valid_plate_page():
     assert CaveOfTreasuresParser.is_valid_plate_page(good)
     assert not CaveOfTreasuresParser.is_valid_plate_page("<html><p>no images</p></html>")
     assert not CaveOfTreasuresParser.is_valid_plate_page("Just a moment <img src='a'>")
+
+
+def test_list_row_number_and_text_are_one_string_in_the_verse(chapter6):
+    """The ``1.`` marker and the row text form a single string, so the verse serialises whole."""
+    first = [b for b in chapter6.blocks if b.kind == "verse"][0]
+    assert first.parts == ["1. Adam begot Seth."]
+
+
+def test_plate_footer_navigation_is_not_caption(parser):
+    """The page footer's site links do not leak into a plate caption."""
+    html = (
+        (FIXTURES / "bct_pl15.htm")
+        .read_text(encoding="utf-8")
+        .replace(
+            "</body>",
+            "<p>Sacred Texts | Christianity</p><p>« Previous: The Book - Plate XIV</p>"
+            "<p>Next: The Book - Index »</p></body>",
+        )
+    )
+    plate = parser.parse_plate(html, "bct_pl15")
+    assert not any("Previous:" in c or "Next:" in c or "Christianity" in c for c in plate.caption)
