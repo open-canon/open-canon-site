@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="Jasher" osisRefWork="Jasher" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.07T22:47:07</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T00:34:12</date>
         <p TEIform="p">Scraped from https://www.sacred-texts.com/chr/apo/jasher/ and converted to OSIS by Andrew P. Sansom.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -21,11 +21,32 @@
       <title canonical="false" short="Jasher" type="main" TEIform="title">The Book of Jasher</title>
       <div canonical="false" type="titlePage" TEIform="div">
         <title canonical="false" type="main" TEIform="title">The Book of Jasher</title>
+        <p TEIform="p">Referred to in</p>
+        <p TEIform="p">Joshua and Second Samuel</p>
+        <p TEIform="p">Faithfully Translated</p>
+        <p TEIform="p">FROM THE ORIGINAL HEBREW INTO ENGLISH</p>
+        <p TEIform="p">"Is not this written in the Book of Jasher?"--Joshua, x. 13.</p>
+        <p TEIform="p">"Behold it is written in the Book of Jasher."--II. Samuel, i. 18</p>
+        <p TEIform="p">SALT LAKE CITY:</p>
+        <p TEIform="p">PUBLISHED BY J.H. PARRY &amp; COMPANY</p>
+        <p TEIform="p">1887.</p>
       </div>
       <div canonical="false" type="front" TEIform="div">
         <title canonical="false" type="main" TEIform="title">Introduction</title>
-        <p TEIform="p">This is one of the apochrypal Books of Jasher. There are several (as many as five) separate works by this title, all composed much later than Biblical times. This particular one is a translation of a Hebrew book printed in 1613. Sepir Ha Yasher, the Hebrew title of this book, means the 'Book of the Upright', or 'the Upright or Correct Record'. This title was misread as 'Jasher', and at some point Jasher was treated as a proper name; however the pronoun 'the' (hebrew 'ha') never preceeds proper names.</p>
-        <p TEIform="p">This text covers much of the same ground as the traditional Mosaic books of the Bible, from the creation of the world to the death of Moses, albeit with several minor variations.</p>
+        <p TEIform="p">This is one of the apochrypal Books of Jasher.</p>
+        <p TEIform="p">There are several (as many as five) separate works by this title, all</p>
+        <p TEIform="p">composed much later than Biblical times.</p>
+        <p TEIform="p">This particular one is a translation of a Hebrew book printed in 1613.</p>
+        <p TEIform="p">Sepir Ha Yasher, the Hebrew title of this book, means the 'Book of the Upright',</p>
+        <p TEIform="p">or 'the Upright or Correct Record'.</p>
+        <p TEIform="p">This title was misread as 'Jasher', and at some point Jasher was</p>
+        <p TEIform="p">treated as a proper name; however the pronoun 'the' (hebrew 'ha')</p>
+        <p TEIform="p">never preceeds proper names.</p>
+        <p TEIform="p">There is also another spurious Book of Jasher, published 1750, in which Jasher</p>
+        <p TEIform="p">is treated as the name of the author.</p>
+        <p TEIform="p">This text covers much of the same ground as the traditional Mosaic books</p>
+        <p TEIform="p">of the Bible, from the creation of the world to the death of Moses,</p>
+        <p TEIform="p">albeit with several minor variations.</p>
       </div>
       <div canonical="true" type="chapter" osisID="Jasher.1" TEIform="div">
         <verse canonical="true" osisID="Jasher.1.1">And God said, Let us make man in our image, after our likeness, and God created man in his own image.</verse>

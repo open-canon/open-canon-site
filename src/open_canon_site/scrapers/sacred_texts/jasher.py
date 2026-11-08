@@ -29,9 +29,9 @@ LOGGER = logging.getLogger(__name__)
 OUTPUT_FILENAME: Final[str] = "jasher.xml"
 """Name of the OSIS file written into the output directory."""
 
-INDEX_URL: Final[str] = "https://sacred-texts.com/chr/apo/jasher/index.htm"
+INDEX_URL: Final[str] = "https://archive.sacred-texts.com/chr/apo/jasher/index.htm"
 """URL of the book's index page (title page, introduction and chapter links)."""
-CHAPTER_URL_TEMPLATE: Final[str] = "https://sacred-texts.com/chr/apo/jasher/{page}.htm"
+CHAPTER_URL_TEMPLATE: Final[str] = "https://archive.sacred-texts.com/chr/apo/jasher/{page}.htm"
 """``str.format`` template for a chapter page URL; ``{page}`` is the chapter number (``1`` .. ``91``)."""
 OSIS_WORK_ID: Final[str] = "Jasher"
 """OSIS work identifier, also the book id prefix (``Jasher.<chapter>.<verse>``)."""
@@ -690,7 +690,7 @@ def run(args: argparse.Namespace) -> list[Path]:
 SPEC = ScraperSpec(
     name="jasher",
     help="Book of Jasher (1887 Parry & Company edition) to OSIS",
-    source="https://sacred-texts.com/chr/apo/jasher/",
+    source="https://archive.sacred-texts.com/chr/apo/jasher/",
     outputs=(OUTPUT_FILENAME,),
     run=run,
     add_arguments=add_arguments,

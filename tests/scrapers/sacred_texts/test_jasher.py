@@ -217,7 +217,7 @@ def test_fetch_index_text_rejects_interstitial(parser, monkeypatch):
 
 def test_fetch_chapter_text_formats_url_and_validates_chapter(parser, monkeypatch):
     """The chapter URL contains the number and the page must name that chapter."""
-    url = "https://sacred-texts.com/chr/apo/jasher/12.htm"
+    url = "https://archive.sacred-texts.com/chr/apo/jasher/12.htm"
     calls = stub_fetch(parser, monkeypatch, {url: chapter_html(12)})
     assert parser.fetch_chapter_text(12) == chapter_html(12)
     assert calls == [url]
@@ -225,7 +225,7 @@ def test_fetch_chapter_text_formats_url_and_validates_chapter(parser, monkeypatc
 
 def test_fetch_chapter_text_raises_for_mismatched_page(parser, monkeypatch):
     """A page for the wrong chapter is rejected with the chapter number in the message."""
-    url = "https://sacred-texts.com/chr/apo/jasher/12.htm"
+    url = "https://archive.sacred-texts.com/chr/apo/jasher/12.htm"
     stub_fetch(parser, monkeypatch, {url: chapter_html(13)})
     with pytest.raises(RuntimeError, match="chapter 12"):
         parser.fetch_chapter_text(12)

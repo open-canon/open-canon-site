@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="1En" osisRefWork="1 Enoch" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.07T22:47:11</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T00:34:11</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/boe/, and converted to OSIS by Andrew P. Sansom.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -34,6 +34,7 @@
       </div>
       <div canonical="false" type="front" TEIform="div">
         <title canonical="false" type="main" TEIform="title">Editors' Preface</title>
+        <milestone type="page" n="vi" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">THE object of this series of translations is primarily to furnish students with short, cheap, and handy text-books, which, it is hoped, will facilitate the study of the particular texts in class under competent teachers. But it is also hoped that the volumes will be acceptable to the general reader who may be interested in the subjects with which they deal. It has been thought advisable, as a general rule, to restrict the notes and comments to a small compass; more especially as, in most cases, excellent works of a more elaborate character are available. Indeed, it is much to be desired that these translations may have the effect of inducing readers to study the larger works.</p>
         <p TEIform="p">Our principal aim, in a word, is to make some difficult texts, important for the study of Christian origins, more generally accessible in faithful and scholarly translations.</p>
         <p TEIform="p">In most cases these texts are not available in a cheap and handy form. In one or two cases texts have been included of books which are available in the official Apocrypha; but in every such case reasons exist for putting forth these texts in a new translation, with an Introduction, in this series.</p>
@@ -42,7 +43,7 @@
       </div>
       <div canonical="false" type="front" TEIform="div">
         <title canonical="false" type="main" TEIform="title">Introduction</title>
-        <p TEIform="p">THE APOCALYPTIC LITERATURE</p>
+        <milestone type="page" n="vii" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">As the Book of Enoch is, in some respects, the most notable extant apocalyptic work outside the canonical Scriptures, it will not be inappropriate to offer a few remarks here on the Apocalyptic Literature generally. In writing about the books which belong to this literature, Prof. Burkitt says very pointedly that "they are the most characteristic survival of what I will venture to call, with all its narrowness and its incoherence, the heroic age of Jewish history, the age when the nation attempted to realize in action the part of the peculiar people of God. It ended in catastrophe, but the nation left two successors, the Christian Church and the Rabbinical Schools, each of which carried on some of the old national aims. And of the two it was the Christian Church that was most faithful to the ideas enshrined in the Apocalypses, and it did consider itself, not without some reason, the fulfilment of those ideas. What is wanted, therefore, in studying the Apocalypses is, above all, sympathy with the ideas that underlie them, and especially with the belief in the New Age. And those who believe that in Christianity a new Era really did dawn for us ought, I think, to have that sympathy. . . . We study the Apocalypses to learn how our spiritual ancestors hoped again that God would make all right in the end; and that we, their children, are here to-day studying them is an indication</p>
         <milestone type="page" n="viii" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">that their hope was not wholly unfounded." 
@@ -66,7 +67,7 @@
         <p TEIform="p">Again, to realize the significance of much that is found in these Apocalypses one has to reckon with a rigid predestinarianism which was characteristic of the Apocalyptists as a whole. They started with the absolute conviction that the whole course of the world, from beginning to end, both as regards its physical changes and also in all that concerns the history of nations, their growth and decline, and of every single individual, was in every respect predetermined by God Almighty before all time. This</p>
         <milestone type="page" n="xi" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">belief of the Apocalyptists is well illustrated in one of the later Apocalypses by these words:</p>
-        <p TEIform="p">"For He hath weighed the age in the balance, And by number hath He numbered the seasons; Neither will He move nor stir things, Till the measure appointed be fulfilled." (ii. (iv.) Esdras iv. 36, 37.)</p>
+        <p TEIform="p">"For He hath weighed the age in the balance, And by number hath He numbered the seasons; Neither will He move nor stir things, Till the measure appointed be fulfilled."                       (ii. (iv.) Esdras iv. 36, 37.)</p>
         <p TEIform="p">Thus "the times and periods of the course of the world's history have been predetermined by God. The numbers of the years have been exactly fixed. This was a fundamental postulate of the Apocalyptists, who devoted much of their energy to calculations, based upon a close study of prophecy, as to the exact period when history should reach its consummation . . . the underlying idea is predestinarian." 
           <note canonical="false" type="explanation" n="xi:1" TEIform="note">G. H. Box, The Ezra Apocalypse , pp. 35, 36 (1912).</note> But all these things, according to the Apocalyptists, were divine secrets hidden from the beginning the world, but revealed to God-fearing men to whom was accorded the faculty of peering into the hidden things of God and of understanding them; upon these men was laid the privilege and duty of revealing the divine secrets to others, hence their name of Apocalyptists or "revealers." It was because the Apocalyptists believed so firmly in this power which they possessed of looking into the deep things of God that they claimed to be able to measure the significance of what had happened in the past and of what was happening in the present; and upon the basis of this knowledge they believed that they also had the power, given them by God, of foreseeing the march of future events; above all, of knowing when the end of the world would come, a consummation towards which the whole history of the world had been tending from the beginning.
         </p>
@@ -75,7 +76,7 @@
         <p TEIform="p">the Apocalyptists fully realized the need of practical religion; they were upholders, of the Law, the loyal observance of which they regard as a necessity for all God-fearing men. In this the Apocalyptists were at one, in principle, with Pharisaism; but their conception of what constituted loyal observance of the Law differed from that of the Pharisees, for, unlike these, the Apocalyptists laid all stress on the spirit of its observance rather than upon the letter. Characteristic of their attitude here are the words in 1 Enoch v. 4:</p>
         <p TEIform="p">"But ye--ye have not been steadfast, nor done the commandments of the Lord, But ye have turned away, and have spoken proud and hard words With your impure mouths against His greatness, O ye hard-hearted, ye shall find no peace."</p>
         <p TEIform="p">And again, in xcix. 2:</p>
-        <p TEIform="p">"Woe to them that pervert the words of uprightness, And transgress the eternal Law."</p>
+        <p TEIform="p">"Woe to them that pervert the words of uprightness,            And transgress the eternal Law."</p>
         <p TEIform="p">We do not find in this Literature that insistence on the literal carrying-out of the minutest precepts of the Law which was characteristic of Pharisaism. Veneration for the Law is whole-hearted; it is the real guide of life; punishment awaits those who ignore its guidance; but the Pharisaic interpretation of the Law and its requirements is alien to the spirit of the Apocalyptists.</p>
         <p TEIform="p">As a whole, the Apocalyptic Literature presents an universalistic attitude very different from the nationalistic narrowness of the Pharisees. It is true, the Apocalyptists are not always consistent in this, but normally they embrace the Gentiles equally with the men of their own nation in the divine scheme of salvation; and, in the same way, the wicked who are</p>
         <milestone type="page" n="xiii" marker="DEFAULT" TEIform="milestone"/>
@@ -231,7 +232,7 @@
       </div>
       <div canonical="false" type="front" TEIform="div">
         <title canonical="false" type="main" TEIform="title">Abbreviations, Brackets and Symbols</title>
-        <p TEIform="p">ABBREVIATIONS, BRACKETS, AND SYMBOLS SPECIALLY USED IN THE TRANSLATION OF 1 ENOCH</p>
+        <milestone type="page" n="xxx" marker="DEFAULT" TEIform="milestone"/>
         <p TEIform="p">E denotes the Ethiopic Version.</p>
         <p TEIform="p">G
           <hi type="super" TEIform="hi">s</hi> denotes the fragments of the Greek Version preserved In Syncellus: in the case of 8
@@ -244,15 +245,15 @@
           <hi type="super" TEIform="hi">g</hi> denotes the large fragment of the Greek Version discovered at Akhmîm, and deposited in the Gizeh Museum, Cairo.
         </p>
         <p TEIform="p">The following brackets are used in the translation of 1 Enoch:</p>
-        <p TEIform="p">⌈ ⌉. The use of these brackets means that the words so enclosed are found in G
+        <p TEIform="p">⌈⌉. The use of these brackets means that the words so enclosed are found in G
           <hi type="super" TEIform="hi">g</hi> but not In E.
         </p>
-        <p TEIform="p">⌈⌈ ⌉⌉. The use of these brackets means that the words so enclosed are found in E but not in G
+        <p TEIform="p">⌈⌈⌉⌉. The use of these brackets means that the words so enclosed are found in E but not in G
           <hi type="super" TEIform="hi">g</hi> or G
           <hi type="super" TEIform="hi">s</hi>.
         </p>
-        <p TEIform="p">〈 〉. The use of these brackets means that the words so enclosed are restored.</p>
-        <p TEIform="p">[ ] The use of these brackets means that the words so enclosed are interpolations.</p>
+        <p TEIform="p">〈〉. The use of these brackets means that the words so enclosed are restored.</p>
+        <p TEIform="p">[] The use of these brackets means that the words so enclosed are interpolations.</p>
         <p TEIform="p">( ). The use of these brackets means that the words so enclosed are supplied by the editor.</p>
         <p TEIform="p">The use of 
           <hi type="bold" TEIform="hi">thick type</hi> denotes that the words so printed are emended.
@@ -272,7 +273,7 @@
         <verse canonical="true" osisID="1En.1.4">
           <lgCT TEIform="lg">
             <l TEIform="l">And the eternal God will tread upon the earth, (even) on Mount Sinai,</l>
-            <l TEIform="l"> ⌈And appear from His camp⌉</l>
+            <l TEIform="l">⌈And appear from His camp⌉</l>
             <l TEIform="l"> And appear in the strength of His might from the heaven of heavens.</l>
           </lgCT>
         </verse>
@@ -317,7 +318,7 @@
           <lgCT TEIform="lg">
             <l TEIform="l">⌈And He will help them all⌉,</l>
             <l TEIform="l"> And light shall appear unto them,</l>
-            <l TEIform="l"> ⌈And He will make peace with them⌉.</l>
+            <l TEIform="l">⌈And He will make peace with them⌉.</l>
           </lgCT>
         </verse>
         <verse canonical="true" osisID="1En.1.9">
@@ -445,7 +446,7 @@
       <div canonical="true" type="chapter" osisID="1En.8" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER VIII.</title>
         <verse canonical="true" osisID="1En.8.1">And Azâzêl taught men to make swords, and knives, and shields, and breastplates, and made known to them 
-          <hi type="bold" TEIform="hi">the metals</hi> 〈of the earth〉 and the art of working them, and bracelets, and ornaments, and the use of antimony, and the beautifying of the eyelids, and all kinds of costly stones, and all colouring tinctures.
+          <hi type="bold" TEIform="hi">the metals</hi>〈of the earth〉 and the art of working them, and bracelets, and ornaments, and the use of antimony, and the beautifying of the eyelids, and all kinds of costly stones, and all colouring tinctures.
         </verse>
         <verse canonical="true" osisID="1En.8.2">And there arose much godlessness, and they committed fornication, and they were led astray, and became corrupt in all their ways. Semjâzâ taught enchantments, and root-cuttings, Armârôs the resolving of enchantments, Barâqîjâl,</verse>
       </div>
@@ -569,7 +570,7 @@
       <div canonical="true" type="chapter" osisID="1En.22" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXII.</title>
         <verse canonical="true" osisID="1En.22.1">And thence I went to another place, and he showed me in the west ⌈another⌉ great and high mountain [and] of hard rock.</verse>
-        <verse canonical="true" osisID="1En.22.2">And there were †four† hollow places in it, deep and very smooth: †three† of them were dark and one bright; and there was a fountain of water in its midst. And I said: '†How† smooth are these hollow places, and deep and dark to view.' </verse>
+        <verse canonical="true" osisID="1En.22.2">And there were †four† hollow places in it, deep and very smooth: †three† of them were dark and one bright; and there was a fountain of water in its midst. And I said: '†How† smooth are these hollow places, and deep and dark to view.'</verse>
         <verse canonical="true" osisID="1En.22.3">Then Raphael answered, one of the holy angels who was with me, and said unto me: 'These hollow places have been created for this very purpose, that the spirits of the souls of the dead should assemble therein, yea that all the souls of the children of men should assemble here. And these places 
           <hi type="bold" TEIform="hi">have</hi>
         </verse>
@@ -578,7 +579,7 @@
         <verse canonical="true" osisID="1En.22.5">I saw (the spirit of) 
           <hi type="bold" TEIform="hi">a dead man</hi> making suit, and his voice went forth to heaven and made suit.
         </verse>
-        <verse canonical="true" osisID="1En.22.6">And I asked Raphael the angel who was with me, and I said unto him: 'This spirit which maketh suit, whose is it, whose voice goeth forth and maketh suit to heaven?' </verse>
+        <verse canonical="true" osisID="1En.22.6">And I asked Raphael the angel who was with me, and I said unto him: 'This spirit which maketh suit, whose is it, whose voice goeth forth and maketh suit to heaven?'</verse>
         <verse canonical="true" osisID="1En.22.7">And he answered me saying: 'This is the spirit which went forth from Abel, whom his brother Cain slew, and he makes his suit against him till his seed is destroyed from the face of the earth, and his seed is annihilated from amongst the seed of men.'</verse>
         <verse canonical="true" osisID="1En.22.8">Then I asked regarding it, and regarding all the 
           <hi type="bold" TEIform="hi">hollow places</hi>: 'Why as one separated from the other?'
@@ -605,7 +606,7 @@
         <verse canonical="true" osisID="1En.23.1">From thence I went to another place to the west of the ends of the earth.</verse>
         <verse canonical="true" osisID="1En.23.2">And I saw a ⌈⌈burning⌉⌉ fire which ran without resting, and paused not from its course day or night but (ran) regularly.</verse>
         <verse canonical="true" osisID="1En.23.3">And I asked saying: 'What is this which rests not?'</verse>
-        <verse canonical="true" osisID="1En.23.4">Then Raguel, one of the holy angels who was with me, answered me ⌈⌈and said unto me⌉⌉: 'This course ⌈of fire⌉ ⌈⌈which thou hast seen⌉⌉ is the fire in the west which †persecutes† all the luminaries of heaven.'</verse>
+        <verse canonical="true" osisID="1En.23.4">Then Raguel, one of the holy angels who was with me, answered me ⌈⌈and said unto me⌉⌉: 'This course ⌈of fire⌉⌈⌈which thou hast seen⌉⌉ is the fire in the west which †persecutes† all the luminaries of heaven.'</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1En.24" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXIV.</title>
@@ -672,10 +673,10 @@
       <div canonical="true" type="chapter" osisID="1En.32" TEIform="div">
         <title canonical="false" type="main" TEIform="title">CHAPTER XXXII.</title>
         <verse canonical="true" osisID="1En.32.1">And after these fragrant odours, as I looked towards the north over the mountains I saw seven mountains full of choice nard and fragrant trees and cinnamon and pepper.</verse>
-        <verse canonical="true" osisID="1En.32.1">To the north-east I beheld seven mountains full of choice nard and mastic and cinnamon and pepper. </verse>
+        <verse canonical="true" osisID="1En.32.1">To the north-east I beheld seven mountains full of choice nard and mastic and cinnamon and pepper.</verse>
         <verse canonical="true" osisID="1En.32.2">And thence I went over the summits of ⌈all⌉ these mountains, far towards the east ⌈of the earth⌉, and passed above the Erythraean sea and went far from it, and passed over ⌈⌈the angel⌉⌉ Zotîêl.</verse>
         <verse canonical="true" osisID="1En.32.3">And I came to the Garden of Righteousness, and saw beyond those trees many large trees growing there and of goodly fragrance, large, very beautiful and glorious, and the tree of wisdom whereof they eat and know great wisdom.</verse>
-        <verse canonical="true" osisID="1En.32.3">And I came to the Garden of Righteousness, and from afar off trees more numerous than these trees and great--†two† trees there, very great, beautiful, and glorious, and magnificent, and the tree of knowledge, whose holy fruit they eat and know great wisdom. </verse>
+        <verse canonical="true" osisID="1En.32.3">And I came to the Garden of Righteousness, and from afar off trees more numerous than these trees and great--†two† trees there, very great, beautiful, and glorious, and magnificent, and the tree of knowledge, whose holy fruit they eat and know great wisdom.</verse>
         <verse canonical="true" osisID="1En.32.4">⌈That tree is in height like the fir, and its leaves are⌉ like (those of) the Carob tree: and its fruit is like the clusters of the vine, very beautiful: and the fragrance of the tree penetrates afar.</verse>
         <verse canonical="true" osisID="1En.32.5">Then I said: '⌈How⌉ beautiful is the tree, and how attractive is its look!'</verse>
         <verse canonical="true" osisID="1En.32.6">Then Raphael the holy angel, who was with me, answered me ⌈⌈and said⌉⌉: 'This is the tree of wisdom, of which thy father old (in years) and thy aged mother, who were before thee, have eaten, and they learnt wisdom and their eyes were opened, and they knew that they were naked and they were driven out of the garden.'</verse>
@@ -833,7 +834,7 @@
           <lgCT TEIform="lg">
             <l TEIform="l">And their lips extol the name of the Lord of Spirits,</l>
             <l TEIform="l"> And righteousness before Him shall never fail,</l>
-            <l TEIform="l"> [And uprightness shall never fail before Him.]</l>
+            <l TEIform="l">[And uprightness shall never fail before Him.]</l>
             <l TEIform="l"> 8. There I wished to dwell,</l>
             <l TEIform="l"> And my spirit longed for that dwelling-place:</l>
           </lgCT>
@@ -1024,7 +1025,7 @@
           <lgCT TEIform="lg">
             <l TEIform="l">4, And this Son of Man whom thou hast seen</l>
             <l TEIform="l"> Shall †raise up† the kings and the mighty from their seats,</l>
-            <l TEIform="l"> [And the strong from their thrones]</l>
+            <l TEIform="l">[And the strong from their thrones]</l>
           </lgCT>
         </verse>
         <verse canonical="true" osisID="1En.46.6">
@@ -1057,7 +1058,7 @@
         <verse canonical="true" osisID="1En.46.7">
           <lgCT TEIform="lg">
             <l TEIform="l">And these are they who †judge† the stars of heaven,</l>
-            <l TEIform="l"> [And raise their hands against the Most High],</l>
+            <l TEIform="l">[And raise their hands against the Most High],</l>
             <l TEIform="l"> †And tread upon the earth and dwell upon it†.</l>
           </lgCT>
         </verse>
@@ -1431,7 +1432,7 @@
             <l TEIform="l">And they shall go up and tread under foot the land of His elect ones, 
               <milestone type="page" n="74" marker="DEFAULT" TEIform="milestone"/>
             </l>
-            <l TEIform="l"> [And the land of His elect ones shall be before them a threshing-floor and a highway:]</l>
+            <l TEIform="l">[And the land of His elect ones shall be before them a threshing-floor and a highway:]</l>
             <l TEIform="l"> 7 But the city of my righteous shall be a hindrance to their horses.</l>
           </lgCT>
         </verse>
@@ -1512,7 +1513,7 @@
             </l>
             <l TEIform="l"> And to a limit (lit. 'number') of days they shall not come,</l>
             <l TEIform="l"> For the darkness shall first have been destroyed,</l>
-            <l TEIform="l"> [And the light established before the Lord of Spirits]</l>
+            <l TEIform="l">[And the light established before the Lord of Spirits]</l>
             <l TEIform="l"> And the light of uprightness established for ever before the Lord of Spirits.</l>
           </lgCT>
         </verse>
@@ -1657,7 +1658,7 @@
         <verse canonical="true" osisID="1En.62.4">
           <lgCT TEIform="lg">
             <l TEIform="l">Then shall pain come upon them as on a woman in travail,</l>
-            <l TEIform="l"> [And she has pain in bringing forth]</l>
+            <l TEIform="l">[And she has pain in bringing forth]</l>
             <l TEIform="l"> When her child enters the mouth of the womb,</l>
             <l TEIform="l"> And she has pain in bringing forth.</l>
           </lgCT>
@@ -2266,7 +2267,7 @@
           <lgCT TEIform="lg">
             <l TEIform="l">And the whole order of the stars shall be concealed from the sinners,</l>
             <l TEIform="l"> And the thoughts of those on the earth shall err concerning them,</l>
-            <l TEIform="l"> [And they shall be altered from all their ways],</l>
+            <l TEIform="l">[And they shall be altered from all their ways],</l>
             <l TEIform="l"> Yea, they shall err and take them to be gods.</l>
           </lgCT>
         </verse>
@@ -2335,7 +2336,7 @@
         <verse canonical="true" osisID="1En.82.2">
           <lgCT TEIform="lg">
             <l TEIform="l">I have given Wisdom to thee and to thy children,</l>
-            <l TEIform="l"> [And thy children that shall be to thee],</l>
+            <l TEIform="l">[And thy children that shall be to thee],</l>
             <l TEIform="l"> That they may give it to their children for generations,</l>
             <l TEIform="l"> This wisdom (namely) that passeth their thought.</l>
           </lgCT>
@@ -2565,7 +2566,7 @@
         <verse canonical="true" osisID="1En.92.3">
           <lgCT TEIform="lg">
             <l TEIform="l">And the righteous one shall arise from sleep,</l>
-            <l TEIform="l"> [Shall arise] and walk in the paths of righteousness,</l>
+            <l TEIform="l">[Shall arise] and walk in the paths of righteousness,</l>
             <l TEIform="l"> And all his path and conversation shall be in eternal goodness and grace.</l>
           </lgCT>
         </verse>

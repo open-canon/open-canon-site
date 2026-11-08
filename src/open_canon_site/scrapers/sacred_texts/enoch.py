@@ -58,7 +58,7 @@ DEFAULT_START_PAGE: Final[int] = 0  # 0 includes the title page and front matter
 DEFAULT_END_PAGE: Final[int] = 112
 """Default last page to process (the appendix)."""
 
-BASE_URL: Final[str] = "https://sacred-texts.com/bib/boe/"
+BASE_URL: Final[str] = "https://archive.sacred-texts.com/bib/boe/"
 """Directory URL of the Charles translation; page files are appended to it."""
 FILE_RANGE: Final[tuple[int, int]] = (0, 112)
 """Inclusive range of page numbers, ``boe000.htm`` (title page) to ``boe112.htm`` (appendix)."""
@@ -1195,7 +1195,7 @@ def run(args: argparse.Namespace) -> list[Path]:
 SPEC = ScraperSpec(
     name="1-enoch",
     help="Book of Enoch (R. H. Charles, 1917) to OSIS",
-    source="https://sacred-texts.com/bib/boe/",
+    source="https://archive.sacred-texts.com/bib/boe/",
     outputs=(OUTPUT_FILENAME,),
     run=run,
     add_arguments=add_arguments,
