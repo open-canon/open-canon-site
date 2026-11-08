@@ -1,0 +1,12 @@
+# Test modules get the same docstring rules, minus the ones that make little
+# sense for pytest fixtures and test functions.
+extend = "../../pyproject.toml"
+preview = true
+
+[lint]
+extend-select = ["D", "DOC"]
+# DOC: tests do not document Args/Returns/Raises; D417: fixture args are self-explanatory.
+extend-ignore = ["DOC", "D417"]
+
+[lint.pydocstyle]
+convention = "google"
