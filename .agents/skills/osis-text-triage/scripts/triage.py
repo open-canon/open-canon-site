@@ -135,6 +135,16 @@ def default_base() -> str:
     return "HEAD"
 
 
+def repo_path(path: Path) -> str:
+    """``path`` relative to the repository root, as git's ``REF:path`` syntax needs.
+
+    Raises:
+        ValueError: If ``path`` is outside the repository.
+    """
+    root = Path(git("rev-parse", "--show-toplevel").strip()).resolve()
+    return path.resolve().relative_to(root).as_posix()
+
+
 def changed_xml(base: str) -> list[Path]:
     names = set(git("diff", "--name-only", base, "--", f"{DOCS_DIR}/*.xml").split())
     names |= set(
@@ -186,31 +196,78 @@ def _is_milestone(verse: ET.Element) -> bool:
     return start_only or end_only
 
 
+def _reading_text(el: ET.Element) -> str:
+    """Text of ``el`` without its notes (the site moves notes to the notes tray).
+
+    A note's tail is kept: it is the verse text that follows the note.
+    """
+    parts = [el.text or ""]
+    for child in el:
+        if child.tag != f"{OSIS_NS}note":
+            parts.append(_reading_text(child))
+        parts.append(child.tail or "")
+    return "".join(parts)
+
+
+def _chapter_verses(root: ET.Element) -> list[tuple[str, list[ET.Element]]]:
+    """Group verses by chapter, in document order, as (chapter id, verses) pairs.
+
+    Each chapter element is its own group, so two chapters that share an id stay
+    apart (they are reported as a duplicate chapter id instead).
+
+    Handles both chapter encodings the site parser accepts: containers
+    (``<chapter>`` or ``<div type="chapter">`` holding the verses) and milestones
+    (verses between ``<chapter sID="X"/>`` and ``<chapter eID="X"/>``).
+    """
+    chapter_tag, div_tag, verse_tag = f"{OSIS_NS}chapter", f"{OSIS_NS}div", f"{OSIS_NS}verse"
+    parents = {child: parent for parent in root.iter() for child in parent}
+    groups: dict[object, tuple[str, list[ET.Element]]] = {}
+    milestone: tuple[ET.Element, str] | None = None
+    for el in root.iter():
+        is_chapter = el.tag == chapter_tag or (el.tag == div_tag and el.get("type") == "chapter")
+        if is_chapter and len(el) == 0 and not (el.text or "").strip():
+            if el.get("sID") is not None and el.get("eID") is None:
+                milestone = (el, el.get("osisID") or el.get("sID") or "?")
+            elif el.get("eID") is not None and el.get("sID") is None:
+                milestone = None
+            continue
+        if el.tag != verse_tag:
+            continue
+        key = milestone
+        ancestor = parents.get(el)
+        while ancestor is not None:
+            if ancestor.tag == chapter_tag or (
+                ancestor.tag == div_tag and ancestor.get("type") == "chapter"
+            ):
+                key = (ancestor, ancestor.get("osisID") or ancestor.get("sID") or "?")
+                break
+            ancestor = parents.get(ancestor)
+        if key is not None:
+            groups.setdefault(key[0], (key[1], []))[1].append(el)
+    return list(groups.values())
+
+
 def structural_checks(xml: Path) -> list[str]:
-    """Verse-level checks on the XML itself: duplicates, gaps, empty verses, empty chapters."""
+    """Verse-level checks on the XML itself: duplicates, gaps, empty verses."""
     findings: list[str] = []
     try:
         root = ET.parse(xml).getroot()
     except ET.ParseError as exc:
         return [f"XML does not parse: {exc}"]
     ids = Counter()
-    chapters = [
-        el
-        for el in root.iter()
-        if el.tag == f"{OSIS_NS}chapter"
-        or (el.tag == f"{OSIS_NS}div" and el.get("type") == "chapter")
+    chapters = _chapter_verses(root)
+    chapter_ids = Counter(cid for cid, _ in chapters)
+    findings += [
+        f"duplicate chapter osisID {cid} (x{n})" for cid, n in chapter_ids.items() if n > 1
     ]
-    for chapter in chapters:
-        cid = chapter.get("osisID", "?")
-        verses = list(chapter.iter(f"{OSIS_NS}verse"))
-        if not verses:
-            continue
+    for cid, verses in chapters:
         prev = 0
         for verse in verses:
-            vid = verse.get("osisID") or verse.get("sID") or "?"
+            vid = verse.get("osisID") or verse.get("sID")
+            if vid is None:  # end milestone
+                continue
             ids[vid] += 1
-            text = "".join(verse.itertext()).strip()
-            if not text and not _is_milestone(verse):
+            if not _is_milestone(verse) and not _reading_text(verse).strip():
                 findings.append(f"empty verse {vid}")
             m = re.match(r"(\d+)", vid.rsplit(".", 1)[-1])
             if m:
@@ -220,7 +277,7 @@ def structural_checks(xml: Path) -> list[str]:
                 elif num < prev:
                     findings.append(f"verse order goes backwards in {cid}: {prev} -> {num}")
                 prev = max(prev, num)
-    findings += [f"duplicate osisID {vid} (x{n})" for vid, n in ids.items() if n > 1 and vid != "?"]
+    findings += [f"duplicate osisID {vid} (x{n})" for vid, n in ids.items() if n > 1]
     return findings
 
 
@@ -281,8 +338,8 @@ def main() -> int:
 
         if not args.no_diff:
             try:
-                base_xml_text = git("show", f"{base}:{xml.as_posix()}")
-            except subprocess.CalledProcessError:
+                base_xml_text = git("show", f"{base}:{repo_path(xml)}")
+            except (subprocess.CalledProcessError, ValueError):
                 base_xml_text = None
             if base_xml_text is None:
                 print("(new file: no base version to diff)")
@@ -308,11 +365,11 @@ def main() -> int:
                     print("pages removed: " + ", ".join(removed))
                 changed = 0
                 printed = 0
-                for rel in sorted(set(head_pages) & set(base_pages)):
+                for rel in sorted(set(head_pages) | set(base_pages)):
                     diff = list(
                         difflib.unified_diff(
-                            base_pages[rel],
-                            head_pages[rel],
+                            base_pages.get(rel, []),
+                            head_pages.get(rel, []),
                             f"base/{rel}",
                             f"head/{rel}",
                             n=args.context,
