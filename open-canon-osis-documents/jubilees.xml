@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="Jub" osisRefWork="Jubilees" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.07T22:47:37</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T00:13:09</date>
         <p TEIform="p">Scraped from https://www.sacred-texts.com/bib/jub/ and converted to OSIS by Andrew P. Sansom.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -769,8 +769,9 @@
             <note canonical="false" type="explanation" n="51:5" TEIform="note">Cf. Gen. iv. 11-12.</note>
           </verse>
           <verse canonical="true" osisID="Jub.4.5">And on this account it is written on the heavenly tables, "Cursed is he who smiteth his neighbour treacherously, and let all who have seen and heard say, So be it; and the man who hath seen and not declared (it), let him be accursed as the other." 
-            <note canonical="false" type="explanation" n="51:6" TEIform="note">Cf. Deut. xxvii. 24.</note>. And for this reason we announce when we come before the Lord our God all the sin which is committed in heaven and on earth, and in light and in darkness, and everywhere.
+            <note canonical="false" type="explanation" n="51:6" TEIform="note">Cf. Deut. xxvii. 24.</note>
           </verse>
+          <verse canonical="true" osisID="Jub.4.6">And for this reason we announce when we come before the Lord our God all the sin which is committed in heaven and on earth, and in light and in darkness, and everywhere.</verse>
           <verse canonical="true" osisID="Jub.4.7">And Adam and his wife mourned for Abel four weeks of years, and in the fourth year of the fifth week they became joyful, and Adam knew his wife again, and she bare him a son, and he 
             <note canonical="false" type="explanation" n="52:1" TEIform="note">So Sam.; but MT "she." In our Book it is generally the father who names the child.</note> called his name Seth; for he said "God hath raised up a second seed unto us on the earth instead of Abel; for Cain slew him." 
             <note canonical="false" type="explanation" n="52:2" TEIform="note">Cf. Gen. iv. 25.</note>
@@ -1683,8 +1684,9 @@
             <note canonical="false" type="explanation" n="92:2" TEIform="note">For 1 cf. Gen. xii. 5-6. For "lofty oak" (so LXX) NIT has "oak of Moreh."</note>
           </verse>
           <verse canonical="true" osisID="Jub.13.2">And he saw, and, behold, the land was very pleasant from the entering of Hamath to the lofty oak. 
-            <note canonical="false" type="explanation" n="92:3" TEIform="note">Supply (?) "to the east of Bethel with" (Charles).</note>. And the Lord said to him: "To thee and to thy seed will I give this land."
+            <note canonical="false" type="explanation" n="92:3" TEIform="note">Supply (?) "to the east of Bethel with" (Charles).</note>
           </verse>
+          <verse canonical="true" osisID="Jub.13.3">And the Lord said to him: "To thee and to thy seed will I give this land."</verse>
           <verse canonical="true" osisID="Jub.13.4">And he built an altar there, and he offered thereon a burnt sacrifice to the Lord, who had appeared to him.</verse>
           <verse canonical="true" osisID="Jub.13.5">And he removed from thence unto the mountain . . . 3 Bethel on the west and Ai on the east, and pitched his tent there. 
             <note canonical="false" type="explanation" n="92:4" TEIform="note">For 3-5 cf. Gen. xii. 7, 8.</note>
@@ -2027,7 +2029,9 @@
             <note canonical="false" type="explanation" n="107:2" TEIform="note">Cf. Gen. xxi. 8.</note>
           </verse>
           <verse canonical="true" osisID="Jub.17.2">And Ishmael, the son of Hagar, the Egyptian, was before the face of Abraham, his father, in his place, and Abraham rejoiced and blessed God because he had seen his sons 3 and had not died childless. 
-            <note canonical="false" type="explanation" n="107:3" TEIform="note">Cf. xvi. 16.</note>. And he remembered the words which He had spoken to him on the day on which Lot had parted from him, and he rejoiced because the Lord had given him seed upon the earth to inherit the earth, and he blessed with all his mouth the Creator of all things. 
+            <note canonical="false" type="explanation" n="107:3" TEIform="note">Cf. xvi. 16.</note>
+          </verse>
+          <verse canonical="true" osisID="Jub.17.3">And he remembered the words which He had spoken to him on the day on which Lot had parted from him, and he rejoiced because the Lord had given him seed upon the earth to inherit the earth, and he blessed with all his mouth the Creator of all things. 
             <note canonical="false" type="explanation" n="107:4" TEIform="note">Cf. xiii. 19 ff.</note>
           </verse>
           <verse canonical="true" osisID="Jub.17.4">
@@ -2066,7 +2070,9 @@
             <note canonical="false" type="explanation" n="109:2" TEIform="note">Seven of the traditional ten trials of Abraham are here mentioned: (1) Departure from his country; (2) famine; (3) the wealth of kings; (4) seizure of his wife; (5) circumcision; (6) and (7) expulsion of Hagar and Ishmael [(8) is the unfruitfulness of Sarah; (9) the sacrifice of Isaac, and (10) the burial of Sarah; Cf. xiv. 21 and xix. 3, 8]. Slightly different enumerations occur elsewhere (
               <hi type="italic" TEIform="hi">e. g.</hi> 
               <hi type="italic" TEIform="hi">Pirḳe de R. Eliezer</hi>, xxvi.-xxx.).
-            </note>. And He said, "Take thy beloved 
+            </note>
+          </verse>
+          <verse canonical="true" osisID="Jub.18.2">And He said, "Take thy beloved 
             <note canonical="false" type="explanation" n="109:3" TEIform="note">So LXX (Gen. xxii. 2): MT 
               <hi type="italic" TEIform="hi">only</hi> (
               <hi type="italic" TEIform="hi">son</hi>).

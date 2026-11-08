@@ -920,3 +920,58 @@ def test_extract_page_components_strips_margin_dates_only_on_reader_pages(parser
     )
     _, reader_paragraphs = parser.extract_page_components(reader_page)
     assert reader_paragraphs[0].text.startswith("27. And in the first week He said")
+
+
+# --- verse numbers rendered as footnote references -----------------------------------------
+
+VERSE_REF_HTML = (
+    '1. And he said, "Here." '
+    '<a name="fr_5"></a><a href="#fn_5"><font size="1">2</font></a>. And He said, '
+    '"Take thy son." 3. And he rose.'
+)
+VERSE_REF_FOOTNOTES = '<p><a name="fn_5"></a><a href="#fr_5">109:2</a> A note.</p>'
+
+
+def test_restore_verse_numbers_moves_label_out_of_the_reference():
+    """A numeric reference after a sentence end, before ``. X``, hands its number to the text."""
+    body = soup_body(f"<p>{VERSE_REF_HTML}</p>")
+    JubileesParser.restore_verse_numbers(body)
+    assert body.find("a", href="#fn_5").get_text() == ""
+    assert "2. And He said" in body.get_text()
+
+
+@pytest.mark.parametrize(
+    "html",
+    [
+        '<p>word <a name="fr_1"></a><a href="#fn_1">2</a>. And</p>',
+        '<p>end. <a name="fr_1"></a><a href="#fn_1">a</a>. And</p>',
+        '<p>end. <a name="fr_1"></a><a href="#fn_1">2</a> and more</p>',
+        '<p>end. <a name="fr_1"></a><a href="#fn_1">2</a>.</p>',
+        '<p><a name="fr_1"></a><a href="#fn_1">2</a>. And</p>',
+    ],
+)
+def test_restore_verse_numbers_leaves_real_footnote_references(html):
+    """Mid-sentence, non-numeric, not-followed-by-a-period and leading references stay put."""
+    body = soup_body(html)
+    before = str(body)
+    JubileesParser.restore_verse_numbers(body)
+    assert str(body) == before
+
+
+def test_extract_page_components_restores_verse_numbers_on_request(parser):
+    """With ``restore_verses`` the footnote is kept and verse 2 is its own verse."""
+    html = page("Jubilees 18:1-3 (xviii. 1-3)", [VERSE_REF_HTML], VERSE_REF_FOOTNOTES)
+    _, plain = parser.extract_page_components(html)
+    _, restored = parser.extract_page_components(html, restore_verses=True)
+    assert "2. And He said" not in plain[0].text
+    assert "2. And He said" in restored[0].text
+    assert any(isinstance(p, pyosis.NoteCt) for p in restored[0].content_parts)
+
+
+def test_parse_section_page_splits_verse_hidden_in_a_reference(parser):
+    """The verse behind a numeric reference becomes its own verse, keeping the note."""
+    html = page("Jubilees 18:1-3 (xviii. 1-3)", [VERSE_REF_HTML], VERSE_REF_FOOTNOTES)
+    section = parser.parse_section_page(40, html)
+    numbers = [v.verse_numbers for v in section.verses]
+    assert numbers == [[1], [2], [3]]
+    assert any(isinstance(p, pyosis.NoteCt) for p in section.verses[0].content_parts)

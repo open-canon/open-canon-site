@@ -94,6 +94,12 @@ e.g. ``II. And the angel ...`` (``chapter`` and ``text`` groups).
 
 The numeral stands in for verse 1's own number.
 """
+FOOTNOTE_HREF_RE: Final[re.Pattern[str]] = re.compile(r"^#fn_")
+"""Matches the ``href`` of a link from a footnote reference to its note."""
+VERSE_REFERENCE_TAIL_RE: Final[re.Pattern[str]] = re.compile(r"\.\s+\S")
+"""Matches the text after a footnote reference that is really a verse number (``. And ...``)."""
+SENTENCE_END_RE: Final[re.Pattern[str]] = re.compile(r"""[.!?:;"')\u201d\]]\s*$""")
+"""Matches text ending in sentence-final punctuation (plus trailing whitespace)."""
 VERSE_LINE_RE: Final[re.Pattern[str]] = re.compile(r"^(?P<verse>\d+)\.\s+(?P<text>.+)$")
 """Matches a paragraph starting with ``<digits>. `` (``verse`` and ``text`` groups)."""
 INLINE_VERSE_RE: Final[re.Pattern[str]] = re.compile(r"(?:(?<=^)|(?<=\s))(?P<verse>\d+)\.\s+")
@@ -547,7 +553,9 @@ class JubileesParser:
 
         return footnotes
 
-    def extract_page_components(self, raw_text: str) -> tuple[list[str], list[PageParagraph]]:
+    def extract_page_components(
+        self, raw_text: str, restore_verses: bool = False
+    ) -> tuple[list[str], list[PageParagraph]]:
         """Split a page into headings and content paragraphs.
 
         The main content is isolated first with ``legacy_html`` (a no-op for old-layout
@@ -559,6 +567,8 @@ class JubileesParser:
 
         Args:
             raw_text: Raw page HTML.
+            restore_verses: Put back verse numbers the site rendered as footnote references
+                (see ``restore_verse_numbers``); for chapter pages only.
 
         Returns:
             ``(headings, paragraphs)`` in document order.
@@ -575,6 +585,8 @@ class JubileesParser:
         body = soup.body if soup.body else soup
         if is_reader_layout(raw_text):
             self.strip_margin_dates(body)
+        if restore_verses:
+            self.restore_verse_numbers(body)
         footnotes = self.extract_footnotes(body)
 
         headings: list[str] = []
@@ -618,6 +630,36 @@ class JubileesParser:
             paragraphs.append(paragraph)
 
         return headings, paragraphs
+
+    @staticmethod
+    def restore_verse_numbers(body: Tag) -> None:
+        """Turn footnote references that stand in for a verse number back into the number.
+
+        In a few places the source prints a footnote reference where the verse number
+        belongs (``... (here) am I."<ref>2</ref>. And He said``), so the verse number is
+        swallowed by the note marker. A reference whose label is a number, that directly
+        follows sentence-ending punctuation and is itself followed by ``. `` is such a
+        marker: its label is moved out of the reference, to just before the period, so the
+        footnote is kept and the verse splits off as usual.
+
+        Args:
+            body: Parsed page content, modified in place.
+        """
+        for link in body.find_all("a", href=FOOTNOTE_HREF_RE):
+            label = link.get_text(strip=True)
+            following = link.next_sibling
+            anchor = link.find_previous_sibling("a")
+            preceding = anchor.previous_sibling if anchor is not None else None
+            if (
+                not label.isdigit()
+                or not isinstance(following, NavigableString)
+                or not VERSE_REFERENCE_TAIL_RE.match(str(following))
+                or not isinstance(preceding, NavigableString)
+                or not SENTENCE_END_RE.search(str(preceding))
+            ):
+                continue
+            link.clear()
+            following.replace_with(NavigableString(f"{label}{following}"))
 
     @staticmethod
     def strip_margin_dates(body: Tag) -> None:
@@ -890,7 +932,7 @@ class JubileesParser:
         Raises:
             RuntimeError: If the page has no heading.
         """
-        headings, content_lines = self.extract_page_components(raw_text)
+        headings, content_lines = self.extract_page_components(raw_text, restore_verses=True)
         if not headings:
             raise RuntimeError(f"Missing section heading for Jubilees page {page_number}")
 
