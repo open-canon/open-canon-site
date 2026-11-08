@@ -1,3 +1,11 @@
+"""Scraper that converts the ebible.org KJV Apocrypha (verse-per-line XML) to OSIS XML.
+
+The ebible.org ``eng-kjv_vpl.zip`` archive contains one XML file with a flat ``<v b= c= v=>``
+element per verse. This module downloads it, keeps the fourteen Apocrypha books, groups the
+verses into book/chapter/verse ``pyosis`` structures and writes a combined OSIS file (and
+optionally one file per book).
+"""
+
 from __future__ import annotations
 
 import argparse
@@ -14,11 +22,13 @@ import pyosis
 from open_canon_site.scrapers.base import ScraperSpec
 
 logger = logging.getLogger(__name__)
+"""Module logger for download and output progress messages."""
 
 DOWNLOAD_URL = "https://ebible.org/Scriptures/eng-kjv_vpl.zip"
+"""URL of the zip archive holding the KJV verse-per-line XML."""
 XML_FILENAME = "eng-kjv_vpl.xml"
+"""Name of the XML member inside the downloaded zip archive."""
 
-# Mapping: VPL book code -> (display name, OSIS ID), in canonical KJV order
 APOCRYPHA_BOOKS: dict[str, tuple[str, str]] = {
     "1ES": ("1 Esdras", "1Esd"),
     "2ES": ("2 Esdras", "2Esd"),
@@ -35,9 +45,21 @@ APOCRYPHA_BOOKS: dict[str, tuple[str, str]] = {
     "1MA": ("1 Maccabees", "1Macc"),
     "2MA": ("2 Maccabees", "2Macc"),
 }
+"""Maps VPL book code to ``(display name, OSIS book ID)``, in canonical KJV order.
+
+Books whose code is not a key here are ignored when parsing; iteration order is the output order.
+"""
 
 
 def download_xml() -> bytes:
+    """Download the KJV zip from ebible.org and return the XML member's bytes.
+
+    Returns:
+        The raw contents of ``XML_FILENAME`` extracted from the archive at ``DOWNLOAD_URL``.
+
+    Network and archive errors propagate unchanged: ``httpx.HTTPStatusError`` for an error
+    status, ``zipfile.BadZipFile`` for a corrupt body and ``KeyError`` if the member is missing.
+    """
     logger.info("Downloading %s ...", DOWNLOAD_URL)
     response = httpx.get(DOWNLOAD_URL, follow_redirects=True)
     response.raise_for_status()
@@ -46,6 +68,23 @@ def download_xml() -> bytes:
 
 
 def parse_books(xml_bytes: bytes) -> dict[str, pyosis.DivCt]:
+    """Parse VPL XML into one OSIS book ``div`` per Apocrypha book present.
+
+    Every ``<v b="CODE" c="N" v="M">`` element whose code is in ``APOCRYPHA_BOOKS`` becomes a
+    verse with ``osisID`` ``<OsisId>.N.M``; other books are skipped. Chapters and verses are
+    sorted numerically, verse text is whitespace-stripped (missing text becomes ``""``), and
+    each book div starts with a ``head`` holding the display name. Books with no verses are
+    omitted with a warning.
+
+    Args:
+        xml_bytes: Raw bytes of the verse-per-line XML document.
+
+    Returns:
+        Mapping of VPL book code to its book ``DivCt``, in ``APOCRYPHA_BOOKS`` order.
+
+    Malformed input propagates ``ElementTree.ParseError``; a matching element with a missing
+    or non-integer chapter/verse attribute raises ``TypeError``/``ValueError``.
+    """
     root = ET.fromstring(xml_bytes)
 
     # Collect verses grouped by book code -> chapter number -> list of (verse num, text)
@@ -94,6 +133,17 @@ def parse_books(xml_bytes: bytes) -> dict[str, pyosis.DivCt]:
 
 
 def books_to_osis_xml(books: list[pyosis.DivCt]) -> pyosis.OsisXML:
+    """Wrap book divs in a complete OSIS document with header metadata.
+
+    The work is ``kjv-apocrypha`` (title "King James Version--Apocrypha", English) and the
+    revision date is the current local time, so output differs between runs.
+
+    Args:
+        books: Book-level divs (as returned by ``parse_books``) to place in the OSIS text.
+
+    Returns:
+        A ``pyosis.OsisXML`` object ready for ``.to_xml()``.
+    """
     return pyosis.OsisXML(
         osis=pyosis.Osis(
             osis_text=pyosis.OsisTextCt(
@@ -135,11 +185,23 @@ def books_to_osis_xml(books: list[pyosis.DivCt]) -> pyosis.OsisXML:
 
 
 def book_file_name(book_name: str) -> str:
-    """Legacy per-book output filename, e.g. ``1_Esdras.xml``."""
+    """Return the legacy per-book output filename, e.g. ``1_Esdras.xml``.
+
+    Args:
+        book_name: Display name; runs of whitespace become single underscores.
+
+    Returns:
+        The name with underscores and an ``.xml`` suffix.
+    """
     return "_".join(book_name.split()) + ".xml"
 
 
 def add_arguments(parser: argparse.ArgumentParser) -> None:
+    """Register this scraper's CLI options.
+
+    Args:
+        parser: Sub-parser to which the ``--per-book`` flag is added.
+    """
     parser.add_argument(
         "--per-book",
         action="store_true",
@@ -149,6 +211,18 @@ def add_arguments(parser: argparse.ArgumentParser) -> None:
 
 
 def run(args: argparse.Namespace) -> list[pathlib.Path]:
+    """Download, convert and write the KJV Apocrypha OSIS files.
+
+    Always writes ``kjv_apocrypha.xml`` containing every book found; with ``args.per_book``
+    also writes one file per book (named by ``book_file_name``) before it.
+
+    Args:
+        args: Parsed CLI arguments. ``output_dir`` is created if missing; ``per_book``
+            (optional, default false) enables per-book files.
+
+    Returns:
+        Paths written, per-book files first (canonical order) and the combined file last.
+    """
     output_dir = pathlib.Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -183,3 +257,4 @@ SPEC = ScraperSpec(
     run=run,
     add_arguments=add_arguments,
 )
+"""Registry entry that exposes this scraper to the ``open-canon-scrape`` CLI."""
