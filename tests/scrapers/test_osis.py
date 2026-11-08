@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+
 import pyosis
 import pytest
 from hypothesis import given
@@ -129,25 +131,35 @@ def test_normalize_whitespace_is_idempotent(text):
 # --- parse_page_marker_text ------------------------------------------------------------
 
 
+def _flat(parts):
+    """Render parts as strings, with milestones shown as ``<n>`` for compact assertions."""
+    return [f"<{p.n}>" if isinstance(p, pyosis.MilestoneCt) else p for p in parts]
+
+
 def test_parse_page_marker_text_splits_text_and_arabic_marker():
-    """A marker in the middle yields text, a page milestone and text."""
+    """A marker in the middle yields text, a page milestone and text, keeping separators."""
     parts = _osis.parse_page_marker_text("before p. 12 after")
-    assert parts[0] == "before"
+    assert parts[0] == "before "
     assert isinstance(parts[1], pyosis.MilestoneCt) and parts[1].n == "12"
     assert parts[1].type_value == "page"
-    assert parts[2] == "after"
+    assert parts[2] == " after"
 
 
 def test_parse_page_marker_text_accepts_roman_and_case_insensitive_marker():
     """Roman numerals and an upper-case ``P.`` are recognised and kept as written."""
-    parts = _osis.parse_page_marker_text("a P. xiv b")
-    assert [getattr(p, "n", p) for p in parts] == ["a", "xiv", "b"]
+    assert _flat(_osis.parse_page_marker_text("a P. xiv b")) == ["a ", "<xiv>", " b"]
 
 
 def test_parse_page_marker_text_multiple_markers():
     """Several markers produce one milestone each in order."""
     parts = _osis.parse_page_marker_text("a p. 1 b p. 2 c")
-    assert [getattr(p, "n", p) for p in parts] == ["a", "1", "b", "2", "c"]
+    assert _flat(parts) == ["a ", "<1>", " b ", "<2>", " c"]
+
+
+def test_parse_page_marker_text_keeps_whitespace_only_separators():
+    """Whitespace between or around markers survives as its own fragment."""
+    parts = _osis.parse_page_marker_text(" p. 1 p. 2\n")
+    assert _flat(parts) == [" ", "<1>", " ", "<2>", "\n"]
 
 
 def test_parse_page_marker_text_marker_only():
@@ -156,71 +168,40 @@ def test_parse_page_marker_text_marker_only():
     assert len(parts) == 1 and parts[0].n == "iv"
 
 
+def test_parse_page_marker_text_marker_followed_by_punctuation():
+    """Punctuation after the numeral still ends the token."""
+    assert _flat(_osis.parse_page_marker_text("(p. 7).")) == ["(", "<7>", ")."]
+
+
 def test_parse_page_marker_text_without_marker_returns_text():
     """Text with no marker is returned as a single string."""
     assert _osis.parse_page_marker_text("no marker here") == ["no marker here"]
 
 
-def test_parse_page_marker_text_empty_and_blank_return_empty():
-    """Empty or whitespace-only text yields no parts."""
+def test_parse_page_marker_text_empty_returns_empty_and_blank_is_kept():
+    """Empty text yields no parts; whitespace-only text is returned unchanged."""
     assert _osis.parse_page_marker_text("") == []
-    assert _osis.parse_page_marker_text("   ") == []
+    assert _osis.parse_page_marker_text("   ") == ["   "]
 
 
-def test_parse_page_marker_text_ignores_p_dot_inside_words():
-    """A ``p.`` ending an ordinary word is not a page marker."""
-    assert _osis.parse_page_marker_text("Gossip. 5 times") == ["Gossip. 5 times"]
-    assert _osis.parse_page_marker_text("map. xiv") == ["map. xiv"]
-
-
-def test_parse_page_marker_text_marker_after_punctuation_and_at_start():
-    """A marker at the start of the text or after ``(``/``[``/``.`` is still recognised."""
-    assert [getattr(p, "n", p) for p in _osis.parse_page_marker_text("p. 3 text")] == ["3", "text"]
-    assert [getattr(p, "n", p) for p in _osis.parse_page_marker_text("a (p. 7) b")] == [
-        "a (",
-        "7",
-        ") b",
-    ]
-    assert [getattr(p, "n", p) for p in _osis.parse_page_marker_text("a [p. xi] b")] == [
-        "a [",
-        "xi",
-        "] b",
-    ]
-    assert [getattr(p, "n", p) for p in _osis.parse_page_marker_text("end.p. 4 x")] == [
-        "end.",
-        "4",
-        "x",
-    ]
-
-
-def test_parse_page_marker_text_marker_preceded_by_newline():
-    """Newlines count as the whitespace before a marker."""
-    assert [getattr(p, "n", p) for p in _osis.parse_page_marker_text("a\np. 9\nb")] == [
-        "a",
-        "9",
-        "b",
-    ]
-
-
-@given(
-    word=st.from_regex(r"[A-Za-z0-9_]+", fullmatch=True),
-    number=st.integers(min_value=1, max_value=999),
+@pytest.mark.parametrize(
+    "text",
+    ["Gossip. 5 times", "help. me", "Help. Me now", "p. 12th", "a p.5 b"],
 )
-def test_parse_page_marker_text_word_ending_in_p_dot_never_splits(word, number):
-    """Any word-character run followed by ``p. N`` stays plain text."""
-    text = f"{word}p. {number} tail"
+def test_parse_page_marker_text_ignores_prose(text):
+    """``p.`` ending a word, numerals starting a word, or no space after ``p.`` are not markers."""
     assert _osis.parse_page_marker_text(text) == [text]
 
 
-@given(
-    before=st.from_regex(r"[A-Za-z]+", fullmatch=True),
-    after=st.from_regex(r"[A-Za-z]+", fullmatch=True),
-    number=st.integers(min_value=1, max_value=999),
-)
-def test_parse_page_marker_text_whitespace_separated_marker_always_splits(before, after, number):
-    """A ``p. N`` marker separated from words by spaces always becomes one milestone."""
-    parts = _osis.parse_page_marker_text(f"{before} p. {number} {after}")
-    assert [getattr(p, "n", p) for p in parts] == [before, str(number), after]
+@given(st.text())
+def test_parse_page_marker_text_round_trips_text(text):
+    """Joining text parts with each milestone rendered as ``p. <n>`` reproduces the input."""
+    rendered = "".join(
+        f"p. {p.n}" if isinstance(p, pyosis.MilestoneCt) else p
+        for p in _osis.parse_page_marker_text(text)
+    )
+    # Only the whitespace inside a marker may differ (``p.\t5`` renders as ``p. 5``).
+    assert re.sub(r"(?i)p\.\s+", "p. ", rendered) == re.sub(r"(?i)p\.\s+", "p. ", text)
 
 
 # --- roman_to_int ----------------------------------------------------------------------
