@@ -9,7 +9,8 @@ The Church of Jesus Christ of Latter-day Saints has issued six official proclama
   ``/scriptures/the-restoration-of-the-fulness-of-the-gospel-of-jesus-christ/...``.
 
 The 1841, 1845 and 1865 proclamations survive only in newspaper archives and third-party sites and are not scraped.
-"The Living Christ" (2000) is a testimony, not one of the six proclamations, and is also left out.
+"The Living Christ" (2000) is a testimony, not one of the six proclamations; it has its own scraper in
+``living_christ``, which reuses `build_proclamation`.
 
 Each proclamation becomes a book division (``Proc1980``, ``Proc1995``, ``Proc2020``) with a single chapter whose
 paragraphs are verses, mirroring the Official Declarations in ``doctrine_and_covenants``. These are not standard works,
@@ -83,9 +84,11 @@ def build_proclamation(
     """Convert one proclamation page into an OSIS book division.
 
     The page has a ``header`` (``h1#title1``, optional ``p.subtitle``, optional ``div.byline``), a ``div.body-block`` of
-    plain paragraphs and, for the 1995 and 2020 texts, a trailing ``div.event`` note on when it was read. Title and
-    subtitle become the book's titles, the byline (and an italic-only dateline paragraph, as in 1980) a non-canonical introduction, every other body paragraph a verse
-    ``<osis_id>.1.<n>`` and the event note a non-canonical colophon.
+    plain paragraphs and, for the 1995 and 2020 texts, a trailing ``div.event`` note on when it was read; "The Living
+    Christ" instead ends with signature ``figure``s. Title and subtitle become the book's titles, the byline (and an
+    italic-only dateline paragraph, as in 1980) a non-canonical introduction, every other direct body paragraph a verse
+    ``<osis_id>.1.<n>``, and the event note and signature titles/captions non-canonical colophons. Nested blocks such
+    as ``div.copyright-info`` are skipped.
 
     Args:
         proclamation: Which proclamation the page is.
@@ -139,6 +142,23 @@ def build_proclamation(
                 canonical=False,
                 type_value=pyosis.generated.OsisDivs.COLOPHON,
                 content=[pyosis.generated.PCt(content=[colophon_text])],
+            )
+        )
+
+    # Signature blocks (as in "The Living Christ") are figures of signature images under a title such as "The First
+    # Presidency", with the date as caption. The images are dropped; their titles and captions become a colophon.
+    signature_lines = [
+        text
+        for figure in body.find_all("figure", recursive=False)
+        for line in figure.select("p.title, figcaption p")
+        if (text := line.get_text(" ", strip=True))
+    ]
+    if signature_lines:
+        colophon.append(
+            pyosis.generated.DivCt(
+                canonical=False,
+                type_value=pyosis.generated.OsisDivs.COLOPHON,
+                content=[pyosis.generated.PCt(content=[line]) for line in signature_lines],
             )
         )
 
@@ -202,6 +222,28 @@ async def build_proclamations(lang: str, client: httpx.AsyncClient) -> pyosis.se
     ])
     divs = [build_proclamation(p, page) for p, page in zip(PROCLAMATIONS, pages)]
 
+    return osis_document(
+        lang,
+        osis_work="Proclamations",
+        title="Official Proclamations of The Church of Jesus Christ of Latter-day Saints",
+        divs=divs,
+    )
+
+
+def osis_document(
+    lang: str, osis_work: str, title: str, divs: list[pyosis.generated.DivCt]
+) -> pyosis.serialization.OsisXML:
+    """Wrap book divisions in an OSIS document whose header credits the First Presidency and the Twelve.
+
+    Args:
+        lang: Language code of the content.
+        osis_work: OSIS work id, e.g. ``"Proclamations"``.
+        title: Main title of the work.
+        divs: Book divisions, in order.
+
+    Returns:
+        The OSIS XML document.
+    """
     header = pyosis.generated.HeaderCt(
         revision_desc=[
             pyosis.generated.RevisionDescCt(
@@ -222,14 +264,12 @@ async def build_proclamations(lang: str, client: httpx.AsyncClient) -> pyosis.se
         ],
         work=[
             pyosis.generated.WorkCt(
-                osis_work="Proclamations",
+                osis_work=osis_work,
                 title=[
                     pyosis.generated.TitleCt(
                         canonical=True,
                         type_value=pyosis.generated.OsisTitles.MAIN,
-                        content=[
-                            "Official Proclamations of The Church of Jesus Christ of Latter-day Saints"
-                        ],
+                        content=[title],
                     )
                 ],
                 contributor=[
@@ -245,9 +285,9 @@ async def build_proclamations(lang: str, client: httpx.AsyncClient) -> pyosis.se
         osis=pyosis.generated.Osis(
             osis_text=pyosis.generated.OsisTextCt(
                 header=header,
-                osis_idwork="Proclamations",
+                osis_idwork=osis_work,
                 lang=lang,
-                osis_ref_work="Official Proclamations of The Church of Jesus Christ of Latter-day Saints",
+                osis_ref_work=title,
                 div=divs,
             )
         )
