@@ -92,6 +92,16 @@ def test_render_hi_bold():
     assert render_content([hi]) == "<strong>word</strong>"
 
 
+def test_render_hi_superscript():
+    hi = _make_hi("super", "3")
+    assert render_content([hi]) == "<sup>3</sup>"
+
+
+def test_render_hi_subscript():
+    hi = _make_hi("sub", "2")
+    assert render_content([hi]) == "<sub>2</sub>"
+
+
 def test_render_hi_small_caps():
     hi = _make_hi("small-caps", "Lord")
     assert 'class="small-caps"' in render_content([hi])

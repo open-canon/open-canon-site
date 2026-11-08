@@ -255,8 +255,12 @@ class TestParsePageUnnumberedPoetry:
             f"verse 4 first line should be 'And the eternal God...', got {v4_first!r}"
         )
 
-    def test_no_inline_marker_all_lines_go_to_next_verse(self) -> None:
-        """Unnumbered poetry with NO inline verse marker → all lines become verse 4."""
+    def test_no_inline_marker_stanza_continues_current_verse(self) -> None:
+        """Unnumbered poetry with NO inline verse marker is a further stanza of verse 3.
+
+        Charles splits one verse into several stanzas (1 Enoch 1:8 is followed by two
+        unnumbered stanzas before 1:9), so no verse number is invented for it.
+        """
         parser = self._make_parser_with_chapter()
         html = (
             "<html><body>"
@@ -278,22 +282,14 @@ class TestParsePageUnnumberedPoetry:
             item.osis_id[0] for item in div.content if hasattr(item, "osis_id") and item.osis_id
         ]
 
-        # Verse 4 must now be present between verse 3 and verse 5
-        assert "1En.1.4" in verse_ids, f"1En.1.4 missing from {verse_ids}"
-        assert verse_ids.index("1En.1.3") < verse_ids.index("1En.1.4")
-        assert verse_ids.index("1En.1.4") < verse_ids.index("1En.1.5")
+        # No verse number is invented: the stanza is a further part of verse 3.
+        assert verse_ids == ["1En.1.3", "1En.1.5"]
+        verse3 = next(item for item in div.content if getattr(item, "osis_id", None) == ["1En.1.3"])
+        lg = next(c for c in verse3.content if isinstance(c, pyosis.LgCt))
+        assert len(lg.l) == 3, "the stanza's lines extend verse 3"
 
-        # Verse 4 must be poetry (lgCt wrapper)
-        verse4 = next(
-            item
-            for item in div.content
-            if hasattr(item, "osis_id") and item.osis_id and item.osis_id[0] == "1En.1.4"
-        )
-        has_lg = any(isinstance(c, pyosis.LgCt) for c in verse4.content)
-        assert has_lg, "verse 4 should be wrapped in a linegroup (lgCt)"
-
-    def test_unnumbered_prose_paragraph_is_ignored(self) -> None:
-        """An unnumbered paragraph WITHOUT <br> tags is not treated as a verse."""
+    def test_unnumbered_prose_paragraph_continues_current_verse(self) -> None:
+        """An unnumbered paragraph WITHOUT <br> tags continues the verse before it."""
         parser = self._make_parser_with_chapter()
         html = (
             "<html><body>"
@@ -312,18 +308,20 @@ class TestParsePageUnnumberedPoetry:
             item.osis_id[0] for item in div.content if hasattr(item, "osis_id") and item.osis_id
         ]
         # Only verse 3 and verse 5 should be present; no spurious verse 4
-        assert "1En.1.3" in verse_ids
-        assert "1En.1.5" in verse_ids
-        assert "1En.1.4" not in verse_ids, "prose paragraph should not become verse 4"
+        assert verse_ids == ["1En.1.3", "1En.1.5"], "prose paragraph should not become verse 4"
+        verse3 = next(item for item in div.content if getattr(item, "osis_id", None) == ["1En.1.3"])
+        assert verse3.content == [
+            "First verse text. This is a prose continuation without br tags or a verse number."
+        ]
 
-    def test_unnumbered_poetry_before_first_verse_is_ignored(self) -> None:
-        """A poetry paragraph before any verse has been added is ignored."""
+    def test_unnumbered_poetry_opening_a_chapter_is_verse_one(self) -> None:
+        """A poetry paragraph before any numbered verse opens the chapter as verse 1."""
         parser = self._make_parser_with_chapter()
         html = (
             "<html><body>"
             "<h3>CHAPTER I.</h3>"
             "<p>Some poetry before first verse<br/>Line two.</p>"
-            "<p>1. First verse text.</p>"
+            "<p>2. Second verse text.</p>"
             "</body></html>"
         )
         parser.parse_page(html, page_num=5)
@@ -334,6 +332,4 @@ class TestParsePageUnnumberedPoetry:
         verse_ids = [
             item.osis_id[0] for item in div.content if hasattr(item, "osis_id") and item.osis_id
         ]
-        # Only verse 1 should be present; no verse 0 created from pre-verse poetry
-        assert "1En.1.1" in verse_ids
-        assert len([v for v in verse_ids if v.startswith("1En.1.")]) == 1
+        assert verse_ids == ["1En.1.1", "1En.1.2"]
