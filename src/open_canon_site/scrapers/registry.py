@@ -5,6 +5,7 @@ from __future__ import annotations
 from open_canon_site.scrapers.base import ScraperSpec
 from open_canon_site.scrapers.churchofjesuschrist.standard_works import SPEC as LDS_STANDARD_WORKS
 from open_canon_site.scrapers.ebible.kjv_apocrypha import SPEC as KJV_APOCRYPHA
+from open_canon_site.scrapers.sacred_texts.cave_of_treasures import SPEC as CAVE_OF_TREASURES
 from open_canon_site.scrapers.sacred_texts.enoch import SPEC as ENOCH
 from open_canon_site.scrapers.sacred_texts.forgotten_books_of_eden import (
     SPEC as FORGOTTEN_BOOKS_OF_EDEN,
@@ -19,6 +20,7 @@ from open_canon_site.scrapers.sacred_texts.vita_adae_et_evae import SPEC as VITA
 
 SCRAPERS: tuple[ScraperSpec, ...] = (
     KJV_APOCRYPHA,
+    CAVE_OF_TREASURES,
     ENOCH,
     FORGOTTEN_BOOKS_OF_EDEN,
     JASHER,
