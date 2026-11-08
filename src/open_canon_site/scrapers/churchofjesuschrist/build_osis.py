@@ -1,4 +1,10 @@
-"""Build OSIS XML files."""
+"""Convert churchofjesuschrist.org scripture HTML into PyOSIS structures.
+
+The Study API returns each chapter as an HTML fragment (``ScriptureStudyContent.content.body``) plus a dictionary
+of footnotes. This module turns that HTML into ``pyosis.generated`` objects: `extract_markup` converts individual
+elements, `build_chapter` assembles a chapter (verses plus titles/summary front matter), and `build_book`
+fetches and assembles every chapter of a book.
+"""
 
 from __future__ import annotations
 
@@ -16,6 +22,7 @@ import pyosis.generated
 from open_canon_site.scrapers.churchofjesuschrist import models as church_website_models
 
 OneElement = bs4._typing._OneElement  # pyright: ignore[reportPrivateUsage]
+"""BeautifulSoup's type for a single node of the parse tree (a ``Tag`` or a ``NavigableString``)."""
 
 
 def clean_up_html(html: bs4.BeautifulSoup) -> bs4.BeautifulSoup:
@@ -43,12 +50,18 @@ def extract_footnote(
 ]:
     """Extract a footnote from a BeautifulSoup Tag.
 
+    The tag is a footnote link such as ``<a class="study-note-ref" href="#note1a">`` containing an empty
+    ``<sup class="marker">`` and the annotated words. The ``href`` with leading ``#`` characters removed is used as the
+    key into ``footnotes_dict``; the footnote's HTML text is stripped to plain text and emitted as a non-canonical
+    ``<note>`` followed by the converted link contents. If the key is not in ``footnotes_dict`` a warning is emitted
+    and the key itself becomes the note text (so hrefs that are real URLs are kept as-is).
+
     Args:
-        tag: Footnote tag from Church Website HTML.
+        tag: Footnote tag from Church Website HTML; must have an ``href`` attribute.
         footnotes_dict: Dictionary of footnotes extract from Church Website JSON.
 
     Returns:
-        List of OSIS Notes/References/Foreign tags.
+        A NoteCt followed by the OSIS conversion of the tag's contents (strings, hi, divineName and so on).
     """
     note_content = extract_markup(tag, footnotes_dict, no_container=True)
     # If the mark href is an id, we should look it up in the dictionary, otherwise, we won't find it, and it's probably
@@ -77,10 +90,23 @@ def extract_markup(
         tag: BeautifulSoup Tag.
         footnotes_dict: Dictionary whose keys are strings contained within the footnote html tags and values are parsed
             Footnote JSON objects.
-        no_container: Whether to include the root element of the tag as a container for the contents when converting.
+        no_container: If True, return only the converted contents of the tag and do not emit an OSIS element for the tag
+            itself.
 
     Returns:
-        List of PyOSIS objects or strings, which can be assembled into an OSIS XML document.
+        List of PyOSIS objects or strings, which can be assembled into an OSIS XML document. Plain text nodes become
+        their text; elements map as follows: ``p`` -> p; ``a.scripture-ref`` -> reference (trailing ", page N" removed);
+        ``a.study-note-ref``/``a.note-ref`` -> note (see `extract_footnote`); ``span.small-caps``/``span.uppercase``/
+        ``small`` -> hi smallCaps; ``sup`` -> hi super (empty ``sup`` footnote markers are dropped); ``sub``, ``b``, ``em``,
+        ``i`` -> hi sub/bold/emphasis/italic; ``span.deity-name`` -> divineName; ``span.language`` and ``span.translit`` ->
+        foreign; ``span.question``/``span.answer`` -> div x-question/x-answer; ``span.line`` -> l; ``span.clarity-word`` ->
+        transChange added; ``span.dominant`` and ``header``/``thead``/``tbody`` -> children only; other ``span`` ->
+        children only plus a warning; ``ol``/``ul``/``li`` -> list/item; ``img`` -> figure; ``figure.image`` -> div
+        x-figure; ``figure.table`` -> table; ``tr``/``td``/``th`` -> row/cell; ``figcaption`` -> div x-figcaption;
+        ``div.credit``/``div.publish-info``/``div.copyright-info`` -> acknowledgement/x-publish-info/x-copyright-info
+        div; ``div.card-label`` -> nothing; other ``div`` -> div x-unknown plus a warning; ``h1``-``h6`` -> head; ``br`` -> lb;
+        ``section``/``blockquote`` -> div x-section/x-blockquote. With ``no_container`` only the converted children of
+        the tag are returned (the tag's own wrapper is not emitted).
 
     Raises:
         NotImplementedError: If the function encounters a tag or structure that is not yet supported (e.g., <table>
@@ -427,11 +453,14 @@ def build_chapter(
     chapter_number: int,
     book_short_name: str | None = None,
 ) -> tuple[pyosis.generated.ChapterCt, list[object] | None]:
-    """Builds an OSIS (Open Scripture Information Standard) chapter object and its associated front matter from parsed
-    HTML scripture content.
+    """Build an OSIS chapter object and its associated front matter from parsed HTML scripture content.
 
-    The function parses the HTML content for the chapter, extracts and cleans up titles, subtitles, introductions, and
-    verses, and constructs the corresponding OSIS objects. It also handles study introductions and summaries if present.
+    The chapter HTML has an optional ``p#title1``/``h1#title1`` (containing ``span.dominant`` with the book title and
+    possibly further title text), optional ``p.subtitle``, ``p.intro``, ``p.study-intro`` and ``p.study-summary``, and
+    a ``div.body-block`` holding ``p.verse`` paragraphs, each starting with ``span.verse-number``. Titles, subtitle,
+    intro and study intro become front matter; the study summary becomes a non-canonical summary div at the start
+    of the chapter; each verse becomes a ``verse`` with OSIS id ``<book_osis_id>.<chapter>.<verse>`` (verses
+    marked ``contains-line`` are wrapped in a line group of their ``l`` elements).
 
     Args:
         scripture_content: The scripture content object containing HTML body and footnotes.
@@ -442,10 +471,11 @@ def build_chapter(
             ``<title type="main" short="…">`` element instead of a plain heading.
 
     Returns:
-        tuple:
-            - pyosis.generated.ChapterCt: The constructed OSIS chapter object containing verses and optional summary.
-            - list[objectl] | None: A list of front matter elements (such as titles, subtitles, and introductions) or
-            None if no front matter is present.
+        A ``(chapter, front_matter)`` tuple: the constructed OSIS chapter object containing verses and optional
+        summary, and a list of front matter elements (titles, subtitles, introductions) or None if there is none.
+
+    Raises:
+        ValueError: If a ``p.verse`` has no ``span.verse-number``.
     """
     chapter_osis_id = f"{book_osis_id}.{chapter_number}"
 
@@ -569,7 +599,7 @@ def build_chapter(
 async def build_book(
     lang: str, parent_book: str, book: str, client: httpx.AsyncClient
 ) -> pyosis.generated.DivCt:
-    """Asynchronously builds an OSIS book division from scripture content.
+    """Build an OSIS book division from scripture content.
 
     Fetches the list of chapter numbers for the specified book and language, retrieves the content for each chapter
     concurrently, and constructs OSIS chapter elements. Handles front matter if present in chapters and assembles the
@@ -577,27 +607,21 @@ async def build_book(
 
     Args:
         lang: The language code for the scripture content.
-        parent_book: The parent book identifier (e.g., for grouped books).
-        book: The book identifier to build.
+        parent_book: Key of the standard work containing the book (e.g. ``"BookOfMormon"``).
+        book: Book name as in the work's ``*BooksUri`` mapping (e.g. ``"1 Nephi"``); also used as the OSIS id.
         client: An asynchronous HTTP client for making requests.
 
     Returns:
-        pyosis.generated.DivCt: An OSIS division element representing the complete book, including all chapters and
-        any front matter.
-
-
+        An OSIS book division (id ``book``) containing, for each chapter in order, its front matter followed by the
+        chapter.
     """
     chapter_nums = await church_website_models.get_chapters_list(
         lang=lang, parent_book=parent_book, book=book, client=client
     )
-    chapter_contents = await asyncio.gather(
-        *[
-            church_website_models.get_scripture_content(
-                lang, parent_book, book, chapter_num, client
-            )
-            for chapter_num in chapter_nums
-        ]
-    )
+    chapter_contents = await asyncio.gather(*[
+        church_website_models.get_scripture_content(lang, parent_book, book, chapter_num, client)
+        for chapter_num in chapter_nums
+    ])
 
     osis_chapters: list[object] = []
     for chapter_num, chapter_content in zip(chapter_nums, chapter_contents):

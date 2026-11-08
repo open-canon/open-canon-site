@@ -4,7 +4,6 @@ import asyncio
 import datetime
 
 import bs4
-import bs4.element
 import httpx
 import pyosis.generated
 import pyosis.serialization
@@ -33,6 +32,10 @@ async def _build_pgp_front_matter_div(
         client: An asynchronous HTTP client used to fetch scripture content.
         canonical: Whether the division should be marked as canonical in the OSIS output.
         front_matter_type_value: The OSIS division type for the content.
+
+    The page body is expected to contain an optional ``p#title1``/``h1#title1`` (-> head), optional ``p#subtitle1``
+    (-> title), an optional ``header`` (-> introduction div) and a required ``div.body-block`` (converted as
+    markup).
 
     Returns:
         An OSIS DivCt object representing the structured front matter division.
@@ -177,8 +180,11 @@ async def _build_abraham_facsimile_div(
         fac_num: The facsimile number (1, 2, or 3).
         client: An asynchronous HTTP client used to fetch scripture content.
 
+    The facsimile page lives at ``/scriptures/pgp/abr/fac-<n>``; it has an optional ``h1#title1``/``p#title1``
+    (-> head), optional ``p#subtitle1`` (-> title) and a required ``div.body-block``.
+
     Returns:
-        A canonical OSIS DivCt appendix representing the facsimile.
+        A canonical OSIS DivCt appendix with id ``Abraham.Fac-<n>`` representing the facsimile.
     """
     scripture_content = await church_website_models.get_scripture_content(
         lang,
@@ -232,6 +238,9 @@ async def _build_abraham_with_facsimiles(
     Args:
         lang: The language code for the scripture content.
         client: An asynchronous HTTP client used to fetch scripture content.
+
+    The book content is built by `build_osis.build_book` and the three facsimile divisions are appended after the
+    chapters.
 
     Returns:
         An OSIS DivCt book division for Abraham with facsimile appendices appended.

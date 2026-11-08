@@ -1,5 +1,4 @@
-"""This module provides functionality to build OSIS XML files for the Standard Works of the Church of Jesus Christ of
-Latter-day Saints.
+"""Build OSIS XML files for the Standard Works of the Church of Jesus Christ of Latter-day Saints.
 
 Features:
     - Asynchronous gathering and processing of scripture texts.
@@ -34,7 +33,9 @@ import open_canon_site.scrapers.churchofjesuschrist.pearl_of_great_price
 from open_canon_site.scrapers.base import ScraperSpec
 
 K = TypeVar("K")
+"""Key type of `gather_dict`."""
 V = TypeVar("V")
+"""Awaited value type of `gather_dict`."""
 
 
 async def gather_dict(tasks: dict[K, Awaitable[V]]) -> dict[K, V]:
@@ -48,6 +49,15 @@ async def gather_dict(tasks: dict[K, Awaitable[V]]) -> dict[K, V]:
     """
 
     async def mark(key: K, coro: Awaitable[V]) -> tuple[K, V]:
+        """Await one task and pair its result with its key.
+
+        Args:
+            key: Dictionary key the result belongs to.
+            coro: Awaitable to run.
+
+        Returns:
+            The ``(key, result)`` pair.
+        """
         return key, await coro
 
     return {
@@ -56,22 +66,18 @@ async def gather_dict(tasks: dict[K, Awaitable[V]]) -> dict[K, V]:
 
 
 class AvailableStandardWorks(enum.IntFlag):
-    """Enumeration of available Standard Works.
-
-    Attributes:
-        BOOK_OF_MORMON: Represents the Book of Mormon.
-        DOCTRINE_AND_COVENANTS: Represents the Doctrine and Covenants.
-        NEW_TESTAMENT: Represents the New Testament.
-        OLD_TESTAMENT: Represents the Old Testament.
-        PEARL_OF_GREAT_PRICE: Represents the Pearl of Great Price.
-        ALL: All the available Standard Works.
-    """
+    """Flag enumeration of the Standard Works that can be built; members combine with ``|``."""
 
     BOOK_OF_MORMON = enum.auto()
+    """Represents the Book of Mormon."""
     DOCTRINE_AND_COVENANTS = enum.auto()
+    """Represents the Doctrine and Covenants."""
     NEW_TESTAMENT = enum.auto()
+    """Represents the New Testament."""
     OLD_TESTAMENT = enum.auto()
+    """Represents the Old Testament."""
     PEARL_OF_GREAT_PRICE = enum.auto()
+    """Represents the Pearl of Great Price."""
     ALL = (
         BOOK_OF_MORMON
         | DOCTRINE_AND_COVENANTS
@@ -79,6 +85,7 @@ class AvailableStandardWorks(enum.IntFlag):
         | OLD_TESTAMENT
         | PEARL_OF_GREAT_PRICE
     )
+    """All the available Standard Works."""
 
 
 async def build_standard_works(
@@ -97,7 +104,8 @@ async def build_standard_works(
             before returning; a client passed in is left open for the caller.
 
     Returns:
-        Paths of the OSIS XML files written.
+        Paths of the OSIS XML files written, in canonical work order (Book of Mormon, Doctrine and Covenants, New Testament, Old
+        Testament, Pearl of Great Price), restricted to the works requested.
     """
     root_dir = pathlib.Path(root_dir)
     owns_client = client is None
@@ -152,7 +160,6 @@ async def build_standard_works(
     return written
 
 
-# CLI work names (kebab-case) -> flag. Keys follow the enum member names.
 WORK_NAMES: dict[str, AvailableStandardWorks] = {
     "book-of-mormon": AvailableStandardWorks.BOOK_OF_MORMON,
     "doctrine-and-covenants": AvailableStandardWorks.DOCTRINE_AND_COVENANTS,
@@ -160,10 +167,24 @@ WORK_NAMES: dict[str, AvailableStandardWorks] = {
     "old-testament": AvailableStandardWorks.OLD_TESTAMENT,
     "pearl-of-great-price": AvailableStandardWorks.PEARL_OF_GREAT_PRICE,
 }
+"""CLI work names (kebab-case) mapped to their flag. Keys follow the enum member names."""
 
 
 def parse_works(value: str) -> AvailableStandardWorks:
-    """Parse a comma-separated list of kebab-case work names into an ``AvailableStandardWorks`` flag."""
+    """Parse a comma-separated list of kebab-case work names into an ``AvailableStandardWorks`` flag.
+
+    Used as the ``type=`` callable of the ``--works`` argument. Whitespace around names and empty
+    items (e.g. a trailing comma) are ignored; duplicates are harmless.
+
+    Args:
+        value: Comma-separated names, each a key of `WORK_NAMES` (e.g. ``"book-of-mormon,new-testament"``).
+
+    Returns:
+        The union of the named works' flags.
+
+    Raises:
+        argparse.ArgumentTypeError: If no names are given, or a name is not in `WORK_NAMES`.
+    """
     names = [part.strip() for part in value.split(",") if part.strip()]
     if not names:
         raise argparse.ArgumentTypeError(f"no works given; choose from: {', '.join(WORK_NAMES)}")
@@ -179,6 +200,13 @@ def parse_works(value: str) -> AvailableStandardWorks:
 
 
 def add_arguments(parser: argparse.ArgumentParser) -> None:
+    """Add the ``lds-standard-works`` options to its subcommand parser.
+
+    Adds ``--works`` (parsed with `parse_works`, defaulting to all works) and ``--lang`` (default ``eng``).
+
+    Args:
+        parser: Subcommand parser to add the arguments to.
+    """
     parser.add_argument(
         "--works",
         type=parse_works,
@@ -194,6 +222,14 @@ def add_arguments(parser: argparse.ArgumentParser) -> None:
 
 
 def run(args: argparse.Namespace) -> list[pathlib.Path]:
+    """Run the scraper for the parsed command-line arguments.
+
+    Args:
+        args: Parsed arguments; needs ``lang``, ``works`` and ``output_dir`` attributes.
+
+    Returns:
+        Paths of the OSIS XML files written by `build_standard_works`.
+    """
     # This scraper talks to the Scripture Content API directly and does not use the
     # shared HTTP cache or --delay.
     return asyncio.run(
@@ -219,3 +255,4 @@ SPEC = ScraperSpec(
     run=run,
     add_arguments=add_arguments,
 )
+"""Registration entry for the ``lds-standard-works`` subcommand."""
