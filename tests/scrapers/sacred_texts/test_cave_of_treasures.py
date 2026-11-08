@@ -44,11 +44,20 @@ def test_chapter_table_is_six_ordered_pages():
     assert [c.page for c in cot.CHAPTERS] == [f"bct0{n}" for n in range(4, 10)]
 
 
+def find(chapter, text: str):
+    """Return the first block whose plain text starts with ``text``."""
+    return next(b for b in chapter.blocks if cot._plain(b.parts).startswith(text))
+
+
 def test_headings_verses_and_notes_are_classified(chapter1):
-    """Bracketed centred headings, paragraphs and NOTES are told apart; furniture is dropped."""
+    """Titles, running heads, headings, paragraphs and NOTES are told apart."""
     assert kinds(chapter1) == [
+        "heading",  # <h1> THE CAVE OF TREASURES
+        "heading",  # TRANSLATION
+        "heading",  # (Brit. Mus. MS. Add. 25875.)
         "heading",  # the scribe's prayer title
         "verse",  # the prayer
+        "heading",  # THE FIRST THOUSAND YEARS: ...
         "heading",  # Creation. First Day
         "verse",
         "notes",
@@ -57,21 +66,25 @@ def test_headings_verses_and_notes_are_classified(chapter1):
     ]
 
 
-def test_chapter_title_heading_navigation_and_running_heads_are_dropped(chapter1):
-    """The chapter heading, nav line and manuscript running heads do not become blocks."""
+def test_running_heads_and_chapter_heading_are_kept_but_navigation_is_dropped(chapter1):
+    """Only the site's navigation is dropped; the book's own headings stay."""
     texts = [cot._plain(b.parts) for b in chapter1.blocks]
-    assert not any("THOUSAND YEARS" in t or "TRANSLATION" in t or "Brit. Mus" in t for t in texts)
+    assert "THE CAVE OF TREASURES" in texts
+    assert "TRANSLATION" in texts
+    assert "(Brit. Mus. MS. Add. 25875.)" in texts
+    assert "THE FIRST THOUSAND YEARS: ADAM TO YARÊD (Jared)." in texts
     assert not any(t in {"Next", "Previous"} or t.startswith("Sacred-Texts") for t in texts)
 
 
 def test_heading_brackets_are_stripped(chapter1):
     """Heading text loses its enclosing square brackets."""
-    assert cot._plain(chapter1.blocks[2].parts) == "The Creation. First Day."
+    assert find(chapter1, "The Creation. First").kind == "heading"
+    assert cot._plain(find(chapter1, "The Creation. First").parts) == "The Creation. First Day."
 
 
 def test_page_marker_becomes_milestone_inside_the_verse(chapter1):
     """A mid-paragraph ``p. 44`` anchor is a page milestone inside that verse."""
-    verse = chapter1.blocks[3]
+    verse = find(chapter1, "In the beginning")
     milestones = [p for p in verse.parts if isinstance(p, pyosis.MilestoneCt)]
     assert [m.n for m in milestones] == ["44"]
     assert cot._plain(verse.parts) == (
@@ -80,17 +93,18 @@ def test_page_marker_becomes_milestone_inside_the_verse(chapter1):
 
 
 def test_leading_page_marker_is_carried_past_headings_to_next_verse(chapter1):
-    """A page marker before a heading is not lost: it lands on the next verse, not the title."""
-    assert not any(isinstance(p, pyosis.MilestoneCt) for p in chapter1.blocks[0].parts)
-    first_verse = chapter1.blocks[1]
-    assert first_verse.kind == "verse"
+    """A page marker before the headings is not lost: it lands on the next verse."""
+    assert not any(isinstance(p, pyosis.MilestoneCt) for b in chapter1.blocks[:4] for p in b.parts)
+    first_verse = next(b for b in chapter1.blocks if b.kind == "verse")
     assert isinstance(first_verse.parts[0], pyosis.MilestoneCt)
     assert first_verse.parts[0].n == "43"
 
 
 def test_folio_reference_stays_in_text(chapter1):
     """Budge's folio reference is kept as printed, not turned into markup."""
-    assert cot._plain(chapter1.blocks[1].parts).startswith("[Fol. 3b, col. 1.] By the might")
+    assert cot._plain(find(chapter1, "[Fol. 3b").parts).startswith(
+        "[Fol. 3b, col. 1.] By the might"
+    )
 
 
 def test_numbered_list_rows_are_verses_and_image_tables_dropped(chapter6):
@@ -213,12 +227,25 @@ def test_spec_is_registered():
     assert spec is cot.SPEC
 
 
-def test_image_table_becomes_figures_block_with_absolute_urls(chapter6):
-    """A table of images is kept as a figures block whose ``src`` is an absolute URL."""
-    (block,) = [b for b in chapter6.blocks if b.kind == "figures"]
-    assert block.images == [
+def test_table_row_with_text_and_image_is_a_verse_then_a_figures_block(chapter6):
+    """Nothing in a table is dropped: its text is a verse and its image a figure with absolute URL."""
+    verse = next(b for b in chapter6.blocks if cot._plain(b.parts) == "1")
+    assert verse.kind == "verse"
+    figures = chapter6.blocks[chapter6.blocks.index(verse) + 1]
+    assert figures.kind == "figures"
+    assert figures.images == [
         cot.Image(src="https://archive.sacred-texts.com/chr/bct/cnf-star.jpg", alt="cuneiform")
     ]
+
+
+def test_multi_cell_rows_join_cells_with_a_bar(parser):
+    """A non-list row keeps every cell, joined with `` | ``."""
+    html = (
+        "<html><body><table><tr><td>1</td><td>The Labourer</td><td>Goat</td><td>Nisannu</td></tr>"
+        "</table></body></html>"
+    )
+    (block,) = parser.parse_chapter(html, 1).blocks
+    assert cot._plain(block.parts) == "1 | The Labourer | Goat | Nisannu"
 
 
 def test_parse_plate_reads_label_facing_images_and_caption(parser):
@@ -232,9 +259,10 @@ def test_parse_plate_reads_label_facing_images_and_caption(parser):
         "pl15-3.jpg",
     ]
     assert plate.images[0].src.startswith("https://archive.sacred-texts.com/chr/bct/")
-    assert plate.caption[0] == 'Incised shell plaques from "Ur of the Chaldees."'
+    assert 'Incised shell plaques from "Ur of the Chaldees."' in plate.caption
+    assert {"1", "2", "3"} <= set(plate.caption)
     assert any("Shell plaque of the Ist dynasty" in c for c in plate.caption)
-    assert not any("List of Plates" in c or c == "1" for c in plate.caption)
+    assert not any("List of Plates" in c for c in plate.caption)
 
 
 def test_generate_osis_emits_figures_and_plates(parser, chapter6):
@@ -286,9 +314,9 @@ def test_folio_prefixed_heading_keeps_folio_on_next_verse(parser):
         "<p>   And Enoch ruled.</p></body></html>"
     )
     chapter = parser.parse_chapter(html, 2)
-    assert [b.kind for b in chapter.blocks] == ["heading", "verse"]
-    assert cot._plain(chapter.blocks[0].parts) == "The Rule of Enoch"
-    assert cot._plain(chapter.blocks[1].parts) == "[Fol. 13b, col. 2] And Enoch ruled."
+    assert [b.kind for b in chapter.blocks] == ["heading", "heading", "verse"]
+    assert cot._plain(chapter.blocks[1].parts) == "The Rule of Enoch"
+    assert cot._plain(chapter.blocks[2].parts) == "[Fol. 13b, col. 2] And Enoch ruled."
 
 
 def test_internal_link_text_in_footnote_is_kept(parser):

@@ -19,7 +19,8 @@ deliberately simple and follows the divisions Budge prints:
   genealogies in chapter 6) is its own verse.
 * **Sub-headings** (Budge's bracketed centred headings such as ``[The Creation. First Day.]``)
   are emitted as non-canonical ``<title type="sub">`` elements before the verses they
-  introduce; they are not verses.
+  introduce; they are not verses. The page's own ``<h1>``, the running heads (``TRANSLATION``,
+  the manuscript reference) and the chapter's own heading are kept as headings too.
 * **Page markers** (``p. 44``, the printed page of the 1927 edition) become ``<milestone
   type="page">`` elements inside the verse (or heading) in which they fall. Folio references
   to the Syriac manuscript (``[Fol. 3b, col. 1.]``) stay in the text as printed.
@@ -42,10 +43,12 @@ Images are kept as ``<figure src=...>`` elements that point at the image files o
   plate is a ``<div type="x-plate">`` with a sub-title (``Plate XV (facing page 272)``), one
   figure per image and Budge's caption as a paragraph.
 
+Nothing inside the six translation pages is dropped except site navigation. A table row
+becomes a verse (cells joined with `` | ``), followed by a figures block if it holds images.
+
 Left out: the title page, preface, introduction, contents and bibliography, the "notes to
 the hypertext transcription", and the appendices (Testamentum Adami, translations from the
-Book of the Bee, Abraham and the City of Ur), which are separate works Budge appended. Text
-in tables that are not numbered lists is dropped.
+Book of the Bee, Abraham and the City of Ur), which are separate works Budge appended.
 """
 
 from __future__ import annotations
@@ -119,11 +122,11 @@ CHAPTERS: Final[tuple[ChapterSource, ...]] = (
 CHAPTER_HEADING_RE: Final[re.Pattern[str]] = re.compile(
     r"THOUSAND YEARS|FIVE HUNDRED YEARS FROM THE SECOND YEAR", re.IGNORECASE
 )
-"""Matches a heading that names the chapter itself, which is not repeated as a sub-heading."""
-SKIPPED_HEADING_RE: Final[re.Pattern[str]] = re.compile(
+"""Matches an unbracketed centred heading that names the chapter itself."""
+RUNNING_HEAD_RE: Final[re.Pattern[str]] = re.compile(
     r"^(?:TRANSLATION|\(Brit\. Mus\.[^)]*\))$", re.IGNORECASE
 )
-"""Matches the manuscript running heads on the first page, which are dropped."""
+"""Matches the manuscript running heads on the first page, kept as headings."""
 NAVIGATION_RE: Final[re.Pattern[str]] = re.compile(
     r"^(?:(?:Sacred-Texts|Christianity|Index|List of Plates|Title Page|Previous Plate|Next Plate"
     r"|Previous|Next)\s*)+$",
@@ -476,11 +479,13 @@ class CaveOfTreasuresParser:
     def _table_blocks(
         self, table: Tag, footnotes: dict[str, Footnote], pending: list[InlinePart], page: str
     ) -> list[Block]:
-        """Turn a table into verses (numbered lists) or a figures block (images).
+        """Turn every row of a table into verses and figures, dropping nothing.
 
-        Rows whose first cell is a number become verses; a row that holds only a page marker
-        is carried into ``pending``. Other text is dropped, but a table with no numbered rows
-        that holds images yields one ``figures`` block.
+        A row whose first cell is a list number (``12.``) is one verse reading ``12. text``.
+        Any other row with text is one verse whose cells are joined with `` | ``. Images in a
+        row follow it as a ``figures`` block, and a row with only images yields just that.
+        A row holding only a page marker carries the marker into ``pending``. Rows that
+        contain a nested table are skipped, since the nested rows are visited themselves.
 
         Args:
             table: The ``<table>`` element.
@@ -489,24 +494,34 @@ class CaveOfTreasuresParser:
             page: Stem of the page being parsed.
 
         Returns:
-            One verse block per numbered row, else at most one figures block.
+            Verse and figures blocks in row order.
         """
         blocks: list[Block] = []
         for row in table.find_all("tr"):
-            cells = row.find_all("td", recursive=False)
-            parts = _clean(self.parse_inline(row, footnotes))
-            if not _has_text(parts):
-                pending.extend(p for p in parts if isinstance(p, pyosis.MilestoneCt))
+            if row.find("table"):
                 continue
+            cells = row.find_all(["td", "th"], recursive=False)
+            images = self.parse_images(row, page)
+            cell_parts = [_clean(self.parse_inline(cell, footnotes)) for cell in cells]
+            cell_parts = [cp for cp in cell_parts if _has_text(cp)]
+            if not cell_parts:
+                for cp in (_clean(self.parse_inline(cell, footnotes)) for cell in cells):
+                    pending.extend(p for p in cp if isinstance(p, pyosis.MilestoneCt))
+                if images:
+                    blocks.append(Block("figures", [], images))
+                continue
+
             number = normalize_whitespace(cells[0].get_text()) if cells else ""
-            if len(cells) >= 2 and LIST_NUMBER_RE.match(number):
-                body = _clean(self.parse_inline(cells[1], footnotes))
-                blocks.append(Block("verse", _clean([*pending, number + " ", *body])))
-                pending.clear()
+            if len(cell_parts) >= 2 and LIST_NUMBER_RE.match(number):
+                joined: list[InlinePart] = [number + " ", *cell_parts[1]]
+                for extra in cell_parts[2:]:
+                    joined.extend([" | ", *extra])
             else:
-                LOGGER.debug("Skipping non-list table row: %s", number)
-        if not blocks:
-            images = self.parse_images(table, page)
+                joined = []
+                for index, cp in enumerate(cell_parts):
+                    joined.extend([" | ", *cp] if index else cp)
+            blocks.append(Block("verse", _clean([*pending, *joined])))
+            pending.clear()
             if images:
                 blocks.append(Block("figures", [], images))
         return blocks
@@ -528,7 +543,7 @@ class CaveOfTreasuresParser:
         pending: list[InlinePart] = []
         body = soup.body or soup
 
-        for element in body.find_all(["p", "blockquote", "table"], recursive=False):
+        for element in body.find_all(["h1", "p", "blockquote", "table"], recursive=False):
             if element.find_parent("table") is not None:
                 continue
             if element.name == "table":
@@ -546,13 +561,19 @@ class CaveOfTreasuresParser:
                     chapter.blocks.append(Block("figures", [], images))
                 continue
             text = _plain(parts)
-            if NAVIGATION_RE.match(text) or SKIPPED_HEADING_RE.match(text):
+            if NAVIGATION_RE.match(text):
                 continue
 
             centred = element.get("align") == "center"
-            if (centred or element.name == "blockquote") and CHAPTER_HEADING_RE.search(text):
-                continue
-            if element.name == "blockquote" or (centred and text.startswith("[")):
+            is_heading = element.name in {"h1", "blockquote"} or (
+                centred
+                and (
+                    text.startswith("[")
+                    or CHAPTER_HEADING_RE.search(text)
+                    or RUNNING_HEAD_RE.match(text)
+                )
+            )
+            if is_heading:
                 folio = FOLIO_HEADING_RE.match(text)
                 if folio:
                     parts = [folio.group("title")]
@@ -584,8 +605,8 @@ class CaveOfTreasuresParser:
         """Parse one plate page.
 
         The label is the first centred line, the facing page comes from ``{facing page N}``,
-        images are every ``<img>`` and the caption is the remaining text (navigation, the
-        label, the facing line and bare digit keys such as ``1`` dropped).
+        images are every ``<img>`` and the caption is the remaining text (only navigation, the
+        label and the facing line are left out).
 
         Args:
             html_text: Raw page HTML (old layout, or reader layout via ``legacy_html``).
@@ -603,7 +624,7 @@ class CaveOfTreasuresParser:
             if element.find(["p", "td", "table"]):
                 continue
             text = _plain(_clean(self.parse_inline(element, {})))
-            if not text or text.isdigit() or NAVIGATION_RE.match(text):
+            if not text or NAVIGATION_RE.match(text):
                 continue
             if PLATE_FOOTER_RE.match(text):
                 continue
