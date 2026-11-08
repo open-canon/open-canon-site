@@ -2,6 +2,58 @@
 
 <!-- version list -->
 
+## v1.15.0 (2026-11-08)
+
+### Bug Fixes
+
+- **scrapers**: Attach paragraph-leading margin references to their own verse
+  ([`3130a9b`](https://github.com/open-canon/open-canon-site/commit/3130a9b46e1fe15e52f409b294bb936a3522b99d))
+
+- **scrapers**: Do not read grouped or decimal numbers as Pseudo-Philo verse markers
+  ([`0dc3a79`](https://github.com/open-canon/open-canon-site/commit/0dc3a79e5951bd29407f0083edafdabb0e7d3687))
+
+- **scrapers**: Keep all table text, running heads and chapter headings in Cave of Treasures
+  ([`d9f90c4`](https://github.com/open-canon/open-canon-site/commit/d9f90c488a407e2bff6ccebe2c3eb89e443e54d1))
+
+- **scrapers**: Keep italics split by a page break; add generated pseudo-philo.xml
+  ([`a543ab6`](https://github.com/open-canon/open-canon-site/commit/a543ab6f99b11ced69a94178c0d7aabd88036b14))
+
+- **scrapers**: Keep page markers past headings, folio headings and footnote link text
+  ([`12c3b8e`](https://github.com/open-canon/open-canon-site/commit/12c3b8ef2afabd079f51ed47b969ffb03f26e2bf))
+
+- **skills**: Check chapter divs, contained verses and render failures in triage
+  ([`c057ca2`](https://github.com/open-canon/open-canon-site/commit/c057ca21ede9c82a2e95cafa4efc9005cf9576fc))
+
+### Documentation
+
+- Add an OSIS text triage skill for coding agents
+  ([`f94c90f`](https://github.com/open-canon/open-canon-site/commit/f94c90f6be9cb09685ddf61001b0b4be9f68f33b))
+
+- List the pseudo-philo scraper in the README
+  ([`3b14da7`](https://github.com/open-canon/open-canon-site/commit/3b14da786ab6c7e43b805cce59c45f7732486f34))
+
+### Features
+
+- **scrapers**: Add Biblical Antiquities of Philo (Pseudo-Philo) scraper
+  ([`2889a7c`](https://github.com/open-canon/open-canon-site/commit/2889a7ccfd2fd19415ef88868801b8758dbf644b))
+
+- **scrapers**: Add Budge's Book of the Cave of Treasures scraper
+  ([`2c1e6b6`](https://github.com/open-canon/open-canon-site/commit/2c1e6b63a4b979814acc9e863a3ea9f5bc3e3d04))
+
+- **scrapers**: Generate Cave of Treasures OSIS; fix list verses and plate captions
+  ([`5ceea66`](https://github.com/open-canon/open-canon-site/commit/5ceea66ba5a363211edfcdc1b0c87a18ab53bd83))
+
+- **scrapers**: Keep Cave of Treasures images as OSIS figures
+  ([`9930c1f`](https://github.com/open-canon/open-canon-site/commit/9930c1f33da7fb4e55371fe71da58fbb56d39e2d))
+
+- **scrapers**: Keep Pseudo-Philo margin Bible references as crossReference notes
+  ([`56bab0d`](https://github.com/open-canon/open-canon-site/commit/56bab0d7b9aca4ec4e508762dbd22784526de1cd))
+
+- **scrapers**: Scrape front/back matter and appendices; render notes, headings and figures on the
+  site
+  ([`d6c96f5`](https://github.com/open-canon/open-canon-site/commit/d6c96f51759eeb2e4b4b854bf0faf10475f0a176))
+
+
 ## v1.14.0 (2026-11-08)
 
 ### Features
