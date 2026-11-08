@@ -50,6 +50,8 @@ def test_is_valid_index():
     assert KebraNagastParser.is_valid_index(fixture("index.htm"))
     assert not KebraNagastParser.is_valid_index(fixture("index.htm").replace("kn117.htm", "x"))
     assert not KebraNagastParser.is_valid_index(fixture("index.htm") + "Just a moment")
+    no_colophon = fixture("index.htm").replace('<A HREF="kn118.htm">Colophon</A>', "")
+    assert not KebraNagastParser.is_valid_index(no_colophon)
 
 
 def test_parse_chapter_one_paragraph_per_verse_without_marks():

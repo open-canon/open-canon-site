@@ -221,20 +221,21 @@ class KebraNagastParser:
 
         raise RuntimeError(invalid_error)
 
-    @staticmethod
-    def is_valid_index(text: str) -> bool:
+    @classmethod
+    def is_valid_index(cls, text: str) -> bool:
         """Report whether text is the genuine Kebra Nagast index page.
 
         Args:
             text: Raw page HTML.
 
         Returns:
-            True if it names the book, links to the last chapter (``kn117.htm``) and is not a
-            Cloudflare interstitial ("Just a moment").
+            True if it names the book, links to exactly pages 1 through 118 (so a truncated
+            index is rejected and refetched) and is not a Cloudflare interstitial
+            ("Just a moment").
         """
         return (
             "Kebra Nagast" in text
-            and bool(re.search(r"""href\s*=\s*["']kn117\.htm["']""", text, re.I))
+            and cls.extract_pages(text) == EXPECTED_PAGES
             and "Just a moment" not in text
         )
 
