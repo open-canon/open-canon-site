@@ -143,14 +143,24 @@ def changed_xml(base: str) -> list[Path]:
     return sorted(Path(n) for n in names if Path(n).exists())
 
 
+class RenderError(Exception):
+    """The site generator failed; the message carries its captured output."""
+
+
 def render(xml: Path, out: Path) -> dict[str, list[str]]:
-    """Render one XML file into ``out`` and return {page path: text lines}."""
-    subprocess.run(
+    """Render one XML file into ``out`` and return {page path: text lines}.
+
+    Raises:
+        RenderError: If the generator exits nonzero, with its stderr/stdout tail.
+    """
+    proc = subprocess.run(
         [sys.executable, "-m", "open_canon_site", str(xml), "-o", str(out), "--clean"],
-        check=True,
         capture_output=True,
         text=True,
     )
+    if proc.returncode:
+        output = (proc.stderr or proc.stdout).strip().splitlines()
+        raise RenderError("\n".join(output[-20:]) or f"exit status {proc.returncode}")
     return {
         str(p.relative_to(out)): page_text(p)
         for p in sorted(out.rglob("*.html"))
@@ -165,6 +175,17 @@ def dump_text(pages: dict[str, list[str]], dest_dir: Path) -> None:
         dest.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def _is_milestone(verse: ET.Element) -> bool:
+    """True for a verse start or end milestone, which carries no text of its own.
+
+    A contained verse may carry ``osisID``, ``sID`` and ``eID`` together (the LDS
+    documents do), so ``eID`` alone does not make a verse an end milestone.
+    """
+    start_only = verse.get("sID") is not None and verse.get("eID") is None
+    end_only = verse.get("eID") is not None and not verse.get("osisID") and not verse.get("sID")
+    return start_only or end_only
+
+
 def structural_checks(xml: Path) -> list[str]:
     """Verse-level checks on the XML itself: duplicates, gaps, empty verses, empty chapters."""
     findings: list[str] = []
@@ -173,7 +194,13 @@ def structural_checks(xml: Path) -> list[str]:
     except ET.ParseError as exc:
         return [f"XML does not parse: {exc}"]
     ids = Counter()
-    for chapter in root.iter(f"{OSIS_NS}chapter"):
+    chapters = [
+        el
+        for el in root.iter()
+        if el.tag == f"{OSIS_NS}chapter"
+        or (el.tag == f"{OSIS_NS}div" and el.get("type") == "chapter")
+    ]
+    for chapter in chapters:
         cid = chapter.get("osisID", "?")
         verses = list(chapter.iter(f"{OSIS_NS}verse"))
         if not verses:
@@ -183,7 +210,7 @@ def structural_checks(xml: Path) -> list[str]:
             vid = verse.get("osisID") or verse.get("sID") or "?"
             ids[vid] += 1
             text = "".join(verse.itertext()).strip()
-            if not text and verse.get("eID") is None:
+            if not text and not _is_milestone(verse):
                 findings.append(f"empty verse {vid}")
             m = re.match(r"(\d+)", vid.rsplit(".", 1)[-1])
             if m:
@@ -230,12 +257,24 @@ def main() -> int:
     work.mkdir(parents=True, exist_ok=True)
     print(f"base: {base}\nwork dir: {work}\n")
 
+    status = 0
     for xml in files:
         print("#" * 78)
         print(f"# {xml}")
         print("#" * 78)
+
+        print("-- structural checks (XML) --")
+        for finding in structural_checks(xml) or ["none"]:
+            print(f"  {finding}")
+        print()
+
         head_dir = work / "head" / xml.stem
-        head_pages = render(xml, head_dir)
+        try:
+            head_pages = render(xml, head_dir)
+        except RenderError as exc:
+            status = 1
+            print(f"RENDER FAILED for {xml}; skipping diff and flags:\n{exc}\n")
+            continue
         dump_dir = work / "text" / "head" / xml.stem
         dump_text(head_pages, dump_dir)
         print(f"rendered {len(head_pages)} pages; plain-text dumps in {dump_dir}")
@@ -251,7 +290,13 @@ def main() -> int:
                 base_xml = work / "base-src" / xml.name
                 base_xml.parent.mkdir(parents=True, exist_ok=True)
                 base_xml.write_text(base_xml_text, encoding="utf-8")
-                base_pages = render(base_xml, work / "base" / xml.stem)
+                try:
+                    base_pages = render(base_xml, work / "base" / xml.stem)
+                except RenderError as exc:
+                    status = 1
+                    print(f"base render failed; no diff for {xml}:\n{exc}")
+                    base_pages = None
+            if base_xml_text is not None and base_pages is not None:
                 dump_text(base_pages, work / "text" / "base" / xml.stem)
                 head_count = verse_count(xml.read_text(encoding="utf-8"))
                 print(f"verses: {verse_count(base_xml_text)} -> {head_count}")
@@ -286,10 +331,6 @@ def main() -> int:
                             printed += len(diff)
                 print(f"pages with text changes: {changed}")
 
-        print("\n-- structural checks (XML) --")
-        for finding in structural_checks(xml) or ["none"]:
-            print(f"  {finding}")
-
         print("\n-- heuristic flags (rendered text; hints, not verdicts) --")
         any_flag = False
         for label, pattern in LINE_FLAGS:
@@ -314,7 +355,7 @@ def main() -> int:
 
     if args.out is None:
         print(f"(temp work dir kept for inspection: {work}; delete with: rm -rf {work})")
-    return 0
+    return status
 
 
 if __name__ == "__main__":
