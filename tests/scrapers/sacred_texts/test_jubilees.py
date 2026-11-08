@@ -8,9 +8,9 @@ import string
 import pyosis
 import pytest
 from bs4 import BeautifulSoup, NavigableString
-from hypothesis import given
+from hypothesis import HealthCheck, given, settings
 from hypothesis import strategies as st
-from open_canon_site.scrapers._osis import int_to_roman
+from open_canon_site.scrapers._osis import extract_plain_text, int_to_roman
 from open_canon_site.scrapers.sacred_texts import jubilees
 from open_canon_site.scrapers.sacred_texts.jubilees import (
     Chapter,
@@ -340,20 +340,60 @@ def test_extract_footnotes_collects_labels_and_content(parser):
     notes = parser.extract_footnotes(soup_body(FOOTNOTES_HTML))
     assert set(notes) == {"fn_1", "fn_2", "fn_3"}
     assert notes["fn_1"].label == "1" and notes["fn_1"].ref_id == "fn_1"
-    assert notes["fn_1"].content_parts == ["First note."]
+    assert extract_plain_text(notes["fn_1"].content_parts) == "First note."
     assert notes["fn_2"].label == "2"
     assert notes["fn_3"].label == ""
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason="extract_footnotes parses each footnote child as an element, so a top-level "
-    "<i>/<b> in a footnote loses its highlight (parse_inline_content only wraps children)",
-)
 def test_extract_footnotes_preserves_top_level_italics(parser):
-    """Italic text directly inside a footnote paragraph should stay a ``HiCt`` highlight."""
+    """Italic text directly inside a footnote paragraph stays a ``HiCt`` highlight."""
     notes = parser.extract_footnotes(soup_body(FOOTNOTES_HTML))
-    assert any(isinstance(p, pyosis.HiCt) for p in notes["fn_1"].content_parts)
+    parts = notes["fn_1"].content_parts
+    assert [p for p in parts if isinstance(p, pyosis.HiCt)] == [
+        pyosis.HiCt(type_value=pyosis.OsisHi.ITALIC, content=["note"])
+    ]
+    assert extract_plain_text(parts) == "First note."
+
+
+def test_extract_footnotes_preserves_top_level_bold_sup_sub(parser):
+    """Direct ``<b>``, ``<sup>`` and ``<sub>`` children of a footnote keep their highlight type."""
+    body = soup_body(
+        "<h3>Footnotes</h3>"
+        '<p><a name="fn_1"></a><a href="#fr_1">1</a> <b>B</b><sup>S</sup><sub>U</sub></p>'
+    )
+    parts = parser.extract_footnotes(body)["fn_1"].content_parts
+    kinds = [p.type_value for p in parts if isinstance(p, pyosis.HiCt)]
+    assert kinds == [pyosis.OsisHi.BOLD, pyosis.OsisHi.SUPER, pyosis.OsisHi.SUB]
+
+
+def test_extract_footnotes_top_level_and_nested_italics_match(parser):
+    """A direct ``<i>`` yields the same highlight as one wrapped in a transparent ``<span>``."""
+    direct = soup_body(
+        '<h3>Footnotes</h3><p><a name="fn_1"></a><a href="#x">1</a> a <i>b</i> c</p>'
+    )
+    nested = soup_body(
+        '<h3>Footnotes</h3><p><a name="fn_1"></a><a href="#x">1</a><span> a <i>b</i> c</span></p>'
+    )
+    assert (
+        parser.extract_footnotes(direct)["fn_1"].content_parts
+        == parser.extract_footnotes(nested)["fn_1"].content_parts
+    )
+
+
+def test_extract_footnotes_does_not_mutate_source_tree(parser):
+    """Extracting footnotes leaves the footnote anchors in the original soup."""
+    body = soup_body(FOOTNOTES_HTML)
+    parser.extract_footnotes(body)
+    assert body.find("a", attrs={"name": "fn_1"}) is not None
+
+
+@settings(suppress_health_check=[HealthCheck.function_scoped_fixture])
+@given(text=st.from_regex(r"[A-Za-z]+( [A-Za-z]+)*", fullmatch=True))
+def test_extract_footnotes_top_level_italic_text_is_preserved(parser, text):
+    """Italic text in a footnote round-trips as an italic highlight whatever the text."""
+    body = soup_body(f'<h3>Footnotes</h3><p><a name="fn_1"></a><a href="#x">1</a><i>{text}</i></p>')
+    parts = parser.extract_footnotes(body)["fn_1"].content_parts
+    assert parts == [pyosis.HiCt(type_value=pyosis.OsisHi.ITALIC, content=[text])]
 
 
 def test_extract_footnotes_ignores_paragraphs_before_footnotes_heading(parser):

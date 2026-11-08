@@ -418,14 +418,68 @@ def test_extract_markup_figure_without_known_class_raises() -> None:
         extract_markup(_tag('<figure class="video"></figure>'), {})
 
 
-@pytest.mark.xfail(
-    strict=True,
-    raises=KeyError,
-    reason="BUG: extract_markup indexes tag.attrs['class'] for span without a class attribute",
-)
 def test_extract_markup_span_without_class_attribute() -> None:
-    """A classless ``span`` should be treated as an unknown span (warn, pass through) rather than crash."""
-    assert extract_markup(_tag("<span>x</span>"), {}) == ["x"]
+    """A classless ``span`` is treated as an unknown span (warn, pass through) rather than crash."""
+    with pytest.warns(UserWarning, match="Unknown span class"):
+        assert extract_markup(_tag("<span>x</span>"), {}) == ["x"]
+
+
+def test_extract_markup_div_without_class_attribute() -> None:
+    """A classless ``div`` is treated as an unknown div (warn, ``x-unknown`` wrapper)."""
+    with pytest.warns(UserWarning, match="Unknown Div tag"):
+        (result,) = extract_markup(_tag("<div>x</div>"), {})
+    assert isinstance(result, osis.DivCt)
+    assert result.type_value == "x-unknown" and result.content == ["x"]
+
+
+def test_extract_markup_anchor_without_class_attribute_is_unparseable() -> None:
+    """A classless ``a`` matches no known anchor class and reaches the generic ValueError."""
+    with pytest.raises(ValueError, match="Not sure how to parse markup"):
+        extract_markup(_tag('<a href="#x">x</a>'), {})
+
+
+def test_extract_markup_figure_without_class_attribute_is_unparseable() -> None:
+    """A classless ``figure`` is neither image nor table, so it reaches the generic ValueError."""
+    with pytest.raises(ValueError, match="Not sure how to parse markup"):
+        extract_markup(_tag("<figure>x</figure>"), {})
+
+
+def test_extract_markup_classless_span_inside_paragraph_keeps_text() -> None:
+    """A classless span nested in a paragraph passes its text through to the paragraph."""
+    with pytest.warns(UserWarning, match="Unknown span class"):
+        (result,) = extract_markup(_tag("<p>a <span>b</span> c</p>"), {})
+    assert isinstance(result, osis.PCt) and result.content == ["a b c"]
+
+
+@pytest.mark.parametrize(
+    ("html", "expected_type"),
+    [
+        ('<span class="dominant">x</span>', None),
+        ('<div class="credit">x</div>', osis.OsisDivs.ACKNOWLEDGEMENT),
+        ('<div class="publish-info">x</div>', "x-publish-info"),
+    ],
+)
+def test_extract_markup_classed_tags_unchanged(html: str, expected_type: object) -> None:
+    """Tags that do have a recognised class still convert exactly as before."""
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")
+        result = extract_markup(_tag(html), {})
+    if expected_type is None:
+        assert result == ["x"]
+    else:
+        (div,) = result
+        assert isinstance(div, osis.DivCt) and div.type_value == expected_type
+
+
+@given(st.sampled_from(["span", "div"]), st.text(alphabet="abc xyz", min_size=1, max_size=20))
+def test_extract_markup_classless_span_or_div_never_raises(name: str, text: str) -> None:
+    """Classless span/div elements always convert (with a warning) whatever their text."""
+    tag = bs4.BeautifulSoup(f"<{name}></{name}>", "html.parser").find(name)
+    assert isinstance(tag, bs4.element.Tag)
+    tag.append(bs4.element.NavigableString(text))
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        assert extract_markup(tag, {})
 
 
 @given(st.text(alphabet=st.characters(blacklist_categories=("Cs", "Cc")), max_size=40))
