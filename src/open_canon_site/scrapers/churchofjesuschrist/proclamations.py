@@ -171,12 +171,18 @@ def build_proclamation(
     if not verses:
         raise ValueError(f"{proclamation.uri} has no paragraphs")
 
-    chapter = pyosis.generated.ChapterCt(canonical=False, osis_id=[chapter_id], content=verses)
+    # The byline/dateline and colophon go inside the chapter: the site parser only keeps a contained chapter's own
+    # content, so siblings of the chapter would be dropped from the generated reading pages.
+    intros = [f for f in front if isinstance(f, pyosis.generated.DivCt)]
+    titles = [f for f in front if not isinstance(f, pyosis.generated.DivCt)]
+    chapter = pyosis.generated.ChapterCt(
+        canonical=False, osis_id=[chapter_id], content=[*intros, *verses, *colophon]
+    )
     return pyosis.generated.DivCt(
         canonical=True,
         type_value=pyosis.generated.OsisDivs.BOOK,
         osis_id=[proclamation.osis_id],
-        content=[*front, chapter, *colophon],
+        content=[*titles, chapter],
     )
 
 

@@ -30,11 +30,12 @@ def test_build_proclamation_structure() -> None:
     """Titles, byline, paragraph verses and the colophon are produced in order."""
     div = proc.build_proclamation(proc.PROCLAMATIONS[1], _content(_FULL_PAGE))
     assert div.osis_id == ["Proc1995"] and div.type_value == osis.OsisDivs.BOOK
-    main, sub, byline, chapter, colophon = div.content
+    main, sub, chapter = div.content
     assert main.content == ["The Family"] and sub.content == ["A Proclamation"]
-    assert byline.type_value == osis.OsisDivs.INTRODUCTION and byline.canonical is False
     assert chapter.osis_id == ["Proc1995.1"]
-    assert [v.osis_id for v in chapter.content] == [["Proc1995.1.1"], ["Proc1995.1.2"]]
+    byline, v1, v2, colophon = chapter.content
+    assert byline.type_value == osis.OsisDivs.INTRODUCTION and byline.canonical is False
+    assert [v1.osis_id, v2.osis_id] == [["Proc1995.1.1"], ["Proc1995.1.2"]]
     assert colophon.type_value == osis.OsisDivs.COLOPHON
     assert colophon.content[0].content == ["Read in 1995."]
 
@@ -91,6 +92,23 @@ def test_build_proclamation_dateline_is_front_matter() -> None:
     """A leading italic-only paragraph becomes an introduction and verses start after it."""
     body = '<div class="body-block"><p><em>From the Presidency, 1980</em></p><p>Text</p></div>'
     div = proc.build_proclamation(proc.PROCLAMATIONS[0], _content(body))
-    intro, chapter = div.content
+    (chapter,) = div.content
+    intro, verse = chapter.content
     assert intro.type_value == osis.OsisDivs.INTRODUCTION and intro.canonical is False
-    assert [v.osis_id for v in chapter.content] == [["Proc1980.1.1"]]
+    assert verse.osis_id == ["Proc1980.1.1"]
+
+
+@pytest.mark.asyncio
+async def test_byline_and_colophon_survive_site_parsing(site: FakeSite, make_client) -> None:
+    """The site parser keeps the byline and colophon in the chapter body, not just the verses."""
+    from open_canon_site.parser import parse_osis_text
+
+    for p in proc.PROCLAMATIONS:
+        site.pages[p.uri] = _FULL_PAGE
+    async with make_client(site) as client:
+        xml = await proc.build_proclamations("eng", client)
+    doc = parse_osis_text(xml.osis.osis_text)
+    chapter = doc.divisions[1].chapters[0]
+    assert chapter.chapter_id == "Proc1995.1" and len(chapter.verses) == 2
+    body = repr(chapter.body)
+    assert "The First Presidency" in body and "Read in 1995." in body
