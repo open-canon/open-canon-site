@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="psalms-of-solomon" osisRefWork="Psalms of Solomon" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T16:46:06</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T00:50:37</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -31,9 +31,7 @@
       </div>
       <div canonical="true" type="chapter" osisID="psalms-of-solomon.1" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
-          <p TEIform="p">"
-            <hi type="italic" TEIform="hi">They became insolent in their prosperity . . . .</hi>"
-          </p>
+          <p TEIform="p">"They became insolent in their prosperity . . . ."</p>
         </div>
         <verse canonical="true" osisID="psalms-of-solomon.1.1">
           <lgCT TEIform="lg">
@@ -71,7 +69,7 @@
             <l TEIform="l">Because the sons of Jerusalem had defiled the holy things of the Lord,</l>
             <l TEIform="l">Had profaned with iniquities the offerings of God.</l>
             <l TEIform="l">Therefore He said: Cast them far from Me;</l>
-            <l TEIform="l">.       .       .       .       .       .</l>
+            <l TEIform="l">. . . . . .</l>
             <l TEIform="l">It was set at naught before God,</l>
             <l TEIform="l">It was utterly dishonoured;</l>
             <l TEIform="l">The sons and the daughters were m grievous captivity,</l>
@@ -87,7 +85,7 @@
             <l TEIform="l">And the earth recognized all</l>
             <l TEIform="l">Thy righteous judgements, O God.</l>
             <l TEIform="l">They set the sons of Jerusalem to be mocked at in return for the harlots in her;</l>
-            <l TEIform="l">Every wayfarer entered in in the full light of day.</l>
+            <l TEIform="l">Every wayfarer entered in in the full light of day.</l>
             <l TEIform="l">They made mock with their transgressions, as they themselves were wont to do;</l>
             <l TEIform="l">In the full light of day they revealed their iniquities.</l>
             <l TEIform="l">And the daughters of Jerusalem were defiled in accordance with Thy judgement,</l>

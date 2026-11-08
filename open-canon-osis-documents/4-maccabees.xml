@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="4Macc" osisRefWork="4 Maccabees" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T16:48:50</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T00:50:42</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -80,7 +80,7 @@
         <verse canonical="true" osisID="4Macc.1.45">For the temperate mind is able, as I said, to win the victory over the passions, modifying some, while crushing others absolutely.</verse>
         <verse canonical="true" osisID="4Macc.1.46">Why else did our wise father Jacob blame the houses of Simeon and Levi for their unreasoning slaughter of the tribe of the Shechemites, saying, 'Accursed be their anger!'</verse>
         <verse canonical="true" osisID="4Macc.1.47">For had not Reason possessed the power to restrain their anger he would not have spoken thus.</verse>
-        <verse canonical="true" osisID="4Macc.1.48">For in the day when God created man, he implanted in him his passions and inclinations, and also, at the very same time, set the mind on a throne amidst the senses to be his sacred guide in all things; and to the mind he gave the Law, by the which if a man order himself, he shall reign over a kingdom that is temperate, and just, and virtuous, and brave. 179:1 See The Testament of Joseph, page 260.</verse>
+        <verse canonical="true" osisID="4Macc.1.48">For in the day when God created man, he implanted in him his passions and inclinations, and also, at the very same time, set the mind on a throne amidst the senses to be his sacred guide in all things; and to the mind he gave the Law, by the which if a man order himself, he shall reign over a kingdom that is temperate, and just, and virtuous, and brave. 179:1  See The Testament of Joseph, page 260.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="4Macc.2" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">

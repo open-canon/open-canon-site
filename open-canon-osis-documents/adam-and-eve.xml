@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="adam-and-eve" osisRefWork="Adam and Eve" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.07T22:47:11</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T07:15:46</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -595,9 +595,10 @@
         <verse canonical="true" osisID="1-adam-and-eve.37.10">"But now, O Lord, behold, we have endured all these days, and have borne sufferings. Make these forty-three days an equivalent for the one hour in which we transgressed."</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1-adam-and-eve.38" TEIform="div">
-        <verse canonical="true" osisID="1-adam-and-eve.38.1">"
-          <hi type="italic" TEIform="hi">When 5500 years are fulfilled</hi> . . . ." AFTER these things the Word of God came to Adam, and said unto him:--
-        </verse>
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">"When 5500 years are fulfilled. . . ."</p>
+        </div>
+        <verse canonical="true" osisID="1-adam-and-eve.38.1">AFTER these things the Word of God came to Adam, and said unto him:--</verse>
         <verse canonical="true" osisID="1-adam-and-eve.38.2">"O Adam, as to the fruit of the Tree of Life, for which thou askest, I will not give it thee now, but when the 5500 years are fulfilled. Then will I give thee of the fruit of the Tree of Life, and thou shalt eat, and live for ever, thou, and Eve, and thy righteous seed.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.38.3">"But these forty-three days cannot make amends for the hour in which thou didst transgress My commandment.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.38.4">"O Adam, I gave thee to eat of the fig-tree in which thou didst hide thyself. Go and eat of it, thou and Eve.</verse>
@@ -712,9 +713,10 @@
         <verse canonical="true" osisID="1-adam-and-eve.45.12">And God withdrew His Word from Adam.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1-adam-and-eve.46" TEIform="div">
-        <verse canonical="true" osisID="1-adam-and-eve.46.1">"
-          <hi type="italic" TEIform="hi">How many times have I delivered thee out of his hand</hi> . . ." THEN Adam and Eve began again to come into the cave. And when they came to the way between the fire, Satan blew into the fire like a whirlwind, and made on Adam and Eve a burning coal-fire; so that their bodies were singed; and the coal-fire scorched them.
-        </verse>
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">"How many times have I delivered thee out of his hand. . ."</p>
+        </div>
+        <verse canonical="true" osisID="1-adam-and-eve.46.1">THEN Adam and Eve began again to come into the cave. And when they came to the way between the fire, Satan blew into the fire like a whirlwind, and made on Adam and Eve a burning coal-fire; so that their bodies were singed; and the coal-fire scorched them.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.46.2">And from the burning of the fire Adam and Eve cried aloud, and said, "O Lord, save us! Leave us not to be consumed and plagued by this burning fire; neither require us for having transgressed Thy commandment."</verse>
         <verse canonical="true" osisID="1-adam-and-eve.46.3">Then God looked upon their bodies, on which Satan had caused fire to bum, and God sent His angel that stayed the burning fire. But the wounds remained on their bodies.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.46.4">And God said unto Adam, "See Satan's love for thee, who pretended to give thee the Godhead and greatness; and, behold, he burns thee with fire, and seeks to destroy thee from off the earth.</verse>
@@ -787,9 +789,10 @@
         <verse canonical="true" osisID="1-adam-and-eve.50.7">Then came the Word of God and said unto him, "O Adam, take Eve and come to the seashore, where ye fasted before. There ye shall find skins of sheep, whose flesh was devoured by lions, and whose skins were left. Take them and make raiment for yourselves, and clothe yourselves withal."</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1-adam-and-eve.51" TEIform="div">
-        <verse canonical="true" osisID="1-adam-and-eve.51.1">"
-          <hi type="italic" TEIform="hi">What is his beauty that you should have followed him</hi>?" WHEN Adam heard these words from God, he took Eve and removed from the northern end of the garden to the south of it, by the river of water, where they once fasted.
-        </verse>
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">"What is his beauty that you should have followed him?"</p>
+        </div>
+        <verse canonical="true" osisID="1-adam-and-eve.51.1">WHEN Adam heard these words from God, he took Eve and removed from the northern end of the garden to the south of it, by the river of water, where they once fasted.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.51.2">But as they were going in the way, and before they reached that place, Satan, the wicked one, had heard the Word of God communing with Adam respecting his covering.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.51.3">It grieved him, and he hastened to the place where the sheep-skins were, with the intention of taking them and throwing them into the sea, or of burning them with fire, that Adam and Eve should not find them.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.51.4">But as he was about to take them, the Word of God came from heaven, and bound him by the side of those skins until Adam and Eve came near him. But as they neared him they were afraid of him, and of his hideous look.</verse>
@@ -889,9 +892,10 @@
         <verse canonical="true" osisID="1-adam-and-eve.56.13">Then Adam came out of the cave, thinking he was one of God's angels that was come to give him some good counsel.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1-adam-and-eve.57" TEIform="div">
-        <verse canonical="true" osisID="1-adam-and-eve.57.1">"
-          <hi type="italic" TEIform="hi">Therefore did I fall</hi>. . . BUT when Adam came out and saw his hideous figure, he was afraid of him, and said unto him, "Who art thou?"
-        </verse>
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">"Therefore did I fall. . .</p>
+        </div>
+        <verse canonical="true" osisID="1-adam-and-eve.57.1">BUT when Adam came out and saw his hideous figure, he was afraid of him, and said unto him, "Who art thou?"</verse>
         <verse canonical="true" osisID="1-adam-and-eve.57.2">Then Satan answered and said unto him, "It is I, who hid myself within the serpent, and who talked to Eve, and beguiled her until she hearkened to my command. I am he who sent her, through the wiles of my speech, to deceive thee, until thou and she ate of the fruit of the tree, and ye came away from under the command of God."</verse>
         <verse canonical="true" osisID="1-adam-and-eve.57.3">But when Adam heard these words from him, he said unto him, "Canst thou make me a garden as God made for me? Or canst thou clothe me in the same bright nature in which God had clothed me?</verse>
         <verse canonical="true" osisID="1-adam-and-eve.57.4">"Where is the divine nature thou didst promise to give me? Where is that fair speech of thine, thou didst hold with us at first, when we were in the garden?"</verse>
@@ -905,9 +909,10 @@
         <verse canonical="true" osisID="1-adam-and-eve.57.12">"But we will ask God, who created us, to deliver us out of his hands."</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1-adam-and-eve.58" TEIform="div">
-        <verse canonical="true" osisID="1-adam-and-eve.58.1">"
-          <hi type="italic" TEIform="hi">About sunset on the 53rd day</hi> . . . ." THEN Adam and Eve spread their hands unto God, praying and entreating Him to drive Satan away from them; that he do them no violence, and do not force them to deny God.
-        </verse>
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">"About sunset on the 53rd day. . . ."</p>
+        </div>
+        <verse canonical="true" osisID="1-adam-and-eve.58.1">THEN Adam and Eve spread their hands unto God, praying and entreating Him to drive Satan away from them; that he do them no violence, and do not force them to deny God.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.58.2">Then God sent to them at once His angel, who drove away Satan--from them. This happened about sunset, on the fifty-third day after they had come out of the garden.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.58.3">Then Adam and Eve went into the cave, and stood up and turned their faces to the earth, to pray to God.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.58.4">But ere they prayed Adam said unto Eve, "Lo, thou hast seen what temptations have befallen us in this land. Come, let us arise, and ask God to forgive us the sins we have committed; and we will not come out until the end of the day next to the fortieth. And if we die herein, He will save us."</verse>
@@ -1067,9 +1072,10 @@
         <verse canonical="true" osisID="1-adam-and-eve.66.10">Adam accomplished all that, until he grew very faint and weary. He then returned to the cave; rejoicing at what he had learned of what is done with wheat, until it is made into bread for one's use.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="1-adam-and-eve.67" TEIform="div">
-        <verse canonical="true" osisID="1-adam-and-eve.67.1">"
-          <hi type="italic" TEIform="hi">Then Satan began to lead astray Adam and Eve</hi>. . . ." BUT when Adam and Eve went down to the land of black mud, and came near to the wheat God had showed them, and saw it ripe and ready for reaping, as they had no sickle to reap it withal--they girt themselves, and began to pull up the wheat, until it was all done.
-        </verse>
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">"Then Satan began to lead astray Adam and Eve. . . ."</p>
+        </div>
+        <verse canonical="true" osisID="1-adam-and-eve.67.1">BUT when Adam and Eve went down to the land of black mud, and came near to the wheat God had showed them, and saw it ripe and ready for reaping, as they had no sickle to reap it withal--they girt themselves, and began to pull up the wheat, until it was all done.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.67.2">Then they made it into a heap; and, faint from heat and from thirst, they went under a shady tree, where the breeze fanned them to sleep.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.67.3">But Satan saw what Adam and Eve had done. And he called his hosts, and said to them, "Since God has shown to Adam and Eve all about this wheat, wherewith to strengthen their bodies--and, lo, they are come and have made a heap of it, and faint from the toil are now asleep--come, let us set fire to this heap of corn, and burn it, and let us take that bottle of water that is by them, and empty it out, so that they may find nothing to drink, and we kill them with hunger and thirst.</verse>
         <verse canonical="true" osisID="1-adam-and-eve.67.4">"Then, when they wake up from their sleep, and seek to return to the cave, we will come to them in the way, and will lead them astray; so that they die of hunger and thirst; when they may, perhaps, deny God, and He destroy them. So shall we be rid of them."</verse>
@@ -1517,9 +1523,10 @@
         <verse canonical="true" osisID="2-adam-and-eve.9.9">And they all stood up an prayed.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="2-adam-and-eve.10" TEIform="div">
-        <verse canonical="true" osisID="2-adam-and-eve.10.1">"
-          <hi type="italic" TEIform="hi">Adam was the first....</hi>" AND when they had ended their prayer, the Word of God came and comforted them concerning their father Adam.
-        </verse>
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">"Adam was the first...."</p>
+        </div>
+        <verse canonical="true" osisID="2-adam-and-eve.10.1">AND when they had ended their prayer, the Word of God came and comforted them concerning their father Adam.</verse>
         <verse canonical="true" osisID="2-adam-and-eve.10.2">After this, they offered their gifts for themselves and for their father.</verse>
         <verse canonical="true" osisID="2-adam-and-eve.10.3">And when they had ended their offering, the Word of God came to Seth, the eldest among them, saying unto him, "O Seth, Seth, Seth, three times. As I was with thy father, so also shall I be with thee, until the fulfilment of the promise I made him-thy father saying, I will send My Word and save thee and thy seed.</verse>
         <verse canonical="true" osisID="2-adam-and-eve.10.4">But as to thy father Adam, keep thou the commandment he gave thee; and sever thy seed from that of Cain thy brother."</verse>
@@ -1569,9 +1576,10 @@
         <verse canonical="true" osisID="2-adam-and-eve.12.16">But by the time Enos was eight hundred and twenty years old, Cain had a large progeny; for they married frequently, being given to animal lusts; until the land below the mountain, was filled with them.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="2-adam-and-eve.13" TEIform="div">
-        <verse canonical="true" osisID="2-adam-and-eve.13.1">"
-          <hi type="italic" TEIform="hi">Among the children of Cain there was much robbery, murder and sin</hi>." IN those days lived Lamech the blind, who was of the sons of Cain. He had a son whose name was Atun, and they two had much cattle.
-        </verse>
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">"Among the children of Cain there was much robbery, murder and sin."</p>
+        </div>
+        <verse canonical="true" osisID="2-adam-and-eve.13.1">IN those days lived Lamech the blind, who was of the sons of Cain. He had a son whose name was Atun, and they two had much cattle.</verse>
         <verse canonical="true" osisID="2-adam-and-eve.13.2">But Lamech was in the habit of sending them to feed with a young shepherd, who tended them; and who, when coming home in the evening wept before his grandfather, and before his father Atun and his mother Hazina, and said to them, "As for me, I cannot feed those cattle alone, lest one rob me of some of them, or kill me for the sake of them." For among the children of Cain, there was much robbery, murder, and sin.</verse>
         <verse canonical="true" osisID="2-adam-and-eve.13.3">Then Lamech pitied him, and he said, "Truly, he when alone, might be overpowered by the men of this place."</verse>
         <verse canonical="true" osisID="2-adam-and-eve.13.4">So Lamech arose, took a bow he had kept ever since he was a youth, ere he became blind, and he took large arrows, and smooth stones, and a sling which he had, and went to the field with the young shepherd, and placed himself behind the cattle; while the young shepherd watched the cattle. Thus did Lamech many days.</verse>
@@ -1590,15 +1598,7 @@
           <p TEIform="p">Time, like an ever-rolling stream, bears away another generation of men</p>
         </div>
         <verse canonical="true" osisID="2-adam-and-eve.14.1">WHEN Enos was nine hundred years old, all the children of Seth, and of Cainan, and his first-born, with their wives and children, gathered around him, asking for a blessing from him.</verse>
-        <verse canonical="true" osisID="2-adam-and-eve.14.2">
-          <lgCT TEIform="lg">
-            <l TEIform="l">Click to enlarge</l>
-            <l TEIform="l">FACSIMILE OF ACTUAL PAGE OF ORIGINAL GUTENBERG BIBLE.</l>
-            <l TEIform="l">The first successful printing was done in 1450 A.D. when Gutenberg printed the Old Testament in Latin. There are about 45 copies of the precious Gutenberg Bible in existence that have survived the chances of Europe and its wars for five hundred years.</l>
-            <l TEIform="l">Click to enlarge</l>
-            <l TEIform="l">THE FIRST SUNRISE</l>
-          </lgCT>
-        </verse>
+        <verse canonical="true" osisID="2-adam-and-eve.14.2">He then prayed over them and blessed them, and adjured them by the blood of Abel the just saying to them, "Let not one of your children go down from this Holy Mountain, and let them make no fellowship with the children of Cain the murderer."</verse>
         <verse canonical="true" osisID="2-adam-and-eve.14.3">Then Enos called his son Cainan and said to him, "See, O my son, and set thy heart on thy people, and establish them in righteousness, and in innocence; and stand ministering before the body of our father Adam, all the days of thy life."</verse>
         <verse canonical="true" osisID="2-adam-and-eve.14.4">After this Enos entered into rest, aged nine hundred and eighty-five years; and Cainan wound him up, and laid him in the Cave of Treasures on the left of his father Adam; and made offerings for him, after the custom of his fathers.</verse>
       </div>
