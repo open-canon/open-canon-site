@@ -1,15 +1,34 @@
 """Download and parse The Forgotten Books of Eden from sacred-texts.com to OSIS XML.
 
-Scrapes https://sacred-texts.com/bib/fbe/ and produces OSIS XML files for the
-following works:
-    - The First and Second Books of Adam and Eve (in one document with two books)
-  - The Book of the Secrets of Enoch (2 Enoch)
-  - The Psalms of Solomon
-  - The Odes of Solomon
-  - The Letter of Aristeas
-  - Fourth Book of Maccabees (4 Maccabees)
-  - The Story of Ahikar
-  - The Testaments of the Twelve Patriarchs (with 12 sub-books)
+Scrapes https://sacred-texts.com/bib/fbe/ (pages ``fbe000.htm`` to ``fbe295.htm``) and
+produces one OSIS XML file per work:
+
+- The First and Second Books of Adam and Eve (one document containing two books)
+- The Book of the Secrets of Enoch (2 Enoch)
+- The Psalms of Solomon
+- The Odes of Solomon
+- The Letter of Aristeas
+- Fourth Book of Maccabees (4 Maccabees)
+- The Story of Ahikar
+- The Testaments of the Twelve Patriarchs (one book with twelve sub-books)
+
+HTML shapes handled (sacred-texts.com, Platt 1926 edition):
+
+- Every page is one small file. Introduction pages hold ``<h1>``..``<h6>`` headings
+  followed by ``<p>`` paragraphs; chapter pages hold an ``<h3>`` heading such as
+  ``CHAP. IV.``, a bare Roman numeral (Psalms) or ``ODE 12.``, then ``<p>`` paragraphs.
+- A verse is a ``<p>`` starting with its number (``"1 text"`` or ``"1. text"``); an
+  un-numbered first paragraph is verse 1 and later un-numbered paragraphs continue the
+  current verse. Poetry uses ``<br>`` line breaks inside one ``<p>``.
+- The Odes of Solomon put a whole ode in a single ``<p>`` whose ``<br>``-separated
+  lines start with verse numbers. The Psalms of Solomon have no verse numbers at all and
+  become a single verse holding a line group.
+- A chapter summary is an italic ``<i>``/``<em>`` element (optionally wrapping a ``<p>``)
+  directly after the ``<h3>``; an italic subtitle before the ``<h3>`` names a testament.
+- Inline ``<i>``/``<em>``, ``<b>``/``<strong>``, ``<sup>`` and ``<sub>`` map to OSIS
+  ``hi`` elements; ``<font color="green">`` text carries ``p. 12`` page markers that become
+  page milestones; navigation links (``Next:``, ``Sacred Texts`` ...) and standalone
+  ``<a name="page_12">`` paragraphs are skipped.
 """
 
 from __future__ import annotations
@@ -26,6 +45,7 @@ import pyosis
 from bs4 import BeautifulSoup, NavigableString, Tag
 from tqdm import tqdm
 
+from open_canon_site.scrapers import _osis
 from open_canon_site.scrapers._http import CachedHttpFetcher
 from open_canon_site.scrapers._osis import (
     InlinePart,
@@ -34,16 +54,17 @@ from open_canon_site.scrapers._osis import (
     is_navigation_text,
     parse_page_marker_text,
 )
-from open_canon_site.scrapers._osis import (
-    roman_to_int as shared_roman_to_int,
-)
 from open_canon_site.scrapers.base import ScraperSpec
 
 LOGGER = logging.getLogger(__name__)
+"""Module logger; progress, warnings for missing pages and per-work errors go here."""
 
 BASE_URL: Final[str] = "https://sacred-texts.com/bib/fbe/"
+"""Base URL of the FBE section of sacred-texts.com (with trailing slash)."""
 FILE_PREFIX: Final[str] = "fbe"
+"""Filename prefix of every page; page ``n`` is ``fbe{n:03d}.htm``."""
 FILE_RANGE: Final[tuple[int, int]] = (0, 295)
+"""Inclusive range of page numbers that exist on the site (default for ``--start/--end-page``)."""
 
 
 # ---------------------------------------------------------------------------
@@ -53,17 +74,30 @@ FILE_RANGE: Final[tuple[int, int]] = (0, 295)
 
 @dataclass
 class WorkDef:
-    """Definition of a single work within the FBE collection."""
+    """Definition of a single work within the FBE collection.
+
+    A work is a contiguous run of pages: optional introduction pages followed by one page
+    per chapter.
+    """
 
     osis_id: str
+    """OSIS book identifier and work id (e.g. ``"2En"`` or ``"psalms-of-solomon"``)."""
     title: str
+    """Full canonical title written to the book's main ``<title>``."""
     short: str
+    """Short title written to the ``short`` attribute and used as ``osisRefWork``."""
     intro_pages: list[int]
-    chapter_pages: list[int]  # In order; chapter_pages[0] = chapter 1, etc.
+    """Page numbers of the introduction pages, in order (empty if the work has none)."""
+    chapter_pages: list[int]
+    """Page numbers of the chapter pages in order; index 0 is the fallback chapter 1."""
     output_stem: str | None = None
+    """Output filename stem (without ``.xml``); ``None`` means use ``osis_id``."""
     intro_title: str | None = None
+    """Main title text for the introduction div; also suppresses heading ``<head>`` output."""
     intro_subtitle: str | None = None
+    """Fixed subtitle written at the top of the introduction div, if any."""
     intro_headings_as_subtitles: bool = False
+    """Whether the intro page's headings are also emitted as sub ``<title>`` elements."""
 
 
 @dataclass
@@ -71,13 +105,17 @@ class TestamentDef:
     """Definition of one Testament within the Twelve Patriarchs."""
 
     osis_id: str
+    """OSIS sub-book id, dotted under the parent (e.g. ``"T12Patr.TReu"``)."""
     title: str
+    """Full title of the testament (e.g. ``"The Testament of Reuben"``)."""
     short: str
+    """Short title for the ``short`` attribute (e.g. ``"Test. Reuben"``)."""
     chapter_pages: list[int]
+    """Page numbers of the testament's chapters, in order."""
 
 
-# Global front matter pages (title page, contents, illustrations, preface, introduction)
-FRONT_MATTER_PAGES: Final[list[int]] = list(range(0, 5))  # fbe000–fbe004
+FRONT_MATTER_PAGES: Final[list[int]] = list(range(0, 5))
+"""Global front matter pages (title page, contents, illustrations, preface, introduction)."""
 
 WORKS: Final[list[WorkDef]] = [
     WorkDef(
@@ -153,7 +191,10 @@ WORKS: Final[list[WorkDef]] = [
     ),
 ]
 
+"""The works converted one-per-file (Adam and Eve is merged from two entries), in page order."""
+
 TESTAMENTS_INTRO_PAGES: Final[list[int]] = [266]
+"""Page numbers of the collection-level introduction to the Testaments of the Twelve Patriarchs."""
 
 TESTAMENTS: Final[list[TestamentDef]] = [
     TestamentDef("T12Patr.TReu", "The Testament of Reuben", "Test. Reuben", [267, 268]),
@@ -175,11 +216,18 @@ TESTAMENTS: Final[list[TestamentDef]] = [
     TestamentDef("T12Patr.TBenj", "The Testament of Benjamin", "Test. Benjamin", [294, 295]),
 ]
 
+"""The twelve testaments in canonical order, each a sub-book of ``T12Patr``."""
+
 ADAM_EVE_WORK_IDS: Final[tuple[str, str]] = ("1-adam-and-eve", "2-adam-and-eve")
+"""``WorkDef.osis_id`` values merged into the single Adam and Eve document."""
 ADAM_EVE_OSIS_ID: Final[str] = "adam-and-eve"
+"""OSIS work id of the combined Adam and Eve document."""
 ADAM_EVE_OUTPUT_STEM: Final[str] = "adam-and-eve"
+"""Filename stem (without ``.xml``) of the combined Adam and Eve document."""
 ADAM_EVE_TITLE: Final[str] = "The First and Second Books of Adam and Eve"
+"""Work title of the combined Adam and Eve document."""
 ADAM_EVE_REF_WORK: Final[str] = "Adam and Eve"
+"""``osisRefWork`` of the combined Adam and Eve document."""
 
 
 # ---------------------------------------------------------------------------
@@ -189,12 +237,16 @@ ADAM_EVE_REF_WORK: Final[str] = "Adam and Eve"
 
 @dataclass
 class VerseContent:
-    """Parsed content of a single verse."""
+    """Parsed content of a single verse, as plain text plus annotated OSIS parts."""
 
     text: str
+    """Plain text of the verse with all markup removed, stripped of outer whitespace."""
     content_parts: list[str | pyosis.HiCt | pyosis.MilestoneCt]
+    """Inline OSIS content: strings, ``hi`` highlights and page milestones, in order."""
     has_poetry: bool = False
+    """Whether the source paragraph contained ``<br>`` line breaks."""
     poetry_lines: list[list[str | pyosis.HiCt | pyosis.MilestoneCt]] | None = None
+    """One inline-parts list per verse line when poetry was detected, else ``None``."""
 
 
 # ---------------------------------------------------------------------------
@@ -203,15 +255,27 @@ class VerseContent:
 
 
 class FBEParser:
-    """Parse The Forgotten Books of Eden from sacred-texts.com pages."""
+    """Parse The Forgotten Books of Eden from sacred-texts.com pages into OSIS documents.
+
+    Parsing methods take page HTML strings and return ``pyosis`` objects; only
+    ``fetch_page`` and ``process_all`` touch the network or filesystem.
+    """
 
     def __init__(
         self,
         cache_dir: str | None = None,
         delay: float = 1.5,
     ) -> None:
+        """Create a parser backed by a caching HTTP fetcher.
+
+        Args:
+            cache_dir: Directory for the on-disk HTML cache; ``None`` disables caching.
+            delay: Seconds to sleep between uncached requests (politeness delay).
+        """
         self.http = CachedHttpFetcher(cache_dir=cache_dir, delay=delay, logger=LOGGER)
+        """Fetcher used for every page request."""
         self.cache_dir = Path(cache_dir) if cache_dir else None
+        """Cache directory as a ``Path``, or ``None`` when caching is disabled."""
         if self.cache_dir:
             LOGGER.info("Using cache directory: %s", self.cache_dir)
 
@@ -220,11 +284,20 @@ class FBEParser:
     # ------------------------------------------------------------------
 
     def fetch_page(self, page_num: int, retry_count: int = 3) -> str:
-        """Fetch a single FBE page."""
+        """Fetch a single FBE page.
+
+        Args:
+            page_num: Page number; the URL is ``BASE_URL + "fbe{page_num:03d}.htm"``.
+            retry_count: Maximum fetch attempts, passed to the HTTP fetcher.
+
+        Returns:
+            The page HTML as text.
+        """
         url = f"{BASE_URL}{FILE_PREFIX}{page_num:03d}.htm"
         return self.http.fetch_text(url=url, retry_count=retry_count)
 
     def close(self) -> None:
+        """Release the underlying HTTP client."""
         self.http.close()
 
     # ------------------------------------------------------------------
@@ -232,13 +305,18 @@ class FBEParser:
     # ------------------------------------------------------------------
 
     @staticmethod
-    def _is_nav_text(text: str) -> bool:
-        """Return True if the text is a navigation snippet to be skipped."""
-        return is_navigation_text(text)
-
-    @staticmethod
     def _is_standalone_page_marker(p_tag: Tag) -> bool:
-        """Return True if this <p> contains only a page-marker anchor."""
+        """Return True if this <p> contains only a page-marker anchor.
+
+        The shape is ``<p><a name="page_12"></a></p>`` (whitespace-only text siblings are
+        ignored).
+
+        Args:
+            p_tag: The paragraph element to inspect.
+
+        Returns:
+            Whether its only meaningful child is an ``<a>`` whose ``name`` starts ``page_``.
+        """
         children = [
             c for c in p_tag.children if not isinstance(c, NavigableString) or str(c).strip()
         ]
@@ -252,7 +330,14 @@ class FBEParser:
         self,
         content: list[InlinePart],
     ) -> list[InlinePart]:
-        """Merge consecutive strings to work around pyosis serialisation quirk."""
+        """Merge consecutive strings to work around pyosis serialisation quirk.
+
+        Args:
+            content: Inline parts in document order.
+
+        Returns:
+            A new list with adjacent strings concatenated.
+        """
         return consolidate_inline_strings(content)
 
     def parse_inline_annotations(
@@ -260,7 +345,22 @@ class FBEParser:
         element: Tag | NavigableString,
         is_green_font: bool = False,
     ) -> list[InlinePart]:
-        """Recursively parse inline HTML, converting formatting to OSIS equivalents."""
+        """Recursively parse inline HTML, converting formatting to OSIS equivalents.
+
+        ``<i>``/``<em>`` become italic ``hi``, ``<b>``/``<strong>`` bold, ``<sup>`` and
+        ``<sub>`` super/subscript; ``<br>`` is dropped; other tags (``a``, ``font``, ``span``)
+        are transparent. Text inside ``<font color="green">`` is scanned for ``p. N`` page
+        markers. Whitespace-only strings outside green text are discarded and empty
+        formatting elements are omitted.
+
+        Args:
+            element: A tag whose children are parsed, or a bare text node.
+            is_green_font: Whether ``element`` is inside a green ``<font>`` (page-marker
+                text); only consulted for text nodes.
+
+        Returns:
+            Inline parts with adjacent strings consolidated.
+        """
         if isinstance(element, NavigableString):
             text = str(element)
             if is_green_font:
@@ -312,29 +412,40 @@ class FBEParser:
         self,
         parts: list[InlinePart],
     ) -> str:
-        """Flatten annotation parts to plain text."""
+        """Flatten annotation parts to plain text.
+
+        Args:
+            parts: Inline parts in document order.
+
+        Returns:
+            The concatenated text of all parts.
+        """
         return extract_plain_text(parts)
 
     # ------------------------------------------------------------------
     # Chapter-number extraction
     # ------------------------------------------------------------------
 
-    @staticmethod
-    def roman_to_int(s: str) -> int:
-        """Convert a Roman numeral string to an integer."""
-        return shared_roman_to_int(s)
-
     def extract_chapter_number(self, heading_text: str) -> int | None:
         """Extract chapter number from an <h3> heading.
 
-        Handles formats: "CHAP. I.", "CHAP. II", "I", "XVII", "ODE 1.", "ODE 42."
+        Handles formats: "CHAP. I.", "CHAP. II", "I", "XVII", "ODE 1.", "ODE 42." and a
+        bare arabic number. Matching is case-insensitive for the Roman and ``CHAP.``/``ODE``
+        forms.
+
+        Args:
+            heading_text: Text of the heading, surrounding whitespace allowed.
+
+        Returns:
+            The chapter number, or ``None`` if the heading matches no known form (or is a
+            Roman numeral that evaluates to zero).
         """
         t = heading_text.strip()
 
         # "CHAP. <Roman>." or "CHAP. <Roman>"
         m = re.match(r"CHAP\.\s+([IVXLCDM]+)\.?$", t, re.IGNORECASE)
         if m:
-            return self.roman_to_int(m.group(1))
+            return _osis.roman_to_int(m.group(1))
 
         # "ODE <number>."
         m = re.match(r"ODE\s+(\d+)\.?$", t, re.IGNORECASE)
@@ -345,7 +456,7 @@ class FBEParser:
         m = re.match(r"^([IVXLCDM]+)\.?$", t, re.IGNORECASE)
         if m:
             try:
-                n = self.roman_to_int(m.group(1))
+                n = _osis.roman_to_int(m.group(1))
                 if n > 0:
                     return n
             except Exception:
@@ -363,7 +474,18 @@ class FBEParser:
     # ------------------------------------------------------------------
 
     def _parse_verse_content(self, p_tag: Tag) -> VerseContent:
-        """Parse a <p> tag into a VerseContent (plain + annotated + poetry)."""
+        """Parse a <p> tag into a VerseContent (plain + annotated + poetry).
+
+        If the paragraph contains ``<br>`` the raw HTML is split on it and each non-empty,
+        non-navigation chunk becomes a poetry line with its leading whitespace stripped.
+
+        Args:
+            p_tag: The verse paragraph.
+
+        Returns:
+            Parsed content; ``poetry_lines`` is ``None`` when there are no ``<br>`` lines
+            or every line is blank/navigation.
+        """
         parts = self.parse_inline_annotations(p_tag)
 
         # Plain text (for analysis)
@@ -380,7 +502,7 @@ class FBEParser:
                 chunk_soup = BeautifulSoup(chunk_html, "html.parser")
                 chunk_parts = self.parse_inline_annotations(chunk_soup)
                 chunk_text = self._extract_text(chunk_parts).strip()
-                if chunk_text and not self._is_nav_text(chunk_text):
+                if chunk_text and not is_navigation_text(chunk_text):
                     # Strip leading whitespace from first text element in the line
                     chunk_parts = self._strip_leading_whitespace(chunk_parts)
                     lines.append(chunk_parts)
@@ -397,7 +519,14 @@ class FBEParser:
     def _strip_leading_whitespace(
         content: list[str | pyosis.HiCt | pyosis.MilestoneCt],
     ) -> list[str | pyosis.HiCt | pyosis.MilestoneCt]:
-        """Return a copy of content with leading whitespace removed from the first text element."""
+        """Return a copy of content with leading whitespace removed from the first text element.
+
+        Args:
+            content: Inline parts; not modified.
+
+        Returns:
+            A new list (empty for empty input) whose first item, if a string, is left-stripped.
+        """
         if not content:
             return []
         result = list(content)
@@ -409,7 +538,15 @@ class FBEParser:
     def _strip_verse_number(
         content: list[str | pyosis.HiCt | pyosis.MilestoneCt],
     ) -> list[str | pyosis.HiCt | pyosis.MilestoneCt]:
-        """Return a copy of content with a leading verse number ('N ' or 'N. ') removed."""
+        """Return a copy of content with a leading verse number ('N ' or 'N. ') removed.
+
+        Args:
+            content: Inline parts; not modified.
+
+        Returns:
+            A new list (empty for empty input) whose first item, if a string, has a leading
+            ``N `` or ``N. `` removed.
+        """
         if not content:
             return []
         result = list(content)
@@ -424,7 +561,19 @@ class FBEParser:
         *,
         canonical: bool = True,
     ) -> pyosis.VerseCt:
-        """Wrap VerseContent in a VerseCt OSIS element."""
+        """Wrap VerseContent in a VerseCt OSIS element.
+
+        Poetry verses become a single line group of ``<l>`` lines; other verses use the
+        annotated parts, or the plain text if there are none.
+
+        Args:
+            osis_id: Full verse reference (e.g. ``"2En.1.3"``).
+            verse_content: Parsed verse content.
+            canonical: Value of the verse's ``canonical`` attribute.
+
+        Returns:
+            The ``<verse>`` element.
+        """
         if verse_content.has_poetry and verse_content.poetry_lines:
             lg = pyosis.LgCt(l=[pyosis.LCt(content=line) for line in verse_content.poetry_lines])
             content: list = [lg]
@@ -440,18 +589,35 @@ class FBEParser:
     # ------------------------------------------------------------------
 
     def _skip_paragraph(self, p_tag: Tag) -> bool:
-        """Return True if this <p> should be ignored entirely."""
+        """Return True if this <p> should be ignored entirely.
+
+        Args:
+            p_tag: Paragraph to test.
+
+        Returns:
+            Whether it is empty, navigation text, or a standalone page-marker anchor.
+        """
         text = p_tag.get_text().strip()
         if not text:
             return True
-        if self._is_nav_text(text):
+        if is_navigation_text(text):
             return True
         if self._is_standalone_page_marker(p_tag):
             return True
         return False
 
     def _extract_intro_headings(self, html: str) -> list[str]:
-        """Extract heading lines that appear before the first intro paragraph."""
+        """Extract heading lines that appear before the first intro paragraph.
+
+        Walks headings and paragraphs in document order and stops at the first paragraph
+        that is not skipped. Duplicate, empty and navigation headings are ignored.
+
+        Args:
+            html: Intro page HTML.
+
+        Returns:
+            Heading texts in order of appearance.
+        """
         soup = BeautifulSoup(html, "html.parser")
         body = soup.find("body")
         root = body if body else soup
@@ -466,7 +632,7 @@ class FBEParser:
                 break
 
             heading_text = element.get_text().strip()
-            if not heading_text or self._is_nav_text(heading_text) or heading_text in seen:
+            if not heading_text or is_navigation_text(heading_text) or heading_text in seen:
                 continue
 
             headings.append(heading_text)
@@ -475,7 +641,17 @@ class FBEParser:
         return headings
 
     def _extract_intro_subtitle(self, html: str) -> str | None:
-        """Extract an intro-page subtitle such as an “also called” line."""
+        """Extract an intro-page subtitle such as an “also called” line.
+
+        The subtitle is the heading following an ``ALSO CALLED`` heading, with trailing
+        periods removed.
+
+        Args:
+            html: Intro page HTML.
+
+        Returns:
+            The subtitle, or ``None`` if there is no such heading pair.
+        """
         headings = self._extract_intro_headings(html)
         for idx, heading in enumerate(headings):
             if heading.strip().upper() == "ALSO CALLED" and idx + 1 < len(headings):
@@ -491,7 +667,22 @@ class FBEParser:
         headings_as_subtitles: bool = False,
         include_headings: bool = True,
     ) -> list[pyosis.TitleCt | pyosis.PCt | pyosis.HeadCt | pyosis.MilestoneCt]:
-        """Parse an intro / front-matter page into OSIS paragraph elements."""
+        """Parse an intro / front-matter page into OSIS paragraph elements.
+
+        Output order: main title, subtitle, heading subtitles, ``<head>`` elements, then one
+        ``<p>`` per body paragraph (a paragraph holding only a page marker becomes a bare
+        milestone).
+
+        Args:
+            html: Intro page HTML.
+            title_override: If given, emitted first as a non-canonical main title.
+            subtitle_override: If given, emitted as a non-canonical sub title.
+            headings_as_subtitles: Emit each page heading as a sub title.
+            include_headings: Emit each page heading as a ``<head>``.
+
+        Returns:
+            The ordered OSIS elements.
+        """
         soup = BeautifulSoup(html, "html.parser")
         elements: list[pyosis.TitleCt | pyosis.PCt | pyosis.HeadCt | pyosis.MilestoneCt] = []
         intro_headings = self._extract_intro_headings(html)
@@ -548,7 +739,21 @@ class FBEParser:
         book_osis_id: str,
         chapter_num: int,
     ) -> pyosis.DivCt:
-        """Parse a chapter page and return a chapter DivCt."""
+        """Parse a chapter page and return a chapter DivCt.
+
+        An italic element right after the ``<h3>`` becomes a non-canonical summary div, and
+        italic paragraphs before the ``<h3>`` are skipped. A paragraph starting ``N `` or
+        ``N. `` begins verse N; the first un-numbered paragraph is verse 1; later
+        un-numbered paragraphs are appended to the current verse after a space.
+
+        Args:
+            html: Chapter page HTML.
+            book_osis_id: OSIS id of the containing book.
+            chapter_num: Chapter number used in the ids.
+
+        Returns:
+            The ``<div type="chapter">`` with osisID ``{book_osis_id}.{chapter_num}``.
+        """
         soup = BeautifulSoup(html, "html.parser")
         chapter_osis_id = f"{book_osis_id}.{chapter_num}"
 
@@ -616,6 +821,7 @@ class FBEParser:
         verse_divs: list[pyosis.VerseCt] = []
 
         def flush_verse() -> None:
+            """Emit the verse being accumulated (if any) into ``verse_divs`` and reset it."""
             nonlocal \
                 current_verse_num, \
                 current_verse_parts, \
@@ -710,7 +916,16 @@ class FBEParser:
 
         In this edition the entire Ode is in one <p> with <br>-separated
         numbered verses (e.g. "1 text<br>2 text<br>…").  We split by <br>,
-        detect the verse number, and emit individual VerseCts.
+        detect the verse number, and emit individual VerseCts. Lines without a number
+        continue the current verse as poetry lines.
+
+        Args:
+            html: Ode page HTML.
+            book_osis_id: OSIS id of the containing book.
+            chapter_num: Ode number used in the ids.
+
+        Returns:
+            The chapter div; falls back to ``_parse_chapter_page`` when no verses are found.
         """
         soup = BeautifulSoup(html, "html.parser")
         chapter_osis_id = f"{book_osis_id}.{chapter_num}"
@@ -753,6 +968,7 @@ class FBEParser:
             current_lines: list[list] = []
 
             def flush() -> None:
+                """Emit the accumulated verse lines as one verse and reset the state."""
                 nonlocal current_verse_num, current_lines
                 if current_verse_num is None or not current_lines:
                     return
@@ -773,7 +989,7 @@ class FBEParser:
                 csoup = BeautifulSoup(chunk_html, "html.parser")
                 chunk_parts = self.parse_inline_annotations(csoup)
                 chunk_text = self._extract_text(chunk_parts).strip()
-                if not chunk_text or self._is_nav_text(chunk_text):
+                if not chunk_text or is_navigation_text(chunk_text):
                     continue
 
                 chunk_parts = self._strip_leading_whitespace(chunk_parts)
@@ -815,7 +1031,17 @@ class FBEParser:
 
         Psalms in this edition have no verse numbers; the entire psalm text is
         one block of poetry with <br>-separated lines.  Produces a single
-        verse containing a linegroup.
+        verse containing a linegroup. An italic (or quoted centered) motto after the
+        ``<h3>`` becomes a summary div.
+
+        Args:
+            html: Psalm page HTML.
+            book_osis_id: OSIS id of the containing book.
+            chapter_num: Psalm number used in the ids.
+
+        Returns:
+            The chapter div; falls back to ``_parse_chapter_page`` if a numbered
+            non-poetry paragraph is found.
         """
         soup = BeautifulSoup(html, "html.parser")
         chapter_osis_id = f"{book_osis_id}.{chapter_num}"
@@ -873,7 +1099,7 @@ class FBEParser:
                     csoup = BeautifulSoup(chunk_html, "html.parser")
                     chunk_parts = self.parse_inline_annotations(csoup)
                     chunk_text = self._extract_text(chunk_parts).strip()
-                    if chunk_text and not self._is_nav_text(chunk_text):
+                    if chunk_text and not is_navigation_text(chunk_text):
                         chunk_parts = self._strip_leading_whitespace(chunk_parts)
                         all_lines.append(chunk_parts)
             else:
@@ -916,7 +1142,18 @@ class FBEParser:
         headings_as_subtitles: bool = False,
         include_headings: bool = True,
     ) -> pyosis.DivCt:
-        """Build a non-canonical introduction div from an intro page."""
+        """Build a non-canonical introduction div from an intro page.
+
+        Args:
+            html: Intro page HTML.
+            title_override: Forwarded to ``_parse_intro_page``.
+            subtitle_override: Forwarded to ``_parse_intro_page``.
+            headings_as_subtitles: Forwarded to ``_parse_intro_page``.
+            include_headings: Forwarded to ``_parse_intro_page``.
+
+        Returns:
+            The ``<div type="introduction">``.
+        """
         elements = self._parse_intro_page(
             html,
             title_override=title_override,
@@ -935,7 +1172,19 @@ class FBEParser:
         work: WorkDef,
         page_html: dict[int, str],
     ) -> pyosis.DivCt:
-        """Build the complete OSIS book div for a single work."""
+        """Build the complete OSIS book div for a single work.
+
+        Contains the main title, an optional "also called" subtitle, introduction divs and
+        one chapter div per chapter page (Psalms and Odes use their special parsers).
+
+        Args:
+            work: The work definition.
+            page_html: Page HTML keyed by page number; must contain every page of ``work``
+                (a missing page propagates as ``KeyError``).
+
+        Returns:
+            The ``<div type="book">`` for the work.
+        """
         book_content: list = [
             pyosis.TitleCt(
                 type_value=pyosis.OsisTitles.MAIN,
@@ -994,7 +1243,15 @@ class FBEParser:
         )
 
     def _detect_chapter_number(self, html: str, fallback: int) -> int:
-        """Extract the chapter number from a page's <h3> heading."""
+        """Extract the chapter number from a page's <h3> heading.
+
+        Args:
+            html: Chapter page HTML.
+            fallback: Number to use when there is no ``<h3>`` or it cannot be parsed.
+
+        Returns:
+            The parsed chapter number or ``fallback``.
+        """
         soup = BeautifulSoup(html, "html.parser")
         h3 = soup.find("h3")
         if h3:
@@ -1009,6 +1266,13 @@ class FBEParser:
         This handles testament pages where a subtitle like "The First-Born Son of
         Jacob and Leah" appears in an <i><p> block after the <h1> testament name
         and before the <h3> chapter heading.
+
+        Args:
+            html: Chapter page HTML.
+
+        Returns:
+            The text of the nearest preceding italic element with trailing periods
+            removed, or ``None`` if there is no ``<h3>`` or no non-empty italic text.
         """
         soup = BeautifulSoup(html, "html.parser")
         h3 = soup.find("h3")
@@ -1026,7 +1290,15 @@ class FBEParser:
         self,
         page_html: dict[int, str],
     ) -> pyosis.DivCt:
-        """Build the combined Testaments of the Twelve Patriarchs book div."""
+        """Build the combined Testaments of the Twelve Patriarchs book div.
+
+        Args:
+            page_html: Page HTML keyed by page number; must contain the intro and every
+                testament chapter page (a missing page propagates as ``KeyError``).
+
+        Returns:
+            A ``T12Patr`` book div with the collection introduction and twelve sub-books.
+        """
         parent_content: list = [
             pyosis.TitleCt(
                 type_value=pyosis.OsisTitles.MAIN,
@@ -1101,6 +1373,16 @@ class FBEParser:
         title: str,
         description: str,
     ) -> pyosis.HeaderCt:
+        """Build the OSIS header with revision and work metadata.
+
+        Args:
+            osis_work_id: OSIS work id.
+            title: Work title.
+            description: Work description text.
+
+        Returns:
+            The header, stamped with the current local time as the eversion date.
+        """
         current_datetime = datetime.now().strftime("%Y.%m.%dT%H:%M:%S")
 
         return pyosis.HeaderCt(
@@ -1165,7 +1447,15 @@ class FBEParser:
         work: WorkDef,
         page_html: dict[int, str],
     ) -> pyosis.OsisXML:
-        """Generate a complete OSIS document for a single work."""
+        """Generate a complete OSIS document for a single work.
+
+        Args:
+            work: The work definition.
+            page_html: Page HTML keyed by page number.
+
+        Returns:
+            The OSIS document.
+        """
         header = self._build_header(
             osis_work_id=work.osis_id,
             title=work.title,
@@ -1189,7 +1479,14 @@ class FBEParser:
         self,
         page_html: dict[int, str],
     ) -> pyosis.OsisXML:
-        """Generate a combined OSIS document for 1 and 2 Adam and Eve."""
+        """Generate a combined OSIS document for 1 and 2 Adam and Eve.
+
+        Args:
+            page_html: Page HTML keyed by page number, covering both books.
+
+        Returns:
+            One OSIS document with two book divs.
+        """
         adam_eve_works = [work for work in WORKS if work.osis_id in ADAM_EVE_WORK_IDS]
         header = self._build_header(
             osis_work_id=ADAM_EVE_OSIS_ID,
@@ -1213,7 +1510,14 @@ class FBEParser:
         self,
         page_html: dict[int, str],
     ) -> pyosis.OsisXML:
-        """Generate a complete OSIS document for the Testaments of the Twelve Patriarchs."""
+        """Generate a complete OSIS document for the Testaments of the Twelve Patriarchs.
+
+        Args:
+            page_html: Page HTML keyed by page number.
+
+        Returns:
+            The OSIS document.
+        """
         osis_id = "T12Patr"
         header = self._build_header(
             osis_work_id=osis_id,
@@ -1240,7 +1544,17 @@ class FBEParser:
         start_page: int = FILE_RANGE[0],
         end_page: int = FILE_RANGE[1],
     ) -> None:
-        """Fetch all needed pages and write one XML file per work."""
+        """Fetch all needed pages and write one XML file per work.
+
+        Pages outside ``[start_page, end_page]`` are not fetched; fetch failures are logged
+        and the dependent works are skipped with a warning. A failure while building one
+        work is logged and does not stop the others.
+
+        Args:
+            output_dir: Directory for the XML files (created if missing).
+            start_page: First page number to fetch.
+            end_page: Last page number to fetch (inclusive).
+        """
         out_path = Path(output_dir)
         out_path.mkdir(parents=True, exist_ok=True)
 
@@ -1338,9 +1652,15 @@ OUTPUT_FILENAMES: Final[tuple[str, ...]] = (
     "story-of-ahikar.xml",
     "testaments-twelve-patriarchs.xml",
 )
+"""Names of the XML files the scraper writes, in the order ``run`` reports them."""
 
 
 def add_arguments(parser: argparse.ArgumentParser) -> None:
+    """Register the ``--start-page`` and ``--end-page`` options.
+
+    Args:
+        parser: Subcommand parser to extend.
+    """
     parser.add_argument(
         "--start-page",
         type=int,
@@ -1356,6 +1676,15 @@ def add_arguments(parser: argparse.ArgumentParser) -> None:
 
 
 def run(args: argparse.Namespace) -> list[Path]:
+    """Run the FBE scraper.
+
+    Args:
+        args: Parsed options: ``output_dir``, ``cache_dir``, ``delay``, ``start_page`` and
+            ``end_page``.
+
+    Returns:
+        Paths of the expected output files that exist in ``output_dir`` afterwards.
+    """
     output_dir = Path(args.output_dir)
     parser = FBEParser(cache_dir=args.cache_dir, delay=args.delay)
 
@@ -1382,3 +1711,4 @@ SPEC = ScraperSpec(
     run=run,
     add_arguments=add_arguments,
 )
+"""Registry entry for the ``forgotten-books-of-eden`` scraper."""
