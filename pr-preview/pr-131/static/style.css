@@ -251,6 +251,31 @@ details.nav-section[open] > summary::after {
   user-select: none;
 }
 
+.verse-heading h3 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  margin: 1.5rem 0 .5rem;
+}
+
+.osis-figure {
+  margin: 1rem 0;
+}
+
+.osis-figure img {
+  max-width: 100%;
+  height: auto;
+}
+
+.osis-figure figcaption {
+  font-size: .9rem;
+  color: var(--color-muted);
+}
+
+.verse-text .osis-figure {
+  display: block;
+}
+
 .verse-text {
   font-family: var(--font-serif);
   font-size: 1.05rem;
