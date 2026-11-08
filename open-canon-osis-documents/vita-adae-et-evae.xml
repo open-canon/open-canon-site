@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="vita-adae-et-evae" osisRefWork="Vita Adae et Evae" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.06T10:47:53</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.07T22:47:01</date>
         <p TEIform="p">Scraped from https://www.sacred-texts.com/chr/apo/adamnev.htm and converted to OSIS by Andrew P. Sansom.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -13,7 +13,7 @@
       <work osisWork="vita-adae-et-evae" xml:lang="en">
         <title canonical="true" TEIform="title">Vita Adae et Evae</title>
         <creator role="trl">Robert Henry (R.H.) Charles</creator>
-        <description>Vita Adae et Evae from "The Apocrypha and Pseudepigrapha of the Old Testament in English : with introductions and critical and explanatory notes to the several books" by Robert Henry Charles, 1913. Transcribed at sacred-texts.com and converted to OSIS in this repository.</description>
+        <description>Vita Adae et Evae from "The Apocrypha and Pseudepigrapha of the Old Testament in English : with introductions and critical and explanatory notes to the several books" by Robert Henry Charles, 1913. Transcribed at sacred-texts.com and converted to OSIS by the open-canon-site scrapers.</description>
         <publisher>The Clarendon Press</publisher>
         <type type="OSIS"/>
       </work>
@@ -258,7 +258,8 @@
         <verse canonical="true" osisID="vita-adae-et-evae.48.2">Michael, saying: 'Let him be in thy charge till the day of Judgement in punishment, till the last years when I will convert his sorrow into joy.</verse>
         <verse canonical="true" osisID="vita-adae-et-evae.48.3">Then shall he sit on the throne of him who hath been his supplanter.'</verse>
         <verse canonical="true" osisID="vita-adae-et-evae.48.4">And the Lord said again to the angels Michael and Uriel: 'Bring me three linen clothes of byssus and spread them out over Adam and other linen clothes over Abel his son and bury Adam and Abel his son.'</verse>
-        <verse canonical="true" osisID="vita-adae-et-evae.48.5">And all the 'powers' of angels marched before Adam, and the sleep of the dead was 6 consecrated. And the angels Michael and Uriel buried Adam and Abel in the parts of Paradise, before the eyes of Seth and his mother</verse>
+        <verse canonical="true" osisID="vita-adae-et-evae.48.5">And all the 'powers' of angels marched before Adam, and the sleep of the dead was</verse>
+        <verse canonical="true" osisID="vita-adae-et-evae.48.6">consecrated. And the angels Michael and Uriel buried Adam and Abel in the parts of Paradise, before the eyes of Seth and his mother</verse>
         <verse canonical="true" osisID="vita-adae-et-evae.48.7">[and no one else], and Michael and Uriel said: 'Just as ye have seen, in like manner, bury your dead.'</verse>
       </div>
       <div canonical="true" type="chapter" osisID="vita-adae-et-evae.49" TEIform="div">
