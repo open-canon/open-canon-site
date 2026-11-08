@@ -426,7 +426,7 @@ def _lecture_from_raw(item: Any) -> Lecture:
 
     Args:
         item: A dict with ``number``, ``subtitle``, ``paragraphs`` (dicts of ``number``/``text``), ``qa`` (dicts of
-            ``question``/``answer``) and optionally ``note``.
+            ``question``/``answer``; required, and empty for a lecture without a catechism) and optionally ``note``.
 
     Returns:
         The lecture.
@@ -446,7 +446,7 @@ def _lecture_from_raw(item: Any) -> Lecture:
                 QuestionAnswer(
                     question=_require_str(q["question"]), answer=_require_str(q["answer"])
                 )
-                for q in item.get("qa", [])
+                for q in item["qa"]
             ),
             note=_require_str(item.get("note", "")),
         )

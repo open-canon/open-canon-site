@@ -134,6 +134,27 @@ def test_extract_editions_rejects_missing_lecture():
         lof.extract_editions(make_bundle(rse=array_rse(range(1, 7))))
 
 
+@pytest.mark.parametrize("edition", ["1835", "rse"])
+def test_extract_editions_rejects_missing_qa_field(edition):
+    """A lecture entry without a ``qa`` field is a changed schema, not a lecture without a catechism."""
+    if edition == "1835":
+        bundle = make_bundle(
+            old=array_1835().replace(',qa:[_("Question 1?"', ',qz:[_("Question 1?"', 1)
+        )
+    else:
+        bundle = make_bundle(
+            rse=array_rse().replace(',qa:[C("Question 1?"', ',qz:[C("Question 1?"', 1)
+        )
+    with pytest.raises(ValueError, match="Unexpected lecture entry"):
+        lof.extract_editions(bundle)
+
+
+def test_extract_editions_accepts_empty_qa():
+    """An explicit empty ``qa`` array (lectures 6 and 7) is accepted."""
+    (_, lectures), _ = lof.extract_editions(make_bundle())
+    assert lectures[7].qa == ()
+
+
 def test_extract_editions_rejects_paragraph_gap():
     """Paragraph numbers must run 1, 2, 3, ... with no gap."""
     old = array_1835().replace('T(2,"It closes', 'T(3,"It closes', 1)
