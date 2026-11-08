@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="odes-of-solomon" osisRefWork="Odes of Solomon" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T16:46:06</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T00:50:38</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -45,7 +45,7 @@
         <div canonical="false" type="summary" TEIform="div">
           <p TEIform="p">The first words of this Ode have disappeared</p>
         </div>
-        <verse canonical="true" osisID="odes-of-solomon.3.1">.    .    .   I put on:</verse>
+        <verse canonical="true" osisID="odes-of-solomon.3.1">. . . I put on:</verse>
         <verse canonical="true" osisID="odes-of-solomon.3.2">And his members are with him. And on them do I stand, and He loves me:</verse>
         <verse canonical="true" osisID="odes-of-solomon.3.3">For I should not have known how to love the Lord, if He had not loved me.</verse>
         <verse canonical="true" osisID="odes-of-solomon.3.4">For who is able to distinguish love, except the one that is loved?</verse>
@@ -628,9 +628,9 @@
         <verse canonical="true" osisID="odes-of-solomon.34.6">Grace has been revealed for your salvation. Believe and live and be saved. Hallelujah.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="odes-of-solomon.35" TEIform="div">
-        <verse canonical="true" osisID="odes-of-solomon.35.1">"
-          <hi type="italic" TEIform="hi">No cradled child more softly lies than I: come soon, eternity</hi>."
-        </verse>
+        <div canonical="false" type="summary" TEIform="div">
+          <p TEIform="p">"No cradled child more softly lies than I: come soon, eternity."</p>
+        </div>
         <verse canonical="true" osisID="odes-of-solomon.35.1">The dew of the Lord in quietness He distilled upon me:</verse>
         <verse canonical="true" osisID="odes-of-solomon.35.2">And the cloud of peace He caused to rise over my head, which guarded me continually;</verse>
         <verse canonical="true" osisID="odes-of-solomon.35.3">It was to me for salvation: everything was shaken and they were affrighted;</verse>

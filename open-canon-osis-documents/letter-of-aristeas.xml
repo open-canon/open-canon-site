@@ -3,7 +3,7 @@
   <osisText xmlns:xml="http://www.w3.org/XML/1998/namespace" canonical="true" osisIDWork="letter-of-aristeas" osisRefWork="Letter of Aristeas" xml:lang="en" xml:space="default" TEIform="text">
     <header TEIform="teiHeader" canonical="false">
       <revisionDesc TEIform="revisionDesc">
-        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.04.05T16:46:06</date>
+        <date event="eversion" type="ISO" xml:lang="en" TEIform="date">2026.11.08T00:50:41</date>
         <p TEIform="p">Scraped from https://sacred-texts.com/bib/fbe/, and converted to OSIS by open-canon contributors.</p>
       </revisionDesc>
       <revisionDesc TEIform="revisionDesc">
@@ -130,17 +130,13 @@
           <hi type="italic" TEIform="hi">of the captives</hi>.
         </verse>
         <verse canonical="true" osisID="letter-of-aristeas.1.48">For we consider that it will be advantageous to us and to our affairs that the matter should be brought to a conclusion.</verse>
-        <verse canonical="true" osisID="letter-of-aristeas.1.49">
-          <lgCT TEIform="lg">
-            <l TEIform="l">Click to enlarge</l>
-            <l TEIform="l">AHIKAR ANSWERS PHARAOH'S RIDDLE</l>
-            <l TEIform="l">Click to enlarge</l>
-            <l TEIform="l">JUDAH REVEALS THE STORY OF HIS LIFE</l>
-          </lgCT>
+        <verse canonical="true" osisID="letter-of-aristeas.1.49">Any one who likes may give information about any who disobey the decree, on condition (
+          <hi type="italic" TEIform="hi">See page 214</hi>) (
+          <hi type="italic" TEIform="hi">See page 233 et seq</hi>.) that if the man is proved guilty he will become his slave; his property, however, will be handed over to the royal treasury.'
         </verse>
         <verse canonical="true" osisID="letter-of-aristeas.1.50">When the decree was brought to be read over to the king for his approval, it contained all the other provisions except the phrase 'any captives who were in the land before that time or were brought hither afterwards,' and in his magnanimity and the largeness of his heart the king inserted this clause and gave orders that the grant of money required for the redemption should be deposited in full with the paymasters of the forces and the royal bankers, and so the matter was decided and the decree ratified within seven days.</verse>
         <verse canonical="true" osisID="letter-of-aristeas.1.51">The grant for the redemption amounted to more than six hundred and sixty talents; for many infants at the breast were emancipated together with their mothers.</verse>
-        <verse canonical="true" osisID="letter-of-aristeas.1.52">When the question was raised whether the sum of twenty talents was to be paid for these, the king ordered that it should be done, and thus he carried out his decision in the most comprehensive way. 143:1 A important comparison of God and Zeus.</verse>
+        <verse canonical="true" osisID="letter-of-aristeas.1.52">When the question was raised whether the sum of twenty talents was to be paid for these, the king ordered that it should be done, and thus he carried out his decision in the most comprehensive way. 143:1  A important comparison of God and Zeus.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="letter-of-aristeas.2" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -300,7 +296,7 @@
         <verse canonical="true" osisID="letter-of-aristeas.3.62">For oftentimes he would neglect his official business, and spend his time with the artists in his anxiety that they should complete everything in a manner worthy of the place to which the gifts were to be sent.</verse>
         <verse canonical="true" osisID="letter-of-aristeas.3.63">So everything was carried out on a grand scale, in a manner worthy of the king who sent the gifts and of the high priest who was the ruler of the land.</verse>
         <verse canonical="true" osisID="letter-of-aristeas.3.64">There was no stint of precious stones, for not less than five thousand were used and they were all of large size.</verse>
-        <verse canonical="true" osisID="letter-of-aristeas.3.65">The most exceptional artistic skill was employed, so that the cost of the stones and the workmanship was five times as much as that of the gold. 148:1 A cubit is 18 inches.</verse>
+        <verse canonical="true" osisID="letter-of-aristeas.3.65">The most exceptional artistic skill was employed, so that the cost of the stones and the workmanship was five times as much as that of the gold. 148:1  A cubit is 18 inches.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="letter-of-aristeas.4" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -438,7 +434,7 @@
         <verse canonical="true" osisID="letter-of-aristeas.5.49">For, 
           <hi type="italic" TEIform="hi">he explained</hi>, the good life consists in the keeping of the enactments of the law, and this end is achieved much more by hearing than by reading.
         </verse>
-        <verse canonical="true" osisID="letter-of-aristeas.5.50">From this and other similar statements it was clear what his feelings towards them were. 154:1 A furlong is 1/8 mile (i. e. 220 yards). 154:2 This account of the measures adopted at Alexandria to prevent the depopulation of the countryside through migrations into the city is an interesting revelation that the question was as acute 2000 years ago as it is today.</verse>
+        <verse canonical="true" osisID="letter-of-aristeas.5.50">From this and other similar statements it was clear what his feelings towards them were. 154:1  A furlong is 1/8 mile (i. e. 220 yards). 154:2  This account of the measures adopted at Alexandria to prevent the depopulation of the countryside through migrations into the city is an interesting revelation that the question was as acute 2000 years ago as it is today.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="letter-of-aristeas.6" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -531,7 +527,7 @@
         <verse canonical="true" osisID="letter-of-aristeas.6.64">And so concerning meats and things unclean, creeping things, and wild beasts, the whole system aims at righteousness and righteous relationships between man and man.'</verse>
         <verse canonical="true" osisID="letter-of-aristeas.6.65">He seemed to me to have made a good defence on all the points; for in reference also to the calves and rams and goats which are offered, he said that it was necessary to take them from the herds and flocks, and sacrifice tame animals and offer nothing wild, that the offerers of the sacrifices might understand the symbolic meaning of the lawgiver and not be under the influence of an arrogant self-consciousness.</verse>
         <verse canonical="true" osisID="letter-of-aristeas.6.66">For he, who offers a sacrifice, makes an offering also of his own soul in all its moods.</verse>
-        <verse canonical="true" osisID="letter-of-aristeas.6.67">I think that these particulars with regard to our discussion are worth narrating, and on account of the sanctity and natural meaning of the law, I have been induced to explain them to you clearly, Philocrates, because of your own devotion to learning. 158:1 Compare this quaint idea with 1 Corinthians, IX, 9.</verse>
+        <verse canonical="true" osisID="letter-of-aristeas.6.67">I think that these particulars with regard to our discussion are worth narrating, and on account of the sanctity and natural meaning of the law, I have been induced to explain them to you clearly, Philocrates, because of your own devotion to learning. 158:1  Compare this quaint idea with 1 Corinthians, IX, 9.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="letter-of-aristeas.7" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -612,7 +608,7 @@
         <verse canonical="true" osisID="letter-of-aristeas.7.52">And he answered, 'If a right plan is carried out in the hour of danger in accordance with the original intention. For all things are accomplished by God to your advantage, O king, since your purpose is good.'</verse>
         <verse canonical="true" osisID="letter-of-aristeas.7.53">When all had signified by their applause their agreement with the answer, the king said to the philosophers (for not a few of them were present), 'It is my opinion that these men excel in virtue and possess extraordinary knowledge, since on the spur of the moment they have given fitting answers to these questions which I have put to them, and have all made God the starting-point of their words.'</verse>
         <verse canonical="true" osisID="letter-of-aristeas.7.54">And Menedemus, the philosopher of Eretria, said, 'True, O King--for since the universe is managed by providence and since we rightly perceive that man is the creation of God, it follows that all power and beauty of speech proceed from God.'</verse>
-        <verse canonical="true" osisID="letter-of-aristeas.7.55">When the king had nodded his assent to this sentiment, the speaking ceased and they proceeded to enjoy themselves. When evening came on, the banquet ended. 162:1 Compare this attitude toward criminals with that of the so-called modern humanitarian view. Also Bee Chapter VIII. 11.</verse>
+        <verse canonical="true" osisID="letter-of-aristeas.7.55">When the king had nodded his assent to this sentiment, the speaking ceased and they proceeded to enjoy themselves. When evening came on, the banquet ended. 162:1  Compare this attitude toward criminals with that of the so-called modern humanitarian view. Also Bee Chapter VIII. 11.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="letter-of-aristeas.8" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -674,7 +670,7 @@
         <verse canonical="true" osisID="letter-of-aristeas.8.45">The king bestowed great praise upon him and asked the tenth, What is the highest form of glory?</verse>
         <verse canonical="true" osisID="letter-of-aristeas.8.46">And he said, 'To honour God, and this is done not with gifts and sacrifices but with purity of soul and holy conviction, since all things are fashioned and governed by God in accordance with His will. Of this purpose you are in constant possession as all men can she from your achievements in the past and in the present.'</verse>
         <verse canonical="true" osisID="letter-of-aristeas.8.47">With loud voice the king greeted them all and spoke kindly to them, and all those who were present expressed their approval, especially the philosophers. For they were far superior to them [i. e. the philosophers] both in conduct and in argument, since they always made God their starting-point.</verse>
-        <verse canonical="true" osisID="letter-of-aristeas.8.48">After this the king to show his good feeling proceeded to drink the health of his guests. 165:1 Written about 150 B. C.!</verse>
+        <verse canonical="true" osisID="letter-of-aristeas.8.48">After this the king to show his good feeling proceeded to drink the health of his guests. 165:1  Written about 150 B. C.!</verse>
       </div>
       <div canonical="true" type="chapter" osisID="letter-of-aristeas.9" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
@@ -752,11 +748,11 @@
         <verse canonical="true" osisID="letter-of-aristeas.9.65">And he replied, 'Virtue, for it is the creator of good deeds, and by it evil is destroyed, even as you exhibit nobility of character towards all by the gift which God bestows upon you.'</verse>
         <verse canonical="true" osisID="letter-of-aristeas.9.66">The king graciously acknowledged the answer and asked the eleventh (since there were two more than seventy), how he could in time of war maintain tranquillity of soul?</verse>
         <verse canonical="true" osisID="letter-of-aristeas.9.67">And he replied, 'By remembering that he had done no evil to any of his subjects, and that all would fight for him in return for the benefits which they had received, knowing that even if they lose their lives, you will care for those dependent on them. For you never fail to make reparation to any--such is the kind-heartedness with which God has inspired you.'</verse>
-        <verse canonical="true" osisID="letter-of-aristeas.9.68">The king loudly applauded them all and spoke very kindly to them and then drank a long draught to the health of each, giving himself up to enjoyment, and lavishing the most generous and joyous friendship upon his guests. 169:1 There were foreign residents in those days too. 170:1 The policy of a fair wage for a fair day's work is here seen to be not so modern as we sometimes think in what we are pleased to call this enlightened age.</verse>
+        <verse canonical="true" osisID="letter-of-aristeas.9.68">The king loudly applauded them all and spoke very kindly to them and then drank a long draught to the health of each, giving himself up to enjoyment, and lavishing the most generous and joyous friendship upon his guests. 169:1  There were foreign residents in those days too. 170:1  The policy of a fair wage for a fair day's work is here seen to be not so modern as we sometimes think in what we are pleased to call this enlightened age.</verse>
       </div>
       <div canonical="true" type="chapter" osisID="letter-of-aristeas.10" TEIform="div">
         <div canonical="false" type="summary" TEIform="div">
-          <p TEIform="p">The questions and answers continue. Showing how the army officers ought to be selected. What man is worthy of admiration and other problems of daily life as true today as 2000 years </p>
+          <p TEIform="p">The questions and answers continue. Showing how the army officers ought to be selected. What man is worthy of admiration and other problems of daily life as true today as 2000 years </p>
         </div>
         <verse canonical="true" osisID="letter-of-aristeas.10.1">ago. Verses 15-17 are notable for recommending the theatre. Verses 2i-22 describe the wisdom of electing a president or having a king ON the seventh day much more extensive preparations were made, and many others were present from the different cities (among them a large number of ambassadors).</verse>
         <verse canonical="true" osisID="letter-of-aristeas.10.2">When an opportunity occurred, the king asked the first of those who had not yet been questioned, how he could avoid being deceived 
