@@ -2,6 +2,17 @@
 
 <!-- version list -->
 
+## v1.14.0 (2026-11-08)
+
+### Features
+
+- **scrapers**: Add The Lost Books of the Bible scraper
+  ([`07dd9c5`](https://github.com/open-canon/open-canon-site/commit/07dd9c5ec5a2bd36d9e81d39c7263638fc17c0d0))
+
+- **scrapers**: Generate Lost Books of the Bible OSIS and fix real-page issues
+  ([`4aae16a`](https://github.com/open-canon/open-canon-site/commit/4aae16a0c7f36601513d2e40e85a1c34901093af))
+
+
 ## v1.13.0 (2026-11-08)
 
 ### Bug Fixes
