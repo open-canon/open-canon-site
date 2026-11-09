@@ -163,6 +163,9 @@ SECTIONS: Final[tuple[ChapterSource, ...]] = (*FRONT_MATTER, *CHAPTERS)
 class BookOfTheBeeParser(CaveOfTreasuresParser):
     """Fetch and parse the Book of the Bee, reusing the Cave of Treasures page parser."""
 
+    PAGE_URL_TEMPLATE = PAGE_URL_TEMPLATE
+    """Resolves relative image URLs against ``/chr/bb/`` rather than the Cave of Treasures."""
+
     def fetch_page_text(self, source: ChapterSource) -> str:
         """Return the validated HTML of one page, from cache or the network.
 
@@ -219,6 +222,7 @@ class BookOfTheBeeParser(CaveOfTreasuresParser):
                 ],
             )
             verse_number = 0
+            last_verse: pyosis.VerseCt | None = None
             for block in chapter.blocks:
                 if block.kind == "heading":
                     title = pyosis.TitleCt(
@@ -234,18 +238,23 @@ class BookOfTheBeeParser(CaveOfTreasuresParser):
                         )
                     )
                 elif block.kind == "figures":
-                    continue
+                    figures = [self._figure(image) for image in block.images]
+                    if last_verse is not None:
+                        last_verse.content = [*last_verse.content, *figures]
+                    else:
+                        chapter_div.content.append(
+                            pyosis.DivCt(type_value="x-figures", canonical=False, content=figures)
+                        )
                 elif not numbered:
                     chapter_div.content.append(pyosis.PCt(content=block.parts))
                 else:
                     verse_number += 1
-                    chapter_div.content.append(
-                        pyosis.VerseCt(
-                            osis_id=[f"{OSIS_WORK_ID}.{chapter.number}.{verse_number}"],
-                            canonical=True,
-                            content=block.parts,
-                        )
+                    last_verse = pyosis.VerseCt(
+                        osis_id=[f"{OSIS_WORK_ID}.{chapter.number}.{verse_number}"],
+                        canonical=True,
+                        content=block.parts,
                     )
+                    chapter_div.content.append(last_verse)
             book_div.content.append(chapter_div)
 
         current_date = datetime.now().strftime("%Y.%m.%dT%H:%M:%S")

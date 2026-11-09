@@ -642,3 +642,20 @@ def test_sub_titles_attach_to_the_following_verse():
     verses = doc.divisions[0].chapters[0].verses
     assert [_text_of([h]) for h in verses[0].heading] == ["The First Day"]
     assert verses[1].heading == []
+
+
+def test_notes_in_sub_titles_move_to_the_following_verse():
+    """A note inside a sub-title becomes a marker in the heading and a note of the next verse."""
+    doc = _parse("""
+        <div type="book" osisID="Gen">
+          <div type="chapter" osisID="Gen.1">
+            <title type="sub">CHAPTER I<note n="1">Chap. ii in the MS.</note>.</title>
+            <verse osisID="Gen.1.1">In the beginning<note n="2">Ps. xc.</note>.</verse>
+          </div>
+        </div>
+    """)
+    verse = doc.divisions[0].chapters[0].verses[0]
+    assert [_text_of(n.content) for n in verse.notes] == ["Chap. ii in the MS.", "Ps. xc."]
+    heading = verse.heading[0]
+    assert any(isinstance(i, tuple) and i[0] == "note_marker" for i in heading.content)
+    assert "Chap. ii" not in _text_of([heading])

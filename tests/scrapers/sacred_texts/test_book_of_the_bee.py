@@ -7,6 +7,7 @@ from pathlib import Path
 
 import pyosis
 import pytest
+from bs4 import BeautifulSoup
 from open_canon_site.scrapers import registry
 from open_canon_site.scrapers.sacred_texts import book_of_the_bee as bee
 from open_canon_site.scrapers.sacred_texts import cave_of_treasures as cot
@@ -154,3 +155,51 @@ def section_live(parser):
     """Fetch and parse chapter 1 over the network."""
     source = bee.CHAPTERS[0]
     return parser.parse_section(parser.fetch_page_text(source), source, 1)
+
+
+def test_footnote_page_labels_are_not_note_text(parser):
+    """A footnote that runs across a page break does not contain the ``p. v`` label."""
+    preface = section(parser, "bbpref", 0)
+    doc = parser.generate_osis([preface])
+    xml = doc.to_xml()
+    assert "See Rosen and Forshall's" in " ".join(xml.split())
+    assert "Rosen p. v" not in " ".join(xml.split())
+
+
+def test_page_cross_references_in_footnotes_are_kept(parser):
+    """A genuine ``p.`` reference in a footnote's wording stays."""
+    footnotes = parser.parse_footnotes(
+        BeautifulSoup(
+            '<h3>Footnotes</h3><p><a name="page_1_note_1"></a><a href="#page_1_fr_1">1</a> '
+            'Compare p. 12 and <a name="footnotes_page_2"></a><font color="GREEN">p. 2</font>'
+            " more.</p>",
+            "html.parser",
+        )
+    )
+    assert "".join(footnotes["page_1_note_1"].parts) == "Compare p. 12 and more."
+
+
+def test_inline_figure_is_kept_with_bee_url(parser):
+    """The watermark ``v.jpg`` in the preface is a figure resolved against ``/chr/bb/``."""
+    preface = section(parser, "bbpref", 0)
+    xml = parser.generate_osis([preface]).to_xml()
+    assert 'src="https://archive.sacred-texts.com/chr/bb/v.jpg"' in xml
+    assert "/chr/bct/" not in xml
+
+
+def test_heading_note_is_visible_on_the_site(parser, tmp_path):
+    """The footnote on ``CHAPTER I`` appears as a marker in the heading and in the notes tray."""
+    from open_canon_site.generator import generate_site
+
+    xml_path = tmp_path / "bee.xml"
+    xml_path.write_text(
+        parser.generate_osis([section(parser, "bb01", 1)]).to_xml(), encoding="utf-8"
+    )
+    out = tmp_path / "site"
+    generate_site([xml_path], out)
+    page = next(out.rglob("*.html"))
+    pages = [p.read_text(encoding="utf-8") for p in out.rglob("*.html")]
+    html = next(p for p in pages if "Chap. ii in the Oxford MS." in p)
+    heading = html[html.index("verse-heading") :]
+    assert 'class="note-marker"' in heading[: heading.index("</div>")]
+    assert page.exists()
