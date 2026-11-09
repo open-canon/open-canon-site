@@ -6,6 +6,7 @@ import pytest
 from open_canon_site.scrapers import cli, registry
 
 SACRED_TEXTS = {
+    "book-of-the-bee": ("book-of-the-bee.xml",),
     "1-enoch": ("1-enoch.xml",),
     "jasher": ("jasher.xml",),
     "jubilees": ("jubilees.xml",),

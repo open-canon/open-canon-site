@@ -87,6 +87,8 @@ Common options (accepted by every scraper and by `all`):
 | subcommand | source | outputs |
 |---|---|---|
 | `kjv-apocrypha` | [ebible.org](https://ebible.org/Scriptures/eng-kjv_vpl.zip) KJV Apocrypha | `kjv_apocrypha.xml` (`--per-book` also writes one file per book) |
+| `book-of-the-bee` | sacred-texts.com, Book of the Bee (Budge) | `book-of-the-bee.xml` |
+| `cave-of-treasures` | sacred-texts.com, Book of the Cave of Treasures (Budge) | `cave-of-treasures.xml` |
 | `1-enoch` (`--start-page`, `--end-page`) | sacred-texts.com, Book of Enoch | `1-enoch.xml` |
 | `forgotten-books-of-eden` (`--start-page`, `--end-page`) | sacred-texts.com, Forgotten Books of Eden | `adam-and-eve.xml`, `2-enoch.xml`, `psalms-of-solomon.xml`, `odes-of-solomon.xml`, `letter-of-aristeas.xml`, `4-maccabees.xml`, `story-of-ahikar.xml`, `testaments-twelve-patriarchs.xml` |
 | `lost-books-of-the-bible` (`--start-page`, `--end-page`) | sacred-texts.com, The Lost Books of the Bible | `birth-of-mary.xml`, `protevangelion.xml`, `first-infancy-gospel.xml`, `thomas-infancy-gospel.xml`, `abgarus-correspondence.xml`, `gospel-of-nicodemus.xml`, `apostles-creed.xml`, `laodiceans.xml`, `paul-and-seneca.xml`, `acts-of-paul-and-thecla.xml`, `1-clement.xml`, `2-clement.xml`, `barnabas.xml`, `ignatius-epistles.xml`, `polycarp.xml`, `shepherd-of-hermas.xml`, `herod-and-pilate.xml`, `gospel-of-peter.xml` |
