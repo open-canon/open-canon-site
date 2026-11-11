@@ -202,4 +202,6 @@ def test_heading_note_is_visible_on_the_site(parser, tmp_path):
     html = next(p for p in pages if "Chap. ii in the Oxford MS." in p)
     heading = html[html.index("verse-heading") :]
     assert 'class="note-marker"' in heading[: heading.index("</div>")]
+    notes_tray = html[html.index('id="notes-tray-inner"') : html.index("</aside>")]
+    assert "Chap. ii in the Oxford MS." in notes_tray
     assert page.exists()
