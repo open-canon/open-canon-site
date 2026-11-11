@@ -193,6 +193,10 @@ PLATE_FOOTER_RE: Final[re.Pattern[str]] = re.compile(
 )
 """Matches the footer navigation of a page: ``Sacred Texts | Christianity`` and the
 ``« Previous: …`` / ``Next: … »`` links."""
+FOOTNOTE_PAGE_ANCHOR_RE: Final[re.Pattern[str]] = re.compile(r"^footnotes_page_")
+"""Matches the anchor that opens a page's footnotes: ``footnotes_page_v``."""
+FOOTNOTE_PAGE_LABEL_RE: Final[re.Pattern[str]] = re.compile(r"^p\.\s*[0-9ivxlcdm]+$", re.I)
+"""Matches the printed-page label next to such an anchor: ``p. v``."""
 HEADING_TAGS: Final[list[str]] = ["h1", "h2", "h3", "h4", "h5", "h6"]
 """Heading elements; each is kept as a heading (the ``Footnotes`` heading ends the content)."""
 LIST_NUMBER_RE: Final[re.Pattern[str]] = re.compile(r"^\d+\.$")
@@ -269,9 +273,8 @@ def _clean(parts: list[InlinePart]) -> list[InlinePart]:
         Parts with whitespace runs collapsed, the first string left-trimmed, the last
         right-trimmed and empty strings removed.
     """
-    merged = consolidate_inline_strings([
-        re.sub(r"\s+", " ", p) if isinstance(p, str) else p for p in parts
-    ])
+    merged = consolidate_inline_strings(list(parts))
+    merged = [re.sub(r"\s+", " ", p) if isinstance(p, str) else p for p in merged]
     while merged and isinstance(merged[0], str) and not merged[0].strip():
         merged.pop(0)
     while merged and isinstance(merged[-1], str) and not merged[-1].strip():
@@ -493,6 +496,7 @@ class CaveOfTreasuresParser:
         heading = soup.find("h3", string=re.compile(r"Footnotes"))
         if not heading:
             return footnotes
+        self._drop_footnote_page_labels(soup)
         for para in heading.find_next_siblings("p"):
             anchor = para.find("a", attrs={"name": FOOTNOTE_ANCHOR_RE})
             back = para.find("a", attrs={"href": re.compile(r"^#")})
@@ -505,8 +509,35 @@ class CaveOfTreasuresParser:
             footnotes[key] = Footnote(label=label, parts=_clean(self.parse_inline(para, {})))
         return footnotes
 
+    PAGE_URL_TEMPLATE: str = PAGE_URL_TEMPLATE
+    """Page URL template used to resolve relative image URLs; subclasses for other books
+    override it."""
+
     @staticmethod
-    def parse_images(node: Tag, page: str) -> list[Image]:
+    def _drop_footnote_page_labels(soup: BeautifulSoup) -> None:
+        """Remove the page labels the footnote block prints between footnotes.
+
+        Each page's footnotes are introduced by ``<a name="footnotes_page_v"></a><font
+        color="GREEN">p. v</font>``. When a footnote runs on across a page break the label
+        lands in the middle of its sentence; it marks the printed page, not text, so both the
+        anchor and the label that directly follows it are dropped. Page cross-references that
+        are part of a footnote's wording (``see p. 12``) have no such anchor and are kept.
+
+        Args:
+            soup: Parsed page; modified in place.
+        """
+        for anchor in soup.find_all("a", attrs={"name": FOOTNOTE_PAGE_ANCHOR_RE}):
+            label = anchor.find_next_sibling()
+            if (
+                isinstance(label, Tag)
+                and label.name == "font"
+                and FOOTNOTE_PAGE_LABEL_RE.match(label.get_text(strip=True))
+            ):
+                label.decompose()
+            anchor.decompose()
+
+    @classmethod
+    def parse_images(cls, node: Tag, page: str) -> list[Image]:
         """Collect the images inside an element.
 
         Args:
@@ -516,7 +547,7 @@ class CaveOfTreasuresParser:
         Returns:
             The images in document order, with absolute URLs.
         """
-        base = PAGE_URL_TEMPLATE.format(page=page)
+        base = cls.PAGE_URL_TEMPLATE.format(page=page)
         return [
             Image(src=urljoin(base, img["src"]), alt=normalize_whitespace(img.get("alt", "")))
             for img in node.find_all("img")

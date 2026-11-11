@@ -226,10 +226,14 @@ def _group_into_collections(
 # ---------------------------------------------------------------------------
 
 
-def _verse_html(verse: VerseData) -> str:
-    """Render the inline text of a verse (note markers included)."""
-    nc: list[int] = [0]
-    return render_content(verse.content, nc)
+def _verse_html(verse: VerseData, nc: list[int] | None = None) -> str:
+    """Render the inline text of a verse (note markers included).
+
+    Args:
+        verse: The verse to render.
+        nc: Note counter shared with the verse's heading, so marker letters continue from it.
+    """
+    return render_content(verse.content, [0] if nc is None else nc)
 
 
 def _all_notes_html(notes: list[NoteData]) -> list[dict]:
@@ -320,12 +324,14 @@ def _generate_chapter(
     # Build per-verse rendered data
     rendered_verses = []
     for verse in chapter.verses:
+        verse_nc: list[int] = [0]
+        heading_html = render_content(verse.heading, verse_nc) if verse.heading else ""
         rendered_verses.append(
             {
                 "id": verse.verse_id,
                 "number": verse.number,
-                "html": _verse_html(verse),
-                "heading_html": render_content(verse.heading) if verse.heading else "",
+                "html": _verse_html(verse, verse_nc),
+                "heading_html": heading_html,
                 "has_notes": bool(verse.notes),
                 "note_ids": [n.note_id for n in verse.notes],
             }

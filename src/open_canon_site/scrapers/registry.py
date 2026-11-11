@@ -8,6 +8,7 @@ from open_canon_site.scrapers.churchofjesuschrist.proclamations import SPEC as L
 from open_canon_site.scrapers.churchofjesuschrist.standard_works import SPEC as LDS_STANDARD_WORKS
 from open_canon_site.scrapers.ebible.kjv_apocrypha import SPEC as KJV_APOCRYPHA
 from open_canon_site.scrapers.lecturesonfaith.lectures_on_faith import SPEC as LECTURES_ON_FAITH
+from open_canon_site.scrapers.sacred_texts.book_of_the_bee import SPEC as BOOK_OF_THE_BEE
 from open_canon_site.scrapers.sacred_texts.cave_of_treasures import SPEC as CAVE_OF_TREASURES
 from open_canon_site.scrapers.sacred_texts.enoch import SPEC as ENOCH
 from open_canon_site.scrapers.sacred_texts.forgotten_books_of_eden import (
@@ -28,6 +29,7 @@ from open_canon_site.scrapers.sacred_texts.vita_adae_et_evae import SPEC as VITA
 
 SCRAPERS: tuple[ScraperSpec, ...] = (
     KJV_APOCRYPHA,
+    BOOK_OF_THE_BEE,
     CAVE_OF_TREASURES,
     ENOCH,
     FORGOTTEN_BOOKS_OF_EDEN,
