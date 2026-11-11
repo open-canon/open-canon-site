@@ -2,6 +2,24 @@
 
 <!-- version list -->
 
+## v1.18.0 (2026-11-11)
+
+### Bug Fixes
+
+- **scrapers**: Keep Bee heading notes, figures and footnote text intact
+  ([`c14a642`](https://github.com/open-canon/open-canon-site/commit/c14a642e9fe58f216c4aa1cd8e96b90c8194ce74))
+
+### Features
+
+- **scrapers**: Add the Book of the Bee (Budge, 1886)
+  ([`fee30d8`](https://github.com/open-canon/open-canon-site/commit/fee30d8fd7063aa9264c0d3ac01f8a39495b39c8))
+
+### Testing
+
+- Assert Bee heading note appears in notes tray
+  ([`4379339`](https://github.com/open-canon/open-canon-site/commit/43793395689cbbbaaf50441b7b32a83a9cbddd65))
+
+
 ## v1.17.0 (2026-11-08)
 
 ### Bug Fixes
